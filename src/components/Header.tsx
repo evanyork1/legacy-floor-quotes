@@ -22,9 +22,9 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
             <img 
-              src="/lovable-uploads/3b6e349e-0ea3-4497-a5c5-58e241020a58.png" 
+              src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-14 w-auto"
+              className="h-16 w-auto"
             />
           </div>
 

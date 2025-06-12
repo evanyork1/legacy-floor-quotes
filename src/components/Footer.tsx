@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,9 +13,9 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-6">
               <img 
-                src="/lovable-uploads/3b6e349e-0ea3-4497-a5c5-58e241020a58.png" 
+                src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
                 alt="Legacy Industrial Coatings" 
-                className="h-10 w-auto brightness-0 invert"
+                className="h-12 w-auto brightness-0 invert"
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
