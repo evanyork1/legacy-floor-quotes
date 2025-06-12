@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -84,6 +85,29 @@ const Index = () => {
     }
   ];
 
+  const galleryImages = [
+    {
+      src: "/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png",
+      alt: "High-end garage floor coating with luxury vehicles"
+    },
+    {
+      src: "/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png",
+      alt: "Modern garage with professional floor coating"
+    },
+    {
+      src: "/lovable-uploads/d89757aa-68ca-4a3f-b457-ae8701a25ca1.png",
+      alt: "Premium garage floor with luxury car"
+    },
+    {
+      src: "/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png",
+      alt: "Outdoor patio coating installation"
+    },
+    {
+      src: "/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png",
+      alt: "Professional floor preparation and installation"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -109,6 +133,33 @@ const Index = () => {
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 to-indigo-50/20 pointer-events-none"></div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Premium Warranty Floors by Legacy
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              See the quality and craftsmanship that comes with our warranty protection
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {galleryImages.map((image, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Why Choose Legacy Section */}
@@ -164,7 +215,7 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-white" id="how-it-works">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">

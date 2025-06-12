@@ -24,7 +24,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-16 w-auto"
+              className="h-20 w-auto"
             />
           </div>
 
