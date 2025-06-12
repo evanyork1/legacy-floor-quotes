@@ -1,0 +1,92 @@
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "How It Works", path: "/#how-it-works" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" }
+  ];
+
+  return (
+    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
+            <img 
+              src="/lovable-uploads/3b6e349e-0ea3-4497-a5c5-58e241020a58.png" 
+              alt="Legacy Industrial Coatings" 
+              className="h-10 w-auto"
+            />
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.path}
+                className="text-gray-600 hover:text-teal-600 transition-colors duration-200 font-medium"
+              >
+                {item.name}
+              </a>
+            ))}
+            <Button 
+              onClick={() => navigate('/quote')}
+              className="bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6"
+            >
+              Get Quote
+            </Button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-100 py-4">
+            <nav className="flex flex-col space-y-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.path}
+                  className="text-gray-600 hover:text-teal-600 transition-colors duration-200 font-medium px-4 py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+              <div className="px-4">
+                <Button 
+                  onClick={() => {
+                    navigate('/quote');
+                    setIsMenuOpen(false);
+                  }}
+                  className="bg-teal-600 hover:bg-teal-700 text-white rounded-full w-full"
+                >
+                  Get Quote
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
