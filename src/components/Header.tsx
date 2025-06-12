@@ -18,13 +18,13 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
             <img 
               src="/lovable-uploads/3b6e349e-0ea3-4497-a5c5-58e241020a58.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-10 w-auto"
+              className="h-14 w-auto"
             />
           </div>
 
@@ -34,14 +34,14 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.path}
-                className="text-gray-600 hover:text-teal-600 transition-colors duration-200 font-medium"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
             ))}
             <Button 
               onClick={() => navigate('/quote')}
-              className="bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6"
             >
               Get Quote
             </Button>
@@ -64,7 +64,7 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.path}
-                  className="text-gray-600 hover:text-teal-600 transition-colors duration-200 font-medium px-4 py-2"
+                  className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -76,7 +76,7 @@ const Header = () => {
                     navigate('/quote');
                     setIsMenuOpen(false);
                   }}
-                  className="bg-teal-600 hover:bg-teal-700 text-white rounded-full w-full"
+                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full"
                 >
                   Get Quote
                 </Button>
