@@ -85,81 +85,42 @@ const Index = () => {
     }
   ];
 
-  const galleryImages = [
-    {
-      src: "/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png",
-      alt: "High-end garage floor coating with luxury vehicles"
-    },
-    {
-      src: "/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png",
-      alt: "Modern garage with professional floor coating"
-    },
-    {
-      src: "/lovable-uploads/d89757aa-68ca-4a3f-b457-ae8701a25ca1.png",
-      alt: "Premium garage floor with luxury car"
-    },
-    {
-      src: "/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png",
-      alt: "Outdoor patio coating installation"
-    },
-    {
-      src: "/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png",
-      alt: "Professional floor preparation and installation"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 lg:py-32">
+      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 lg:py-32 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              The only company you need for premium{" "}
-              <span className="text-blue-600">warranty floors</span>
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed">
-              We handle everything - payments, scheduling, installation coordination, and warranty service.
-            </p>
-            <Button 
-              onClick={() => navigate('/quote')}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              Get Instant Quote
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl">
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Get Your Dream{" "}
+                <span className="text-blue-600">Garage Floor</span>{" "}
+                with a Free Instant Quote
+              </h1>
+              <p className="text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed">
+                Vetted Installers • 15-Year to Lifetime Warranties • Hassle-Free Process
+              </p>
+              <Button 
+                onClick={() => navigate('/quote')}
+                className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                Get Instant Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" 
+                alt="Premium garage floor coating with luxury vehicles"
+                className="w-full h-auto rounded-lg shadow-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+            </div>
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 to-indigo-50/20 pointer-events-none"></div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Premium Warranty Floors by Legacy
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              See the quality and craftsmanship that comes with our warranty protection
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {galleryImages.map((image, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Why Choose Legacy Section */}
@@ -174,41 +135,65 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-            {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-8 text-center">
-                  <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div className="grid gap-8">
+              {features.map((feature, index) => (
+                <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                        {feature.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                        <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" 
+                alt="Modern garage with professional floor coating"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
           </div>
 
           {/* Full Service Section */}
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 lg:p-12">
-            <div className="text-center mb-12">
-              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                One Company, Complete Service
-              </h3>
-              <p className="text-lg text-gray-600">
-                Unlike other platforms that just connect you to contractors, Legacy handles everything
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="text-center">
-                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    {service.icon}
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{service.title}</h4>
-                  <p className="text-gray-600 leading-relaxed">{service.description}</p>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                  One Company, Complete Service
+                </h3>
+                <p className="text-lg text-gray-600 mb-8">
+                  Unlike other platforms that just connect you to contractors, Legacy handles everything
+                </p>
+                
+                <div className="space-y-6">
+                  {services.map((service, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+                        {service.icon}
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h4>
+                        <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/d89757aa-68ca-4a3f-b457-ae8701a25ca1.png" 
+                  alt="Premium garage floor with luxury car"
+                  className="w-full h-auto rounded-lg shadow-xl"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -226,16 +211,27 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {steps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
-                  {step.step}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png" 
+                alt="Outdoor patio coating installation"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
+            <div className="grid gap-8">
+              {steps.map((step, index) => (
+                <div key={index} className="flex items-start space-x-6">
+                  <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg flex-shrink-0">
+                    {step.step}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{step.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -252,23 +248,32 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-8">
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
-                  <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.location}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 mb-4 leading-relaxed italic">"{testimonial.text}"</p>
+                    <div>
+                      <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                      <p className="text-sm text-gray-500">{testimonial.location}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png" 
+                alt="Professional floor preparation and installation"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -277,7 +282,7 @@ const Index = () => {
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Ready to Get Your Warranty Floor?
+            Ready to Get Your Dream Garage Floor?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Get your free instant quote and experience Legacy's full-service approach
