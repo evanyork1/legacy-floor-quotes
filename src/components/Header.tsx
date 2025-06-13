@@ -18,13 +18,13 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-28">
+          {/* Logo - Made Larger */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
             <img 
               src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-24 w-auto"
+              className="h-32 w-auto"
             />
           </div>
 

@@ -96,14 +96,29 @@ const Index = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
-                {/* Arrow and handwritten text */}
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 hidden lg:flex items-center">
-                  <svg className="w-12 h-8 text-black animate-pulse" viewBox="0 0 48 32" fill="none">
-                    <path d="M2 16 L40 16 M34 10 L40 16 L34 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* Hand-drawn arrow and text */}
+                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-6 hidden lg:flex items-start">
+                  {/* Hand-drawn style arrow */}
+                  <svg className="w-16 h-12 text-black" viewBox="0 0 64 48" fill="none">
+                    <path d="M2 24 C8 20, 16 18, 24 20 C32 22, 40 26, 48 24 C52 23, 56 22, 58 24 M52 18 C54 20, 58 22, 58 24 C58 26, 54 28, 52 30" 
+                          stroke="currentColor" 
+                          strokeWidth="2.5" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          fill="none"
+                          style={{
+                            filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.3))'
+                          }}
+                    />
                   </svg>
-                  <div className="ml-2 transform rotate-2">
-                    <p className="text-lg text-gray-800 font-handwritten whitespace-nowrap animate-bounce" style={{fontFamily: 'Comic Sans MS, cursive', transform: 'rotate(-2deg)'}}>
-                      Build your own quote in 90 seconds or less!
+                  <div className="ml-2 transform rotate-1">
+                    <p className="text-lg text-gray-800 font-bold whitespace-nowrap" 
+                       style={{
+                         fontFamily: 'Comic Sans MS, cursive', 
+                         transform: 'rotate(-1deg)',
+                         textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+                       }}>
+                      Build your own quote and<br />schedule in 90 seconds or less!
                     </p>
                   </div>
                 </div>
@@ -141,11 +156,11 @@ const Index = () => {
               </Card>)}
           </div>
 
-          {/* Enhanced showcase image */}
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
+          {/* Enhanced showcase image - Made smaller and clearer */}
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl group max-w-4xl mx-auto">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
             <div className="relative bg-white rounded-3xl overflow-hidden">
-              <img src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" alt="Modern garage with professional floor coating" className="w-full h-64 lg:h-[500px] object-cover object-center" />
+              <img src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" alt="Modern garage with professional floor coating" className="w-full h-80 lg:h-96 object-cover object-center" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12">
                 <div className="text-white">
                   <h3 className="text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg">Transform Your Space</h3>
