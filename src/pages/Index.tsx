@@ -119,7 +119,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 to-indigo-50/20 pointer-events-none"></div>
       </section>
 
       {/* Features Grid Section */}
@@ -155,10 +154,10 @@ const Index = () => {
               alt="Modern garage with professional floor coating"
               className="w-full h-64 lg:h-96 object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
-              <div className="p-8 text-white">
-                <h3 className="text-2xl font-bold mb-2">Transform Your Space</h3>
-                <p className="text-lg opacity-90">See the difference professional coating makes</p>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-8">
+              <div className="text-white">
+                <h3 className="text-2xl font-bold mb-2 drop-shadow-lg">Transform Your Space</h3>
+                <p className="text-lg opacity-90 drop-shadow-lg">See the difference professional coating makes</p>
               </div>
             </div>
           </div>
@@ -173,25 +172,25 @@ const Index = () => {
             alt="Premium garage floor with luxury car"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-blue-900/85"></div>
+          <div className="absolute inset-0 bg-blue-900/60"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h3 className="text-3xl lg:text-4xl font-bold mb-6">
+            <h3 className="text-3xl lg:text-4xl font-bold mb-6 drop-shadow-lg">
               One Company, Complete Service
             </h3>
-            <p className="text-xl mb-12 opacity-90">
+            <p className="text-xl mb-12 opacity-90 drop-shadow-lg">
               Unlike other platforms that just connect you to contractors, Legacy handles everything
             </p>
             
             <div className="grid md:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                <div key={index} className="bg-white/15 backdrop-blur-sm rounded-lg p-6 border border-white/20">
                   <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     {service.icon}
                   </div>
-                  <h4 className="text-lg font-semibold mb-3">{service.title}</h4>
-                  <p className="opacity-90 leading-relaxed">{service.description}</p>
+                  <h4 className="text-lg font-semibold mb-3 drop-shadow-lg">{service.title}</h4>
+                  <p className="opacity-90 leading-relaxed drop-shadow-lg">{service.description}</p>
                 </div>
               ))}
             </div>
@@ -211,32 +210,59 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="grid gap-12">
-              {steps.map((step, index) => (
-                <div key={index} className={`flex items-center gap-12 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-6 mb-6">
-                      <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
-                        {step.step}
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-semibold text-gray-900">{step.title}</h3>
-                      </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid gap-16">
+              {/* Step 1 */}
+              <div className="flex items-center gap-12">
+                <div className="flex-1">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                      1
                     </div>
-                    <p className="text-lg text-gray-600 leading-relaxed">{step.description}</p>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-gray-900">Get Your Quote</h3>
+                    </div>
                   </div>
-                  {index === 1 && (
-                    <div className="flex-1">
-                      <img 
-                        src="/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png" 
-                        alt="Outdoor patio coating installation"
-                        className="w-full h-auto rounded-lg shadow-xl"
-                      />
-                    </div>
-                  )}
+                  <p className="text-lg text-gray-600 leading-relaxed">Use our instant quote tool to get pricing in seconds</p>
                 </div>
-              ))}
+              </div>
+
+              {/* Step 2 with image */}
+              <div className="flex items-center gap-12 flex-row-reverse">
+                <div className="flex-1">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                      2
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-gray-900">Pay Legacy & Schedule</h3>
+                    </div>
+                  </div>
+                  <p className="text-lg text-gray-600 leading-relaxed">We handle payment processing and coordinate with your installer</p>
+                </div>
+                <div className="flex-1">
+                  <img 
+                    src="/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png" 
+                    alt="Outdoor patio coating installation"
+                    className="w-full h-auto rounded-lg shadow-xl"
+                  />
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="flex items-center gap-12">
+                <div className="flex-1">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                      3
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-gray-900">Enjoy Your Warranty Floor</h3>
+                    </div>
+                  </div>
+                  <p className="text-lg text-gray-600 leading-relaxed">Professional installation with Legacy's warranty protection</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
