@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,7 +5,6 @@ import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones,
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const Index = () => {
   const navigate = useNavigate();
   const features = [{
@@ -22,7 +20,6 @@ const Index = () => {
     title: "World Class Service",
     description: "No need to take time out of your day to meet in person, we handle everything remotely."
   }];
-  
   const services = [{
     icon: <Zap className="h-8 w-8 text-blue-600" />,
     title: "Fast Availability",
@@ -36,7 +33,6 @@ const Index = () => {
     title: "We Guarantee The Work",
     description: "Legacy stands behind every installation with our warranty backing"
   }];
-  
   const steps = [{
     step: "1",
     title: "Create Your Own Quote",
@@ -53,7 +49,6 @@ const Index = () => {
     description: "Relax while we transform your space with professional installation and lifetime warranty",
     gradient: "from-pink-500 to-orange-600"
   }];
-  
   const testimonials = [{
     name: "Sarah Johnson",
     location: "Denver, CO",
@@ -75,7 +70,6 @@ const Index = () => {
     rating: 5,
     text: "The 7-day guarantee was incredible - from booking to finished floor in under a week! The quality exceeded my expectations and the process was effortless."
   }];
-  
   return <div className="min-h-screen bg-white">
       <Header />
       
@@ -99,27 +93,9 @@ const Index = () => {
                 {/* Hand-drawn arrow and text */}
                 <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-6 hidden lg:flex items-start">
                   {/* Hand-drawn style arrow */}
-                  <svg className="w-16 h-12 text-black" viewBox="0 0 64 48" fill="none">
-                    <path d="M2 24 C8 20, 16 18, 24 20 C32 22, 40 26, 48 24 C52 23, 56 22, 58 24 M52 18 C54 20, 58 22, 58 24 C58 26, 54 28, 52 30" 
-                          stroke="currentColor" 
-                          strokeWidth="2.5" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          fill="none"
-                          style={{
-                            filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.3))'
-                          }}
-                    />
-                  </svg>
+                  
                   <div className="ml-2 transform rotate-1">
-                    <p className="text-lg text-gray-800 font-bold whitespace-nowrap" 
-                       style={{
-                         fontFamily: 'Comic Sans MS, cursive', 
-                         transform: 'rotate(-1deg)',
-                         textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
-                       }}>
-                      Build your own quote and<br />schedule in 90 seconds or less!
-                    </p>
+                    
                   </div>
                 </div>
               </div>
@@ -215,12 +191,9 @@ const Index = () => {
           
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-3 gap-12">
-              {steps.map((step, index) => (
-                <div key={index} className="group relative">
+              {steps.map((step, index) => <div key={index} className="group relative">
                   {/* Connecting line for desktop */}
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300 transform translate-x-4 z-10"></div>
-                  )}
+                  {index < steps.length - 1 && <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300 transform translate-x-4 z-10"></div>}
                   
                   <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-100">
                     <div className="absolute -top-6 left-8">
@@ -241,8 +214,7 @@ const Index = () => {
                     {/* Decorative gradient overlay */}
                     <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${step.gradient} rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
             
             {/* Central connecting element for mobile */}
@@ -310,5 +282,4 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 export default Index;
