@@ -71,15 +71,28 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="max-w-xl space-y-8">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Get Your Dream{" "}
-                <span className="text-blue-600">Garage Floor</span>{" "}
-                with a Free Instant Quote
+                Get Your Dream Garage Floor in{" "}
+                <span className="text-blue-600">One Day</span>
               </h1>
               <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results</p>
-              <Button onClick={() => navigate('/quote')} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Get Instant Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <div className="relative">
+                <Button onClick={() => navigate('/quote')} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  Get Instant Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                
+                {/* Arrow and handwritten text */}
+                <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 hidden lg:flex items-center">
+                  <svg className="w-12 h-8 text-black" viewBox="0 0 48 32" fill="none">
+                    <path d="M2 16 L40 16 M34 10 L40 16 L34 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <div className="ml-2 transform rotate-2">
+                    <p className="text-lg text-gray-800 font-handwritten whitespace-nowrap" style={{fontFamily: 'Comic Sans MS, cursive', transform: 'rotate(-2deg)'}}>
+                      Build your own quote in 90 seconds or less!
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="relative">
               <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Premium garage floor coating with luxury vehicles" className="w-full h-auto rounded-lg shadow-2xl" />
