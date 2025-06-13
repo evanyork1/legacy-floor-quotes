@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, ArrowLeft, Upload, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, Upload, Check, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -16,7 +16,9 @@ const Quote = () => {
     customSqft: "",
     spaceType: "",
     otherSpaceType: "",
-    photos: [] as File[],
+    additionalSpaces: [] as Array<{type: string, sqft: string, spaceType: string, otherSpaceType: string}>,
+    exteriorPhotos: [] as File[],
+    damagePhotos: [] as File[],
     colorChoice: "",
     name: "",
     email: "",
@@ -24,9 +26,17 @@ const Quote = () => {
     zipCode: "",
   });
 
-  const totalSteps = 6;
+  const [showAdditionalSpace, setShowAdditionalSpace] = useState(false);
+  const [currentAdditionalSpace, setCurrentAdditionalSpace] = useState({
+    type: "",
+    sqft: "",
+    spaceType: "",
+    otherSpaceType: ""
+  });
 
-  const updateFormData = (field: string, value: string | File[]) => {
+  const totalSteps = 7;
+
+  const updateFormData = (field: string, value: string | File[] | any[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -42,27 +52,54 @@ const Quote = () => {
     }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, type: 'exterior' | 'damage') => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-      updateFormData('photos', [...formData.photos, ...files]);
+      if (type === 'exterior') {
+        updateFormData('exteriorPhotos', [...formData.exteriorPhotos, ...files]);
+      } else {
+        updateFormData('damagePhotos', [...formData.damagePhotos, ...files]);
+      }
     }
   };
 
-  const removePhoto = (index: number) => {
-    const newPhotos = formData.photos.filter((_, i) => i !== index);
-    updateFormData('photos', newPhotos);
+  const removePhoto = (index: number, type: 'exterior' | 'damage') => {
+    if (type === 'exterior') {
+      const newPhotos = formData.exteriorPhotos.filter((_, i) => i !== index);
+      updateFormData('exteriorPhotos', newPhotos);
+    } else {
+      const newPhotos = formData.damagePhotos.filter((_, i) => i !== index);
+      updateFormData('damagePhotos', newPhotos);
+    }
+  };
+
+  const addAdditionalSpace = () => {
+    if (currentAdditionalSpace.type) {
+      updateFormData('additionalSpaces', [...formData.additionalSpaces, currentAdditionalSpace]);
+      setCurrentAdditionalSpace({ type: "", sqft: "", spaceType: "", otherSpaceType: "" });
+      setShowAdditionalSpace(false);
+    }
   };
 
   const calculatePrice = () => {
-    let sqft = 0;
-    if (formData.garageType === "2-car") sqft = 425;
-    else if (formData.garageType === "3-car") sqft = 650;
-    else if (formData.garageType === "4-car") sqft = 900;
-    else if (formData.garageType === "custom" && formData.customSqft) sqft = parseInt(formData.customSqft);
+    let totalSqft = 0;
+    
+    // Main space
+    if (formData.garageType === "2-car") totalSqft += 425;
+    else if (formData.garageType === "3-car") totalSqft += 650;
+    else if (formData.garageType === "4-car") totalSqft += 900;
+    else if (formData.garageType === "custom" && formData.customSqft) totalSqft += parseInt(formData.customSqft);
+
+    // Additional spaces
+    formData.additionalSpaces.forEach(space => {
+      if (space.type === "2-car") totalSqft += 425;
+      else if (space.type === "3-car") totalSqft += 650;
+      else if (space.type === "4-car") totalSqft += 900;
+      else if (space.type === "custom" && space.sqft) totalSqft += parseInt(space.sqft);
+    });
 
     // Base pricing: $8 per sq ft
-    const basePrice = sqft * 8;
+    const basePrice = totalSqft * 8;
     return basePrice;
   };
 
@@ -81,7 +118,7 @@ const Quote = () => {
                 { id: "2-car", label: "2-Car Garage", desc: "Approx. 400–450 sq ft" },
                 { id: "3-car", label: "3-Car Garage", desc: "Approx. 600–700 sq ft" },
                 { id: "4-car", label: "4-Car Garage", desc: "Approx. 800–1,000 sq ft" },
-                { id: "custom", label: "Custom / Other Size", desc: "We'll ask for details next" }
+                { id: "custom", label: "Custom Size", desc: "We'll ask for details next" }
               ].map((option) => (
                 <button
                   key={option.id}
@@ -103,6 +140,131 @@ const Quote = () => {
                   </div>
                 </button>
               ))}
+            </div>
+
+            {/* Additional Space Button */}
+            <div className="mt-12 max-w-2xl mx-auto">
+              <div className="border-t-2 border-dashed border-gray-300 pt-8">
+                <button
+                  onClick={() => setShowAdditionalSpace(!showAdditionalSpace)}
+                  className="w-full p-4 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl hover:border-purple-400 transition-all"
+                >
+                  <div className="flex items-center justify-center">
+                    <Plus className="h-6 w-6 text-purple-600 mr-3" />
+                    <span className="text-lg font-semibold text-purple-700">Add Additional Space</span>
+                  </div>
+                  <p className="text-sm text-purple-600 mt-1">Storage, workshop, or other areas</p>
+                </button>
+              </div>
+
+              {showAdditionalSpace && (
+                <div className="mt-6 p-6 bg-purple-50 rounded-xl border border-purple-200">
+                  <h3 className="text-lg font-semibold mb-4">Additional Space Details</h3>
+                  <div className="grid gap-4">
+                    {[
+                      { id: "2-car", label: "2-Car Size", desc: "Approx. 400–450 sq ft" },
+                      { id: "3-car", label: "3-Car Size", desc: "Approx. 600–700 sq ft" },
+                      { id: "4-car", label: "4-Car Size", desc: "Approx. 800–1,000 sq ft" },
+                      { id: "custom", label: "Custom Size", desc: "Enter custom details" }
+                    ].map((option) => (
+                      <button
+                        key={option.id}
+                        onClick={() => setCurrentAdditionalSpace(prev => ({ ...prev, type: option.id }))}
+                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                          currentAdditionalSpace.type === option.id 
+                            ? 'border-purple-600 bg-purple-100' 
+                            : 'border-gray-200 hover:border-purple-300'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-semibold text-gray-900">{option.label}</h4>
+                            <p className="text-gray-600 text-sm">{option.desc}</p>
+                          </div>
+                          {currentAdditionalSpace.type === option.id && (
+                            <Check className="h-5 w-5 text-purple-600" />
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {currentAdditionalSpace.type === "custom" && (
+                    <div className="mt-4 space-y-3">
+                      <Input 
+                        type="number"
+                        value={currentAdditionalSpace.sqft}
+                        onChange={(e) => setCurrentAdditionalSpace(prev => ({ ...prev, sqft: e.target.value }))}
+                        placeholder="Enter square footage"
+                        className="h-12"
+                      />
+                      <div className="grid gap-2">
+                        {[
+                          { id: "storage", label: "Extra storage" },
+                          { id: "warehouse", label: "Warehouse" },
+                          { id: "detached", label: "Detached garage" },
+                          { id: "other", label: "Other" }
+                        ].map((option) => (
+                          <button
+                            key={option.id}
+                            onClick={() => setCurrentAdditionalSpace(prev => ({ ...prev, spaceType: option.id }))}
+                            className={`p-3 rounded-lg border text-left transition-all ${
+                              currentAdditionalSpace.spaceType === option.id 
+                                ? 'border-purple-600 bg-purple-100' 
+                                : 'border-gray-200 hover:border-purple-300'
+                            }`}
+                          >
+                            {option.label}
+                          </button>
+                        ))}
+                      </div>
+                      {currentAdditionalSpace.spaceType === "other" && (
+                        <Input 
+                          value={currentAdditionalSpace.otherSpaceType}
+                          onChange={(e) => setCurrentAdditionalSpace(prev => ({ ...prev, otherSpaceType: e.target.value }))}
+                          placeholder="Please describe your space"
+                          className="h-12"
+                        />
+                      )}
+                    </div>
+                  )}
+
+                  <div className="flex gap-3 mt-6">
+                    <Button onClick={addAdditionalSpace} disabled={!currentAdditionalSpace.type}>
+                      Add Space
+                    </Button>
+                    <Button variant="outline" onClick={() => setShowAdditionalSpace(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {formData.additionalSpaces.length > 0 && (
+                <div className="mt-6">
+                  <h3 className="font-semibold mb-3">Added Spaces ({formData.additionalSpaces.length})</h3>
+                  <div className="space-y-2">
+                    {formData.additionalSpaces.map((space, index) => (
+                      <div key={index} className="p-3 bg-green-50 border border-green-200 rounded-lg flex justify-between items-center">
+                        <span className="text-green-800">
+                          {space.type === "custom" ? `Custom (${space.sqft} sq ft)` : 
+                           space.type === "2-car" ? "2-Car Size" :
+                           space.type === "3-car" ? "3-Car Size" : "4-Car Size"}
+                        </span>
+                        <button
+                          onClick={() => {
+                            const newSpaces = formData.additionalSpaces.filter((_, i) => i !== index);
+                            updateFormData('additionalSpaces', newSpaces);
+                          }}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -177,41 +339,55 @@ const Quote = () => {
         return (
           <div className="space-y-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Upload Photos</h2>
-              <p className="text-lg text-gray-600">Got photos of your space or any cracks/damage? Upload them here.</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Upload Photos - Exterior View</h2>
+              <p className="text-lg text-gray-600 mb-6">This helps us understand exactly how to price your floor.</p>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
+                <p className="text-blue-800 font-medium">📸 Please take photos showing the whole space or all spaces from the exterior</p>
+              </div>
             </div>
 
             <div className="max-w-2xl mx-auto">
+              {/* Example placeholder */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold mb-4">Example Photo:</h3>
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center">
+                  <div className="text-center text-gray-500">
+                    <Upload className="h-12 w-12 mx-auto mb-2" />
+                    <p>Example: Wide shot of garage exterior</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors">
                 <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-lg font-medium text-gray-700 mb-2">Drop photos here or click to browse</p>
+                <p className="text-lg font-medium text-gray-700 mb-2">Drop exterior photos here or click to browse</p>
                 <p className="text-gray-500 mb-6">JPG, PNG up to 10MB each</p>
                 <input
                   type="file"
                   multiple
                   accept="image/*"
-                  onChange={handleFileUpload}
+                  onChange={(e) => handleFileUpload(e, 'exterior')}
                   className="hidden"
-                  id="photo-upload"
+                  id="exterior-upload"
                 />
-                <label htmlFor="photo-upload">
+                <label htmlFor="exterior-upload">
                   <Button className="cursor-pointer">Choose Photos</Button>
                 </label>
               </div>
 
-              {formData.photos.length > 0 && (
+              {formData.exteriorPhotos.length > 0 && (
                 <div className="mt-8">
-                  <h3 className="text-lg font-semibold mb-4">Uploaded Photos ({formData.photos.length})</h3>
+                  <h3 className="text-lg font-semibold mb-4">Uploaded Exterior Photos ({formData.exteriorPhotos.length})</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {formData.photos.map((photo, index) => (
+                    {formData.exteriorPhotos.map((photo, index) => (
                       <div key={index} className="relative group">
                         <img 
                           src={URL.createObjectURL(photo)} 
-                          alt={`Upload ${index + 1}`}
+                          alt={`Exterior ${index + 1}`}
                           className="w-full h-24 object-cover rounded-lg"
                         />
                         <button
-                          onClick={() => removePhoto(index)}
+                          onClick={() => removePhoto(index, 'exterior')}
                           className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                           ×
@@ -226,6 +402,72 @@ const Quote = () => {
         );
 
       case 4:
+        return (
+          <div className="space-y-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Upload Photos - Damage & Concerns</h2>
+              <p className="text-lg text-gray-600 mb-6">Show any damage, cracks, or areas of concern</p>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-2xl mx-auto">
+                <p className="text-amber-800 font-medium">⚠️ Please photograph any cracks, stains, existing coatings, or problem areas</p>
+              </div>
+            </div>
+
+            <div className="max-w-2xl mx-auto">
+              {/* Example placeholder */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold mb-4">Example Photos:</h3>
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center">
+                  <div className="text-center text-gray-500">
+                    <Upload className="h-12 w-12 mx-auto mb-2" />
+                    <p>Example: Close-ups of cracks, stains, or damage</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-400 transition-colors">
+                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-lg font-medium text-gray-700 mb-2">Drop damage photos here or click to browse</p>
+                <p className="text-gray-500 mb-6">JPG, PNG up to 10MB each (Optional)</p>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => handleFileUpload(e, 'damage')}
+                  className="hidden"
+                  id="damage-upload"
+                />
+                <label htmlFor="damage-upload">
+                  <Button className="cursor-pointer">Choose Photos</Button>
+                </label>
+              </div>
+
+              {formData.damagePhotos.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold mb-4">Uploaded Damage Photos ({formData.damagePhotos.length})</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {formData.damagePhotos.map((photo, index) => (
+                      <div key={index} className="relative group">
+                        <img 
+                          src={URL.createObjectURL(photo)} 
+                          alt={`Damage ${index + 1}`}
+                          className="w-full h-24 object-cover rounded-lg"
+                        />
+                        <button
+                          onClick={() => removePhoto(index, 'damage')}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+
+      case 5:
         return (
           <div className="space-y-8">
             <div className="text-center mb-12">
@@ -269,7 +511,7 @@ const Quote = () => {
           </div>
         );
 
-      case 5:
+      case 6:
         return (
           <div className="space-y-8">
             <div className="text-center mb-12">
@@ -329,7 +571,7 @@ const Quote = () => {
           </div>
         );
 
-      case 6:
+      case 7:
         const estimatedPrice = calculatePrice();
         return (
           <div className="space-y-8">
@@ -350,20 +592,26 @@ const Quote = () => {
                     <h3 className="font-semibold text-lg mb-4">Quote Summary:</h3>
                     <div className="text-left space-y-2">
                       <div className="flex justify-between">
-                        <span>Garage Type:</span>
+                        <span>Main Garage:</span>
                         <span className="font-medium">
                           {formData.garageType === "custom" ? `Custom (${formData.customSqft} sq ft)` : 
                            formData.garageType === "2-car" ? "2-Car Garage" :
                            formData.garageType === "3-car" ? "3-Car Garage" : "4-Car Garage"}
                         </span>
                       </div>
+                      {formData.additionalSpaces.length > 0 && (
+                        <div className="flex justify-between">
+                          <span>Additional Spaces:</span>
+                          <span className="font-medium">{formData.additionalSpaces.length} spaces</span>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <span>Color Choice:</span>
                         <span className="font-medium capitalize">{formData.colorChoice.replace('-', ' ')}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Photos Uploaded:</span>
-                        <span className="font-medium">{formData.photos.length} photos</span>
+                        <span className="font-medium">{formData.exteriorPhotos.length + formData.damagePhotos.length} photos</span>
                       </div>
                     </div>
                   </div>
@@ -371,6 +619,16 @@ const Quote = () => {
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                     <p className="text-green-800 font-medium">
                       🔥 We'll call you within 60 minutes to confirm your quote and answer any questions.
+                    </p>
+                  </div>
+
+                  {/* Disclaimer */}
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <p className="text-yellow-800 text-sm font-medium mb-2">Important Disclaimer:</p>
+                    <p className="text-yellow-700 text-sm text-left">
+                      This is not an exact estimate. Once our team member calls you, you will be issued an exact quote. 
+                      Things that may change pricing are significance of damage, moisture issues seen on photos, 
+                      existing coatings that need to be removed.
                     </p>
                   </div>
                 </CardContent>
@@ -389,9 +647,10 @@ const Quote = () => {
       case 1: return formData.garageType !== "";
       case 2: return formData.garageType !== "custom" || (formData.customSqft !== "" && formData.spaceType !== "");
       case 3: return true; // Photos are optional
-      case 4: return formData.colorChoice !== "";
-      case 5: return formData.name !== "" && formData.email !== "" && formData.phone !== "" && formData.zipCode !== "";
-      case 6: return true;
+      case 4: return true; // Damage photos are optional
+      case 5: return formData.colorChoice !== "";
+      case 6: return formData.name !== "" && formData.email !== "" && formData.phone !== "" && formData.zipCode !== "";
+      case 7: return true;
       default: return false;
     }
   };
