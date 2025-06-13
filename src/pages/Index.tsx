@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +12,7 @@ const Index = () => {
   const features = [
     {
       icon: <Users className="h-8 w-8 text-blue-600" />,
-      title: "Vetted Installers",
+      title: "Certified Installers",
       description: "Only certified, insured professionals in our network"
     },
     {
@@ -100,7 +99,7 @@ const Index = () => {
                 with a Free Instant Quote
               </h1>
               <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">
-                Vetted Installers • 15-Year to Lifetime Warranties • Hassle-Free Process
+                Certified Installers • 15-Year to Lifetime Warranties • Hassle-Free Process
               </p>
               <Button 
                 onClick={() => navigate('/quote')}
