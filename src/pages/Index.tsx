@@ -17,13 +17,13 @@ const Index = () => {
     },
     {
       icon: <Shield className="h-8 w-8 text-blue-600" />,
-      title: "Warranty Floors - 15-Year to Lifetime",
+      title: "Lifetime Warranty",
       description: "Industry-leading protection with comprehensive coverage"
     },
     {
       icon: <Headphones className="h-8 w-8 text-blue-600" />,
-      title: "Full Service Management",
-      description: "We handle everything - payments, scheduling, and communication"
+      title: "World Class Service",
+      description: "No need to take time out of your day to meet in person, we handle everything remotely."
     }
   ];
 
