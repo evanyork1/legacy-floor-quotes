@@ -3,20 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white py-20">
+  return <footer className="bg-gray-900 text-white py-20">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-6">
-              <img 
-                src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
-                alt="Legacy Industrial Coatings" 
-                className="h-12 w-auto brightness-0 invert"
-              />
+              <img src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" alt="Legacy Industrial Coatings" className="h-40 w-auto brightness-0 invert-0 " />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
               The only company you need for premium warranty floors. We handle everything - 
@@ -57,20 +51,9 @@ const Footer = () => {
             <Card className="bg-gray-800 border-gray-700">
               <CardContent className="p-6">
                 <form className="space-y-4">
-                  <Input 
-                    placeholder="Your Name" 
-                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                  />
-                  <Input 
-                    type="email" 
-                    placeholder="Your Email" 
-                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                  />
-                  <Textarea 
-                    placeholder="Your Message" 
-                    rows={3}
-                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                  />
+                  <Input placeholder="Your Name" className="bg-gray-700 border-gray-600 text-white placeholder-gray-400" />
+                  <Input type="email" placeholder="Your Email" className="bg-gray-700 border-gray-600 text-white placeholder-gray-400" />
+                  <Textarea placeholder="Your Message" rows={3} className="bg-gray-700 border-gray-600 text-white placeholder-gray-400" />
                   <Button className="bg-blue-600 hover:bg-blue-700 w-full">
                     Send Message
                   </Button>
@@ -100,8 +83,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
