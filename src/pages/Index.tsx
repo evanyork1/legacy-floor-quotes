@@ -1,10 +1,12 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones, CreditCard } from "lucide-react";
+import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones, CreditCard, Zap, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
 const Index = () => {
   const navigate = useNavigate();
   const features = [{
@@ -20,32 +22,38 @@ const Index = () => {
     title: "World Class Service",
     description: "No need to take time out of your day to meet in person, we handle everything remotely."
   }];
+  
   const services = [{
-    icon: <CreditCard className="h-8 w-8 text-blue-600" />,
-    title: "We Handle All Payments",
-    description: "Pay Legacy directly - secure processing, milestone payments, and warranty protection"
+    icon: <Zap className="h-8 w-8 text-blue-600" />,
+    title: "Fast Availability",
+    description: "Book and install within 7 days guaranteed - no waiting months for your dream floor"
   }, {
-    icon: <Clock className="h-8 w-8 text-blue-600" />,
-    title: "We Coordinate Scheduling",
-    description: "Legacy manages all scheduling and communication with your installer"
+    icon: <Heart className="h-8 w-8 text-blue-600" />,
+    title: "We Are Easy to Work With",
+    description: "The Amazon of garage flooring - seamless experience from quote to completion"
   }, {
     icon: <Award className="h-8 w-8 text-blue-600" />,
     title: "We Guarantee The Work",
     description: "Legacy stands behind every installation with our warranty backing"
   }];
+  
   const steps = [{
     step: "1",
-    title: "Get Your Quote",
-    description: "Use our instant quote tool to get pricing in seconds"
+    title: "Create Your Own Quote",
+    description: "Use our intelligent quote builder to get accurate pricing instantly",
+    gradient: "from-blue-500 to-purple-600"
   }, {
     step: "2",
-    title: "Pay Legacy & Schedule",
-    description: "We handle payment processing and coordinate with your installer"
+    title: "Schedule Your Installation Day",
+    description: "Pick your perfect date and we coordinate everything with your certified installer",
+    gradient: "from-purple-500 to-pink-600"
   }, {
     step: "3",
-    title: "Enjoy Your Warranty Floor",
-    description: "Professional installation with Legacy's warranty protection"
+    title: "Enjoy Your New Floor",
+    description: "Relax while we transform your space with professional installation and lifetime warranty",
+    gradient: "from-pink-500 to-orange-600"
   }];
+  
   const testimonials = [{
     name: "Sarah Johnson",
     location: "Denver, CO",
@@ -61,33 +69,40 @@ const Index = () => {
     location: "Phoenix, AZ",
     rating: 5,
     text: "From quote to completion, Legacy managed everything. No dealing with multiple contractors. Our outdoor patio coating looks amazing and was done professionally."
+  }, {
+    name: "David Martinez",
+    location: "Dallas, TX",
+    rating: 5,
+    text: "The 7-day guarantee was incredible - from booking to finished floor in under a week! The quality exceeded my expectations and the process was effortless."
   }];
+  
   return <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-white py-24 lg:py-40 overflow-hidden">
-        <div className="container mx-auto px-4">
+      {/* Hero Section - Enhanced */}
+      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-24 lg:py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
+        <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="max-w-xl space-y-8">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Get Your Dream Garage Floor in{" "}
-                <span className="text-blue-600">One Day</span>
+                <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
               </h1>
               <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results</p>
               <div className="relative">
-                <Button onClick={() => navigate('/quote')} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                   Get Instant Quote
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
                 {/* Arrow and handwritten text */}
                 <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-4 hidden lg:flex items-center">
-                  <svg className="w-12 h-8 text-black" viewBox="0 0 48 32" fill="none">
+                  <svg className="w-12 h-8 text-black animate-pulse" viewBox="0 0 48 32" fill="none">
                     <path d="M2 16 L40 16 M34 10 L40 16 L34 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <div className="ml-2 transform rotate-2">
-                    <p className="text-lg text-gray-800 font-handwritten whitespace-nowrap" style={{fontFamily: 'Comic Sans MS, cursive', transform: 'rotate(-2deg)'}}>
+                    <p className="text-lg text-gray-800 font-handwritten whitespace-nowrap animate-bounce" style={{fontFamily: 'Comic Sans MS, cursive', transform: 'rotate(-2deg)'}}>
                       Build your own quote in 90 seconds or less!
                     </p>
                   </div>
@@ -95,17 +110,18 @@ const Index = () => {
               </div>
             </div>
             <div className="relative">
-              <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Premium garage floor coating with luxury vehicles" className="w-full h-auto rounded-lg shadow-2xl" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20 animate-pulse"></div>
+              <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Premium garage floor coating with luxury vehicles" className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Grid Section */}
-      <section className="py-20 bg-white">
+      {/* Features Grid Section - Enhanced */}
+      <section className="py-20 bg-gradient-to-br from-white to-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
               Why Choose Legacy Industrial Coatings?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -114,9 +130,9 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {features.map((feature, index) => <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+            {features.map((feature, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
                 <CardContent className="p-8">
-                  <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
@@ -125,40 +141,43 @@ const Index = () => {
               </Card>)}
           </div>
 
-          {/* Large showcase image */}
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-            <img src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" alt="Modern garage with professional floor coating" className="w-full h-64 lg:h-96 object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-8">
-              <div className="text-white">
-                <h3 className="text-2xl font-bold mb-2 drop-shadow-lg">Transform Your Space</h3>
-                <p className="text-lg opacity-90 drop-shadow-lg">See the difference professional coating makes</p>
+          {/* Enhanced showcase image */}
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+            <div className="relative bg-white rounded-3xl overflow-hidden">
+              <img src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" alt="Modern garage with professional floor coating" className="w-full h-64 lg:h-[500px] object-cover object-center" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12">
+                <div className="text-white">
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg">Transform Your Space</h3>
+                  <p className="text-xl lg:text-2xl opacity-90 drop-shadow-lg">See the difference professional coating makes</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Full Service Section - Background Style */}
-      <section className="py-20 relative">
+      {/* Enhanced Full Service Section */}
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <img src="/lovable-uploads/d89757aa-68ca-4a3f-b457-ae8701a25ca1.png" alt="Premium garage floor with luxury car" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-blue-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-purple-900/60 to-blue-900/70"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h3 className="text-3xl lg:text-4xl font-bold mb-6 drop-shadow-lg">
+            <h3 className="text-4xl lg:text-5xl font-bold mb-6 drop-shadow-lg bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
               One Company, Complete Service
             </h3>
-            <p className="text-xl mb-12 opacity-90 drop-shadow-lg">
-              Unlike other platforms that just connect you to contractors, Legacy handles everything
+            <p className="text-xl lg:text-2xl mb-12 opacity-90 drop-shadow-lg">
+              Work with the most trusted brand in garage floors.
             </p>
             
             <div className="grid md:grid-cols-3 gap-8">
-              {services.map((service, index) => <div key={index} className="bg-white/15 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                  <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              {services.map((service, index) => <div key={index} className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105">
+                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     {service.icon}
                   </div>
-                  <h4 className="text-lg font-semibold mb-3 drop-shadow-lg">{service.title}</h4>
+                  <h4 className="text-xl font-semibold mb-4 drop-shadow-lg">{service.title}</h4>
                   <p className="opacity-90 leading-relaxed drop-shadow-lg">{service.description}</p>
                 </div>)}
             </div>
@@ -166,77 +185,64 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-white" id="how-it-works">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      {/* Redesigned How It Works Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden" id="how-it-works">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 bg-clip-text text-transparent">
               How It Works
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Three simple steps to transform your space with Legacy
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Three simple steps to transform your space with Legacy's premium service
             </p>
           </div>
           
-          <div className="max-w-6xl mx-auto">
-            <div className="grid gap-16">
-              {/* Step 1 */}
-              <div className="flex items-center gap-12">
-                <div className="flex-1">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
-                      1
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-12">
+              {steps.map((step, index) => (
+                <div key={index} className="group relative">
+                  {/* Connecting line for desktop */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300 transform translate-x-4 z-10"></div>
+                  )}
+                  
+                  <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-100">
+                    <div className="absolute -top-6 left-8">
+                      <div className={`bg-gradient-to-r ${step.gradient} text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        {step.step}
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-semibold text-gray-900">Get Your Quote</h3>
+                    
+                    <div className="pt-8">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-lg">
+                        {step.description}
+                      </p>
                     </div>
+                    
+                    {/* Decorative gradient overlay */}
+                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${step.gradient} rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                   </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">Use our instant quote tool to get pricing in seconds</p>
                 </div>
-              </div>
-
-              {/* Step 2 with image */}
-              <div className="flex items-center gap-12 flex-row-reverse">
-                <div className="flex-1">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
-                      2
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-semibold text-gray-900">Pay Legacy & Schedule</h3>
-                    </div>
-                  </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">We handle payment processing and coordinate with your installer</p>
-                </div>
-                <div className="flex-1">
-                  <img src="/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png" alt="Outdoor patio coating installation" className="w-full h-auto rounded-lg shadow-xl" />
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="flex items-center gap-12">
-                <div className="flex-1">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
-                      3
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-semibold text-gray-900">Enjoy Your Warranty Floor</h3>
-                    </div>
-                  </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">Professional installation with Legacy's warranty protection</p>
-                </div>
-              </div>
+              ))}
+            </div>
+            
+            {/* Central connecting element for mobile */}
+            <div className="lg:hidden flex justify-center mt-8">
+              <div className="w-1 h-16 bg-gradient-to-b from-blue-300 to-purple-300 rounded-full"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      {/* Enhanced Testimonials Section */}
+      <section className="py-20 bg-gradient-to-br from-white to-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
               What Our Customers Say
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -244,8 +250,8 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-            {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
+            {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
                 <CardContent className="p-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
@@ -261,21 +267,25 @@ const Index = () => {
 
           {/* Professional installation image */}
           <div className="text-center">
-            <img src="/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png" alt="Professional floor preparation and installation" className="w-full max-w-2xl mx-auto h-auto rounded-lg shadow-xl" />
+            <div className="relative inline-block">
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
+              <img src="/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png" alt="Professional floor preparation and installation" className="relative w-full max-w-2xl mx-auto h-auto rounded-xl shadow-2xl" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+      {/* Enhanced CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-purple-600/90"></div>
+        <div className="container mx-auto px-4 text-center relative">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
             Ready to Get Your Dream Garage Floor?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Get your free instant quote and experience Legacy's full-service approach
           </p>
-          <Button onClick={() => navigate('/quote')} className="bg-white text-blue-600 hover:bg-gray-50 text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <Button onClick={() => navigate('/quote')} className="bg-white text-blue-600 hover:bg-gray-50 text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
             Start Your Quote
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -285,4 +295,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
