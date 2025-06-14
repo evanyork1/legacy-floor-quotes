@@ -360,14 +360,25 @@ const Quote = () => {
             <div className="max-w-xl mx-auto space-y-6">
               <div>
                 <Label htmlFor="sqft" className="text-lg font-medium mb-3 block">What's your total square footage?</Label>
-                <Input 
-                  id="sqft"
-                  type="number"
-                  value={formData.customSqft}
-                  onChange={(e) => updateFormData('customSqft', e.target.value)}
-                  placeholder="Enter square footage"
-                  className="h-14 text-lg"
-                />
+                <div className="relative">
+                  <Input 
+                    id="sqft"
+                    type="number"
+                    inputMode="decimal"
+                    pattern="[0-9]*"
+                    value={formData.customSqft}
+                    onChange={(e) => updateFormData('customSqft', e.target.value)}
+                    placeholder="Enter square footage"
+                    className="h-16 text-xl font-semibold text-center bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 hover:shadow-lg placeholder:text-blue-400"
+                  />
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-blue-500 font-medium text-lg">
+                    sq ft
+                  </div>
+                  <div className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
+                <p className="text-sm text-blue-600 mt-2 text-center font-medium">
+                  ✨ The more accurate, the better your quote!
+                </p>
               </div>
 
               <div>
