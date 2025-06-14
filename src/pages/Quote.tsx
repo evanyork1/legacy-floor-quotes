@@ -158,9 +158,9 @@ const Quote = () => {
                 <button
                   key={option.id}
                   onClick={() => updateFormData('garageType', option.id)}
-                  className={`p-4 sm:p-6 rounded-xl border-2 text-left transition-all hover:scale-[1.02] ${
+                  className={`p-4 sm:p-6 rounded-xl border-2 text-left transition-all hover:scale-[1.02] relative ${
                     option.id === "custom" 
-                      ? `relative bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-lg ${
+                      ? `bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-lg ${
                           formData.garageType === option.id 
                             ? 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-2xl shadow-purple-400/30' 
                             : 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-xl hover:shadow-purple-400/20'
@@ -198,13 +198,15 @@ const Quote = () => {
                           option.id === "custom" ? 'text-purple-600' : 'text-blue-600'
                         }`} />
                       )}
-                      {option.id === "custom" && (
-                        <span className="text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
-                          MOST ACCURATE
-                        </span>
-                      )}
                     </div>
                   </div>
+                  {option.id === "custom" && (
+                    <div className="absolute bottom-3 right-3">
+                      <span className="text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+                        MOST ACCURATE
+                      </span>
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
