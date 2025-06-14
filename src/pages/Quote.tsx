@@ -82,11 +82,12 @@ const Quote = () => {
       thumbnail: "/lovable-uploads/30880d71-5ddb-4653-8b75-4f05283e8728.png",
       preview: "/lovable-uploads/17dfd122-2e0f-4fe6-80ee-fe0ce73f36e1.png"
     },
-    { id: "charcoal", name: "Charcoal", color: "#374151" },
-    { id: "beige", name: "Beige", color: "#D1C4B7" },
-    { id: "brown", name: "Brown", color: "#8B4513" },
-    { id: "green", name: "Forest Green", color: "#065F46" },
-    { id: "navy", name: "Navy Blue", color: "#1E3A8A" },
+    {
+      id: "orbit",
+      name: "Orbit",
+      thumbnail: "/lovable-uploads/77dbbade-9254-4af6-872f-f75c0f6f9607.png",
+      preview: "/lovable-uploads/1194f510-058f-4c9b-b792-ac33f55f217e.png"
+    },
     { id: "custom", name: "Custom Color", color: "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" }
   ];
 
