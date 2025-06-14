@@ -1,10 +1,12 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, ArrowLeft, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type { FormData, ColorOption } from "@/components/quote/types";
@@ -19,6 +21,7 @@ import { Step7QuoteSummary } from "@/components/quote/Step7QuoteSummary";
 
 const Quote = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     garageType: "",
@@ -35,6 +38,28 @@ const Quote = () => {
     zipCode: ""
   });
   const totalSteps = 7;
+
+  const { data: pricingSettings } = useQuery({
+    queryKey: ['pricingSettings'],
+    queryFn: async () => {
+        const { data, error } = await supabase
+            .from('pricing_settings')
+            .select('*')
+            .limit(1)
+            .single();
+        if (error) {
+            console.error("Error fetching pricing", error);
+            toast({
+                title: "Error",
+                description: "Could not load pricing information. Please try again later.",
+                variant: "destructive",
+            });
+            throw new Error(error.message);
+        }
+        return data;
+    },
+    staleTime: 1000 * 60 * 60, // Cache for 1 hour
+  });
 
   const colorOptions: ColorOption[] = [
     { id: "domino", name: "Domino", thumbnail: "/lovable-uploads/cdfd7176-3906-43b6-94ee-714cbd1826a4.png", preview: "/lovable-uploads/3cf154bb-3983-4192-8d3c-6d8bf7cc2587.png" },
@@ -86,20 +111,20 @@ const Quote = () => {
   };
 
   const calculatePrice = () => {
-    let totalSqft = 0;
-    if (formData.garageType === "2-car") totalSqft += 425;
-    else if (formData.garageType === "3-car") totalSqft += 650;
-    else if (formData.garageType === "4-car") totalSqft += 900;
-    else if (formData.garageType === "custom" && formData.customSqft) totalSqft += parseInt(formData.customSqft);
-    
-    formData.additionalSpaces.forEach(space => {
-      if (space.type === "2-car") totalSqft += 425;
-      else if (space.type === "3-car") totalSqft += 650;
-      else if (space.type === "4-car") totalSqft += 900;
-      else if (space.type === "custom" && space.sqft) totalSqft += parseInt(space.sqft);
-    });
+    if (!pricingSettings) return 0;
 
-    return totalSqft * 8;
+    let price = 0;
+    if (formData.garageType === "2-car") price = pricingSettings.price_2_car;
+    else if (formData.garageType === "3-car") price = pricingSettings.price_3_car;
+    else if (formData.garageType === "4-car") price = pricingSettings.price_4_car;
+    else if (formData.garageType === "custom" && formData.customSqft) {
+      price = parseInt(formData.customSqft) * pricingSettings.price_per_sqft;
+    }
+    
+    // Note: The current UI flow doesn't support adding 'additionalSpaces',
+    // so their cost is not included in this calculation.
+    
+    return price;
   };
   
   const renderStep = () => {
@@ -136,10 +161,62 @@ const Quote = () => {
     }
   };
 
+  const { mutate: submitQuote, isPending: isSubmitting } = useMutation({
+    mutationFn: async (dataToSubmit: FormData) => {
+        const uploadFile = async (file: File) => {
+            const fileName = `${crypto.randomUUID()}-${file.name}`;
+            const { error: uploadError } = await supabase.storage.from('quote_photos').upload(fileName, file);
+            if (uploadError) throw uploadError;
+            const { data: urlData } = supabase.storage.from('quote_photos').getPublicUrl(fileName);
+            return urlData.publicUrl;
+        };
+
+        const exterior_photos = await Promise.all(dataToSubmit.exteriorPhotos.map(uploadFile));
+        const damage_photos = await Promise.all(dataToSubmit.damagePhotos.map(uploadFile));
+        
+        const price = calculatePrice();
+
+        const quotePayload = {
+            garage_type: dataToSubmit.garageType,
+            custom_sqft: dataToSubmit.customSqft ? parseInt(dataToSubmit.customSqft) : null,
+            space_type: dataToSubmit.spaceType,
+            other_space_type: dataToSubmit.otherSpaceType,
+            color_choice: dataToSubmit.colorChoice,
+            name: dataToSubmit.name,
+            email: dataToSubmit.email,
+            phone: dataToSubmit.phone,
+            zip_code: dataToSubmit.zipCode,
+            estimated_price: price,
+            exterior_photos,
+            damage_photos,
+            status: 'new',
+        };
+
+        const { error } = await supabase.from('quotes').insert(quotePayload);
+
+        if (error) {
+            throw error;
+        }
+    },
+    onSuccess: () => {
+        toast({
+            title: "Quote Submitted!",
+            description: "We'll call you within 60 minutes to confirm.",
+        });
+        navigate('/');
+    },
+    onError: (error) => {
+        console.error('Error submitting quote:', error);
+        toast({
+            title: "Submission Failed",
+            description: "There was an error submitting your quote. Please try again.",
+            variant: "destructive",
+        });
+    },
+  });
+
   const handleSubmit = () => {
-    console.log('Quote submitted:', formData);
-    alert('Quote submitted successfully! We\'ll call you within 60 minutes.');
-    navigate('/');
+    submitQuote(formData);
   };
 
   return (
@@ -163,7 +240,7 @@ const Quote = () => {
             <CardContent className="p-6 sm:p-8 lg:p-12">
               {renderStep()}
               <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-100">
-                <Button variant="outline" onClick={prevStep} disabled={currentStep === 1} className="flex items-center justify-center px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg order-2 sm:order-1">
+                <Button variant="outline" onClick={prevStep} disabled={currentStep === 1 || isSubmitting} className="flex items-center justify-center px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg order-2 sm:order-1">
                   <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   Previous
                 </Button>
@@ -172,9 +249,9 @@ const Quote = () => {
                     Next Step
                     <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                   </Button> : 
-                  <Button onClick={handleSubmit} className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg order-1 sm:order-2">
-                    Done
-                    <Check className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+                  <Button onClick={handleSubmit} disabled={isSubmitting} className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg order-1 sm:order-2">
+                    {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Done'}
+                    {!isSubmitting && <Check className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />}
                   </Button>
                 }
               </div>

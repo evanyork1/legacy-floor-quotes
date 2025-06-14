@@ -9,7 +9,87 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      pricing_settings: {
+        Row: {
+          id: number
+          price_2_car: number
+          price_3_car: number
+          price_4_car: number
+          price_per_sqft: number
+          updated_at: string | null
+        }
+        Insert: {
+          id?: number
+          price_2_car?: number
+          price_3_car?: number
+          price_4_car?: number
+          price_per_sqft?: number
+          updated_at?: string | null
+        }
+        Update: {
+          id?: number
+          price_2_car?: number
+          price_3_car?: number
+          price_4_car?: number
+          price_per_sqft?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      quotes: {
+        Row: {
+          color_choice: string
+          created_at: string
+          custom_sqft: number | null
+          damage_photos: string[] | null
+          email: string
+          estimated_price: number
+          exterior_photos: string[] | null
+          garage_type: string
+          id: string
+          name: string
+          other_space_type: string | null
+          phone: string
+          space_type: string | null
+          status: string
+          zip_code: string
+        }
+        Insert: {
+          color_choice: string
+          created_at?: string
+          custom_sqft?: number | null
+          damage_photos?: string[] | null
+          email: string
+          estimated_price: number
+          exterior_photos?: string[] | null
+          garage_type: string
+          id?: string
+          name: string
+          other_space_type?: string | null
+          phone: string
+          space_type?: string | null
+          status?: string
+          zip_code: string
+        }
+        Update: {
+          color_choice?: string
+          created_at?: string
+          custom_sqft?: number | null
+          damage_photos?: string[] | null
+          email?: string
+          estimated_price?: number
+          exterior_photos?: string[] | null
+          garage_type?: string
+          id?: string
+          name?: string
+          other_space_type?: string | null
+          phone?: string
+          space_type?: string | null
+          status?: string
+          zip_code?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
