@@ -31,10 +31,14 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => (
                   {formData.garageType === "custom" ? `Custom (${formData.customSqft} sq ft)` : formData.garageType === "2-car" ? "2-Car Garage" : formData.garageType === "3-car" ? "3-Car Garage" : "4-Car Garage"}
                 </span>
               </div>
-              {formData.additionalSpaces.length > 0 && <div className="flex justify-between text-sm sm:text-base">
-                  <span>Additional Spaces:</span>
-                  <span className="font-medium">{formData.additionalSpaces.length} spaces</span>
-                </div>}
+              {formData.additionalSpaces.map((space, index) => (
+                <div className="flex justify-between text-sm sm:text-base" key={index}>
+                  <span>Additional Space #{index + 1}:</span>
+                  <span className="font-medium">
+                    {space.garageType === "custom" ? `Custom (${space.customSqft} sq ft)` : space.garageType === "2-car" ? "2-Car Garage" : space.garageType === "3-car" ? "3-Car Garage" : "4-Car Garage"}
+                  </span>
+                </div>
+              ))}
               <div className="flex justify-between text-sm sm:text-base">
                 <span>Color Choice:</span>
                 <span className="font-medium capitalize">{formData.colorChoice.replace('-', ' ')}</span>

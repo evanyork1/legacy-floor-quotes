@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Check } from 'lucide-react';
 import type { FormData, AdditionalSpace } from './types';
+import { Label } from '@/components/ui/label';
 
 interface Step1Props {
   formData: FormData;
@@ -13,16 +13,35 @@ interface Step1Props {
 export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
   const [showAdditionalSpace, setShowAdditionalSpace] = useState(false);
   const [currentAdditionalSpace, setCurrentAdditionalSpace] = useState<AdditionalSpace>({
-    type: "",
-    sqft: "",
-    spaceType: "",
-    otherSpaceType: ""
+    garageType: "",
+    customSqft: "",
   });
 
+  const garageOptions = [{
+    id: "custom",
+    label: "Know Exact Square Footage?",
+    desc: "We'll ask for details next"
+  }, {
+    id: "2-car",
+    label: "2-Car Garage",
+    desc: "Approx. 400–450 sq ft"
+  }, {
+    id: "3-car",
+    label: "3-Car Garage",
+    desc: "Approx. 600–700 sq ft"
+  }, {
+    id: "4-car",
+    label: "4-Car Garage",
+    desc: "Approx. 800–1,000 sq ft"
+  }];
+
   const addAdditionalSpace = () => {
-    if (currentAdditionalSpace.type) {
+    if (currentAdditionalSpace.garageType) {
+      if (currentAdditionalSpace.garageType === 'custom' && !currentAdditionalSpace.customSqft) {
+        return; // Or show a toast message
+      }
       updateFormData('additionalSpaces', [...formData.additionalSpaces, currentAdditionalSpace]);
-      setCurrentAdditionalSpace({ type: "", sqft: "", spaceType: "", otherSpaceType: "" });
+      setCurrentAdditionalSpace({ garageType: "", customSqft: "" });
       setShowAdditionalSpace(false);
     }
   };
@@ -40,23 +59,7 @@ export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
       </div>
 
       <div className="grid gap-3 sm:gap-4 max-w-2xl mx-auto px-4">
-        {[{
-          id: "custom",
-          label: "Know Exact Square Footage?",
-          desc: "We'll ask for details next"
-        }, {
-          id: "2-car",
-          label: "2-Car Garage",
-          desc: "Approx. 400–450 sq ft"
-        }, {
-          id: "3-car",
-          label: "3-Car Garage",
-          desc: "Approx. 600–700 sq ft"
-        }, {
-          id: "4-car",
-          label: "4-Car Garage",
-          desc: "Approx. 800–1,000 sq ft"
-        }].map(option => <button key={option.id} onClick={() => updateFormData('garageType', option.id)} className={`p-4 sm:p-6 rounded-xl border-2 text-left transition-all hover:scale-[1.02] relative ${option.id === "custom" ? `bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-lg ${formData.garageType === option.id ? 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-2xl shadow-purple-400/30' : 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-xl hover:shadow-purple-400/20'}` : formData.garageType === option.id ? 'border-blue-600 bg-blue-50 shadow-lg' : 'border-gray-200 hover:border-blue-300'}`} style={option.id === "custom" ? {
+        {garageOptions.map(option => <button key={option.id} onClick={() => updateFormData('garageType', option.id)} className={`p-4 sm:p-6 rounded-xl border-2 text-left transition-all hover:scale-[1.02] relative ${option.id === "custom" ? `bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-lg ${formData.garageType === option.id ? 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-2xl shadow-purple-400/30' : 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-xl hover:shadow-purple-400/20'}` : formData.garageType === option.id ? 'border-blue-600 bg-blue-50 shadow-lg' : 'border-gray-200 hover:border-blue-300'}`} style={option.id === "custom" ? {
           background: formData.garageType === option.id ? 'linear-gradient(135deg, #fdf4ff, #fef7ed, #fff7ed)' : 'linear-gradient(135deg, #faf5ff, #fef2f2, #fff7ed)',
           position: 'relative'
         } : {}}>
@@ -87,39 +90,38 @@ export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
               <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 mr-2 sm:mr-3" />
               <span className="text-base sm:text-lg font-semibold text-purple-700">Add Additional Space</span>
             </div>
-            <p className="text-xs sm:text-sm text-purple-600 mt-1">Storage, workshop, or other areas</p>
+            <p className="text-xs sm:text-sm text-purple-600 mt-1">Garage, storage, or other areas</p>
           </button>
         </div>
 
         {showAdditionalSpace && <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-purple-50 rounded-xl border border-purple-200">
           <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Additional Space Details</h3>
           <div className="grid gap-3 sm:gap-4">
-            {[{ id: "garage-floor", label: "Garage Floor" }, { id: "storage", label: "Extra storage" }, { id: "warehouse", label: "Warehouse" }, { id: "detached", label: "Detached garage" }, { id: "other", label: "Other" }].map(option => <button key={option.id} onClick={() => setCurrentAdditionalSpace(prev => ({ ...prev, type: option.id }))} className={`p-3 sm:p-4 rounded-lg border-2 text-left transition-all ${currentAdditionalSpace.type === option.id ? 'border-purple-600 bg-purple-100' : 'border-gray-200 hover:border-purple-300'}`}>
+            {garageOptions.map(option => <button key={option.id} onClick={() => setCurrentAdditionalSpace(prev => ({ ...prev, garageType: option.id }))} className={`p-3 sm:p-4 rounded-lg border-2 text-left transition-all ${currentAdditionalSpace.garageType === option.id ? 'border-purple-600 bg-purple-100' : 'border-gray-200 hover:border-purple-300'}`}>
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{option.label}</h4>
+                   <p className="text-xs sm:text-sm text-gray-500">{option.id === 'custom' ? 'Enter square footage below' : option.desc}</p>
                 </div>
-                {currentAdditionalSpace.type === option.id && <Check className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />}
+                {currentAdditionalSpace.garageType === option.id && <Check className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />}
               </div>
             </button>)}
           </div>
 
-          {currentAdditionalSpace.type === "other" && <div className="mt-3 sm:mt-4">
-            <Input value={currentAdditionalSpace.otherSpaceType} onChange={e => setCurrentAdditionalSpace(prev => ({ ...prev, otherSpaceType: e.target.value }))} placeholder="Please describe your space" className="h-10 sm:h-12" />
-          </div>}
-
-          {currentAdditionalSpace.type === "custom" && <div className="mt-4 sm:mt-6 space-y-3">
-            <Input type="number" value={currentAdditionalSpace.sqft} onChange={e => setCurrentAdditionalSpace(prev => ({ ...prev, sqft: e.target.value }))} placeholder="Enter square footage" className="h-12" />
-            <div className="grid gap-2">
-              {[{ id: "storage", label: "Extra storage" }, { id: "warehouse", label: "Warehouse" }, { id: "detached", label: "Detached garage" }, { id: "other", label: "Other" }].map(option => <button key={option.id} onClick={() => setCurrentAdditionalSpace(prev => ({ ...prev, spaceType: option.id }))} className={`p-3 rounded-lg border text-left transition-all ${currentAdditionalSpace.spaceType === option.id ? 'border-purple-600 bg-purple-100' : 'border-gray-200 hover:border-purple-300'}`}>
-                {option.label}
-              </button>)}
-            </div>
-            {currentAdditionalSpace.spaceType === "other" && <Input value={currentAdditionalSpace.otherSpaceType} onChange={e => setCurrentAdditionalSpace(prev => ({ ...prev, otherSpaceType: e.target.value }))} placeholder="Please describe your space" className="h-12" />}
-          </div>}
+          {currentAdditionalSpace.garageType === "custom" && <div className="mt-4">
+              <Label htmlFor="additionalSqft" className="font-medium mb-2 block">Square Footage</Label>
+              <Input
+                id="additionalSqft"
+                type="number"
+                value={currentAdditionalSpace.customSqft}
+                onChange={e => setCurrentAdditionalSpace(prev => ({ ...prev, customSqft: e.target.value }))}
+                placeholder="e.g. 500"
+                className="h-12"
+              />
+            </div>}
 
           <div className="flex gap-2 sm:gap-3 mt-4 sm:mt-6">
-            <Button onClick={addAdditionalSpace} disabled={!currentAdditionalSpace.type} className="text-sm sm:text-base">
+            <Button onClick={addAdditionalSpace} disabled={!currentAdditionalSpace.garageType || (currentAdditionalSpace.garageType === 'custom' && !currentAdditionalSpace.customSqft)} className="text-sm sm:text-base">
               Add Space
             </Button>
             <Button variant="outline" onClick={() => setShowAdditionalSpace(false)} className="text-sm sm:text-base">
@@ -133,7 +135,7 @@ export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
           <div className="space-y-2">
             {formData.additionalSpaces.map((space, index) => <div key={index} className="p-2 sm:p-3 bg-green-50 border border-green-200 rounded-lg flex justify-between items-center">
               <span className="text-green-800 text-sm sm:text-base">
-                {space.type === "custom" ? `Custom (${space.sqft} sq ft)` : space.type === "2-car" ? "2-Car Size" : space.type === "3-car" ? "3-Car Size" : "4-Car Size"}
+                {space.garageType === "custom" ? `Custom (${space.customSqft} sq ft)` : `${space.garageType.split('-')[0]}-Car Garage`}
               </span>
               <button onClick={() => removeAdditionalSpace(index)} className="text-red-600 hover:text-red-800 text-sm sm:text-base">
                 Remove

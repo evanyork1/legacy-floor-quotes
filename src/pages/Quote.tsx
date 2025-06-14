@@ -114,15 +114,24 @@ const Quote = () => {
     if (!pricingSettings) return 0;
 
     let price = 0;
-    if (formData.garageType === "2-car") price = pricingSettings.price_2_car;
-    else if (formData.garageType === "3-car") price = pricingSettings.price_3_car;
-    else if (formData.garageType === "4-car") price = pricingSettings.price_4_car;
-    else if (formData.garageType === "custom" && formData.customSqft) {
-      price = parseInt(formData.customSqft) * pricingSettings.price_per_sqft;
-    }
     
-    // Note: The current UI flow doesn't support adding 'additionalSpaces',
-    // so their cost is not included in this calculation.
+    const calculateSpacePrice = (space: { garageType: string; customSqft: string; }) => {
+        if (space.garageType === "2-car") return pricingSettings.price_2_car;
+        if (space.garageType === "3-car") return pricingSettings.price_3_car;
+        if (space.garageType === "4-car") return pricingSettings.price_4_car;
+        if (space.garageType === "custom" && space.customSqft) {
+          return parseInt(space.customSqft) * pricingSettings.price_per_sqft;
+        }
+        return 0;
+    }
+
+    // Main garage price
+    price += calculateSpacePrice({ garageType: formData.garageType, customSqft: formData.customSqft });
+
+    // Additional spaces price
+    formData.additionalSpaces.forEach(space => {
+        price += calculateSpacePrice(space);
+    });
     
     return price;
   };

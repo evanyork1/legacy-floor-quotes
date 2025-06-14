@@ -1,9 +1,6 @@
-
 export interface AdditionalSpace {
-  type: string;
-  sqft: string;
-  spaceType: string;
-  otherSpaceType: string;
+  garageType: string;
+  customSqft: string;
 }
 
 export interface FormData {
