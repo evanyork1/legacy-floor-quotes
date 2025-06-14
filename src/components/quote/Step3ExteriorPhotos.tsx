@@ -1,19 +1,19 @@
-
 import { Button } from '@/components/ui/button';
 import { Upload } from 'lucide-react';
 import type { FormData } from './types';
-
 interface Step3Props {
   formData: FormData;
   handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>, type: 'exterior' | 'damage') => void;
   removePhoto: (index: number, type: 'exterior' | 'damage') => void;
 }
-
-export const Step3ExteriorPhotos = ({ formData, handleFileUpload, removePhoto }: Step3Props) => (
-  <div className="space-y-6 sm:space-y-8">
+export const Step3ExteriorPhotos = ({
+  formData,
+  handleFileUpload,
+  removePhoto
+}: Step3Props) => <div className="space-y-6 sm:space-y-8">
     <div className="text-center mb-8 sm:mb-12 px-4">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Upload Photos - Exterior View</h2>
-      <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">This helps us understand exactly how to price your floor.</p>
+      <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">*Optional for now, however we will need them to create an exact estimate.</p>
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 max-w-2xl mx-auto">
         <p className="text-blue-800 font-medium text-sm sm:text-base">📸 Please take photos showing the whole space or all spaces from the exterior</p>
       </div>
@@ -52,5 +52,4 @@ export const Step3ExteriorPhotos = ({ formData, handleFileUpload, removePhoto }:
         </div>
       </div>}
     </div>
-  </div>
-);
+  </div>;
