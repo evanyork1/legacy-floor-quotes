@@ -33,13 +33,6 @@ interface Quote {
   status: 'new' | 'contacted' | 'quoted' | 'closed';
 }
 
-interface PricingTier {
-  id: string;
-  min_sqft: number;
-  max_sqft: number;
-  price_per_sqft: number;
-}
-
 interface Subdomain {
   id: string;
   name: string;

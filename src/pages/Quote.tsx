@@ -21,6 +21,7 @@ interface Option {
   description: string;
   sqft: number;
   price: number;
+  icon?: React.ComponentType<{ className?: string }>;
 }
 
 interface QuoteData {
