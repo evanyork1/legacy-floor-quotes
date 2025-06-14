@@ -201,10 +201,8 @@ const Quote = () => {
                     </div>
                   </div>
                   {option.id === "custom" && (
-                    <div className="absolute -bottom-2 right-2">
-                      <span className="text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
-                        MOST ACCURATE
-                      </span>
+                    <div className="absolute top-3 right-[-34px] w-auto whitespace-nowrap transform rotate-45 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1 shadow-lg">
+                      MOST ACCURATE
                     </div>
                   )}
                 </button>
