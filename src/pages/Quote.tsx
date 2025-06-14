@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,12 +13,14 @@ import {
   Phone, 
   MapPin 
 } from "lucide-react";
+import { getPricingConfig, calculatePrice, type PricingConfig } from "@/lib/pricing";
 
 interface Option {
   id: string;
   name: string;
   description: string;
   sqft: number;
+  price: number;
 }
 
 interface QuoteData {
@@ -34,6 +36,7 @@ interface QuoteData {
 
 const Quote = () => {
   const navigate = useNavigate();
+  const [pricingConfig, setPricingConfig] = useState<PricingConfig>(getPricingConfig());
   const [quoteData, setQuoteData] = useState<QuoteData>({
     garageType: '',
     name: '',
@@ -44,13 +47,45 @@ const Quote = () => {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target;
+  // Update pricing config when localStorage changes (from admin panel)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setPricingConfig(getPricingConfig());
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check for changes periodically since localStorage events don't fire in same tab
+    const interval = setInterval(() => {
+      const newConfig = getPricingConfig();
+      if (JSON.stringify(newConfig) !== JSON.stringify(pricingConfig)) {
+        setPricingConfig(newConfig);
+      }
+    }, 1000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [pricingConfig]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | { target: { name: string; value: string | boolean; type: string; checked?: boolean } }) => {
+    const { name, value, type } = e.target;
+    const checked = 'checked' in e.target ? e.target.checked : false;
+    
     setQuoteData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
     setErrors(prev => ({ ...prev, [name]: '' })); // Clear error on change
+  };
+
+  const handleCheckboxChange = (name: string, checked: boolean) => {
+    setQuoteData(prev => ({
+      ...prev,
+      [name]: checked
+    }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const validate = () => {
@@ -84,33 +119,22 @@ const Quote = () => {
     }
   };
 
-  const garageOptions = [
-    { 
-      id: '1-car', 
-      name: '1-Car Garage', 
-      description: '425 sq ft', 
-      sqft: 425,
-      icon: Car 
-    },
-    { 
-      id: '2-car', 
-      name: '2-Car Garage', 
-      description: '650 sq ft', 
-      sqft: 650,
-      icon: Car 
-    },
-    { 
-      id: '3-car', 
-      name: '3-Car Garage', 
-      description: '900 sq ft', 
-      sqft: 900,
-      icon: Car 
-    },
+  // Generate garage options from pricing config
+  const garageOptions: Option[] = [
+    ...pricingConfig.garageConfigs.map(config => ({
+      id: config.id,
+      name: config.name,
+      description: `${config.sqft} sq ft - $${calculatePrice(config.sqft, pricingConfig).toLocaleString()}`,
+      sqft: config.sqft,
+      price: calculatePrice(config.sqft, pricingConfig),
+      icon: Car
+    })),
     { 
       id: 'custom', 
       name: 'Custom Size', 
       description: 'Enter your dimensions', 
       sqft: 0,
+      price: 0,
       icon: Ruler 
     }
   ];
@@ -119,22 +143,50 @@ const Quote = () => {
     { 
       id: 'workshop', 
       name: 'Workshop Area', 
-      description: '425 sq ft', 
-      sqft: 425 
+      description: `425 sq ft - $${calculatePrice(425, pricingConfig).toLocaleString()}`, 
+      sqft: 425,
+      price: calculatePrice(425, pricingConfig)
     },
     { 
       id: 'storage', 
       name: 'Storage Room', 
-      description: '650 sq ft', 
-      sqft: 650 
+      description: `650 sq ft - $${calculatePrice(650, pricingConfig).toLocaleString()}`, 
+      sqft: 650,
+      price: calculatePrice(650, pricingConfig)
     },
     { 
       id: 'basement', 
       name: 'Basement', 
-      description: '900 sq ft', 
-      sqft: 900 
+      description: `900 sq ft - $${calculatePrice(900, pricingConfig).toLocaleString()}`, 
+      sqft: 900,
+      price: calculatePrice(900, pricingConfig)
     }
   ];
+
+  // Calculate total price
+  const calculateTotalPrice = () => {
+    let total = 0;
+    
+    // Main garage price
+    if (quoteData.garageType === 'custom' && quoteData.customSqft) {
+      total += calculatePrice(quoteData.customSqft, pricingConfig);
+    } else {
+      const selectedGarage = garageOptions.find(option => option.id === quoteData.garageType);
+      if (selectedGarage) {
+        total += selectedGarage.price;
+      }
+    }
+    
+    // Additional space price
+    if (quoteData.additionalSpace) {
+      const selectedSpace = additionalSpaceOptions.find(option => option.id === quoteData.additionalSpace);
+      if (selectedSpace) {
+        total += selectedSpace.price;
+      }
+    }
+    
+    return total;
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
@@ -158,7 +210,7 @@ const Quote = () => {
                         <Card
                           key={option.id}
                           className={`cursor-pointer hover:shadow-md transition-shadow duration-300 ${quoteData.garageType === option.id ? 'border-2 border-blue-500' : ''}`}
-                          onClick={() => handleChange({ target: { name: 'garageType', value: option.id, type: 'text' } } as any)}
+                          onClick={() => handleChange({ target: { name: 'garageType', value: option.id, type: 'text' } })}
                         >
                           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">{option.name}</CardTitle>
@@ -190,6 +242,11 @@ const Quote = () => {
                         placeholder="Enter square footage"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                       />
+                      {quoteData.customSqft && (
+                        <p className="text-sm text-blue-600 font-medium">
+                          Estimated Price: ${calculatePrice(quoteData.customSqft, pricingConfig).toLocaleString()}
+                        </p>
+                      )}
                       {errors.customSqft && <p className="text-red-500 text-sm">{errors.customSqft}</p>}
                     </div>
                   )}
@@ -204,7 +261,7 @@ const Quote = () => {
                         <Card
                           key={option.id}
                           className={`cursor-pointer hover:shadow-md transition-shadow duration-300 ${quoteData.additionalSpace === option.id ? 'border-2 border-blue-500' : ''}`}
-                          onClick={() => handleChange({ target: { name: 'additionalSpace', value: option.id, type: 'text' } } as any)}
+                          onClick={() => handleChange({ target: { name: 'additionalSpace', value: option.id, type: 'text' } })}
                         >
                           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">{option.name}</CardTitle>
@@ -219,6 +276,15 @@ const Quote = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* Total Price Display */}
+                  {(quoteData.garageType || quoteData.additionalSpace) && (
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h3 className="text-lg font-semibold text-blue-800">Estimated Total</h3>
+                      <p className="text-2xl font-bold text-blue-600">${calculateTotalPrice().toLocaleString()}</p>
+                      <p className="text-sm text-gray-600">Final price may vary based on site conditions</p>
+                    </div>
+                  )}
 
                   {/* Contact Information */}
                   <div className="space-y-4">
@@ -295,7 +361,7 @@ const Quote = () => {
                         id="terms"
                         name="terms"
                         checked={quoteData.terms}
-                        onCheckedChange={(checked) => handleChange({ target: { name: 'terms', type: 'checkbox', checked } } as any)}
+                        onCheckedChange={(checked) => handleCheckboxChange('terms', checked as boolean)}
                         className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                       />
                     </div>

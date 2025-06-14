@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +17,7 @@ import {
   Plus,
   Save
 } from "lucide-react";
+import { getPricingConfig, setPricingConfig, type PricingConfig, type GarageConfig, type PricingTier } from "@/lib/pricing";
 
 interface Quote {
   id: string;
@@ -49,6 +50,7 @@ interface Subdomain {
 
 const AdminPanel = () => {
   const { toast } = useToast();
+  const [pricingConfig, setPricingConfigState] = useState<PricingConfig>(getPricingConfig());
   
   // Mock data - replace with real API calls
   const [quotes] = useState<Quote[]>([
@@ -76,13 +78,6 @@ const AdminPanel = () => {
       submitted_at: "2024-01-14T15:45:00Z",
       status: "contacted"
     }
-  ]);
-
-  const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([
-    { id: "1", min_sqft: 0, max_sqft: 500, price_per_sqft: 9 },
-    { id: "2", min_sqft: 501, max_sqft: 800, price_per_sqft: 8 },
-    { id: "3", min_sqft: 801, max_sqft: 1200, price_per_sqft: 7 },
-    { id: "4", min_sqft: 1201, max_sqft: 9999, price_per_sqft: 6 }
   ]);
 
   const [subdomains, setSubdomains] = useState<Subdomain[]>([
@@ -120,10 +115,24 @@ const AdminPanel = () => {
     }
   };
 
+  const updateGarageConfig = (id: string, field: keyof GarageConfig, value: string | number) => {
+    const newConfig = {
+      ...pricingConfig,
+      garageConfigs: pricingConfig.garageConfigs.map(config => 
+        config.id === id ? { ...config, [field]: field === 'sqft' || field === 'price_per_sqft' ? Number(value) : value } : config
+      )
+    };
+    setPricingConfigState(newConfig);
+  };
+
   const updatePricingTier = (id: string, field: keyof PricingTier, value: number) => {
-    setPricingTiers(prev => prev.map(tier => 
-      tier.id === id ? { ...tier, [field]: value } : tier
-    ));
+    const newConfig = {
+      ...pricingConfig,
+      pricingTiers: pricingConfig.pricingTiers.map(tier => 
+        tier.id === id ? { ...tier, [field]: value } : tier
+      )
+    };
+    setPricingConfigState(newConfig);
   };
 
   const exportLeads = () => {
@@ -154,11 +163,10 @@ const AdminPanel = () => {
   };
 
   const savePricingChanges = () => {
-    // Here you would typically make an API call to save the pricing changes
-    // For now, we'll just show a success toast
+    setPricingConfig(pricingConfig);
     toast({
       title: "Pricing Updated",
-      description: "Your pricing tiers have been successfully saved.",
+      description: "Your pricing configuration has been successfully saved and will be reflected on the quote page.",
     });
   };
 
@@ -251,21 +259,68 @@ const AdminPanel = () => {
           </TabsContent>
 
           {/* Pricing Tab */}
-          <TabsContent value="pricing">
+          <TabsContent value="pricing" className="space-y-6">
+            {/* Garage Size Configuration */}
             <Card className="bg-gray-800 border-gray-700">
               <CardHeader>
-                <CardTitle className="text-white">Pricing Tiers</CardTitle>
-                <p className="text-gray-400">Set your base pricing per square foot</p>
+                <CardTitle className="text-white">Garage Size Configuration</CardTitle>
+                <p className="text-gray-400">Configure the square footage and pricing for standard garage types</p>
               </CardHeader>
               <CardContent className="space-y-4">
-                {pricingTiers.map((tier) => (
+                {pricingConfig.garageConfigs.map((config) => (
+                  <div key={config.id} className="grid grid-cols-4 gap-4 p-4 bg-gray-700 rounded-lg">
+                    <div>
+                      <Label className="text-gray-300">Garage Type</Label>
+                      <Input 
+                        value={config.name}
+                        onChange={(e) => updateGarageConfig(config.id, 'name', e.target.value)}
+                        className="bg-gray-600 border-gray-500 text-white"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-gray-300">Square Footage</Label>
+                      <Input 
+                        type="number"
+                        value={config.sqft}
+                        onChange={(e) => updateGarageConfig(config.id, 'sqft', parseInt(e.target.value) || 0)}
+                        className="bg-gray-600 border-gray-500 text-white"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-gray-300">Price per Sq Ft</Label>
+                      <Input 
+                        type="number"
+                        step="0.50"
+                        value={config.price_per_sqft}
+                        onChange={(e) => updateGarageConfig(config.id, 'price_per_sqft', parseFloat(e.target.value) || 0)}
+                        className="bg-gray-600 border-gray-500 text-white"
+                      />
+                    </div>
+                    <div className="flex items-end">
+                      <div className="text-gray-300 text-sm">
+                        Total: ${(config.sqft * config.price_per_sqft).toLocaleString()}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Pricing Tiers for Custom Sizes */}
+            <Card className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Pricing Tiers (Custom Sizes)</CardTitle>
+                <p className="text-gray-400">Set pricing tiers for custom square footage ranges</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {pricingConfig.pricingTiers.map((tier) => (
                   <div key={tier.id} className="grid grid-cols-4 gap-4 p-4 bg-gray-700 rounded-lg">
                     <div>
                       <Label className="text-gray-300">Min Sq Ft</Label>
                       <Input 
                         type="number"
                         value={tier.min_sqft}
-                        onChange={(e) => updatePricingTier(tier.id, 'min_sqft', parseInt(e.target.value))}
+                        onChange={(e) => updatePricingTier(tier.id, 'min_sqft', parseInt(e.target.value) || 0)}
                         className="bg-gray-600 border-gray-500 text-white"
                       />
                     </div>
@@ -274,7 +329,7 @@ const AdminPanel = () => {
                       <Input 
                         type="number"
                         value={tier.max_sqft}
-                        onChange={(e) => updatePricingTier(tier.id, 'max_sqft', parseInt(e.target.value))}
+                        onChange={(e) => updatePricingTier(tier.id, 'max_sqft', parseInt(e.target.value) || 0)}
                         className="bg-gray-600 border-gray-500 text-white"
                       />
                     </div>
@@ -284,7 +339,7 @@ const AdminPanel = () => {
                         type="number"
                         step="0.50"
                         value={tier.price_per_sqft}
-                        onChange={(e) => updatePricingTier(tier.id, 'price_per_sqft', parseFloat(e.target.value))}
+                        onChange={(e) => updatePricingTier(tier.id, 'price_per_sqft', parseFloat(e.target.value) || 0)}
                         className="bg-gray-600 border-gray-500 text-white"
                       />
                     </div>
