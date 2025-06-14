@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -87,8 +86,7 @@ const Quote = () => {
       name: "Orbit",
       thumbnail: "/lovable-uploads/77dbbade-9254-4af6-872f-f75c0f6f9607.png",
       preview: "/lovable-uploads/1194f510-058f-4c9b-b792-ac33f55f217e.png"
-    },
-    { id: "custom", name: "Custom Color", color: "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" }
+    }
   ];
 
   const updateFormData = (field: string, value: string | File[] | any[]) => {
