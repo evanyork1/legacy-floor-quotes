@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +10,7 @@ import Footer from "@/components/Footer";
 
 const Quote = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedColorPreview, setSelectedColorPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     garageType: "",
     customSqft: "",
@@ -35,6 +35,28 @@ const Quote = () => {
   });
 
   const totalSteps = 7;
+
+  // Color options with real images
+  const colorOptions = [
+    {
+      id: "domino",
+      name: "Domino",
+      thumbnail: "/lovable-uploads/cdfd7176-3906-43b6-94ee-714cbd1826a4.png",
+      preview: "/lovable-uploads/3cf154bb-3983-4192-8d3c-6d8bf7cc2587.png"
+    },
+    {
+      id: "tidal-wave",
+      name: "Tidal Wave",
+      thumbnail: "/lovable-uploads/ee1820a2-913b-461d-b3fb-92cbd844fd78.png", 
+      preview: "/lovable-uploads/31083ac1-bd37-402e-93a7-56f5bedbf606.png"
+    },
+    { id: "charcoal", name: "Charcoal", color: "#374151" },
+    { id: "beige", name: "Beige", color: "#D1C4B7" },
+    { id: "brown", name: "Brown", color: "#8B4513" },
+    { id: "green", name: "Forest Green", color: "#065F46" },
+    { id: "navy", name: "Navy Blue", color: "#1E3A8A" },
+    { id: "custom", name: "Custom Color", color: "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" }
+  ];
 
   const updateFormData = (field: string, value: string | File[] | any[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -101,6 +123,11 @@ const Quote = () => {
     // Base pricing: $8 per sq ft
     const basePrice = totalSqft * 8;
     return basePrice;
+  };
+
+  const handleColorSelection = (colorId: string) => {
+    updateFormData('colorChoice', colorId);
+    setSelectedColorPreview(selectedColorPreview === colorId ? null : colorId);
   };
 
   const renderStep = () => {
@@ -477,34 +504,41 @@ const Quote = () => {
 
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {[
-                  { id: "classic-gray", name: "Classic Gray", color: "#6B7280" },
-                  { id: "slate-blue", name: "Slate Blue", color: "#475569" },
-                  { id: "charcoal", name: "Charcoal", color: "#374151" },
-                  { id: "beige", name: "Beige", color: "#D1C4B7" },
-                  { id: "brown", name: "Brown", color: "#8B4513" },
-                  { id: "green", name: "Forest Green", color: "#065F46" },
-                  { id: "navy", name: "Navy Blue", color: "#1E3A8A" },
-                  { id: "custom", name: "Custom Color", color: "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" }
-                ].map((color) => (
-                  <button
-                    key={color.id}
-                    onClick={() => updateFormData('colorChoice', color.id)}
-                    className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${
-                      formData.colorChoice === color.id 
-                        ? 'border-blue-600 shadow-lg' 
-                        : 'border-gray-200'
-                    }`}
-                  >
-                    <div 
-                      className="w-full h-20 rounded-lg mb-3"
-                      style={{ background: color.color }}
-                    />
-                    <p className="font-medium text-gray-900">{color.name}</p>
-                    {formData.colorChoice === color.id && (
-                      <Check className="h-5 w-5 text-blue-600 mx-auto mt-2" />
+                {colorOptions.map((color) => (
+                  <div key={color.id} className="space-y-4">
+                    <button
+                      onClick={() => handleColorSelection(color.id)}
+                      className={`w-full p-4 rounded-xl border-2 transition-all hover:scale-105 ${
+                        formData.colorChoice === color.id 
+                          ? 'border-blue-600 shadow-lg' 
+                          : 'border-gray-200'
+                      }`}
+                    >
+                      <div 
+                        className="w-full h-20 rounded-lg mb-3 bg-cover bg-center"
+                        style={{ 
+                          backgroundImage: color.thumbnail ? `url(${color.thumbnail})` : undefined,
+                          background: !color.thumbnail ? color.color : undefined
+                        }}
+                      />
+                      <p className="font-medium text-gray-900">{color.name}</p>
+                      {formData.colorChoice === color.id && (
+                        <Check className="h-5 w-5 text-blue-600 mx-auto mt-2" />
+                      )}
+                    </button>
+
+                    {/* Expandable Preview */}
+                    {selectedColorPreview === color.id && color.preview && (
+                      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-lg animate-fade-in">
+                        <h4 className="font-semibold text-gray-900 mb-3">See how {color.name} looks in a real garage</h4>
+                        <img 
+                          src={color.preview} 
+                          alt={`${color.name} in garage`}
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
                     )}
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
