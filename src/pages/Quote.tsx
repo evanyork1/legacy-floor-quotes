@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -154,7 +153,7 @@ const Quote = () => {
                 { id: "2-car", label: "2-Car Garage", desc: "Approx. 400–450 sq ft" },
                 { id: "3-car", label: "3-Car Garage", desc: "Approx. 600–700 sq ft" },
                 { id: "4-car", label: "4-Car Garage", desc: "Approx. 800–1,000 sq ft" },
-                { id: "custom", label: "Custom Size", desc: "We'll ask for details next" }
+                { id: "custom", label: "Know Exact Square Footage?", desc: "We'll ask for details next" }
               ].map((option) => (
                 <button
                   key={option.id}
