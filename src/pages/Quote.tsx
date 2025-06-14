@@ -150,10 +150,10 @@ const Quote = () => {
 
             <div className="grid gap-4 max-w-2xl mx-auto">
               {[
+                { id: "custom", label: "Know Exact Square Footage?", desc: "We'll ask for details next" },
                 { id: "2-car", label: "2-Car Garage", desc: "Approx. 400–450 sq ft" },
                 { id: "3-car", label: "3-Car Garage", desc: "Approx. 600–700 sq ft" },
-                { id: "4-car", label: "4-Car Garage", desc: "Approx. 800–1,000 sq ft" },
-                { id: "custom", label: "Know Exact Square Footage?", desc: "We'll ask for details next" }
+                { id: "4-car", label: "4-Car Garage", desc: "Approx. 800–1,000 sq ft" }
               ].map((option) => (
                 <button
                   key={option.id}
