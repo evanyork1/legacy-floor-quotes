@@ -5,8 +5,10 @@ import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones,
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
 const Index = () => {
   const navigate = useNavigate();
+  
   const features = [{
     icon: <Users className="h-8 w-8 text-blue-600" />,
     title: "Certified Installers",
@@ -20,6 +22,7 @@ const Index = () => {
     title: "World Class Service",
     description: "No need to take time out of your day to meet in person, we handle everything remotely."
   }];
+  
   const services = [{
     icon: <Zap className="h-8 w-8 text-blue-600" />,
     title: "Fast Availability",
@@ -33,6 +36,7 @@ const Index = () => {
     title: "We Guarantee The Work",
     description: "Legacy stands behind every installation with our warranty backing"
   }];
+  
   const steps = [{
     step: "1",
     title: "Create Your Own Quote",
@@ -49,6 +53,7 @@ const Index = () => {
     description: "Relax while we transform your space with professional installation and lifetime warranty",
     gradient: "from-pink-500 to-orange-600"
   }];
+  
   const testimonials = [{
     name: "Sarah Johnson",
     location: "Denver, CO",
@@ -70,6 +75,7 @@ const Index = () => {
     rating: 5,
     text: "The 7-day guarantee was incredible - from booking to finished floor in under a week! The quality exceeded my expectations and the process was effortless."
   }];
+  
   return <div className="min-h-screen bg-white">
       <Header />
       
@@ -275,4 +281,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
