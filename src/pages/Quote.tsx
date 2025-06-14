@@ -76,6 +76,12 @@ const Quote = () => {
       thumbnail: "/lovable-uploads/7ad5601d-c765-4bd8-9777-db2ad54404eb.png",
       preview: "/lovable-uploads/a5a3889c-577c-48c8-adcc-e3e9aefdf70b.png"
     },
+    {
+      id: "creek-bed",
+      name: "Creek Bed",
+      thumbnail: "/lovable-uploads/30880d71-5ddb-4653-8b75-4f05283e8728.png",
+      preview: "/lovable-uploads/17dfd122-2e0f-4fe6-80ee-fe0ce73f36e1.png"
+    },
     { id: "charcoal", name: "Charcoal", color: "#374151" },
     { id: "beige", name: "Beige", color: "#D1C4B7" },
     { id: "brown", name: "Brown", color: "#8B4513" },
