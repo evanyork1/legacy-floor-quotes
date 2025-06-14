@@ -8,10 +8,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { ArrowRight, ArrowLeft, Upload, Check, Plus, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import QuoteIntro from "@/components/QuoteIntro";
 
 const Quote = () => {
-  const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedColorPreview, setSelectedColorPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -138,10 +136,6 @@ const Quote = () => {
 
   const closeColorPreview = () => {
     setSelectedColorPreview(null);
-  };
-
-  const handleStartQuote = () => {
-    setShowIntro(false);
   };
 
   const renderStep = () => {
@@ -802,11 +796,6 @@ const Quote = () => {
     // Here you would normally send to backend
     alert('Quote submitted successfully! We\'ll call you within 60 minutes.');
   };
-
-  // Show intro page first
-  if (showIntro) {
-    return <QuoteIntro onStartQuote={handleStartQuote} />;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
