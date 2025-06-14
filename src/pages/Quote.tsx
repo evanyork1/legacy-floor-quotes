@@ -245,7 +245,6 @@ const Quote = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <h4 className="font-semibold text-gray-900">{option.label}</h4>
-                            <p className="text-gray-600 text-sm">{option.desc}</p>
                           </div>
                           {currentAdditionalSpace.type === option.id && (
                             <Check className="h-5 w-5 text-purple-600" />
@@ -254,6 +253,17 @@ const Quote = () => {
                       </button>
                     ))}
                   </div>
+
+                  {currentAdditionalSpace.type === "other" && (
+                    <div className="mt-4">
+                      <Input 
+                        value={currentAdditionalSpace.otherSpaceType}
+                        onChange={(e) => setCurrentAdditionalSpace(prev => ({ ...prev, otherSpaceType: e.target.value }))}
+                        placeholder="Please describe your space"
+                        className="h-12"
+                      />
+                    </div>
+                  )}
 
                   {currentAdditionalSpace.type === "custom" && (
                     <div className="mt-4 space-y-3">
@@ -417,11 +427,12 @@ const Quote = () => {
               {/* Example placeholder */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Example Photo:</h3>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <Upload className="h-12 w-12 mx-auto mb-2" />
-                    <p>Example: Wide shot of garage exterior</p>
-                  </div>
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/c131885b-6fd6-4475-afeb-d13b0d895942.png" 
+                    alt="Example garage exterior view"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
               </div>
 
