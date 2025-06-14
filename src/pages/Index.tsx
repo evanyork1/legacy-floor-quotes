@@ -5,6 +5,7 @@ import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones,
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
 const Index = () => {
   const navigate = useNavigate();
   const features = [{
@@ -131,19 +132,67 @@ const Index = () => {
                 </CardContent>
               </Card>)}
           </div>
+        </div>
+      </section>
 
-          {/* Enhanced showcase image - Made smaller and clearer */}
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl group max-w-4xl mx-auto">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
-            <div className="relative bg-white rounded-3xl overflow-hidden">
-              <img src="/lovable-uploads/6bb7ca29-9153-489d-a82d-ac6756606223.png" alt="Modern garage with professional floor coating" className="w-full h-80 lg:h-96 object-cover object-center" />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12">
-                <div className="text-white">
-                  <h3 className="text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg">Transform Your Space</h3>
-                  <p className="text-xl lg:text-2xl opacity-90 drop-shadow-lg">See the difference professional coating makes</p>
+      {/* Premium Showcase Section - Redesigned */}
+      <section className="relative py-0 overflow-hidden">
+        {/* Full-width background image */}
+        <div className="relative h-[70vh] lg:h-[80vh]">
+          <div className="absolute inset-0">
+            <img 
+              src="/lovable-uploads/171f7c9e-88ae-49c9-b252-9f5d62d0221d.png" 
+              alt="Premium speckled garage floor coating with luxury car" 
+              className="w-full h-full object-cover object-bottom"
+            />
+            {/* Gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30"></div>
+          </div>
+          
+          {/* Content overlay */}
+          <div className="relative h-full flex items-end">
+            <div className="container mx-auto px-4 pb-16 lg:pb-20">
+              <div className="max-w-4xl">
+                <div className="text-white space-y-6">
+                  <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4">
+                    <p className="text-sm font-medium text-white/90">Premium Polyurea Coating</p>
+                  </div>
+                  <h3 className="text-4xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
+                    See the
+                    <span className="block text-blue-300">Difference</span>
+                  </h3>
+                  <p className="text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed drop-shadow-lg">
+                    This is what professional-grade floor coating looks like. Durable, beautiful, and designed to last a lifetime.
+                  </p>
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-white font-medium">Slip Resistant</span>
+                      </div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-white font-medium">Chemical Resistant</span>
+                      </div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-white font-medium">Easy to Clean</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-4">
+            <Award className="h-8 w-8 text-white" />
           </div>
         </div>
       </section>
@@ -282,4 +331,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
