@@ -421,13 +421,16 @@ const Quote = () => {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
                 <p className="text-blue-800 font-medium">📸 Please take photos showing the whole space or all spaces from the exterior</p>
               </div>
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 max-w-2xl mx-auto mt-4">
+                <p className="text-green-800 font-semibold text-sm">💡 Upload as many pictures as you can; the more, the better!</p>
+              </div>
             </div>
 
             <div className="max-w-2xl mx-auto">
               {/* Example placeholder */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Example Photo:</h3>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center overflow-hidden">
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-80 flex items-center justify-center overflow-hidden">
                   <img 
                     src="/lovable-uploads/c131885b-6fd6-4475-afeb-d13b0d895942.png" 
                     alt="Example garage exterior view"
@@ -488,13 +491,16 @@ const Quote = () => {
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-2xl mx-auto">
                 <p className="text-amber-800 font-medium">⚠️ Please photograph any cracks, stains, existing coatings, or problem areas</p>
               </div>
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 max-w-2xl mx-auto mt-4">
+                <p className="text-green-800 font-semibold text-sm">💡 Upload as many pictures as you can; the more, the better!</p>
+              </div>
             </div>
 
             <div className="max-w-2xl mx-auto">
               {/* Example placeholder */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Example Photos:</h3>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 flex items-center justify-center">
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-80 flex items-center justify-center">
                   <div className="text-center text-gray-500">
                     <Upload className="h-12 w-12 mx-auto mb-2" />
                     <p>Example: Close-ups of cracks, stains, or damage</p>
