@@ -469,16 +469,7 @@ const Quote = () => {
                 {colorOptions.map(color => <div key={color.id} className="space-y-3 sm:space-y-4">
                     <button onClick={() => handleColorSelection(color.id)} className={`w-full p-3 sm:p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.colorChoice === color.id ? 'border-blue-600 shadow-lg' : 'border-gray-200'}`}>
                       <div className="w-full h-16 sm:h-20 rounded-lg mb-2 sm:mb-3 overflow-hidden">
-                        {color.thumbnail ? <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" onError={e => {
-                      // Fallback to solid color if image fails to load
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) fallback.style.display = 'block';
-                    }} /> : null}
-                        <div className={`w-full h-full rounded-lg ${color.thumbnail ? 'hidden' : 'block'}`} style={{
-                      background: color.color
-                    }} />
+                        <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" />
                       </div>
                       <p className="font-medium text-gray-900 text-sm sm:text-base">{color.name}</p>
                       {formData.colorChoice === color.id && <Check className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mx-auto mt-2" />}
