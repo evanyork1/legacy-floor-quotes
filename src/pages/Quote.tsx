@@ -159,18 +159,48 @@ const Quote = () => {
                   key={option.id}
                   onClick={() => updateFormData('garageType', option.id)}
                   className={`p-6 rounded-xl border-2 text-left transition-all hover:scale-[1.02] ${
-                    formData.garageType === option.id 
-                      ? 'border-blue-600 bg-blue-50 shadow-lg' 
-                      : 'border-gray-200 hover:border-blue-300'
+                    option.id === "custom" 
+                      ? `relative bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-lg ${
+                          formData.garageType === option.id 
+                            ? 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-2xl shadow-purple-400/30' 
+                            : 'before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-xl hover:shadow-purple-400/20'
+                        }`
+                      : formData.garageType === option.id 
+                        ? 'border-blue-600 bg-blue-50 shadow-lg' 
+                        : 'border-gray-200 hover:border-blue-300'
                   }`}
+                  style={option.id === "custom" ? {
+                    background: formData.garageType === option.id 
+                      ? 'linear-gradient(135deg, #fdf4ff, #fef7ed, #fff7ed)' 
+                      : 'linear-gradient(135deg, #faf5ff, #fef2f2, #fff7ed)',
+                    position: 'relative'
+                  } : {}}
                 >
-                  <div className="flex items-center justify-between">
+                  {option.id === "custom" && (
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-20 blur-sm -z-10" />
+                  )}
+                  <div className="flex items-center justify-between relative z-10">
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{option.label}</h3>
-                      <p className="text-gray-600 mt-1">{option.desc}</p>
+                      <h3 className={`text-xl font-semibold ${
+                        option.id === "custom" ? 'text-purple-900' : 'text-gray-900'
+                      }`}>
+                        {option.label}
+                        {option.id === "custom" && (
+                          <span className="ml-2 text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+                            MOST ACCURATE
+                          </span>
+                        )}
+                      </h3>
+                      <p className={`mt-1 ${
+                        option.id === "custom" ? 'text-purple-700' : 'text-gray-600'
+                      }`}>
+                        {option.desc}
+                      </p>
                     </div>
                     {formData.garageType === option.id && (
-                      <Check className="h-6 w-6 text-blue-600" />
+                      <Check className={`h-6 w-6 ${
+                        option.id === "custom" ? 'text-purple-600' : 'text-blue-600'
+                      }`} />
                     )}
                   </div>
                 </button>
