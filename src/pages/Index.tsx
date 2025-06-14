@@ -147,29 +147,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Enhanced Full Service Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/lovable-uploads/d89757aa-68ca-4a3f-b457-ae8701a25ca1.png" alt="Premium garage floor with luxury car" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-purple-900/60 to-blue-900/70"></div>
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h3 className="text-4xl lg:text-5xl font-bold mb-6 drop-shadow-lg bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-              One Company, Complete Service
-            </h3>
-            <p className="text-xl lg:text-2xl mb-12 opacity-90 drop-shadow-lg">
-              Work with the most trusted brand in garage floors.
-            </p>
+      {/* The Most Trusted Brand Section */}
+      <section className="py-20 bg-gradient-to-br from-white to-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+              The most trusted brand in garage floors
+            </h2>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+            {/* Left side - Image */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
+              <img src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" alt="Premium garage floor with luxury car" className="relative w-full h-auto rounded-xl shadow-2xl" />
+            </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              {services.map((service, index) => <div key={index} className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105">
-                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {service.icon}
+            {/* Right side - Service points */}
+            <div className="space-y-8">
+              {services.map((service, index) => (
+                <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100">
+                  <div className="flex items-start space-x-6">
+                    <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      {service.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
-                  <h4 className="text-xl font-semibold mb-4 drop-shadow-lg">{service.title}</h4>
-                  <p className="opacity-90 leading-relaxed drop-shadow-lg">{service.description}</p>
-                </div>)}
+                </div>
+              ))}
             </div>
           </div>
         </div>
