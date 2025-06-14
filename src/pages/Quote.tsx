@@ -58,6 +58,12 @@ const Quote = () => {
       thumbnail: "/lovable-uploads/2546c208-cda6-4d48-9163-80c246dba2d2.png",
       preview: "/lovable-uploads/0d074361-e8d8-4280-99dc-ad791113a1fd.png"
     },
+    {
+      id: "raven",
+      name: "Raven",
+      thumbnail: "/lovable-uploads/348c8c3b-1396-4bef-ab42-e8412ddbee0c.png",
+      preview: "/lovable-uploads/40f32c63-7463-4fd5-ad12-c4e99b315de8.png"
+    },
     { id: "charcoal", name: "Charcoal", color: "#374151" },
     { id: "beige", name: "Beige", color: "#D1C4B7" },
     { id: "brown", name: "Brown", color: "#8B4513" },
