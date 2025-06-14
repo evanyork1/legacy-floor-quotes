@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -522,13 +523,26 @@ const Quote = () => {
                           : 'border-gray-200'
                       }`}
                     >
-                      <div 
-                        className="w-full h-20 rounded-lg mb-3 bg-cover bg-center"
-                        style={{ 
-                          backgroundImage: color.thumbnail ? `url(${color.thumbnail})` : undefined,
-                          background: !color.thumbnail ? color.color : undefined
-                        }}
-                      />
+                      <div className="w-full h-20 rounded-lg mb-3 overflow-hidden">
+                        {color.thumbnail ? (
+                          <img 
+                            src={color.thumbnail} 
+                            alt={color.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              // Fallback to solid color if image fails to load
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const fallback = target.nextElementSibling as HTMLElement;
+                              if (fallback) fallback.style.display = 'block';
+                            }}
+                          />
+                        ) : null}
+                        <div 
+                          className={`w-full h-full rounded-lg ${color.thumbnail ? 'hidden' : 'block'}`}
+                          style={{ background: color.color }}
+                        />
+                      </div>
                       <p className="font-medium text-gray-900">{color.name}</p>
                       {formData.colorChoice === color.id && (
                         <Check className="h-5 w-5 text-blue-600 mx-auto mt-2" />
