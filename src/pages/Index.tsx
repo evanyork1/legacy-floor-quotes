@@ -135,65 +135,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Premium Showcase Section - Redesigned */}
-      <section className="relative py-0 overflow-hidden">
-        {/* Full-width background image */}
-        <div className="relative h-[70vh] lg:h-[80vh]">
-          <div className="absolute inset-0">
-            <img 
-              src="/lovable-uploads/171f7c9e-88ae-49c9-b252-9f5d62d0221d.png" 
-              alt="Premium speckled garage floor coating with luxury car" 
-              className="w-full h-full object-cover object-bottom"
-            />
-            {/* Gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30"></div>
-          </div>
-          
-          {/* Content overlay */}
-          <div className="relative h-full flex items-end">
-            <div className="container mx-auto px-4 pb-16 lg:pb-20">
-              <div className="max-w-4xl">
-                <div className="text-white space-y-6">
-                  <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4">
-                    <p className="text-sm font-medium text-white/90">Premium Polyurea Coating</p>
-                  </div>
-                  <h3 className="text-4xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
-                    See the
-                    <span className="block text-blue-300">Difference</span>
-                  </h3>
-                  <p className="text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed drop-shadow-lg">
-                    This is what professional-grade floor coating looks like. Durable, beautiful, and designed to last a lifetime.
-                  </p>
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
-                      <div className="flex items-center space-x-2">
-                        <CheckCircle className="h-5 w-5 text-green-400" />
-                        <span className="text-white font-medium">Slip Resistant</span>
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
-                      <div className="flex items-center space-x-2">
-                        <CheckCircle className="h-5 w-5 text-green-400" />
-                        <span className="text-white font-medium">Chemical Resistant</span>
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3">
-                      <div className="flex items-center space-x-2">
-                        <CheckCircle className="h-5 w-5 text-green-400" />
-                        <span className="text-white font-medium">Easy to Clean</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-4">
-            <Award className="h-8 w-8 text-white" />
-          </div>
+      {/* Simple Image Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <img 
+            src="/lovable-uploads/171f7c9e-88ae-49c9-b252-9f5d62d0221d.png" 
+            alt="Premium speckled garage floor coating with luxury car" 
+            className="w-full max-w-6xl mx-auto h-auto rounded-xl shadow-2xl"
+          />
         </div>
       </section>
 
