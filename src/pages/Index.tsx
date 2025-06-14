@@ -81,7 +81,7 @@ const Index = () => {
             <div className="max-w-xl space-y-8">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Get Your Dream Garage Floor in{" "}
-                <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
+                <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
               </h1>
               <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results</p>
               <div className="relative">
@@ -116,7 +116,7 @@ const Index = () => {
               Why Choose Legacy Industrial Coatings?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              The only company you need to deal with for premium warranty floors
+              Thousands have trusted us as their garage floor experts.
             </p>
           </div>
           
