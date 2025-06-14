@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Upload } from 'lucide-react';
 import type { FormData } from './types';
+import { ExamplePhoto } from './ExamplePhoto';
 
 interface Step4Props {
   formData: FormData;
@@ -25,9 +26,10 @@ export const Step4DamagePhotos = ({ formData, handleFileUpload, removePhoto }: S
     <div className="max-w-2xl mx-auto px-4">
       <div className="mb-6 sm:mb-8">
         <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Example Photo:</h3>
-        <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-48 sm:h-96 flex items-center justify-center overflow-hidden">
-          <img src="/lovable-uploads/a05a7933-8c9e-4367-9523-6c38e3b5944c.png" alt="Example of floor crack damage" className="w-full h-full object-cover rounded-xl" />
-        </div>
+        <ExamplePhoto
+          src="/lovable-uploads/a05a7933-8c9e-4367-9523-6c38e3b5944c.png"
+          alt="Example of floor crack damage"
+        />
       </div>
 
       <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 sm:p-12 text-center hover:border-blue-400 transition-colors">
