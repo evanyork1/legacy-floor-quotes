@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Settings, 
   Users, 
@@ -48,6 +48,8 @@ interface Subdomain {
 }
 
 const AdminPanel = () => {
+  const { toast } = useToast();
+  
   // Mock data - replace with real API calls
   const [quotes] = useState<Quote[]>([
     {
@@ -149,6 +151,15 @@ const AdminPanel = () => {
       case 'closed': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const savePricingChanges = () => {
+    // Here you would typically make an API call to save the pricing changes
+    // For now, we'll just show a success toast
+    toast({
+      title: "Pricing Updated",
+      description: "Your pricing tiers have been successfully saved.",
+    });
   };
 
   return (
@@ -284,7 +295,7 @@ const AdminPanel = () => {
                     </div>
                   </div>
                 ))}
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                <Button onClick={savePricingChanges} className="w-full bg-blue-600 hover:bg-blue-700">
                   <Save className="h-4 w-4 mr-2" />
                   Save Pricing Changes
                 </Button>
