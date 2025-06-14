@@ -179,7 +179,7 @@ const Quote = () => {
                   {option.id === "custom" && (
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-20 blur-sm -z-10" />
                   )}
-                  <div className="flex items-start justify-between relative z-10">
+                  <div className="flex items-center relative z-10">
                     <div className="flex-1">
                       <h3 className={`text-lg sm:text-xl font-semibold ${
                         option.id === "custom" ? 'text-purple-900' : 'text-gray-900'
@@ -192,7 +192,7 @@ const Quote = () => {
                         {option.desc}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end gap-2">
+                    <div className="pl-4">
                       {formData.garageType === option.id && (
                         <Check className={`h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 ${
                           option.id === "custom" ? 'text-purple-600' : 'text-blue-600'
