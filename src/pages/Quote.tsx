@@ -201,7 +201,7 @@ const Quote = () => {
                     </div>
                   </div>
                   {option.id === "custom" && (
-                    <div className="absolute bottom-0 right-2 mb-4">
+                    <div className="absolute -bottom-2 right-2">
                       <span className="text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
                         MOST ACCURATE
                       </span>
