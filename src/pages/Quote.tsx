@@ -502,7 +502,7 @@ const Quote = () => {
                 <h3 className="text-lg font-semibold mb-4">Example Photo:</h3>
                 <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/lovable-uploads/4d4d1aa1-4df0-4104-b13b-46262bd52e9a.png" 
+                    src="/lovable-uploads/a05a7933-8c9e-4367-9523-6c38e3b5944c.png" 
                     alt="Example of floor crack damage"
                     className="w-full h-full object-cover rounded-xl"
                   />
