@@ -46,9 +46,10 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => (
             </div>
           </div>
 
-          <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-            <p className="text-green-800 font-medium text-sm sm:text-base">
-              🔥 We'll call you within 60 minutes to confirm your quote and answer any questions.
+          <div className="bg-green-100 border-2 border-green-300 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 text-center">
+            <h4 className="text-green-900 font-bold text-lg sm:text-xl mb-2">What's Next? 🔥</h4>
+            <p className="text-green-800 text-base sm:text-lg">
+              We'll call you within 60 minutes to confirm your quote and answer any questions!
             </p>
           </div>
 

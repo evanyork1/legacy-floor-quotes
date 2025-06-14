@@ -170,7 +170,7 @@ const Quote = () => {
                     <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                   </Button> : 
                   <Button onClick={handleSubmit} className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg order-1 sm:order-2">
-                    Finish & Submit
+                    Done
                     <Check className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                   </Button>
                 }
