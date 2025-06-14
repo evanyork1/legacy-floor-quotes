@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, ArrowLeft, Upload, Check, Plus } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ArrowRight, ArrowLeft, Upload, Check, Plus, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -127,7 +128,14 @@ const Quote = () => {
 
   const handleColorSelection = (colorId: string) => {
     updateFormData('colorChoice', colorId);
-    setSelectedColorPreview(selectedColorPreview === colorId ? null : colorId);
+  };
+
+  const openColorPreview = (colorId: string) => {
+    setSelectedColorPreview(colorId);
+  };
+
+  const closeColorPreview = () => {
+    setSelectedColorPreview(null);
   };
 
   const renderStep = () => {
@@ -527,21 +535,41 @@ const Quote = () => {
                       )}
                     </button>
 
-                    {/* Expandable Preview */}
-                    {selectedColorPreview === color.id && color.preview && (
-                      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-lg animate-fade-in">
-                        <h4 className="font-semibold text-gray-900 mb-3">See how {color.name} looks in a real garage</h4>
-                        <img 
-                          src={color.preview} 
-                          alt={`${color.name} in garage`}
-                          className="w-full h-48 object-cover rounded-lg"
-                        />
-                      </div>
+                    {/* Preview Button - only show for colors with preview images */}
+                    {color.preview && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => openColorPreview(color.id)}
+                        className="w-full text-xs"
+                      >
+                        See in Garage
+                      </Button>
                     )}
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Color Preview Modal */}
+            <Dialog open={selectedColorPreview !== null} onOpenChange={closeColorPreview}>
+              <DialogContent className="max-w-4xl w-full">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-semibold">
+                    {selectedColorPreview && colorOptions.find(c => c.id === selectedColorPreview)?.name} in a Real Garage
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="relative">
+                  {selectedColorPreview && (
+                    <img 
+                      src={colorOptions.find(c => c.id === selectedColorPreview)?.preview} 
+                      alt={`${colorOptions.find(c => c.id === selectedColorPreview)?.name} in garage`}
+                      className="w-full h-auto rounded-lg"
+                    />
+                  )}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         );
 
