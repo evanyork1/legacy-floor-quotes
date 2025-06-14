@@ -227,10 +227,11 @@ const Quote = () => {
                   <h3 className="text-lg font-semibold mb-4">Additional Space Details</h3>
                   <div className="grid gap-4">
                     {[
-                      { id: "2-car", label: "2-Car Size", desc: "Approx. 400–450 sq ft" },
-                      { id: "3-car", label: "3-Car Size", desc: "Approx. 600–700 sq ft" },
-                      { id: "4-car", label: "4-Car Size", desc: "Approx. 800–1,000 sq ft" },
-                      { id: "custom", label: "Custom Size", desc: "Enter custom details" }
+                      { id: "garage-floor", label: "Garage Floor" },
+                      { id: "storage", label: "Extra storage" },
+                      { id: "warehouse", label: "Warehouse" },
+                      { id: "detached", label: "Detached garage" },
+                      { id: "other", label: "Other" }
                     ].map((option) => (
                       <button
                         key={option.id}
@@ -363,6 +364,7 @@ const Quote = () => {
                 <Label className="text-lg font-medium mb-4 block">What type of space is this?</Label>
                 <div className="grid gap-3">
                   {[
+                    { id: "garage-floor", label: "Garage Floor" },
                     { id: "storage", label: "Extra storage" },
                     { id: "warehouse", label: "Warehouse" },
                     { id: "detached", label: "Detached garage" },
