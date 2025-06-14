@@ -5,10 +5,8 @@ import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones,
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const Index = () => {
   const navigate = useNavigate();
-  
   const features = [{
     icon: <Users className="h-8 w-8 text-blue-600" />,
     title: "Certified Installers",
@@ -22,7 +20,6 @@ const Index = () => {
     title: "World Class Service",
     description: "No need to take time out of your day to meet in person, we handle everything remotely."
   }];
-  
   const services = [{
     icon: <Zap className="h-8 w-8 text-blue-600" />,
     title: "Fast Availability",
@@ -36,7 +33,6 @@ const Index = () => {
     title: "We Guarantee The Work",
     description: "Legacy stands behind every installation with our warranty backing"
   }];
-  
   const steps = [{
     step: "1",
     title: "Create Your Own Quote",
@@ -53,7 +49,6 @@ const Index = () => {
     description: "Relax while we transform your space with professional installation and lifetime warranty",
     gradient: "from-pink-500 to-orange-600"
   }];
-  
   const testimonials = [{
     name: "Sarah Johnson",
     location: "Denver, CO",
@@ -75,7 +70,6 @@ const Index = () => {
     rating: 5,
     text: "The 7-day guarantee was incredible - from booking to finished floor in under a week! The quality exceeded my expectations and the process was effortless."
   }];
-  
   return <div className="min-h-screen bg-white">
       <Header />
       
@@ -141,11 +135,7 @@ const Index = () => {
       </section>
 
       {/* Simple Image Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <img src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" alt="Premium speckled garage floor coating with luxury sports car" className="w-full max-w-xl mx-auto h-auto rounded-xl shadow-2xl" />
-        </div>
-      </section>
+      
 
       {/* The Most Trusted Brand Section */}
       <section className="py-20 bg-gradient-to-br from-white to-slate-50">
@@ -165,8 +155,7 @@ const Index = () => {
             
             {/* Right side - Service points */}
             <div className="space-y-8">
-              {services.map((service, index) => (
-                <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100">
+              {services.map((service, index) => <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100">
                   <div className="flex items-start space-x-6">
                     <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       {service.icon}
@@ -180,8 +169,7 @@ const Index = () => {
                       </p>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -293,5 +281,4 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 export default Index;
