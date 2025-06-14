@@ -138,12 +138,11 @@ const Index = () => {
       {/* Simple Image Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="relative inline-block">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
-              <img src="/lovable-uploads/26488809-d060-4237-a3aa-177b4c95165a.png" alt="Professional floor preparation and installation" className="relative w-full max-w-2xl mx-auto h-auto rounded-xl shadow-2xl" />
-            </div>
-          </div>
+          <img 
+            src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" 
+            alt="Premium speckled garage floor coating with luxury sports car" 
+            className="w-full max-w-6xl mx-auto h-auto rounded-xl shadow-2xl"
+          />
         </div>
       </section>
 
