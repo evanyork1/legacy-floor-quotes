@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -17,6 +18,7 @@ import { Step6ContactInfo } from "@/components/quote/Step6ContactInfo";
 import { Step7QuoteSummary } from "@/components/quote/Step7QuoteSummary";
 
 const Quote = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     garageType: "",
@@ -137,6 +139,7 @@ const Quote = () => {
   const handleSubmit = () => {
     console.log('Quote submitted:', formData);
     alert('Quote submitted successfully! We\'ll call you within 60 minutes.');
+    navigate('/');
   };
 
   return (
