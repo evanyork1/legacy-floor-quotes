@@ -74,7 +74,7 @@ const Index = () => {
       <Header />
       
       {/* Hero Section - Enhanced */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-24 lg:py-40 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-16 sm:py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
