@@ -179,17 +179,12 @@ const Quote = () => {
                   {option.id === "custom" && (
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-20 blur-sm -z-10" />
                   )}
-                  <div className="flex items-center justify-between relative z-10">
-                    <div>
+                  <div className="flex items-start justify-between relative z-10">
+                    <div className="flex-1">
                       <h3 className={`text-lg sm:text-xl font-semibold ${
                         option.id === "custom" ? 'text-purple-900' : 'text-gray-900'
                       }`}>
                         {option.label}
-                        {option.id === "custom" && (
-                          <span className="ml-2 text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold block sm:inline">
-                            MOST ACCURATE
-                          </span>
-                        )}
                       </h3>
                       <p className={`mt-1 text-sm sm:text-base ${
                         option.id === "custom" ? 'text-purple-700' : 'text-gray-600'
@@ -197,11 +192,18 @@ const Quote = () => {
                         {option.desc}
                       </p>
                     </div>
-                    {formData.garageType === option.id && (
-                      <Check className={`h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 ${
-                        option.id === "custom" ? 'text-purple-600' : 'text-blue-600'
-                      }`} />
-                    )}
+                    <div className="flex flex-col items-end gap-2">
+                      {formData.garageType === option.id && (
+                        <Check className={`h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 ${
+                          option.id === "custom" ? 'text-purple-600' : 'text-blue-600'
+                        }`} />
+                      )}
+                      {option.id === "custom" && (
+                        <span className="text-xs sm:text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+                          MOST ACCURATE
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </button>
               ))}
