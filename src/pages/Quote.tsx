@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +39,10 @@ const Quote = () => {
     zipCode: ""
   });
   const totalSteps = 7;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep]);
 
   const { data: pricingSettings } = useQuery({
     queryKey: ['pricingSettings'],
