@@ -430,7 +430,7 @@ const Quote = () => {
               {/* Example placeholder */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Example Photo:</h3>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-80 flex items-center justify-center overflow-hidden">
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center overflow-hidden">
                   <img 
                     src="/lovable-uploads/c131885b-6fd6-4475-afeb-d13b0d895942.png" 
                     alt="Example garage exterior view"
@@ -500,7 +500,7 @@ const Quote = () => {
               {/* Example placeholder */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Example Photos:</h3>
-                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-80 flex items-center justify-center">
+                <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center">
                   <div className="text-center text-gray-500">
                     <Upload className="h-12 w-12 mx-auto mb-2" />
                     <p>Example: Close-ups of cracks, stains, or damage</p>
