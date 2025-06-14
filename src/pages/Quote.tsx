@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -63,6 +62,12 @@ const Quote = () => {
       name: "Raven",
       thumbnail: "/lovable-uploads/348c8c3b-1396-4bef-ab42-e8412ddbee0c.png",
       preview: "/lovable-uploads/40f32c63-7463-4fd5-ad12-c4e99b315de8.png"
+    },
+    {
+      id: "cabin-fever",
+      name: "Cabin Fever",
+      thumbnail: "/lovable-uploads/735e5c66-d9b6-4902-9d1a-fd1deea7b369.png",
+      preview: "/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png"
     },
     { id: "charcoal", name: "Charcoal", color: "#374151" },
     { id: "beige", name: "Beige", color: "#D1C4B7" },
