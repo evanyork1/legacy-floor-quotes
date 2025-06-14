@@ -5,7 +5,6 @@ import { ArrowRight, Star, CheckCircle, Users, Shield, Clock, Award, Headphones,
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const Index = () => {
   const navigate = useNavigate();
   const features = [{
@@ -138,11 +137,7 @@ const Index = () => {
       {/* Simple Image Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <img 
-            src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" 
-            alt="Premium speckled garage floor coating with luxury sports car" 
-            className="w-full max-w-6xl mx-auto h-auto rounded-xl shadow-2xl"
-          />
+          <img src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" alt="Premium speckled garage floor coating with luxury sports car" className="w-full max-w-xl mx-auto h-auto rounded-xl shadow-2xl" />
         </div>
       </section>
 
@@ -280,5 +275,4 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 export default Index;
