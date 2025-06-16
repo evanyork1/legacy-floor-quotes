@@ -113,7 +113,13 @@ const AdminPanel = () => {
         return;
       }
 
-      setQuotes(data || []);
+      // Type cast the status field to ensure type safety
+      const typedQuotes = (data || []).map(quote => ({
+        ...quote,
+        status: quote.status as 'new' | 'contacted' | 'quoted' | 'closed'
+      }));
+
+      setQuotes(typedQuotes);
     } catch (error) {
       console.error('Error:', error);
       toast({
