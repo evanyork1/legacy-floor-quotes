@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -13,7 +14,7 @@ const Header = () => {
     path: "/#how-it-works"
   }, {
     name: "About",
-    path: "/about"
+    path: "/#testimonials"
   }, {
     name: "Contact",
     path: "/contact"
