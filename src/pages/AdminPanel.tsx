@@ -23,7 +23,8 @@ import {
   Trash2,
   Plus,
   Save,
-  RefreshCw
+  RefreshCw,
+  Webhook
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -65,6 +66,8 @@ interface Subdomain {
 const AdminPanel = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
+  const [webhookUrl, setWebhookUrl] = useState("");
+  const [savingWebhook, setSavingWebhook] = useState(false);
   const { toast } = useToast();
 
   const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([
@@ -157,12 +160,65 @@ const AdminPanel = () => {
     }
   };
 
+  const fetchWebhookSettings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('webhook_settings')
+        .select('zapier_webhook_url')
+        .eq('id', 1)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching webhook settings:', error);
+        return;
+      }
+
+      if (data?.zapier_webhook_url) {
+        setWebhookUrl(data.zapier_webhook_url);
+      }
+    } catch (error) {
+      console.error('Error fetching webhook settings:', error);
+    }
+  };
+
+  const saveWebhookUrl = async () => {
+    setSavingWebhook(true);
+    try {
+      const { error } = await supabase
+        .from('webhook_settings')
+        .upsert({ 
+          id: 1, 
+          zapier_webhook_url: webhookUrl || null,
+          updated_at: new Date().toISOString()
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Success",
+        description: "Webhook URL saved successfully",
+      });
+    } catch (error) {
+      console.error('Error saving webhook URL:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save webhook URL",
+        variant: "destructive",
+      });
+    } finally {
+      setSavingWebhook(false);
+    }
+  };
+
   // Test Supabase connection on component mount
   useEffect(() => {
     console.log('🚀 AdminPanel component mounted, testing Supabase connection...');
     console.log('🔧 Supabase client:', supabase);
     
     fetchQuotes();
+    fetchWebhookSettings();
   }, []);
 
   const addSubdomain = () => {
@@ -253,7 +309,7 @@ const AdminPanel = () => {
         </div>
 
         <Tabs defaultValue="leads" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-gray-800 border-gray-700">
+          <TabsList className="grid w-full grid-cols-5 bg-gray-800 border-gray-700">
             <TabsTrigger value="leads" className="text-white data-[state=active]:bg-blue-600">
               <Users className="h-4 w-4 mr-2" />
               Leads
@@ -265,6 +321,10 @@ const AdminPanel = () => {
             <TabsTrigger value="subdomains" className="text-white data-[state=active]:bg-blue-600">
               <Globe className="h-4 w-4 mr-2" />
               Subdomains
+            </TabsTrigger>
+            <TabsTrigger value="webhooks" className="text-white data-[state=active]:bg-blue-600">
+              <Webhook className="h-4 w-4 mr-2" />
+              Webhooks
             </TabsTrigger>
             <TabsTrigger value="settings" className="text-white data-[state=active]:bg-blue-600">
               <Settings className="h-4 w-4 mr-2" />
@@ -494,6 +554,82 @@ const AdminPanel = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Webhooks Tab */}
+          <TabsContent value="webhooks">
+            <Card className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Email Notifications via Zapier</CardTitle>
+                <p className="text-gray-400">Configure webhook to trigger email notifications when quotes are submitted</p>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <Label className="text-gray-300">Zapier Webhook URL</Label>
+                  <Input 
+                    value={webhookUrl}
+                    onChange={(e) => setWebhookUrl(e.target.value)}
+                    placeholder="https://hooks.zapier.com/hooks/catch/..."
+                    className="bg-gray-600 border-gray-500 text-white"
+                  />
+                  <p className="text-xs text-gray-400 mt-1">
+                    Paste your Zapier webhook URL here to receive quote notifications
+                  </p>
+                </div>
+                
+                <Button 
+                  onClick={saveWebhookUrl} 
+                  disabled={savingWebhook}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {savingWebhook ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="h-4 w-4 mr-2" />
+                      Save Webhook URL
+                    </>
+                  )}
+                </Button>
+
+                <div className="bg-gray-700 p-4 rounded-lg">
+                  <h3 className="text-white font-medium mb-2">Setup Instructions:</h3>
+                  <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+                    <li>Go to Zapier and create a new Zap</li>
+                    <li>Choose "Webhooks by Zapier" as the trigger</li>
+                    <li>Select "Catch Hook" as the trigger event</li>
+                    <li>Copy the webhook URL and paste it above</li>
+                    <li>Set up your action (Gmail, Outlook, etc.) to send formatted emails</li>
+                    <li>Test by submitting a quote on your website</li>
+                  </ol>
+                </div>
+
+                <div className="bg-gray-700 p-4 rounded-lg">
+                  <h3 className="text-white font-medium mb-2">Webhook Data Structure:</h3>
+                  <pre className="text-gray-300 text-xs overflow-x-auto">
+{`{
+  "timestamp": "2024-01-01T12:00:00Z",
+  "event_type": "quote_submitted",
+  "quote": {
+    "customer_name": "John Doe",
+    "customer_email": "john@example.com",
+    "customer_phone": "555-123-4567",
+    "customer_zip_code": "12345",
+    "garage_type": "2-car",
+    "estimated_price": 3400,
+    "estimated_price_formatted": "$3,400",
+    "color_choice": "Gray",
+    "exterior_photos_count": 3,
+    "damage_photos_count": 1
+  }
+}`}
+                  </pre>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           {/* Settings Tab */}

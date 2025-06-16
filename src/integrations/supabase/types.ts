@@ -90,6 +90,24 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_settings: {
+        Row: {
+          id: number
+          updated_at: string | null
+          zapier_webhook_url: string | null
+        }
+        Insert: {
+          id?: number
+          updated_at?: string | null
+          zapier_webhook_url?: string | null
+        }
+        Update: {
+          id?: number
+          updated_at?: string | null
+          zapier_webhook_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -48,11 +47,36 @@ export const useQuoteNavigation = (
             status: 'new',
         };
 
-        const { error } = await supabase.from('quotes').insert(quotePayload);
+        const { data: insertedQuote, error } = await supabase
+            .from('quotes')
+            .insert(quotePayload)
+            .select()
+            .single();
 
         if (error) {
             throw error;
         }
+
+        // Trigger webhook after successful database insertion
+        try {
+            console.log('Triggering webhook for quote:', insertedQuote.id);
+            const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {
+                body: insertedQuote
+            });
+
+            if (webhookError) {
+                console.error('Webhook error:', webhookError);
+                // Don't throw here - we still want the quote submission to succeed
+                // even if the webhook fails
+            } else {
+                console.log('Webhook triggered successfully');
+            }
+        } catch (webhookError) {
+            console.error('Error triggering webhook:', webhookError);
+            // Continue without failing the quote submission
+        }
+
+        return insertedQuote;
     },
     onSuccess: () => {
         toast({
