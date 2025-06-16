@@ -169,7 +169,25 @@ const Quote = () => {
       case 3: return true;
       case 4: return true;
       case 5: return formData.colorChoice !== "";
-      case 6: return formData.name !== "" && formData.email !== "" && formData.phone !== "" && formData.zipCode !== "";
+      case 6: {
+        // Check that all fields are filled
+        const allFieldsFilled = formData.name !== "" && formData.email !== "" && formData.phone !== "" && formData.zipCode !== "";
+        
+        if (!allFieldsFilled) return false;
+        
+        // Validate phone (10 digits)
+        const phoneDigits = formData.phone.replace(/\D/g, '');
+        const phoneValid = phoneDigits.length === 10;
+        
+        // Validate email (contains @)
+        const emailValid = formData.email.includes('@');
+        
+        // Validate zip code (5 digits)
+        const zipDigits = formData.zipCode.replace(/\D/g, '');
+        const zipValid = zipDigits.length === 5;
+        
+        return phoneValid && emailValid && zipValid;
+      }
       case 7: return true;
       default: return false;
     }
@@ -278,4 +296,5 @@ const Quote = () => {
     </div>
   );
 };
+
 export default Quote;
