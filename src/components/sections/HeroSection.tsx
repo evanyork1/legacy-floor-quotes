@@ -35,7 +35,7 @@ const HeroSection = () => {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20 animate-pulse"></div>
-            <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Premium garage floor coating with luxury vehicles" className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500" />
+            <img src="/lovable-uploads/a05a7933-8c9e-4367-9523-6c38e3b5944c.png" alt="Premium garage floor coating with luxury vehicles" className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
       </div>
