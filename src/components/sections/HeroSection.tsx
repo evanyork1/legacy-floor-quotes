@@ -7,20 +7,20 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-20 sm:py-28 lg:py-36 min-h-screen flex items-center overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-24 items-center">
-          <div className="max-w-2xl space-y-10 lg:space-y-12">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="max-w-2xl space-y-6 lg:space-y-8">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
               Get Your Dream Garage Floor in{" "}
               <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
             </h1>
-            <p className="text-2xl lg:text-3xl xl:text-4xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results in <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span></p>
+            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results in <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span></p>
             <div className="relative pt-4">
-              <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl lg:text-2xl px-12 lg:px-16 py-6 lg:py-8 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                 Get Instant Quote
-                <ArrowRight className="ml-3 h-6 w-6 lg:h-7 lg:w-7" />
+                <ArrowRight className="ml-3 h-5 w-5 lg:h-6 lg:w-6" />
               </Button>
               
               {/* Hand-drawn arrow and text */}
