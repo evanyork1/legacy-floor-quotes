@@ -39,7 +39,7 @@ export const Step6ContactInfo = ({
 
   const validateEmail = (email: string): string => {
     if (!email.includes('@')) {
-      return 'Email must contain an @ symbol';
+      return 'Please enter a valid email.';
     }
     return '';
   };
