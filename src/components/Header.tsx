@@ -1,11 +1,12 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  
   const navItems = [{
     name: "Home",
     path: "/"
@@ -17,8 +18,9 @@ const Header = () => {
     path: "/#testimonials"
   }, {
     name: "Contact",
-    path: "/contact"
+    path: "/#footer"
   }];
+
   return <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
@@ -62,4 +64,5 @@ const Header = () => {
       </div>
     </header>;
 };
+
 export default Header;

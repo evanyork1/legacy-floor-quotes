@@ -278,7 +278,10 @@ const Index = () => {
         </div>
       </section>
 
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
     </div>;
 };
+
 export default Index;
