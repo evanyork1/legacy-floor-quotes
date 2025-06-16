@@ -8,7 +8,7 @@ const HowItWorksSection = () => {
   }, {
     step: "2",
     title: "Schedule Your Installation Day",
-    description: "Pick your perfect date and we coordinate everything with your certified installer",
+    description: "One person will help you find the perfect install day within the next week.",
     gradient: "from-purple-500 to-pink-600"
   }, {
     step: "3",
