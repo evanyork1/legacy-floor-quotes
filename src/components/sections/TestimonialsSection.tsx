@@ -1,28 +1,27 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 
 const TestimonialsSection = () => {
   const testimonials = [{
-    name: "Sarah Johnson",
-    location: "Denver, CO",
+    name: "Emily Carter",
+    location: "Plano, TX",
     rating: 5,
-    text: "Working with Legacy was seamless. I paid them directly, they coordinated everything, and my garage floor looks incredible. The warranty gives me total peace of mind."
+    text: "Legacy made the whole process easy from start to finish. They handled everything, and my garage floor turned out amazing. The warranty gives me real peace of mind."
   }, {
-    name: "Mike Chen",
+    name: "Michael Tran",
     location: "Austin, TX",
     rating: 5,
-    text: "Best part was dealing with one company - Legacy handled the payment, scheduling, and warranty. The polyurea coating has held up perfectly through Texas weather."
+    text: "What I liked most was that everything was handled by one team—no back and forth. The coating has held up great, even with all the wild Texas weather."
   }, {
-    name: "Lisa Rodriguez",
+    name: "Jessica Rivera",
+    location: "Houston, TX",
+    rating: 5,
+    text: "Legacy took care of everything, which made things stress-free for us. Our patio floor looks incredible and was finished quickly and professionally."
+  }, {
+    name: "Daniel Lopez",
     location: "Phoenix, AZ",
     rating: 5,
-    text: "From quote to completion, Legacy managed everything. No dealing with multiple contractors. Our outdoor patio coating looks amazing and was done professionally."
-  }, {
-    name: "David Martinez",
-    location: "Dallas, TX",
-    rating: 5,
-    text: "The 7-day guarantee was incredible - from booking to finished floor in under a week! The quality exceeded my expectations and the process was effortless."
+    text: "The turnaround time was impressive—our floor was done in less than a week. It looks fantastic, and the whole process felt smooth and well-organized."
   }];
 
   return (
