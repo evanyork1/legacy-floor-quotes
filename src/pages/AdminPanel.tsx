@@ -1,11 +1,19 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { 
   Settings, 
   Users, 
@@ -15,20 +23,28 @@ import {
   Edit,
   Trash2,
   Plus,
-  Save
+  Save,
+  RefreshCw
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+import PhotoViewer from "@/components/admin/PhotoViewer";
 
 interface Quote {
   id: string;
   garage_type: string;
   custom_sqft?: number;
   space_type?: string;
+  other_space_type?: string;
+  exterior_photos: string[] | null;
+  damage_photos: string[] | null;
+  color_choice: string;
   name: string;
   email: string;
   phone: string;
   zip_code: string;
-  quoted_price: number;
-  submitted_at: string;
+  estimated_price: number;
+  created_at: string;
   status: 'new' | 'contacted' | 'quoted' | 'closed';
 }
 
@@ -48,33 +64,9 @@ interface Subdomain {
 }
 
 const AdminPanel = () => {
-  // Mock data - replace with real API calls
-  const [quotes] = useState<Quote[]>([
-    {
-      id: "1",
-      garage_type: "2-car",
-      name: "John Smith",
-      email: "john@example.com", 
-      phone: "(555) 123-4567",
-      zip_code: "75201",
-      quoted_price: 3400,
-      submitted_at: "2024-01-15T10:30:00Z",
-      status: "new"
-    },
-    {
-      id: "2",
-      garage_type: "custom",
-      custom_sqft: 1200,
-      space_type: "warehouse",
-      name: "Sarah Johnson",
-      email: "sarah@example.com",
-      phone: "(555) 987-6543", 
-      zip_code: "75202",
-      quoted_price: 9600,
-      submitted_at: "2024-01-14T15:45:00Z",
-      status: "contacted"
-    }
-  ]);
+  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([
     { id: "1", min_sqft: 0, max_sqft: 500, price_per_sqft: 9 },
@@ -103,6 +95,41 @@ const AdminPanel = () => {
   const [newSubdomain, setNewSubdomain] = useState("");
   const [newMultiplier, setNewMultiplier] = useState("1.0");
 
+  const fetchQuotes = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('quotes')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching quotes:', error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch quotes from database",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setQuotes(data || []);
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to connect to database",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuotes();
+  }, []);
+
   const addSubdomain = () => {
     if (newSubdomain.trim()) {
       const subdomain: Subdomain = {
@@ -125,11 +152,32 @@ const AdminPanel = () => {
   };
 
   const exportLeads = () => {
+    if (quotes.length === 0) {
+      toast({
+        title: "No Data",
+        description: "No quotes available to export",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const csvContent = [
-      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Price', 'Status', 'Date'],
+      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Custom Sq Ft', 'Space Type', 'Other Space Type', 'Color Choice', 'Price', 'Status', 'Date', 'Exterior Photos', 'Damage Photos'],
       ...quotes.map(q => [
-        q.name, q.email, q.phone, q.zip_code, q.garage_type, 
-        q.quoted_price.toString(), q.status, q.submitted_at
+        q.name, 
+        q.email, 
+        q.phone, 
+        q.zip_code, 
+        q.garage_type,
+        q.custom_sqft?.toString() || '',
+        q.space_type || '',
+        q.other_space_type || '',
+        q.color_choice,
+        q.estimated_price.toString(), 
+        q.status, 
+        q.created_at,
+        (q.exterior_photos || []).join('; '),
+        (q.damage_photos || []).join('; ')
       ])
     ].map(row => row.join(',')).join('\n');
 
@@ -139,6 +187,7 @@ const AdminPanel = () => {
     a.href = url;
     a.download = 'leads.csv';
     a.click();
+    URL.revokeObjectURL(url);
   };
 
   const getStatusColor = (status: string) => {
@@ -149,6 +198,14 @@ const AdminPanel = () => {
       case 'closed': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const formatGarageType = (quote: Quote) => {
+    if (quote.garage_type === 'custom') {
+      const spaceType = quote.other_space_type || quote.space_type || 'Custom';
+      return `${spaceType} (${quote.custom_sqft || 0} sq ft)`;
+    }
+    return quote.garage_type;
   };
 
   return (
@@ -184,57 +241,84 @@ const AdminPanel = () => {
           <TabsContent value="leads">
             <Card className="bg-gray-800 border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-white">Recent Leads ({quotes.length})</CardTitle>
-                <Button onClick={exportLeads} className="bg-green-600 hover:bg-green-700">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export CSV
-                </Button>
+                <CardTitle className="text-white">
+                  Recent Leads ({quotes.length})
+                  {loading && <span className="ml-2 text-sm text-gray-400">(Loading...)</span>}
+                </CardTitle>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={fetchQuotes} 
+                    variant="outline"
+                    size="sm"
+                    disabled={loading}
+                    className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
+                  >
+                    <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                    Refresh
+                  </Button>
+                  <Button onClick={exportLeads} className="bg-green-600 hover:bg-green-700">
+                    <Download className="h-4 w-4 mr-2" />
+                    Export CSV
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="border-b border-gray-700">
-                        <th className="pb-3 text-gray-300">Name</th>
-                        <th className="pb-3 text-gray-300">Contact</th>
-                        <th className="pb-3 text-gray-300">Location</th>
-                        <th className="pb-3 text-gray-300">Type</th>
-                        <th className="pb-3 text-gray-300">Price</th>
-                        <th className="pb-3 text-gray-300">Status</th>
-                        <th className="pb-3 text-gray-300">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {quotes.map((quote) => (
-                        <tr key={quote.id} className="border-b border-gray-700">
-                          <td className="py-4 text-white font-medium">{quote.name}</td>
-                          <td className="py-4 text-gray-300">
-                            <div>{quote.email}</div>
-                            <div className="text-sm">{quote.phone}</div>
-                          </td>
-                          <td className="py-4 text-gray-300">{quote.zip_code}</td>
-                          <td className="py-4 text-gray-300">
-                            {quote.garage_type === 'custom' ? 
-                              `Custom (${quote.custom_sqft} sq ft)` : 
-                              quote.garage_type
-                            }
-                          </td>
-                          <td className="py-4 text-green-400 font-bold">
-                            ${quote.quoted_price.toLocaleString()}
-                          </td>
-                          <td className="py-4">
-                            <Badge className={`${getStatusColor(quote.status)} border-0`}>
-                              {quote.status}
-                            </Badge>
-                          </td>
-                          <td className="py-4 text-gray-400 text-sm">
-                            {new Date(quote.submitted_at).toLocaleDateString()}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                {loading ? (
+                  <div className="text-center py-8 text-gray-400">Loading quotes...</div>
+                ) : quotes.length === 0 ? (
+                  <div className="text-center py-8 text-gray-400">No quotes found</div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-b border-gray-700">
+                          <TableHead className="text-gray-300">Name</TableHead>
+                          <TableHead className="text-gray-300">Contact</TableHead>
+                          <TableHead className="text-gray-300">Location</TableHead>
+                          <TableHead className="text-gray-300">Type</TableHead>
+                          <TableHead className="text-gray-300">Color</TableHead>
+                          <TableHead className="text-gray-300">Price</TableHead>
+                          <TableHead className="text-gray-300">Photos</TableHead>
+                          <TableHead className="text-gray-300">Status</TableHead>
+                          <TableHead className="text-gray-300">Date</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {quotes.map((quote) => (
+                          <TableRow key={quote.id} className="border-b border-gray-700">
+                            <TableCell className="text-white font-medium">{quote.name}</TableCell>
+                            <TableCell className="text-gray-300">
+                              <div>{quote.email}</div>
+                              <div className="text-sm">{quote.phone}</div>
+                            </TableCell>
+                            <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
+                            <TableCell className="text-gray-300">
+                              {formatGarageType(quote)}
+                            </TableCell>
+                            <TableCell className="text-gray-300">{quote.color_choice}</TableCell>
+                            <TableCell className="text-green-400 font-bold">
+                              ${quote.estimated_price.toLocaleString()}
+                            </TableCell>
+                            <TableCell>
+                              <PhotoViewer 
+                                exteriorPhotos={quote.exterior_photos}
+                                damagePhotos={quote.damage_photos}
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Badge className={`${getStatusColor(quote.status)} border-0`}>
+                                {quote.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-gray-400 text-sm">
+                              {new Date(quote.created_at).toLocaleDateString()}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
