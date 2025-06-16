@@ -9,17 +9,13 @@ export const useQuoteForm = () => {
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
-  const { submitQuote, isSubmitting, handleSubmit } = useQuoteSubmission(
-    calculatePrice,
-    () => setCurrentStep(7) // Proceed to step 7 after successful submission
-  );
-
-  const { currentStep, totalSteps, nextStep, prevStep, canProceed, setCurrentStep } = useQuoteNavigation(
+  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigation(
     formData,
-    submitQuote
+    calculatePrice
   );
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
+  const { handleSubmit, isSubmitting } = useQuoteSubmission();
 
   return {
     currentStep,
