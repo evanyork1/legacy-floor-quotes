@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -58,7 +57,10 @@ export const useQuoteForm = () => {
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
-        if (currentStep === 1 && formData.garageType !== "custom") {
+        if (currentStep === 6) {
+            // Submit to database when moving from step 6 to step 7
+            submitQuote(formData);
+        } else if (currentStep === 1 && formData.garageType !== "custom") {
             setCurrentStep(3); // Skip step 2 if garageType is not custom
         } else {
             setCurrentStep(currentStep + 1);
@@ -189,7 +191,8 @@ export const useQuoteForm = () => {
             title: "Quote Submitted!",
             description: "We'll call you within 60 minutes to confirm.",
         });
-        navigate('/');
+        // Proceed to step 7 after successful submission
+        setCurrentStep(7);
     },
     onError: (error) => {
         console.error('Error submitting quote:', error);
@@ -202,7 +205,7 @@ export const useQuoteForm = () => {
   });
 
   const handleSubmit = () => {
-    submitQuote(formData);
+    navigate('/');
   };
 
   return {
