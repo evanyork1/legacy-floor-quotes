@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -6,16 +7,16 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-8 sm:py-12 lg:py-16 min-h-screen flex items-center overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-4 sm:py-6 lg:py-8 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="max-w-2xl space-y-4 lg:space-y-6">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
+          <div className="max-w-2xl space-y-3 lg:space-y-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
               Get Your Dream Garage Floor in{" "}
               <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results in <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span></p>
+            <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">Elite Installers. Unmatched Quality. A Reputation Built on Results in <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span></p>
             <div className="relative pt-2">
               <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                 Get Instant Quote
