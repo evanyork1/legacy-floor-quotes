@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +6,11 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-4 sm:py-6 lg:py-8 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="max-w-2xl space-y-3 lg:space-y-4">
+          <div className="max-w-2xl space-y-4 lg:space-y-6">
             <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
               Get Your Dream Garage Floor in{" "}
               <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">One Day</span>
