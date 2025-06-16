@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -66,6 +65,7 @@ interface Subdomain {
 const AdminPanel = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
+  const [debugInfo, setDebugInfo] = useState<any>(null);
   const { toast } = useToast();
 
   const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([
@@ -96,32 +96,67 @@ const AdminPanel = () => {
   const [newMultiplier, setNewMultiplier] = useState("1.0");
 
   const fetchQuotes = async () => {
+    console.log('🔍 Starting fetchQuotes function...');
+    
     try {
       setLoading(true);
-      const { data, error } = await supabase
+      console.log('📡 Making Supabase query...');
+      
+      // Test basic Supabase connection first
+      const connectionTest = await supabase.from('quotes').select('count', { count: 'exact', head: true });
+      console.log('🔗 Connection test result:', connectionTest);
+      
+      const { data, error, count } = await supabase
         .from('quotes')
-        .select('*')
+        .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
+      console.log('📊 Raw Supabase response:', { data, error, count });
+      console.log('📈 Data length:', data?.length);
+      console.log('🔍 First item (if exists):', data?.[0]);
+
       if (error) {
-        console.error('Error fetching quotes:', error);
+        console.error('❌ Supabase error:', error);
+        setDebugInfo({ error: error.message, details: error });
         toast({
-          title: "Error",
-          description: "Failed to fetch quotes from database",
+          title: "Database Error",
+          description: `Error fetching quotes: ${error.message}`,
           variant: "destructive",
         });
         return;
       }
 
-      // Type cast the status field to ensure type safety
-      const typedQuotes = (data || []).map(quote => ({
-        ...quote,
-        status: quote.status as 'new' | 'contacted' | 'quoted' | 'closed'
-      }));
+      if (!data || data.length === 0) {
+        console.log('⚠️ No data returned from database');
+        setDebugInfo({ message: 'No data found', rawData: data });
+        setQuotes([]);
+        return;
+      }
 
+      console.log('✅ Processing data...');
+      // Type cast the status field and handle null arrays
+      const typedQuotes = data.map(quote => {
+        console.log('🔄 Processing quote:', quote.id, quote.name);
+        return {
+          ...quote,
+          status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
+          exterior_photos: quote.exterior_photos || [],
+          damage_photos: quote.damage_photos || []
+        };
+      });
+
+      console.log('🎯 Final processed quotes:', typedQuotes);
+      setDebugInfo({ success: true, count: typedQuotes.length, firstQuote: typedQuotes[0] });
       setQuotes(typedQuotes);
+      
+      toast({
+        title: "Success",
+        description: `Loaded ${typedQuotes.length} quotes from database`,
+      });
+
     } catch (error) {
-      console.error('Error:', error);
+      console.error('💥 Unexpected error in fetchQuotes:', error);
+      setDebugInfo({ unexpectedError: error });
       toast({
         title: "Error",
         description: "Failed to connect to database",
@@ -129,10 +164,26 @@ const AdminPanel = () => {
       });
     } finally {
       setLoading(false);
+      console.log('🏁 fetchQuotes completed');
     }
   };
 
+  // Test Supabase connection on component mount
   useEffect(() => {
+    console.log('🚀 AdminPanel component mounted, testing Supabase connection...');
+    console.log('🔧 Supabase client:', supabase);
+    
+    // Test if we can access Supabase at all
+    const testConnection = async () => {
+      try {
+        const { data: testData, error: testError } = await supabase.from('quotes').select('id').limit(1);
+        console.log('🧪 Connection test:', { testData, testError });
+      } catch (err) {
+        console.error('🚨 Connection test failed:', err);
+      }
+    };
+    
+    testConnection();
     fetchQuotes();
   }, []);
 
@@ -221,6 +272,20 @@ const AdminPanel = () => {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Admin Dashboard</h1>
           <p className="text-blue-200">Manage your garage floor coating business</p>
+          
+          {/* Debug Info Card */}
+          {debugInfo && (
+            <Card className="mt-4 bg-yellow-900 border-yellow-700">
+              <CardHeader>
+                <CardTitle className="text-yellow-100">Debug Information</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <pre className="text-yellow-200 text-xs overflow-auto">
+                  {JSON.stringify(debugInfo, null, 2)}
+                </pre>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         <Tabs defaultValue="leads" className="space-y-6">
@@ -270,9 +335,22 @@ const AdminPanel = () => {
               </CardHeader>
               <CardContent>
                 {loading ? (
-                  <div className="text-center py-8 text-gray-400">Loading quotes...</div>
+                  <div className="text-center py-8 text-gray-400">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                    Loading quotes from database...
+                  </div>
                 ) : quotes.length === 0 ? (
-                  <div className="text-center py-8 text-gray-400">No quotes found</div>
+                  <div className="text-center py-8">
+                    <div className="text-gray-400 mb-4">No quotes found in database</div>
+                    <Button 
+                      onClick={fetchQuotes} 
+                      variant="outline"
+                      className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
+                    >
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                      Try Again
+                    </Button>
+                  </div>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>
