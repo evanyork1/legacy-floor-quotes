@@ -65,7 +65,6 @@ interface Subdomain {
 const AdminPanel = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
-  const [debugInfo, setDebugInfo] = useState<any>(null);
   const { toast } = useToast();
 
   const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([
@@ -102,22 +101,15 @@ const AdminPanel = () => {
       setLoading(true);
       console.log('📡 Making Supabase query...');
       
-      // Test basic Supabase connection first
-      const connectionTest = await supabase.from('quotes').select('count', { count: 'exact', head: true });
-      console.log('🔗 Connection test result:', connectionTest);
-      
       const { data, error, count } = await supabase
         .from('quotes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
       console.log('📊 Raw Supabase response:', { data, error, count });
-      console.log('📈 Data length:', data?.length);
-      console.log('🔍 First item (if exists):', data?.[0]);
 
       if (error) {
         console.error('❌ Supabase error:', error);
-        setDebugInfo({ error: error.message, details: error });
         toast({
           title: "Database Error",
           description: `Error fetching quotes: ${error.message}`,
@@ -128,7 +120,6 @@ const AdminPanel = () => {
 
       if (!data || data.length === 0) {
         console.log('⚠️ No data returned from database');
-        setDebugInfo({ message: 'No data found', rawData: data });
         setQuotes([]);
         return;
       }
@@ -146,7 +137,6 @@ const AdminPanel = () => {
       });
 
       console.log('🎯 Final processed quotes:', typedQuotes);
-      setDebugInfo({ success: true, count: typedQuotes.length, firstQuote: typedQuotes[0] });
       setQuotes(typedQuotes);
       
       toast({
@@ -156,7 +146,6 @@ const AdminPanel = () => {
 
     } catch (error) {
       console.error('💥 Unexpected error in fetchQuotes:', error);
-      setDebugInfo({ unexpectedError: error });
       toast({
         title: "Error",
         description: "Failed to connect to database",
@@ -173,17 +162,6 @@ const AdminPanel = () => {
     console.log('🚀 AdminPanel component mounted, testing Supabase connection...');
     console.log('🔧 Supabase client:', supabase);
     
-    // Test if we can access Supabase at all
-    const testConnection = async () => {
-      try {
-        const { data: testData, error: testError } = await supabase.from('quotes').select('id').limit(1);
-        console.log('🧪 Connection test:', { testData, testError });
-      } catch (err) {
-        console.error('🚨 Connection test failed:', err);
-      }
-    };
-    
-    testConnection();
     fetchQuotes();
   }, []);
 
@@ -272,20 +250,6 @@ const AdminPanel = () => {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Admin Dashboard</h1>
           <p className="text-blue-200">Manage your garage floor coating business</p>
-          
-          {/* Debug Info Card */}
-          {debugInfo && (
-            <Card className="mt-4 bg-yellow-900 border-yellow-700">
-              <CardHeader>
-                <CardTitle className="text-yellow-100">Debug Information</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <pre className="text-yellow-200 text-xs overflow-auto">
-                  {JSON.stringify(debugInfo, null, 2)}
-                </pre>
-              </CardContent>
-            </Card>
-          )}
         </div>
 
         <Tabs defaultValue="leads" className="space-y-6">
