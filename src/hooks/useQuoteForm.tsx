@@ -15,7 +15,11 @@ export const useQuoteForm = () => {
   );
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
-  const { handleSubmit, isSubmitting } = useQuoteSubmission();
+  const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission();
+
+  const handleSubmit = () => {
+    submitQuote(formData);
+  };
 
   return {
     currentStep,
