@@ -38,6 +38,7 @@ export type Database = {
       }
       quotes: {
         Row: {
+          archived: boolean
           color_choice: string
           created_at: string
           custom_sqft: number | null
@@ -55,6 +56,7 @@ export type Database = {
           zip_code: string
         }
         Insert: {
+          archived?: boolean
           color_choice: string
           created_at?: string
           custom_sqft?: number | null
@@ -72,6 +74,7 @@ export type Database = {
           zip_code: string
         }
         Update: {
+          archived?: boolean
           color_choice?: string
           created_at?: string
           custom_sqft?: number | null
