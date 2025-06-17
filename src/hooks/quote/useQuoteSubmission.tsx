@@ -61,12 +61,12 @@ export const useQuoteSubmission = () => {
       let exteriorPhotoUrls: string[] = [];
       let damagePhotoUrls: string[] = [];
 
-      if (formData.exteriorPhotos.length > 0) {
+      if (formData.exteriorPhotos && formData.exteriorPhotos.length > 0) {
         console.log('Uploading exterior photos...');
         exteriorPhotoUrls = await uploadPhotos(formData.exteriorPhotos, 'exterior');
       }
 
-      if (formData.damagePhotos.length > 0) {
+      if (formData.damagePhotos && formData.damagePhotos.length > 0) {
         console.log('Uploading damage photos...');
         damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       }
@@ -77,7 +77,7 @@ export const useQuoteSubmission = () => {
       // Prepare quote data
       const quoteData = {
         garage_type: formData.garageType,
-        custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
+        custom_sqft: formData.garageType === 'custom' && formData.customSqft ? parseInt(formData.customSqft) : null,
         space_type: formData.spaceType || null,
         other_space_type: formData.otherSpaceType || null,
         exterior_photos: exteriorPhotoUrls.length > 0 ? exteriorPhotoUrls : null,
