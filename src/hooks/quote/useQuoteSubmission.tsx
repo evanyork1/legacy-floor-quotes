@@ -13,27 +13,40 @@ export const useQuoteSubmission = () => {
   const uploadPhotos = async (photos: File[], folder: string): Promise<string[]> => {
     const uploadedUrls: string[] = [];
     
-    for (const photo of photos) {
-      const fileExt = photo.name.split('.').pop();
-      const fileName = `${crypto.randomUUID()}.${fileExt}`;
-      const filePath = `${folder}/${fileName}`;
+    console.log(`Starting upload of ${photos.length} photos to ${folder} folder`);
+    
+    for (let i = 0; i < photos.length; i++) {
+      const photo = photos[i];
+      try {
+        const fileExt = photo.name.split('.').pop();
+        const fileName = `${crypto.randomUUID()}.${fileExt}`;
+        const filePath = `${folder}/${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
-        .from('quote_photos')
-        .upload(filePath, photo);
+        console.log(`Uploading photo ${i + 1}/${photos.length}: ${fileName}`);
 
-      if (uploadError) {
-        console.error('Photo upload error:', uploadError);
-        throw new Error(`Failed to upload photo: ${uploadError.message}`);
+        const { error: uploadError } = await supabase.storage
+          .from('quote_photos')
+          .upload(filePath, photo);
+
+        if (uploadError) {
+          console.error(`Photo upload error for ${fileName}:`, uploadError);
+          throw new Error(`Failed to upload photo ${fileName}: ${uploadError.message}`);
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('quote_photos')
+          .getPublicUrl(filePath);
+
+        uploadedUrls.push(publicUrl);
+        console.log(`Successfully uploaded photo ${i + 1}/${photos.length}`);
+      } catch (error) {
+        console.error(`Error uploading photo ${i + 1}:`, error);
+        // Continue with other photos instead of failing completely
+        continue;
       }
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('quote_photos')
-        .getPublicUrl(filePath);
-
-      uploadedUrls.push(publicUrl);
     }
 
+    console.log(`Upload complete: ${uploadedUrls.length}/${photos.length} photos uploaded successfully`);
     return uploadedUrls;
   };
 
@@ -57,22 +70,40 @@ export const useQuoteSubmission = () => {
     console.log('Starting quote submission process...', formData);
 
     try {
-      // Upload photos first
+      // Upload photos with graceful failure handling
       let exteriorPhotoUrls: string[] = [];
       let damagePhotoUrls: string[] = [];
+      let photoUploadWarnings: string[] = [];
 
       if (formData.exteriorPhotos && formData.exteriorPhotos.length > 0) {
         console.log('Uploading exterior photos...');
-        exteriorPhotoUrls = await uploadPhotos(formData.exteriorPhotos, 'exterior');
+        try {
+          exteriorPhotoUrls = await uploadPhotos(formData.exteriorPhotos, 'exterior');
+          if (exteriorPhotoUrls.length < formData.exteriorPhotos.length) {
+            photoUploadWarnings.push(`Only ${exteriorPhotoUrls.length}/${formData.exteriorPhotos.length} exterior photos uploaded successfully`);
+          }
+        } catch (error) {
+          console.error('Exterior photo upload failed completely:', error);
+          photoUploadWarnings.push('Exterior photo upload failed');
+        }
       }
 
       if (formData.damagePhotos && formData.damagePhotos.length > 0) {
         console.log('Uploading damage photos...');
-        damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
+        try {
+          damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
+          if (damagePhotoUrls.length < formData.damagePhotos.length) {
+            photoUploadWarnings.push(`Only ${damagePhotoUrls.length}/${formData.damagePhotos.length} damage photos uploaded successfully`);
+          }
+        } catch (error) {
+          console.error('Damage photo upload failed completely:', error);
+          photoUploadWarnings.push('Damage photo upload failed');
+        }
       }
 
       // Calculate estimated price
       const estimatedPrice = calculateEstimatedPrice(formData);
+      console.log('Calculated estimated price:', estimatedPrice);
 
       // Prepare quote data
       const quoteData = {
@@ -108,7 +139,7 @@ export const useQuoteSubmission = () => {
 
       console.log('Quote saved successfully:', savedQuote);
 
-      // Trigger webhook
+      // Trigger webhook with better error handling
       console.log('Triggering webhook...');
       try {
         const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {
@@ -117,35 +148,45 @@ export const useQuoteSubmission = () => {
 
         if (webhookError) {
           console.error('Webhook error:', webhookError);
-          // Don't fail the whole submission if webhook fails, just log it
-          toast({
-            title: "Quote Submitted",
-            description: "Your quote was saved but email notification may be delayed.",
-          });
         } else {
           console.log('Webhook triggered successfully');
-          toast({
-            title: "Quote Submitted Successfully!",
-            description: "We've received your quote and will contact you soon.",
-          });
         }
       } catch (webhookError) {
         console.error('Webhook call failed:', webhookError);
-        // Still show success since quote was saved
-        toast({
-          title: "Quote Submitted",
-          description: "Your quote was saved but email notification may be delayed.",
-        });
       }
+
+      // Show success message with any warnings
+      let successMessage = "We've received your quote and will contact you soon.";
+      if (photoUploadWarnings.length > 0) {
+        successMessage += ` Note: ${photoUploadWarnings.join(', ')}.`;
+      }
+
+      toast({
+        title: "Quote Submitted Successfully!",
+        description: successMessage,
+      });
 
       // Navigate to success page
       navigate('/');
 
     } catch (error) {
       console.error('Quote submission error:', error);
+      
+      // Provide more specific error messages
+      let errorMessage = "Failed to submit quote. Please try again.";
+      if (error instanceof Error) {
+        if (error.message.includes('upload')) {
+          errorMessage = "Failed to upload photos. Please try with smaller images or fewer photos.";
+        } else if (error.message.includes('save')) {
+          errorMessage = "Failed to save quote to database. Please check your internet connection and try again.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       toast({
         title: "Submission Failed",
-        description: error instanceof Error ? error.message : "Failed to submit quote. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
