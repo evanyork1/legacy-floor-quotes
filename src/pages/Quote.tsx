@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,6 +23,17 @@ const Quote = () => {
     handleSubmit,
     isSubmitting
   } = useQuoteForm();
+
+  useEffect(() => {
+    // Track quote request conversion when page loads
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-410786005/2Ym5CI3Q7d0aENWx8MMB',
+        'value': 1.0,
+        'currency': 'USD'
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
