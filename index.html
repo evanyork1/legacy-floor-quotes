@@ -18,6 +18,24 @@
 
       gtag('config', 'AW-410786005');
     </script>
+
+    <!-- Event snippet for Click to call conversion page -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-410786005/RWaBCIC37d0aENWx8MMB',
+            'value': 1.0,
+            'currency': 'USD',
+            'event_callback': callback
+        });
+        return false;
+      }
+    </script>
     
     <title>Legacy Industrial Coatings - Premium Garage Floor Coating Houston, TX</title>
     <meta name="description" content="Professional garage floor coating in Houston, TX. Get your dream polyurea floor installed in one day. Lifetime warranty, certified installers, instant quotes." />

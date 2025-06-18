@@ -6,6 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
+  const handlePhoneClick = () => {
+    // Call the Google Ads conversion tracking function
+    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+      (window as any).gtag_report_conversion('tel:214-305-6516');
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6">
@@ -25,7 +32,13 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">214-305-6516</span>
+                <a 
+                  href="tel:214-305-6516" 
+                  onClick={handlePhoneClick}
+                  className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base"
+                >
+                  214-305-6516
+                </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
