@@ -37,22 +37,12 @@ export const useQuoteSubmission = () => {
     return uploadedUrls;
   };
 
-  const calculateEstimatedPrice = (formData: FormData): number => {
-    // Get pricing based on garage type
-    if (formData.garageType === '2-car') {
-      return 3400;
-    } else if (formData.garageType === '3-car') {
-      return 5200;
-    } else if (formData.garageType === '4-car') {
-      return 7200;
-    } else if (formData.garageType === 'custom' && formData.customSqft) {
-      const sqft = parseInt(formData.customSqft);
-      return sqft * 8; // $8 per sq ft default
+  const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
+    if (isSubmitting) {
+      console.log('Submission already in progress, ignoring duplicate request');
+      return;
     }
-    return 0;
-  };
 
-  const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true);
     console.log('Starting quote submission process...', formData);
 
@@ -71,10 +61,7 @@ export const useQuoteSubmission = () => {
         damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       }
 
-      // Calculate estimated price
-      const estimatedPrice = calculateEstimatedPrice(formData);
-
-      // Prepare quote data
+      // Prepare quote data using the provided estimated price
       const quoteData = {
         garage_type: formData.garageType,
         custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,

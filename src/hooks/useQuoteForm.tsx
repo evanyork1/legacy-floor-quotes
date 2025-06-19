@@ -18,7 +18,8 @@ export const useQuoteForm = () => {
   const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission();
 
   const handleSubmit = () => {
-    submitQuote(formData);
+    const estimatedPrice = calculatePrice();
+    submitQuote(formData, estimatedPrice);
   };
 
   return {
