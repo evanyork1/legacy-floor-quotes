@@ -49,10 +49,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   const archivedQuotes = quotes.filter(q => q.archived);
   const displayedQuotes = showArchived ? quotes : activeQuotes;
 
-  // Count by lead source
-  const houstonLeads = quotes.filter(q => q.lead_source === 'Houston').length;
-  const dfwLeads = quotes.filter(q => q.lead_source === 'DFW').length;
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'new': return 'bg-blue-100 text-blue-800';
@@ -81,9 +77,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
               • {archivedQuotes.length} archived
             </span>
           )}
-          <div className="text-sm text-gray-400 mt-1">
-            Houston: {houstonLeads} • DFW: {dfwLeads}
-          </div>
           {loading && <span className="ml-2 text-sm text-gray-400">(Loading...)</span>}
         </CardTitle>
         <div className="flex gap-2">
@@ -116,12 +109,12 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
         {loading ? (
           <div className="text-center py-8 text-gray-400">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            Loading quotes from databases...
+            Loading quotes from database...
           </div>
         ) : displayedQuotes.length === 0 ? (
           <div className="text-center py-8">
             <div className="text-gray-400 mb-4">
-              {showArchived ? 'No quotes found in databases' : 'No active quotes found'}
+              {showArchived ? 'No quotes found in database' : 'No active quotes found'}
             </div>
             <Button 
               onClick={onRefresh} 
@@ -145,7 +138,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                   <TableHead className="text-gray-300">Price</TableHead>
                   <TableHead className="text-gray-300">Photos</TableHead>
                   <TableHead className="text-gray-300">Status</TableHead>
-                  <TableHead className="text-gray-300">Lead Source</TableHead>
                   <TableHead className="text-gray-300">Date</TableHead>
                   <TableHead className="text-gray-300">Actions</TableHead>
                 </TableRow>
@@ -185,11 +177,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                     <TableCell>
                       <Badge className={`${getStatusColor(quote.status)} border-0`}>
                         {quote.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-gray-300">
-                      <Badge variant={quote.lead_source === 'DFW' ? 'default' : 'secondary'}>
-                        {quote.lead_source || 'Unknown'}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-gray-400 text-sm">

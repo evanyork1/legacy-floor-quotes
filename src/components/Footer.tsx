@@ -1,66 +1,85 @@
 
-import { Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
+  const handlePhoneClick = () => {
+    // Call the Google Ads conversion tracking function
+    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+      (window as any).gtag_report_conversion('tel:214-305-6516');
+    }
+  };
+
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Legacy Industrial Coatings</h3>
-            <p className="text-gray-400 mb-6 max-w-md">
-              Premier epoxy flooring specialists in Houston, TX. Transform your garage with our lifetime warranty coating solutions.
+    <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
+          {/* Company Info */}
+          <div className="space-y-4 sm:space-y-6">
+            <div className="flex items-center mb-4 sm:mb-6">
+              {/* Logo space if needed */}
+            </div>
+            <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+              The only company you need for premium warranty floors. We handle everything - quoting, scheduling, installation coordination, and warranty service.
             </p>
-            <div className="flex items-center space-x-4">
-              <a 
-                href="https://www.instagram.com/legacyindustrialcoatings/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <Instagram className="h-5 w-5 text-white" />
-              </a>
-            </div>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center">
-                <Phone className="h-4 w-4 mr-3 text-blue-400" />
-                <span className="text-gray-400">(713) 999-9999</span>
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <span className="text-gray-300 text-sm sm:text-base break-all">support@legacyindustrialcoatings.com</span>
               </div>
               <div className="flex items-center">
-                <Mail className="h-4 w-4 mr-3 text-blue-400" />
-                <span className="text-gray-400">info@legacycoatings.com</span>
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <a 
+                  href="tel:214-305-6516" 
+                  onClick={handlePhoneClick}
+                  className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base"
+                >
+                  214-305-6516
+                </a>
               </div>
               <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-3 text-blue-400" />
-                <span className="text-gray-400">Houston, TX</span>
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <span className="text-gray-300 text-sm sm:text-base">Nationwide Service</span>
               </div>
             </div>
           </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
-            <div className="space-y-2">
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Terms & Conditions
-              </a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Warranty Information
-              </a>
-            </div>
+
+          {/* Quick Links */}
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Quick Links</h3>
+            <ul className="space-y-2 sm:space-y-3">
+              <li><a href="/" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Home</a></li>
+              <li><a href="/quote" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Get Quote</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">About Us</a></li>
+              <li><a href="/apply" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Become an Installer</a></li>
+              <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Warranty Info</a></li>
+            </ul>
           </div>
+
+          {/* Third column can be added here if needed */}
         </div>
-        
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
-            © 2024 Legacy Industrial Coatings. All rights reserved.
-          </p>
+
+        {/* Bottom Section */}
+        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+              © 2025 Legacy Industrial Coatings. All rights reserved.
+            </div>
+            <div className="flex space-x-4 sm:space-x-6">
+              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

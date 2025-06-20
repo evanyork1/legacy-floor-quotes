@@ -76,8 +76,7 @@ export const useQuoteSubmission = () => {
         zip_code: formData.zipCode,
         estimated_price: estimatedPrice,
         status: 'new' as const,
-        archived: false,
-        lead_source: 'Houston'
+        archived: false
       };
 
       console.log('Saving quote to database...', quoteData);

@@ -1,15 +1,9 @@
 
-interface HowItWorksSectionProps {
-  isDFW?: boolean;
-}
-
-const HowItWorksSection = ({ isDFW = false }: HowItWorksSectionProps) => {
+const HowItWorksSection = () => {
   const steps = [{
     step: "1",
-    title: isDFW ? "Get a Custom Quote" : "Create Your Own Quote",
-    description: isDFW 
-      ? "Quote your own space, or meet with a team member for personalized service and expert recommendations."
-      : "Use our intelligent quote builder to get accurate pricing instantly",
+    title: "Create Your Own Quote",
+    description: "Use our intelligent quote builder to get accurate pricing instantly",
     gradient: "from-blue-500 to-purple-600"
   }, {
     step: "2",
