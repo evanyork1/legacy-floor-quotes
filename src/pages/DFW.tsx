@@ -3,10 +3,10 @@ import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import DFWTestimonialsSection from "@/components/sections/DFWTestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import DFWFooter from "@/components/DFWFooter";
 import DFWCommercialSection from "@/components/sections/DFWCommercialSection";
 
 const DFW = () => {
@@ -17,10 +17,10 @@ const DFW = () => {
       <TrustedBrandSection isDFW={true} />
       <FeaturesSection />
       <HowItWorksSection isDFW={true} />
-      <TestimonialsSection />
+      <DFWTestimonialsSection />
       <DFWCommercialSection />
       <CTASection />
-      <Footer />
+      <DFWFooter />
     </div>
   );
 };

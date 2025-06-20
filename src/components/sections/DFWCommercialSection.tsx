@@ -1,36 +1,35 @@
 
 import { Button } from "@/components/ui/button";
-import { Building, Plane, Factory, School, Users, Heart } from "lucide-react";
 
 const DFWCommercialSection = () => {
   const services = [
     {
-      icon: Building,
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
       title: "Warehouses",
       description: "Industrial-grade flooring for high-traffic commercial spaces"
     },
     {
-      icon: Plane,
+      image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?w=400&h=300&fit=crop",
       title: "Airplane Hangars", 
       description: "Specialized coatings for aviation facilities and aircraft storage"
     },
     {
-      icon: Factory,
+      image: "https://images.unsplash.com/photo-1497604401993-f2e922e5cb0a?w=400&h=300&fit=crop",
       title: "Manufacturing Plants",
       description: "Chemical-resistant flooring for industrial manufacturing"
     },
     {
-      icon: School,
+      image: "https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=400&h=300&fit=crop",
       title: "Schools",
       description: "Durable, safe flooring solutions for educational facilities"
     },
     {
-      icon: Users,
+      image: "https://images.unsplash.com/photo-1551038247-3d9af20df552?w=400&h=300&fit=crop",
       title: "Wedding Venues",
       description: "Beautiful polished concrete for special event spaces"
     },
     {
-      icon: Heart,
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
       title: "Dog Kennels",
       description: "Hygienic, easy-to-clean surfaces for animal care facilities"
     }
@@ -56,13 +55,14 @@ const DFWCommercialSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div key={index} className="text-center p-6 bg-gray-50 rounded-xl">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <IconComponent className="h-8 w-8 text-blue-600" />
-                </div>
+          {services.map((service, index) => (
+            <div key={index} className="text-center bg-gray-50 rounded-xl overflow-hidden">
+              <img 
+                src={service.image} 
+                alt={service.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {service.title}
                 </h3>
@@ -70,8 +70,8 @@ const DFWCommercialSection = () => {
                   {service.description}
                 </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
