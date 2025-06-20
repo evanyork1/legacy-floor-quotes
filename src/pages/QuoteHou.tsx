@@ -35,14 +35,14 @@ const QuoteHou = () => {
             updateFormData={updateFormData}
             handleFileUpload={handleFileUpload}
             removePhoto={removePhoto}
-            calculatePrice={calculatePrice}
+            estimatedPrice={calculatePrice()}
           />
 
           <QuoteNavigation
             currentStep={currentStep}
             totalSteps={totalSteps}
             onNext={nextStep}
-            onPrev={prevStep}
+            onPrevious={prevStep}
             onSubmit={handleSubmit}
             canProceed={canProceed()}
             isSubmitting={isSubmitting}
