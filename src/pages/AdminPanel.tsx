@@ -8,7 +8,7 @@ import {
   Globe, 
   Webhook
 } from "lucide-react";
-import { useAdminData } from "@/hooks/useAdminData";
+import { useAdminDataDFW } from "@/hooks/useAdminDataDFW";
 import AdminHeader from "@/components/admin/AdminHeader";
 import LeadsTab from "@/components/admin/LeadsTab";
 import PricingTab from "@/components/admin/PricingTab";
@@ -37,7 +37,7 @@ const AdminPanel = () => {
     archiveQuote,
     unarchiveQuote,
     saveWebhookUrl
-  } = useAdminData();
+  } = useAdminDataDFW();
 
   const { toast } = useToast();
 
@@ -58,7 +58,7 @@ const AdminPanel = () => {
     }
 
     const csvContent = [
-      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Custom Sq Ft', 'Space Type', 'Other Space Type', 'Color Choice', 'Price', 'Status', 'Archived', 'Date', 'Exterior Photos', 'Damage Photos'],
+      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Custom Sq Ft', 'Space Type', 'Other Space Type', 'Color Choice', 'Price', 'Status', 'Lead Source', 'Archived', 'Date', 'Exterior Photos', 'Damage Photos'],
       ...quotes.map(q => [
         q.name, 
         q.email, 
@@ -71,6 +71,7 @@ const AdminPanel = () => {
         q.color_choice,
         q.estimated_price.toString(), 
         q.status,
+        q.lead_source || 'Unknown',
         q.archived ? 'Yes' : 'No',
         q.created_at,
         (q.exterior_photos || []).join('; '),
@@ -82,7 +83,7 @@ const AdminPanel = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `leads-${showArchived ? 'all' : 'active'}.csv`;
+    a.download = `leads-combined-${showArchived ? 'all' : 'active'}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };

@@ -1,7 +1,7 @@
 
 import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 
-const Footer = () => {
+const DFWFooter = () => {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="col-span-2">
             <h3 className="text-2xl font-bold mb-4">Legacy Industrial Coatings</h3>
             <p className="text-gray-400 mb-6 max-w-md">
-              Premier epoxy flooring specialists in Houston, TX. Transform your garage with our lifetime warranty coating solutions.
+              Premier epoxy flooring and concrete coating specialists serving Dallas-Fort Worth, Plano, and Houston with lifetime warranties.
             </p>
             <div className="flex items-center space-x-4">
               <a 
@@ -28,7 +28,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-3 text-blue-400" />
-                <span className="text-gray-400">(713) 999-9999</span>
+                <span className="text-gray-400">(214) 305-6516</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-3 text-blue-400" />
@@ -36,7 +36,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-3 text-blue-400" />
-                <span className="text-gray-400">Houston, TX</span>
+                <span className="text-gray-400">Dallas-Fort Worth, Plano, Houston</span>
               </div>
             </div>
           </div>
@@ -67,4 +67,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default DFWFooter;

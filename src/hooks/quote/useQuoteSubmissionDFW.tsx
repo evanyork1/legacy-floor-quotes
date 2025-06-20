@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { FormData } from "@/components/quote/types";
 
-export const useQuoteSubmission = () => {
+export const useQuoteSubmissionDFW = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,7 +44,7 @@ export const useQuoteSubmission = () => {
     }
 
     setIsSubmitting(true);
-    console.log('Starting quote submission process...', formData);
+    console.log('Starting DFW quote submission process...', formData);
 
     try {
       // Upload photos first
@@ -61,7 +61,7 @@ export const useQuoteSubmission = () => {
         damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       }
 
-      // Prepare quote data using the provided estimated price
+      // Prepare quote data for DFW table
       const quoteData = {
         garage_type: formData.garageType,
         custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
@@ -77,14 +77,14 @@ export const useQuoteSubmission = () => {
         estimated_price: estimatedPrice,
         status: 'new' as const,
         archived: false,
-        lead_source: 'Houston'
+        lead_source: 'DFW'
       };
 
-      console.log('Saving quote to database...', quoteData);
+      console.log('Saving DFW quote to database...', quoteData);
 
-      // Save quote to database
+      // Save quote to DFW database table
       const { data: savedQuote, error: saveError } = await supabase
-        .from('quotes')
+        .from('quotes_dfw')
         .insert(quoteData)
         .select()
         .single();
@@ -94,7 +94,7 @@ export const useQuoteSubmission = () => {
         throw new Error(`Failed to save quote: ${saveError.message}`);
       }
 
-      console.log('Quote saved successfully:', savedQuote);
+      console.log('DFW Quote saved successfully:', savedQuote);
 
       // Trigger webhook
       console.log('Triggering webhook...');
@@ -127,10 +127,10 @@ export const useQuoteSubmission = () => {
       }
 
       // Navigate to success page
-      navigate('/');
+      navigate('/dfw');
 
     } catch (error) {
-      console.error('Quote submission error:', error);
+      console.error('DFW Quote submission error:', error);
       toast({
         title: "Submission Failed",
         description: error instanceof Error ? error.message : "Failed to submit quote. Please try again.",

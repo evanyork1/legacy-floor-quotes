@@ -33,60 +33,87 @@ const EmployeePanel = () => {
   const { toast } = useToast();
 
   const fetchQuotes = async (includeArchived = false) => {
-    console.log('🔍 Starting fetchQuotes function...', { includeArchived });
+    console.log('🔍 Starting fetchQuotes function for combined data...', { includeArchived });
     
     try {
       setLoading(true);
-      console.log('📡 Making Supabase query...');
+      console.log('📡 Making Supabase queries for both tables...');
       
-      let query = supabase
+      // Build queries for both tables
+      let houstonQuery = supabase
         .from('quotes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
+      let dfwQuery = supabase
+        .from('quotes_dfw')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false });
+
       if (!includeArchived) {
-        query = query.or('archived.is.null,archived.eq.false');
+        houstonQuery = houstonQuery.or('archived.is.null,archived.eq.false');
+        dfwQuery = dfwQuery.or('archived.is.null,archived.eq.false');
       }
 
-      const { data, error, count } = await query;
+      // Execute both queries
+      const [houstonResult, dfwResult] = await Promise.all([
+        houstonQuery,
+        dfwQuery
+      ]);
 
-      console.log('📊 Raw Supabase response:', { data, error, count });
+      console.log('📊 Raw Supabase responses:', { 
+        houston: houstonResult, 
+        dfw: dfwResult 
+      });
 
-      if (error) {
-        console.error('❌ Supabase error:', error);
+      if (houstonResult.error) {
+        console.error('❌ Houston Supabase error:', houstonResult.error);
         toast({
           title: "Database Error",
-          description: `Error fetching quotes: ${error.message}`,
+          description: `Error fetching Houston quotes: ${houstonResult.error.message}`,
           variant: "destructive",
         });
         return;
       }
 
-      if (!data || data.length === 0) {
-        console.log('⚠️ No data returned from database');
-        setQuotes([]);
+      if (dfwResult.error) {
+        console.error('❌ DFW Supabase error:', dfwResult.error);
+        toast({
+          title: "Database Error", 
+          description: `Error fetching DFW quotes: ${dfwResult.error.message}`,
+          variant: "destructive",
+        });
         return;
       }
 
-      console.log('✅ Processing data...');
-      const typedQuotes = data.map(quote => {
-        console.log('🔄 Processing quote:', quote.id, quote.name);
+      // Combine and process data
+      const houstonData = houstonResult.data || [];
+      const dfwData = dfwResult.data || [];
+      const combinedData = [...houstonData, ...dfwData];
+
+      console.log('✅ Processing combined data...');
+      const typedQuotes = combinedData.map(quote => {
+        console.log('🔄 Processing quote:', quote.id, quote.name, quote.lead_source);
         return {
           ...quote,
           status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
           exterior_photos: quote.exterior_photos || [],
           damage_photos: quote.damage_photos || [],
-          archived: quote.archived || false
+          archived: quote.archived || false,
+          lead_source: quote.lead_source || 'Unknown'
         };
       });
 
-      console.log('🎯 Final processed quotes:', typedQuotes);
+      // Sort by creation date (newest first)
+      typedQuotes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+      console.log('🎯 Final processed combined quotes:', typedQuotes);
       setQuotes(typedQuotes);
       
       const statusText = includeArchived ? 'all quotes (including archived)' : 'active quotes';
       toast({
         title: "Success",
-        description: `Loaded ${typedQuotes.length} ${statusText} from database`,
+        description: `Loaded ${typedQuotes.length} ${statusText} from both Houston and DFW databases`,
       });
 
     } catch (error) {
@@ -105,8 +132,16 @@ const EmployeePanel = () => {
   const archiveQuote = async (quoteId: string) => {
     setArchivingQuoteId(quoteId);
     try {
+      // Find which table this quote belongs to
+      const quote = quotes.find(q => q.id === quoteId);
+      if (!quote) {
+        throw new Error('Quote not found');
+      }
+
+      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+      
       const { error } = await supabase
-        .from('quotes')
+        .from(tableName)
         .update({ archived: true })
         .eq('id', quoteId);
 
@@ -141,8 +176,16 @@ const EmployeePanel = () => {
   const unarchiveQuote = async (quoteId: string) => {
     setArchivingQuoteId(quoteId);
     try {
+      // Find which table this quote belongs to
+      const quote = quotes.find(q => q.id === quoteId);
+      if (!quote) {
+        throw new Error('Quote not found');
+      }
+
+      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+      
       const { error } = await supabase
-        .from('quotes')
+        .from(tableName)
         .update({ archived: false })
         .eq('id', quoteId);
 
@@ -194,7 +237,7 @@ const EmployeePanel = () => {
     }
 
     const csvContent = [
-      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Custom Sq Ft', 'Space Type', 'Other Space Type', 'Color Choice', 'Price', 'Status', 'Archived', 'Date', 'Exterior Photos', 'Damage Photos'],
+      ['Name', 'Email', 'Phone', 'ZIP', 'Garage Type', 'Custom Sq Ft', 'Space Type', 'Other Space Type', 'Color Choice', 'Price', 'Status', 'Lead Source', 'Archived', 'Date', 'Exterior Photos', 'Damage Photos'],
       ...quotes.map(q => [
         q.name, 
         q.email, 
@@ -207,6 +250,7 @@ const EmployeePanel = () => {
         q.color_choice,
         q.estimated_price.toString(), 
         q.status,
+        q.lead_source || 'Unknown',
         q.archived ? 'Yes' : 'No',
         q.created_at,
         (q.exterior_photos || []).join('; '),
@@ -218,7 +262,7 @@ const EmployeePanel = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `leads-${showArchived ? 'all' : 'active'}.csv`;
+    a.download = `leads-combined-${showArchived ? 'all' : 'active'}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -251,7 +295,7 @@ const EmployeePanel = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Employee Dashboard</h1>
-          <p className="text-blue-200">View and manage leads</p>
+          <p className="text-blue-200">View and manage leads from both Houston and DFW</p>
         </div>
 
         {/* Leads Section */}
@@ -297,12 +341,12 @@ const EmployeePanel = () => {
             {loading ? (
               <div className="text-center py-8 text-gray-400">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
-                Loading quotes from database...
+                Loading quotes from databases...
               </div>
             ) : displayedQuotes.length === 0 ? (
               <div className="text-center py-8">
                 <div className="text-gray-400 mb-4">
-                  {showArchived ? 'No quotes found in database' : 'No active quotes found'}
+                  {showArchived ? 'No quotes found in databases' : 'No active quotes found'}
                 </div>
                 <Button 
                   onClick={() => fetchQuotes(showArchived)} 
@@ -326,6 +370,7 @@ const EmployeePanel = () => {
                       <TableHead className="text-gray-300">Price</TableHead>
                       <TableHead className="text-gray-300">Photos</TableHead>
                       <TableHead className="text-gray-300">Status</TableHead>
+                      <TableHead className="text-gray-300">Lead Source</TableHead>
                       <TableHead className="text-gray-300">Date</TableHead>
                       <TableHead className="text-gray-300">Actions</TableHead>
                     </TableRow>
@@ -365,6 +410,11 @@ const EmployeePanel = () => {
                         <TableCell>
                           <Badge className={`${getStatusColor(quote.status)} border-0`}>
                             {quote.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-gray-300">
+                          <Badge variant={quote.lead_source === 'DFW' ? 'default' : 'secondary'}>
+                            {quote.lead_source || 'Unknown'}
                           </Badge>
                         </TableCell>
                         <TableCell className="text-gray-400 text-sm">
