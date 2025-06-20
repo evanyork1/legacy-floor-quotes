@@ -13,10 +13,10 @@ const DFW = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <HeroSection />
-      <TrustedBrandSection />
+      <HeroSection isDFW={true} />
+      <TrustedBrandSection isDFW={true} />
       <FeaturesSection />
-      <HowItWorksSection />
+      <HowItWorksSection isDFW={true} />
       <TestimonialsSection />
       <DFWCommercialSection />
       <CTASection />

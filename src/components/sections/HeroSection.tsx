@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  isDFW?: boolean;
+}
+
+const HeroSection = ({ isDFW = false }: HeroSectionProps) => {
   const navigate = useNavigate();
 
   return (
@@ -18,13 +22,35 @@ const HeroSection = () => {
             </h1>
             <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
               Elite Installers. Unmatched Quality. A Reputation Built on Results in{" "}
-              <span className="block sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span>
+              <span className="block sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX"}
+              </span>
             </p>
+            {isDFW && (
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Use our intelligent quote builder to get accurate pricing instantly, or one of our experts will evaluate on site.
+              </p>
+            )}
             <div className="relative pt-2">
-              <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                Get Instant Quote
-                <ArrowRight className="ml-3 h-5 w-5 lg:h-6 lg:w-6" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  onClick={() => navigate(isDFW ? '/quotedfw' : '/quote')} 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                >
+                  Get Instant Quote
+                  <ArrowRight className="ml-3 h-5 w-5 lg:h-6 lg:w-6" />
+                </Button>
+                {isDFW && (
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 text-lg"
+                    onClick={() => window.open('tel:214-305-6516', '_self')}
+                  >
+                    Call (214) 305-6516
+                  </Button>
+                )}
+              </div>
               
               {/* Hand-drawn arrow and text */}
               <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-6 hidden lg:flex items-start">
