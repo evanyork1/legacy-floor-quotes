@@ -2,9 +2,9 @@
 import { useQuoteForm } from "@/hooks/useQuoteForm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import QuoteProgress from "@/components/quote/QuoteProgress";
-import QuoteStepRenderer from "@/components/quote/QuoteStepRenderer";
-import QuoteNavigation from "@/components/quote/QuoteNavigation";
+import { QuoteProgress } from "@/components/quote/QuoteProgress";
+import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
+import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 
 const QuoteHou = () => {
   const {

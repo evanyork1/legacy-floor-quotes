@@ -2,9 +2,9 @@
 import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
 import Header from "@/components/Header";
 import DFWFooter from "@/components/DFWFooter";
-import QuoteProgress from "@/components/quote/QuoteProgress";
-import QuoteStepRenderer from "@/components/quote/QuoteStepRenderer";
-import QuoteNavigation from "@/components/quote/QuoteNavigation";
+import { QuoteProgress } from "@/components/quote/QuoteProgress";
+import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
+import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 
 const QuoteDFW = () => {
   const {
