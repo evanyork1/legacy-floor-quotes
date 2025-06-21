@@ -1,26 +1,20 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import { useLocation } from "react-router-dom";
-
 const Footer = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
-  
   const serviceArea = isDFW ? "Dallas, Plano, Houston" : "Nationwide Service";
-  
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
       (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
-
-  return (
-    <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
+  return <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
           {/* Company Info */}
@@ -28,9 +22,7 @@ const Footer = () => {
             <div className="flex items-center mb-4 sm:mb-6">
               {/* Logo space if needed */}
             </div>
-            <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              The only company you need for premium warranty floors. We handle everything - quoting, scheduling, installation coordination, and warranty service.
-            </p>
+            <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.</p>
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
@@ -38,11 +30,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <a 
-                  href="tel:214-305-6516" 
-                  onClick={handlePhoneClick}
-                  className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
                   214-305-6516
                 </a>
               </div>
@@ -85,8 +73,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
