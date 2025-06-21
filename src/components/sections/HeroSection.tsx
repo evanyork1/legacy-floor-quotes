@@ -24,8 +24,8 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="max-w-2xl space-y-8 sm:space-y-10 lg:space-y-12">
-            <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-relaxed mb-4 sm:mb-6">
+          <div className="max-w-2xl space-y-6 sm:space-y-8 lg:space-y-10">
+            <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-relaxed mb-4 sm:mb-6">
               {isDFW ? (
                 <>
                   {title}{" "}
@@ -46,23 +46,30 @@ const HeroSection = () => {
                 })
               )}
             </h1>
-            <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed mb-4 sm:mb-6">
-              {isDFW ? (
-                <>
-                  Unmatched Quality and a Reputation Built on Results<br />
+            
+            {isDFW ? (
+              <div className="space-y-2 sm:space-y-3">
+                <div className="text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-800">
+                  Unmatched Quality
+                </div>
+                <div className="text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-800">
+                  A Reputation Built on Results
+                </div>
+                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 pt-2">
                   Serving{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-medium">
                     {locationText}
                   </span>
-                </>
-              ) : (
-                <>
-                  Elite Installers. Unmatched Quality. A Reputation Built on Results in{" "}
-                  <span className="block sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{locationText}</span>
-                </>
-              )}
-            </p>
-            <div className="relative pt-8 sm:pt-10">
+                </div>
+              </div>
+            ) : (
+              <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
+                Elite Installers. Unmatched Quality. A Reputation Built on Results in{" "}
+                <span className="block sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{locationText}</span>
+              </p>
+            )}
+            
+            <div className="relative pt-6 sm:pt-8">
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button onClick={() => navigate(quotePath)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                   Get Instant Quote
