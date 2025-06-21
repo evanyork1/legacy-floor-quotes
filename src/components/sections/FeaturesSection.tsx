@@ -14,7 +14,7 @@ const FeaturesSection = () => {
   }, {
     icon: <Headphones className="h-8 w-8 text-blue-600" />,
     title: "World Class Service",
-    description: "No need to take time out of your day to meet in person, we handle everything remotely."
+    description: "Choose what works best for you - virtual consultations or meet with our experts on-site. No need to take time out of your day unless you prefer the personal touch."
   }];
 
   return (
