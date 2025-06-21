@@ -9,27 +9,33 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
+  // Determine if we're in DFW environment
+  const isDFW = location.pathname === '/dfw';
+  
   // Determine quote path based on current location
-  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quote';
+  const quotePath = isDFW ? '/quotedfw' : '/quotehou';
+  
+  // Determine home path based on current location
+  const homePath = isDFW ? '/dfw' : '/houston';
   
   const navItems = [{
     name: "Home",
-    path: "/"
+    path: homePath
   }, {
     name: "Commercial",
-    path: "/dfw#commercial"
+    path: `${homePath}#commercial`
   }, {
     name: "Gallery",
     path: "/gallery"
   }, {
     name: "How It Works",
-    path: "/#how-it-works"
+    path: `${homePath}#how-it-works`
   }, {
     name: "About",
-    path: "/#testimonials"
+    path: `${homePath}#testimonials`
   }, {
     name: "Contact",
-    path: "/#footer"
+    path: `${homePath}#footer`
   }];
 
   return (
@@ -37,7 +43,7 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
           {/* Logo - Responsive sizing */}
-          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
+          <div className="flex items-center cursor-pointer" onClick={() => navigate(homePath)}>
             <img src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" alt="Legacy Industrial Coatings" className="h-24 sm:h-16 md:h-20 lg:h-40 w-auto" />
           </div>
 

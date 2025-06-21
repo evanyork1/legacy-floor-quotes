@@ -1,12 +1,18 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Shield, Headphones } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const FeaturesSection = () => {
+  const location = useLocation();
+  const isDFW = location.pathname === '/dfw';
+  
   const features = [{
     icon: <Users className="h-8 w-8 text-blue-600" />,
     title: "Certified Installers",
-    description: "Only certified, insured professionals in our network"
+    description: isDFW 
+      ? "Only certified, insured professionals"
+      : "Only certified, insured professionals in our network"
   }, {
     icon: <Shield className="h-8 w-8 text-blue-600" />,
     title: "Lifetime Warranty",
@@ -25,7 +31,7 @@ const FeaturesSection = () => {
             Why Choose Legacy Industrial Coatings?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Thousands have trusted us as their garage floor experts.
+            Thousands have trusted us as their floor coating experts.
           </p>
         </div>
         

@@ -1,20 +1,29 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import { useLocation } from "react-router-dom";
+
 const Footer = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
   const serviceArea = isDFW ? "Dallas, Plano, Houston" : "Nationwide Service";
+  
+  // Determine paths based on current location
+  const homePath = isDFW ? "/dfw" : "/houston";
+  const quotePath = isDFW ? "/quotedfw" : "/quotehou";
+  
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
       (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
-  return <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
+
+  return (
+    <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
           {/* Company Info */}
@@ -45,8 +54,8 @@ const Footer = () => {
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Quick Links</h3>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href="/" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Home</a></li>
-              <li><a href="/quote" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Get Quote</a></li>
+              <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Home</a></li>
+              <li><a href={quotePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Get Quote</a></li>
               <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Gallery</a></li>
               <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">About Us</a></li>
               <li><a href="/apply" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Become an Installer</a></li>
@@ -66,13 +75,15 @@ const Footer = () => {
               © 2025 Legacy Industrial Coatings. All rights reserved.
             </div>
             <div className="flex justify-center">
-              <a href="#" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
                 <Instagram className="h-6 w-6 text-white" />
               </a>
             </div>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
