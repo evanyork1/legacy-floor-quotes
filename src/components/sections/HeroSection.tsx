@@ -64,19 +64,19 @@ const HeroSection = () => {
             </p>
             <div className="relative pt-2">
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button onClick={() => navigate(quotePath)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-base lg:text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                <Button onClick={() => navigate(quotePath)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                   Get Instant Quote
-                  <ArrowRight className="ml-3 h-4 w-4 lg:h-5 lg:w-5" />
+                  <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
                 </Button>
                 
                 {isDFW && (
                   <Button 
                     asChild
                     variant="outline" 
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-base lg:text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                   >
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+                      <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
                       Call Us Now
                     </a>
                   </Button>

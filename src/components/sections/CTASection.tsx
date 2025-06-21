@@ -20,9 +20,9 @@ const CTASection = () => {
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           Get your free instant quote and experience Legacy's full-service approach
         </p>
-        <Button onClick={() => navigate(quotePath)} className="bg-white text-blue-600 hover:bg-gray-50 text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+        <Button onClick={() => navigate(quotePath)} className="bg-white text-blue-600 hover:bg-gray-50 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
           Start Your Quote
-          <ArrowRight className="ml-2 h-5 w-5" />
+          <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
       </div>
     </section>

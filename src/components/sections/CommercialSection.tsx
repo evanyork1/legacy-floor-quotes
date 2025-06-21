@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Phone, Building, Factory, Car, Home, Plane, Dog, Church } from "lucide-react";
 
@@ -106,14 +105,14 @@ const CommercialSection = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Optimized for mobile */}
         <div className="text-center">
           <Button 
             asChild
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xl px-12 py-6 rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base sm:text-xl px-6 sm:px-12 py-3 sm:py-6 rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
           >
             <a href="tel:214-305-6516">
-              <Phone className="mr-3 h-6 w-6" />
+              <Phone className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
               Call Now for Commercial Quote
             </a>
           </Button>
