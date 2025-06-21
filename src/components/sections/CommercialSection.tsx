@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Phone, Building, Factory, Car, Home } from "lucide-react";
+import { Phone, Building, Factory, Car, Home, Plane } from "lucide-react";
 
 const CommercialSection = () => {
   const services = [
@@ -19,7 +19,7 @@ const CommercialSection = () => {
   ];
 
   const applications = [
-    { name: "Airplane Hangars", icon: <Building className="h-6 w-6" /> },
+    { name: "Airplane Hangars", icon: <Plane className="h-6 w-6" /> },
     { name: "Warehouses", icon: <Factory className="h-6 w-6" /> },
     { name: "Manufacturing Plants", icon: <Factory className="h-6 w-6" /> },
     { name: "Car Dealerships", icon: <Car className="h-6 w-6" /> },
@@ -30,7 +30,7 @@ const CommercialSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
+    <section id="commercial" className="py-24 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-purple-600/3"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-20">
@@ -57,15 +57,11 @@ const CommercialSection = () => {
             ))}
           </div>
 
-          {/* Right side - Placeholder Image */}
+          {/* Right side - Helicopter Photo */}
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
-            <div className="relative bg-white/90 rounded-xl aspect-[4/3] flex items-center justify-center border-2 border-gray-200/50 shadow-xl">
-              <div className="text-center">
-                <Building className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 text-lg font-medium">Commercial Floor Photo</p>
-                <p className="text-gray-500 text-sm">Upload your photos here</p>
-              </div>
+            <div className="relative bg-white/90 rounded-xl aspect-[4/3] overflow-hidden border-2 border-gray-200/50 shadow-xl">
+              <img src="/lovable-uploads/0ef2964f-9a33-4a3c-9527-b1c46a84e9da.png" alt="Helicopter in hangar with polished concrete floor" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -89,18 +85,26 @@ const CommercialSection = () => {
 
         {/* Additional Images Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-15"></div>
-              <div className="relative bg-white/90 rounded-xl aspect-[3/2] flex items-center justify-center border border-gray-200/50 shadow-lg">
-                <div className="text-center">
-                  <Factory className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-600 font-medium">Commercial Project {i}</p>
-                  <p className="text-gray-500 text-xs">Photo placeholder</p>
-                </div>
-              </div>
+          <div className="relative">
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-15"></div>
+            <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
+              <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Commercial restaurant with polished concrete floors" className="w-full h-full object-cover" />
             </div>
-          ))}
+          </div>
+          
+          <div className="relative">
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-15"></div>
+            <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
+              <img src="/lovable-uploads/4a97932b-03f2-42ab-9e2f-2a90852befc0.png" alt="Commercial restroom with epoxy flooring" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-15"></div>
+            <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
+              <img src="/lovable-uploads/b5e6bdc4-80f9-44ea-a580-29d22662f7d4.png" alt="Industrial floor coating detail" className="w-full h-full object-cover" />
+            </div>
+          </div>
         </div>
 
         {/* Call to Action */}
