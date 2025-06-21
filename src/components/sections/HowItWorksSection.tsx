@@ -1,80 +1,80 @@
-
-import { useLocation } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar, Camera, Palette, CheckCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HowItWorksSection = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const isDFW = location.pathname === '/dfw';
   
-  const steps = [{
-    step: "1",
-    title: isDFW ? "Get a Custom Quote" : "Create Your Own Quote",
-    description: isDFW 
-      ? "Use our intelligent quote builder or meet with a member of our team"
-      : "Use our intelligent quote builder to get accurate pricing instantly",
-    gradient: "from-blue-500 to-blue-700"
-  }, {
-    step: "2",
-    title: "Schedule Your Installation Day",
-    description: isDFW 
-      ? "Find the perfect install day that works with your schedule."
-      : "One person will help you find the perfect install day within the next week.",
-    gradient: "from-blue-600 to-blue-800"
-  }, {
-    step: "3",
-    title: "Enjoy Your New Floor",
-    description: "Relax while we transform your space with professional installation",
-    gradient: "from-blue-700 to-indigo-700"
-  }];
+  // Determine quote path based on current location
+  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quotehou';
+
+  const steps = [
+    {
+      icon: <Calendar className="h-8 w-8 text-blue-600" />,
+      title: "Schedule Your Free Consultation",
+      description: "Book a convenient time for our expert to assess your space and provide personalized recommendations.",
+      bgColor: "from-blue-50 to-blue-100"
+    },
+    {
+      icon: <Camera className="h-8 w-8 text-blue-600" />,
+      title: "Professional Assessment",
+      description: "Our certified technician evaluates your floor condition and discusses your vision and requirements.",
+      bgColor: "from-blue-50 to-blue-100"
+    },
+    {
+      icon: <Palette className="h-8 w-8 text-blue-600" />,
+      title: "Expert Installation",
+      description: "Our skilled team transforms your space with precision application of premium coating systems.",
+      bgColor: "from-blue-50 to-blue-100"
+    },
+    {
+      icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
+      title: "Enjoy Your New Floor",
+      description: "Experience the beauty, durability, and easy maintenance of your professionally coated floor.",
+      bgColor: "from-blue-50 to-blue-100"
+    }
+  ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden" id="how-it-works">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-blue-700/5 to-blue-800/5"></div>
-      <div className="container mx-auto px-4 relative">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+    <section id="how-it-works" className="py-20 bg-gradient-to-br from-white to-blue-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             How It Works
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Three simple steps to transform your space with Legacy's premium service
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            From consultation to completion, we make the process simple and stress-free
           </p>
         </div>
         
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {steps.map((step, index) => (
-              <div key={index} className="group relative">
-                {/* Connecting line for desktop */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-blue-500 transform translate-x-4 z-10"></div>
-                )}
-                
-                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-100">
-                  <div className="absolute -top-6 left-8">
-                    <div className={`bg-gradient-to-r ${step.gradient} text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      {step.step}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed text-lg">
-                      {step.description}
-                    </p>
-                  </div>
-                  
-                  {/* Decorative gradient overlay */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${step.gradient} rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {steps.map((step, index) => (
+            <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50 relative">
+              <CardContent className="p-8">
+                <div className={`bg-gradient-to-br ${step.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  {step.icon}
                 </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Central connecting element for mobile */}
-          <div className="lg:hidden flex justify-center mt-8">
-            <div className="w-1 h-16 bg-gradient-to-b from-blue-300 to-blue-600 rounded-full"></div>
-          </div>
+                <div className="absolute -top-3 -left-3 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                  {index + 1}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center">
+          <Button 
+            onClick={() => navigate(quotePath)} 
+            className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+          >
+            Get Instant Quote
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>
