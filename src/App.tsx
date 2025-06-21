@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Quote from "./pages/Quote";
 import DFW from "./pages/DFW";
 import QuoteDFW from "./pages/QuoteDFW";
+import Gallery from "./pages/Gallery";
 import AdminPanel from "./pages/AdminPanel";
 import EmployeePanel from "./pages/EmployeePanel";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/quote" element={<Quote />} />
           <Route path="/dfw" element={<DFW />} />
           <Route path="/quotedfw" element={<QuoteDFW />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/adminpanel2025" element={<AdminPanel />} />
           <Route path="/jingram" element={<EmployeePanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

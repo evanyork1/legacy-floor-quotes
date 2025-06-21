@@ -1,15 +1,23 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determine quote path based on current location
+  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quote';
   
   const navItems = [{
     name: "Home",
     path: "/"
+  }, {
+    name: "Gallery",
+    path: "/gallery"
   }, {
     name: "How It Works",
     path: "/#how-it-works"
@@ -21,7 +29,8 @@ const Header = () => {
     path: "/#footer"
   }];
 
-  return <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+  return (
+    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
           {/* Logo - Responsive sizing */}
@@ -31,10 +40,12 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map(item => <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-sm lg:text-base">
+            {navItems.map(item => (
+              <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-sm lg:text-base">
                 {item.name}
-              </a>)}
-            <Button onClick={() => navigate('/quote')} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base">
+              </a>
+            ))}
+            <Button onClick={() => navigate(quotePath)} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base">
               Get Quote
             </Button>
           </nav>
@@ -46,23 +57,28 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && <div className="md:hidden border-t border-gray-100 py-4 bg-white">
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-100 py-4 bg-white">
             <nav className="flex flex-col space-y-4">
-              {navItems.map(item => <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-3 text-base rounded-lg hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
+              {navItems.map(item => (
+                <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium px-4 py-3 text-base rounded-lg hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                   {item.name}
-                </a>)}
+                </a>
+              ))}
               <div className="px-4 pt-2">
                 <Button onClick={() => {
-              navigate('/quote');
-              setIsMenuOpen(false);
-            }} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full py-3 text-base font-medium">
+                  navigate(quotePath);
+                  setIsMenuOpen(false);
+                }} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full py-3 text-base font-medium">
                   Get Quote
                 </Button>
               </div>
             </nav>
-          </div>}
+          </div>
+        )}
       </div>
-    </header>;
+    </header>
+  );
 };
 
 export default Header;

@@ -1,11 +1,17 @@
 
 import { Zap, Heart, Award } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const TrustedBrandSection = () => {
+  const location = useLocation();
+  const isDFW = location.pathname === '/dfw';
+  
   const services = [{
     icon: <Zap className="h-8 w-8 text-blue-600" />,
     title: "Fast Availability",
-    description: "Book and install within 7 days guaranteed - no waiting months for your dream floor"
+    description: isDFW 
+      ? "Fastest availability in the area guaranteed - no waiting months for your dream floor"
+      : "Book and install within 7 days guaranteed - no waiting months for your dream floor"
   }, {
     icon: <Heart className="h-8 w-8 text-blue-600" />,
     title: "We Are Easy to Work With",
@@ -16,12 +22,16 @@ const TrustedBrandSection = () => {
     description: "Legacy stands behind every installation with our warranty backing"
   }];
 
+  const sectionTitle = isDFW 
+    ? "The Most Trusted Brand in Concrete Coatings"
+    : "The Most Trusted Brand in Garage Floors";
+
   return (
     <section className="bg-gradient-to-br from-white to-slate-50 py-[31px]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
-            The Most Trusted Brand in Garage Floors
+            {sectionTitle}
           </h2>
         </div>
         

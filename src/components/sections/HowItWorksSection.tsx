@@ -1,14 +1,23 @@
 
+import { useLocation } from "react-router-dom";
+
 const HowItWorksSection = () => {
+  const location = useLocation();
+  const isDFW = location.pathname === '/dfw';
+  
   const steps = [{
     step: "1",
-    title: "Create Your Own Quote",
-    description: "Use our intelligent quote builder to get accurate pricing instantly",
+    title: isDFW ? "Get a Custom Quote" : "Create Your Own Quote",
+    description: isDFW 
+      ? "Use our intelligent quote builder or meet with a member of our team"
+      : "Use our intelligent quote builder to get accurate pricing instantly",
     gradient: "from-blue-500 to-purple-600"
   }, {
     step: "2",
     title: "Schedule Your Installation Day",
-    description: "One person will help you find the perfect install day within the next week.",
+    description: isDFW 
+      ? "Find the perfect install day that works with your schedule."
+      : "One person will help you find the perfect install day within the next week.",
     gradient: "from-purple-500 to-pink-600"
   }, {
     step: "3",
