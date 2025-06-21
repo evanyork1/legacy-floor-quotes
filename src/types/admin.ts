@@ -16,6 +16,7 @@ export interface Quote {
   created_at: string;
   status: 'new' | 'contacted' | 'quoted' | 'closed';
   archived: boolean;
+  lead_source: string;
 }
 
 export interface PricingTier {
