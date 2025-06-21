@@ -1,35 +1,42 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Building, Factory, Car, Home, Plane, Dog, Church } from "lucide-react";
-
 const CommercialSection = () => {
-  const services = [
-    {
-      title: "Concrete Polishing",
-      description: "High-gloss, durable polished concrete for industrial and commercial spaces"
-    },
-    {
-      title: "Industrial Epoxy",
-      description: "Heavy-duty epoxy coatings designed for high-traffic commercial environments"
-    },
-    {
-      title: "Commercial Flake Floors",
-      description: "Decorative and functional flake systems for professional commercial spaces"
-    }
-  ];
-
-  const applications = [
-    { name: "Airplane Hangars", icon: <Plane className="h-6 w-6" /> },
-    { name: "Warehouses", icon: <Factory className="h-6 w-6" /> },
-    { name: "Manufacturing Plants", icon: <Factory className="h-6 w-6" /> },
-    { name: "Car Dealerships", icon: <Car className="h-6 w-6" /> },
-    { name: "Dog Kennels", icon: <Dog className="h-6 w-6" /> },
-    { name: "Commercial Kitchens", icon: <Home className="h-6 w-6" /> },
-    { name: "Wedding Venues", icon: <Church className="h-6 w-6" /> },
-    { name: "And More", icon: <Building className="h-6 w-6" /> }
-  ];
-
-  return (
-    <section id="commercial" className="py-24 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
+  const services = [{
+    title: "Concrete Polishing",
+    description: "High-gloss, durable polished concrete for industrial and commercial spaces"
+  }, {
+    title: "Industrial Epoxy",
+    description: "Heavy-duty epoxy coatings designed for high-traffic commercial environments"
+  }, {
+    title: "Commercial Flake Floors",
+    description: "Decorative and functional flake systems for professional commercial spaces"
+  }];
+  const applications = [{
+    name: "Airplane Hangars",
+    icon: <Plane className="h-6 w-6" />
+  }, {
+    name: "Warehouses",
+    icon: <Factory className="h-6 w-6" />
+  }, {
+    name: "Manufacturing Plants",
+    icon: <Factory className="h-6 w-6" />
+  }, {
+    name: "Car Dealerships",
+    icon: <Car className="h-6 w-6" />
+  }, {
+    name: "Dog Kennels",
+    icon: <Dog className="h-6 w-6" />
+  }, {
+    name: "Commercial Kitchens",
+    icon: <Home className="h-6 w-6" />
+  }, {
+    name: "Wedding Venues",
+    icon: <Church className="h-6 w-6" />
+  }, {
+    name: "And More",
+    icon: <Building className="h-6 w-6" />
+  }];
+  return <section id="commercial" className="py-24 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-purple-600/3"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-20">
@@ -44,16 +51,14 @@ const CommercialSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left side - Services */}
           <div className="space-y-8">
-            {services.map((service, index) => (
-              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 hover:bg-white/90 transition-all duration-500 group shadow-lg hover:shadow-xl">
+            {services.map((service, index) => <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 hover:bg-white/90 transition-all duration-500 group shadow-lg hover:shadow-xl">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg">
                   {service.description}
                 </p>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* Right side - Helicopter Photo */}
@@ -70,14 +75,12 @@ const CommercialSection = () => {
             Where We Install
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {applications.map((app, index) => (
-              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-200/50 hover:bg-white/90 transition-all duration-300 group shadow-lg hover:shadow-xl">
+            {applications.map((app, index) => <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-200/50 hover:bg-white/90 transition-all duration-300 group shadow-lg hover:shadow-xl">
                 <div className="text-blue-600 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
                   {app.icon}
                 </div>
                 <p className="text-gray-800 text-sm font-medium">{app.name}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -107,20 +110,15 @@ const CommercialSection = () => {
 
         {/* Call to Action - Optimized for mobile */}
         <div className="text-center">
-          <Button 
-            asChild
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base sm:text-xl px-6 sm:px-12 py-3 sm:py-6 rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-          >
+          <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base sm:text-xl px-6 sm:px-12 py-3 sm:py-6 rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
             <a href="tel:214-305-6516">
               <Phone className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
               Call Now for Commercial Quote
             </a>
           </Button>
-          <p className="text-gray-600 mt-4 text-lg">(214) 305-6516</p>
+          
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CommercialSection;
