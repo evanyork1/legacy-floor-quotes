@@ -1,24 +1,22 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X, Image as ImageIcon } from "lucide-react";
-
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   // Placeholder gallery items - these will be replaced with actual photos
-  const galleryItems = Array.from({ length: 20 }, (_, i) => ({
+  const galleryItems = Array.from({
+    length: 20
+  }, (_, i) => ({
     id: i + 1,
     title: `Project ${i + 1}`,
     category: i % 4 === 0 ? "Commercial" : i % 3 === 0 ? "Residential" : i % 2 === 0 ? "Industrial" : "Garage",
     description: "Premium floor coating installation"
   }));
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
@@ -28,9 +26,7 @@ const Gallery = () => {
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Our Work <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Gallery</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Explore our portfolio of premium floor coating installations across Dallas-Fort Worth and Houston
-            </p>
+            <p className="text-xl text-gray-600 leading-relaxed">Explore our portfolio of premium floor coating installations.</p>
           </div>
         </div>
       </section>
@@ -39,12 +35,7 @@ const Gallery = () => {
       <section className="py-20 bg-gradient-to-br from-white to-slate-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {galleryItems.map((item) => (
-              <Card 
-                key={item.id}
-                className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 overflow-hidden hover:-translate-y-2"
-                onClick={() => setSelectedImage(item.id)}
-              >
+            {galleryItems.map(item => <Card key={item.id} className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 overflow-hidden hover:-translate-y-2" onClick={() => setSelectedImage(item.id)}>
                 <CardContent className="p-0">
                   <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                     {/* Placeholder content */}
@@ -64,8 +55,7 @@ const Gallery = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -77,15 +67,11 @@ const Gallery = () => {
             Gallery Image {selectedImage}
           </DialogTitle>
           <div className="relative">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
-            >
+            <button onClick={() => setSelectedImage(null)} className="absolute top-4 right-4 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors">
               <X className="h-6 w-6" />
             </button>
             
-            {selectedImage && (
-              <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-lg">
+            {selectedImage && <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-lg">
                 <div className="text-center">
                   <ImageIcon className="h-24 w-24 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-gray-700 mb-2">
@@ -98,15 +84,12 @@ const Gallery = () => {
                     Upload your project photos to showcase your work
                   </p>
                 </div>
-              </div>
-            )}
+              </div>}
           </div>
         </DialogContent>
       </Dialog>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Gallery;
