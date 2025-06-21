@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -72,9 +73,14 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-800 pt-6 sm:pt-8">
-          <div className="flex justify-center">
-            <div className="text-gray-400 text-xs sm:text-sm text-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
               © 2025 Legacy Industrial Coatings. All rights reserved.
+            </div>
+            <div className="flex justify-center">
+              <a href="#" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+                <Instagram className="h-6 w-6 text-white" />
+              </a>
             </div>
           </div>
         </div>
