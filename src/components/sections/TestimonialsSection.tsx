@@ -1,27 +1,28 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 
 const TestimonialsSection = () => {
   const testimonials = [{
-    name: "Emily Carter",
+    name: "Bharat Arimilli",
     location: "Plano, TX",
     rating: 5,
-    text: "Legacy made the whole process easy from start to finish. They handled everything, and my garage floor turned out amazing. The warranty gives me real peace of mind."
+    text: "Excellent experience from start to finish. Got a quote quickly and at a very reasonable price. The office was very communicative throughout and the crew did an amazing job with the final result. This team is full of people who are professional, friendly and great at what they do."
   }, {
-    name: "Michael Tran",
-    location: "Austin, TX",
+    name: "Scott Cleland",
+    location: "Dallas, TX",
     rating: 5,
-    text: "What I liked most was that everything was handled by one team—no back and forth. The coating has held up great, even with all the wild Texas weather."
+    text: "Totally exceeded my expectations. Crew was experienced and professional. They worked with me on how to address existing cracks in my floor, and they worked around some challenging weather. Finished floor is amazing."
   }, {
-    name: "Jessica Rivera",
-    location: "Houston, TX",
+    name: "Chris C",
+    location: "Melissa, TX",
     rating: 5,
-    text: "Legacy took care of everything, which made things stress-free for us. Our patio floor looks incredible and was finished quickly and professionally."
+    text: "Great company to work with. Competent, genuinely helpful staff. From the original quote to the completion of the job, the representatives were always thorough and professional. Would highly recommend Legacy Industrial Epoxy Floor Coating to anyone seeking this service."
   }, {
-    name: "Daniel Lopez",
-    location: "Phoenix, AZ",
+    name: "Joseph Im",
+    location: "McKinney, TX",
     rating: 5,
-    text: "The turnaround time was impressive—our floor was done in less than a week. It looks fantastic, and the whole process felt smooth and well-organized."
+    text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their garage floor coated. Definitely recommending to my family and friends. :)"
   }];
 
   return (

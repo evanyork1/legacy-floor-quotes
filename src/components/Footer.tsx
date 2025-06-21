@@ -1,12 +1,16 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
+  const isDFW = location.pathname === '/dfw';
+  
+  const serviceArea = isDFW ? "Dallas, Plano, Houston" : "Nationwide Service";
   
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
@@ -44,7 +48,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">Nationwide Service</span>
+                <span className="text-gray-300 text-sm sm:text-base">{serviceArea}</span>
               </div>
             </div>
           </div>
@@ -59,6 +63,8 @@ const Footer = () => {
               <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">About Us</a></li>
               <li><a href="/apply" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Become an Installer</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Warranty Info</a></li>
+              <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Terms and Conditions</a></li>
+              <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -71,15 +77,9 @@ const Footer = () => {
             <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
               © 2025 Legacy Industrial Coatings. All rights reserved.
             </div>
-            <div className="flex space-x-4 sm:space-x-6">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Instagram className="h-5 w-5" />
+            <div className="flex justify-center">
+              <a href="#" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+                <Instagram className="h-6 w-6 text-white" />
               </a>
             </div>
           </div>
