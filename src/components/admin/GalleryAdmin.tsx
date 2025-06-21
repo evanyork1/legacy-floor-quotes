@@ -4,11 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Upload, Edit, Trash2, Image as ImageIcon, Plus } from "lucide-react";
+import { Upload, Edit, Trash2, Image as ImageIcon, X } from "lucide-react";
 
 interface GalleryPhoto {
   id: string;
@@ -27,17 +26,14 @@ const GalleryAdmin = () => {
   const [uploading, setUploading] = useState(false);
   const [editingPhoto, setEditingPhoto] = useState<GalleryPhoto | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<string[]>([]);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    category: "Commercial",
-    display_order: 0,
     is_featured: false
   });
-
-  const categories = ["Commercial", "Residential", "Industrial", "Garage"];
 
   useEffect(() => {
     fetchPhotos();
@@ -64,62 +60,86 @@ const GalleryAdmin = () => {
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const handleMultipleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
     setUploading(true);
+    setUploadProgress([]);
+    
     try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}.${fileExt}`;
-      const filePath = `gallery/${fileName}`;
+      const uploadedFiles: string[] = [];
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        setUploadProgress(prev => [...prev, `Uploading ${file.name}...`]);
+        
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${i}.${fileExt}`;
+        const filePath = `gallery/${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
-        .from('gallery-images')
-        .upload(filePath, file);
+        const { error: uploadError } = await supabase.storage
+          .from('gallery-images')
+          .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          throw new Error(`Failed to upload ${file.name}: ${uploadError.message}`);
+        }
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('gallery-images')
-        .getPublicUrl(filePath);
+        const { data: { publicUrl } } = supabase.storage
+          .from('gallery-images')
+          .getPublicUrl(filePath);
 
-      const { error: insertError } = await supabase
-        .from('gallery_photos')
-        .insert({
-          title: formData.title || `Photo ${photos.length + 1}`,
-          description: formData.description || null,
-          category: formData.category,
-          image_url: publicUrl,
-          display_order: formData.display_order || photos.length,
-          is_featured: formData.is_featured
-        });
+        const photoTitle = formData.title || `Photo ${photos.length + uploadedFiles.length + 1}`;
+        
+        const { error: insertError } = await supabase
+          .from('gallery_photos')
+          .insert({
+            title: photoTitle,
+            description: formData.description || null,
+            category: 'Gallery', // Default category
+            image_url: publicUrl,
+            display_order: photos.length + uploadedFiles.length,
+            is_featured: formData.is_featured
+          });
 
-      if (insertError) throw insertError;
+        if (insertError) {
+          console.error('Insert error:', insertError);
+          throw new Error(`Failed to save ${file.name}: ${insertError.message}`);
+        }
+
+        uploadedFiles.push(file.name);
+        setUploadProgress(prev => prev.map((msg, idx) => 
+          idx === i ? `✓ ${file.name} uploaded successfully` : msg
+        ));
+      }
 
       toast({
         title: "Success",
-        description: "Photo uploaded successfully",
+        description: `Successfully uploaded ${uploadedFiles.length} photo(s)`,
       });
 
       setFormData({
         title: "",
         description: "",
-        category: "Commercial",
-        display_order: 0,
         is_featured: false
       });
 
+      // Clear the file input
+      event.target.value = '';
+      
       fetchPhotos();
     } catch (error) {
-      console.error('Error uploading photo:', error);
+      console.error('Error uploading photos:', error);
       toast({
-        title: "Error",
-        description: "Failed to upload photo",
+        title: "Upload Error",
+        description: error instanceof Error ? error.message : "Failed to upload photos",
         variant: "destructive",
       });
     } finally {
       setUploading(false);
+      setUploadProgress([]);
     }
   };
 
@@ -132,8 +152,7 @@ const GalleryAdmin = () => {
         .update({
           title: formData.title,
           description: formData.description || null,
-          category: formData.category,
-          display_order: formData.display_order,
+          display_order: editingPhoto.display_order,
           is_featured: formData.is_featured
         })
         .eq('id', editingPhoto.id);
@@ -198,8 +217,6 @@ const GalleryAdmin = () => {
     setFormData({
       title: photo.title,
       description: photo.description || "",
-      category: photo.category,
-      display_order: photo.display_order,
       is_featured: photo.is_featured
     });
     setIsDialogOpen(true);
@@ -222,46 +239,54 @@ const GalleryAdmin = () => {
       <Card className="bg-gray-800 border-gray-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <ImageIcon className="h-5 w-5" />
-            Upload New Photo
+            <Upload className="h-5 w-5" />
+            Upload Photos (Multiple files supported)
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
-              placeholder="Photo title"
+              placeholder="Title (optional - will auto-generate if empty)"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               className="bg-gray-700 border-gray-600 text-white"
             />
-            <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-              <SelectTrigger className="bg-gray-700 border-gray-600 text-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="featured-upload"
+                checked={formData.is_featured}
+                onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
+                className="rounded"
+              />
+              <label htmlFor="featured-upload" className="text-sm text-white">Mark as featured</label>
+            </div>
           </div>
           <Textarea
-            placeholder="Photo description (optional)"
+            placeholder="Description (optional)"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="bg-gray-700 border-gray-600 text-white"
           />
-          <div className="flex items-center gap-4">
+          <div className="space-y-4">
             <Input
               type="file"
               accept="image/*"
-              onChange={handleFileUpload}
+              multiple
+              onChange={handleMultipleFileUpload}
               disabled={uploading}
               className="bg-gray-700 border-gray-600 text-white file:bg-blue-600 file:text-white"
             />
-            <Button disabled={uploading} className="bg-blue-600 hover:bg-blue-700">
-              {uploading ? "Uploading..." : "Upload"}
-            </Button>
+            {uploading && (
+              <div className="bg-gray-700 p-4 rounded-lg">
+                <h4 className="text-white font-medium mb-2">Upload Progress:</h4>
+                {uploadProgress.map((progress, index) => (
+                  <div key={index} className="text-sm text-gray-300 mb-1">
+                    {progress}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -274,7 +299,7 @@ const GalleryAdmin = () => {
           {photos.length === 0 ? (
             <div className="text-center py-8 text-gray-400">
               <ImageIcon className="h-12 w-12 mx-auto mb-2 opacity-50" />
-              <p>No photos uploaded yet. Upload your first photo above.</p>
+              <p>No photos uploaded yet. Upload your first photos above.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -335,16 +360,6 @@ const GalleryAdmin = () => {
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               className="bg-gray-700 border-gray-600 text-white"
             />
-            <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-              <SelectTrigger className="bg-gray-700 border-gray-600 text-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
             <Textarea
               placeholder="Photo description (optional)"
               value={formData.description}
