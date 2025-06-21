@@ -34,7 +34,17 @@ const Gallery = () => {
         .order('display_order', { ascending: true });
 
       if (error) throw error;
-      setPhotos(data || []);
+      
+      // Sort photos to put featured images first, then by display_order
+      const sortedPhotos = (data || []).sort((a, b) => {
+        // First, sort by featured status (featured first)
+        if (a.is_featured && !b.is_featured) return -1;
+        if (!a.is_featured && b.is_featured) return 1;
+        // Then by display_order within each group
+        return a.display_order - b.display_order;
+      });
+      
+      setPhotos(sortedPhotos);
     } catch (error) {
       console.error('Error fetching photos:', error);
     } finally {
