@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
@@ -57,6 +57,13 @@ const Header = () => {
           <button className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+        </div>
+
+        {/* Instagram Icon Section - Below Main Header */}
+        <div className="flex justify-center py-4 border-t border-gray-100">
+          <a href="#" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+            <Instagram className="h-6 w-6 text-white" />
+          </a>
         </div>
 
         {/* Mobile Navigation */}
