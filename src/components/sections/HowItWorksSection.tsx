@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Camera, Palette, CheckCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const HowItWorksSection = () => {
@@ -12,36 +12,27 @@ const HowItWorksSection = () => {
 
   const steps = [
     {
-      icon: <Calendar className="h-8 w-8 text-blue-600" />,
-      title: "Schedule Your Free Consultation",
-      description: "Book a convenient time for our expert to assess your space and provide personalized recommendations.",
-      bgColor: "from-blue-50 to-blue-100"
+      number: "1",
+      title: "Create Custom Quote",
+      description: "Use our intelligent quote builder or have one of our team members measure in person"
     },
     {
-      icon: <Camera className="h-8 w-8 text-blue-600" />,
-      title: "Professional Assessment",
-      description: "Our certified technician evaluates your floor condition and discusses your vision and requirements.",
-      bgColor: "from-blue-50 to-blue-100"
+      number: "2", 
+      title: "Schedule Your Installation Day",
+      description: "One person will help you find the perfect install day within the next week"
     },
     {
-      icon: <Palette className="h-8 w-8 text-blue-600" />,
-      title: "Expert Installation",
-      description: "Our skilled team transforms your space with precision application of premium coating systems.",
-      bgColor: "from-blue-50 to-blue-100"
-    },
-    {
-      icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
+      number: "3",
       title: "Enjoy Your New Floor",
-      description: "Experience the beauty, durability, and easy maintenance of your professionally coated floor.",
-      bgColor: "from-blue-50 to-blue-100"
+      description: "Relax while we transform your space with professional installation"
     }
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-gradient-to-br from-white to-blue-50">
+    <section id="how-it-works" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             How It Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -49,21 +40,27 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {steps.map((step, index) => (
-            <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50 relative">
-              <CardContent className="p-8">
-                <div className={`bg-gradient-to-br ${step.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  {step.icon}
+        <div className="relative max-w-4xl mx-auto mb-12">
+          {/* Steps Container */}
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Connecting Line */}
+            <div className="hidden md:block absolute top-8 left-1/6 right-1/6 h-0.5 bg-blue-200 z-0"></div>
+            
+            {steps.map((step, index) => (
+              <div key={index} className="relative text-center z-10">
+                {/* Step Number Circle */}
+                <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 relative z-10">
+                  {step.number}
                 </div>
-                <div className="absolute -top-3 -left-3 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                  {index + 1}
+                
+                {/* Step Content Box */}
+                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{step.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* CTA Button */}
