@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { FormData } from "@/components/quote/types";
 
 export const useQuoteSubmission = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -61,6 +62,9 @@ export const useQuoteSubmission = () => {
         damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       }
 
+      // Determine lead source based on current route
+      const leadSource = location.pathname === '/quotedfw' ? 'DFW' : 'Houston';
+
       // Prepare quote data using the provided estimated price
       const quoteData = {
         garage_type: formData.garageType,
@@ -75,15 +79,19 @@ export const useQuoteSubmission = () => {
         phone: formData.phone,
         zip_code: formData.zipCode,
         estimated_price: estimatedPrice,
+        lead_source: leadSource,
         status: 'new' as const,
         archived: false
       };
 
       console.log('Saving quote to database...', quoteData);
 
+      // Determine which table to save to based on lead source
+      const tableName = leadSource === 'DFW' ? 'quotes_dfw' : 'quotes';
+
       // Save quote to database
       const { data: savedQuote, error: saveError } = await supabase
-        .from('quotes')
+        .from(tableName)
         .insert(quoteData)
         .select()
         .single();
@@ -125,8 +133,8 @@ export const useQuoteSubmission = () => {
         });
       }
 
-      // Navigate to success page
-      navigate('/');
+      // Navigate to success page based on lead source
+      navigate(leadSource === 'DFW' ? '/dfw' : '/houston');
 
     } catch (error) {
       console.error('Quote submission error:', error);

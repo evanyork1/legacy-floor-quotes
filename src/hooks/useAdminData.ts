@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -42,56 +41,81 @@ export const useAdminData = () => {
     
     try {
       setLoading(true);
-      console.log('📡 Making Supabase query...');
+      console.log('📡 Making Supabase queries...');
       
-      let query = supabase
+      // Fetch from both tables
+      const quotesQuery = supabase
         .from('quotes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
+      const quotesDfwQuery = supabase
+        .from('quotes_dfw')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false });
+
       if (!includeArchived) {
-        query = query.or('archived.is.null,archived.eq.false');
+        quotesQuery.or('archived.is.null,archived.eq.false');
+        quotesDfwQuery.or('archived.is.null,archived.eq.false');
       }
 
-      const { data, error, count } = await query;
+      const [quotesResult, quotesDfwResult] = await Promise.all([
+        quotesQuery,
+        quotesDfwQuery
+      ]);
 
-      console.log('📊 Raw Supabase response:', { data, error, count });
+      console.log('📊 Raw Supabase responses:', { 
+        quotes: quotesResult, 
+        quotesDfw: quotesDfwResult 
+      });
 
-      if (error) {
-        console.error('❌ Supabase error:', error);
-        toast({
-          title: "Database Error",
-          description: `Error fetching quotes: ${error.message}`,
-          variant: "destructive",
-        });
-        return;
+      if (quotesResult.error) {
+        console.error('❌ Supabase error (quotes):', quotesResult.error);
+        throw quotesResult.error;
       }
 
-      if (!data || data.length === 0) {
-        console.log('⚠️ No data returned from database');
-        setQuotes([]);
-        return;
+      if (quotesDfwResult.error) {
+        console.error('❌ Supabase error (quotes_dfw):', quotesDfwResult.error);
+        throw quotesDfwResult.error;
       }
+
+      const quotesData = quotesResult.data || [];
+      const quotesDfwData = quotesDfwResult.data || [];
 
       console.log('✅ Processing data...');
-      const typedQuotes = data.map(quote => {
-        console.log('🔄 Processing quote:', quote.id, quote.name);
-        return {
+      
+      // Combine and process both datasets
+      const allQuotes = [
+        ...quotesData.map(quote => ({
           ...quote,
           status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
           exterior_photos: quote.exterior_photos || [],
           damage_photos: quote.damage_photos || [],
-          archived: quote.archived || false
-        };
-      });
+          archived: quote.archived || false,
+          lead_source: quote.lead_source || 'Houston'
+        })),
+        ...quotesDfwData.map(quote => ({
+          ...quote,
+          status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
+          exterior_photos: quote.exterior_photos || [],
+          damage_photos: quote.damage_photos || [],
+          archived: quote.archived || false,
+          lead_source: quote.lead_source || 'DFW'
+        }))
+      ];
 
-      console.log('🎯 Final processed quotes:', typedQuotes);
-      setQuotes(typedQuotes);
+      // Sort by creation date (newest first)
+      const sortedQuotes = allQuotes.sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+
+      console.log('🎯 Final processed quotes:', sortedQuotes);
+      setQuotes(sortedQuotes);
       
       const statusText = includeArchived ? 'all quotes (including archived)' : 'active quotes';
       toast({
         title: "Success",
-        description: `Loaded ${typedQuotes.length} ${statusText} from database`,
+        description: `Loaded ${sortedQuotes.length} ${statusText} from database`,
       });
 
     } catch (error) {
@@ -110,8 +134,14 @@ export const useAdminData = () => {
   const archiveQuote = async (quoteId: string) => {
     setArchivingQuoteId(quoteId);
     try {
+      // Find the quote to determine which table to update
+      const quote = quotes.find(q => q.id === quoteId);
+      if (!quote) return;
+
+      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+
       const { error } = await supabase
-        .from('quotes')
+        .from(tableName)
         .update({ archived: true })
         .eq('id', quoteId);
 
@@ -146,8 +176,14 @@ export const useAdminData = () => {
   const unarchiveQuote = async (quoteId: string) => {
     setArchivingQuoteId(quoteId);
     try {
+      // Find the quote to determine which table to update
+      const quote = quotes.find(q => q.id === quoteId);
+      if (!quote) return;
+
+      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+
       const { error } = await supabase
-        .from('quotes')
+        .from(tableName)
         .update({ archived: false })
         .eq('id', quoteId);
 

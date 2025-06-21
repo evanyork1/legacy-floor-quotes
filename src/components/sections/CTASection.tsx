@@ -8,7 +8,7 @@ const CTASection = () => {
   const location = useLocation();
   
   // Determine quote path based on current location
-  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quote';
+  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quotehou';
 
   return (
     <section className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">

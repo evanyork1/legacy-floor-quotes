@@ -59,6 +59,13 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
     }
   };
 
+  const getSourceBadge = (leadSource: string) => {
+    if (leadSource === 'DFW') {
+      return <Badge className="bg-green-100 text-green-800 border-0">DFW</Badge>;
+    }
+    return <Badge className="bg-blue-100 text-blue-800 border-0">Houston</Badge>;
+  };
+
   const formatGarageType = (quote: Quote) => {
     if (quote.garage_type === 'custom') {
       const spaceType = quote.other_space_type || quote.space_type || 'Custom';
@@ -133,6 +140,7 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                   <TableHead className="text-gray-300">Name</TableHead>
                   <TableHead className="text-gray-300">Contact</TableHead>
                   <TableHead className="text-gray-300">Location</TableHead>
+                  <TableHead className="text-gray-300">Source</TableHead>
                   <TableHead className="text-gray-300">Type</TableHead>
                   <TableHead className="text-gray-300">Color</TableHead>
                   <TableHead className="text-gray-300">Price</TableHead>
@@ -161,6 +169,7 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                       <div className="text-sm">{quote.phone}</div>
                     </TableCell>
                     <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
+                    <TableCell>{getSourceBadge(quote.lead_source)}</TableCell>
                     <TableCell className="text-gray-300">
                       {formatGarageType(quote)}
                     </TableCell>

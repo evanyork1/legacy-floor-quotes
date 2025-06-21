@@ -9,7 +9,7 @@ const HeroSection = () => {
   
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/dfw';
-  const quotePath = isDFW ? '/quotedfw' : '/quote';
+  const quotePath = isDFW ? '/quotedfw' : '/quotehou';
   
   const title = isDFW 
     ? "Your Local Epoxy Flooring"
