@@ -75,7 +75,7 @@ const Footer = () => {
               © 2025 Legacy Industrial Coatings. All rights reserved.
             </div>
             <div className="flex justify-center">
-              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
                 <Instagram className="h-6 w-6 text-white" />
               </a>
             </div>

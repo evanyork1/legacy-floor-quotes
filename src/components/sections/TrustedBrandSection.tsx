@@ -38,7 +38,7 @@ const TrustedBrandSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
           {/* Left side - Image */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
             <img src="/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png" alt="Premium garage floor with luxury car" className="relative w-full h-auto rounded-xl shadow-2xl" />
           </div>
           
@@ -47,7 +47,7 @@ const TrustedBrandSection = () => {
             {services.map((service, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100">
                 <div className="flex items-start space-x-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                     {service.icon}
                   </div>
                   <div>

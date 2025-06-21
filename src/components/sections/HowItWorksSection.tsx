@@ -11,27 +11,27 @@ const HowItWorksSection = () => {
     description: isDFW 
       ? "Use our intelligent quote builder or meet with a member of our team"
       : "Use our intelligent quote builder to get accurate pricing instantly",
-    gradient: "from-blue-500 to-purple-600"
+    gradient: "from-blue-500 to-blue-700"
   }, {
     step: "2",
     title: "Schedule Your Installation Day",
     description: isDFW 
       ? "Find the perfect install day that works with your schedule."
       : "One person will help you find the perfect install day within the next week.",
-    gradient: "from-purple-500 to-pink-600"
+    gradient: "from-blue-600 to-blue-800"
   }, {
     step: "3",
     title: "Enjoy Your New Floor",
     description: "Relax while we transform your space with professional installation",
-    gradient: "from-pink-500 to-orange-600"
+    gradient: "from-blue-700 to-indigo-700"
   }];
 
   return (
     <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden" id="how-it-works">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-blue-700/5 to-blue-800/5"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-20">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
             How It Works
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -45,7 +45,7 @@ const HowItWorksSection = () => {
               <div key={index} className="group relative">
                 {/* Connecting line for desktop */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300 transform translate-x-4 z-10"></div>
+                  <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-blue-300 to-blue-500 transform translate-x-4 z-10"></div>
                 )}
                 
                 <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-100">
@@ -73,7 +73,7 @@ const HowItWorksSection = () => {
           
           {/* Central connecting element for mobile */}
           <div className="lg:hidden flex justify-center mt-8">
-            <div className="w-1 h-16 bg-gradient-to-b from-blue-300 to-purple-300 rounded-full"></div>
+            <div className="w-1 h-16 bg-gradient-to-b from-blue-300 to-blue-600 rounded-full"></div>
           </div>
         </div>
       </div>
