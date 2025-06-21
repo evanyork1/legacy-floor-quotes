@@ -1,10 +1,14 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determine quote path based on current location
+  const quotePath = location.pathname === '/dfw' ? '/quotedfw' : '/quote';
 
   return (
     <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-20 sm:py-24 lg:py-28 overflow-hidden">
@@ -21,7 +25,7 @@ const HeroSection = () => {
               <span className="block sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Houston, TX</span>
             </p>
             <div className="relative pt-2">
-              <Button onClick={() => navigate('/quote')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              <Button onClick={() => navigate(quotePath)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg lg:text-xl px-10 lg:px-12 py-5 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                 Get Instant Quote
                 <ArrowRight className="ml-3 h-5 w-5 lg:h-6 lg:w-6" />
               </Button>
