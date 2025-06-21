@@ -6,7 +6,8 @@ import {
   Users, 
   DollarSign, 
   Globe, 
-  Webhook
+  Webhook,
+  Image
 } from "lucide-react";
 import { useAdminData } from "@/hooks/useAdminData";
 import AdminHeader from "@/components/admin/AdminHeader";
@@ -15,7 +16,8 @@ import PricingTab from "@/components/admin/PricingTab";
 import SubdomainsTab from "@/components/admin/SubdomainsTab";
 import WebhooksTab from "@/components/admin/WebhooksTab";
 import SettingsTab from "@/components/admin/SettingsTab";
-import { useToast } from "@/components/ui/use-toast";
+import GalleryAdmin from "@/components/admin/GalleryAdmin";
+import { useToast } from "@/hooks/use-toast";
 import { PricingTier, Subdomain } from "@/types/admin";
 
 const AdminPanel = () => {
@@ -110,7 +112,7 @@ const AdminPanel = () => {
         <AdminHeader />
 
         <Tabs defaultValue="leads" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 bg-gray-800 border-gray-700">
+          <TabsList className="grid w-full grid-cols-6 bg-gray-800 border-gray-700">
             <TabsTrigger value="leads" className="text-white data-[state=active]:bg-blue-600">
               <Users className="h-4 w-4 mr-2" />
               Leads
@@ -126,6 +128,10 @@ const AdminPanel = () => {
             <TabsTrigger value="webhooks" className="text-white data-[state=active]:bg-blue-600">
               <Webhook className="h-4 w-4 mr-2" />
               Webhooks
+            </TabsTrigger>
+            <TabsTrigger value="gallery" className="text-white data-[state=active]:bg-blue-600">
+              <Image className="h-4 w-4 mr-2" />
+              Gallery
             </TabsTrigger>
             <TabsTrigger value="settings" className="text-white data-[state=active]:bg-blue-600">
               <Settings className="h-4 w-4 mr-2" />
@@ -168,6 +174,10 @@ const AdminPanel = () => {
               onWebhookUrlChange={setWebhookUrl}
               onSaveWebhookUrl={saveWebhookUrl}
             />
+          </TabsContent>
+
+          <TabsContent value="gallery">
+            <GalleryAdmin />
           </TabsContent>
 
           <TabsContent value="settings">
