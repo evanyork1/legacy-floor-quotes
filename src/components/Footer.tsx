@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,9 +7,6 @@ import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
-  const isDFW = location.pathname === '/dfw';
-  
-  const serviceArea = isDFW ? "Dallas, Plano, Houston" : "Nationwide Service";
   
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
@@ -48,7 +44,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">{serviceArea}</span>
+                <span className="text-gray-300 text-sm sm:text-base">Nationwide Service</span>
               </div>
             </div>
           </div>
