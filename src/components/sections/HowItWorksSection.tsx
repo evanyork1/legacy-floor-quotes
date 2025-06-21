@@ -22,7 +22,7 @@ const HowItWorksSection = () => {
   }, {
     step: "3",
     title: "Enjoy Your New Floor",
-    description: "Relax while we transform your space with professional installation and lifetime warranty",
+    description: "Relax while we transform your space with professional installation",
     gradient: "from-pink-500 to-orange-600"
   }];
 
