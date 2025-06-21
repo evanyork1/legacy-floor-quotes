@@ -21,9 +21,6 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryPhoto | null>(null);
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const categories = ["All", "Commercial", "Residential", "Industrial", "Garage"];
 
   useEffect(() => {
     fetchPhotos();
@@ -45,10 +42,6 @@ const Gallery = () => {
     }
   };
 
-  const filteredPhotos = selectedCategory === "All" 
-    ? photos 
-    : photos.filter(photo => photo.category === selectedCategory);
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -65,27 +58,6 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="py-8 bg-gradient-to-br from-white to-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${
-                  selectedCategory === category
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Gallery Grid */}
       <section className="py-12 bg-gradient-to-br from-white to-slate-50">
         <div className="container mx-auto px-4">
@@ -93,7 +65,7 @@ const Gallery = () => {
             <div className="flex justify-center items-center h-64">
               <div className="text-gray-500">Loading gallery...</div>
             </div>
-          ) : filteredPhotos.length === 0 ? (
+          ) : photos.length === 0 ? (
             <div className="text-center py-20">
               <ImageIcon className="h-24 w-24 text-gray-300 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-gray-700 mb-2">No Photos Yet</h3>
@@ -101,7 +73,7 @@ const Gallery = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredPhotos.map((photo) => (
+              {photos.map((photo) => (
                 <Card 
                   key={photo.id} 
                   className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 overflow-hidden hover:-translate-y-2" 
@@ -124,7 +96,6 @@ const Gallery = () => {
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <div className="text-white text-center">
                           <p className="font-semibold text-lg">{photo.title}</p>
-                          <p className="text-sm opacity-90">{photo.category}</p>
                           <p className="text-xs opacity-75 mt-1">Click to expand</p>
                         </div>
                       </div>
@@ -162,7 +133,6 @@ const Gallery = () => {
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {selectedImage.title}
                   </h3>
-                  <p className="text-gray-200 mb-1">{selectedImage.category}</p>
                   {selectedImage.description && (
                     <p className="text-gray-300 text-sm">{selectedImage.description}</p>
                   )}
