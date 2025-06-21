@@ -61,7 +61,7 @@ const CommercialSection = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
             <div className="relative bg-white/90 rounded-xl aspect-[4/3] overflow-hidden border-2 border-gray-200/50 shadow-xl">
-              <img src="/lovable-uploads/0ef2964f-9a33-4a3c-9527-b1c46a84e9da.png" alt="Helicopter in hangar with polished concrete floor" className="w-full h-full object-cover" />
+              <img src="/lovable-uploads/5a469d4f-0350-40fb-bac8-78a1885f125c.png" alt="Helicopter in hangar with polished concrete floor" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
