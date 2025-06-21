@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Phone, Building, Factory, Car, Home, Plane } from "lucide-react";
+import { Phone, Building, Factory, Car, Home, Plane, Dog, Church } from "lucide-react";
 
 const CommercialSection = () => {
   const services = [
@@ -23,9 +23,9 @@ const CommercialSection = () => {
     { name: "Warehouses", icon: <Factory className="h-6 w-6" /> },
     { name: "Manufacturing Plants", icon: <Factory className="h-6 w-6" /> },
     { name: "Car Dealerships", icon: <Car className="h-6 w-6" /> },
-    { name: "Dog Kennels", icon: <Home className="h-6 w-6" /> },
+    { name: "Dog Kennels", icon: <Dog className="h-6 w-6" /> },
     { name: "Commercial Kitchens", icon: <Home className="h-6 w-6" /> },
-    { name: "Wedding Venues", icon: <Building className="h-6 w-6" /> },
+    { name: "Wedding Venues", icon: <Church className="h-6 w-6" /> },
     { name: "And More", icon: <Building className="h-6 w-6" /> }
   ];
 
@@ -59,8 +59,8 @@ const CommercialSection = () => {
 
           {/* Right side - Helicopter Photo */}
           <div className="relative">
-            <div className="relative bg-white/90 rounded-xl aspect-[4/3] overflow-hidden border-2 border-gray-200/50 shadow-xl">
-              <img src="/lovable-uploads/d4536f88-5221-46d0-9709-d66f9f73493f.png" alt="Helicopter in hangar with polished concrete floor" className="w-full h-full object-cover" />
+            <div className="rounded-xl aspect-[4/3] overflow-hidden">
+              <img src="/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png" alt="Helicopter in hangar with polished concrete floor" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
