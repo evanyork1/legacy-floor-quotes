@@ -30,8 +30,8 @@ const CommercialSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
+    <section className="py-24 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-purple-600/3"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-20">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 bg-clip-text text-transparent">
