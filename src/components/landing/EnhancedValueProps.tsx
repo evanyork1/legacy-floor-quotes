@@ -36,10 +36,9 @@ export const EnhancedValueProps = () => {
     {
       icon: Sparkles,
       title: "1 Year Free Cleanings",
-      description: "A $1,100 bonus, included.",
+      description: "Professional quarterly cleaning service included.",
       bgColor: "bg-orange-100",
-      iconColor: "text-orange-600",
-      isHighlighted: true
+      iconColor: "text-orange-600"
     }
   ];
 
@@ -59,7 +58,7 @@ export const EnhancedValueProps = () => {
             </Card>
             
             {/* Animated arrow pointing to cleaning section */}
-            {prop.isHighlighted && showArrow && (
+            {prop.title === "1 Year Free Cleanings" && showArrow && (
               <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 z-10">
                 <div className="flex flex-col items-center animate-bounce">
                   <ArrowDown className="h-8 w-8 text-orange-500" />

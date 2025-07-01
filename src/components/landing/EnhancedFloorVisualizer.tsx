@@ -117,7 +117,7 @@ export const EnhancedFloorVisualizer = () => {
                 </div>
                 <div>
                   <p className="text-gray-600 mb-6 text-lg">
-                    Take a clear photo of your garage floor to see how it will look with our premium coatings
+                    Upload a photo of your garage here to see how it will look with our premium coatings
                   </p>
                   <Button 
                     onClick={() => fileInputRef.current?.click()}
