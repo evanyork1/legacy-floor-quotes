@@ -36,15 +36,15 @@ const LandingVisual = () => {
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-video">
                     <img
-                      src="/lovable-uploads/2ab63ba5-ef69-4c89-bf72-5784721b5738.png"
-                      alt="Garage floor before transformation"
+                      src="/lovable-uploads/89206199-5b6d-4fd5-9d4c-a086f9a934f8.png"
+                      alt="Garage floor before transformation - plain concrete with luxury cars"
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="aspect-video">
                     <img
-                      src="/lovable-uploads/3cd064c0-ec80-4cb5-9911-b187343cad50.png"
-                      alt="Garage floor after transformation"
+                      src="/lovable-uploads/eac4aaf6-c97d-43ed-88b0-8939f4711f55.png"
+                      alt="Garage floor after transformation - beautiful epoxy coating with luxury cars"
                       className="w-full h-full object-cover"
                     />
                   </div>
