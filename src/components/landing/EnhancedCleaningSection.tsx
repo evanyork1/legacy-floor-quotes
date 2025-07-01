@@ -43,7 +43,7 @@ export const EnhancedCleaningSection = () => {
             <h4 className="font-semibold mb-4 text-center text-lg">Before & After Professional Cleaning</h4>
             <div className="aspect-video rounded-lg overflow-hidden shadow-md">
               <img
-                src="/lovable-uploads/df272a69-af15-46b5-84cc-c40d68deaa8c.png"
+                src="/lovable-uploads/cb273052-7745-4749-acfa-67e16145bac6.png"
                 alt="Before and after professional cleaning transformation"
                 className="w-full h-full object-cover"
               />

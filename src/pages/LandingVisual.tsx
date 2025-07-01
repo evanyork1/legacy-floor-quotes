@@ -1,3 +1,4 @@
+
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -28,16 +29,25 @@ const LandingVisual = () => {
               Professional installation in Dallas-Fort Worth
             </p>
             
-            {/* Hero Before/After Image */}
+            {/* Hero Before/After Images Side by Side */}
             <div className="max-w-5xl mx-auto mb-8">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
-                  <img
-                    src="/lovable-uploads/f4d6cdce-5ac8-45b4-94e8-5868b45a6bf7.png"
-                    alt="Before and after garage floor transformation"
-                    className="w-full h-full object-cover"
-                  />
+                <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
+                  <div className="aspect-video">
+                    <img
+                      src="/lovable-uploads/2ab63ba5-ef69-4c89-bf72-5784721b5738.png"
+                      alt="Garage floor before transformation"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="aspect-video">
+                    <img
+                      src="/lovable-uploads/3cd064c0-ec80-4cb5-9911-b187343cad50.png"
+                      alt="Garage floor after transformation"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
