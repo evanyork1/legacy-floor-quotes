@@ -57,11 +57,6 @@ export const EnhancedValueProps = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{prop.title}</h3>
                 <p className="text-gray-600">{prop.description}</p>
-                {prop.isHighlighted && (
-                  <div className="mt-4 bg-orange-50 rounded-lg p-3 border border-orange-200">
-                    <p className="text-orange-700 font-semibold text-sm">Worth $1,100 annually!</p>
-                  </div>
-                )}
               </CardContent>
             </Card>
             
@@ -69,10 +64,7 @@ export const EnhancedValueProps = () => {
             {prop.isHighlighted && showArrow && (
               <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 z-10">
                 <div className="flex flex-col items-center animate-bounce">
-                  <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">
-                    Learn More Below
-                  </div>
-                  <ArrowDown className="h-6 w-6 text-orange-500" />
+                  <ArrowDown className="h-8 w-8 text-orange-500" />
                 </div>
               </div>
             )}

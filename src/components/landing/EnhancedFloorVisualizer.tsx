@@ -1,8 +1,7 @@
-
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Upload, Loader2, ArrowRight } from "lucide-react";
+import { Upload, Loader2, Camera } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -91,39 +90,6 @@ export const EnhancedFloorVisualizer = () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Example Photos Section */}
-      <div className="text-center mb-12">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">See the Transformation</h3>
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="space-y-3">
-            <h4 className="text-lg font-semibold text-gray-700">Before: Bare Concrete</h4>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <img
-                src="/lovable-uploads/8d18aa34-b22c-4d5b-869b-7c4edf751cb3.png"
-                alt="Bare concrete garage floor"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-lg font-semibold text-gray-700">After: Premium Coating</h4>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <img
-                src="/lovable-uploads/1c094843-a6bf-4308-a6d6-e0cf06bb5844.png"
-                alt="Garage floor with premium flake coating"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 flex items-center justify-center space-x-4">
-          <div className="bg-blue-100 p-3 rounded-full">
-            <ArrowRight className="h-6 w-6 text-blue-600" />
-          </div>
-          <p className="text-xl font-semibold text-blue-600">Upload Your Own Photo to See the Magic!</p>
-        </div>
-      </div>
-
       {/* Upload Section */}
       <Card className="border-2 border-dashed border-blue-300 hover:border-blue-400 transition-colors bg-gradient-to-br from-blue-50 to-white">
         <CardContent className="p-8">
@@ -139,17 +105,18 @@ export const EnhancedFloorVisualizer = () => {
             {!uploadedImage ? (
               <div className="space-y-6">
                 <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto">
-                  <Upload className="h-10 w-10 text-blue-600" />
+                  <Camera className="h-10 w-10 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">Upload Your Garage Photo</h3>
                   <p className="text-gray-600 mb-6 text-lg">
-                    Take a photo of your garage floor and see it transformed instantly
+                    Take a photo of your garage floor and our AI will show you exactly how it will look with our premium coatings
                   </p>
                   <Button 
                     onClick={() => fileInputRef.current?.click()}
                     className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
                   >
+                    <Upload className="h-5 w-5 mr-2" />
                     Choose Photo
                   </Button>
                 </div>
