@@ -50,11 +50,10 @@ export const EnhancedCleaningSection = () => {
             </div>
           </CardContent>
         </Card>
-        
         <div className="text-center bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6">
-          <p className="text-lg font-semibold text-blue-800 mb-2">Professional Quarterly Cleaning</p>
-          <p className="text-gray-700 font-medium">Included FREE with your installation</p>
-          <p className="text-sm text-gray-600 mt-2">4 cleanings per year, completely hassle-free</p>
+          <p className="text-3xl font-bold text-blue-600 mb-2">$1,100 Annual Value</p>
+          <p className="text-gray-700 font-semibold">Included FREE with your installation</p>
+          <p className="text-sm text-gray-600 mt-2">4 professional cleanings per year</p>
         </div>
       </div>
     </div>

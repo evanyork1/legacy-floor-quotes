@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -54,7 +53,7 @@ const LandingVisual = () => {
               See Your Floor with Our Coating
             </h2>
             <p className="text-xl text-gray-600">
-              Follow these simple steps to visualize your transformation and get your personalized quote
+              Follow these simple steps to visualize your transformation and get your quote
             </p>
           </div>
           <EnhancedFloorVisualizer />
