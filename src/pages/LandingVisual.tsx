@@ -1,16 +1,24 @@
 
-import { useState } from "react";
+import { LandingHeader } from "@/components/landing/LandingHeader";
+import { ScrollArrows } from "@/components/landing/ScrollArrows";
+import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
+import { EnhancedValueProps } from "@/components/landing/EnhancedValueProps";
+import { EnhancedCleaningSection } from "@/components/landing/EnhancedCleaningSection";
+import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Upload, Check } from "lucide-react";
-import { FloorVisualizer } from "@/components/landing/FloorVisualizer";
-import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
+import { Star } from "lucide-react";
 
 const LandingVisual = () => {
+  const sections = ['hero', 'visualizer', 'value-props', 'cleaning', 'quote-section', 'reviews'];
+
   return (
     <div className="min-h-screen bg-white">
+      <LandingHeader />
+      <ScrollArrows sections={sections} />
+
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-16 lg:py-24">
+      <section id="hero" className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-16 lg:py-24">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
@@ -33,7 +41,7 @@ const LandingVisual = () => {
       </section>
 
       {/* Floor Visualizer Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="visualizer" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -43,12 +51,12 @@ const LandingVisual = () => {
               Upload a photo of your space and visualize it with our premium coatings
             </p>
           </div>
-          <FloorVisualizer />
+          <EnhancedFloorVisualizer />
         </div>
       </section>
 
       {/* Why Legacy Section */}
-      <section className="py-16 bg-white">
+      <section id="value-props" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -58,53 +66,12 @@ const LandingVisual = () => {
               Premium quality comes at a premium price, but the value is unmatched
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="h-8 w-8 text-green-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Install within 3 days</h3>
-                <p className="text-gray-600">No 3-week wait. We move fast.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">We Do the Heavy Lifting</h3>
-                <p className="text-gray-600">Boxes, cabinets, gym gear — we move it all.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="h-8 w-8 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Thick, Seamless Finish</h3>
-                <p className="text-gray-600">8 mil thick top coat vs competitors' 4 mil.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Check className="h-8 w-8 text-orange-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">1 Year Free Cleanings</h3>
-                <p className="text-gray-600">A $1,100 bonus, included.</p>
-              </CardContent>
-            </Card>
-          </div>
+          <EnhancedValueProps />
         </div>
       </section>
 
       {/* Cleaning Service Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
+      <section id="cleaning" className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -115,58 +82,12 @@ const LandingVisual = () => {
               No hassle for you - we handle everything.
             </p>
           </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="h-5 w-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">We Move Everything</h3>
-                  <p className="text-gray-600">Cars, storage items, gym equipment - we carefully relocate everything before cleaning.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="h-5 w-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Deep Professional Clean</h3>
-                  <p className="text-gray-600">Specialized equipment and techniques restore your floor to showroom condition.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="h-5 w-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Everything Back in Place</h3>
-                  <p className="text-gray-600">We return all your items exactly where they were - you won't lift a finger.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="bg-white p-4 rounded-xl shadow-lg">
-                <h4 className="font-semibold mb-2">Before & After Cleaning Photos</h4>
-                <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Cleaning transformation photos will be displayed here</p>
-                </div>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-blue-600">$1,100 Annual Value</p>
-                <p className="text-gray-600">Included FREE with your installation</p>
-              </div>
-            </div>
-          </div>
+          <EnhancedCleaningSection />
         </div>
       </section>
 
       {/* Quote Form Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="quote-section" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -181,7 +102,7 @@ const LandingVisual = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-16 bg-white">
+      <section id="reviews" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
