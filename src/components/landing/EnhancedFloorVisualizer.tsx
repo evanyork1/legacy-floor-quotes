@@ -1,3 +1,4 @@
+
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -90,10 +91,17 @@ export const EnhancedFloorVisualizer = () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Upload Section */}
+      {/* Step 1: Upload Section */}
       <Card className="border-2 border-dashed border-blue-300 hover:border-blue-400 transition-colors bg-gradient-to-br from-blue-50 to-white">
         <CardContent className="p-8">
           <div className="text-center">
+            <div className="flex items-center justify-center mb-6">
+              <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 font-bold">
+                1
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Upload a Photo of Your Garage</h3>
+            </div>
+            
             <input
               type="file"
               ref={fileInputRef}
@@ -108,16 +116,15 @@ export const EnhancedFloorVisualizer = () => {
                   <Camera className="h-10 w-10 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Upload Your Garage Photo</h3>
                   <p className="text-gray-600 mb-6 text-lg">
-                    Take a photo of your garage floor and our AI will show you exactly how it will look with our premium coatings
+                    Take a clear photo of your garage floor to see how it will look with our premium coatings
                   </p>
                   <Button 
                     onClick={() => fileInputRef.current?.click()}
                     className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
                   >
                     <Upload className="h-5 w-5 mr-2" />
-                    Choose Photo
+                    Upload Photo
                   </Button>
                 </div>
               </div>
@@ -141,11 +148,19 @@ export const EnhancedFloorVisualizer = () => {
         </CardContent>
       </Card>
 
-      {/* Color Selection */}
+      {/* Step 2: Color Selection */}
       {uploadedImage && (
         <Card className="shadow-lg">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Choose Your Color</h3>
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 font-bold">
+                  2
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900">Choose Your Color</h3>
+              </div>
+              <p className="text-gray-600">Select the perfect color for your garage floor coating</p>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {colorOptions.map(color => (
                 <button
@@ -169,6 +184,12 @@ export const EnhancedFloorVisualizer = () => {
             
             {selectedColor && (
               <div className="text-center mt-8">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 font-bold">
+                    3
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">See Your Transformation</h3>
+                </div>
                 <Button
                   onClick={handleVisualize}
                   disabled={isProcessing}
@@ -180,7 +201,7 @@ export const EnhancedFloorVisualizer = () => {
                       Creating Your Visualization...
                     </>
                   ) : (
-                    "Transform My Floor!"
+                    "See Your Floor Transformed!"
                   )}
                 </Button>
               </div>
@@ -189,11 +210,11 @@ export const EnhancedFloorVisualizer = () => {
         </Card>
       )}
 
-      {/* Visualization Result */}
+      {/* Step 3: Visualization Result */}
       {visualizedImage && (
         <Card className="shadow-xl">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Your Transformed Floor</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Your Garage Floor Transformation</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold mb-2 text-center text-lg">Before</h4>
@@ -211,6 +232,20 @@ export const EnhancedFloorVisualizer = () => {
                   className="w-full h-64 object-cover rounded-lg shadow-md"
                 />
               </div>
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-gray-600 mb-4">Love what you see? Get your personalized quote below!</p>
+              <Button
+                onClick={() => {
+                  const element = document.getElementById('quote-section');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3"
+              >
+                Get My Quote Now
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, HandHeart, Layers, Sparkles, ArrowDown } from "lucide-react";
+import { Clock, Box, Layers, Sparkles, ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const EnhancedValueProps = () => {
@@ -20,7 +20,7 @@ export const EnhancedValueProps = () => {
       iconColor: "text-green-600"
     },
     {
-      icon: HandHeart,
+      icon: Box,
       title: "We Do the Heavy Lifting",
       description: "Boxes, cabinets, gym gear — we move it all.",
       bgColor: "bg-blue-100",
@@ -48,9 +48,7 @@ export const EnhancedValueProps = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {valueProps.map((prop, index) => (
           <div key={index} className="relative">
-            <Card className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-              prop.isHighlighted ? 'ring-2 ring-orange-300 shadow-orange-100' : ''
-            }`}>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <CardContent className="p-8 text-center">
                 <div className={`${prop.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6`}>
                   <prop.icon className={`h-8 w-8 ${prop.iconColor}`} />

@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -29,32 +28,16 @@ const LandingVisual = () => {
               Professional installation in Dallas-Fort Worth
             </p>
             
-            {/* Hero Before/After Images */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-700">Before: Bare Concrete</h3>
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-gray-400 to-gray-600 rounded-2xl blur opacity-20"></div>
-                  <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
-                    <img
-                      src="/lovable-uploads/8d18aa34-b22c-4d5b-869b-7c4edf751cb3.png"
-                      alt="Bare concrete garage floor"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-700">After: Premium Coating</h3>
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                  <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
-                    <img
-                      src="/lovable-uploads/1c094843-a6bf-4308-a6d6-e0cf06bb5844.png"
-                      alt="Garage floor with premium flake coating"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            {/* Hero Before/After Image */}
+            <div className="max-w-5xl mx-auto mb-8">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
+                  <img
+                    src="/lovable-uploads/f4d6cdce-5ac8-45b4-94e8-5868b45a6bf7.png"
+                    alt="Before and after garage floor transformation"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -67,10 +50,10 @@ const LandingVisual = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              AI Floor Visualizer
+              See Your Floor with Our Coating
             </h2>
             <p className="text-xl text-gray-600">
-              Upload a photo of your garage and see it transformed with our premium coatings using artificial intelligence
+              Follow these simple steps to visualize your transformation and get your quote
             </p>
           </div>
           <EnhancedFloorVisualizer />
