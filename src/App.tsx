@@ -12,6 +12,7 @@ import Gallery from "./pages/Gallery";
 import AdminPanel from "./pages/AdminPanel";
 import EmployeePanel from "./pages/EmployeePanel";
 import NotFound from "./pages/NotFound";
+import LandingVisual from "./pages/LandingVisual";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/dfw" element={<DFW />} />
           <Route path="/quotedfw" element={<QuoteDFW />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/landingvisual" element={<LandingVisual />} />
           <Route path="/adminpanel2025" element={<AdminPanel />} />
           <Route path="/jingram" element={<EmployeePanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
