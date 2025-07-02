@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -8,12 +7,9 @@ import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
-
 const LandingVisual = () => {
   const sections = ['hero', 'visualizer', 'value-props', 'cleaning', 'quote-section', 'reviews'];
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <LandingHeader />
       <ScrollArrows sections={sections} />
 
@@ -35,18 +31,10 @@ const LandingVisual = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-video">
-                    <img
-                      src="/lovable-uploads/89206199-5b6d-4fd5-9d4c-a086f9a934f8.png"
-                      alt="Garage floor before transformation - plain concrete with luxury cars"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src="/lovable-uploads/89206199-5b6d-4fd5-9d4c-a086f9a934f8.png" alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" />
                   </div>
                   <div className="aspect-video">
-                    <img
-                      src="/lovable-uploads/eac4aaf6-c97d-43ed-88b0-8939f4711f55.png"
-                      alt="Garage floor after transformation - beautiful epoxy coating with luxury cars"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src="/lovable-uploads/eac4aaf6-c97d-43ed-88b0-8939f4711f55.png" alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
@@ -77,9 +65,7 @@ const LandingVisual = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Yes, We're More Expensive. Here's Why...
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Premium quality comes at a premium price, but the value is unmatched
-            </p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We remove everything that is a hassle so you don't have to.</p>
           </div>
           <EnhancedValueProps />
         </div>
@@ -144,9 +130,7 @@ const LandingVisual = () => {
             <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
               <CardContent className="p-6">
                 <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed italic">
                   "Excellent experience from start to finish. Got a quote quickly and at a very reasonable price. The office was very communicative throughout and the crew did an amazing job with the final result."
@@ -161,9 +145,7 @@ const LandingVisual = () => {
             <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
               <CardContent className="p-6">
                 <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed italic">
                   "Totally exceeded my expectations. Crew was experienced and professional. They worked with me on how to address existing cracks in my floor, and they worked around some challenging weather."
@@ -178,9 +160,7 @@ const LandingVisual = () => {
             <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
               <CardContent className="p-6">
                 <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed italic">
                   "Great company to work with. Competent, genuinely helpful staff. From the original quote to the completion of the job, the representatives were always thorough and professional."
@@ -195,9 +175,7 @@ const LandingVisual = () => {
             <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
               <CardContent className="p-6">
                 <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed italic">
                   "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. Would definitely recommend to anyone looking to get their garage floor coated."
@@ -211,8 +189,6 @@ const LandingVisual = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingVisual;
