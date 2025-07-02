@@ -1,14 +1,24 @@
+
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
-import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
+import { LandingColorShowcase } from "@/components/landing/LandingColorShowcase";
 import { EnhancedValueProps } from "@/components/landing/EnhancedValueProps";
 import { EnhancedCleaningSection } from "@/components/landing/EnhancedCleaningSection";
 import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, Phone, ArrowRight } from "lucide-react";
+
 const LandingVisual = () => {
-  const sections = ['hero', 'visualizer', 'value-props', 'cleaning', 'quote-section', 'reviews'];
+  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'quote-section', 'reviews'];
+  
+  const scrollToQuote = () => {
+    const element = document.getElementById('quote-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return <div className="min-h-screen bg-white">
       <LandingHeader />
       <ScrollArrows sections={sections} />
@@ -25,15 +35,15 @@ const LandingVisual = () => {
               Professional installation in Dallas-Fort Worth
             </p>
             
-            {/* Hero Before/After Images Side by Side */}
+            {/* Hero Before/After Images Side by Side - Made Taller */}
             <div className="max-w-5xl mx-auto mb-8">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
-                  <div className="aspect-video">
+                  <div className="aspect-[4/3]">
                     <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" />
                   </div>
-                  <div className="aspect-video">
+                  <div className="aspect-[4/3]">
                     <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png" />
                   </div>
                 </div>
@@ -43,18 +53,18 @@ const LandingVisual = () => {
         </div>
       </section>
 
-      {/* Floor Visualizer Section */}
-      <section id="visualizer" className="py-16 bg-gray-50">
+      {/* Color Showcase Section */}
+      <section id="color-showcase" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              See Your Floor with Our Coating
+              See Our Colors on Real Floors
             </h2>
             <p className="text-xl text-gray-600">
-              Follow these simple steps to visualize your transformation and get your quote
+              Click any color to see how it looks in an actual garage
             </p>
           </div>
-          <EnhancedFloorVisualizer />
+          <LandingColorShowcase />
         </div>
       </section>
 
@@ -199,8 +209,29 @@ const LandingVisual = () => {
               </CardContent>
             </Card>
           </div>
+
+          {/* CTA Section After Reviews */}
+          <div className="text-center pt-8">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <a 
+                href="tel:214-305-6516" 
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-colors"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                214-305-6516
+              </a>
+              <Button 
+                onClick={scrollToQuote}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              >
+                Get Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>;
 };
+
 export default LandingVisual;

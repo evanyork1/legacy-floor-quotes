@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Check } from 'lucide-react';
-import type { ColorOption as ColorOptionType } from './types';
+import type { ColorOption as ColorOptionType } from '@/constants/colorOptions';
 import { cn } from '@/lib/utils';
 
 interface ColorOptionProps {
