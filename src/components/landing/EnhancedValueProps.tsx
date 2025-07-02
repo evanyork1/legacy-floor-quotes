@@ -28,8 +28,8 @@ export const EnhancedValueProps = () => {
     },
     {
       icon: Layers,
-      title: "2X Thickness as the Others",
-      description: "8 mil thick top coat vs competitors' 4 mil.",
+      title: "Superior Quality Coating",
+      description: "Our top coat looks more shiny and lasts 5x longer than the other guys.",
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600"
     },

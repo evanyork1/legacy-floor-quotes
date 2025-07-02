@@ -29,7 +29,7 @@ const LandingVisual = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-6xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-tight">
               Get Your Dream Garage Floor
               <br />
               This Week
@@ -43,11 +43,23 @@ const LandingVisual = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
-                  <div className="aspect-[4/3]">
+                  <div className="aspect-[4/3] relative">
                     <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" />
+                    {/* Before Banner */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-gray-800/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
+                        BEFORE
+                      </div>
+                    </div>
                   </div>
-                  <div className="aspect-[4/3]">
+                  <div className="aspect-[4/3] relative">
                     <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png" />
+                    {/* After Banner */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-blue-600/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
+                        AFTER
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -60,10 +72,10 @@ const LandingVisual = () => {
       <section id="color-showcase" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               See Our Colors on Real Floors
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600">
               Click any color to see how it looks in an actual garage
             </p>
           </div>
@@ -75,10 +87,10 @@ const LandingVisual = () => {
       <section id="value-props" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Yes, We're More Expensive. Here's Why...
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              We Offer the Highest Quality and Most Benefits
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">We remove everything that is a hassle so you don't have to.</p>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">We remove everything that is a hassle so you don't have to.</p>
           </div>
           <EnhancedValueProps />
         </div>
@@ -88,10 +100,10 @@ const LandingVisual = () => {
       <section id="cleaning" className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Free Year of Professional Cleanings
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
               We come to your home every quarter, move your belongings, and professionally clean your floor to like-new condition. 
               No hassle for you - we handle everything.
             </p>
@@ -117,32 +129,32 @@ const LandingVisual = () => {
           <div className="text-center mb-12">
             {/* Five Star Reviews Highlight */}
             <div className="mb-8">
-              <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-full px-4 sm:px-6 py-3 sm:py-4 border border-yellow-200">
-                <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-full px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 border border-yellow-200">
+                <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3">
                   <div className="flex">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 fill-current" />)}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-yellow-400 fill-current" />)}
                   </div>
-                  <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">170+ Five Star Reviews</span>
+                  <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900">170+ Five Star Reviews</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mb-8">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-8">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">1M+</div>
-                <div className="text-sm sm:text-base text-gray-600">Square Feet Installed</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600">1M+</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600">Square Feet Installed</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">3,000+</div>
-                <div className="text-sm sm:text-base text-gray-600">Floors Completed</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600">3,000+</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600">Floors Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">15</div>
-                <div className="text-sm sm:text-base text-gray-600">Years Experience</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600">15</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600">Years Experience</div>
               </div>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               What Our Customers Say
             </h2>
           </div>
@@ -215,10 +227,10 @@ const LandingVisual = () => {
       <section id="gallery" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               See Our Latest Work
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600">
               Real transformations from real customers
             </p>
           </div>
@@ -241,10 +253,10 @@ const LandingVisual = () => {
       <section id="quote-section" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Get Your Instant Quote
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600">
               Complete your quote in 90 seconds
             </p>
           </div>
