@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -8,12 +7,9 @@ import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
-
 const LandingVisual = () => {
   const sections = ['hero', 'visualizer', 'value-props', 'cleaning', 'quote-section', 'reviews'];
-  
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <LandingHeader />
       <ScrollArrows sections={sections} />
 
@@ -35,10 +31,10 @@ const LandingVisual = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-video">
-                    <img src="/lovable-uploads/89206199-5b6d-4fd5-9d4c-a086f9a934f8.png" alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" />
+                    <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" />
                   </div>
                   <div className="aspect-video">
-                    <img src="/lovable-uploads/eac4aaf6-c97d-43ed-88b0-8939f4711f55.png" alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" />
+                    <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png" />
                   </div>
                 </div>
               </div>
@@ -115,9 +111,7 @@ const LandingVisual = () => {
               <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-full px-8 py-4 border border-yellow-200">
                 <div className="flex items-center space-x-3">
                   <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
-                    ))}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />)}
                   </div>
                   <span className="text-2xl font-bold text-gray-900">170+ Five Star Reviews</span>
                 </div>
@@ -207,8 +201,6 @@ const LandingVisual = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingVisual;
