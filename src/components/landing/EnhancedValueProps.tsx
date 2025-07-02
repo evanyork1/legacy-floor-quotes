@@ -29,7 +29,7 @@ export const EnhancedValueProps = () => {
     {
       icon: Layers,
       title: "Superior Quality Coating",
-      description: "Our top coat looks more shiny and lasts 5x longer than the other guys.",
+      description: "Our top coat looks better and lasts 5x longer than the other guys.",
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600"
     },
