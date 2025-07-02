@@ -1,7 +1,5 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
-import { LandingColorShowcase } from "@/components/landing/LandingColorShowcase";
 import { EnhancedValueProps } from "@/components/landing/EnhancedValueProps";
 import { EnhancedCleaningSection } from "@/components/landing/EnhancedCleaningSection";
 import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
@@ -11,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
 
 const LandingVisual = () => {
-  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
+  const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
   
   const scrollToQuote = () => {
     const element = document.getElementById('quote-section');
@@ -65,21 +63,6 @@ const LandingVisual = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Color Showcase Section */}
-      <section id="color-showcase" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              See Our Colors on Real Floors
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600">
-              Click any color to see how it looks in an actual garage
-            </p>
-          </div>
-          <LandingColorShowcase />
         </div>
       </section>
 
