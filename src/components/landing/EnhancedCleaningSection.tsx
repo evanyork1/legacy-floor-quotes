@@ -40,7 +40,7 @@ export const EnhancedCleaningSection = () => {
         <Card className="bg-white shadow-xl">
           <CardContent className="p-6">
             <h4 className="font-semibold mb-4 text-center text-lg">Before & After Professional Cleaning</h4>
-            <div className="aspect-video rounded-lg overflow-hidden shadow-md border-2 border-gray-200">
+            <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-md border-2 border-gray-200">
               <img 
                 alt="Before and after professional cleaning transformation showing dramatic improvement from dirty to sparkling clean garage floor" 
                 src="/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg" 
