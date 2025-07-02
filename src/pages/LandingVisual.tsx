@@ -1,3 +1,4 @@
+
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { LandingColorShowcase } from "@/components/landing/LandingColorShowcase";
@@ -10,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
 
 const LandingVisual = () => {
-  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'quote-section', 'gallery', 'reviews'];
+  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
   
   const scrollToQuote = () => {
     const element = document.getElementById('quote-section');
@@ -99,36 +100,6 @@ const LandingVisual = () => {
         </div>
       </section>
 
-      {/* Quote Form Section */}
-      <section id="quote-section" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Get Your Instant Quote
-            </h2>
-            <p className="text-xl text-gray-600">
-              Complete your quote in 90 seconds
-            </p>
-          </div>
-          <LandingQuoteForm />
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              See Our Latest Work
-            </h2>
-            <p className="text-xl text-gray-600">
-              Real transformations from real customers
-            </p>
-          </div>
-          <LandingGallery />
-        </div>
-      </section>
-
       {/* Social Proof Section */}
       <section id="reviews" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
@@ -165,7 +136,7 @@ const LandingVisual = () => {
             </h2>
           </div>
           
-          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8">
             <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
               <CardContent className="p-6">
                 <div className="flex mb-4">
@@ -226,9 +197,54 @@ const LandingVisual = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
 
-          {/* CTA Section After Reviews */}
-          <div className="text-center pt-8">
+      {/* Gallery Section */}
+      <section id="gallery" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              See Our Latest Work
+            </h2>
+            <p className="text-xl text-gray-600">
+              Real transformations from real customers
+            </p>
+          </div>
+          <LandingGallery />
+          
+          {/* CTA Button after Gallery */}
+          <div className="text-center mt-12">
+            <Button 
+              onClick={scrollToQuote}
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              Get Quote
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote Form Section */}
+      <section id="quote-section" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Get Your Instant Quote
+            </h2>
+            <p className="text-xl text-gray-600">
+              Complete your quote in 90 seconds
+            </p>
+          </div>
+          <LandingQuoteForm />
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <a 
                 href="tel:214-305-6516" 
