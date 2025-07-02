@@ -21,8 +21,8 @@ export const EnhancedValueProps = () => {
     },
     {
       icon: Box,
-      title: "We Do the Heavy Lifting",
-      description: "Boxes, cabinets, gym gear — we move it all.",
+      title: "We Move Your Stuff",
+      description: "Boxes, cabinets, gym gear, - we move it all out and back in when we are done",
       bgColor: "bg-blue-100",
       iconColor: "text-blue-600"
     },
@@ -48,7 +48,7 @@ export const EnhancedValueProps = () => {
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {valueProps.map((prop, index) => (
           <div key={index} className="relative">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${prop.isHighlighted ? 'border-2 border-orange-400' : ''}`}>
               <CardContent className="p-8 text-center">
                 <div className={`${prop.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6`}>
                   <prop.icon className={`h-8 w-8 ${prop.iconColor}`} />
