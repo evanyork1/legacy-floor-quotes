@@ -1,10 +1,7 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
-
 export const EnhancedCleaningSection = () => {
-  return (
-    <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+  return <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
       <div className="space-y-6">
         <div className="flex items-start space-x-4">
           <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -42,11 +39,7 @@ export const EnhancedCleaningSection = () => {
           <CardContent className="p-6">
             <h4 className="font-semibold mb-4 text-center text-lg">Before & After Professional Cleaning</h4>
             <div className="aspect-video rounded-lg overflow-hidden shadow-md">
-              <img
-                src="/lovable-uploads/49d6e130-e5dd-42f6-a570-93dfc4c1ab6e.png"
-                alt="Before and after professional cleaning transformation showing dramatic improvement from dirty to sparkling clean garage floor"
-                className="w-full h-full object-cover"
-              />
+              <img alt="Before and after professional cleaning transformation showing dramatic improvement from dirty to sparkling clean garage floor" src="/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg" className="w-full h-full object-fill" />
             </div>
           </CardContent>
         </Card>
@@ -56,6 +49,5 @@ export const EnhancedCleaningSection = () => {
           <p className="text-sm text-gray-600 mt-2">4 professional cleanings per year</p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
