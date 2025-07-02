@@ -110,6 +110,20 @@ const LandingVisual = () => {
       <section id="reviews" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
+            {/* Five Star Reviews Highlight */}
+            <div className="mb-8">
+              <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-full px-8 py-4 border border-yellow-200">
+                <div className="flex items-center space-x-3">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-2xl font-bold text-gray-900">170+ Five Star Reviews</span>
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">1M+</div>
