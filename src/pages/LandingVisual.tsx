@@ -6,10 +6,10 @@ import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { LandingGallery } from "@/components/landing/LandingGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Phone, ArrowRight, Shield, Clock } from "lucide-react";
+import { Star, Phone, ArrowRight } from "lucide-react";
 
 const LandingVisual = () => {
-  const sections = ['hero', 'trust-indicators', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
+  const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
   
   const scrollToQuote = () => {
     const element = document.getElementById('quote-section');
@@ -18,8 +18,7 @@ const LandingVisual = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <LandingHeader />
       <ScrollArrows sections={sections} />
 
@@ -67,56 +66,12 @@ const LandingVisual = () => {
         </div>
       </section>
 
-      {/* Trust Indicators Section */}
-      <section id="trust-indicators" className="py-12 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 items-center max-w-4xl mx-auto">
-            {/* Lifetime Warranty */}
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center">
-                  <Shield className="h-8 w-8 text-green-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Lifetime Warranty</h3>
-              <p className="text-gray-600">Guaranteed for life against defects</p>
-            </div>
-
-            {/* 170+ Reviews Circle */}
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-full px-6 py-4 border border-yellow-200 mb-2">
-                <div className="flex items-center space-x-3">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <span className="text-lg font-bold text-gray-900">170+ Five Star Reviews</span>
-                </div>
-              </div>
-              <p className="text-gray-600">Trusted by homeowners</p>
-            </div>
-
-            {/* Online Instant Quotes */}
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center">
-                  <Clock className="h-8 w-8 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Online Instant Quotes</h3>
-              <p className="text-gray-600">Get pricing in 90 seconds</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Legacy Section */}
       <section id="value-props" className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              We Provide the Highest Quality and Most Benefits
+              We Offer the Highest Quality and Most Benefits
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">We remove everything that is a hassle so you don't have to.</p>
           </div>
@@ -288,9 +243,7 @@ const LandingVisual = () => {
               Complete your quote in 90 seconds
             </p>
           </div>
-          <div className="max-w-3xl mx-auto">
-            <LandingQuoteForm />
-          </div>
+          <LandingQuoteForm />
         </div>
       </section>
 
@@ -317,8 +270,7 @@ const LandingVisual = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
 
 export default LandingVisual;
