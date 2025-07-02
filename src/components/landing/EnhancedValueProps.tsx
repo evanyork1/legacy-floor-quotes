@@ -28,7 +28,7 @@ export const EnhancedValueProps = () => {
     },
     {
       icon: Layers,
-      title: "Thick, Seamless Finish",
+      title: "2X Thickness as the Others",
       description: "8 mil thick top coat vs competitors' 4 mil.",
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600"
@@ -36,7 +36,7 @@ export const EnhancedValueProps = () => {
     {
       icon: Sparkles,
       title: "1 Year Free Cleanings",
-      description: "A $1,100 bonus, included.",
+      description: "A free professional cleaning of your floor 4x a year.",
       bgColor: "bg-orange-100",
       iconColor: "text-orange-600",
       isHighlighted: true
@@ -45,7 +45,7 @@ export const EnhancedValueProps = () => {
 
   return (
     <div className="relative">
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {valueProps.map((prop, index) => (
           <div key={index} className="relative">
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">

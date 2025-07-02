@@ -1,3 +1,4 @@
+
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedFloorVisualizer } from "@/components/landing/EnhancedFloorVisualizer";
@@ -7,9 +8,12 @@ import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+
 const LandingVisual = () => {
   const sections = ['hero', 'visualizer', 'value-props', 'cleaning', 'quote-section', 'reviews'];
-  return <div className="min-h-screen bg-white">
+  
+  return (
+    <div className="min-h-screen bg-white">
       <LandingHeader />
       <ScrollArrows sections={sections} />
 
@@ -76,7 +80,7 @@ const LandingVisual = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Professional Quarterly Cleaning Service
+              Free Year of Professional Cleanings
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We come to your home every quarter, move your belongings, and professionally clean your floor to like-new condition. 
@@ -189,6 +193,8 @@ const LandingVisual = () => {
           </div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default LandingVisual;
