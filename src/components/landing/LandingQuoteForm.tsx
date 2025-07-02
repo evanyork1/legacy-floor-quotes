@@ -4,8 +4,12 @@ import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { useQuoteForm } from "@/hooks/useQuoteForm";
+import { useLocation } from "react-router-dom";
 
 export const LandingQuoteForm = () => {
+  const location = useLocation();
+  
+  // Use DFW-specific hook for landing page quotes
   const {
     currentStep,
     totalSteps,

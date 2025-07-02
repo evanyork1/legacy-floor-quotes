@@ -4,12 +4,13 @@ import { LandingColorShowcase } from "@/components/landing/LandingColorShowcase"
 import { EnhancedValueProps } from "@/components/landing/EnhancedValueProps";
 import { EnhancedCleaningSection } from "@/components/landing/EnhancedCleaningSection";
 import { LandingQuoteForm } from "@/components/landing/LandingQuoteForm";
+import { LandingGallery } from "@/components/landing/LandingGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
 
 const LandingVisual = () => {
-  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'quote-section', 'reviews'];
+  const sections = ['hero', 'color-showcase', 'value-props', 'cleaning', 'quote-section', 'gallery', 'reviews'];
   
   const scrollToQuote = () => {
     const element = document.getElementById('quote-section');
@@ -28,7 +29,9 @@ const LandingVisual = () => {
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-6xl mx-auto">
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Get Your Dream Garage Floor This Week
+              Get Your Dream Garage Floor
+              <br />
+              This Week
             </h1>
             <p className="text-xl lg:text-2xl text-gray-600 mb-12">
               Serving all of Dallas-Fort Worth
@@ -111,8 +114,23 @@ const LandingVisual = () => {
         </div>
       </section>
 
+      {/* Gallery Section */}
+      <section id="gallery" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              See Our Latest Work
+            </h2>
+            <p className="text-xl text-gray-600">
+              Real transformations from real customers
+            </p>
+          </div>
+          <LandingGallery />
+        </div>
+      </section>
+
       {/* Social Proof Section */}
-      <section id="reviews" className="py-16 bg-white">
+      <section id="reviews" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             {/* Five Star Reviews Highlight */}

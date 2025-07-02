@@ -62,8 +62,8 @@ export const useQuoteSubmission = () => {
         damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       }
 
-      // Determine lead source based on current route
-      const leadSource = location.pathname === '/quotedfw' ? 'DFW' : 'Houston';
+      // Determine lead source - if on landing visual page, use DFW
+      const leadSource = (location.pathname === '/quotedfw' || location.pathname === '/landingvisual') ? 'DFW' : 'Houston';
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
