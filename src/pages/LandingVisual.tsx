@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { LandingColorShowcase } from "@/components/landing/LandingColorShowcase";
@@ -29,10 +28,10 @@ const LandingVisual = () => {
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-6xl mx-auto">
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Trusted by thousands for premium garage flooring
+              Get Your Dream Garage Floor This Week
             </h1>
             <p className="text-xl lg:text-2xl text-gray-600 mb-12">
-              Professional installation in Dallas-Fort Worth
+              Serving all of Dallas-Fort Worth
             </p>
             
             {/* Hero Before/After Images Side by Side - Made Taller */}

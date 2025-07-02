@@ -14,7 +14,7 @@ export const EnhancedValueProps = () => {
   const valueProps = [
     {
       icon: Clock,
-      title: "Install within 3 days",
+      title: "Install within 5 days",
       description: "No 3-week wait. We move fast.",
       bgColor: "bg-green-100",
       iconColor: "text-green-600"
