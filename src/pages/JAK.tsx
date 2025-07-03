@@ -1,4 +1,3 @@
-
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { ScrollArrows } from "@/components/landing/ScrollArrows";
 import { EnhancedValueProps } from "@/components/landing/EnhancedValueProps";
@@ -8,17 +7,16 @@ import { LandingGallery } from "@/components/landing/LandingGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
-
 const JAK = () => {
   const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
-  
   const scrollToQuote = () => {
     const element = document.getElementById('quote-section');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
   return <div className="min-h-screen bg-white">
       <LandingHeader isJAK={true} />
       <ScrollArrows sections={sections} />
@@ -124,31 +122,7 @@ const JAK = () => {
       </section>
 
       {/* Cleaning Service Section */}
-      <section id="cleaning" className="py-16 bg-gradient-to-br from-orange-50 to-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Free Year of Professional Cleanings
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              We come to your home every quarter, move your belongings, and professionally clean your floor to like-new condition. 
-              No hassle for you - we handle everything.
-            </p>
-          </div>
-          <EnhancedCleaningSection />
-          
-          {/* CTA Button after Cleaning Section */}
-          <div className="text-center mt-12">
-            <Button 
-              onClick={scrollToQuote}
-              className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-            >
-              Get Quote
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Social Proof Section */}
       <section id="reviews" className="py-16 bg-gray-50">
@@ -265,10 +239,7 @@ const JAK = () => {
           
           {/* CTA Button after Gallery */}
           <div className="text-center mt-12">
-            <Button 
-              onClick={scrollToQuote}
-              className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-            >
+            <Button onClick={scrollToQuote} className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
               Get Quote
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -296,17 +267,11 @@ const JAK = () => {
         <div className="container mx-auto px-6">
           <div className="text-center">
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <a 
-                href="tel:562-285-6770" 
-                className="inline-flex items-center text-orange-600 hover:text-orange-700 font-semibold text-lg transition-colors"
-              >
+              <a href="tel:562-285-6770" className="inline-flex items-center text-orange-600 hover:text-orange-700 font-semibold text-lg transition-colors">
                 <Phone className="mr-2 h-5 w-5" />
                 (562) 285-6770
               </a>
-              <Button 
-                onClick={scrollToQuote}
-                className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
+              <Button onClick={scrollToQuote} className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 Get Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -316,5 +281,4 @@ const JAK = () => {
       </section>
     </div>;
 };
-
 export default JAK;
