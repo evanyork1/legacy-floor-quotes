@@ -13,6 +13,7 @@ import AdminPanel from "./pages/AdminPanel";
 import EmployeePanel from "./pages/EmployeePanel";
 import NotFound from "./pages/NotFound";
 import LandingVisual from "./pages/LandingVisual";
+import JAK from "./pages/JAK";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/quotedfw" element={<QuoteDFW />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/landingvisual" element={<LandingVisual />} />
+          <Route path="/jak" element={<JAK />} />
           <Route path="/adminpanel2025" element={<AdminPanel />} />
           <Route path="/jingram" element={<EmployeePanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
