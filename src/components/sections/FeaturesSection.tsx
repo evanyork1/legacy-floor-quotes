@@ -1,4 +1,5 @@
 
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -18,7 +19,7 @@ const FeaturesSection = () => {
       icon: <Building className="h-8 w-8 text-blue-600" />,
       title: "Industrial Epoxy",
       description: "Cutting edge epoxy materials are now available for industrial applications such as airplane hangars, warehouses, restaurants, and more.",
-      image: "/lovable-uploads/80e063fc-473a-4a20-8f6e-a9cf88273165.png"
+      image: "/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png"
     },
     {
       icon: <Sparkles className="h-8 w-8 text-blue-600" />,
@@ -92,3 +93,4 @@ const FeaturesSection = () => {
 };
 
 export default FeaturesSection;
+
