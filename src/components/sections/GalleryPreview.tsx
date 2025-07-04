@@ -9,7 +9,7 @@ export const GalleryPreview = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // First 6 images from the gallery
+  // Photos in the same order as they appear on the gallery page
   const previewImages = [
     {
       id: 1,
@@ -56,7 +56,7 @@ export const GalleryPreview = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
-            Our Work Gallery
+            See Our Latest Work
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             See the quality and craftsmanship that goes into every installation
