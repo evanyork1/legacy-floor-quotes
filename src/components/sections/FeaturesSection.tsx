@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -11,7 +12,7 @@ const FeaturesSection = () => {
       icon: <Layers className="h-8 w-8 text-blue-600" />,
       title: "Flake Floors",
       description: "Our standard product is a Polyurea flake floor system. This is a Lifetime Warrantied product that has been perfected with science to look great and perform for years to come.",
-      image: "/lovable-uploads/a9ec528c-6c11-4afa-8889-bd3d77742cc1.png"
+      image: "/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png"
     },
     {
       icon: <Building className="h-8 w-8 text-blue-600" />,
