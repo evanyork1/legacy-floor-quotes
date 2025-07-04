@@ -7,6 +7,7 @@ import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import CommercialSection from "@/components/sections/CommercialSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import GalleryPreview from "@/components/sections/GalleryPreview";
 import CTASection from "@/components/sections/CTASection";
 
 const DFW = () => {
@@ -19,6 +20,7 @@ const DFW = () => {
       <HowItWorksSection />
       <CommercialSection />
       <TestimonialsSection />
+      <GalleryPreview />
       <CTASection />
       <div id="footer">
         <Footer />

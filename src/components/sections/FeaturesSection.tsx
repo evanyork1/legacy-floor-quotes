@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -12,19 +11,19 @@ const FeaturesSection = () => {
       icon: <Layers className="h-8 w-8 text-blue-600" />,
       title: "Flake Floors",
       description: "Our standard product is a Polyurea flake floor system. This is a Lifetime Warrantied product that has been perfected with science to look great and perform for years to come.",
-      image: "/lovable-uploads/af830f43-30bb-4aaa-a7bd-e2e462b37c66.png"
+      image: "/lovable-uploads/a9ec528c-6c11-4afa-8889-bd3d77742cc1.png"
     },
     {
       icon: <Building className="h-8 w-8 text-blue-600" />,
       title: "Industrial Epoxy",
       description: "Cutting edge epoxy materials are now available for industrial applications such as airplane hangars, warehouses, restaurants, and more.",
-      image: "/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png"
+      image: "/lovable-uploads/80e063fc-473a-4a20-8f6e-a9cf88273165.png"
     },
     {
       icon: <Sparkles className="h-8 w-8 text-blue-600" />,
       title: "Concrete Polishing",
       description: "Concrete polishing is ideal for commercial spaces such as warehouses, restaurants, retail stores, and more. Durable finishes that offer a great looking result.",
-      image: "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"
+      image: "/lovable-uploads/c85a692b-80a3-4ce7-a6b5-c8364e4d4d93.png"
     }
   ] : [
     {
