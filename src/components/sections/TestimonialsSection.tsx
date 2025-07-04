@@ -28,8 +28,22 @@ const TestimonialsSection = () => {
   return (
     <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+        <div className="text-center mb-16 relative">
+          {/* Yellow Reviews Badge */}
+          <div className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-4">
+            <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full px-4 py-2 shadow-lg">
+              <div className="flex items-center space-x-2">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-white fill-current" />
+                  ))}
+                </div>
+                <span className="text-sm font-bold text-white">Over 170 Five Star Google Reviews</span>
+              </div>
+            </div>
+          </div>
+          
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent pt-8">
             What Our Customers Say
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

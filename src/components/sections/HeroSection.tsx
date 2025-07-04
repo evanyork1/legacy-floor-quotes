@@ -12,12 +12,16 @@ const HeroSection = () => {
   const quotePath = isDFW ? '/quotedfw' : '/quotehou';
   
   const title = isDFW 
-    ? "Your Local Epoxy Flooring"
+    ? "DFW's Epoxy Flooring"
     : "Get Your Dream Garage Floor in One Day";
     
   const locationText = isDFW 
     ? "Dallas - Fort Worth, TX"
     : "Houston, TX";
+
+  const subtext = isDFW
+    ? "Residential & Commercial Floor Coatings That Last"
+    : "Elite Installers. Unmatched Quality. A Reputation Built on Results";
 
   return (
     <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
@@ -49,11 +53,8 @@ const HeroSection = () => {
             
             {isDFW ? (
               <div className="space-y-1 sm:space-y-2">
-                <div className="text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-800">
-                  Unmatched Quality
-                </div>
-                <div className="text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-800">
-                  A Reputation Built on Results
+                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
+                  {subtext}
                 </div>
                 <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600">
                   Serving{" "}
@@ -64,7 +65,7 @@ const HeroSection = () => {
               </div>
             ) : (
               <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
-                Elite Installers. Unmatched Quality. A Reputation Built on Results in{" "}
+                {subtext} in{" "}
                 <span className="block sm:inline bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">{locationText}</span>
               </p>
             )}

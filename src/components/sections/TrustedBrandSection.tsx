@@ -1,26 +1,44 @@
 
-import { Zap, Heart, Award } from "lucide-react";
+import { Star, Users, Sparkles } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const TrustedBrandSection = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
   
-  const services = [{
-    icon: <Zap className="h-8 w-8 text-blue-600" />,
-    title: "Fast Availability",
-    description: isDFW 
-      ? "Fastest availability in the area guaranteed - no waiting months for your dream floor"
-      : "Book and install within 7 days guaranteed - no waiting months for your dream floor"
-  }, {
-    icon: <Heart className="h-8 w-8 text-blue-600" />,
-    title: "We Are Easy to Work With",
-    description: "The Amazon of garage flooring - seamless experience from quote to completion"
-  }, {
-    icon: <Award className="h-8 w-8 text-blue-600" />,
-    title: "We Guarantee The Work",
-    description: "Legacy stands behind every installation with our warranty backing"
-  }];
+  const services = isDFW ? [
+    {
+      icon: <Users className="h-8 w-8 text-blue-600" />,
+      title: "3,000+ Floors Installed",
+      description: "Cracks, chips, or stains — we've seen it all and know how to make it look great again."
+    },
+    {
+      icon: <Star className="h-8 w-8 text-blue-600" />,
+      title: "170+ Five Star Reviews",
+      description: "From small garages to large commercial warehouses, we've done it all — and our customers love talking about it."
+    },
+    {
+      icon: <Sparkles className="h-8 w-8 text-blue-600" />,
+      title: "Over 5 Million Square Feet Installed",
+      description: "The products we use are top quality and built to stand the test of time — No cheap stuff, no shortcuts."
+    }
+  ] : [
+    {
+      icon: <Zap className="h-8 w-8 text-blue-600" />,
+      title: "Fast Availability",
+      description: "Book and install within 7 days guaranteed - no waiting months for your dream floor"
+    },
+    {
+      icon: <Heart className="h-8 w-8 text-blue-600" />,
+      title: "We Are Easy to Work With",
+      description: "The Amazon of garage flooring - seamless experience from quote to completion"
+    },
+    {
+      icon: <Award className="h-8 w-8 text-blue-600" />,
+      title: "We Guarantee The Work",
+      description: "Legacy stands behind every installation with our warranty backing"
+    }
+  ];
 
   const sectionTitle = isDFW 
     ? "The Most Trusted Brand in Concrete Coatings"
