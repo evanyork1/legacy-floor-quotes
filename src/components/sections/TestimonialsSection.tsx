@@ -1,7 +1,5 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
-
 const TestimonialsSection = () => {
   const testimonials = [{
     name: "Bharat Arimilli",
@@ -24,9 +22,7 @@ const TestimonialsSection = () => {
     rating: 5,
     text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their garage floor coated. Definitely recommending to my family and friends. :)"
   }];
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
+  return <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 relative">
           {/* Yellow Reviews Badge */}
@@ -34,9 +30,7 @@ const TestimonialsSection = () => {
             <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full px-4 py-2 shadow-lg">
               <div className="flex items-center space-x-2">
                 <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-white fill-current" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 text-white fill-current" />)}
                 </div>
                 <span className="text-sm font-bold text-white">Over 170 Five Star Google Reviews</span>
               </div>
@@ -52,13 +46,10 @@ const TestimonialsSection = () => {
         </div>
         
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
+          {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
               <CardContent className="p-6">
                 <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed italic">"{testimonial.text}"</p>
                 <div>
@@ -66,20 +57,12 @@ const TestimonialsSection = () => {
                   <p className="text-sm text-gray-500">{testimonial.location}</p>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* Professional installation image */}
-        <div className="text-center">
-          <div className="relative inline-block">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
-            <img src="/lovable-uploads/49c586ed-2f38-4bb6-97fc-f42d1593a5c4.png" alt="Professional floor preparation and installation" className="relative w-full max-w-2xl mx-auto h-auto rounded-xl shadow-2xl" />
-          </div>
-        </div>
+        
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TestimonialsSection;
