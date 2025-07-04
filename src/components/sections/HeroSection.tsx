@@ -1,74 +1,46 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-
 const HeroSection = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/dfw';
   const quotePath = isDFW ? '/quotedfw' : '/quotehou';
-  
-  const title = isDFW 
-    ? "DFW's Epoxy Flooring"
-    : "Get Your Dream Garage Floor in One Day";
-    
-  const locationText = isDFW 
-    ? "Dallas - Fort Worth, TX"
-    : "Houston, TX";
-
-  const subtext = isDFW
-    ? "Residential & Commercial Floor Coatings That Last"
-    : "Elite Installers. Unmatched Quality. A Reputation Built on Results";
-
-  return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
+  const title = isDFW ? "DFW's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day";
+  const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
+  const subtext = isDFW ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results";
+  return <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="max-w-2xl space-y-4 sm:space-y-6">
             <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-              {isDFW ? (
-                <>
+              {isDFW ? <>
                   {title}{" "}
                   <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                     Experts
                   </span>
-                </>
-              ) : (
-                title.split(" ").map((word, index) => {
-                  if (word === "One" || word === "Day") {
-                    return (
-                      <span key={index} className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                </> : title.split(" ").map((word, index) => {
+              if (word === "One" || word === "Day") {
+                return <span key={index} className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                         {word}{" "}
-                      </span>
-                    );
-                  }
-                  return word + " ";
-                })
-              )}
+                      </span>;
+              }
+              return word + " ";
+            })}
             </h1>
             
-            {isDFW ? (
-              <div className="space-y-1 sm:space-y-2">
+            {isDFW ? <div className="space-y-1 sm:space-y-2">
                 <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
                   {subtext}
                 </div>
-                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600">
-                  Serving{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent font-medium">
-                    {locationText}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
+                
+              </div> : <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
                 {subtext} in{" "}
                 <span className="block sm:inline bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">{locationText}</span>
-              </p>
-            )}
+              </p>}
             
             <div className="relative pt-4 sm:pt-6">
               <div className="flex flex-col sm:flex-row gap-3">
@@ -77,18 +49,12 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
                 </Button>
                 
-                {isDFW && (
-                  <Button 
-                    asChild
-                    variant="outline" 
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
-                  >
+                {isDFW && <Button asChild variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent">
                     <a href="tel:214-305-6516">
                       <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
                       Call Us Now
                     </a>
-                  </Button>
-                )}
+                  </Button>}
               </div>
             </div>
           </div>
@@ -98,8 +64,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
