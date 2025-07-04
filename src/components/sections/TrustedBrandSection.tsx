@@ -1,5 +1,5 @@
 
-import { Star, Users, Sparkles } from "lucide-react";
+import { Star, Users, Sparkles, Zap, Heart, Award } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const TrustedBrandSection = () => {

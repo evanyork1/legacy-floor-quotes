@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Layers, Building, Sparkles } from "lucide-react";
+import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const FeaturesSection = () => {
