@@ -34,10 +34,10 @@ const TestimonialsSection = () => {
     <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 relative">
-          {/* Yellow Reviews Badge - Fixed for mobile */}
-          <div className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 sm:-translate-y-4">
-            <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg">
-              <div className="flex items-center space-x-1.5 sm:space-x-2">
+          {/* Yellow Reviews Badge - Fixed for mobile spacing */}
+          <div className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1 sm:-translate-y-3">
+            <div className="inline-flex flex-col items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
+              <div className="flex items-center space-x-1.5 sm:space-x-2 mb-1">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-white fill-current" />
@@ -45,15 +45,13 @@ const TestimonialsSection = () => {
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-white">Over 170 Five Star Google Reviews</span>
               </div>
+              <span className="text-xs text-white/90 text-center">Our customers love talking about the work we have done</span>
             </div>
           </div>
           
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent pt-12 sm:pt-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent pt-20 sm:pt-16">
             What Our Customers Say
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our customers love talking about the work we have done. Read from hundreds of customers their experience with us.
-          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 mb-12">
