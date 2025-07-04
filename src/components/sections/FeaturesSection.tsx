@@ -1,5 +1,3 @@
-
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -25,7 +23,7 @@ const FeaturesSection = () => {
       icon: <Sparkles className="h-8 w-8 text-blue-600" />,
       title: "Concrete Polishing",
       description: "Concrete polishing is ideal for commercial spaces such as warehouses, restaurants, retail stores, and more. Durable finishes that offer a great looking result.",
-      image: "/lovable-uploads/c85a692b-80a3-4ce7-a6b5-c8364e4d4d93.png"
+      image: "/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png"
     }
   ] : [
     {
@@ -93,4 +91,3 @@ const FeaturesSection = () => {
 };
 
 export default FeaturesSection;
-
