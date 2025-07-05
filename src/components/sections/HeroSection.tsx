@@ -19,7 +19,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="max-w-2xl space-y-6 sm:space-y-8">
+          <div className="max-w-2xl space-y-8 sm:space-y-10">
             <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
               {isDFW ? (
                 <>
@@ -55,7 +55,7 @@ const HeroSection = () => {
               </p>
             )}
             
-            <div className="relative pt-6 sm:pt-8">
+            <div className="relative mb-8 sm:mb-10">
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={() => navigate(quotePath)} 

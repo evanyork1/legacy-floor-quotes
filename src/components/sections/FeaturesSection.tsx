@@ -1,9 +1,12 @@
+
 import { Card, CardContent } from "@/components/ui/card";
-import { Layers, Building, Sparkles, Users, Shield, Headphones } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FeaturesSection = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isDFW = location.pathname === '/dfw';
   
   const features = isDFW ? [
@@ -84,6 +87,17 @@ const FeaturesSection = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Get Instant Quote Button */}
+        <div className="text-center">
+          <Button 
+            onClick={() => navigate(isDFW ? '/quotedfw' : '/quotehou')} 
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+          >
+            Get Instant Quote
+            <ArrowRight className="ml-3 h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>

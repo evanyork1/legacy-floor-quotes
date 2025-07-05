@@ -15,7 +15,7 @@ const TrustedBrandSection = () => {
     {
       icon: <Star className="h-8 w-8 text-blue-600" />,
       title: "170+ Five Star Reviews",
-      description: "From small garages to large commercial warehouses, we've done it all — and our customers love talking about it."
+      description: "Our reputation is important to us. See why we are the number one coatings company in Dallas by hearing what our clients have to say."
     },
     {
       icon: <Sparkles className="h-8 w-8 text-blue-600" />,
