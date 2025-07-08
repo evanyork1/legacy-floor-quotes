@@ -9,14 +9,12 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Determine if we're in DFW environment
-  const isDFW = location.pathname === '/dfw';
+  // Force DFW context for this header
+  const isDFW = true;
   
-  // Determine quote path based on current location
-  const quotePath = isDFW ? '/quotedfw' : '/quotehou';
-  
-  // Determine home path based on current location
-  const homePath = isDFW ? '/dfw' : '/houston';
+  // Always use DFW paths
+  const quotePath = '/quotedfw';
+  const homePath = '/dfw';
   
   const navItems = [{
     name: "Home",
