@@ -10,7 +10,6 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CommercialSpacesSection from "@/components/sections/CommercialSpacesSection";
 import { CommercialContactModal } from "@/components/commercial/CommercialContactModal";
 import { CommercialCTAButtons } from "@/components/commercial/CommercialCTAButtons";
-
 const DFWCommercialLanding = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
@@ -19,15 +18,12 @@ const DFWCommercialLanding = () => {
     const handleOpenModal = () => {
       setIsContactModalOpen(true);
     };
-
     window.addEventListener('openCommercialModal', handleOpenModal);
     return () => {
       window.removeEventListener('openCommercialModal', handleOpenModal);
     };
   }, []);
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Commercial Concrete Polishing & Industrial Epoxy Flooring Dallas, TX - Legacy Industrial Coatings</title>
         <meta name="description" content="Professional commercial concrete polishing and industrial epoxy flooring in Dallas-Fort Worth, TX. Serving warehouses, hangars, restaurants, and manufacturing facilities with durable flooring solutions." />
@@ -65,11 +61,7 @@ const DFWCommercialLanding = () => {
         <HeroSection />
         
         {/* CTA after Hero */}
-        <section className="py-12 bg-slate-50">
-          <div className="container mx-auto px-4 text-center">
-            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
-          </div>
-        </section>
+        
         
         <FeaturesSection />
         
@@ -120,13 +112,8 @@ const DFWCommercialLanding = () => {
           <LandingMinimalFooter />
         </div>
         
-        <CommercialContactModal 
-          open={isContactModalOpen}
-          onOpenChange={setIsContactModalOpen}
-        />
+        <CommercialContactModal open={isContactModalOpen} onOpenChange={setIsContactModalOpen} />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default DFWCommercialLanding;
