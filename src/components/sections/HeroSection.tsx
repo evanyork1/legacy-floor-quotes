@@ -9,11 +9,11 @@ const HeroSection = () => {
 
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
-  const isHouston = location.pathname === '/houston';
+  const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   const quotePath = isDFW ? '/quotedfw' : '/quotehou';
-  const title = isDFW ? "DFW's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day";
+  const title = isDFW ? "DFW's Epoxy Flooring" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day");
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
-  const subtext = isDFW ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results";
+  const subtext = isDFW ? "Residential & Commercial Floor Coatings That Last" : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results");
 
   return (
     <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">

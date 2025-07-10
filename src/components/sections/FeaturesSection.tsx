@@ -8,7 +8,7 @@ const FeaturesSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
-  const isHouston = location.pathname === '/houston';
+  const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   
   const features = (isDFW || isHouston) ? [
     {

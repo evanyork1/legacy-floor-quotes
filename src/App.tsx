@@ -9,6 +9,7 @@ import Houston from "./pages/Houston";
 import Quote from "./pages/Quote";
 import DFW from "./pages/DFW";
 import DFWResLanding from "./pages/DFWResLanding";
+import HoustonResLanding from "./pages/HoustonResLanding";
 import QuoteDFW from "./pages/QuoteDFW";
 import Gallery from "./pages/Gallery";
 import AdminPanel from "./pages/AdminPanel";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/quotehou" element={<Quote />} />
             <Route path="/dfw" element={<DFW />} />
             <Route path="/dfwreslanding" element={<DFWResLanding />} />
+            <Route path="/houstonreslanding" element={<HoustonResLanding />} />
             <Route path="/quotedfw" element={<QuoteDFW />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/landingvisual" element={<LandingVisual />} />
