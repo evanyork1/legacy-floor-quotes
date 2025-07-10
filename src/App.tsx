@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import Index from "./pages/Index";
+import Houston from "./pages/Houston";
 import Quote from "./pages/Quote";
 import DFW from "./pages/DFW";
 import DFWResLanding from "./pages/DFWResLanding";
@@ -31,7 +31,7 @@ const App = () => (
           <Routes>
             {/* Redirect root to dfw to make it the new homepage */}
             <Route path="/" element={<Navigate to="/dfw" replace />} />
-            <Route path="/houston" element={<Index />} />
+            <Route path="/houston" element={<Houston />} />
             <Route path="/quotehou" element={<Quote />} />
             <Route path="/dfw" element={<DFW />} />
             <Route path="/dfwreslanding" element={<DFWResLanding />} />

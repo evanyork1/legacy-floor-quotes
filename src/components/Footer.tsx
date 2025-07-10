@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
-  const serviceArea = isDFW ? "Dallas, Plano, Houston" : "Nationwide Service";
+  const serviceArea = isDFW ? "Dallas, Plano, Houston, Phoenix" : "Nationwide Service";
   
   // Determine paths based on current location
   const homePath = isDFW ? "/dfw" : "/houston";

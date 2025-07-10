@@ -1,10 +1,10 @@
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 
-export const LandingMinimalFooter = () => {
+export const LandingMinimalFooterHouston = () => {
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-      (window as any).gtag_report_conversion('tel:214-305-6516');
+      (window as any).gtag_report_conversion('tel:713-766-5566');
     }
   };
 
@@ -24,13 +24,13 @@ export const LandingMinimalFooter = () => {
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
-                  214-305-6516
+                <a href="tel:713-766-5566" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
+                  713-766-5566
                 </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">Dallas, Plano, Houston, Phoenix</span>
+                <span className="text-gray-300 text-sm sm:text-base">Houston, Dallas, Plano, Phoenix</span>
               </div>
             </div>
           </div>

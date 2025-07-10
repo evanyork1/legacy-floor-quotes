@@ -8,8 +8,9 @@ const FeaturesSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isHouston = location.pathname === '/houston';
   
-  const features = isDFW ? [
+  const features = (isDFW || isHouston) ? [
     {
       icon: <Layers className="h-8 w-8 text-blue-600" />,
       title: "Flake Floors",
@@ -46,7 +47,7 @@ const FeaturesSection = () => {
     }
   ];
 
-  const sectionTitle = isDFW 
+  const sectionTitle = (isDFW || isHouston)
     ? "Premium Polyurea, Epoxy, and Polished Floors"
     : "Why Choose Legacy Industrial Coatings?";
 
@@ -58,7 +59,7 @@ const FeaturesSection = () => {
             {sectionTitle}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {isDFW 
+            {(isDFW || isHouston)
               ? "Professional flooring solutions for every space and application."
               : "Thousands have trusted us as their floor coating experts."
             }
@@ -69,7 +70,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
               <CardContent className="p-8">
-                {isDFW && feature.image && (
+                {(isDFW || isHouston) && feature.image && (
                   <div className="mb-6 relative">
                     <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
                     <img 
@@ -92,7 +93,7 @@ const FeaturesSection = () => {
         {/* Get Instant Quote Button */}
         <div className="text-center">
           <Button 
-            onClick={() => navigate(isDFW ? '/quotedfw' : '/quotehou')} 
+            onClick={() => navigate((isDFW || isHouston) ? (isDFW ? '/quotedfw' : '/quotehou') : '/quotehou')} 
             className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
           >
             Get Instant Quote
