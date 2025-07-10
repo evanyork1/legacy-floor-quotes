@@ -6,8 +6,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import GalleryPreview from "@/components/sections/GalleryPreview";
-import CommercialSection from "@/components/sections/CommercialSection";
+import CommercialSpacesSection from "@/components/sections/CommercialSpacesSection";
 
 const DFWCommercialLanding = () => {
   return (
@@ -50,9 +49,8 @@ const DFWCommercialLanding = () => {
         <FeaturesSection />
         <TrustedBrandSection />
         <HowItWorksSection />
+        <CommercialSpacesSection />
         <TestimonialsSection />
-        <GalleryPreview />
-        <CommercialSection />
         <div id="footer">
           <LandingMinimalFooter />
         </div>

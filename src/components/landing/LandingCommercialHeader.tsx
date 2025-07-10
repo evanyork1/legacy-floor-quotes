@@ -6,9 +6,11 @@ export const LandingCommercialHeader = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center space-x-2">
-          <div className="text-xl font-bold text-gray-900">
-            Legacy Industrial Coatings
-          </div>
+          <img 
+            src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
+            alt="Legacy Industrial Coatings Logo" 
+            className="h-8 w-auto sm:h-10 lg:h-12" 
+          />
         </div>
         
         <div className="flex items-center space-x-4">

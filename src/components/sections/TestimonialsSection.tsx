@@ -20,7 +20,7 @@ const TestimonialsSection = () => {
     name: "Joseph Im",
     location: "McKinney, TX",
     rating: 5,
-    text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their garage floor coated. Definitely recommending to my family and friends. :)"
+    text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their floor coated. Definitely recommending to my family and friends. :)"
   }];
   return <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
       <div className="container mx-auto px-4">

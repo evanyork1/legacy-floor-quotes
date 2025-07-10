@@ -15,12 +15,12 @@ const TrustedBrandSection = () => {
     },
     {
       icon: <Star className="h-8 w-8 text-blue-600" />,
-      title: "Certified Commercial Installers",
-      description: "Our team holds industry certifications and specializes in commercial flooring applications that meet safety and compliance standards."
+      title: "170+ Five Star Reviews",
+      description: "Our reputation is important to us. See why we are the number one coatings company in Dallas by hearing what our clients have to say."
     },
     {
       icon: <Sparkles className="h-8 w-8 text-blue-600" />,
-      title: "10+ Million Commercial Square Feet",
+      title: "Over 5 Million Commercial Square Feet",
       description: "Trusted by construction professionals and facility managers for projects that require minimal downtime and maximum durability."
     }
   ] : isDFW ? [

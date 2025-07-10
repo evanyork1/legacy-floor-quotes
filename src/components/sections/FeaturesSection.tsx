@@ -100,7 +100,7 @@ const FeaturesSection = () => {
                     <img 
                       src={feature.image} 
                       alt={feature.title} 
-                      className="relative w-full h-48 object-cover rounded-xl shadow-lg"
+                      className="relative w-full h-64 object-cover rounded-xl shadow-lg"
                     />
                   </div>
                 )}

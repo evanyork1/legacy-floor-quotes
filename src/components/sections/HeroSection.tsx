@@ -86,10 +86,10 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
             <img 
-              src={isCommercial ? "/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png" : "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"} 
-              alt={isCommercial ? "Commercial industrial flooring in warehouse facility" : "Premium garage floor coating with luxury vehicles"} 
+              src={isCommercial ? "/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png" : "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"} 
+              alt={isCommercial ? "Airplane hangar with polished concrete flooring" : "Premium garage floor coating with luxury vehicles"} 
               className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500" 
             />
           </div>
