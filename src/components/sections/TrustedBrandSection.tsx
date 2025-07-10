@@ -6,7 +6,7 @@ const TrustedBrandSection = () => {
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/houstonreslanding';
   const services = isCommercial ? [{
     icon: <Users className="h-8 w-8 text-blue-600" />,
-    title: "500+ Commercial Projects Completed",
+    title: "Hundreds of Commercial Projects Completed",
     description: "From small restaurants to massive warehouses — we deliver industrial-grade solutions that meet commercial demands and timelines."
   }, {
     icon: <Star className="h-8 w-8 text-blue-600" />,

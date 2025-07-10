@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -24,7 +23,15 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="max-w-2xl space-y-8 sm:space-y-10">
             <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-              {isDFW || isHoustonLanding || isCommercial ? (
+              {isCommercial ? (
+                <>
+                  DFW's{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                    Commercial
+                  </span>
+                  {" "}Flooring Experts
+                </>
+              ) : isDFW || isHoustonLanding ? (
                 <>
                   {title}{" "}
                   <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
@@ -58,9 +65,9 @@ const HeroSection = () => {
               </p>
             )}
             
-            <div className="relative mb-8 sm:mb-10">
-              <div className="flex flex-col sm:flex-row gap-4">
-                {!isCommercial && (
+            {!isCommercial && (
+              <div className="relative mb-8 sm:mb-10">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     onClick={() => navigate(quotePath)} 
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
@@ -68,25 +75,24 @@ const HeroSection = () => {
                     Get Instant Quote
                     <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
                   </Button>
-                )}
-                
-                {(isDFW || isHoustonLanding || isCommercial) && (
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
-                  >
-                    <a href="tel:214-305-6516">
-                      <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
-                      Call Us Now
-                    </a>
-                  </Button>
-                )}
+                  
+                  {(isDFW || isHoustonLanding) && (
+                    <Button 
+                      asChild 
+                      variant="outline" 
+                      className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                    >
+                      <a href="tel:214-305-6516">
+                        <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+                        Call Us Now
+                      </a>
+                    </Button>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
             <img 
               src={isCommercial ? "/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png" : "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"} 
               alt={isCommercial ? "Airplane hangar with polished concrete flooring" : "Premium garage floor coating with luxury vehicles"} 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { LandingCommercialHeader } from "@/components/landing/LandingCommercialHeader";
 import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter";
@@ -7,8 +8,12 @@ import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CommercialSpacesSection from "@/components/sections/CommercialSpacesSection";
+import { CommercialContactModal } from "@/components/commercial/CommercialContactModal";
+import { CommercialCTAButtons } from "@/components/commercial/CommercialCTAButtons";
 
 const DFWCommercialLanding = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   return (
     <>
       <Helmet>
@@ -46,14 +51,67 @@ const DFWCommercialLanding = () => {
       <div className="min-h-screen bg-white">
         <LandingCommercialHeader />
         <HeroSection />
+        
+        {/* CTA after Hero */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <FeaturesSection />
+        
+        {/* CTA after Features */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <TrustedBrandSection />
+        
+        {/* CTA after Trusted Brand */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <HowItWorksSection />
+        
+        {/* CTA after How It Works */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <CommercialSpacesSection />
+        
+        {/* CTA after Commercial Spaces */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <TestimonialsSection />
+        
+        {/* CTA after Testimonials */}
+        <section className="py-12 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <CommercialCTAButtons onContactRequestClick={() => setIsContactModalOpen(true)} />
+          </div>
+        </section>
+        
         <div id="footer">
           <LandingMinimalFooter />
         </div>
+        
+        <CommercialContactModal 
+          open={isContactModalOpen}
+          onOpenChange={setIsContactModalOpen}
+        />
       </div>
     </>
   );
