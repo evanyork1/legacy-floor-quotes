@@ -10,6 +10,7 @@ const HeroSection = () => {
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
+  const isHoustonLanding = location.pathname === '/houstonreslanding';
   const quotePath = isDFW ? '/quotedfw' : '/quotehou';
   const title = isDFW ? "DFW's Epoxy Flooring" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day");
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
@@ -22,7 +23,7 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="max-w-2xl space-y-8 sm:space-y-10">
             <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-              {isDFW ? (
+              {isDFW || isHoustonLanding ? (
                 <>
                   {title}{" "}
                   <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
@@ -43,7 +44,7 @@ const HeroSection = () => {
               )}
             </h1>
             
-            {isDFW ? (
+            {isDFW || isHoustonLanding ? (
               <div className="space-y-2 sm:space-y-3">
                 <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
                   {subtext}
@@ -66,7 +67,7 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
                 </Button>
                 
-                {isDFW && (
+                {(isDFW || isHoustonLanding) && (
                   <Button 
                     asChild 
                     variant="outline" 

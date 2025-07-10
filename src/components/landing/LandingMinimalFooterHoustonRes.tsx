@@ -1,68 +1,53 @@
-import { Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 
 export const LandingMinimalFooterHoustonRes = () => {
+  const handlePhoneClick = () => {
+    // Call the Google Ads conversion tracking function
+    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+      (window as any).gtag_report_conversion('tel:214-305-6516');
+    }
+  };
+
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto">
           {/* Company Info */}
-          <div className="col-span-1">
-            <img 
-              src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
-              alt="Legacy Industrial Coatings" 
-              className="h-16 w-auto mb-4 filter brightness-0 invert" 
-            />
-            <p className="text-gray-300 text-sm">
-              Premium concrete coatings and epoxy flooring solutions. Professional installation with lifetime warranty.
+          <div className="text-center space-y-4 sm:space-y-6 mb-8 sm:mb-10 lg:mb-12">
+            <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+              Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.
             </p>
-          </div>
-
-          {/* Services */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-gray-300 text-sm">
-              <li>Polyurea Floor Coatings</li>
-              <li>Epoxy Flooring</li>
-              <li>Concrete Polishing</li>
-              <li>Commercial Coatings</li>
-              <li>Garage Floor Coating</li>
-            </ul>
-          </div>
-
-          {/* Locations */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Service Areas</h3>
-            <ul className="space-y-2 text-gray-300 text-sm">
-              <li>Houston</li>
-              <li>Dallas</li>
-              <li>Plano</li>
-              <li>Phoenix</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <div className="space-y-2 text-gray-300 text-sm">
-              <p>Phone: 214-305-6516</p>
-              <p>Email: info@legacyindustrialcoatings.com</p>
-              <div className="flex space-x-4 mt-4">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Facebook className="h-5 w-5" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+              <div className="flex items-center">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <span className="text-gray-300 text-sm sm:text-base break-all">support@legacyindustrialcoatings.com</span>
+              </div>
+              <div className="flex items-center">
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
+                  214-305-6516
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Instagram className="h-5 w-5" />
-                </a>
+              </div>
+              <div className="flex items-center">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
+                <span className="text-gray-300 text-sm sm:text-base">Houston, Dallas, Plano, Phoenix</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 Legacy Industrial Coatings. All rights reserved.
-          </p>
+        {/* Bottom Section */}
+        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+              © 2025 Legacy Industrial Coatings. All rights reserved.
+            </div>
+            <div className="flex justify-center">
+              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
+                <Instagram className="h-6 w-6 text-white" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

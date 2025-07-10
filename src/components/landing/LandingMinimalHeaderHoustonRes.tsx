@@ -25,16 +25,19 @@ export const LandingMinimalHeaderHoustonRes = () => {
             />
           </div>
 
-          {/* Phone and Quote Button */}
+          {/* Call Us and Quote Button */}
           <div className="flex items-center gap-4">
-            <a 
-              href="tel:214-305-6516"
+            <Button 
+              asChild 
+              variant="outline" 
+              className="hidden sm:inline-flex border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full px-4 lg:px-6 text-sm lg:text-base bg-transparent"
               onClick={handlePhoneClick}
-              className="hidden sm:inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-colors"
             >
-              <Phone className="mr-2 h-5 w-5" />
-              214-305-6516
-            </a>
+              <a href="tel:214-305-6516">
+                <Phone className="mr-2 h-4 w-4" />
+                Call Us Now
+              </a>
+            </Button>
             <Button 
               onClick={() => navigate('/quotehou')} 
               className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base"
