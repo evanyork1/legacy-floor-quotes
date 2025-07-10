@@ -39,10 +39,10 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20 sm:h-20 md:h-28">
+        <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
           {/* Logo - Responsive sizing */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate(homePath)}>
-            <img src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" alt="Legacy Industrial Coatings" className="h-12 sm:h-16 md:h-20 lg:h-32 w-auto" />
+            <img src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" alt="Legacy Industrial Coatings" className="h-24 sm:h-16 md:h-20 lg:h-40 w-auto" />
           </div>
 
           {/* Desktop Navigation */}

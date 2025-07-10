@@ -97,7 +97,7 @@ export const CommercialContactModal = ({ open, onOpenChange }: CommercialContact
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[500px]">
         {showThankYou ? (
           <div className="text-center py-8">
             <DialogHeader className="mb-6">
