@@ -4,9 +4,26 @@ import { useLocation } from "react-router-dom";
 
 const TrustedBrandSection = () => {
   const location = useLocation();
+  const isCommercial = location.pathname === '/dfwcommercial';
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/houstonreslanding';
   
-  const services = isDFW ? [
+  const services = isCommercial ? [
+    {
+      icon: <Users className="h-8 w-8 text-blue-600" />,
+      title: "500+ Commercial Projects Completed",
+      description: "From small restaurants to massive warehouses — we deliver industrial-grade solutions that meet commercial demands and timelines."
+    },
+    {
+      icon: <Star className="h-8 w-8 text-blue-600" />,
+      title: "Certified Commercial Installers",
+      description: "Our team holds industry certifications and specializes in commercial flooring applications that meet safety and compliance standards."
+    },
+    {
+      icon: <Sparkles className="h-8 w-8 text-blue-600" />,
+      title: "10+ Million Commercial Square Feet",
+      description: "Trusted by construction professionals and facility managers for projects that require minimal downtime and maximum durability."
+    }
+  ] : isDFW ? [
     {
       icon: <Users className="h-8 w-8 text-blue-600" />,
       title: "3,000+ Floors Installed",
@@ -40,7 +57,9 @@ const TrustedBrandSection = () => {
     }
   ];
 
-  const sectionTitle = isDFW 
+  const sectionTitle = isCommercial
+    ? "The Most Trusted Brand in Commercial Flooring"
+    : isDFW 
     ? "The Most Trusted Brand in Concrete Coatings"
     : "The Most Trusted Brand in Garage Floors";
 

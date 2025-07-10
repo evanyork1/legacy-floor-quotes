@@ -1,16 +1,36 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight } from "lucide-react";
+import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight, Phone } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const FeaturesSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isCommercial = location.pathname === '/dfwcommercial';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   
-  const features = (isDFW || isHouston) ? [
+  const features = isCommercial ? [
+    {
+      icon: <Sparkles className="h-8 w-8 text-blue-600" />,
+      title: "Concrete Polishing",
+      description: "Professional concrete polishing for warehouses, restaurants, retail stores, and manufacturing facilities. High-gloss, durable finishes that withstand heavy commercial traffic.",
+      image: "/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png"
+    },
+    {
+      icon: <Building className="h-8 w-8 text-blue-600" />,
+      title: "Industrial Epoxy",
+      description: "Heavy-duty epoxy systems engineered for commercial environments including airplane hangars, distribution centers, food processing plants, and automotive facilities.",
+      image: "/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png"
+    },
+    {
+      icon: <Layers className="h-8 w-8 text-blue-600" />,
+      title: "Specialty Coatings",
+      description: "Custom commercial flooring solutions including anti-static, chemical-resistant, and FDA-compliant coatings for specialized industrial applications.",
+      image: "/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png"
+    }
+  ] : (isDFW || isHouston) ? [
     {
       icon: <Layers className="h-8 w-8 text-blue-600" />,
       title: "Flake Floors",
@@ -47,7 +67,9 @@ const FeaturesSection = () => {
     }
   ];
 
-  const sectionTitle = (isDFW || isHouston)
+  const sectionTitle = isCommercial
+    ? "Commercial & Industrial Flooring Solutions"
+    : (isDFW || isHouston)
     ? "Premium Polyurea, Epoxy, and Polished Floors"
     : "Why Choose Legacy Industrial Coatings?";
 
@@ -59,7 +81,9 @@ const FeaturesSection = () => {
             {sectionTitle}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {(isDFW || isHouston)
+            {isCommercial
+              ? "Heavy-duty flooring systems designed for commercial and industrial environments."
+              : (isDFW || isHouston)
               ? "Professional flooring solutions for every space and application."
               : "Thousands have trusted us as their floor coating experts."
             }
@@ -70,7 +94,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
               <CardContent className="p-8">
-                {(isDFW || isHouston) && feature.image && (
+                {(isDFW || isHouston || isCommercial) && feature.image && (
                   <div className="mb-6 relative">
                     <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
                     <img 
@@ -90,15 +114,27 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {/* Get Instant Quote Button */}
+        {/* Call to Action Button */}
         <div className="text-center">
-          <Button 
-            onClick={() => navigate((isDFW || isHouston) ? (isDFW ? '/quotedfw' : '/quotehou') : '/quotehou')} 
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-          >
-            Get Instant Quote
-            <ArrowRight className="ml-3 h-5 w-5" />
-          </Button>
+          {isCommercial ? (
+            <Button 
+              asChild
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            >
+              <a href="tel:214-305-6516" className="flex items-center">
+                <Phone className="mr-3 h-5 w-5" />
+                Schedule Commercial Consultation
+              </a>
+            </Button>
+          ) : (
+            <Button 
+              onClick={() => navigate((isDFW || isHouston) ? (isDFW ? '/quotedfw' : '/quotehou') : '/quotehou')} 
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            >
+              Get Instant Quote
+              <ArrowRight className="ml-3 h-5 w-5" />
+            </Button>
+          )}
         </div>
       </div>
     </section>
