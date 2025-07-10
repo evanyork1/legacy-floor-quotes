@@ -50,9 +50,10 @@ export type Database = {
         }
         Relationships: []
       }
-      pricing_settings: {
+      location_pricing: {
         Row: {
           id: number
+          location: string
           price_2_car: number
           price_3_car: number
           price_4_car: number
@@ -61,6 +62,7 @@ export type Database = {
         }
         Insert: {
           id?: number
+          location: string
           price_2_car?: number
           price_3_car?: number
           price_4_car?: number
@@ -69,6 +71,37 @@ export type Database = {
         }
         Update: {
           id?: number
+          location?: string
+          price_2_car?: number
+          price_3_car?: number
+          price_4_car?: number
+          price_per_sqft?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      pricing_settings: {
+        Row: {
+          id: number
+          location: string
+          price_2_car: number
+          price_3_car: number
+          price_4_car: number
+          price_per_sqft: number
+          updated_at: string | null
+        }
+        Insert: {
+          id?: number
+          location?: string
+          price_2_car?: number
+          price_3_car?: number
+          price_4_car?: number
+          price_per_sqft?: number
+          updated_at?: string | null
+        }
+        Update: {
+          id?: number
+          location?: string
           price_2_car?: number
           price_3_car?: number
           price_4_car?: number

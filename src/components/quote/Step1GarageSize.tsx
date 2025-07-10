@@ -54,7 +54,7 @@ export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
   return (
     <div className="space-y-6 sm:space-y-8">
       <div className="text-center mb-8 sm:mb-12">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">What size is your garage?</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">What size is your space?</h2>
         <p className="text-base sm:text-lg text-gray-600 px-4">Choose the option that best describes your space</p>
       </div>
 

@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import Quote from "./pages/Quote";
 import DFW from "./pages/DFW";
+import DFWResLanding from "./pages/DFWResLanding";
 import QuoteDFW from "./pages/QuoteDFW";
 import Gallery from "./pages/Gallery";
 import AdminPanel from "./pages/AdminPanel";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/houston" element={<Index />} />
             <Route path="/quotehou" element={<Quote />} />
             <Route path="/dfw" element={<DFW />} />
+            <Route path="/dfwreslanding" element={<DFWResLanding />} />
             <Route path="/quotedfw" element={<QuoteDFW />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/landingvisual" element={<LandingVisual />} />

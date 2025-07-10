@@ -2,18 +2,22 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "react-router-dom";
 import type { FormData } from "@/components/quote/types";
 
 export const useQuotePricing = (formData: FormData) => {
   const { toast } = useToast();
+  const location = useLocation();
+  const isDFW = location.pathname.includes('/quotedfw') || location.pathname.includes('/dfw');
+  const locationKey = isDFW ? 'DFW' : 'Houston';
 
   const { data: pricingSettings } = useQuery({
-    queryKey: ['pricingSettings'],
+    queryKey: ['location-pricing', locationKey],
     queryFn: async () => {
         const { data, error } = await supabase
-            .from('pricing_settings')
+            .from('location_pricing')
             .select('*')
-            .limit(1)
+            .eq('location', locationKey)
             .single();
         if (error) {
             console.error("Error fetching pricing", error);
