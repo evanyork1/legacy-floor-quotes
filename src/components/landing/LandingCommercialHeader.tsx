@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 export const LandingCommercialHeader = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-24 items-center justify-between px-4">
         <div className="flex items-center space-x-2">
           <img 
             src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
             alt="Legacy Industrial Coatings Logo" 
-            className="h-16 w-auto sm:h-20 lg:h-24" 
+            className="h-24 w-auto sm:h-32 lg:h-40" 
           />
         </div>
         
