@@ -63,27 +63,27 @@ const FeaturesSection = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-16">
           {features.map((feature, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
-              <CardContent className="p-8">
-                {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-6 relative">
+              <CardContent className="p-6 lg:p-8">
+                {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-4 lg:mb-6 relative">
                     <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
-                    <img src={feature.image} alt={feature.title} className="relative w-full h-64 object-cover rounded-xl shadow-lg" />
+                    <img src={feature.image} alt={feature.title} className="relative w-full h-48 lg:h-64 object-cover rounded-xl shadow-lg" />
                   </div>}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-14 h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg lg:text-xl font-semibold text-gray-900 mb-3 lg:mb-4">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm lg:text-base">{feature.description}</p>
               </CardContent>
             </Card>)}
         </div>
 
         {/* Call to Action Button */}
         <div className="text-center">
-          {isCommercial ? <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+          {isCommercial ? <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-base lg:text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
               
-            </Button> : <Button onClick={() => navigate(isDFW || isHouston ? isDFW ? '/quotedfw' : '/quotehou' : '/quotehou')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+            </Button> : <Button onClick={() => navigate(isDFW || isHouston ? isDFW ? '/quotedfw' : '/quotehou' : '/quotehou')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-base lg:text-lg px-8 lg:px-10 py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
               Get Instant Quote
               <ArrowRight className="ml-3 h-5 w-5" />
             </Button>}
