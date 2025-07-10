@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const FeaturesSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const isDFW = location.pathname === '/dfw';
+  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   
   const features = isDFW ? [
     {
