@@ -9,7 +9,8 @@ import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
-  const serviceArea = isDFW ? "Dallas, Plano, Houston, Phoenix" : "Nationwide Service";
+  const isCommercial = location.pathname === '/dfwcommercial';
+  const serviceArea = isCommercial ? "Dallas-Fort Worth Metroplex" : (isDFW ? "Dallas, Plano, Houston, Phoenix" : "Nationwide Service");
   
   // Determine paths based on current location
   const homePath = isDFW ? "/dfw" : "/houston";
@@ -23,9 +24,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-12 sm:py-16 lg:py-20">
+    <footer className="bg-gray-900 text-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-14 lg:gap-16 mb-12 sm:mb-14 lg:mb-16">
           {/* Company Info */}
           <div className="space-y-4 sm:space-y-6">
             <div className="flex items-center mb-4 sm:mb-6">

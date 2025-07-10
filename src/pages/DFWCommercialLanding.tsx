@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { LandingCommercialHeader } from "@/components/landing/LandingCommercialHeader";
 import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter";
@@ -13,6 +13,18 @@ import { CommercialCTAButtons } from "@/components/commercial/CommercialCTAButto
 
 const DFWCommercialLanding = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  // Listen for the custom event from hero section
+  useEffect(() => {
+    const handleOpenModal = () => {
+      setIsContactModalOpen(true);
+    };
+
+    window.addEventListener('openCommercialModal', handleOpenModal);
+    return () => {
+      window.removeEventListener('openCommercialModal', handleOpenModal);
+    };
+  }, []);
 
   return (
     <>
