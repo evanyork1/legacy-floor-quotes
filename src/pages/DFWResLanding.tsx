@@ -6,7 +6,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import { LandingGalleryPreview } from "@/components/landing/LandingGalleryPreview";
+import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
 
@@ -52,7 +52,7 @@ const DFWResLanding = () => {
         <TrustedBrandSection />
         <HowItWorksSection />
         <TestimonialsSection />
-        <LandingGalleryPreview />
+        <GalleryPreview />
         <CommercialSection />
         <CTASection />
         <div id="footer">

@@ -6,7 +6,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSectionHoustonRes from "@/components/sections/TestimonialsSectionHoustonRes";
-import { LandingGalleryPreviewHoustonRes } from "@/components/landing/LandingGalleryPreviewHoustonRes";
+import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
 
@@ -52,7 +52,7 @@ const HoustonResLanding = () => {
         <TrustedBrandSection />
         <HowItWorksSection />
         <TestimonialsSectionHoustonRes />
-        <LandingGalleryPreviewHoustonRes />
+        <GalleryPreview />
         <CommercialSection />
         <CTASection />
         <div id="footer">

@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const TrustedBrandSection = () => {
   const location = useLocation();
-  const isDFW = location.pathname === '/dfw';
+  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/houstonreslanding';
   
   const services = isDFW ? [
     {

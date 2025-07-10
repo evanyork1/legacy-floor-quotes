@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 const HowItWorksSection = () => {
   const location = useLocation();
-  const isDFW = location.pathname === '/dfw';
+  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/houstonreslanding';
   
   const steps = [{
     step: "1",
