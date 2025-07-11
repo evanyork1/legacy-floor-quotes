@@ -42,7 +42,7 @@ const TrustedBrandSection = () => {
     description: "Legacy stands behind every installation with our warranty backing"
   }];
   const sectionTitle = isCommercial ? "The Most Trusted Brand in Commercial Flooring" : isDFW ? "The Most Trusted Brand in Concrete Coatings" : "The Most Trusted Brand in Garage Floors";
-  const imageSource = isCommercial ? "/lovable-uploads/7f470322-a59f-497a-973a-c0848d8192f8.png" : "/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png";
+  const imageSource = isCommercial ? "/lovable-uploads/9d6d7b07-f52f-4337-8e8b-facfd408c6ae.png" : "/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png";
   const imageAlt = isCommercial ? "Professional commercial warehouse floor with polished concrete finish" : "Premium garage floor with luxury car";
   
   return <section className="bg-gradient-to-br from-white to-slate-50 py-[31px]">
