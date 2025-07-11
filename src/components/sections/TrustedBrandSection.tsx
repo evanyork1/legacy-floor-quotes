@@ -54,7 +54,7 @@ const TrustedBrandSection = () => {
           {/* Left side - Image */}
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-            <img alt="Premium garage floor with luxury car" className="relative w-full h-auto rounded-xl shadow-2xl" src="/lovable-uploads/33986521-46a9-4908-90a6-3f7f9eff4456.png" />
+            <img alt="Premium garage floor with luxury car" className="relative w-full h-auto rounded-xl shadow-2xl" src="/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png" />
           </div>
           
           {/* Right side - Service points */}
