@@ -42,6 +42,9 @@ const TrustedBrandSection = () => {
     description: "Legacy stands behind every installation with our warranty backing"
   }];
   const sectionTitle = isCommercial ? "The Most Trusted Brand in Commercial Flooring" : isDFW ? "The Most Trusted Brand in Concrete Coatings" : "The Most Trusted Brand in Garage Floors";
+  const imageSource = isCommercial ? "/lovable-uploads/7f470322-a59f-497a-973a-c0848d8192f8.png" : "/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png";
+  const imageAlt = isCommercial ? "Professional commercial warehouse floor with polished concrete finish" : "Premium garage floor with luxury car";
+  
   return <section className="bg-gradient-to-br from-white to-slate-50 py-[31px]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -54,7 +57,7 @@ const TrustedBrandSection = () => {
           {/* Left side - Image */}
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-            <img alt="Premium garage floor with luxury car" className="relative w-full h-auto rounded-xl shadow-2xl" src="/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png" />
+            <img alt={imageAlt} className="relative w-full h-auto rounded-xl shadow-2xl" src={imageSource} />
           </div>
           
           {/* Right side - Service points */}
