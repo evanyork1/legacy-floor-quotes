@@ -26,7 +26,16 @@ const CTASection = () => {
         </p>
         {isCommercial ? (
           <Button asChild className="bg-white text-blue-600 hover:bg-gray-50 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-            <a href="tel:214-305-6516" className="flex items-center">
+            <a 
+              href="tel:214-305-6516" 
+              className="flex items-center"
+              onClick={() => {
+                // Call new conversion tracking for /dfwcommercial
+                if (typeof window !== 'undefined' && window.location.pathname === '/dfwcommercial' && (window as any).gtag_report_conversion_new) {
+                  (window as any).gtag_report_conversion_new('tel:214-305-6516');
+                }
+              }}
+            >
               <Phone className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               Call Commercial Team
             </a>

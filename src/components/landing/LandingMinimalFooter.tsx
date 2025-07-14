@@ -6,6 +6,11 @@ export const LandingMinimalFooter = () => {
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
       (window as any).gtag_report_conversion('tel:214-305-6516');
     }
+    
+    // Call new conversion tracking for /dfwreslanding
+    if (typeof window !== 'undefined' && window.location.pathname === '/dfwreslanding' && (window as any).gtag_report_conversion_new) {
+      (window as any).gtag_report_conversion_new('tel:214-305-6516');
+    }
   };
 
   return (

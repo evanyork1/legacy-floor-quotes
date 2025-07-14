@@ -82,7 +82,15 @@ const HeroSection = () => {
                       variant="outline" 
                       className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                     >
-                      <a href="tel:214-305-6516">
+                      <a 
+                        href="tel:214-305-6516"
+                        onClick={() => {
+                          // Call new conversion tracking for /dfwreslanding
+                          if (typeof window !== 'undefined' && window.location.pathname === '/dfwreslanding' && (window as any).gtag_report_conversion_new) {
+                            (window as any).gtag_report_conversion_new('tel:214-305-6516');
+                          }
+                        }}
+                      >
                         <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
                         Call Us Now
                       </a>

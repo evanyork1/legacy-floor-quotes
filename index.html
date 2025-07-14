@@ -9,14 +9,22 @@
     <link rel="apple-touch-icon" href="/lovable-uploads/cca60ef5-0b8e-48de-874d-9d4074dd935c.png?v=2025">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - Original -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-410786005"></script>
+    <!-- Google tag (gtag.js) - New -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NX25CBGD"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'AW-410786005');
+      gtag('config', 'G-Q7NX25CBGD');
+      
+      // New phone conversion config
+      gtag('config', 'AW-16455875438/h_ICCLSv278ZEO724qY9', {
+        'phone_conversion_number': '214-305-6516'
+      });
     </script>
 
     <!-- Event snippet for Click to call conversion page -->
@@ -29,6 +37,22 @@
         };
         gtag('event', 'conversion', {
             'send_to': 'AW-410786005/RWaBCIC37d0aENWx8MMB',
+            'value': 1.0,
+            'currency': 'USD',
+            'event_callback': callback
+        });
+        return false;
+      }
+      
+      // New phone conversion tracking function
+      function gtag_report_conversion_new(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16455875438/h_ICCLSv278ZEO724qY9',
             'value': 1.0,
             'currency': 'USD',
             'event_callback': callback

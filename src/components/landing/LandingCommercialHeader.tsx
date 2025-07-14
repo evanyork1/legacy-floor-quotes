@@ -15,17 +15,35 @@ export const LandingCommercialHeader = () => {
         
         <div className="flex items-center space-x-4">
           {/* Phone Number Display */}
-          <div className="hidden md:flex items-center space-x-2 text-gray-700">
+          <a 
+            href="tel:214-305-6516"
+            onClick={() => {
+              // Call new conversion tracking for /dfwcommercial
+              if (typeof window !== 'undefined' && window.location.pathname === '/dfwcommercial' && (window as any).gtag_report_conversion_new) {
+                (window as any).gtag_report_conversion_new('tel:214-305-6516');
+              }
+            }}
+            className="hidden md:flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
+          >
             <Phone className="h-4 w-4" />
             <span className="font-semibold">214-305-6516</span>
-          </div>
+          </a>
           
           {/* Call Now Button */}
           <Button 
             asChild 
             className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <a href="tel:214-305-6516" className="flex items-center space-x-2">
+            <a 
+              href="tel:214-305-6516" 
+              className="flex items-center space-x-2"
+              onClick={() => {
+                // Call new conversion tracking for /dfwcommercial
+                if (typeof window !== 'undefined' && window.location.pathname === '/dfwcommercial' && (window as any).gtag_report_conversion_new) {
+                  (window as any).gtag_report_conversion_new('tel:214-305-6516');
+                }
+              }}
+            >
               <Phone className="h-4 w-4" />
               <span>Call Now</span>
             </a>

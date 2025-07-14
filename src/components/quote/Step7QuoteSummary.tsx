@@ -11,8 +11,16 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
   useEffect(() => {
     // Track quote request conversion when step 7 loads
     if (typeof window !== 'undefined' && (window as any).gtag) {
+      // Original conversion tracking
       (window as any).gtag('event', 'conversion', {
         'send_to': 'AW-410786005/2Ym5CI3Q7d0aENWx8MMB',
+        'value': 1.0,
+        'currency': 'USD'
+      });
+      
+      // New conversion tracking for quote completions
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-16455875438/new-conversion-id', // Replace with actual conversion ID
         'value': 1.0,
         'currency': 'USD'
       });
