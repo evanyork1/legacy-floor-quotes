@@ -31,15 +31,16 @@ export const QuoteStepRenderer = ({
       return <Step1GarageSize formData={formData} updateFormData={updateFormData} />;
     case 2:
       return <Step2CustomSpace formData={formData} updateFormData={updateFormData} />;
-    case 3:
-      return <Step3ExteriorPhotos formData={formData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} />;
-    case 4:
-      return <Step4DamagePhotos formData={formData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} />;
-    case 5:
+    // PHOTO_UPLOAD_BACKUP: Cases 3&4 removed to skip photo uploads
+    // case 3:
+    //   return <Step3ExteriorPhotos formData={formData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} />;
+    // case 4:
+    //   return <Step4DamagePhotos formData={formData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} />;
+    case 3: // Was step 5, now step 3
       return <Step5ColorChoice formData={formData} updateFormData={updateFormData} colorOptions={colorOptions} />;
-    case 6:
+    case 4: // Was step 6, now step 4
       return <Step6ContactInfo formData={formData} updateFormData={updateFormData} />;
-    case 7:
+    case 5: // Was step 7, now step 5
       return <Step7QuoteSummary formData={formData} estimatedPrice={estimatedPrice} />;
     default:
       return null;

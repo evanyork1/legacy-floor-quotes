@@ -9,7 +9,8 @@ export const useQuoteNavigation = (
   calculatePrice: () => number
 ) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 7;
+  // PHOTO_UPLOAD_BACKUP: Original was totalSteps = 7
+  const totalSteps = 5; // Reduced from 7 to skip photo upload steps (3&4)
   const { toast } = useToast();
 
   useEffect(() => {
@@ -18,16 +19,19 @@ export const useQuoteNavigation = (
 
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: FormData) => {
-        const uploadFile = async (file: File) => {
-            const fileName = `${crypto.randomUUID()}-${file.name}`;
-            const { error: uploadError } = await supabase.storage.from('quote_photos').upload(fileName, file);
-            if (uploadError) throw uploadError;
-            const { data: urlData } = supabase.storage.from('quote_photos').getPublicUrl(fileName);
-            return urlData.publicUrl;
-        };
+        // PHOTO_UPLOAD_BACKUP: Photo upload logic commented out for faster quote process
+        // const uploadFile = async (file: File) => {
+        //     const fileName = `${crypto.randomUUID()}-${file.name}`;
+        //     const { error: uploadError } = await supabase.storage.from('quote_photos').upload(fileName, file);
+        //     if (uploadError) throw uploadError;
+        //     const { data: urlData } = supabase.storage.from('quote_photos').getPublicUrl(fileName);
+        //     return urlData.publicUrl;
+        // };
 
-        const exterior_photos = await Promise.all(dataToSubmit.exteriorPhotos.map(uploadFile));
-        const damage_photos = await Promise.all(dataToSubmit.damagePhotos.map(uploadFile));
+        // const exterior_photos = await Promise.all(dataToSubmit.exteriorPhotos.map(uploadFile));
+        // const damage_photos = await Promise.all(dataToSubmit.damagePhotos.map(uploadFile));
+        const exterior_photos: string[] = [];
+        const damage_photos: string[] = [];
         
         const price = calculatePrice();
 
@@ -83,7 +87,7 @@ export const useQuoteNavigation = (
             title: "Quote Submitted!",
             description: "We'll call you within 60 minutes to confirm.",
         });
-        setCurrentStep(7);
+        setCurrentStep(5); // Was step 7, now step 5
     },
     onError: (error) => {
         console.error('Error submitting quote:', error);
@@ -97,11 +101,11 @@ export const useQuoteNavigation = (
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
-        if (currentStep === 6) {
-            // Submit to database when moving from step 6 to step 7
+        if (currentStep === 4) {
+            // Submit to database when moving from step 4 to step 5 (was step 6 to 7)
             submitQuote(formData);
         } else if (currentStep === 1 && formData.garageType !== "custom") {
-            setCurrentStep(3); // Skip step 2 if garageType is not custom
+            setCurrentStep(3); // Skip step 2 if garageType is not custom, go to color choice (was step 5, now step 3)
         } else {
             setCurrentStep(currentStep + 1);
         }
@@ -122,10 +126,11 @@ export const useQuoteNavigation = (
     switch (currentStep) {
       case 1: return formData.garageType !== "";
       case 2: return formData.customSqft !== "" && formData.spaceType !== "";
-      case 3: return true;
-      case 4: return true;
-      case 5: return formData.colorChoice !== "";
-      case 6: {
+      // PHOTO_UPLOAD_BACKUP: Steps 3&4 were photo uploads, now removed
+      // case 3: return true; // Exterior photos
+      // case 4: return true; // Damage photos
+      case 3: return formData.colorChoice !== ""; // Was step 5, now step 3
+      case 4: { // Was step 6, now step 4
         // Check that all fields are filled
         const allFieldsFilled = formData.name !== "" && formData.email !== "" && formData.phone !== "" && formData.zipCode !== "";
         
@@ -144,7 +149,7 @@ export const useQuoteNavigation = (
         
         return phoneValid && emailValid && zipValid;
       }
-      case 7: return true;
+      case 5: return true; // Was step 7, now step 5
       default: return false;
     }
   };

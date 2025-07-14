@@ -11,32 +11,33 @@ export const useQuoteSubmission = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const uploadPhotos = async (photos: File[], folder: string): Promise<string[]> => {
-    const uploadedUrls: string[] = [];
-    
-    for (const photo of photos) {
-      const fileExt = photo.name.split('.').pop();
-      const fileName = `${crypto.randomUUID()}.${fileExt}`;
-      const filePath = `${folder}/${fileName}`;
+  // PHOTO_UPLOAD_BACKUP: Photo upload function commented out for faster quote process
+  // const uploadPhotos = async (photos: File[], folder: string): Promise<string[]> => {
+  //   const uploadedUrls: string[] = [];
+  //   
+  //   for (const photo of photos) {
+  //     const fileExt = photo.name.split('.').pop();
+  //     const fileName = `${crypto.randomUUID()}.${fileExt}`;
+  //     const filePath = `${folder}/${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
-        .from('quote_photos')
-        .upload(filePath, photo);
+  //     const { error: uploadError } = await supabase.storage
+  //       .from('quote_photos')
+  //       .upload(filePath, photo);
 
-      if (uploadError) {
-        console.error('Photo upload error:', uploadError);
-        throw new Error(`Failed to upload photo: ${uploadError.message}`);
-      }
+  //     if (uploadError) {
+  //       console.error('Photo upload error:', uploadError);
+  //       throw new Error(`Failed to upload photo: ${uploadError.message}`);
+  //     }
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('quote_photos')
-        .getPublicUrl(filePath);
+  //     const { data: { publicUrl } } = supabase.storage
+  //       .from('quote_photos')
+  //       .getPublicUrl(filePath);
 
-      uploadedUrls.push(publicUrl);
-    }
+  //     uploadedUrls.push(publicUrl);
+  //   }
 
-    return uploadedUrls;
-  };
+  //   return uploadedUrls;
+  // };
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
     if (isSubmitting) {
@@ -48,19 +49,20 @@ export const useQuoteSubmission = () => {
     console.log('Starting quote submission process...', formData);
 
     try {
+      // PHOTO_UPLOAD_BACKUP: Photo upload logic commented out for faster quote process
       // Upload photos first
       let exteriorPhotoUrls: string[] = [];
       let damagePhotoUrls: string[] = [];
 
-      if (formData.exteriorPhotos.length > 0) {
-        console.log('Uploading exterior photos...');
-        exteriorPhotoUrls = await uploadPhotos(formData.exteriorPhotos, 'exterior');
-      }
+      // if (formData.exteriorPhotos.length > 0) {
+      //   console.log('Uploading exterior photos...');
+      //   exteriorPhotoUrls = await uploadPhotos(formData.exteriorPhotos, 'exterior');
+      // }
 
-      if (formData.damagePhotos.length > 0) {
-        console.log('Uploading damage photos...');
-        damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
-      }
+      // if (formData.damagePhotos.length > 0) {
+      //   console.log('Uploading damage photos...');
+      //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
+      // }
 
       // Determine lead source - if on landing visual page, use DFW
       const leadSource = (location.pathname === '/quotedfw' || location.pathname === '/landingvisual') ? 'DFW' : 'Houston';
