@@ -85,10 +85,10 @@ export const GalleryPreview = () => {
 
         <div className="text-center">
           <Button 
-            onClick={() => navigate('/gallery')}
+            onClick={() => navigate('/quotedfw')}
             className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
           >
-            See More
+            Get Instant Quote
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>

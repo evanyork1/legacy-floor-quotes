@@ -7,7 +7,7 @@ import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
-import CommercialSection from "@/components/sections/CommercialSection";
+
 import CTASection from "@/components/sections/CTASection";
 
 const DFWResLanding = () => {
@@ -48,12 +48,11 @@ const DFWResLanding = () => {
       <div className="min-h-screen bg-white">
         <LandingMinimalHeader />
         <HeroSection />
-        <FeaturesSection />
         <TrustedBrandSection />
+        <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />
         <GalleryPreview />
-        <CommercialSection />
         <CTASection />
         <div id="footer">
           <LandingMinimalFooter />
