@@ -8,15 +8,19 @@ import { RefreshCw, Save } from "lucide-react";
 
 interface WebhooksTabProps {
   webhookUrl: string;
+  dfwWebhookUrl: string;
   savingWebhook: boolean;
   onWebhookUrlChange: (url: string) => void;
+  onDfwWebhookUrlChange: (url: string) => void;
   onSaveWebhookUrl: () => void;
 }
 
 const WebhooksTab: React.FC<WebhooksTabProps> = ({
   webhookUrl,
+  dfwWebhookUrl,
   savingWebhook,
   onWebhookUrlChange,
+  onDfwWebhookUrlChange,
   onSaveWebhookUrl
 }) => {
   return (
@@ -27,7 +31,7 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <Label className="text-gray-300">Zapier Webhook URL</Label>
+          <Label className="text-gray-300">Houston Quotes Webhook URL</Label>
           <Input 
             value={webhookUrl}
             onChange={(e) => onWebhookUrlChange(e.target.value)}
@@ -35,7 +39,20 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
             className="bg-gray-600 border-gray-500 text-white"
           />
           <p className="text-xs text-gray-400 mt-1">
-            Paste your Zapier webhook URL here to receive quote notifications
+            Webhook URL for Houston quote notifications
+          </p>
+        </div>
+        
+        <div>
+          <Label className="text-gray-300">DFW Quotes Webhook URL</Label>
+          <Input 
+            value={dfwWebhookUrl}
+            onChange={(e) => onDfwWebhookUrlChange(e.target.value)}
+            placeholder="https://hooks.zapier.com/hooks/catch/..."
+            className="bg-gray-600 border-gray-500 text-white"
+          />
+          <p className="text-xs text-gray-400 mt-1">
+            Webhook URL for DFW quote notifications
           </p>
         </div>
         

@@ -29,7 +29,9 @@ const AdminPanel = () => {
     setShowArchived,
     archivingQuoteId,
     webhookUrl,
+    dfwWebhookUrl,
     setWebhookUrl,
+    setDfwWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,
@@ -170,8 +172,10 @@ const AdminPanel = () => {
           <TabsContent value="webhooks">
             <WebhooksTab
               webhookUrl={webhookUrl}
+              dfwWebhookUrl={dfwWebhookUrl}
               savingWebhook={savingWebhook}
               onWebhookUrlChange={setWebhookUrl}
+              onDfwWebhookUrlChange={setDfwWebhookUrl}
               onSaveWebhookUrl={saveWebhookUrl}
             />
           </TabsContent>

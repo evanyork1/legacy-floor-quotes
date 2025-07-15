@@ -22,6 +22,7 @@ interface QuoteWebhookData {
   damage_photos?: string[];
   created_at: string;
   status: string;
+  lead_source: string;
 }
 
 Deno.serve(async (req) => {
@@ -43,10 +44,10 @@ Deno.serve(async (req) => {
     const quoteData: QuoteWebhookData = await req.json();
     console.log('Received quote data:', quoteData);
 
-    // Get the webhook URL from settings
+    // Get the appropriate webhook URL based on lead source
     const { data: webhookSettings, error: settingsError } = await supabase
       .from('webhook_settings')
-      .select('zapier_webhook_url')
+      .select('zapier_webhook_url, dfw_webhook_url')
       .eq('id', 1)
       .single();
 
@@ -58,10 +59,14 @@ Deno.serve(async (req) => {
       );
     }
 
-    if (!webhookSettings?.zapier_webhook_url) {
-      console.log('No webhook URL configured, skipping webhook call');
+    // Choose the appropriate webhook URL based on lead source
+    const isFromDFW = quoteData.lead_source === 'DFW';
+    const webhookUrl = isFromDFW ? webhookSettings?.dfw_webhook_url : webhookSettings?.zapier_webhook_url;
+
+    if (!webhookUrl) {
+      console.log(`No webhook URL configured for ${isFromDFW ? 'DFW' : 'Houston'} leads`);
       return new Response(
-        JSON.stringify({ message: 'No webhook URL configured' }),
+        JSON.stringify({ message: `No webhook URL configured for ${isFromDFW ? 'DFW' : 'Houston'} leads` }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -95,11 +100,11 @@ Deno.serve(async (req) => {
       }
     };
 
-    console.log('Sending webhook to:', webhookSettings.zapier_webhook_url);
+    console.log('Sending webhook to:', webhookUrl);
     console.log('Webhook payload:', webhookPayload);
 
     // Send the webhook to Zapier
-    const webhookResponse = await fetch(webhookSettings.zapier_webhook_url, {
+    const webhookResponse = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

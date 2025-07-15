@@ -9,6 +9,7 @@ export const useAdminData = () => {
   const [showArchived, setShowArchived] = useState(false);
   const [archivingQuoteId, setArchivingQuoteId] = useState<string | null>(null);
   const [webhookUrl, setWebhookUrl] = useState("");
+  const [dfwWebhookUrl, setDfwWebhookUrl] = useState("");
   const [savingWebhook, setSavingWebhook] = useState(false);
   const { toast } = useToast();
 
@@ -215,7 +216,7 @@ export const useAdminData = () => {
     try {
       const { data, error } = await supabase
         .from('webhook_settings')
-        .select('zapier_webhook_url')
+        .select('zapier_webhook_url, dfw_webhook_url')
         .eq('id', 1)
         .single();
 
@@ -224,8 +225,9 @@ export const useAdminData = () => {
         return;
       }
 
-      if (data?.zapier_webhook_url) {
-        setWebhookUrl(data.zapier_webhook_url);
+      if (data) {
+        setWebhookUrl(data.zapier_webhook_url || '');
+        setDfwWebhookUrl(data.dfw_webhook_url || '');
       }
     } catch (error) {
       console.error('Error fetching webhook settings:', error);
@@ -240,6 +242,7 @@ export const useAdminData = () => {
         .upsert({ 
           id: 1, 
           zapier_webhook_url: webhookUrl || null,
+          dfw_webhook_url: dfwWebhookUrl || null,
           updated_at: new Date().toISOString()
         });
 
@@ -249,13 +252,13 @@ export const useAdminData = () => {
 
       toast({
         title: "Success",
-        description: "Webhook URL saved successfully",
+        description: "Webhook URLs saved successfully",
       });
     } catch (error) {
-      console.error('Error saving webhook URL:', error);
+      console.error('Error saving webhook URLs:', error);
       toast({
         title: "Error",
-        description: "Failed to save webhook URL",
+        description: "Failed to save webhook URLs",
         variant: "destructive",
       });
     } finally {
@@ -279,7 +282,9 @@ export const useAdminData = () => {
     setShowArchived,
     archivingQuoteId,
     webhookUrl,
+    dfwWebhookUrl,
     setWebhookUrl,
+    setDfwWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,

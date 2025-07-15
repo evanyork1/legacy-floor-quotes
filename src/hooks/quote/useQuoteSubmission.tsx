@@ -65,7 +65,9 @@ export const useQuoteSubmission = () => {
       // }
 
       // Determine lead source - if on landing visual page, use DFW
+      console.log("Current pathname:", location.pathname);
       const leadSource = (location.pathname === '/quotedfw' || location.pathname === '/landingvisual') ? 'DFW' : 'Houston';
+      console.log("Detected lead source:", leadSource);
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
