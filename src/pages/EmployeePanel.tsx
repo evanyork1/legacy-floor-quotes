@@ -32,8 +32,8 @@ const EmployeePanel = () => {
   const [archivingQuoteId, setArchivingQuoteId] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const fetchQuotes = async (includeArchived = false) => {
-    console.log('🔍 Starting fetchQuotes function...', { includeArchived });
+  const fetchQuotes = async (mode: 'active' | 'archived' | 'all' = 'active') => {
+    console.log('🔍 Starting fetchQuotes function...', { mode });
     
     try {
       setLoading(true);
@@ -50,10 +50,15 @@ const EmployeePanel = () => {
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
-      if (!includeArchived) {
+      // Apply proper filtering based on mode
+      if (mode === 'active') {
         quotesQuery.or('archived.is.null,archived.eq.false');
         quotesDfwQuery.or('archived.is.null,archived.eq.false');
+      } else if (mode === 'archived') {
+        quotesQuery.eq('archived', true);
+        quotesDfwQuery.eq('archived', true);
       }
+      // If mode is 'all', no filtering is applied
 
       const [quotesResult, quotesDfwResult] = await Promise.all([
         quotesQuery,
@@ -108,7 +113,7 @@ const EmployeePanel = () => {
       console.log('🎯 Final processed quotes:', sortedQuotes);
       setQuotes(sortedQuotes);
       
-      const statusText = includeArchived ? 'all quotes (including archived)' : 'active quotes';
+      const statusText = mode === 'all' ? 'all quotes' : mode === 'archived' ? 'archived quotes' : 'active quotes';
       toast({
         title: "Success",
         description: `Loaded ${sortedQuotes.length} ${statusText} from database`,
@@ -145,13 +150,10 @@ const EmployeePanel = () => {
         throw error;
       }
 
-      if (!showArchived) {
-        setQuotes(prev => prev.filter(quote => quote.id !== quoteId));
-      } else {
-        setQuotes(prev => prev.map(quote => 
-          quote.id === quoteId ? { ...quote, archived: true } : quote
-        ));
-      }
+      // Always update state consistently
+      setQuotes(prev => prev.map(quote => 
+        quote.id === quoteId ? { ...quote, archived: true } : quote
+      ));
 
       toast({
         title: "Success",
@@ -210,14 +212,14 @@ const EmployeePanel = () => {
   const toggleArchivedView = () => {
     const newShowArchived = !showArchived;
     setShowArchived(newShowArchived);
-    fetchQuotes(newShowArchived);
+    fetchQuotes(newShowArchived ? 'all' : 'active');
   };
 
   useEffect(() => {
     console.log('🚀 EmployeePanel component mounted, testing Supabase connection...');
     console.log('🔧 Supabase client:', supabase);
     
-    fetchQuotes(false);
+    fetchQuotes('active');
   }, []);
 
   const exportLeads = () => {
@@ -323,7 +325,7 @@ const EmployeePanel = () => {
                 {showArchived ? 'Hide Archived' : 'Show Archived'}
               </Button>
               <Button 
-                onClick={() => fetchQuotes(showArchived)} 
+                onClick={() => fetchQuotes(showArchived ? 'all' : 'active')} 
                 variant="outline"
                 size="sm"
                 disabled={loading}
@@ -350,7 +352,7 @@ const EmployeePanel = () => {
                   {showArchived ? 'No quotes found in database' : 'No active quotes found'}
                 </div>
                 <Button 
-                  onClick={() => fetchQuotes(showArchived)} 
+                  onClick={() => fetchQuotes(showArchived ? 'all' : 'active')} 
                   variant="outline"
                   className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
                 >

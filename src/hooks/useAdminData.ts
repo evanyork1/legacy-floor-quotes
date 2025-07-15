@@ -37,8 +37,8 @@ export const useAdminData = () => {
     }
   ]);
 
-  const fetchQuotes = async (includeArchived = false) => {
-    console.log('🔍 Starting fetchQuotes function...', { includeArchived });
+  const fetchQuotes = async (mode: 'active' | 'archived' | 'all' = 'active') => {
+    console.log('🔍 Starting fetchQuotes function...', { mode });
     
     try {
       setLoading(true);
@@ -55,10 +55,15 @@ export const useAdminData = () => {
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
-      if (!includeArchived) {
+      // Apply proper filtering based on mode
+      if (mode === 'active') {
         quotesQuery.or('archived.is.null,archived.eq.false');
         quotesDfwQuery.or('archived.is.null,archived.eq.false');
+      } else if (mode === 'archived') {
+        quotesQuery.eq('archived', true);
+        quotesDfwQuery.eq('archived', true);
       }
+      // If mode is 'all', no filtering is applied
 
       const [quotesResult, quotesDfwResult] = await Promise.all([
         quotesQuery,
@@ -113,7 +118,7 @@ export const useAdminData = () => {
       console.log('🎯 Final processed quotes:', sortedQuotes);
       setQuotes(sortedQuotes);
       
-      const statusText = includeArchived ? 'all quotes (including archived)' : 'active quotes';
+      const statusText = mode === 'all' ? 'all quotes' : mode === 'archived' ? 'archived quotes' : 'active quotes';
       toast({
         title: "Success",
         description: `Loaded ${sortedQuotes.length} ${statusText} from database`,
@@ -150,13 +155,10 @@ export const useAdminData = () => {
         throw error;
       }
 
-      if (!showArchived) {
-        setQuotes(prev => prev.filter(quote => quote.id !== quoteId));
-      } else {
-        setQuotes(prev => prev.map(quote => 
-          quote.id === quoteId ? { ...quote, archived: true } : quote
-        ));
-      }
+      // Always update state consistently
+      setQuotes(prev => prev.map(quote => 
+        quote.id === quoteId ? { ...quote, archived: true } : quote
+      ));
 
       toast({
         title: "Success",
@@ -270,7 +272,7 @@ export const useAdminData = () => {
     console.log('🚀 AdminPanel component mounted, testing Supabase connection...');
     console.log('🔧 Supabase client:', supabase);
     
-    fetchQuotes(false);
+    fetchQuotes('active');
     fetchWebhookSettings();
   }, []);
 
