@@ -65,9 +65,19 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // SIMPLE DFW DETECTION - DIRECT PATH CHECK
-      const leadSource = location.pathname.includes('/quotedfw') ? 'DFW' : 'Houston';
-      console.log("🎯 Lead source determined:", leadSource, "for path:", location.pathname);
+      // BULLETPROOF DFW DETECTION - ABSOLUTE FORCE
+      const currentPath = window.location.pathname;
+      const isDFW = currentPath.includes('quotedfw') || currentPath.includes('dfw') || explicitLeadSource === 'DFW';
+      const leadSource = isDFW ? 'DFW' : 'Houston';
+      
+      console.log("🔍 BULLETPROOF DFW DETECTION:");
+      console.log("  - window.location.pathname:", window.location.pathname);
+      console.log("  - location.pathname:", location.pathname);
+      console.log("  - includes 'quotedfw':", currentPath.includes('quotedfw'));
+      console.log("  - includes 'dfw':", currentPath.includes('dfw'));
+      console.log("  - explicitLeadSource:", explicitLeadSource);
+      console.log("  - isDFW result:", isDFW);
+      console.log("🎯 FINAL LEAD SOURCE:", leadSource);
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
