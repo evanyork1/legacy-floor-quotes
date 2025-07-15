@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { FormData } from "@/components/quote/types";
 
 export const useQuoteSubmission = (explicitLeadSource?: string) => {
+  console.log("🔍 useQuoteSubmission called with explicitLeadSource:", explicitLeadSource);
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -67,20 +68,27 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       // Determine lead source - use explicit if provided, otherwise fallback to path detection
       let leadSource: string;
       
+      console.log("🔍 DEBUGGING LEAD SOURCE DETECTION:");
+      console.log("  - explicitLeadSource parameter:", explicitLeadSource);
+      console.log("  - current pathname:", location.pathname);
+      
       if (explicitLeadSource) {
-        console.log("Using explicit lead source:", explicitLeadSource);
+        console.log("✅ Using explicit lead source:", explicitLeadSource);
         leadSource = explicitLeadSource;
       } else {
-        console.log("No explicit lead source, detecting from path...");
-        console.log("Current pathname:", location.pathname);
+        console.log("❌ No explicit lead source provided, detecting from path...");
         
-        // Fallback detection for legacy paths
-        const isDFWPath = location.pathname === '/quotedfw' || 
-                         location.pathname.toLowerCase().includes('dfw');
-        
-        leadSource = isDFWPath ? 'DFW' : 'Houston';
-        console.log("Detected lead source:", leadSource);
+        // Force DFW for quotedfw path
+        if (location.pathname === '/quotedfw') {
+          leadSource = 'DFW';
+          console.log("🎯 FORCED DFW for /quotedfw path");
+        } else {
+          leadSource = 'Houston';
+          console.log("🎯 DEFAULTED to Houston");
+        }
       }
+      
+      console.log("🔍 FINAL LEAD SOURCE:", leadSource);
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
@@ -105,7 +113,14 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
 
       // Determine which table to save to based on lead source
       const tableName = leadSource === 'DFW' ? 'quotes_dfw' : 'quotes';
-      console.log(`Saving to table: ${tableName} for lead source: ${leadSource}`);
+      console.log(`🔍 TABLE SELECTION: ${tableName} for lead source: ${leadSource}`);
+      console.log(`🔍 LOGIC CHECK: leadSource === 'DFW' ? ${leadSource === 'DFW'}`);
+      
+      if (leadSource === 'DFW') {
+        console.log("🎯 SAVING TO quotes_dfw TABLE");
+      } else {
+        console.log("🎯 SAVING TO quotes TABLE");
+      }
 
       // Save quote to database
       const { data: savedQuote, error: saveError } = await supabase
