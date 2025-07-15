@@ -6,6 +6,8 @@ import { useQuotePricing } from "./quote/useQuotePricing";
 import { useQuoteSubmission } from "./quote/useQuoteSubmission";
 
 export const useQuoteForm = (leadSource?: string) => {
+  console.log("🔍 useQuoteForm called with leadSource:", leadSource);
+  
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
@@ -15,6 +17,8 @@ export const useQuoteForm = (leadSource?: string) => {
   );
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
+  
+  console.log("🔍 Passing leadSource to useQuoteSubmission:", leadSource);
   const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission(leadSource);
 
   const handleSubmit = () => {

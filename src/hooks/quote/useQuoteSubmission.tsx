@@ -65,23 +65,32 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // SIMPLIFIED LEAD SOURCE LOGIC - FORCE DFW WHEN NEEDED
+      // BULLETPROOF DFW DETECTION - MULTIPLE FALLBACKS
       let leadSource: string;
       
-      console.log("🔍 LEAD SOURCE DETECTION START");
-      console.log("  - explicitLeadSource:", explicitLeadSource);
-      console.log("  - pathname:", location.pathname);
+      console.log("🔍 LEAD SOURCE DETECTION - COMPREHENSIVE DEBUGGING");
+      console.log("  - explicitLeadSource parameter:", explicitLeadSource);
+      console.log("  - explicitLeadSource type:", typeof explicitLeadSource);
+      console.log("  - current pathname:", location.pathname);
+      console.log("  - pathname includes 'dfw':", location.pathname.toLowerCase().includes('dfw'));
       
-      // Force DFW if explicit parameter is provided OR if on /quotedfw path
-      if (explicitLeadSource === 'DFW' || location.pathname === '/quotedfw') {
+      // BULLETPROOF: Check multiple conditions to force DFW
+      const isDFW = explicitLeadSource === 'DFW' || 
+                   location.pathname === '/quotedfw' ||
+                   location.pathname.toLowerCase().includes('dfw');
+      
+      if (isDFW) {
         leadSource = 'DFW';
-        console.log("🎯 FORCED LEAD SOURCE TO DFW");
+        console.log("🎯 CONFIRMED DFW LEAD SOURCE");
+        console.log("  - Reason: explicitLeadSource === 'DFW'?", explicitLeadSource === 'DFW');
+        console.log("  - Reason: pathname === '/quotedfw'?", location.pathname === '/quotedfw');
+        console.log("  - Reason: pathname includes 'dfw'?", location.pathname.toLowerCase().includes('dfw'));
       } else {
         leadSource = 'Houston';
         console.log("🎯 DEFAULTED TO HOUSTON");
       }
       
-      console.log("🔍 FINAL LEAD SOURCE:", leadSource);
+      console.log("🔍 FINAL LEAD SOURCE DECISION:", leadSource);
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
