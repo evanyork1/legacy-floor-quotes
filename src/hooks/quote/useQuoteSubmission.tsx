@@ -73,9 +73,11 @@ export const useQuoteSubmission = () => {
       const isDFWPath = location.pathname === '/quotedfw' || 
                        location.pathname === '/landingvisual' ||
                        location.pathname.includes('dfw') ||
-                       (document.referrer && document.referrer.includes('dfwreslanding'));
+                       location.pathname.includes('DFW') ||
+                       (document.referrer && (document.referrer.includes('dfwreslanding') || document.referrer.includes('dfw')));
       
       const leadSource = isDFWPath ? 'DFW' : 'Houston';
+      console.log("Full location object:", location);
       console.log("Is DFW path:", isDFWPath);
       console.log("Document referrer:", document.referrer);
       console.log("Detected lead source:", leadSource);

@@ -22,18 +22,18 @@ export const LandingMinimalFooter = () => {
             <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
               Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.
             </p>
-            <div className="flex flex-col items-center justify-center gap-6">
-              <div className="flex items-center">
+            <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8">
+              <div className="flex items-center justify-center">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base break-all">support@legacyindustrialcoatings.com</span>
+                <span className="text-gray-300 text-sm sm:text-base break-words">support@legacyindustrialcoatings.com</span>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
                 <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
                   214-305-6516
                 </a>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
                 <span className="text-gray-300 text-sm sm:text-base">Dallas-Fort Worth, TX</span>
               </div>
