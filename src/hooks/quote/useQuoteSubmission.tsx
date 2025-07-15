@@ -65,32 +65,9 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // BULLETPROOF DFW DETECTION - MULTIPLE FALLBACKS
-      let leadSource: string;
-      
-      console.log("🔍 LEAD SOURCE DETECTION - COMPREHENSIVE DEBUGGING");
-      console.log("  - explicitLeadSource parameter:", explicitLeadSource);
-      console.log("  - explicitLeadSource type:", typeof explicitLeadSource);
-      console.log("  - current pathname:", location.pathname);
-      console.log("  - pathname includes 'dfw':", location.pathname.toLowerCase().includes('dfw'));
-      
-      // BULLETPROOF: Check multiple conditions to force DFW
-      const isDFW = explicitLeadSource === 'DFW' || 
-                   location.pathname === '/quotedfw' ||
-                   location.pathname.toLowerCase().includes('dfw');
-      
-      if (isDFW) {
-        leadSource = 'DFW';
-        console.log("🎯 CONFIRMED DFW LEAD SOURCE");
-        console.log("  - Reason: explicitLeadSource === 'DFW'?", explicitLeadSource === 'DFW');
-        console.log("  - Reason: pathname === '/quotedfw'?", location.pathname === '/quotedfw');
-        console.log("  - Reason: pathname includes 'dfw'?", location.pathname.toLowerCase().includes('dfw'));
-      } else {
-        leadSource = 'Houston';
-        console.log("🎯 DEFAULTED TO HOUSTON");
-      }
-      
-      console.log("🔍 FINAL LEAD SOURCE DECISION:", leadSource);
+      // SIMPLE DFW DETECTION - DIRECT PATH CHECK
+      const leadSource = location.pathname.includes('/quotedfw') ? 'DFW' : 'Houston';
+      console.log("🎯 Lead source determined:", leadSource, "for path:", location.pathname);
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
