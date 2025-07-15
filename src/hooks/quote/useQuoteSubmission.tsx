@@ -64,9 +64,20 @@ export const useQuoteSubmission = () => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // Determine lead source - if on landing visual page, use DFW
+      // Determine lead source - improved detection for DFW paths
       console.log("Current pathname:", location.pathname);
-      const leadSource = (location.pathname === '/quotedfw' || location.pathname === '/landingvisual') ? 'DFW' : 'Houston';
+      console.log("Current search params:", location.search);
+      console.log("Current location state:", location.state);
+      
+      // Check if current path is DFW-related or if we came from DFW landing page
+      const isDFWPath = location.pathname === '/quotedfw' || 
+                       location.pathname === '/landingvisual' ||
+                       location.pathname.includes('dfw') ||
+                       (document.referrer && document.referrer.includes('dfwreslanding'));
+      
+      const leadSource = isDFWPath ? 'DFW' : 'Houston';
+      console.log("Is DFW path:", isDFWPath);
+      console.log("Document referrer:", document.referrer);
       console.log("Detected lead source:", leadSource);
 
       // Prepare quote data using the provided estimated price
