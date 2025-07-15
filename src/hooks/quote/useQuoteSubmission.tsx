@@ -149,7 +149,7 @@ export const useQuoteSubmission = () => {
       }
 
       // Navigate to success page based on lead source
-      navigate(leadSource === 'DFW' ? '/dfw' : '/houston');
+      navigate(leadSource === 'DFW' ? '/dfwreslanding' : '/houston');
 
     } catch (error) {
       console.error('Quote submission error:', error);
