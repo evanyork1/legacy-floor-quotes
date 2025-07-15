@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { FormData } from "@/components/quote/types";
 
-export const useQuoteSubmission = () => {
+export const useQuoteSubmission = (explicitLeadSource?: string) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -64,34 +64,23 @@ export const useQuoteSubmission = () => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // EXPLICIT DFW DETECTION - Multiple methods to ensure accuracy
-      console.log("=== LEAD SOURCE DETECTION DEBUG ===");
-      console.log("Current pathname:", location.pathname);
-      console.log("Current search params:", location.search);
-      console.log("Document referrer:", document.referrer);
-      console.log("Window location pathname:", window.location.pathname);
-      console.log("Window location href:", window.location.href);
+      // Determine lead source - use explicit if provided, otherwise fallback to path detection
+      let leadSource: string;
       
-      // Multiple detection methods for bulletproof DFW detection
-      const pathIsQuoteDFW = location.pathname === '/quotedfw';
-      const pathContainsDFW = location.pathname.toLowerCase().includes('dfw');
-      const hrefContainsDFW = window.location.href.toLowerCase().includes('dfw');
-      const windowPathContainsDFW = window.location.pathname.toLowerCase().includes('dfw');
-      const referrerContainsDFW = document.referrer && document.referrer.toLowerCase().includes('dfw');
-      
-      console.log("Path === '/quotedfw':", pathIsQuoteDFW);
-      console.log("Path contains 'dfw':", pathContainsDFW);
-      console.log("Href contains 'dfw':", hrefContainsDFW);
-      console.log("Window path contains 'dfw':", windowPathContainsDFW);
-      console.log("Referrer contains 'dfw':", referrerContainsDFW);
-      
-      // If ANY of these conditions are true, it's a DFW lead
-      const isDFWPath = pathIsQuoteDFW || pathContainsDFW || hrefContainsDFW || windowPathContainsDFW || referrerContainsDFW;
-      
-      const leadSource = isDFWPath ? 'DFW' : 'Houston';
-      console.log("FINAL isDFWPath result:", isDFWPath);
-      console.log("FINAL LEAD SOURCE:", leadSource);
-      console.log("=== END LEAD SOURCE DEBUG ===");
+      if (explicitLeadSource) {
+        console.log("Using explicit lead source:", explicitLeadSource);
+        leadSource = explicitLeadSource;
+      } else {
+        console.log("No explicit lead source, detecting from path...");
+        console.log("Current pathname:", location.pathname);
+        
+        // Fallback detection for legacy paths
+        const isDFWPath = location.pathname === '/quotedfw' || 
+                         location.pathname.toLowerCase().includes('dfw');
+        
+        leadSource = isDFWPath ? 'DFW' : 'Houston';
+        console.log("Detected lead source:", leadSource);
+      }
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
@@ -116,6 +105,7 @@ export const useQuoteSubmission = () => {
 
       // Determine which table to save to based on lead source
       const tableName = leadSource === 'DFW' ? 'quotes_dfw' : 'quotes';
+      console.log(`Saving to table: ${tableName} for lead source: ${leadSource}`);
 
       // Save quote to database
       const { data: savedQuote, error: saveError } = await supabase

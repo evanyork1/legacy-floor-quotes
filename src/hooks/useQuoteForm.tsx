@@ -5,7 +5,7 @@ import { useQuoteFileHandling } from "./quote/useQuoteFileHandling";
 import { useQuotePricing } from "./quote/useQuotePricing";
 import { useQuoteSubmission } from "./quote/useQuoteSubmission";
 
-export const useQuoteForm = () => {
+export const useQuoteForm = (leadSource?: string) => {
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
@@ -15,7 +15,7 @@ export const useQuoteForm = () => {
   );
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
-  const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission();
+  const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission(leadSource);
 
   const handleSubmit = () => {
     const estimatedPrice = calculatePrice();
