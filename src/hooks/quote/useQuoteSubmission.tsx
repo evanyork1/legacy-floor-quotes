@@ -64,23 +64,34 @@ export const useQuoteSubmission = () => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // Determine lead source - improved detection for DFW paths
+      // EXPLICIT DFW DETECTION - Multiple methods to ensure accuracy
+      console.log("=== LEAD SOURCE DETECTION DEBUG ===");
       console.log("Current pathname:", location.pathname);
       console.log("Current search params:", location.search);
-      console.log("Current location state:", location.state);
+      console.log("Document referrer:", document.referrer);
+      console.log("Window location pathname:", window.location.pathname);
+      console.log("Window location href:", window.location.href);
       
-      // Check if current path is DFW-related or if we came from DFW landing page
-      const isDFWPath = location.pathname === '/quotedfw' || 
-                       location.pathname === '/landingvisual' ||
-                       location.pathname.includes('dfw') ||
-                       location.pathname.includes('DFW') ||
-                       (document.referrer && (document.referrer.includes('dfwreslanding') || document.referrer.includes('dfw')));
+      // Multiple detection methods for bulletproof DFW detection
+      const pathIsQuoteDFW = location.pathname === '/quotedfw';
+      const pathContainsDFW = location.pathname.toLowerCase().includes('dfw');
+      const hrefContainsDFW = window.location.href.toLowerCase().includes('dfw');
+      const windowPathContainsDFW = window.location.pathname.toLowerCase().includes('dfw');
+      const referrerContainsDFW = document.referrer && document.referrer.toLowerCase().includes('dfw');
+      
+      console.log("Path === '/quotedfw':", pathIsQuoteDFW);
+      console.log("Path contains 'dfw':", pathContainsDFW);
+      console.log("Href contains 'dfw':", hrefContainsDFW);
+      console.log("Window path contains 'dfw':", windowPathContainsDFW);
+      console.log("Referrer contains 'dfw':", referrerContainsDFW);
+      
+      // If ANY of these conditions are true, it's a DFW lead
+      const isDFWPath = pathIsQuoteDFW || pathContainsDFW || hrefContainsDFW || windowPathContainsDFW || referrerContainsDFW;
       
       const leadSource = isDFWPath ? 'DFW' : 'Houston';
-      console.log("Full location object:", location);
-      console.log("Is DFW path:", isDFWPath);
-      console.log("Document referrer:", document.referrer);
-      console.log("Detected lead source:", leadSource);
+      console.log("FINAL isDFWPath result:", isDFWPath);
+      console.log("FINAL LEAD SOURCE:", leadSource);
+      console.log("=== END LEAD SOURCE DEBUG ===");
 
       // Prepare quote data using the provided estimated price
       const quoteData = {
