@@ -65,27 +65,20 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       //   damagePhotoUrls = await uploadPhotos(formData.damagePhotos, 'damage');
       // }
 
-      // Determine lead source - use explicit if provided, otherwise fallback to path detection
+      // SIMPLIFIED LEAD SOURCE LOGIC - FORCE DFW WHEN NEEDED
       let leadSource: string;
       
-      console.log("🔍 DEBUGGING LEAD SOURCE DETECTION:");
-      console.log("  - explicitLeadSource parameter:", explicitLeadSource);
-      console.log("  - current pathname:", location.pathname);
+      console.log("🔍 LEAD SOURCE DETECTION START");
+      console.log("  - explicitLeadSource:", explicitLeadSource);
+      console.log("  - pathname:", location.pathname);
       
-      if (explicitLeadSource) {
-        console.log("✅ Using explicit lead source:", explicitLeadSource);
-        leadSource = explicitLeadSource;
+      // Force DFW if explicit parameter is provided OR if on /quotedfw path
+      if (explicitLeadSource === 'DFW' || location.pathname === '/quotedfw') {
+        leadSource = 'DFW';
+        console.log("🎯 FORCED LEAD SOURCE TO DFW");
       } else {
-        console.log("❌ No explicit lead source provided, detecting from path...");
-        
-        // Force DFW for quotedfw path
-        if (location.pathname === '/quotedfw') {
-          leadSource = 'DFW';
-          console.log("🎯 FORCED DFW for /quotedfw path");
-        } else {
-          leadSource = 'Houston';
-          console.log("🎯 DEFAULTED to Houston");
-        }
+        leadSource = 'Houston';
+        console.log("🎯 DEFAULTED TO HOUSTON");
       }
       
       console.log("🔍 FINAL LEAD SOURCE:", leadSource);
@@ -109,17 +102,18 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
         archived: false
       };
 
-      console.log('Saving quote to database...', quoteData);
-
-      // Determine which table to save to based on lead source
+      // Determine table and verify data before save
       const tableName = leadSource === 'DFW' ? 'quotes_dfw' : 'quotes';
-      console.log(`🔍 TABLE SELECTION: ${tableName} for lead source: ${leadSource}`);
-      console.log(`🔍 LOGIC CHECK: leadSource === 'DFW' ? ${leadSource === 'DFW'}`);
+      
+      console.log("🔍 PRE-SAVE VERIFICATION:");
+      console.log("  - leadSource in quoteData:", quoteData.lead_source);
+      console.log("  - target table:", tableName);
+      console.log("  - full quoteData:", JSON.stringify(quoteData, null, 2));
       
       if (leadSource === 'DFW') {
-        console.log("🎯 SAVING TO quotes_dfw TABLE");
+        console.log("🎯 CONFIRMED: SAVING TO quotes_dfw TABLE");
       } else {
-        console.log("🎯 SAVING TO quotes TABLE");
+        console.log("🎯 CONFIRMED: SAVING TO quotes TABLE");
       }
 
       // Save quote to database
