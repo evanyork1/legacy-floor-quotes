@@ -4,6 +4,7 @@ import { useQuoteNavigation } from "./quote/useQuoteNavigation";
 import { useQuoteFileHandling } from "./quote/useQuoteFileHandling";
 import { useQuotePricing } from "./quote/useQuotePricing";
 import { useQuoteSubmission } from "./quote/useQuoteSubmission";
+import { useQuoteSubmissionDFW } from "./quote/useQuoteSubmissionDFW";
 
 export const useQuoteForm = (leadSource?: string) => {
   console.log("🔍 useQuoteForm called with leadSource:", leadSource);
@@ -18,8 +19,13 @@ export const useQuoteForm = (leadSource?: string) => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  console.log("🔍 Passing leadSource to useQuoteSubmission:", leadSource);
-  const { handleSubmit: submitQuote, isSubmitting } = useQuoteSubmission(leadSource);
+  // Use dedicated DFW hook for DFW submissions
+  const isDFWSubmission = leadSource === "DFW";
+  const { handleSubmit: submitQuoteRegular, isSubmitting: isSubmittingRegular } = useQuoteSubmission(leadSource);
+  const { handleSubmit: submitQuoteDFW, isSubmitting: isSubmittingDFW } = useQuoteSubmissionDFW();
+  
+  const submitQuote = isDFWSubmission ? submitQuoteDFW : submitQuoteRegular;
+  const isSubmitting = isDFWSubmission ? isSubmittingDFW : isSubmittingRegular;
 
   const handleSubmit = () => {
     const estimatedPrice = calculatePrice();
