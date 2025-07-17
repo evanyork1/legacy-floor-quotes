@@ -42,9 +42,20 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
     if (isSubmitting) {
-      console.log('Submission already in progress, ignoring duplicate request');
+      console.log('🚫 Submission already in progress, ignoring duplicate request');
       return;
     }
+    
+    // Add a small delay to prevent double submissions
+    const submissionKey = `${formData.email}-${estimatedPrice}-${Date.now()}`;
+    const existingSubmission = sessionStorage.getItem('lastSubmission');
+    
+    if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 5000)) {
+      console.log('🚫 Preventing duplicate submission within 5 seconds');
+      return;
+    }
+    
+    sessionStorage.setItem('lastSubmission', Date.now().toString());
 
     setIsSubmitting(true);
     console.log('Starting quote submission process...', formData);
@@ -165,7 +176,7 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       }
 
       // Navigate to success page based on lead source
-      navigate(leadSource === 'DFW' ? '/dfwreslanding' : '/houston');
+      navigate(leadSource === 'DFW' ? '/dfwreslanding' : '/houstonreslanding');
 
     } catch (error) {
       console.error('Quote submission error:', error);

@@ -10,6 +10,21 @@ export const useQuoteSubmissionDFW = () => {
   const location = useLocation();
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
+    // Prevent duplicate submissions
+    if (isSubmitting) {
+      console.log('🚫 DFW Submission already in progress, ignoring duplicate request');
+      return;
+    }
+    
+    // Add a small delay to prevent double submissions
+    const existingSubmission = sessionStorage.getItem('lastDFWSubmission');
+    if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 5000)) {
+      console.log('🚫 Preventing duplicate DFW submission within 5 seconds');
+      return;
+    }
+    
+    sessionStorage.setItem('lastDFWSubmission', Date.now().toString());
+    
     console.log("🟢 DFW SUBMISSION STARTED - Using dedicated DFW hook");
     setIsSubmitting(true);
     
@@ -73,11 +88,7 @@ export const useQuoteSubmissionDFW = () => {
           const { error: webhookFunctionError } = await supabase.functions.invoke(
             "send-quote-webhook",
             {
-              body: {
-                quote: savedQuote,
-                webhookUrl: webhookSettings.dfw_webhook_url,
-                leadSource: "DFW"
-              },
+              body: savedQuote // Send quote data directly, not wrapped in another object
             }
           );
 
@@ -93,13 +104,8 @@ export const useQuoteSubmissionDFW = () => {
 
       toast.success("Quote submitted successfully! We'll be in touch soon.");
       
-      // Navigate to success page
-      const currentPath = location.pathname;
-      if (currentPath.includes('/quotedfw')) {
-        navigate('/quotedfw/success');
-      } else {
-        navigate('/quote/success');
-      }
+      // Navigate to success page - always go to DFW landing for DFW quotes
+      navigate('/dfwreslanding');
 
     } catch (error) {
       console.error("🔴 DFW SUBMISSION ERROR:", error);
