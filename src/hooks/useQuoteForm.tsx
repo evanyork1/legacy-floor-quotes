@@ -20,35 +20,43 @@ export const useQuoteForm = (leadSource?: string) => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // BULLETPROOF DFW DETECTION with multiple fallbacks
+  // SIMPLIFIED PATH DETECTION - Only one hook instantiated
   const currentPath = window.location.pathname;
   const isDFWFromLeadSource = leadSource === "DFW";
-  const isDFWFromPath = currentPath.includes('/quotedfw');
+  const isDFWFromPath = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
   const isDFWSubmission = isDFWFromLeadSource || isDFWFromPath;
   
-  console.log("🔍 DFW DETECTION ANALYSIS:");
+  console.log("🔍 PATH DETECTION ANALYSIS:");
   console.log("🔍 leadSource:", leadSource);
   console.log("🔍 currentPath:", currentPath);
   console.log("🔍 isDFWFromLeadSource:", isDFWFromLeadSource);
   console.log("🔍 isDFWFromPath:", isDFWFromPath);
   console.log("🔍 FINAL isDFWSubmission:", isDFWSubmission);
   
-  const { handleSubmit: submitQuoteRegular, isSubmitting: isSubmittingRegular } = useQuoteSubmission(leadSource);
-  const { handleSubmit: submitQuoteDFW, isSubmitting: isSubmittingDFW } = useQuoteSubmissionDFW();
+  // CONDITIONALLY INSTANTIATE ONLY THE NEEDED HOOK
+  let handleSubmitFunction: (formData: any, estimatedPrice: number) => void;
+  let isSubmitting: boolean;
   
-  const submitQuote = isDFWSubmission ? submitQuoteDFW : submitQuoteRegular;
-  const isSubmitting = isDFWSubmission ? isSubmittingDFW : isSubmittingRegular;
+  if (isDFWSubmission) {
+    console.log("🎯 INSTANTIATING DFW HOOK ONLY");
+    const dfwHook = useQuoteSubmissionDFW();
+    handleSubmitFunction = dfwHook.handleSubmit;
+    isSubmitting = dfwHook.isSubmitting;
+  } else {
+    console.log("🎯 INSTANTIATING HOUSTON HOOK ONLY");
+    const houstonHook = useQuoteSubmission(leadSource);
+    handleSubmitFunction = houstonHook.handleSubmit;
+    isSubmitting = houstonHook.isSubmitting;
+  }
 
-  console.log("🔍 FINAL HOOK SELECTION:");
-  console.log("🔍 Using DFW hook:", isDFWSubmission);
-  console.log("🔍 submitQuote function:", isDFWSubmission ? "submitQuoteDFW" : "submitQuoteRegular");
+  console.log("🔍 HOOK INSTANTIATED:", isDFWSubmission ? "DFW" : "HOUSTON");
 
   const handleSubmit = () => {
     console.log("🚀 HANDLESUBMIT CALLED - isDFWSubmission:", isDFWSubmission);
-    console.log("🚀 About to call:", isDFWSubmission ? "DFW HOOK" : "REGULAR HOOK");
+    console.log("🚀 About to call:", isDFWSubmission ? "DFW HOOK" : "HOUSTON HOOK");
     
     const estimatedPrice = calculatePrice();
-    submitQuote(formData, estimatedPrice);
+    handleSubmitFunction(formData, estimatedPrice);
   };
 
   return {
