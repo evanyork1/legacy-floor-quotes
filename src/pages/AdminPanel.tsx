@@ -48,7 +48,7 @@ const AdminPanel = () => {
   const toggleArchivedView = () => {
     const newShowArchived = !showArchived;
     setShowArchived(newShowArchived);
-    fetchQuotes(newShowArchived ? 'all' : 'active');
+    fetchQuotes(newShowArchived ? 'archived' : 'active');
   };
 
   const exportLeads = () => {
@@ -148,7 +148,7 @@ const AdminPanel = () => {
               showArchived={showArchived}
               archivingQuoteId={archivingQuoteId}
               onToggleArchivedView={toggleArchivedView}
-              onRefresh={() => fetchQuotes(showArchived ? 'all' : 'active')}
+              onRefresh={() => fetchQuotes(showArchived ? 'archived' : 'active')}
               onExportLeads={exportLeads}
               onArchiveQuote={archiveQuote}
               onUnarchiveQuote={unarchiveQuote}

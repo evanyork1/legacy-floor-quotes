@@ -20,7 +20,11 @@ export const useQuoteForm = (leadSource?: string) => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // SIMPLIFIED PATH DETECTION - Only one hook instantiated
+  // ALWAYS INSTANTIATE BOTH HOOKS (following React Rules of Hooks)
+  const { handleSubmit: handleSubmitHouston, isSubmitting: isSubmittingHouston } = useQuoteSubmission(leadSource);
+  const { handleSubmit: handleSubmitDFW, isSubmitting: isSubmittingDFW } = useQuoteSubmissionDFW();
+  
+  // PATH DETECTION for selecting which submission function to use
   const currentPath = window.location.pathname;
   const isDFWFromLeadSource = leadSource === "DFW";
   const isDFWFromPath = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
@@ -33,23 +37,11 @@ export const useQuoteForm = (leadSource?: string) => {
   console.log("🔍 isDFWFromPath:", isDFWFromPath);
   console.log("🔍 FINAL isDFWSubmission:", isDFWSubmission);
   
-  // CONDITIONALLY INSTANTIATE ONLY THE NEEDED HOOK
-  let handleSubmitFunction: (formData: any, estimatedPrice: number) => void;
-  let isSubmitting: boolean;
-  
-  if (isDFWSubmission) {
-    console.log("🎯 INSTANTIATING DFW HOOK ONLY");
-    const dfwHook = useQuoteSubmissionDFW();
-    handleSubmitFunction = dfwHook.handleSubmit;
-    isSubmitting = dfwHook.isSubmitting;
-  } else {
-    console.log("🎯 INSTANTIATING HOUSTON HOOK ONLY");
-    const houstonHook = useQuoteSubmission(leadSource);
-    handleSubmitFunction = houstonHook.handleSubmit;
-    isSubmitting = houstonHook.isSubmitting;
-  }
+  // SELECT WHICH FUNCTIONS TO USE (both hooks are always instantiated)
+  const handleSubmitFunction = isDFWSubmission ? handleSubmitDFW : handleSubmitHouston;
+  const isSubmitting = isDFWSubmission ? isSubmittingDFW : isSubmittingHouston;
 
-  console.log("🔍 HOOK INSTANTIATED:", isDFWSubmission ? "DFW" : "HOUSTON");
+  console.log("🔍 SELECTED SUBMISSION:", isDFWSubmission ? "DFW" : "HOUSTON");
 
   const handleSubmit = () => {
     console.log("🚀 HANDLESUBMIT CALLED - isDFWSubmission:", isDFWSubmission);
