@@ -66,8 +66,16 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       // }
 
       // BULLETPROOF DFW DETECTION - ABSOLUTE FORCE
+      console.log("🔍 INCOMING explicitLeadSource:", explicitLeadSource);
+      console.log("🔍 typeof explicitLeadSource:", typeof explicitLeadSource);
+      console.log("🔍 explicitLeadSource === 'DFW':", explicitLeadSource === 'DFW');
+      
       const currentPath = window.location.pathname;
-      const isDFW = currentPath.includes('quotedfw') || currentPath.includes('dfw') || explicitLeadSource === 'DFW';
+      
+      // ABSOLUTE FORCE: If explicitLeadSource is "DFW", force DFW behavior
+      const forceDFW = explicitLeadSource === 'DFW';
+      const pathContainsDFW = currentPath.includes('quotedfw') || currentPath.includes('dfw');
+      const isDFW = forceDFW || pathContainsDFW;
       const leadSource = isDFW ? 'DFW' : 'Houston';
       
       console.log("🔍 BULLETPROOF DFW DETECTION:");
