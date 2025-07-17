@@ -52,6 +52,7 @@ export const useQuoteSubmissionDFW = () => {
         zip_code: formData.zipCode,
         estimated_price: estimatedPrice,
         lead_source: leadSource, // HARDCODED "DFW"
+        archived: false, // EXPLICITLY SET TO FALSE TO PREVENT AUTO-ARCHIVING
       };
 
       console.log("🟢 SAVING TO QUOTES_DFW TABLE:", quoteData);
