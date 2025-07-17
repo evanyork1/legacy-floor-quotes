@@ -8,6 +8,7 @@ import { useQuoteSubmissionDFW } from "./quote/useQuoteSubmissionDFW";
 
 export const useQuoteForm = (leadSource?: string) => {
   console.log("🔍 useQuoteForm called with leadSource:", leadSource);
+  console.log("🔍 Current window location:", window.location.pathname);
   
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
@@ -19,15 +20,33 @@ export const useQuoteForm = (leadSource?: string) => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // Use dedicated DFW hook for DFW submissions
-  const isDFWSubmission = leadSource === "DFW";
+  // BULLETPROOF DFW DETECTION with multiple fallbacks
+  const currentPath = window.location.pathname;
+  const isDFWFromLeadSource = leadSource === "DFW";
+  const isDFWFromPath = currentPath.includes('/quotedfw');
+  const isDFWSubmission = isDFWFromLeadSource || isDFWFromPath;
+  
+  console.log("🔍 DFW DETECTION ANALYSIS:");
+  console.log("🔍 leadSource:", leadSource);
+  console.log("🔍 currentPath:", currentPath);
+  console.log("🔍 isDFWFromLeadSource:", isDFWFromLeadSource);
+  console.log("🔍 isDFWFromPath:", isDFWFromPath);
+  console.log("🔍 FINAL isDFWSubmission:", isDFWSubmission);
+  
   const { handleSubmit: submitQuoteRegular, isSubmitting: isSubmittingRegular } = useQuoteSubmission(leadSource);
   const { handleSubmit: submitQuoteDFW, isSubmitting: isSubmittingDFW } = useQuoteSubmissionDFW();
   
   const submitQuote = isDFWSubmission ? submitQuoteDFW : submitQuoteRegular;
   const isSubmitting = isDFWSubmission ? isSubmittingDFW : isSubmittingRegular;
 
+  console.log("🔍 FINAL HOOK SELECTION:");
+  console.log("🔍 Using DFW hook:", isDFWSubmission);
+  console.log("🔍 submitQuote function:", isDFWSubmission ? "submitQuoteDFW" : "submitQuoteRegular");
+
   const handleSubmit = () => {
+    console.log("🚀 HANDLESUBMIT CALLED - isDFWSubmission:", isDFWSubmission);
+    console.log("🚀 About to call:", isDFWSubmission ? "DFW HOOK" : "REGULAR HOOK");
+    
     const estimatedPrice = calculatePrice();
     submitQuote(formData, estimatedPrice);
   };
