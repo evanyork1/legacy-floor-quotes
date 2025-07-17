@@ -5,23 +5,37 @@ import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter"
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
-import { useQuoteForm } from "@/hooks/useQuoteForm";
+import { useQuoteFormData } from "@/hooks/quote/useQuoteFormData";
+import { useQuoteNavigation } from "@/hooks/quote/useQuoteNavigation";
+import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
+import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
+import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 
 const QuoteDFW = () => {
-  const {
-    currentStep,
-    totalSteps,
-    formData,
-    updateFormData,
-    nextStep,
-    prevStep,
-    handleFileUpload,
-    removePhoto,
-    calculatePrice,
-    canProceed,
-    handleSubmit,
-    isSubmitting
-  } = useQuoteForm("DFW"); // Explicitly pass "DFW" as lead source
+  console.log("🚀 QuoteDFW component loaded - DIRECT DFW HOOK USAGE");
+  
+  // Use individual hooks directly to bypass detection logic
+  const { formData, updateFormData } = useQuoteFormData();
+  const { calculatePrice } = useQuotePricing(formData);
+  const { 
+    currentStep, 
+    totalSteps, 
+    nextStep, 
+    prevStep, 
+    canProceed 
+  } = useQuoteNavigation(formData, calculatePrice);
+  const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
+  
+  // DIRECTLY use DFW submission hook - no detection needed
+  const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
+  
+  console.log("🚀 DFW hooks initialized - using submitQuoteDFW directly");
+
+  const handleSubmit = () => {
+    console.log("🚀 DFW SUBMISSION TRIGGERED - calling DFW hook directly");
+    const estimatedPrice = calculatePrice();
+    submitQuoteDFW(formData, estimatedPrice);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
