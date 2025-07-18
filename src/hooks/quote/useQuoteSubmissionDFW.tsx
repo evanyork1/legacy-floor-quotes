@@ -15,6 +15,10 @@ export const useQuoteSubmissionDFW = () => {
     const uniqueSubmissionId = `DFW_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     console.log(`🎯 DFW SUBMISSION START - ID: ${uniqueSubmissionId}`);
+    console.log('🔍 DFW SUBMISSION - Current URL:', window.location.href);
+    console.log('🔍 DFW SUBMISSION - Current pathname:', window.location.pathname);
+    console.log('🔍 DFW SUBMISSION - Form data:', formData);
+    console.log('🔍 DFW SUBMISSION - Estimated price:', estimatedPrice);
     
     // Prevent duplicate submissions with DFW-specific session key
     if (isSubmitting) {
@@ -33,11 +37,17 @@ export const useQuoteSubmissionDFW = () => {
     sessionStorage.removeItem('lastQuoteSubmission');
     
     console.log(`🔒 DFW Session locks set for submission: ${uniqueSubmissionId}`);
+    console.log('🔒 Session storage state:', {
+      ACTIVE_DFW_SUBMISSION: sessionStorage.getItem('ACTIVE_DFW_SUBMISSION'),
+      BLOCK_HOUSTON_SUBMISSION: sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION'),
+      SUBMISSION_TYPE: sessionStorage.getItem('SUBMISSION_TYPE')
+    });
     
     setIsSubmitting(true);
     
     try {
       // Validate required fields first
+      console.log('✅ DFW Validating form data...');
       if (!formData.name || !formData.email || !formData.phone) {
         throw new Error("Missing required contact information");
       }
@@ -59,9 +69,12 @@ export const useQuoteSubmissionDFW = () => {
       const tableName = "quotes_dfw";
 
       console.log(`✅ DFW Validation passed - proceeding to save to ${tableName}`);
+      console.log('🎯 CONFIRMED DFW SUBMISSION DETAILS:');
+      console.log('  - Lead source:', leadSource);
+      console.log('  - Target table:', tableName);
+      console.log('  - Submission ID:', uniqueSubmissionId);
 
       // Prepare quote data for DFW table with proper null handling
-      // REMOVED submission_id field as it doesn't exist in quotes_dfw table
       const quoteData = {
         garage_type: formData.garageType,
         custom_sqft: formData.customSqft ? parseInt(formData.customSqft) : null,
@@ -100,6 +113,7 @@ export const useQuoteSubmissionDFW = () => {
       }
 
       console.log("✅ DFW quote saved successfully:", savedQuote);
+      console.log("✅ CONFIRMED: Quote saved to quotes_dfw table with lead_source:", savedQuote.lead_source);
 
       // Trigger DFW webhook only
       try {
@@ -124,6 +138,11 @@ export const useQuoteSubmissionDFW = () => {
       toast.success("Quote submitted successfully! We'll be in touch soon.");
       
       console.log(`🎉 DFW submission complete - ID: ${uniqueSubmissionId}`);
+      console.log('🎯 FINAL VERIFICATION - Quote should be in quotes_dfw table with:');
+      console.log('  - ID:', savedQuote.id);
+      console.log('  - Lead source:', savedQuote.lead_source);
+      console.log('  - Table: quotes_dfw');
+      
       navigate('/dfwreslanding');
 
     } catch (error) {

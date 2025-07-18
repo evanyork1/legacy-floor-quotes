@@ -10,8 +10,16 @@ import { useQuoteNavigationDFW } from "@/hooks/quote/useQuoteNavigationDFW";
 import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
 import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
+import { useLocation } from "react-router-dom";
 
 const QuoteDFW = () => {
+  const location = useLocation();
+  
+  console.log("🎯 QuoteDFW PAGE - Rendering DFW quote page:");
+  console.log("  - Current path:", location.pathname);
+  console.log("  - Current URL:", window.location.href);
+  console.log("  - This page uses DFW-specific hooks");
+  
   // Use individual hooks directly for DFW
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
@@ -31,7 +39,14 @@ const QuoteDFW = () => {
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
 
   const handleSubmit = () => {
+    console.log("🎯 QuoteDFW PAGE - Submit button clicked:");
+    console.log("  - Current path:", location.pathname);
+    console.log("  - Form data:", formData);
+    console.log("  - Will use DFW submission hook");
+    
     const estimatedPrice = calculatePrice();
+    console.log("  - Estimated price:", estimatedPrice);
+    
     submitQuoteDFW(formData, estimatedPrice);
   };
 
@@ -41,6 +56,15 @@ const QuoteDFW = () => {
       
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="max-w-5xl mx-auto">
+          <div className="mb-4 p-3 bg-blue-100 border border-blue-500 rounded-lg">
+            <p className="text-blue-800 text-sm font-medium">
+              ✅ QuoteDFW Page Active - DFW-specific quote processing
+            </p>
+            <p className="text-blue-600 text-xs mt-1">
+              Path: {location.pathname} | Page: QuoteDFW | Target: quotes_dfw table
+            </p>
+          </div>
+          
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
           <Card className="shadow-2xl border-0 overflow-hidden">

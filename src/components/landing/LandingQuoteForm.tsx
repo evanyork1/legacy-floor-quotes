@@ -15,13 +15,25 @@ export const LandingQuoteForm = () => {
   console.log("🔍 LandingQuoteForm - Route check:", {
     pathname: location.pathname,
     isDFWPage,
-    shouldBlockHoustonHooks: isDFWPage
+    shouldBlockHoustonHooks: isDFWPage,
+    currentURL: window.location.href
   });
   
   if (isDFWPage) {
-    console.log("🚫 BLOCKING LandingQuoteForm on DFW page - redirecting to DFW component");
-    // Return null or redirect to prevent Houston hooks from loading on DFW pages
-    return null;
+    console.log("🚫 BLOCKING LandingQuoteForm on DFW page - this should use LandingQuoteFormDFW instead");
+    console.error("❌ CRITICAL ERROR: LandingQuoteForm (Houston) should NOT be used on DFW pages");
+    // Return error message instead of null to make it visible
+    return (
+      <div className="max-w-2xl mx-auto p-8 bg-red-100 border-2 border-red-500 rounded-lg">
+        <h2 className="text-red-800 text-xl font-bold mb-4">Configuration Error</h2>
+        <p className="text-red-700">
+          Houston quote form component loaded on DFW page. This should use DFW-specific components.
+        </p>
+        <p className="text-sm text-red-600 mt-2">
+          Current path: {location.pathname}
+        </p>
+      </div>
+    );
   }
   
   // Use Houston-specific hook only for non-DFW pages

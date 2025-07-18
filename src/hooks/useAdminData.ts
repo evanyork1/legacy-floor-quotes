@@ -39,17 +39,21 @@ export const useAdminData = () => {
 
   const fetchQuotes = async (mode: 'active' | 'archived' | 'all' = 'active') => {
     console.log('🔍 ADMIN PANEL: Starting fetchQuotes function...', { mode });
+    console.log('🔍 ADMIN PANEL: Supabase client initialized:', !!supabase);
     
     try {
       setLoading(true);
-      console.log('📡 ADMIN PANEL: Making Supabase queries...');
+      console.log('📡 ADMIN PANEL: Making separate Supabase queries to both tables...');
       
-      // Fetch from both tables with detailed logging
+      // Query Houston quotes table (quotes)
+      console.log('📊 ADMIN PANEL: Querying Houston quotes table...');
       const quotesQuery = supabase
         .from('quotes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
+      // Query DFW quotes table (quotes_dfw) 
+      console.log('📊 ADMIN PANEL: Querying DFW quotes table...');
       const quotesDfwQuery = supabase
         .from('quotes_dfw')
         .select('*', { count: 'exact' })
@@ -57,43 +61,59 @@ export const useAdminData = () => {
 
       // Apply proper filtering based on mode
       if (mode === 'active') {
+        console.log('📊 ADMIN PANEL: Filtering for active quotes only');
         quotesQuery.or('archived.is.null,archived.eq.false');
         quotesDfwQuery.or('archived.is.null,archived.eq.false');
       } else if (mode === 'archived') {
+        console.log('📊 ADMIN PANEL: Filtering for archived quotes only');
         quotesQuery.eq('archived', true);
         quotesDfwQuery.eq('archived', true);
       }
 
-      console.log('📊 ADMIN PANEL: Executing queries...');
+      console.log('📊 ADMIN PANEL: Executing both queries in parallel...');
       const [quotesResult, quotesDfwResult] = await Promise.all([
         quotesQuery,
         quotesDfwQuery
       ]);
 
-      console.log('📊 ADMIN PANEL: Raw Supabase responses:', { 
-        quotesResult: quotesResult, 
-        quotesDfwResult: quotesDfwResult 
+      console.log('📊 ADMIN PANEL: Raw Supabase responses received:');
+      console.log('  - Houston quotes response:', {
+        data: quotesResult.data,
+        error: quotesResult.error,
+        count: quotesResult.count,
+        status: quotesResult.status
+      });
+      console.log('  - DFW quotes response:', {
+        data: quotesDfwResult.data,
+        error: quotesDfwResult.error,
+        count: quotesDfwResult.count,
+        status: quotesDfwResult.status
       });
 
+      // Check for errors
       if (quotesResult.error) {
-        console.error('❌ ADMIN PANEL: Supabase error (quotes):', quotesResult.error);
-        throw quotesResult.error;
+        console.error('❌ ADMIN PANEL: Error fetching Houston quotes:', quotesResult.error);
+        throw new Error(`Houston quotes error: ${quotesResult.error.message}`);
       }
 
       if (quotesDfwResult.error) {
-        console.error('❌ ADMIN PANEL: Supabase error (quotes_dfw):', quotesDfwResult.error);
-        throw quotesDfwResult.error;
+        console.error('❌ ADMIN PANEL: Error fetching DFW quotes:', quotesDfwResult.error);
+        throw new Error(`DFW quotes error: ${quotesDfwResult.error.message}`);
       }
 
+      // Extract data arrays
       const quotesData = quotesResult.data || [];
       const quotesDfwData = quotesDfwResult.data || [];
 
-      console.log('✅ ADMIN PANEL: Raw data received:');
-      console.log('  Houston quotes:', quotesData.length, quotesData);
-      console.log('  DFW quotes:', quotesDfwData.length, quotesDfwData);
+      console.log('✅ ADMIN PANEL: Raw data extraction complete:');
+      console.log('  - Houston quotes count:', quotesData.length);
+      console.log('  - DFW quotes count:', quotesDfwData.length);
+      console.log('  - Houston quotes data:', quotesData);
+      console.log('  - DFW quotes data:', quotesDfwData);
       
-      // Combine and process both datasets with detailed logging
-      const houstonQuotes = quotesData.map(quote => {
+      // Process Houston quotes with detailed logging
+      console.log('🔄 ADMIN PANEL: Processing Houston quotes...');
+      const houstonQuotes = quotesData.map((quote, index) => {
         const processedQuote = {
           ...quote,
           status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
@@ -102,11 +122,18 @@ export const useAdminData = () => {
           archived: quote.archived || false,
           lead_source: quote.lead_source || 'Houston'
         };
-        console.log('  Processed Houston quote:', processedQuote.id, processedQuote.lead_source);
+        console.log(`  Houston quote ${index + 1}:`, {
+          id: processedQuote.id,
+          name: processedQuote.name,
+          lead_source: processedQuote.lead_source,
+          created_at: processedQuote.created_at
+        });
         return processedQuote;
       });
 
-      const dfwQuotes = quotesDfwData.map(quote => {
+      // Process DFW quotes with detailed logging
+      console.log('🔄 ADMIN PANEL: Processing DFW quotes...');
+      const dfwQuotes = quotesDfwData.map((quote, index) => {
         const processedQuote = {
           ...quote,
           status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
@@ -115,43 +142,67 @@ export const useAdminData = () => {
           archived: quote.archived || false,
           lead_source: quote.lead_source || 'DFW'
         };
-        console.log('  Processed DFW quote:', processedQuote.id, processedQuote.lead_source);
+        console.log(`  DFW quote ${index + 1}:`, {
+          id: processedQuote.id,
+          name: processedQuote.name,
+          lead_source: processedQuote.lead_source,
+          created_at: processedQuote.created_at
+        });
         return processedQuote;
       });
 
+      // Combine arrays
+      console.log('🔗 ADMIN PANEL: Combining quote arrays...');
       const allQuotes = [...houstonQuotes, ...dfwQuotes];
-      console.log('🔗 ADMIN PANEL: Combined quotes array:', allQuotes.length, allQuotes);
+      console.log('🔗 ADMIN PANEL: Combined array length:', allQuotes.length);
 
       // Sort by creation date (newest first)
+      console.log('📅 ADMIN PANEL: Sorting quotes by creation date...');
       const sortedQuotes = allQuotes.sort((a, b) => 
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
 
-      console.log('🎯 ADMIN PANEL: Final sorted quotes:', sortedQuotes.length);
-      console.log('  Quote breakdown by source:');
+      console.log('🎯 ADMIN PANEL: Final processing complete:');
+      console.log('  - Total quotes after sorting:', sortedQuotes.length);
+      
+      // Count breakdown
       const houstonCount = sortedQuotes.filter(q => q.lead_source === 'Houston').length;
       const dfwCount = sortedQuotes.filter(q => q.lead_source === 'DFW').length;
-      console.log('    Houston:', houstonCount);
-      console.log('    DFW:', dfwCount);
+      
+      console.log('  - Houston quotes in final array:', houstonCount);
+      console.log('  - DFW quotes in final array:', dfwCount);
+      console.log('  - Final quotes by source breakdown:', {
+        Houston: houstonCount,
+        DFW: dfwCount,
+        Total: sortedQuotes.length
+      });
 
+      // Set state
+      console.log('💾 ADMIN PANEL: Setting quotes state...');
       setQuotes(sortedQuotes);
       
+      // Success toast
       const statusText = mode === 'all' ? 'all quotes' : mode === 'archived' ? 'archived quotes' : 'active quotes';
       toast({
-        title: "Success",
-        description: `Loaded ${sortedQuotes.length} ${statusText} (${houstonCount} Houston, ${dfwCount} DFW)`,
+        title: "Data Loaded Successfully",
+        description: `Found ${sortedQuotes.length} ${statusText} (${houstonCount} Houston, ${dfwCount} DFW)`,
       });
 
     } catch (error) {
-      console.error('💥 ADMIN PANEL: Unexpected error in fetchQuotes:', error);
+      console.error('💥 ADMIN PANEL: Critical error in fetchQuotes:', error);
+      console.error('💥 ADMIN PANEL: Error details:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      });
+      
       toast({
-        title: "Error",
-        description: "Failed to connect to database",
+        title: "Database Error",
+        description: `Failed to load quotes: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive",
       });
     } finally {
       setLoading(false);
-      console.log('🏁 ADMIN PANEL: fetchQuotes completed');
+      console.log('🏁 ADMIN PANEL: fetchQuotes function completed');
     }
   };
 
@@ -287,8 +338,11 @@ export const useAdminData = () => {
   };
 
   useEffect(() => {
-    console.log('🚀 ADMIN PANEL: Component mounted, initializing data fetch...');
-    console.log('🔧 ADMIN PANEL: Supabase client:', supabase);
+    console.log('🚀 ADMIN PANEL: Component mounted, initializing...');
+    console.log('🔧 ADMIN PANEL: Supabase client status:', {
+      isAvailable: !!supabase,
+      from: typeof supabase?.from
+    });
     
     fetchQuotes('active');
     fetchWebhookSettings();
