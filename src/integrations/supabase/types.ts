@@ -262,19 +262,16 @@ export type Database = {
       }
       webhook_settings: {
         Row: {
-          dfw_webhook_url: string | null
           id: number
           updated_at: string | null
           zapier_webhook_url: string | null
         }
         Insert: {
-          dfw_webhook_url?: string | null
           id?: number
           updated_at?: string | null
           zapier_webhook_url?: string | null
         }
         Update: {
-          dfw_webhook_url?: string | null
           id?: number
           updated_at?: string | null
           zapier_webhook_url?: string | null

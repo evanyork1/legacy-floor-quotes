@@ -22,21 +22,12 @@ interface QuoteWebhookData {
   damage_photos?: string[];
   created_at: string;
   status: string;
-  lead_source: string;
 }
 
 Deno.serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
-  }
-
-  // Only process POST requests to prevent double firing
-  if (req.method !== 'POST') {
-    return new Response(
-      JSON.stringify({ error: 'Method not allowed' }), 
-      { status: 405, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    );
   }
 
   try {
@@ -52,10 +43,10 @@ Deno.serve(async (req) => {
     const quoteData: QuoteWebhookData = await req.json();
     console.log('Received quote data:', quoteData);
 
-    // Get the appropriate webhook URL based on lead source
+    // Get the webhook URL from settings
     const { data: webhookSettings, error: settingsError } = await supabase
       .from('webhook_settings')
-      .select('zapier_webhook_url, dfw_webhook_url')
+      .select('zapier_webhook_url')
       .eq('id', 1)
       .single();
 
@@ -67,14 +58,10 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Choose the appropriate webhook URL based on lead source
-    const isFromDFW = quoteData.lead_source === 'DFW';
-    const webhookUrl = isFromDFW ? webhookSettings?.dfw_webhook_url : webhookSettings?.zapier_webhook_url;
-
-    if (!webhookUrl) {
-      console.log(`No webhook URL configured for ${isFromDFW ? 'DFW' : 'Houston'} leads`);
+    if (!webhookSettings?.zapier_webhook_url) {
+      console.log('No webhook URL configured, skipping webhook call');
       return new Response(
-        JSON.stringify({ message: `No webhook URL configured for ${isFromDFW ? 'DFW' : 'Houston'} leads` }),
+        JSON.stringify({ message: 'No webhook URL configured' }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -108,11 +95,11 @@ Deno.serve(async (req) => {
       }
     };
 
-    console.log('Sending webhook to:', webhookUrl);
+    console.log('Sending webhook to:', webhookSettings.zapier_webhook_url);
     console.log('Webhook payload:', webhookPayload);
 
     // Send the webhook to Zapier
-    const webhookResponse = await fetch(webhookUrl, {
+    const webhookResponse = await fetch(webhookSettings.zapier_webhook_url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

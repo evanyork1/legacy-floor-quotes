@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { 
   Download,
+  RefreshCw,
   Archive,
   ArchiveRestore,
   Eye,
@@ -39,61 +40,14 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   showArchived,
   archivingQuoteId,
   onToggleArchivedView,
-  onExportLeads
+  onRefresh,
+  onExportLeads,
+  onArchiveQuote,
+  onUnarchiveQuote
 }) => {
-  // Frontend-only archive state
-  const [localArchivedIds, setLocalArchivedIds] = useState<Set<string>>(new Set());
-
-  // Load archived IDs from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem('archivedQuoteIds');
-    if (stored) {
-      setLocalArchivedIds(new Set(JSON.parse(stored)));
-    }
-  }, []);
-
-  // Save to localStorage whenever archived IDs change
-  useEffect(() => {
-    localStorage.setItem('archivedQuoteIds', JSON.stringify([...localArchivedIds]));
-  }, [localArchivedIds]);
-
-  const handleArchive = (quoteId: string) => {
-    setLocalArchivedIds(prev => new Set([...prev, quoteId]));
-  };
-
-  const handleUnarchive = (quoteId: string) => {
-    setLocalArchivedIds(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(quoteId);
-      return newSet;
-    });
-  };
-
-  console.log('🎨 LEADS TAB: Rendering with quotes:', quotes.length);
-  console.log('🎨 LEADS TAB: Local archived IDs:', [...localArchivedIds]);
-  
-  // Filter quotes based on archive status (frontend-only)
-  const quotesWithArchiveStatus = quotes.map(quote => ({
-    ...quote,
-    isLocallyArchived: localArchivedIds.has(quote.id)
-  }));
-
-  const activeQuotes = quotesWithArchiveStatus.filter(q => !q.isLocallyArchived);
-  const archivedQuotes = quotesWithArchiveStatus.filter(q => q.isLocallyArchived);
-  const displayedQuotes = showArchived ? quotesWithArchiveStatus : activeQuotes;
-
-  console.log('🎨 LEADS TAB: Quote breakdown:');
-  console.log('  Total quotes:', quotes.length);
-  console.log('  Active quotes:', activeQuotes.length);
-  console.log('  Locally archived quotes:', archivedQuotes.length);
-  console.log('  Displayed quotes:', displayedQuotes.length);
-
-  // Log quote sources
-  const houstonQuotes = quotes.filter(q => q.lead_source === 'Houston');
-  const dfwQuotes = quotes.filter(q => q.lead_source === 'DFW');
-  console.log('🎨 LEADS TAB: Source breakdown:');
-  console.log('  Houston quotes:', houstonQuotes.length);
-  console.log('  DFW quotes:', dfwQuotes.length);
+  const activeQuotes = quotes.filter(q => !q.archived);
+  const archivedQuotes = quotes.filter(q => q.archived);
+  const displayedQuotes = showArchived ? quotes : activeQuotes;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -131,9 +85,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
             </span>
           )}
           {loading && <span className="ml-2 text-sm text-gray-400">(Loading...)</span>}
-          <div className="text-sm text-gray-400 mt-1">
-            Houston: {houstonQuotes.length} | DFW: {dfwQuotes.length}
-          </div>
         </CardTitle>
         <div className="flex gap-2">
           <Button 
@@ -144,6 +95,16 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
           >
             {showArchived ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
             {showArchived ? 'Hide Archived' : 'Show Archived'}
+          </Button>
+          <Button 
+            onClick={onRefresh} 
+            variant="outline"
+            size="sm"
+            disabled={loading}
+            className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
           </Button>
           <Button onClick={onExportLeads} className="bg-green-600 hover:bg-green-700">
             <Download className="h-4 w-4 mr-2" />
@@ -160,18 +121,19 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
         ) : displayedQuotes.length === 0 ? (
           <div className="text-center py-8">
             <div className="text-gray-400 mb-4">
-              {showArchived ? 'No quotes found' : 'No active quotes found'}
+              {showArchived ? 'No quotes found in database' : 'No active quotes found'}
             </div>
-            <div className="text-sm text-gray-500 mb-4">
-              Total quotes: {quotes.length} (Houston: {houstonQuotes.length}, DFW: {dfwQuotes.length})
-            </div>
+            <Button 
+              onClick={onRefresh} 
+              variant="outline"
+              className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
+            >
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Try Again
+            </Button>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <div className="mb-4 text-sm text-gray-400">
-              Displaying {displayedQuotes.length} quotes 
-              ({displayedQuotes.filter(q => q.lead_source === 'Houston').length} Houston, {displayedQuotes.filter(q => q.lead_source === 'DFW').length} DFW)
-            </div>
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-gray-700">
@@ -189,73 +151,79 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {displayedQuotes.map((quote) => {
-                  const isLocallyArchived = localArchivedIds.has(quote.id);
-                  
-                  return (
-                    <TableRow 
-                      key={quote.id} 
-                      className={`border-b border-gray-700 ${isLocallyArchived ? 'opacity-60' : ''}`}
-                    >
-                      <TableCell className="text-white font-medium">
-                        {quote.name}
-                        {isLocallyArchived && (
-                          <Badge variant="secondary" className="ml-2 text-xs">
-                            Archived
-                          </Badge>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-gray-300">
-                        <div>{quote.email}</div>
-                        <div className="text-sm">{quote.phone}</div>
-                      </TableCell>
-                      <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
-                      <TableCell>{getSourceBadge(quote.lead_source)}</TableCell>
-                      <TableCell className="text-gray-300">
-                        {formatGarageType(quote)}
-                      </TableCell>
-                      <TableCell className="text-gray-300">{quote.color_choice}</TableCell>
-                      <TableCell className="text-green-400 font-bold">
-                        ${quote.estimated_price.toLocaleString()}
-                      </TableCell>
-                      <TableCell>
-                        <PhotoViewer 
-                          exteriorPhotos={quote.exterior_photos}
-                          damagePhotos={quote.damage_photos}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Badge className={`${getStatusColor(quote.status)} border-0`}>
-                          {quote.status}
+                {displayedQuotes.map((quote) => (
+                  <TableRow 
+                    key={quote.id} 
+                    className={`border-b border-gray-700 ${quote.archived ? 'opacity-60' : ''}`}
+                  >
+                    <TableCell className="text-white font-medium">
+                      {quote.name}
+                      {quote.archived && (
+                        <Badge variant="secondary" className="ml-2 text-xs">
+                          Archived
                         </Badge>
-                      </TableCell>
-                      <TableCell className="text-gray-400 text-sm">
-                        {new Date(quote.created_at).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        {isLocallyArchived ? (
-                          <Button
-                            onClick={() => handleUnarchive(quote.id)}
-                            size="sm"
-                            variant="outline"
-                            className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
-                          >
+                      )}
+                    </TableCell>
+                    <TableCell className="text-gray-300">
+                      <div>{quote.email}</div>
+                      <div className="text-sm">{quote.phone}</div>
+                    </TableCell>
+                    <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
+                    <TableCell>{getSourceBadge(quote.lead_source)}</TableCell>
+                    <TableCell className="text-gray-300">
+                      {formatGarageType(quote)}
+                    </TableCell>
+                    <TableCell className="text-gray-300">{quote.color_choice}</TableCell>
+                    <TableCell className="text-green-400 font-bold">
+                      ${quote.estimated_price.toLocaleString()}
+                    </TableCell>
+                    <TableCell>
+                      <PhotoViewer 
+                        exteriorPhotos={quote.exterior_photos}
+                        damagePhotos={quote.damage_photos}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={`${getStatusColor(quote.status)} border-0`}>
+                        {quote.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-gray-400 text-sm">
+                      {new Date(quote.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      {quote.archived ? (
+                        <Button
+                          onClick={() => onUnarchiveQuote(quote.id)}
+                          disabled={archivingQuoteId === quote.id}
+                          size="sm"
+                          variant="outline"
+                          className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+                        >
+                          {archivingQuoteId === quote.id ? (
+                            <RefreshCw className="h-4 w-4 animate-spin" />
+                          ) : (
                             <ArchiveRestore className="h-4 w-4" />
-                          </Button>
-                        ) : (
-                          <Button
-                            onClick={() => handleArchive(quote.id)}
-                            size="sm"
-                            variant="outline"
-                            className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
-                          >
+                          )}
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => onArchiveQuote(quote.id)}
+                          disabled={archivingQuoteId === quote.id}
+                          size="sm"
+                          variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
+                        >
+                          {archivingQuoteId === quote.id ? (
+                            <RefreshCw className="h-4 w-4 animate-spin" />
+                          ) : (
                             <Archive className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                          )}
+                        </Button>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>

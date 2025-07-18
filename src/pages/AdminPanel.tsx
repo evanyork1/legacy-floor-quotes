@@ -29,9 +29,7 @@ const AdminPanel = () => {
     setShowArchived,
     archivingQuoteId,
     webhookUrl,
-    dfwWebhookUrl,
     setWebhookUrl,
-    setDfwWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,
@@ -48,7 +46,7 @@ const AdminPanel = () => {
   const toggleArchivedView = () => {
     const newShowArchived = !showArchived;
     setShowArchived(newShowArchived);
-    fetchQuotes(newShowArchived ? 'archived' : 'active');
+    fetchQuotes(newShowArchived);
   };
 
   const exportLeads = () => {
@@ -148,7 +146,7 @@ const AdminPanel = () => {
               showArchived={showArchived}
               archivingQuoteId={archivingQuoteId}
               onToggleArchivedView={toggleArchivedView}
-              onRefresh={() => fetchQuotes(showArchived ? 'archived' : 'active')}
+              onRefresh={() => fetchQuotes(showArchived)}
               onExportLeads={exportLeads}
               onArchiveQuote={archiveQuote}
               onUnarchiveQuote={unarchiveQuote}
@@ -172,10 +170,8 @@ const AdminPanel = () => {
           <TabsContent value="webhooks">
             <WebhooksTab
               webhookUrl={webhookUrl}
-              dfwWebhookUrl={dfwWebhookUrl}
               savingWebhook={savingWebhook}
               onWebhookUrlChange={setWebhookUrl}
-              onDfwWebhookUrlChange={setDfwWebhookUrl}
               onSaveWebhookUrl={saveWebhookUrl}
             />
           </TabsContent>
