@@ -16,14 +16,14 @@ export const useQuoteSubmissionDFW = () => {
       return;
     }
     
-    // Add a small delay to prevent double submissions
-    const existingSubmission = sessionStorage.getItem('lastDFWSubmission');
+    // Add a small delay to prevent double submissions - UNIFIED KEY FOR ALL HOOKS
+    const existingSubmission = sessionStorage.getItem('lastQuoteSubmission');
     if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 5000)) {
-      console.log('🚫 Preventing duplicate DFW submission within 5 seconds');
+      console.log('🚫 DFW: Preventing duplicate submission within 5 seconds');
       return;
     }
     
-    sessionStorage.setItem('lastDFWSubmission', Date.now().toString());
+    sessionStorage.setItem('lastQuoteSubmission', Date.now().toString());
     
     console.log("🟢 DFW SUBMISSION STARTED - Using dedicated DFW hook");
     setIsSubmitting(true);

@@ -46,16 +46,16 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       return;
     }
     
-    // Add a small delay to prevent double submissions
-    const submissionKey = `${formData.email}-${estimatedPrice}-${Date.now()}`;
-    const existingSubmission = sessionStorage.getItem('lastSubmission');
+    // Add a small delay to prevent double submissions - UNIFIED KEY FOR ALL HOOKS
+    const submissionKey = `${formData.email}-${estimatedPrice}`;
+    const existingSubmission = sessionStorage.getItem('lastQuoteSubmission');
     
     if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 5000)) {
-      console.log('🚫 Preventing duplicate submission within 5 seconds');
+      console.log('🚫 Houston: Preventing duplicate submission within 5 seconds');
       return;
     }
     
-    sessionStorage.setItem('lastSubmission', Date.now().toString());
+    sessionStorage.setItem('lastQuoteSubmission', Date.now().toString());
 
     setIsSubmitting(true);
     console.log('Starting quote submission process...', formData);
