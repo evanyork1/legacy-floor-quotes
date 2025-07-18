@@ -12,9 +12,7 @@ import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 
 const QuoteDFW = () => {
-  console.log("🚀 QuoteDFW component loaded - DIRECT DFW HOOK USAGE");
-  
-  // Use individual hooks directly to bypass detection logic
+  // Use individual hooks directly for DFW
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   const { 
@@ -26,13 +24,10 @@ const QuoteDFW = () => {
   } = useQuoteNavigation(formData, calculatePrice);
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // DIRECTLY use DFW submission hook - no detection needed
+  // Use DFW submission hook
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
-  
-  console.log("🚀 DFW hooks initialized - using submitQuoteDFW directly");
 
   const handleSubmit = () => {
-    console.log("🚀 DFW SUBMISSION TRIGGERED - calling DFW hook directly");
     const estimatedPrice = calculatePrice();
     submitQuoteDFW(formData, estimatedPrice);
   };

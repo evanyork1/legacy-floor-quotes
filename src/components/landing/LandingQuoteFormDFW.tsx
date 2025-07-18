@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
@@ -9,8 +10,6 @@ import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 
 export const LandingQuoteFormDFW = () => {
-  console.log("🟢 DFW Landing Quote Form - USING ONLY DFW HOOKS");
-  
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
@@ -21,11 +20,10 @@ export const LandingQuoteFormDFW = () => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // ONLY USE DFW SUBMISSION HOOK
+  // Use DFW submission hook
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
   
   const handleSubmit = () => {
-    console.log("🟢 DFW Landing Form Submit - calling DFW hook only");
     const estimatedPrice = calculatePrice();
     submitQuoteDFW(formData, estimatedPrice);
   };

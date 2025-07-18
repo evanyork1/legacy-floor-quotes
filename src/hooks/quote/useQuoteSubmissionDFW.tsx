@@ -11,14 +11,9 @@ export const useQuoteSubmissionDFW = () => {
   const location = useLocation();
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
-    console.log("🚀 DFW SUBMISSION FUNCTION CALLED");
-    console.log("🚀 Current URL:", window.location.href);
-    console.log("🚀 Form Data received:", formData);
-    console.log("🚀 Estimated Price:", estimatedPrice);
-    
     // Prevent duplicate submissions with DFW-specific session key
     if (isSubmitting) {
-      console.log('🚫 DFW Submission already in progress, ignoring duplicate request');
+      console.log('DFW Submission already in progress, ignoring duplicate request');
       return;
     }
     
@@ -27,7 +22,7 @@ export const useQuoteSubmissionDFW = () => {
     const existingDFWSubmission = sessionStorage.getItem('lastDFWQuoteSubmission');
     
     if (existingDFWSubmission && (Date.now() - parseInt(existingDFWSubmission) < 10000)) {
-      console.log('🚫 DFW: Preventing duplicate DFW submission within 10 seconds');
+      console.log('Preventing duplicate DFW submission within 10 seconds');
       toast.error("Please wait before submitting again.");
       return;
     }
@@ -40,8 +35,7 @@ export const useQuoteSubmissionDFW = () => {
     sessionStorage.setItem('lastDFWQuoteSubmission', Date.now().toString());
     sessionStorage.setItem('currentSubmissionType', 'DFW_ONLY');
     
-    console.log("🟢 DFW SUBMISSION STARTED - Using dedicated DFW hook");
-    console.log("🟢 Session storage set for DFW submission");
+    console.log("DFW submission started");
     setIsSubmitting(true);
     
     try {
@@ -62,15 +56,9 @@ export const useQuoteSubmissionDFW = () => {
         throw new Error("Zip code is required");
       }
 
-      // HARDCODED DFW SETTINGS - NO DETECTION LOGIC
+      // HARDCODED DFW SETTINGS
       const leadSource = "DFW";
       const tableName = "quotes_dfw";
-      
-      console.log("🟢 HARDCODED DFW SETTINGS:");
-      console.log("🟢 Lead Source:", leadSource);
-      console.log("🟢 Table Name:", tableName);
-      console.log("🟢 Form Data:", formData);
-      console.log("🟢 Estimated Price:", estimatedPrice);
 
       // Prepare quote data for DFW table with proper null handling
       const quoteData = {
@@ -86,15 +74,14 @@ export const useQuoteSubmissionDFW = () => {
         phone: formData.phone.trim(),
         zip_code: formData.zipCode.trim(),
         estimated_price: estimatedPrice,
-        lead_source: leadSource, // HARDCODED "DFW"
+        lead_source: leadSource,
         status: "new",
         archived: false,
       };
 
-      console.log("🟢 PREPARED QUOTE DATA FOR QUOTES_DFW TABLE:", quoteData);
+      console.log("Saving to quotes_dfw table:", quoteData);
 
-      // Save to quotes_dfw table (HARDCODED)
-      console.log("🟢 ATTEMPTING TO SAVE TO quotes_dfw TABLE...");
+      // Save to quotes_dfw table
       const { data: savedQuote, error: saveError } = await supabase
         .from("quotes_dfw")
         .insert([quoteData])
@@ -102,24 +89,16 @@ export const useQuoteSubmissionDFW = () => {
         .single();
 
       if (saveError) {
-        console.error("🔴 DFW SAVE ERROR DETAILS:", {
-          error: saveError,
-          message: saveError.message,
-          details: saveError.details,
-          hint: saveError.hint,
-          code: saveError.code
-        });
+        console.error("DFW save error:", saveError);
         throw new Error(`Failed to save DFW quote: ${saveError.message}`);
       }
 
       if (!savedQuote) {
-        console.error("🔴 NO QUOTE DATA RETURNED FROM INSERT");
+        console.error("No quote data returned from insert");
         throw new Error("No quote data returned from database insert");
       }
 
-      console.log("✅ DFW QUOTE SAVED SUCCESSFULLY TO quotes_dfw:", savedQuote);
-      console.log("✅ Saved quote ID:", savedQuote.id);
-      console.log("✅ Saved quote lead_source:", savedQuote.lead_source);
+      console.log("DFW quote saved successfully:", savedQuote);
 
       // Get webhook settings for DFW
       const { data: webhookSettings, error: webhookError } = await supabase
@@ -128,12 +107,12 @@ export const useQuoteSubmissionDFW = () => {
         .single();
 
       if (webhookError) {
-        console.error("🟠 Webhook settings error:", webhookError);
+        console.error("Webhook settings error:", webhookError);
       }
 
       // Trigger DFW webhook if configured
       if (webhookSettings?.dfw_webhook_url && savedQuote) {
-        console.log("🟢 TRIGGERING DFW WEBHOOK:", webhookSettings.dfw_webhook_url);
+        console.log("Triggering DFW webhook");
         
         try {
           const { error: webhookFunctionError } = await supabase.functions.invoke(
@@ -144,23 +123,23 @@ export const useQuoteSubmissionDFW = () => {
           );
 
           if (webhookFunctionError) {
-            console.error("🟠 DFW Webhook function error:", webhookFunctionError);
+            console.error("DFW Webhook function error:", webhookFunctionError);
           } else {
-            console.log("🟢 DFW WEBHOOK SENT SUCCESSFULLY");
+            console.log("DFW webhook sent successfully");
           }
         } catch (webhookError) {
-          console.error("🟠 DFW Webhook error:", webhookError);
+          console.error("DFW Webhook error:", webhookError);
         }
       }
 
       toast.success("Quote submitted successfully! We'll be in touch soon.");
       
       // Navigate to DFW success page
-      console.log("🟢 DFW SUBMISSION COMPLETE - Navigating to DFW landing page");
+      console.log("DFW submission complete - navigating to DFW landing page");
       navigate('/dfwreslanding');
 
     } catch (error) {
-      console.error("🔴 DFW SUBMISSION ERROR:", error);
+      console.error("DFW submission error:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to submit quote. Please try again.";
       toast.error(errorMessage);
     } finally {
