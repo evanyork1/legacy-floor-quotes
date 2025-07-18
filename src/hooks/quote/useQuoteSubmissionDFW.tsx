@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { FormData } from "@/components/quote/types";
@@ -8,7 +8,6 @@ import { FormData } from "@/components/quote/types";
 export const useQuoteSubmissionDFW = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
     const uniqueSubmissionId = `DFW_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -27,8 +26,23 @@ export const useQuoteSubmissionDFW = () => {
     
     try {
       // Validate required fields
-      if (!formData.name || !formData.email || !formData.phone || !formData.garageType || !formData.colorChoice || !formData.zipCode) {
-        throw new Error("Missing required fields");
+      if (!formData.name?.trim()) {
+        throw new Error("Name is required");
+      }
+      if (!formData.email?.trim()) {
+        throw new Error("Email is required");
+      }
+      if (!formData.phone?.trim()) {
+        throw new Error("Phone is required");
+      }
+      if (!formData.garageType) {
+        throw new Error("Garage type is required");
+      }
+      if (!formData.colorChoice) {
+        throw new Error("Color choice is required");
+      }
+      if (!formData.zipCode?.trim()) {
+        throw new Error("ZIP code is required");
       }
 
       // CONFIRMED DFW SUBMISSION - HARDCODED
@@ -42,8 +56,8 @@ export const useQuoteSubmissionDFW = () => {
         custom_sqft: formData.customSqft ? parseInt(formData.customSqft) : null,
         space_type: formData.spaceType || null,
         other_space_type: formData.otherSpaceType || null,
-        exterior_photos: [],
-        damage_photos: [],
+        exterior_photos: formData.exteriorPhotos || [],
+        damage_photos: formData.damagePhotos || [],
         color_choice: formData.colorChoice,
         name: formData.name.trim(),
         email: formData.email.trim(),

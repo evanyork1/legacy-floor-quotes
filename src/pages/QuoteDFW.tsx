@@ -10,13 +10,10 @@ import { useQuoteNavigationDFW } from "@/hooks/quote/useQuoteNavigationDFW";
 import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
 import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
-import { useLocation } from "react-router-dom";
 
 const QuoteDFW = () => {
-  const location = useLocation();
-  
-  console.log("🎯 QuoteDFW PAGE - Rendering DFW quote page:");
-  console.log("  - Current path:", location.pathname);
+  console.log("🎯 QuoteDFW PAGE - Rendering DFW quote page");
+  console.log("  - Current path:", window.location.pathname);
   console.log("  - Current URL:", window.location.href);
   console.log("  - This page uses DFW-specific hooks");
   
@@ -24,7 +21,7 @@ const QuoteDFW = () => {
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
-  // Use DFW-specific navigation hook (no submission logic)
+  // Use DFW-specific navigation hook
   const { 
     currentStep, 
     totalSteps, 
@@ -39,8 +36,8 @@ const QuoteDFW = () => {
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
 
   const handleSubmit = () => {
-    console.log("🎯 QuoteDFW PAGE - Submit button clicked:");
-    console.log("  - Current path:", location.pathname);
+    console.log("🎯 QuoteDFW PAGE - Submit button clicked");
+    console.log("  - Current path:", window.location.pathname);
     console.log("  - Form data:", formData);
     console.log("  - Will use DFW submission hook");
     
