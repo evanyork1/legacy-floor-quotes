@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "react-router-dom";
 import type { FormData } from "@/components/quote/types";
 
 export const useQuoteNavigation = (
@@ -12,6 +13,7 @@ export const useQuoteNavigation = (
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
   const { toast } = useToast();
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,16 +21,10 @@ export const useQuoteNavigation = (
 
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: FormData) => {
-        // Check for DFW context before submission
-        const currentPathCheck = window.location.pathname;
-        const isDFWCheck = currentPathCheck.includes('/quotedfw') || currentPathCheck.includes('/dfw');
-        const dfwSessionCheck = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
-                               sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true' ||
-                               sessionStorage.getItem('SUBMISSION_TYPE') === 'DFW_ONLY';
-        
-        if (isDFWCheck || dfwSessionCheck) {
-          console.log("🚫 Houston navigation submission blocked - DFW context detected");
-          throw new Error("Houston submission blocked - DFW context detected");
+        // Simple route check
+        if (location.pathname.includes('/quotedfw')) {
+          console.log("🚫 Houston navigation submission blocked - on DFW route");
+          throw new Error("Houston submission blocked - on DFW route");
         }
         
         const exterior_photos: string[] = [];
@@ -107,14 +103,9 @@ export const useQuoteNavigation = (
   const nextStep = () => {
     if (currentStep < totalSteps) {
         if (currentStep === 4) {
-            // Check for DFW context before auto-submission
-            const finalPathCheck = window.location.pathname;
-            const finalDFWCheck = finalPathCheck.includes('/quotedfw') || finalPathCheck.includes('/dfw');
-            const finalSessionCheck = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
-                                    sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true';
-            
-            if (finalDFWCheck || finalSessionCheck) {
-                console.log("🚫 Houston auto-submission blocked - DFW context detected");
+            // Simple route check before auto-submission
+            if (location.pathname.includes('/quotedfw')) {
+                console.log("🚫 Houston auto-submission blocked - on DFW route");
                 setCurrentStep(5);
                 return;
             }

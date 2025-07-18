@@ -9,29 +9,11 @@ import { useLocation } from "react-router-dom";
 export const useQuoteForm = (leadSource?: string) => {
   const location = useLocation();
   
-  // Check for DFW context - but don't throw errors, just block gracefully
-  const currentPath = window.location.pathname;
-  const isDFWPath = currentPath.includes('quotedfw') || currentPath.includes('/dfw');
-  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
-  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
-  const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
-  const dfwComponentActive = sessionStorage.getItem('DFW_COMPONENT_ACTIVE');
+  // Simple route-based logic: only block if we're on DFW route
+  const isDFWRoute = location.pathname.includes('/quotedfw');
   
-  console.log("🔍 useQuoteForm - DFW context check:", {
-    currentPath,
-    isDFWPath,
-    activeDFWSubmission,
-    blockHouston,
-    submissionType,
-    dfwComponentActive,
-    shouldBlock: isDFWPath || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY' || dfwComponentActive
-  });
-  
-  // If in DFW context, return null values to gracefully disable the form
-  const isDFWContext = isDFWPath || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY' || dfwComponentActive;
-  
-  if (isDFWContext) {
-    console.log("🚫 Houston form hook blocked - DFW context detected, returning null values");
+  if (isDFWRoute) {
+    console.log("🚫 Houston form hook blocked - on DFW route, returning null values");
     return {
       currentStep: 1,
       totalSteps: 5,
@@ -40,6 +22,7 @@ export const useQuoteForm = (leadSource?: string) => {
         customSqft: '',
         spaceType: '',
         otherSpaceType: '',
+        additionalSpaces: [],
         exteriorPhotos: [],
         damagePhotos: [],
         colorChoice: '',
@@ -56,7 +39,7 @@ export const useQuoteForm = (leadSource?: string) => {
       calculatePrice: () => 0,
       canProceed: () => false,
       handleSubmit: () => {
-        console.log("🚫 Houston form submission blocked - DFW context");
+        console.log("🚫 Houston form submission blocked - on DFW route");
       },
       isSubmitting: false
     };
@@ -73,18 +56,12 @@ export const useQuoteForm = (leadSource?: string) => {
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   const { handleSubmit: handleSubmitHouston, isSubmitting: isSubmittingHouston } = useQuoteSubmission(leadSource);
   
-  console.log("✅ useQuoteForm - Houston hooks initialized for confirmed Houston context");
+  console.log("✅ useQuoteForm - Houston hooks initialized");
   
   const handleSubmit = () => {
-    // Final check - if DFW context detected, block submission
-    const finalCheck = window.location.pathname.includes('/quotedfw') || 
-                      window.location.pathname.includes('/dfw') ||
-                      sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
-                      sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true' ||
-                      sessionStorage.getItem('DFW_COMPONENT_ACTIVE');
-    
-    if (finalCheck) {
-      console.log("🚫 Houston form submission blocked at final step - DFW context detected");
+    // Simple check - if on DFW route, block
+    if (location.pathname.includes('/quotedfw')) {
+      console.log("🚫 Houston form submission blocked - on DFW route");
       return;
     }
     

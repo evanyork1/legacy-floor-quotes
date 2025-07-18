@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/table";
 import { 
   Download,
-  RefreshCw,
   Archive,
   ArchiveRestore,
   Eye,
@@ -40,31 +39,61 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   showArchived,
   archivingQuoteId,
   onToggleArchivedView,
-  onRefresh,
-  onExportLeads,
-  onArchiveQuote,
-  onUnarchiveQuote
+  onExportLeads
 }) => {
+  // Frontend-only archive state
+  const [localArchivedIds, setLocalArchivedIds] = useState<Set<string>>(new Set());
+
+  // Load archived IDs from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem('archivedQuoteIds');
+    if (stored) {
+      setLocalArchivedIds(new Set(JSON.parse(stored)));
+    }
+  }, []);
+
+  // Save to localStorage whenever archived IDs change
+  useEffect(() => {
+    localStorage.setItem('archivedQuoteIds', JSON.stringify([...localArchivedIds]));
+  }, [localArchivedIds]);
+
+  const handleArchive = (quoteId: string) => {
+    setLocalArchivedIds(prev => new Set([...prev, quoteId]));
+  };
+
+  const handleUnarchive = (quoteId: string) => {
+    setLocalArchivedIds(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(quoteId);
+      return newSet;
+    });
+  };
+
   console.log('🎨 LEADS TAB: Rendering with quotes:', quotes.length);
-  console.log('🎨 LEADS TAB: Full quotes array:', quotes);
+  console.log('🎨 LEADS TAB: Local archived IDs:', [...localArchivedIds]);
   
-  const activeQuotes = quotes.filter(q => !q.archived);
-  const archivedQuotes = quotes.filter(q => q.archived);
-  const displayedQuotes = showArchived ? quotes : activeQuotes;
+  // Filter quotes based on archive status (frontend-only)
+  const quotesWithArchiveStatus = quotes.map(quote => ({
+    ...quote,
+    isLocallyArchived: localArchivedIds.has(quote.id)
+  }));
+
+  const activeQuotes = quotesWithArchiveStatus.filter(q => !q.isLocallyArchived);
+  const archivedQuotes = quotesWithArchiveStatus.filter(q => q.isLocallyArchived);
+  const displayedQuotes = showArchived ? quotesWithArchiveStatus : activeQuotes;
 
   console.log('🎨 LEADS TAB: Quote breakdown:');
   console.log('  Total quotes:', quotes.length);
   console.log('  Active quotes:', activeQuotes.length);
-  console.log('  Archived quotes:', archivedQuotes.length);
+  console.log('  Locally archived quotes:', archivedQuotes.length);
   console.log('  Displayed quotes:', displayedQuotes.length);
-  console.log('  Show archived:', showArchived);
 
   // Log quote sources
   const houstonQuotes = quotes.filter(q => q.lead_source === 'Houston');
   const dfwQuotes = quotes.filter(q => q.lead_source === 'DFW');
   console.log('🎨 LEADS TAB: Source breakdown:');
-  console.log('  Houston quotes:', houstonQuotes.length, houstonQuotes.map(q => ({ id: q.id, name: q.name })));
-  console.log('  DFW quotes:', dfwQuotes.length, dfwQuotes.map(q => ({ id: q.id, name: q.name })));
+  console.log('  Houston quotes:', houstonQuotes.length);
+  console.log('  DFW quotes:', dfwQuotes.length);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -116,16 +145,6 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
             {showArchived ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
             {showArchived ? 'Hide Archived' : 'Show Archived'}
           </Button>
-          <Button 
-            onClick={onRefresh} 
-            variant="outline"
-            size="sm"
-            disabled={loading}
-            className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
-          >
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            Refresh
-          </Button>
           <Button onClick={onExportLeads} className="bg-green-600 hover:bg-green-700">
             <Download className="h-4 w-4 mr-2" />
             Export CSV
@@ -141,19 +160,11 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
         ) : displayedQuotes.length === 0 ? (
           <div className="text-center py-8">
             <div className="text-gray-400 mb-4">
-              {showArchived ? 'No quotes found in database' : 'No active quotes found'}
+              {showArchived ? 'No quotes found' : 'No active quotes found'}
             </div>
             <div className="text-sm text-gray-500 mb-4">
-              Debug: Total quotes in state: {quotes.length} (Houston: {houstonQuotes.length}, DFW: {dfwQuotes.length})
+              Total quotes: {quotes.length} (Houston: {houstonQuotes.length}, DFW: {dfwQuotes.length})
             </div>
-            <Button 
-              onClick={onRefresh} 
-              variant="outline"
-              className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
-            >
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Try Again
-            </Button>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -179,21 +190,16 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
               </TableHeader>
               <TableBody>
                 {displayedQuotes.map((quote) => {
-                  console.log('🎨 LEADS TAB: Rendering quote row:', {
-                    id: quote.id,
-                    name: quote.name,
-                    lead_source: quote.lead_source,
-                    archived: quote.archived
-                  });
+                  const isLocallyArchived = localArchivedIds.has(quote.id);
                   
                   return (
                     <TableRow 
                       key={quote.id} 
-                      className={`border-b border-gray-700 ${quote.archived ? 'opacity-60' : ''}`}
+                      className={`border-b border-gray-700 ${isLocallyArchived ? 'opacity-60' : ''}`}
                     >
                       <TableCell className="text-white font-medium">
                         {quote.name}
-                        {quote.archived && (
+                        {isLocallyArchived && (
                           <Badge variant="secondary" className="ml-2 text-xs">
                             Archived
                           </Badge>
@@ -227,33 +233,23 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                         {new Date(quote.created_at).toLocaleDateString()}
                       </TableCell>
                       <TableCell>
-                        {quote.archived ? (
+                        {isLocallyArchived ? (
                           <Button
-                            onClick={() => onUnarchiveQuote(quote.id)}
-                            disabled={archivingQuoteId === quote.id}
+                            onClick={() => handleUnarchive(quote.id)}
                             size="sm"
                             variant="outline"
                             className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
                           >
-                            {archivingQuoteId === quote.id ? (
-                              <RefreshCw className="h-4 w-4 animate-spin" />
-                            ) : (
-                              <ArchiveRestore className="h-4 w-4" />
-                            )}
+                            <ArchiveRestore className="h-4 w-4" />
                           </Button>
                         ) : (
                           <Button
-                            onClick={() => onArchiveQuote(quote.id)}
-                            disabled={archivingQuoteId === quote.id}
+                            onClick={() => handleArchive(quote.id)}
                             size="sm"
                             variant="outline"
                             className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
                           >
-                            {archivingQuoteId === quote.id ? (
-                              <RefreshCw className="h-4 w-4 animate-spin" />
-                            ) : (
-                              <Archive className="h-4 w-4" />
-                            )}
+                            <Archive className="h-4 w-4" />
                           </Button>
                         )}
                       </TableCell>

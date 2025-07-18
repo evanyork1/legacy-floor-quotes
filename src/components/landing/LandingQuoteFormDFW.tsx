@@ -9,41 +9,13 @@ import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
 import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export const LandingQuoteFormDFW = () => {
   const location = useLocation();
   
-  // CRITICAL: Set DFW session locks IMMEDIATELY - even before other hooks
-  console.log("🎯 LandingQuoteFormDFW - IMMEDIATE DFW session lock setup");
-  sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
-  sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
-  sessionStorage.setItem('DFW_COMPONENT_ACTIVE', 'true');
-  
-  useEffect(() => {
-    console.log("🎯 LandingQuoteFormDFW - Reinforcing DFW session locks");
-    sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
-    sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
-    sessionStorage.setItem('DFW_COMPONENT_ACTIVE', 'true');
-    
-    return () => {
-      if (!sessionStorage.getItem('ACTIVE_DFW_SUBMISSION')) {
-        sessionStorage.removeItem('BLOCK_HOUSTON_SUBMISSION');
-        sessionStorage.removeItem('SUBMISSION_TYPE');
-        sessionStorage.removeItem('DFW_COMPONENT_ACTIVE');
-        console.log("🔓 LandingQuoteFormDFW - Cleared session locks on unmount");
-      }
-    };
-  }, []);
-  
   console.log("🎯 LandingQuoteFormDFW - Component initialized:", {
     path: location.pathname,
-    url: window.location.href,
-    sessionFlags: {
-      BLOCK_HOUSTON_SUBMISSION: sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION'),
-      SUBMISSION_TYPE: sessionStorage.getItem('SUBMISSION_TYPE'),
-      DFW_COMPONENT_ACTIVE: sessionStorage.getItem('DFW_COMPONENT_ACTIVE')
-    }
+    url: window.location.href
   });
   
   const { formData, updateFormData } = useQuoteFormData();
