@@ -111,7 +111,7 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
 
       console.log('✅ Houston quote saved successfully:', savedQuote);
 
-      // Trigger Houston webhook
+      // CRITICAL FIX: Trigger Houston webhook
       console.log('🟢 Triggering Houston webhook...');
       try {
         const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {

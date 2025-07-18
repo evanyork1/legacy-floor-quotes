@@ -9,21 +9,27 @@ import { useLocation } from "react-router-dom";
 export const useQuoteForm = (leadSource?: string) => {
   const location = useLocation();
   
-  // CRITICAL FIX: Block Houston hooks on DFW pages
+  // CRITICAL FIX: Block Houston hooks on DFW pages with stronger checks
   const isDFWPage = location.pathname.includes('quotedfw') || location.pathname.includes('/dfw');
+  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
+  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
+  const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
   
   console.log("🔍 useQuoteForm - Route check:", {
     pathname: location.pathname,
     isDFWPage,
-    explicitLeadSource: leadSource
+    explicitLeadSource: leadSource,
+    activeDFWSubmission,
+    blockHouston,
+    submissionType
   });
   
-  // STRONGEST BLOCKING: Check for active DFW submissions
-  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
-  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
-  
-  if (isDFWPage || activeDFWSubmission || blockHouston === 'true') {
+  if (isDFWPage || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY') {
     console.error("🚫 HOUSTON HOOK BLOCKED: DFW page or active DFW submission detected");
+    console.error("  - isDFWPage:", isDFWPage);
+    console.error("  - activeDFWSubmission:", activeDFWSubmission);
+    console.error("  - blockHouston:", blockHouston);
+    console.error("  - submissionType:", submissionType);
     throw new Error("Houston quote form hook blocked - use DFW-specific components instead");
   }
   

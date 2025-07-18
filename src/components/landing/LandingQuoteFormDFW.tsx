@@ -9,9 +9,26 @@ import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
 import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const LandingQuoteFormDFW = () => {
   const location = useLocation();
+  
+  // CRITICAL: Set DFW session locks immediately when component loads
+  useEffect(() => {
+    console.log("🎯 LandingQuoteFormDFW - Setting DFW session locks on component mount");
+    sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
+    sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
+    
+    return () => {
+      // Clean up on unmount if no active submission
+      if (!sessionStorage.getItem('ACTIVE_DFW_SUBMISSION')) {
+        sessionStorage.removeItem('BLOCK_HOUSTON_SUBMISSION');
+        sessionStorage.removeItem('SUBMISSION_TYPE');
+        console.log("🔓 LandingQuoteFormDFW - Cleared session locks on unmount");
+      }
+    };
+  }, []);
   
   console.log("🎯 LandingQuoteFormDFW - Initializing DFW quote form:");
   console.log("  - Current path:", location.pathname);

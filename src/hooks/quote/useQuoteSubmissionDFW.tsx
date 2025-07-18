@@ -115,7 +115,7 @@ export const useQuoteSubmissionDFW = () => {
       console.log("✅ DFW quote saved successfully:", savedQuote);
       console.log("✅ CONFIRMED: Quote saved to quotes_dfw table with lead_source:", savedQuote.lead_source);
 
-      // Trigger DFW webhook only
+      // CRITICAL FIX: Trigger DFW webhook
       try {
         console.log("📡 Triggering DFW webhook");
         
