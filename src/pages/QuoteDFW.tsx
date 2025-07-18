@@ -12,16 +12,16 @@ import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
 
 const QuoteDFW = () => {
-  console.log("🎯 QuoteDFW PAGE - Rendering DFW quote page");
+  console.log("🎯 EMERGENCY DFW PAGE RENDER");
   console.log("  - Current path:", window.location.pathname);
   console.log("  - Current URL:", window.location.href);
-  console.log("  - This page uses DFW-specific hooks");
+  console.log("  - Page component: QuoteDFW");
+  console.log("  - Target table: quotes_dfw");
   
-  // Use individual hooks directly for DFW
+  // Initialize hooks
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
-  // Use DFW-specific navigation hook
   const { 
     currentStep, 
     totalSteps, 
@@ -31,18 +31,26 @@ const QuoteDFW = () => {
   } = useQuoteNavigationDFW(formData);
   
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
-  
-  // Use DFW submission hook
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
 
+  console.log("🎯 DFW HOOKS INITIALIZED");
+  console.log("  - Current step:", currentStep);
+  console.log("  - Can proceed:", canProceed());
+  console.log("  - Is submitting:", isSubmitting);
+  console.log("  - Form data keys:", Object.keys(formData));
+
   const handleSubmit = () => {
-    console.log("🎯 QuoteDFW PAGE - Submit button clicked");
+    console.log("🚨 EMERGENCY DFW SUBMIT BUTTON CLICKED");
     console.log("  - Current path:", window.location.pathname);
+    console.log("  - Current step:", currentStep);
+    console.log("  - Total steps:", totalSteps);
+    console.log("  - Is final step:", currentStep === totalSteps);
     console.log("  - Form data:", formData);
-    console.log("  - Will use DFW submission hook");
+    console.log("  - Target: quotes_dfw table");
     
     const estimatedPrice = calculatePrice();
-    console.log("  - Estimated price:", estimatedPrice);
+    console.log("  - Calculated price:", estimatedPrice);
+    console.log("🚨 CALLING DFW SUBMISSION HOOK...");
     
     submitQuoteDFW(formData, estimatedPrice);
   };
