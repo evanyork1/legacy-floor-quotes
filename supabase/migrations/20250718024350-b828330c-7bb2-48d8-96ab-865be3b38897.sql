@@ -1,0 +1,2 @@
+-- Clean up any DFW test entries that went to Houston table
+DELETE FROM quotes WHERE lead_source = 'Houston' AND created_at >= '2025-07-18' AND (name LIKE '%York%' OR name LIKE '%DFW%' OR name LIKE '%05%' OR name LIKE '%03%' OR name LIKE '%02%' OR name LIKE '%01%');
