@@ -10,6 +10,17 @@ export const useQuoteForm = (leadSource?: string) => {
   console.log("🔍 useQuoteForm called with leadSource:", leadSource);
   console.log("🔍 Current window location:", window.location.pathname);
   
+  // PATH DETECTION - BLOCK USAGE ON DFW ROUTES
+  const currentPath = window.location.pathname;
+  const isDFWRoute = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
+  
+  if (isDFWRoute) {
+    console.log("🚫 useQuoteForm BLOCKED on DFW route:", currentPath);
+    throw new Error("useQuoteForm should not be used on DFW routes. Use DFW-specific components instead.");
+  }
+  
+  console.log("✅ useQuoteForm proceeding on Houston route:", currentPath);
+  
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
@@ -20,35 +31,14 @@ export const useQuoteForm = (leadSource?: string) => {
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // ALWAYS INSTANTIATE BOTH HOOKS (following React Rules of Hooks)
+  // ONLY HOUSTON HOOK - DFW routes are blocked above
   const { handleSubmit: handleSubmitHouston, isSubmitting: isSubmittingHouston } = useQuoteSubmission(leadSource);
-  const { handleSubmit: handleSubmitDFW, isSubmitting: isSubmittingDFW } = useQuoteSubmissionDFW();
   
-  // PATH DETECTION for selecting which submission function to use
-  const currentPath = window.location.pathname;
-  const isDFWFromLeadSource = leadSource === "DFW";
-  const isDFWFromPath = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
-  const isDFWSubmission = isDFWFromLeadSource || isDFWFromPath;
-  
-  console.log("🔍 PATH DETECTION ANALYSIS:");
-  console.log("🔍 leadSource:", leadSource);
-  console.log("🔍 currentPath:", currentPath);
-  console.log("🔍 isDFWFromLeadSource:", isDFWFromLeadSource);
-  console.log("🔍 isDFWFromPath:", isDFWFromPath);
-  console.log("🔍 FINAL isDFWSubmission:", isDFWSubmission);
-  
-  // SELECT WHICH FUNCTIONS TO USE (both hooks are always instantiated)
-  const handleSubmitFunction = isDFWSubmission ? handleSubmitDFW : handleSubmitHouston;
-  const isSubmitting = isDFWSubmission ? isSubmittingDFW : isSubmittingHouston;
-
-  console.log("🔍 SELECTED SUBMISSION:", isDFWSubmission ? "DFW" : "HOUSTON");
-
+  // HOUSTON ONLY LOGIC (DFW routes are blocked)
   const handleSubmit = () => {
-    console.log("🚀 HANDLESUBMIT CALLED - isDFWSubmission:", isDFWSubmission);
-    console.log("🚀 About to call:", isDFWSubmission ? "DFW HOOK" : "HOUSTON HOOK");
-    
+    console.log("🚀 HOUSTON HANDLESUBMIT CALLED");
     const estimatedPrice = calculatePrice();
-    handleSubmitFunction(formData, estimatedPrice);
+    handleSubmitHouston(formData, estimatedPrice);
   };
 
   return {
@@ -63,6 +53,6 @@ export const useQuoteForm = (leadSource?: string) => {
     calculatePrice,
     canProceed,
     handleSubmit,
-    isSubmitting
+    isSubmitting: isSubmittingHouston
   };
 };
