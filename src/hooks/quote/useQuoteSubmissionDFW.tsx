@@ -61,6 +61,7 @@ export const useQuoteSubmissionDFW = () => {
       console.log(`✅ DFW Validation passed - proceeding to save to ${tableName}`);
 
       // Prepare quote data for DFW table with proper null handling
+      // REMOVED submission_id field as it doesn't exist in quotes_dfw table
       const quoteData = {
         garage_type: formData.garageType,
         custom_sqft: formData.customSqft ? parseInt(formData.customSqft) : null,
@@ -76,9 +77,7 @@ export const useQuoteSubmissionDFW = () => {
         estimated_price: estimatedPrice,
         lead_source: leadSource,
         status: "new",
-        archived: false,
-        // Add unique identifier to track this submission
-        submission_id: uniqueSubmissionId
+        archived: false
       };
 
       console.log(`💾 Saving DFW quote to ${tableName}:`, quoteData);
