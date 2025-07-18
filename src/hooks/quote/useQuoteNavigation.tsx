@@ -9,25 +9,6 @@ export const useQuoteNavigation = (
   formData: FormData,
   calculatePrice: () => number
 ) => {
-  // CRITICAL: IMMEDIATE URL-BASED BLOCKING - Check before any other logic
-  const currentPath = window.location.pathname;
-  const isDFWPath = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
-  
-  if (isDFWPath) {
-    console.error("🚫 HOUSTON NAVIGATION HOOK BLOCKED - DFW PATH DETECTED:", currentPath);
-    throw new Error("Houston navigation hook cannot be used on DFW paths");
-  }
-
-  // ADDITIONAL SESSION STORAGE CHECKS
-  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
-  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
-  const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
-  
-  if (activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY') {
-    console.error("🚫 HOUSTON NAVIGATION HOOK BLOCKED - DFW SESSION ACTIVE");
-    throw new Error("Houston navigation hook blocked - DFW session active");
-  }
-
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
   const { toast } = useToast();
@@ -38,7 +19,7 @@ export const useQuoteNavigation = (
 
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: FormData) => {
-        // TRIPLE CHECK: Ensure no DFW context before submission
+        // Check for DFW context before submission
         const currentPathCheck = window.location.pathname;
         const isDFWCheck = currentPathCheck.includes('/quotedfw') || currentPathCheck.includes('/dfw');
         const dfwSessionCheck = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
@@ -46,9 +27,7 @@ export const useQuoteNavigation = (
                                sessionStorage.getItem('SUBMISSION_TYPE') === 'DFW_ONLY';
         
         if (isDFWCheck || dfwSessionCheck) {
-          console.error("🚫 Houston navigation submission ABSOLUTELY BLOCKED");
-          console.error("  - Path check:", isDFWCheck, currentPathCheck);
-          console.error("  - Session check:", dfwSessionCheck);
+          console.log("🚫 Houston navigation submission blocked - DFW context detected");
           throw new Error("Houston submission blocked - DFW context detected");
         }
         
@@ -58,7 +37,7 @@ export const useQuoteNavigation = (
         const price = calculatePrice();
         const uniqueSubmissionId = `HOUSTON_NAV_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-        console.log(`💾 CONFIRMED Houston navigation saving - ID: ${uniqueSubmissionId}`);
+        console.log(`💾 Houston navigation saving - ID: ${uniqueSubmissionId}`);
 
         const quotePayload = {
             garage_type: dataToSubmit.garageType,
@@ -128,19 +107,19 @@ export const useQuoteNavigation = (
   const nextStep = () => {
     if (currentStep < totalSteps) {
         if (currentStep === 4) {
-            // FINAL CHECK: Absolutely ensure this is not DFW context
+            // Check for DFW context before auto-submission
             const finalPathCheck = window.location.pathname;
             const finalDFWCheck = finalPathCheck.includes('/quotedfw') || finalPathCheck.includes('/dfw');
             const finalSessionCheck = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
                                     sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true';
             
             if (finalDFWCheck || finalSessionCheck) {
-                console.log("🚫 Houston auto-submission BLOCKED - DFW context detected at final step");
+                console.log("🚫 Houston auto-submission blocked - DFW context detected");
                 setCurrentStep(5);
                 return;
             }
             
-            console.log("✅ Houston auto-submission proceeding - confirmed Houston context");
+            console.log("✅ Houston auto-submission proceeding");
             submitQuote(formData);
         } else if (currentStep === 1 && formData.garageType !== "custom") {
             setCurrentStep(3);

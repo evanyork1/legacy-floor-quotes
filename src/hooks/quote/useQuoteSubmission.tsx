@@ -9,31 +9,25 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
   console.log("🔍 HOUSTON useQuoteSubmission called with explicitLeadSource:", explicitLeadSource);
   console.log("🔍 HOUSTON Current URL:", window.location.href);
   
-  // CRITICAL: BLOCK DFW USAGE - Houston hook should never be used on DFW pages
-  const currentPath = window.location.pathname;
-  if (currentPath.includes('/quotedfw') || currentPath.includes('/dfw')) {
-    console.error("🚫 HOUSTON HOOK BLOCKED ON DFW PAGE:", currentPath);
-    throw new Error("Houston submission hook should not be used on DFW pages");
-  }
-  
-  // STRONGEST BLOCKING: Check for active DFW submissions
-  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
-  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
-  
-  if (activeDFWSubmission || blockHouston === 'true') {
-    console.error("🚫 HOUSTON HOOK BLOCKED: DFW submission is active");
-    throw new Error("Houston hook blocked - DFW submission in progress");
-  }
-  
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
-    // FINAL CHECK: Ensure no DFW submission is active
-    if (sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true') {
-      console.error('🚫 Houston submission blocked - DFW submission is active');
+    // Check for DFW context - if detected, block gracefully
+    const currentPath = window.location.pathname;
+    const isDFWPath = currentPath.includes('/quotedfw') || currentPath.includes('/dfw');
+    const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
+    const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
+    
+    if (isDFWPath || activeDFWSubmission || blockHouston === 'true') {
+      console.log('🚫 Houston submission blocked - DFW context detected');
+      toast({
+        title: "Form Not Available",
+        description: "Please use the DFW quote form for Dallas-Fort Worth submissions.",
+        variant: "destructive",
+      });
       return;
     }
     
@@ -45,7 +39,7 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
     // Generate unique Houston submission ID
     const uniqueSubmissionId = `HOUSTON_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    // HOUSTON-SPECIFIC session storage to prevent cross-contamination
+    // Check for recent submissions
     const existingSubmission = sessionStorage.getItem('lastHoustonQuoteSubmission');
     
     if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 10000)) {
@@ -61,13 +55,10 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
     console.log(`🟢 Starting HOUSTON quote submission process - ID: ${uniqueSubmissionId}`, formData);
 
     try {
-      // Force Houston lead source - no DFW detection
+      // Force Houston lead source
       const leadSource = 'Houston';
       
-      console.log("🔍 HOUSTON SUBMISSION - FORCED HOUSTON LEAD SOURCE:");
-      console.log("  - window.location.pathname:", window.location.pathname);
-      console.log("  - explicitLeadSource:", explicitLeadSource);
-      console.log("🎯 FINAL LEAD SOURCE:", leadSource);
+      console.log("🔍 HOUSTON SUBMISSION - Lead source:", leadSource);
 
       // Prepare quote data for Houston table
       const quoteData = {
@@ -83,23 +74,17 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
         phone: formData.phone,
         zip_code: formData.zipCode,
         estimated_price: estimatedPrice,
-        lead_source: leadSource, // FORCED to Houston
+        lead_source: leadSource,
         status: 'new' as const,
         archived: false,
         submission_id: uniqueSubmissionId
       };
 
-      // Save to Houston quotes table only
-      const tableName = 'quotes';
-      
-      console.log("🔍 HOUSTON PRE-SAVE VERIFICATION:");
-      console.log("  - leadSource in quoteData:", quoteData.lead_source);
-      console.log("  - target table:", tableName);
-      console.log("🎯 CONFIRMED: SAVING TO quotes TABLE (Houston)");
+      console.log("🔍 HOUSTON saving to quotes table:", quoteData);
 
       // Save quote to Houston database
       const { data: savedQuote, error: saveError } = await supabase
-        .from(tableName)
+        .from('quotes')
         .insert(quoteData)
         .select()
         .single();
@@ -111,7 +96,7 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
 
       console.log('✅ Houston quote saved successfully:', savedQuote);
 
-      // CRITICAL FIX: Trigger Houston webhook
+      // Trigger Houston webhook
       console.log('🟢 Triggering Houston webhook...');
       try {
         const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {

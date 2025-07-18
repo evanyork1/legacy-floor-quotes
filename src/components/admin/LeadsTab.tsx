@@ -45,7 +45,8 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   onArchiveQuote,
   onUnarchiveQuote
 }) => {
-  console.log('🎨 LEADS TAB: Rendering with quotes:', quotes.length, quotes);
+  console.log('🎨 LEADS TAB: Rendering with quotes:', quotes.length);
+  console.log('🎨 LEADS TAB: Full quotes array:', quotes);
   
   const activeQuotes = quotes.filter(q => !q.archived);
   const archivedQuotes = quotes.filter(q => q.archived);
@@ -57,6 +58,13 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   console.log('  Archived quotes:', archivedQuotes.length);
   console.log('  Displayed quotes:', displayedQuotes.length);
   console.log('  Show archived:', showArchived);
+
+  // Log quote sources
+  const houstonQuotes = quotes.filter(q => q.lead_source === 'Houston');
+  const dfwQuotes = quotes.filter(q => q.lead_source === 'DFW');
+  console.log('🎨 LEADS TAB: Source breakdown:');
+  console.log('  Houston quotes:', houstonQuotes.length, houstonQuotes.map(q => ({ id: q.id, name: q.name })));
+  console.log('  DFW quotes:', dfwQuotes.length, dfwQuotes.map(q => ({ id: q.id, name: q.name })));
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -94,6 +102,9 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
             </span>
           )}
           {loading && <span className="ml-2 text-sm text-gray-400">(Loading...)</span>}
+          <div className="text-sm text-gray-400 mt-1">
+            Houston: {houstonQuotes.length} | DFW: {dfwQuotes.length}
+          </div>
         </CardTitle>
         <div className="flex gap-2">
           <Button 
@@ -131,6 +142,9 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
           <div className="text-center py-8">
             <div className="text-gray-400 mb-4">
               {showArchived ? 'No quotes found in database' : 'No active quotes found'}
+            </div>
+            <div className="text-sm text-gray-500 mb-4">
+              Debug: Total quotes in state: {quotes.length} (Houston: {houstonQuotes.length}, DFW: {dfwQuotes.length})
             </div>
             <Button 
               onClick={onRefresh} 

@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 export const useQuoteForm = (leadSource?: string) => {
   const location = useLocation();
   
-  // STRONGEST POSSIBLE BLOCKING - Multiple checks
+  // Check for DFW context - but don't throw errors, just block gracefully
   const currentPath = window.location.pathname;
   const isDFWPath = currentPath.includes('quotedfw') || currentPath.includes('/dfw');
   const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
@@ -17,7 +17,7 @@ export const useQuoteForm = (leadSource?: string) => {
   const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
   const dfwComponentActive = sessionStorage.getItem('DFW_COMPONENT_ACTIVE');
   
-  console.log("🔍 useQuoteForm - COMPREHENSIVE BLOCKING CHECK:", {
+  console.log("🔍 useQuoteForm - DFW context check:", {
     currentPath,
     isDFWPath,
     activeDFWSubmission,
@@ -27,11 +27,39 @@ export const useQuoteForm = (leadSource?: string) => {
     shouldBlock: isDFWPath || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY' || dfwComponentActive
   });
   
-  if (isDFWPath || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY' || dfwComponentActive) {
-    console.error("🚫 HOUSTON FORM HOOK ABSOLUTELY BLOCKED");
-    console.error("  - Path check:", isDFWPath, currentPath);
-    console.error("  - Session checks:", { activeDFWSubmission, blockHouston, submissionType, dfwComponentActive });
-    throw new Error("Houston quote form hook blocked - DFW context detected");
+  // If in DFW context, return null values to gracefully disable the form
+  const isDFWContext = isDFWPath || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY' || dfwComponentActive;
+  
+  if (isDFWContext) {
+    console.log("🚫 Houston form hook blocked - DFW context detected, returning null values");
+    return {
+      currentStep: 1,
+      totalSteps: 5,
+      formData: {
+        garageType: '',
+        customSqft: '',
+        spaceType: '',
+        otherSpaceType: '',
+        exteriorPhotos: [],
+        damagePhotos: [],
+        colorChoice: '',
+        name: '',
+        email: '',
+        phone: '',
+        zipCode: ''
+      },
+      updateFormData: () => {},
+      nextStep: () => {},
+      prevStep: () => {},
+      handleFileUpload: () => {},
+      removePhoto: () => {},
+      calculatePrice: () => 0,
+      canProceed: () => false,
+      handleSubmit: () => {
+        console.log("🚫 Houston form submission blocked - DFW context");
+      },
+      isSubmitting: false
+    };
   }
   
   const { formData, updateFormData } = useQuoteFormData();
@@ -48,7 +76,7 @@ export const useQuoteForm = (leadSource?: string) => {
   console.log("✅ useQuoteForm - Houston hooks initialized for confirmed Houston context");
   
   const handleSubmit = () => {
-    // ABSOLUTE FINAL CHECK
+    // Final check - if DFW context detected, block submission
     const finalCheck = window.location.pathname.includes('/quotedfw') || 
                       window.location.pathname.includes('/dfw') ||
                       sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || 
@@ -56,11 +84,11 @@ export const useQuoteForm = (leadSource?: string) => {
                       sessionStorage.getItem('DFW_COMPONENT_ACTIVE');
     
     if (finalCheck) {
-      console.error("🚫 Houston form submission BLOCKED at final step");
+      console.log("🚫 Houston form submission blocked at final step - DFW context detected");
       return;
     }
     
-    console.log("✅ Houston form submission confirmed - proceeding");
+    console.log("✅ Houston form submission proceeding");
     const estimatedPrice = calculatePrice();
     handleSubmitHouston(formData, estimatedPrice);
   };

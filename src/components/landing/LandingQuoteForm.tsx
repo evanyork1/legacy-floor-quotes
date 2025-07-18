@@ -9,43 +9,22 @@ import { useLocation } from "react-router-dom";
 export const LandingQuoteForm = () => {
   const location = useLocation();
   
-  // STRONGEST BLOCKING: Check for ANY DFW context
+  // Check for DFW context to show appropriate message
   const isDFWPage = location.pathname.includes('quotedfw') || location.pathname.includes('/dfw');
   const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
   const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
   const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
   
-  console.log("🔍 LandingQuoteForm - Route check:", {
+  console.log("🔍 LandingQuoteForm - Context check:", {
     pathname: location.pathname,
     isDFWPage,
-    shouldBlockHoustonHooks: isDFWPage || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY',
-    currentURL: window.location.href,
-    activeDFWSubmission,
-    blockHouston,
-    submissionType
+    shouldShowDFWMessage: isDFWPage || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY',
+    currentURL: window.location.href
   });
   
-  if (isDFWPage || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY') {
-    console.log("🚫 BLOCKING LandingQuoteForm on DFW context - this should use LandingQuoteFormDFW instead");
-    console.error("❌ CRITICAL ERROR: LandingQuoteForm (Houston) should NOT be used in DFW context");
-    // Return error message instead of null to make it visible
-    return (
-      <div className="max-w-2xl mx-auto p-8 bg-red-100 border-2 border-red-500 rounded-lg">
-        <h2 className="text-red-800 text-xl font-bold mb-4">Configuration Error</h2>
-        <p className="text-red-700">
-          Houston quote form component loaded in DFW context. This should use DFW-specific components.
-        </p>
-        <p className="text-sm text-red-600 mt-2">
-          Current path: {location.pathname}
-        </p>
-        <p className="text-sm text-red-600 mt-1">
-          DFW flags: activeDFWSubmission={activeDFWSubmission}, blockHouston={blockHouston}, submissionType={submissionType}
-        </p>
-      </div>
-    );
-  }
+  const isDFWContext = isDFWPage || activeDFWSubmission || blockHouston === 'true' || submissionType === 'DFW_ONLY';
   
-  // Use Houston-specific hook only for non-DFW contexts
+  // Always call the hook - it will handle DFW context gracefully
   const {
     currentStep,
     totalSteps,
@@ -61,7 +40,23 @@ export const LandingQuoteForm = () => {
     isSubmitting
   } = useQuoteForm();
 
-  console.log("✅ LandingQuoteForm - Using Houston hooks for non-DFW context");
+  // Show message if in DFW context
+  if (isDFWContext) {
+    console.log("🔍 LandingQuoteForm - Showing DFW context message");
+    return (
+      <div className="max-w-2xl mx-auto p-8 bg-blue-50 border-2 border-blue-200 rounded-lg">
+        <h2 className="text-blue-800 text-xl font-bold mb-4">DFW Quote Form</h2>
+        <p className="text-blue-700">
+          You are accessing the DFW quote system. Please use the DFW-specific quote form for submissions in the Dallas-Fort Worth area.
+        </p>
+        <p className="text-sm text-blue-600 mt-2">
+          Current path: {location.pathname}
+        </p>
+      </div>
+    );
+  }
+
+  console.log("✅ LandingQuoteForm - Rendering Houston quote form");
 
   return (
     <div className="max-w-2xl mx-auto">

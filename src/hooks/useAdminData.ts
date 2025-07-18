@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Quote, PricingTier, Subdomain } from "@/types/admin";
 
 export const useAdminData = () => {
@@ -108,10 +108,10 @@ export const useAdminData = () => {
       console.log('✅ ADMIN PANEL: Raw data extraction complete:');
       console.log('  - Houston quotes count:', quotesData.length);
       console.log('  - DFW quotes count:', quotesDfwData.length);
-      console.log('  - Houston quotes data:', quotesData);
-      console.log('  - DFW quotes data:', quotesDfwData);
+      console.log('  - Houston quotes sample:', quotesData.slice(0, 3));
+      console.log('  - DFW quotes sample:', quotesDfwData.slice(0, 3));
       
-      // Process Houston quotes with detailed logging
+      // Process Houston quotes
       console.log('🔄 ADMIN PANEL: Processing Houston quotes...');
       const houstonQuotes = quotesData.map((quote, index) => {
         const processedQuote = {
@@ -122,16 +122,18 @@ export const useAdminData = () => {
           archived: quote.archived || false,
           lead_source: quote.lead_source || 'Houston'
         };
-        console.log(`  Houston quote ${index + 1}:`, {
-          id: processedQuote.id,
-          name: processedQuote.name,
-          lead_source: processedQuote.lead_source,
-          created_at: processedQuote.created_at
-        });
+        if (index < 2) {
+          console.log(`  Houston quote ${index + 1}:`, {
+            id: processedQuote.id,
+            name: processedQuote.name,
+            lead_source: processedQuote.lead_source,
+            created_at: processedQuote.created_at
+          });
+        }
         return processedQuote;
       });
 
-      // Process DFW quotes with detailed logging
+      // Process DFW quotes
       console.log('🔄 ADMIN PANEL: Processing DFW quotes...');
       const dfwQuotes = quotesDfwData.map((quote, index) => {
         const processedQuote = {
@@ -142,12 +144,14 @@ export const useAdminData = () => {
           archived: quote.archived || false,
           lead_source: quote.lead_source || 'DFW'
         };
-        console.log(`  DFW quote ${index + 1}:`, {
-          id: processedQuote.id,
-          name: processedQuote.name,
-          lead_source: processedQuote.lead_source,
-          created_at: processedQuote.created_at
-        });
+        if (index < 2) {
+          console.log(`  DFW quote ${index + 1}:`, {
+            id: processedQuote.id,
+            name: processedQuote.name,
+            lead_source: processedQuote.lead_source,
+            created_at: processedQuote.created_at
+          });
+        }
         return processedQuote;
       });
 
@@ -171,11 +175,12 @@ export const useAdminData = () => {
       
       console.log('  - Houston quotes in final array:', houstonCount);
       console.log('  - DFW quotes in final array:', dfwCount);
-      console.log('  - Final quotes by source breakdown:', {
-        Houston: houstonCount,
-        DFW: dfwCount,
-        Total: sortedQuotes.length
-      });
+      console.log('  - Sample of final sorted quotes:', sortedQuotes.slice(0, 5).map(q => ({
+        id: q.id,
+        name: q.name,
+        lead_source: q.lead_source,
+        created_at: q.created_at
+      })));
 
       // Set state
       console.log('💾 ADMIN PANEL: Setting quotes state...');
