@@ -14,47 +14,53 @@ import { useEffect } from "react";
 export const LandingQuoteFormDFW = () => {
   const location = useLocation();
   
-  // CRITICAL: Set DFW session locks immediately when component loads
+  // CRITICAL: Set DFW session locks IMMEDIATELY - even before other hooks
+  console.log("🎯 LandingQuoteFormDFW - IMMEDIATE DFW session lock setup");
+  sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
+  sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
+  sessionStorage.setItem('DFW_COMPONENT_ACTIVE', 'true');
+  
   useEffect(() => {
-    console.log("🎯 LandingQuoteFormDFW - Setting DFW session locks on component mount");
+    console.log("🎯 LandingQuoteFormDFW - Reinforcing DFW session locks");
     sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
     sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
+    sessionStorage.setItem('DFW_COMPONENT_ACTIVE', 'true');
     
     return () => {
-      // Clean up on unmount if no active submission
       if (!sessionStorage.getItem('ACTIVE_DFW_SUBMISSION')) {
         sessionStorage.removeItem('BLOCK_HOUSTON_SUBMISSION');
         sessionStorage.removeItem('SUBMISSION_TYPE');
+        sessionStorage.removeItem('DFW_COMPONENT_ACTIVE');
         console.log("🔓 LandingQuoteFormDFW - Cleared session locks on unmount");
       }
     };
   }, []);
   
-  console.log("🎯 LandingQuoteFormDFW - Initializing DFW quote form:");
-  console.log("  - Current path:", location.pathname);
-  console.log("  - Current URL:", window.location.href);
-  console.log("  - This is the CORRECT DFW component");
+  console.log("🎯 LandingQuoteFormDFW - Component initialized:", {
+    path: location.pathname,
+    url: window.location.href,
+    sessionFlags: {
+      BLOCK_HOUSTON_SUBMISSION: sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION'),
+      SUBMISSION_TYPE: sessionStorage.getItem('SUBMISSION_TYPE'),
+      DFW_COMPONENT_ACTIVE: sessionStorage.getItem('DFW_COMPONENT_ACTIVE')
+    }
+  });
   
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
-  // Use DFW-specific navigation hook (no submission logic)
   const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigationDFW(formData);
-
-  const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
-  // Use DFW submission hook
+  const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   const { handleSubmit: submitQuoteDFW, isSubmitting } = useQuoteSubmissionDFW();
   
   const handleSubmit = () => {
-    console.log("🎯 DFW Form Submit Button Clicked");
+    console.log("🎯 DFW FORM SUBMIT - Final submission triggered");
+    console.log("  - Path:", location.pathname);
     console.log("  - Form data:", formData);
-    console.log("  - Current path:", location.pathname);
-    console.log("  - This will trigger DFW-specific submission");
+    console.log("  - Will save to quotes_dfw table");
     
     const estimatedPrice = calculatePrice();
-    console.log("  - Estimated price:", estimatedPrice);
-    
     submitQuoteDFW(formData, estimatedPrice);
   };
 
