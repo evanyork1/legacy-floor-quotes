@@ -23,13 +23,6 @@ export const useQuoteSubmissionDFW = () => {
       return;
     }
     
-    // Set DFW session locks
-    sessionStorage.setItem('ACTIVE_DFW_SUBMISSION', uniqueSubmissionId);
-    sessionStorage.setItem('BLOCK_HOUSTON_SUBMISSION', 'true');
-    sessionStorage.setItem('SUBMISSION_TYPE', 'DFW_ONLY');
-    
-    console.log(`🔒 DFW Session locks set: ${uniqueSubmissionId}`);
-    
     setIsSubmitting(true);
     
     try {
@@ -112,10 +105,7 @@ export const useQuoteSubmissionDFW = () => {
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
-      sessionStorage.removeItem('ACTIVE_DFW_SUBMISSION');
-      sessionStorage.removeItem('BLOCK_HOUSTON_SUBMISSION');
-      sessionStorage.removeItem('DFW_COMPONENT_ACTIVE');
-      console.log(`🔓 DFW Session locks cleared: ${uniqueSubmissionId}`);
+      console.log(`🔓 DFW Session cleared: ${uniqueSubmissionId}`);
     }
   };
 

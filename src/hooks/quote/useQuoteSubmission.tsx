@@ -15,17 +15,6 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
-    // Simple route check - if on DFW route, block
-    if (location.pathname.includes('/quotedfw')) {
-      console.log('🚫 Houston submission blocked - on DFW route');
-      toast({
-        title: "Form Not Available",
-        description: "Please use the DFW quote form for Dallas-Fort Worth submissions.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
     if (isSubmitting) {
       console.log('🚫 Houston submission already in progress, ignoring duplicate request');
       return;
@@ -38,6 +27,11 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
     console.log(`🟢 Starting HOUSTON quote submission process - ID: ${uniqueSubmissionId}`, formData);
 
     try {
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.phone || !formData.garageType || !formData.colorChoice || !formData.zipCode) {
+        throw new Error("Missing required fields");
+      }
+
       // Force Houston lead source
       const leadSource = 'Houston';
       
@@ -52,15 +46,14 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
         exterior_photos: [],
         damage_photos: [],
         color_choice: formData.colorChoice,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        zip_code: formData.zipCode,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        zip_code: formData.zipCode.trim(),
         estimated_price: estimatedPrice,
         lead_source: leadSource,
         status: 'new' as const,
-        archived: false,
-        submission_id: uniqueSubmissionId
+        archived: false
       };
 
       console.log("🔍 HOUSTON saving to quotes table:", quoteData);

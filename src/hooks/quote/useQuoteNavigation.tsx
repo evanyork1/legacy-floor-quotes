@@ -21,12 +21,11 @@ export const useQuoteNavigation = (
 
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: FormData) => {
-        // Simple route check
-        if (location.pathname.includes('/quotedfw')) {
-          console.log("🚫 Houston navigation submission blocked - on DFW route");
-          throw new Error("Houston submission blocked - on DFW route");
+        // Validate required fields
+        if (!dataToSubmit.name || !dataToSubmit.email || !dataToSubmit.phone || !dataToSubmit.garageType || !dataToSubmit.colorChoice || !dataToSubmit.zipCode) {
+          throw new Error("Missing required fields");
         }
-        
+
         const exterior_photos: string[] = [];
         const damage_photos: string[] = [];
         
@@ -41,16 +40,16 @@ export const useQuoteNavigation = (
             space_type: dataToSubmit.spaceType,
             other_space_type: dataToSubmit.otherSpaceType,
             color_choice: dataToSubmit.colorChoice,
-            name: dataToSubmit.name,
-            email: dataToSubmit.email,
-            phone: dataToSubmit.phone,
-            zip_code: dataToSubmit.zipCode,
+            name: dataToSubmit.name.trim(),
+            email: dataToSubmit.email.trim(),
+            phone: dataToSubmit.phone.trim(),
+            zip_code: dataToSubmit.zipCode.trim(),
             estimated_price: price,
             exterior_photos,
             damage_photos,
             status: 'new',
             lead_source: 'Houston',
-            submission_id: uniqueSubmissionId
+            archived: false
         };
 
         const { data: insertedQuote, error } = await supabase
@@ -103,13 +102,6 @@ export const useQuoteNavigation = (
   const nextStep = () => {
     if (currentStep < totalSteps) {
         if (currentStep === 4) {
-            // Simple route check before auto-submission
-            if (location.pathname.includes('/quotedfw')) {
-                console.log("🚫 Houston auto-submission blocked - on DFW route");
-                setCurrentStep(5);
-                return;
-            }
-            
             console.log("✅ Houston auto-submission proceeding");
             submitQuote(formData);
         } else if (currentStep === 1 && formData.garageType !== "custom") {
