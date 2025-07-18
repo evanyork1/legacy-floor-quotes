@@ -45,9 +45,18 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
   onArchiveQuote,
   onUnarchiveQuote
 }) => {
+  console.log('🎨 LEADS TAB: Rendering with quotes:', quotes.length, quotes);
+  
   const activeQuotes = quotes.filter(q => !q.archived);
   const archivedQuotes = quotes.filter(q => q.archived);
   const displayedQuotes = showArchived ? quotes : activeQuotes;
+
+  console.log('🎨 LEADS TAB: Quote breakdown:');
+  console.log('  Total quotes:', quotes.length);
+  console.log('  Active quotes:', activeQuotes.length);
+  console.log('  Archived quotes:', archivedQuotes.length);
+  console.log('  Displayed quotes:', displayedQuotes.length);
+  console.log('  Show archived:', showArchived);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -134,6 +143,10 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
           </div>
         ) : (
           <div className="overflow-x-auto">
+            <div className="mb-4 text-sm text-gray-400">
+              Displaying {displayedQuotes.length} quotes 
+              ({displayedQuotes.filter(q => q.lead_source === 'Houston').length} Houston, {displayedQuotes.filter(q => q.lead_source === 'DFW').length} DFW)
+            </div>
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-gray-700">
@@ -151,79 +164,88 @@ const LeadsTab: React.FC<LeadsTabProps> = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {displayedQuotes.map((quote) => (
-                  <TableRow 
-                    key={quote.id} 
-                    className={`border-b border-gray-700 ${quote.archived ? 'opacity-60' : ''}`}
-                  >
-                    <TableCell className="text-white font-medium">
-                      {quote.name}
-                      {quote.archived && (
-                        <Badge variant="secondary" className="ml-2 text-xs">
-                          Archived
+                {displayedQuotes.map((quote) => {
+                  console.log('🎨 LEADS TAB: Rendering quote row:', {
+                    id: quote.id,
+                    name: quote.name,
+                    lead_source: quote.lead_source,
+                    archived: quote.archived
+                  });
+                  
+                  return (
+                    <TableRow 
+                      key={quote.id} 
+                      className={`border-b border-gray-700 ${quote.archived ? 'opacity-60' : ''}`}
+                    >
+                      <TableCell className="text-white font-medium">
+                        {quote.name}
+                        {quote.archived && (
+                          <Badge variant="secondary" className="ml-2 text-xs">
+                            Archived
+                          </Badge>
+                        )}
+                      </TableCell>
+                      <TableCell className="text-gray-300">
+                        <div>{quote.email}</div>
+                        <div className="text-sm">{quote.phone}</div>
+                      </TableCell>
+                      <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
+                      <TableCell>{getSourceBadge(quote.lead_source)}</TableCell>
+                      <TableCell className="text-gray-300">
+                        {formatGarageType(quote)}
+                      </TableCell>
+                      <TableCell className="text-gray-300">{quote.color_choice}</TableCell>
+                      <TableCell className="text-green-400 font-bold">
+                        ${quote.estimated_price.toLocaleString()}
+                      </TableCell>
+                      <TableCell>
+                        <PhotoViewer 
+                          exteriorPhotos={quote.exterior_photos}
+                          damagePhotos={quote.damage_photos}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Badge className={`${getStatusColor(quote.status)} border-0`}>
+                          {quote.status}
                         </Badge>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-gray-300">
-                      <div>{quote.email}</div>
-                      <div className="text-sm">{quote.phone}</div>
-                    </TableCell>
-                    <TableCell className="text-gray-300">{quote.zip_code}</TableCell>
-                    <TableCell>{getSourceBadge(quote.lead_source)}</TableCell>
-                    <TableCell className="text-gray-300">
-                      {formatGarageType(quote)}
-                    </TableCell>
-                    <TableCell className="text-gray-300">{quote.color_choice}</TableCell>
-                    <TableCell className="text-green-400 font-bold">
-                      ${quote.estimated_price.toLocaleString()}
-                    </TableCell>
-                    <TableCell>
-                      <PhotoViewer 
-                        exteriorPhotos={quote.exterior_photos}
-                        damagePhotos={quote.damage_photos}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Badge className={`${getStatusColor(quote.status)} border-0`}>
-                        {quote.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-gray-400 text-sm">
-                      {new Date(quote.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>
-                      {quote.archived ? (
-                        <Button
-                          onClick={() => onUnarchiveQuote(quote.id)}
-                          disabled={archivingQuoteId === quote.id}
-                          size="sm"
-                          variant="outline"
-                          className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
-                        >
-                          {archivingQuoteId === quote.id ? (
-                            <RefreshCw className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <ArchiveRestore className="h-4 w-4" />
-                          )}
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => onArchiveQuote(quote.id)}
-                          disabled={archivingQuoteId === quote.id}
-                          size="sm"
-                          variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
-                        >
-                          {archivingQuoteId === quote.id ? (
-                            <RefreshCw className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <Archive className="h-4 w-4" />
-                          )}
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      </TableCell>
+                      <TableCell className="text-gray-400 text-sm">
+                        {new Date(quote.created_at).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell>
+                        {quote.archived ? (
+                          <Button
+                            onClick={() => onUnarchiveQuote(quote.id)}
+                            disabled={archivingQuoteId === quote.id}
+                            size="sm"
+                            variant="outline"
+                            className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+                          >
+                            {archivingQuoteId === quote.id ? (
+                              <RefreshCw className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <ArchiveRestore className="h-4 w-4" />
+                            )}
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => onArchiveQuote(quote.id)}
+                            disabled={archivingQuoteId === quote.id}
+                            size="sm"
+                            variant="outline"
+                            className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
+                          >
+                            {archivingQuoteId === quote.id ? (
+                              <RefreshCw className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Archive className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
