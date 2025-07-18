@@ -43,15 +43,6 @@ export const LandingQuoteFormDFW = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="mb-4 p-3 bg-green-100 border border-green-400 rounded-lg">
-        <p className="text-green-800 text-sm font-medium">
-          ✅ DFW Quote Form Active - Submissions will go to quotes_dfw table
-        </p>
-        <p className="text-green-600 text-xs mt-1">
-          Path: {location.pathname} | Component: LandingQuoteFormDFW
-        </p>
-      </div>
-      
       <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
       <Card className="shadow-xl border-0 overflow-hidden">

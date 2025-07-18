@@ -17,15 +17,26 @@ export const useQuoteNavigation = (
     window.scrollTo(0, 0);
   }, [currentStep]);
 
+  // CRITICAL: Check for DFW context at the hook level
+  const isDFWContext = () => {
+    const isDFWPage = window.location.pathname.includes('/quotedfw') || window.location.pathname.includes('/dfw');
+    const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
+    const blockHoustonSubmission = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
+    const submissionType = sessionStorage.getItem('SUBMISSION_TYPE');
+    
+    return isDFWPage || activeDFWSubmission || blockHoustonSubmission || submissionType === 'DFW_ONLY';
+  };
+
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: FormData) => {
-        // CRITICAL: Check if this is being called from a DFW page
-        const isDFWPage = window.location.pathname.includes('/quotedfw') || window.location.pathname.includes('/dfw');
-        const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
-        
-        if (isDFWPage || activeDFWSubmission) {
-          console.error("🚫 Houston navigation submission blocked - DFW context detected");
-          throw new Error("Houston submission blocked on DFW page");
+        // STRONGEST BLOCKING: Multiple checks for DFW context
+        if (isDFWContext()) {
+          console.error("🚫 Houston navigation submission BLOCKED - DFW context detected");
+          console.error("  - Current URL:", window.location.href);
+          console.error("  - Session storage ACTIVE_DFW_SUBMISSION:", sessionStorage.getItem('ACTIVE_DFW_SUBMISSION'));
+          console.error("  - Session storage BLOCK_HOUSTON_SUBMISSION:", sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION'));
+          console.error("  - Session storage SUBMISSION_TYPE:", sessionStorage.getItem('SUBMISSION_TYPE'));
+          throw new Error("Houston submission blocked - DFW context active");
         }
         
         const exterior_photos: string[] = [];
@@ -105,7 +116,17 @@ export const useQuoteNavigation = (
   const nextStep = () => {
     if (currentStep < totalSteps) {
         if (currentStep === 4) {
-            // Submit to database when moving from step 4 to step 5
+            // CRITICAL BLOCKING: Prevent auto-submission on DFW pages/sessions
+            if (isDFWContext()) {
+                console.log("🚫 Houston auto-submission blocked - DFW context detected");
+                console.log("  - Moving to step 5 without Houston submission");
+                console.log("  - DFW submission should handle this separately");
+                setCurrentStep(5);
+                return;
+            }
+            
+            // Submit to Houston database when moving from step 4 to step 5 (Houston only)
+            console.log("✅ Houston auto-submission proceeding - no DFW context detected");
             submitQuote(formData);
         } else if (currentStep === 1 && formData.garageType !== "custom") {
             setCurrentStep(3); // Skip step 2 if garageType is not custom

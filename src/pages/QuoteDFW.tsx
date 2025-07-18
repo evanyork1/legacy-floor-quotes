@@ -56,15 +56,6 @@ const QuoteDFW = () => {
       
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-4 p-3 bg-blue-100 border border-blue-500 rounded-lg">
-            <p className="text-blue-800 text-sm font-medium">
-              ✅ QuoteDFW Page Active - DFW-specific quote processing
-            </p>
-            <p className="text-blue-600 text-xs mt-1">
-              Path: {location.pathname} | Page: QuoteDFW | Target: quotes_dfw table
-            </p>
-          </div>
-          
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
           <Card className="shadow-2xl border-0 overflow-hidden">
