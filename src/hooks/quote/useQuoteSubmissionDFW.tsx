@@ -71,10 +71,10 @@ export const useQuoteSubmissionDFW = () => {
 
       console.log(`💾 Saving to quotes_dfw:`, quoteData);
 
-      // Remove array wrapper - insert expects single object, not array
+      // Use array format for insert with .single() - this is the correct Supabase pattern
       const { data: savedQuote, error: saveError } = await supabase
         .from("quotes_dfw")
-        .insert(quoteData)
+        .insert([quoteData])
         .select()
         .single();
 
