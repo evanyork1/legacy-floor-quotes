@@ -4,7 +4,7 @@ import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { useQuoteFormData } from "@/hooks/quote/useQuoteFormData";
-import { useQuoteNavigation } from "@/hooks/quote/useQuoteNavigation";
+import { useQuoteNavigationDFW } from "@/hooks/quote/useQuoteNavigationDFW";
 import { useQuoteFileHandling } from "@/hooks/quote/useQuoteFileHandling";
 import { useQuotePricing } from "@/hooks/quote/useQuotePricing";
 import { useQuoteSubmissionDFW } from "@/hooks/quote/useQuoteSubmissionDFW";
@@ -13,10 +13,8 @@ export const LandingQuoteFormDFW = () => {
   const { formData, updateFormData } = useQuoteFormData();
   const { calculatePrice } = useQuotePricing(formData);
   
-  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigation(
-    formData,
-    calculatePrice
-  );
+  // Use DFW-specific navigation hook (no submission logic)
+  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigationDFW(formData);
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
   
