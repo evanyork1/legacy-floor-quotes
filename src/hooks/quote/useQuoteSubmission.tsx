@@ -16,19 +16,36 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
     throw new Error("Houston submission hook should not be used on DFW pages");
   }
   
+  // STRONGEST BLOCKING: Check for active DFW submissions
+  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
+  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
+  
+  if (activeDFWSubmission || blockHouston === 'true') {
+    console.error("🚫 HOUSTON HOOK BLOCKED: DFW submission is active");
+    throw new Error("Houston hook blocked - DFW submission in progress");
+  }
+  
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (formData: FormData, estimatedPrice: number) => {
+    // FINAL CHECK: Ensure no DFW submission is active
+    if (sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true') {
+      console.error('🚫 Houston submission blocked - DFW submission is active');
+      return;
+    }
+    
     if (isSubmitting) {
       console.log('🚫 Houston submission already in progress, ignoring duplicate request');
       return;
     }
     
+    // Generate unique Houston submission ID
+    const uniqueSubmissionId = `HOUSTON_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
     // HOUSTON-SPECIFIC session storage to prevent cross-contamination
-    const submissionKey = `houston_${formData.email}_${estimatedPrice}`;
     const existingSubmission = sessionStorage.getItem('lastHoustonQuoteSubmission');
     
     if (existingSubmission && (Date.now() - parseInt(existingSubmission) < 10000)) {
@@ -36,16 +53,12 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       return;
     }
     
-    // Clear any DFW session storage that might interfere
-    sessionStorage.removeItem('lastDFWQuoteSubmission');
-    sessionStorage.removeItem('currentSubmissionType');
-    
     // Set Houston-specific session storage
     sessionStorage.setItem('lastHoustonQuoteSubmission', Date.now().toString());
-    sessionStorage.setItem('currentSubmissionType', 'HOUSTON_ONLY');
+    sessionStorage.setItem('ACTIVE_HOUSTON_SUBMISSION', uniqueSubmissionId);
 
     setIsSubmitting(true);
-    console.log('🟢 Starting HOUSTON quote submission process...', formData);
+    console.log(`🟢 Starting HOUSTON quote submission process - ID: ${uniqueSubmissionId}`, formData);
 
     try {
       // Force Houston lead source - no DFW detection
@@ -62,8 +75,8 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
         custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
         space_type: formData.spaceType || null,
         other_space_type: formData.otherSpaceType || null,
-        exterior_photos: [], // Simplified flow - no photos
-        damage_photos: [], // Simplified flow - no photos
+        exterior_photos: [],
+        damage_photos: [],
         color_choice: formData.colorChoice,
         name: formData.name,
         email: formData.email,
@@ -72,7 +85,8 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
         estimated_price: estimatedPrice,
         lead_source: leadSource, // FORCED to Houston
         status: 'new' as const,
-        archived: false
+        archived: false,
+        submission_id: uniqueSubmissionId
       };
 
       // Save to Houston quotes table only
@@ -129,7 +143,7 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
       navigate('/houstonreslanding');
 
     } catch (error) {
-      console.error('🔴 Houston quote submission error:', error);
+      console.error(`🔴 Houston quote submission error for ID ${uniqueSubmissionId}:`, error);
       toast({
         title: "Submission Failed",
         description: error instanceof Error ? error.message : "Failed to submit quote. Please try again.",
@@ -138,6 +152,8 @@ export const useQuoteSubmission = (explicitLeadSource?: string) => {
     } finally {
       setIsSubmitting(false);
       sessionStorage.removeItem('lastHoustonQuoteSubmission');
+      sessionStorage.removeItem('ACTIVE_HOUSTON_SUBMISSION');
+      console.log(`🔓 Houston session locks cleared for submission: ${uniqueSubmissionId}`);
     }
   };
 

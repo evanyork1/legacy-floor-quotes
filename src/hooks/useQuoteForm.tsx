@@ -18,9 +18,13 @@ export const useQuoteForm = (leadSource?: string) => {
     explicitLeadSource: leadSource
   });
   
-  if (isDFWPage) {
-    console.error("🚫 HOUSTON HOOK BLOCKED: useQuoteForm should not be used on DFW pages");
-    throw new Error("Houston quote form hook blocked on DFW pages - use DFW-specific components instead");
+  // STRONGEST BLOCKING: Check for active DFW submissions
+  const activeDFWSubmission = sessionStorage.getItem('ACTIVE_DFW_SUBMISSION');
+  const blockHouston = sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION');
+  
+  if (isDFWPage || activeDFWSubmission || blockHouston === 'true') {
+    console.error("🚫 HOUSTON HOOK BLOCKED: DFW page or active DFW submission detected");
+    throw new Error("Houston quote form hook blocked - use DFW-specific components instead");
   }
   
   const { formData, updateFormData } = useQuoteFormData();
@@ -37,6 +41,12 @@ export const useQuoteForm = (leadSource?: string) => {
   console.log("✅ useQuoteForm - Houston hooks initialized for non-DFW page");
   
   const handleSubmit = () => {
+    // FINAL SAFETY CHECK
+    if (sessionStorage.getItem('ACTIVE_DFW_SUBMISSION') || sessionStorage.getItem('BLOCK_HOUSTON_SUBMISSION') === 'true') {
+      console.error("🚫 Houston form submission blocked - DFW submission is active");
+      return;
+    }
+    
     console.log("✅ Houston form submission triggered");
     const estimatedPrice = calculatePrice();
     handleSubmitHouston(formData, estimatedPrice);
