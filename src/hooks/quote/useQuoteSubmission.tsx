@@ -6,7 +6,16 @@ import { useToast } from "@/hooks/use-toast";
 import { FormData } from "@/components/quote/types";
 
 export const useQuoteSubmission = (explicitLeadSource?: string) => {
-  console.log("🔍 useQuoteSubmission called with explicitLeadSource:", explicitLeadSource);
+  console.log("🔍 HOUSTON useQuoteSubmission called with explicitLeadSource:", explicitLeadSource);
+  console.log("🔍 HOUSTON Current URL:", window.location.href);
+  
+  // BLOCK DFW USAGE - Houston hook should never be used on DFW pages
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('/quotedfw') || currentPath.includes('/dfw')) {
+    console.error("🚫 HOUSTON HOOK BLOCKED ON DFW PAGE:", currentPath);
+    throw new Error("Houston submission hook should not be used on DFW pages");
+  }
+  
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
