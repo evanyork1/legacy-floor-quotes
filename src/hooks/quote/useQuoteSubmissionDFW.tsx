@@ -56,8 +56,8 @@ export const useQuoteSubmissionDFW = () => {
         custom_sqft: formData.customSqft ? parseInt(formData.customSqft) : null,
         space_type: formData.spaceType || null,
         other_space_type: formData.otherSpaceType || null,
-        exterior_photos: formData.exteriorPhotos || [],
-        damage_photos: formData.damagePhotos || [],
+        exterior_photos: [], // Convert File[] to string[] (empty since photos disabled)
+        damage_photos: [], // Convert File[] to string[] (empty since photos disabled)
         color_choice: formData.colorChoice,
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -71,9 +71,10 @@ export const useQuoteSubmissionDFW = () => {
 
       console.log(`💾 Saving to quotes_dfw:`, quoteData);
 
+      // Remove array wrapper - insert expects single object, not array
       const { data: savedQuote, error: saveError } = await supabase
         .from("quotes_dfw")
-        .insert([quoteData])
+        .insert(quoteData)
         .select()
         .single();
 
