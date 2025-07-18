@@ -5,11 +5,9 @@ import Footer from "@/components/Footer";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
-import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
+import { useQuoteForm } from "@/hooks/useQuoteForm";
 
 const QuoteDFW = () => {
-  console.log('QuoteDFW component rendered - using dedicated DFW hook');
-  
   const {
     currentStep,
     totalSteps,
@@ -23,22 +21,7 @@ const QuoteDFW = () => {
     canProceed,
     handleSubmit,
     isSubmitting
-  } = useQuoteFormDFW();
-
-  console.log('DFW Quote Form State:', {
-    currentStep,
-    totalSteps,
-    formData: {
-      garageType: formData.garageType,
-      colorChoice: formData.colorChoice,
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      zipCode: formData.zipCode
-    },
-    canProceed: canProceed(),
-    isSubmitting
-  });
+  } = useQuoteForm();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
