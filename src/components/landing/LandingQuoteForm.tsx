@@ -9,7 +9,22 @@ import { useLocation } from "react-router-dom";
 export const LandingQuoteForm = () => {
   const location = useLocation();
   
-  // Use DFW-specific hook for landing page quotes
+  // BLOCK HOUSTON HOOKS ON DFW PAGES - CRITICAL FIX
+  const isDFWPage = location.pathname.includes('quotedfw') || location.pathname.includes('/dfw');
+  
+  console.log("🔍 LandingQuoteForm - Route check:", {
+    pathname: location.pathname,
+    isDFWPage,
+    shouldBlockHoustonHooks: isDFWPage
+  });
+  
+  if (isDFWPage) {
+    console.log("🚫 BLOCKING LandingQuoteForm on DFW page - redirecting to DFW component");
+    // Return null or redirect to prevent Houston hooks from loading on DFW pages
+    return null;
+  }
+  
+  // Use Houston-specific hook only for non-DFW pages
   const {
     currentStep,
     totalSteps,
@@ -24,6 +39,8 @@ export const LandingQuoteForm = () => {
     handleSubmit,
     isSubmitting
   } = useQuoteForm();
+
+  console.log("✅ LandingQuoteForm - Using Houston hooks for non-DFW page");
 
   return (
     <div className="max-w-2xl mx-auto">

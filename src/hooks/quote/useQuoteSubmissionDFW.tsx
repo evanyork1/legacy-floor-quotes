@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,29 +16,52 @@ export const useQuoteSubmissionDFW = () => {
     console.log("🚀 Form Data received:", formData);
     console.log("🚀 Estimated Price:", estimatedPrice);
     
-    // Prevent duplicate submissions
+    // Prevent duplicate submissions with DFW-specific session key
     if (isSubmitting) {
       console.log('🚫 DFW Submission already in progress, ignoring duplicate request');
       return;
     }
     
-    // Add unique session key for DFW submissions
+    // DFW-SPECIFIC session storage to prevent cross-contamination
     const dfwSubmissionKey = `dfw_quote_submission_${Date.now()}`;
     const existingDFWSubmission = sessionStorage.getItem('lastDFWQuoteSubmission');
     
-    if (existingDFWSubmission && (Date.now() - parseInt(existingDFWSubmission) < 5000)) {
-      console.log('🚫 DFW: Preventing duplicate DFW submission within 5 seconds');
+    if (existingDFWSubmission && (Date.now() - parseInt(existingDFWSubmission) < 10000)) {
+      console.log('🚫 DFW: Preventing duplicate DFW submission within 10 seconds');
+      toast.error("Please wait before submitting again.");
       return;
     }
     
+    // Clear any Houston session storage that might interfere
+    sessionStorage.removeItem('lastQuoteSubmission');
+    sessionStorage.removeItem('lastSubmissionType');
+    
+    // Set DFW-specific session storage
     sessionStorage.setItem('lastDFWQuoteSubmission', Date.now().toString());
-    sessionStorage.setItem('currentSubmissionType', 'DFW');
+    sessionStorage.setItem('currentSubmissionType', 'DFW_ONLY');
     
     console.log("🟢 DFW SUBMISSION STARTED - Using dedicated DFW hook");
     console.log("🟢 Session storage set for DFW submission");
     setIsSubmitting(true);
     
     try {
+      // Validate required fields first
+      if (!formData.name || !formData.email || !formData.phone) {
+        throw new Error("Missing required contact information");
+      }
+
+      if (!formData.garageType) {
+        throw new Error("Garage type is required");
+      }
+
+      if (!formData.colorChoice) {
+        throw new Error("Color choice is required");
+      }
+
+      if (!formData.zipCode) {
+        throw new Error("Zip code is required");
+      }
+
       // HARDCODED DFW SETTINGS - NO DETECTION LOGIC
       const leadSource = "DFW";
       const tableName = "quotes_dfw";
@@ -48,24 +72,19 @@ export const useQuoteSubmissionDFW = () => {
       console.log("🟢 Form Data:", formData);
       console.log("🟢 Estimated Price:", estimatedPrice);
 
-      // Validate required fields
-      if (!formData.name || !formData.email || !formData.phone) {
-        throw new Error("Missing required contact information");
-      }
-
-      // Prepare quote data for DFW table
+      // Prepare quote data for DFW table with proper null handling
       const quoteData = {
         garage_type: formData.garageType,
         custom_sqft: formData.customSqft ? parseInt(formData.customSqft) : null,
-        space_type: formData.spaceType || "",
-        other_space_type: formData.otherSpaceType || "",
-        exterior_photos: [], // No photos in simplified flow
-        damage_photos: [], // No photos in simplified flow
+        space_type: formData.spaceType || null,
+        other_space_type: formData.otherSpaceType || null,
+        exterior_photos: [], // Simplified flow - no photos
+        damage_photos: [], // Simplified flow - no photos
         color_choice: formData.colorChoice,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        zip_code: formData.zipCode,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        zip_code: formData.zipCode.trim(),
         estimated_price: estimatedPrice,
         lead_source: leadSource, // HARDCODED "DFW"
         status: "new",
@@ -90,7 +109,7 @@ export const useQuoteSubmissionDFW = () => {
           hint: saveError.hint,
           code: saveError.code
         });
-        throw saveError;
+        throw new Error(`Failed to save DFW quote: ${saveError.message}`);
       }
 
       if (!savedQuote) {
@@ -120,7 +139,7 @@ export const useQuoteSubmissionDFW = () => {
           const { error: webhookFunctionError } = await supabase.functions.invoke(
             "send-quote-webhook",
             {
-              body: savedQuote // Send quote data directly, not wrapped in another object
+              body: savedQuote // Send quote data directly
             }
           );
 
@@ -136,14 +155,18 @@ export const useQuoteSubmissionDFW = () => {
 
       toast.success("Quote submitted successfully! We'll be in touch soon.");
       
-      // Navigate to success page - always go to DFW landing for DFW quotes
+      // Navigate to DFW success page
+      console.log("🟢 DFW SUBMISSION COMPLETE - Navigating to DFW landing page");
       navigate('/dfwreslanding');
 
     } catch (error) {
       console.error("🔴 DFW SUBMISSION ERROR:", error);
-      toast.error("Failed to submit quote. Please try again.");
+      const errorMessage = error instanceof Error ? error.message : "Failed to submit quote. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
+      // Clear session lock after completion
+      sessionStorage.removeItem('lastDFWQuoteSubmission');
     }
   };
 
