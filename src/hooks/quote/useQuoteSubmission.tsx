@@ -89,7 +89,7 @@ export const useQuoteSubmission = () => {
       console.log('Saving quote to database...', quoteData);
 
       // Determine which table to save to based on lead source
-      const tableName = leadSource === 'DFW' ? 'quotes_dfw' : 'quotes';
+      const tableName = leadSource === 'DFW' ? 'dfwquotes' : 'quotes';
 
       // Save quote to database
       const { data: savedQuote, error: saveError } = await supabase

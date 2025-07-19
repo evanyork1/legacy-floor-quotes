@@ -50,7 +50,7 @@ export const useAdminData = () => {
         .order('created_at', { ascending: false });
 
       const quotesDfwQuery = supabase
-        .from('quotes_dfw')
+        .from('dfwquotes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
 
@@ -97,8 +97,8 @@ export const useAdminData = () => {
         ...quotesDfwData.map(quote => ({
           ...quote,
           status: (quote.status as 'new' | 'contacted' | 'quoted' | 'closed') || 'new',
-          exterior_photos: quote.exterior_photos || [],
-          damage_photos: quote.damage_photos || [],
+          exterior_photos: [],  // DFW quotes don't have photo uploads
+          damage_photos: [],    // DFW quotes don't have photo uploads
           archived: quote.archived || false,
           lead_source: quote.lead_source || 'DFW'
         }))
@@ -138,7 +138,7 @@ export const useAdminData = () => {
       const quote = quotes.find(q => q.id === quoteId);
       if (!quote) return;
 
-      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+      const tableName = quote.lead_source === 'DFW' ? 'dfwquotes' : 'quotes';
 
       const { error } = await supabase
         .from(tableName)
@@ -180,7 +180,7 @@ export const useAdminData = () => {
       const quote = quotes.find(q => q.id === quoteId);
       if (!quote) return;
 
-      const tableName = quote.lead_source === 'DFW' ? 'quotes_dfw' : 'quotes';
+      const tableName = quote.lead_source === 'DFW' ? 'dfwquotes' : 'quotes';
 
       const { error } = await supabase
         .from(tableName)
