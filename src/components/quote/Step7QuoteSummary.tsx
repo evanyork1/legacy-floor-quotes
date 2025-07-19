@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import type { FormData } from './types';
@@ -62,10 +63,6 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
                 <div className="flex justify-between text-sm sm:text-base">
                   <span>Color Choice:</span>
                   <span className="font-medium capitalize">{formData.colorChoice.replace('-', ' ')}</span>
-                </div>
-                <div className="flex justify-between text-sm sm:text-base">
-                  <span>Photos Uploaded:</span>
-                  <span className="font-medium">{formData.exteriorPhotos.length + formData.damagePhotos.length} photos</span>
                 </div>
               </div>
             </div>

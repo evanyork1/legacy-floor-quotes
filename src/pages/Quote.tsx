@@ -1,11 +1,11 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { QuoteOnlyHeader } from "@/components/quote/QuoteOnlyHeader";
+import { QuoteOnlyFooterHouston } from "@/components/quote/QuoteOnlyFooterHouston";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
-import { useQuoteForm } from "@/hooks/useQuoteForm";
+import { useQuoteFormHouston } from "@/hooks/useQuoteFormHouston";
 
 const Quote = () => {
   const {
@@ -21,11 +21,18 @@ const Quote = () => {
     canProceed,
     handleSubmit,
     isSubmitting
-  } = useQuoteForm();
+  } = useQuoteFormHouston();
+
+  const handlePhoneClick = () => {
+    // Call the Google Ads conversion tracking function
+    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+      (window as any).gtag_report_conversion('tel:713-766-5566');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <Header />
+      <QuoteOnlyHeader phone="713-766-5566" onPhoneClick={handlePhoneClick} />
       
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="max-w-5xl mx-auto">
@@ -55,7 +62,7 @@ const Quote = () => {
         </div>
       </div>
 
-      <Footer />
+      <QuoteOnlyFooterHouston />
     </div>
   );
 };
