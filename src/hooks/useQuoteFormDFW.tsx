@@ -1,7 +1,6 @@
 
 import { useQuoteFormData } from "./quote/useQuoteFormData";
 import { useQuoteNavigation } from "./quote/useQuoteNavigation";
-import { useQuoteFileHandling } from "./quote/useQuoteFileHandling";
 import { useQuotePricing } from "./quote/useQuotePricing";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -19,10 +18,9 @@ export const useQuoteFormDFW = () => {
     calculatePrice
   );
 
-  const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
-
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: typeof formData) => {
+      console.log('Starting DFW quote submission...', dataToSubmit);
       const price = calculatePrice();
 
       const quotePayload = {
@@ -38,7 +36,10 @@ export const useQuoteFormDFW = () => {
         estimated_price: price,
         status: 'new',
         lead_source: 'DFW',
+        archived: false
       };
+
+      console.log('DFW quote payload:', quotePayload);
 
       const { data: insertedQuote, error } = await supabase
         .from('dfwquotes')
@@ -47,12 +48,34 @@ export const useQuoteFormDFW = () => {
         .single();
 
       if (error) {
+        console.error('DFW quote submission error:', error);
         throw error;
+      }
+
+      console.log('DFW quote saved successfully:', insertedQuote);
+
+      // Trigger webhook if configured
+      try {
+        console.log('Triggering DFW webhook...');
+        const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {
+          body: insertedQuote
+        });
+
+        if (webhookError) {
+          console.error('DFW webhook error:', webhookError);
+          // Don't fail the whole submission if webhook fails
+        } else {
+          console.log('DFW webhook triggered successfully');
+        }
+      } catch (webhookError) {
+        console.error('DFW webhook call failed:', webhookError);
+        // Still continue since quote was saved
       }
 
       return insertedQuote;
     },
     onSuccess: () => {
+      console.log('DFW quote submission completed successfully');
       toast({
         title: "Quote Submitted!",
         description: "We'll call you within 60 minutes to confirm.",
@@ -71,6 +94,7 @@ export const useQuoteFormDFW = () => {
   });
 
   const handleSubmit = () => {
+    console.log('DFW quote handleSubmit called');
     setIsSubmitting(true);
     submitQuote(formData);
   };
@@ -82,8 +106,6 @@ export const useQuoteFormDFW = () => {
     updateFormData,
     nextStep,
     prevStep,
-    handleFileUpload,
-    removePhoto,
     calculatePrice,
     canProceed,
     handleSubmit,

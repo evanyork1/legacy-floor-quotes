@@ -15,8 +15,6 @@ const QuoteDFW = () => {
     updateFormData,
     nextStep,
     prevStep,
-    handleFileUpload,
-    removePhoto,
     calculatePrice,
     canProceed,
     handleSubmit,
@@ -29,6 +27,10 @@ const QuoteDFW = () => {
       (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
+
+  // Empty photo handling functions since DFW quotes don't use photos
+  const handleFileUpload = () => {};
+  const removePhoto = () => {};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
