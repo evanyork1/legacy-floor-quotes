@@ -36,36 +36,18 @@ export const useQuoteFormDFW = () => {
         phone: dataToSubmit.phone,
         zip_code: dataToSubmit.zipCode,
         estimated_price: price,
-        exterior_photos: [],
-        damage_photos: [],
         status: 'new',
         lead_source: 'DFW',
       };
 
       const { data: insertedQuote, error } = await supabase
-        .from('quotes_dfw')
+        .from('dfwquotes')
         .insert(quotePayload)
         .select()
         .single();
 
       if (error) {
         throw error;
-      }
-
-      // Trigger webhook after successful database insertion
-      try {
-        console.log('Triggering webhook for DFW quote:', insertedQuote.id);
-        const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {
-          body: insertedQuote
-        });
-
-        if (webhookError) {
-          console.error('Webhook error:', webhookError);
-        } else {
-          console.log('Webhook triggered successfully');
-        }
-      } catch (webhookError) {
-        console.error('Error triggering webhook:', webhookError);
       }
 
       return insertedQuote;

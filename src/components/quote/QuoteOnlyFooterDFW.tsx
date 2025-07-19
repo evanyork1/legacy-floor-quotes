@@ -16,7 +16,7 @@ export const QuoteOnlyFooterDFW = () => {
           {/* Company Info */}
           <div className="space-y-4 sm:space-y-6">
             <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.
+              Family owned and operated, we are committed to installing the highest quality residential and commercial flooring products available.
             </p>
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center">

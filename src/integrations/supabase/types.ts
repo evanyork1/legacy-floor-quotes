@@ -44,6 +44,60 @@ export type Database = {
         }
         Relationships: []
       }
+      dfwquotes: {
+        Row: {
+          archived: boolean
+          color_choice: string
+          created_at: string
+          custom_sqft: number | null
+          email: string
+          estimated_price: number
+          garage_type: string
+          id: string
+          lead_source: string
+          name: string
+          other_space_type: string | null
+          phone: string
+          space_type: string | null
+          status: string
+          zip_code: string
+        }
+        Insert: {
+          archived?: boolean
+          color_choice: string
+          created_at?: string
+          custom_sqft?: number | null
+          email: string
+          estimated_price: number
+          garage_type: string
+          id?: string
+          lead_source?: string
+          name: string
+          other_space_type?: string | null
+          phone: string
+          space_type?: string | null
+          status?: string
+          zip_code: string
+        }
+        Update: {
+          archived?: boolean
+          color_choice?: string
+          created_at?: string
+          custom_sqft?: number | null
+          email?: string
+          estimated_price?: number
+          garage_type?: string
+          id?: string
+          lead_source?: string
+          name?: string
+          other_space_type?: string | null
+          phone?: string
+          space_type?: string | null
+          status?: string
+          zip_code?: string
+        }
+        Relationships: []
+      }
       gallery_photos: {
         Row: {
           category: string
@@ -200,78 +254,21 @@ export type Database = {
         }
         Relationships: []
       }
-      quotes_dfw: {
-        Row: {
-          archived: boolean
-          color_choice: string
-          created_at: string
-          custom_sqft: number | null
-          damage_photos: string[] | null
-          email: string
-          estimated_price: number
-          exterior_photos: string[] | null
-          garage_type: string
-          id: string
-          lead_source: string
-          name: string
-          other_space_type: string | null
-          phone: string
-          space_type: string | null
-          status: string
-          zip_code: string
-        }
-        Insert: {
-          archived?: boolean
-          color_choice: string
-          created_at?: string
-          custom_sqft?: number | null
-          damage_photos?: string[] | null
-          email: string
-          estimated_price: number
-          exterior_photos?: string[] | null
-          garage_type: string
-          id?: string
-          lead_source?: string
-          name: string
-          other_space_type?: string | null
-          phone: string
-          space_type?: string | null
-          status?: string
-          zip_code: string
-        }
-        Update: {
-          archived?: boolean
-          color_choice?: string
-          created_at?: string
-          custom_sqft?: number | null
-          damage_photos?: string[] | null
-          email?: string
-          estimated_price?: number
-          exterior_photos?: string[] | null
-          garage_type?: string
-          id?: string
-          lead_source?: string
-          name?: string
-          other_space_type?: string | null
-          phone?: string
-          space_type?: string | null
-          status?: string
-          zip_code?: string
-        }
-        Relationships: []
-      }
       webhook_settings: {
         Row: {
+          dfw_webhook_url: string | null
           id: number
           updated_at: string | null
           zapier_webhook_url: string | null
         }
         Insert: {
+          dfw_webhook_url?: string | null
           id?: number
           updated_at?: string | null
           zapier_webhook_url?: string | null
         }
         Update: {
+          dfw_webhook_url?: string | null
           id?: number
           updated_at?: string | null
           zapier_webhook_url?: string | null

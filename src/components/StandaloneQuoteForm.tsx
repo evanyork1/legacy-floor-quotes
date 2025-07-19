@@ -31,11 +31,11 @@ const StandaloneQuoteFormContent = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4">
       <div className="container mx-auto py-6 sm:py-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
           <Card className="shadow-2xl border-0 overflow-hidden">
-            <CardContent className="p-6 sm:p-8 lg:p-12">
+            <CardContent className="p-4 sm:p-6 lg:p-8">
               <QuoteStepRenderer
                 currentStep={currentStep}
                 formData={formData}

@@ -5,7 +5,7 @@ export const QuoteOnlyFooterHouston = () => {
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-      (window as any).gtag_report_conversion('tel:713-766-5566');
+      (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
 
@@ -16,7 +16,7 @@ export const QuoteOnlyFooterHouston = () => {
           {/* Company Info */}
           <div className="space-y-4 sm:space-y-6">
             <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.
+              Family owned and operated, we are committed to installing the highest quality residential and commercial flooring products available.
             </p>
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center">
@@ -26,7 +26,7 @@ export const QuoteOnlyFooterHouston = () => {
               <div className="flex items-center">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
                 <span onClick={handlePhoneClick} className="text-gray-300 text-sm sm:text-base cursor-pointer hover:text-blue-400 transition-colors">
-                  713-766-5566
+                  214-305-6516
                 </span>
               </div>
               <div className="flex items-center">

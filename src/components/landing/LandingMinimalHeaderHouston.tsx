@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ export const LandingMinimalHeaderHouston = () => {
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-      (window as any).gtag_report_conversion('tel:713-766-5566');
+      (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
 
@@ -28,12 +29,12 @@ export const LandingMinimalHeaderHouston = () => {
           {/* Phone and Quote Button */}
           <div className="flex items-center gap-4">
             <a 
-              href="tel:713-766-5566"
+              href="tel:214-305-6516"
               onClick={handlePhoneClick}
               className="hidden sm:inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-colors"
             >
               <Phone className="mr-2 h-5 w-5" />
-              713-766-5566
+              214-305-6516
             </a>
             <Button 
               onClick={() => navigate('/quotehou')} 

@@ -26,20 +26,20 @@ const Quote = () => {
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-      (window as any).gtag_report_conversion('tel:713-766-5566');
+      (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <QuoteOnlyHeader phone="713-766-5566" onPhoneClick={handlePhoneClick} />
+      <QuoteOnlyHeader phone="214-305-6516" onPhoneClick={handlePhoneClick} showCallButton={true} />
       
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
           <Card className="shadow-2xl border-0 overflow-hidden">
-            <CardContent className="p-6 sm:p-8 lg:p-12">
+            <CardContent className="p-4 sm:p-6 lg:p-8">
               <QuoteStepRenderer
                 currentStep={currentStep}
                 formData={formData}
