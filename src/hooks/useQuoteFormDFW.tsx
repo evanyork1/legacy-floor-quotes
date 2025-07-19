@@ -1,4 +1,3 @@
-
 import { useQuoteFormData } from "./quote/useQuoteFormData";
 import { useQuoteNavigation } from "./quote/useQuoteNavigation";
 import { useQuotePricing } from "./quote/useQuotePricing";
@@ -12,11 +11,6 @@ export const useQuoteFormDFW = () => {
   const { calculatePrice } = useQuotePricing(formData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
-  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigation(
-    formData,
-    calculatePrice
-  );
 
   const { mutate: submitQuote } = useMutation({
     mutationFn: async (dataToSubmit: typeof formData) => {
@@ -53,24 +47,7 @@ export const useQuoteFormDFW = () => {
       }
 
       console.log('DFW quote saved successfully:', insertedQuote);
-
-      // Trigger webhook if configured
-      try {
-        console.log('Triggering DFW webhook...');
-        const { error: webhookError } = await supabase.functions.invoke('send-quote-webhook', {
-          body: insertedQuote
-        });
-
-        if (webhookError) {
-          console.error('DFW webhook error:', webhookError);
-          // Don't fail the whole submission if webhook fails
-        } else {
-          console.log('DFW webhook triggered successfully');
-        }
-      } catch (webhookError) {
-        console.error('DFW webhook call failed:', webhookError);
-        // Still continue since quote was saved
-      }
+      // Webhook will be triggered automatically by database trigger
 
       return insertedQuote;
     },
@@ -98,6 +75,18 @@ export const useQuoteFormDFW = () => {
     setIsSubmitting(true);
     submitQuote(formData);
   };
+
+  const {
+    currentStep,
+    totalSteps,
+    nextStep,
+    prevStep,
+    canProceed
+  } = useQuoteNavigation(
+    formData,
+    calculatePrice,
+    handleSubmit
+  );
 
   return {
     currentStep,

@@ -4,7 +4,8 @@ import type { FormData } from "@/components/quote/types";
 
 export const useQuoteNavigation = (
   formData: FormData,
-  calculatePrice: () => number
+  calculatePrice: () => number,
+  onSubmitAtStep4?: () => void
 ) => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5; // Reduced from 7 to skip photo upload steps (3&4)
@@ -15,6 +16,11 @@ export const useQuoteNavigation = (
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
+      // If moving from step 4 to step 5, trigger submission first
+      if (currentStep === 4 && onSubmitAtStep4) {
+        onSubmitAtStep4();
+      }
+      
       if (currentStep === 1 && formData.garageType !== "custom") {
         setCurrentStep(3); // Skip step 2 if garageType is not custom, go to color choice
       } else {

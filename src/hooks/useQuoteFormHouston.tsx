@@ -13,11 +13,6 @@ export const useQuoteFormHouston = () => {
   const { calculatePrice } = useQuotePricing(formData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
-  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigation(
-    formData,
-    calculatePrice
-  );
 
   const { handleFileUpload, removePhoto } = useQuoteFileHandling(formData, updateFormData);
 
@@ -92,6 +87,12 @@ export const useQuoteFormHouston = () => {
     setIsSubmitting(true);
     submitQuote(formData);
   };
+
+  const { currentStep, totalSteps, nextStep, prevStep, canProceed } = useQuoteNavigation(
+    formData,
+    calculatePrice,
+    handleSubmit
+  );
 
   return {
     currentStep,
