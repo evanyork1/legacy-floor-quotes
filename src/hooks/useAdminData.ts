@@ -55,8 +55,8 @@ export const useAdminData = () => {
         .order('created_at', { ascending: false });
 
       if (!includeArchived) {
-        quotesQuery.or('archived.is.null,archived.eq.false');
-        quotesDfwQuery.or('archived.is.null,archived.eq.false');
+        quotesQuery.eq('archived', false);
+        quotesDfwQuery.eq('archived', false);
       }
 
       const [quotesResult, quotesDfwResult] = await Promise.all([
