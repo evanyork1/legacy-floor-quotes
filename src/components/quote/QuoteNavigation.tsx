@@ -10,6 +10,7 @@ interface QuoteNavigationProps {
   onNext: () => void;
   onPrevious: () => void;
   onSubmit: () => void;
+  customFinalButton?: React.ReactNode;
 }
 
 export const QuoteNavigation = ({
@@ -19,7 +20,8 @@ export const QuoteNavigation = ({
   isSubmitting,
   onNext,
   onPrevious,
-  onSubmit
+  onSubmit,
+  customFinalButton
 }: QuoteNavigationProps) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
@@ -41,6 +43,7 @@ export const QuoteNavigation = ({
           Next Step
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button> : 
+        customFinalButton ? customFinalButton :
         <Button 
           onClick={onNext}
           className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-4 sm:px-6 py-2 text-sm sm:text-base order-1 sm:order-2"
