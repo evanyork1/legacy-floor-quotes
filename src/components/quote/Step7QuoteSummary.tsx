@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import type { FormData } from './types';
-
 interface Step7Props {
   formData: FormData;
   estimatedPrice: number;
 }
-
-export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
+export const Step7QuoteSummary = ({
+  formData,
+  estimatedPrice
+}: Step7Props) => {
   useEffect(() => {
     // Track quote request conversion when step 7 loads
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -17,10 +18,11 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
         'value': 1.0,
         'currency': 'USD'
       });
-      
+
       // New conversion tracking for quote completions
       (window as any).gtag('event', 'conversion', {
-        'send_to': 'AW-16455875438/new-conversion-id', // Replace with actual conversion ID
+        'send_to': 'AW-16455875438/new-conversion-id',
+        // Replace with actual conversion ID
         'value': 1.0,
         'currency': 'USD'
       });
@@ -29,9 +31,7 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
       (window as any).gtag("event", "quote_form");
     }
   }, []);
-
-  return (
-    <div className="space-y-6 sm:space-y-8">
+  return <div className="space-y-6 sm:space-y-8">
       <div className="text-center mb-8 sm:mb-12 px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Your Instant Quote</h2>
         <p className="text-base sm:text-lg text-gray-600">Here's your estimated price based on your selections</p>
@@ -54,14 +54,12 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
                     {formData.garageType === "custom" ? `Custom (${formData.customSqft} sq ft)` : formData.garageType === "2-car" ? "2-Car Garage" : formData.garageType === "3-car" ? "3-Car Garage" : "4-Car Garage"}
                   </span>
                 </div>
-                {formData.additionalSpaces.map((space, index) => (
-                  <div className="flex justify-between text-sm sm:text-base" key={index}>
+                {formData.additionalSpaces.map((space, index) => <div className="flex justify-between text-sm sm:text-base" key={index}>
                     <span>Additional Space #{index + 1}:</span>
                     <span className="font-medium">
                       {space.garageType === "custom" ? `Custom (${space.customSqft} sq ft)` : space.garageType === "2-car" ? "2-Car Garage" : space.garageType === "3-car" ? "3-Car Garage" : "4-Car Garage"}
                     </span>
-                  </div>
-                ))}
+                  </div>)}
                 <div className="flex justify-between text-sm sm:text-base">
                   <span>Color Choice:</span>
                   <span className="font-medium capitalize">{formData.colorChoice.replace('-', ' ')}</span>
@@ -76,17 +74,9 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
               </p>
             </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-              <p className="text-yellow-800 text-sm font-medium mb-2">Important Disclaimer:</p>
-              <p className="text-yellow-700 text-xs sm:text-sm text-left">
-                This is not an exact estimate. Once our team member calls you, you will be issued an exact quote. 
-                Things that may change pricing are significance of damage, moisture issues seen on photos, 
-                existing coatings that need to be removed.
-              </p>
-            </div>
+            
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
