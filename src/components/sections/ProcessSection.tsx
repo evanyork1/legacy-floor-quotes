@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Pause, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,31 +17,31 @@ const ProcessSection = () => {
       number: 1,
       title: "Diamond Grind Surface Preparation",
       description: "We diamond grind to prepare the surface properly for the coating, ensuring optimal adhesion and longevity.",
-      placeholder: "/lovable-uploads/placeholder-diamond-grind.png"
+      image: "/lovable-uploads/7a02cc67-38e9-4f07-9b6e-e051b18f52a2.png"
     },
     {
       number: 2,
       title: "Crack Repair & Surface Restoration",
       description: "We repair cracks so they don't create problems long term. Every floor has minor hairline cracks, even the newest concrete.",
-      placeholder: "/lovable-uploads/placeholder-crack-repair.png"
+      image: "/lovable-uploads/cf1d8da4-0027-41ff-a35e-e0fe7d638db4.png"
     },
     {
       number: 3,
       title: "Polyurea Base Coat Application",
       description: "Our high-performance polyurea base coat provides the foundation for a durable, long-lasting floor system.",
-      placeholder: "/lovable-uploads/placeholder-base-coat.png"
+      image: "/lovable-uploads/abfd686b-1b52-4bc9-a8e0-5bd5f130a682.png"
     },
     {
       number: 4,
       title: "Polymer Flake Installation",
       description: "Decorative polymer flakes are broadcast into the base coat, creating texture and the signature look of your new floor.",
-      placeholder: "/lovable-uploads/placeholder-polymer-flake.png"
+      image: "/lovable-uploads/184a567c-9bf6-4719-9e8b-8aec08c14ca3.png"
     },
     {
       number: 5,
       title: "Polyaspartic Topcoat Protection",
       description: "Our polyaspartic topcoat protects the surface long term and gives it that signature feel and shine.",
-      placeholder: "/lovable-uploads/placeholder-topcoat.png"
+      image: "/lovable-uploads/494eac69-523e-4734-b40b-ac20fd3a3245.png"
     }
   ];
 
@@ -145,14 +144,12 @@ const ProcessSection = () => {
               <div className="relative order-2 lg:order-1">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
                 <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-                    {/* Placeholder for process photos */}
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span className="text-2xl font-bold text-blue-600">{steps[activeStep].number}</span>
-                      </div>
-                      <p className="text-gray-500 text-sm">Process Photo Coming Soon</p>
-                    </div>
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
+                    <img 
+                      src={steps[activeStep].image} 
+                      alt={steps[activeStep].title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
