@@ -130,6 +130,21 @@ const ProcessSection = () => {
               ))}
             </div>
 
+            {/* Arrow Navigation */}
+            <button
+              onClick={prevStep}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            
+            <button
+              onClick={nextStep}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+
             {/* Auto-play indicator */}
             <div className="absolute top-4 right-4 z-20 bg-white/90 rounded-full p-2 shadow-lg">
               {isAutoPlaying ? (
@@ -141,8 +156,24 @@ const ProcessSection = () => {
 
             {/* Step Content */}
             <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
-              {/* Left Side - Content */}
-              <div className="order-1 lg:order-1">
+              {/* Left Side - Image */}
+              <div className="relative order-2 lg:order-1">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
+                <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
+                    {/* Placeholder for process photos */}
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-2xl font-bold text-blue-600">{steps[activeStep].number}</span>
+                      </div>
+                      <p className="text-gray-500 text-sm">Process Photo Coming Soon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="order-1 lg:order-2">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center">
@@ -158,39 +189,6 @@ const ProcessSection = () => {
                   <p className="text-lg text-gray-600 leading-relaxed">
                     {steps[activeStep].description}
                   </p>
-
-                  {/* Navigation arrows positioned below text content */}
-                  <div className="flex justify-center space-x-6 pt-6">
-                    <button
-                      onClick={prevStep}
-                      className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-200"
-                    >
-                      <ChevronLeft className="w-6 h-6 text-gray-700" />
-                    </button>
-                    
-                    <button
-                      onClick={nextStep}
-                      className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-200"
-                    >
-                      <ChevronRight className="w-6 h-6 text-gray-700" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side - Image */}
-              <div className="relative order-2 lg:order-2">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
-                <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-                    {/* Placeholder for process photos */}
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span className="text-2xl font-bold text-blue-600">{steps[activeStep].number}</span>
-                      </div>
-                      <p className="text-gray-500 text-sm">Process Photo Coming Soon</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

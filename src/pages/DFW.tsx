@@ -7,7 +7,6 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import ProcessSection from "@/components/sections/ProcessSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
@@ -54,7 +53,6 @@ const DFW = () => {
         <TrustedBrandSection />
         <HowItWorksSection />
         <TestimonialsSection />
-        <ProcessSection />
         <GalleryPreview />
         <CommercialSection />
         <CTASection />
