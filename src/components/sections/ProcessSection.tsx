@@ -130,21 +130,6 @@ const ProcessSection = () => {
               ))}
             </div>
 
-            {/* Arrow Navigation */}
-            <button
-              onClick={prevStep}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
-            
-            <button
-              onClick={nextStep}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
-
             {/* Auto-play indicator */}
             <div className="absolute top-4 right-4 z-20 bg-white/90 rounded-full p-2 shadow-lg">
               {isAutoPlaying ? (
@@ -191,6 +176,23 @@ const ProcessSection = () => {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Navigation Controls - Positioned below content */}
+            <div className="flex justify-center items-center mt-8 space-x-6">
+              <button
+                onClick={prevStep}
+                className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-200"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-700" />
+              </button>
+              
+              <button
+                onClick={nextStep}
+                className="bg-white hover:bg-gray-50 rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-200"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-700" />
+              </button>
             </div>
           </div>
         </div>
