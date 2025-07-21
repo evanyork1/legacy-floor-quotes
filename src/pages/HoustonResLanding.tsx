@@ -9,6 +9,7 @@ import TestimonialsSectionHoustonRes from "@/components/sections/TestimonialsSec
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
+import ProcessSection from "@/components/sections/ProcessSection";
 
 const HoustonResLanding = () => {
   return (
@@ -50,6 +51,7 @@ const HoustonResLanding = () => {
         <HeroSection />
         <FeaturesSection />
         <TrustedBrandSection />
+        <ProcessSection />
         <HowItWorksSection />
         <TestimonialsSectionHoustonRes />
         <GalleryPreview />

@@ -7,6 +7,7 @@ import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
+import ProcessSection from "@/components/sections/ProcessSection";
 
 import CTASection from "@/components/sections/CTASection";
 
@@ -49,6 +50,7 @@ const DFWResLanding = () => {
         <LandingMinimalHeader />
         <HeroSection />
         <TrustedBrandSection />
+        <ProcessSection />
         <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />

@@ -1,0 +1,254 @@
+
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useLocation } from "react-router-dom";
+
+const ProcessSection = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const location = useLocation();
+  
+  const isHouston = location.pathname === '/houstonreslanding';
+  const quoteUrl = isHouston ? '/quotehou' : '/quotedfw';
+
+  const steps = [
+    {
+      number: 1,
+      title: "Diamond Grind Surface Preparation",
+      description: "We diamond grind to prepare the surface properly for the coating, ensuring optimal adhesion and longevity.",
+      placeholder: "/lovable-uploads/placeholder-diamond-grind.png"
+    },
+    {
+      number: 2,
+      title: "Crack Repair & Surface Restoration",
+      description: "We repair cracks so they don't create problems long term. Every floor has minor hairline cracks, even the newest concrete.",
+      placeholder: "/lovable-uploads/placeholder-crack-repair.png"
+    },
+    {
+      number: 3,
+      title: "Polyurea Base Coat Application",
+      description: "Our high-performance polyurea base coat provides the foundation for a durable, long-lasting floor system.",
+      placeholder: "/lovable-uploads/placeholder-base-coat.png"
+    },
+    {
+      number: 4,
+      title: "Polymer Flake Installation",
+      description: "Decorative polymer flakes are broadcast into the base coat, creating texture and the signature look of your new floor.",
+      placeholder: "/lovable-uploads/placeholder-polymer-flake.png"
+    },
+    {
+      number: 5,
+      title: "Polyaspartic Topcoat Protection",
+      description: "Our polyaspartic topcoat protects the surface long term and gives it that signature feel and shine.",
+      placeholder: "/lovable-uploads/placeholder-topcoat.png"
+    }
+  ];
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        setActiveStep((prev) => (prev + 1) % steps.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying, steps.length]);
+
+  const nextStep = () => {
+    setActiveStep((prev) => (prev + 1) % steps.length);
+  };
+
+  const prevStep = () => {
+    setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+  };
+
+  const goToStep = (index: number) => {
+    setActiveStep(index);
+    setIsAutoPlaying(false);
+  };
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+            Our Proven 5-Step Process
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Each step is carefully executed by our expert team to ensure your floor looks amazing and lasts for decades.
+          </p>
+        </div>
+
+        {/* Process Steps Container */}
+        <div className="max-w-7xl mx-auto">
+          {/* Desktop Progress Bar */}
+          <div className="hidden lg:flex justify-between items-center mb-12 relative">
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded-full transform -translate-y-1/2"></div>
+            <div 
+              className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full transform -translate-y-1/2 transition-all duration-1000 ease-out"
+              style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
+            ></div>
+            
+            {steps.map((step, index) => (
+              <button
+                key={index}
+                onClick={() => goToStep(index)}
+                className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${
+                  index <= activeStep
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-lg'
+                    : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'
+                }`}
+              >
+                {step.number}
+              </button>
+            ))}
+          </div>
+
+          {/* Main Content Area */}
+          <div className="relative">
+            {/* Mobile Step Indicator */}
+            <div className="lg:hidden flex justify-center space-x-2 mb-8">
+              {steps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToStep(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === activeStep ? 'bg-blue-600 scale-125' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Step Content */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
+              {/* Left Side - Image */}
+              <div className="relative order-2 lg:order-1">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
+                <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
+                    {/* Placeholder for process photos */}
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-2xl font-bold text-blue-600">{steps[activeStep].number}</span>
+                      </div>
+                      <p className="text-gray-500 text-sm">Process Photo Coming Soon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="order-1 lg:order-2">
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center">
+                      <span className="text-2xl font-bold text-white">{steps[activeStep].number}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
+                        {steps[activeStep].title}
+                      </h3>
+                    </div>
+                  </div>
+                  
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    {steps[activeStep].description}
+                  </p>
+
+                  {/* Mobile Navigation */}
+                  <div className="lg:hidden flex items-center justify-between pt-6">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={prevStep}
+                      className="flex items-center space-x-2"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      <span>Previous</span>
+                    </Button>
+                    
+                    <Button
+                      variant={isAutoPlaying ? "destructive" : "outline"}
+                      size="lg"
+                      onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                      className="flex items-center space-x-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      <span>{isAutoPlaying ? 'Pause' : 'Auto Play'}</span>
+                    </Button>
+                    
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={nextStep}
+                      className="flex items-center space-x-2"
+                    >
+                      <span>Next</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Navigation Controls */}
+            <div className="hidden lg:flex justify-center items-center space-x-6 mt-12">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={prevStep}
+                className="flex items-center space-x-2 hover:scale-105 transition-transform"
+              >
+                <ChevronLeft className="w-5 h-5" />
+                <span>Previous Step</span>
+              </Button>
+              
+              <Button
+                variant={isAutoPlaying ? "destructive" : "outline"}
+                size="lg"
+                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                className="flex items-center space-x-2 hover:scale-105 transition-transform"
+              >
+                <Play className="w-5 h-5" />
+                <span>{isAutoPlaying ? 'Pause Auto Play' : 'Start Auto Play'}</span>
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={nextStep}
+                className="flex items-center space-x-2 hover:scale-105 transition-transform"
+              >
+                <span>Next Step</span>
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-20">
+          <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-2xl max-w-4xl mx-auto border border-gray-100">
+            <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              Ready to Transform Your {isHouston ? 'Houston' : 'Dallas'} Floor?
+            </h3>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Get your instant quote today and see how our proven 5-step process can give you the floor of your dreams.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              onClick={() => window.location.href = quoteUrl}
+            >
+              Get Instant Quote
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ProcessSection;
