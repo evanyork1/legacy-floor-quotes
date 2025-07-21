@@ -1,16 +1,17 @@
 
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
 
 const ProcessSection = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const location = useLocation();
   
   const isHouston = location.pathname === '/houstonreslanding';
   const quoteUrl = isHouston ? '/quotehou' : '/quotedfw';
+  const phoneNumber = isHouston ? '713-766-5566' : '214-305-6516';
 
   const steps = [
     {
@@ -68,6 +69,14 @@ const ProcessSection = () => {
     setIsAutoPlaying(false);
   };
 
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setTimeout(() => setIsAutoPlaying(true), 2000);
+  };
+
   return (
     <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4">
@@ -82,7 +91,7 @@ const ProcessSection = () => {
         </div>
 
         {/* Process Steps Container */}
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {/* Desktop Progress Bar */}
           <div className="hidden lg:flex justify-between items-center mb-12 relative">
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded-full transform -translate-y-1/2"></div>
@@ -121,6 +130,30 @@ const ProcessSection = () => {
               ))}
             </div>
 
+            {/* Arrow Navigation */}
+            <button
+              onClick={prevStep}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            
+            <button
+              onClick={nextStep}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+
+            {/* Auto-play indicator */}
+            <div className="absolute top-4 right-4 z-20 bg-white/90 rounded-full p-2 shadow-lg">
+              {isAutoPlaying ? (
+                <Pause className="w-4 h-4 text-blue-600" />
+              ) : (
+                <Play className="w-4 h-4 text-gray-400" />
+              )}
+            </div>
+
             {/* Step Content */}
             <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
               {/* Left Side - Image */}
@@ -156,74 +189,8 @@ const ProcessSection = () => {
                   <p className="text-lg text-gray-600 leading-relaxed">
                     {steps[activeStep].description}
                   </p>
-
-                  {/* Mobile Navigation */}
-                  <div className="lg:hidden flex items-center justify-between pt-6">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={prevStep}
-                      className="flex items-center space-x-2"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      <span>Previous</span>
-                    </Button>
-                    
-                    <Button
-                      variant={isAutoPlaying ? "destructive" : "outline"}
-                      size="lg"
-                      onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                      className="flex items-center space-x-2"
-                    >
-                      <Play className="w-4 h-4" />
-                      <span>{isAutoPlaying ? 'Pause' : 'Auto Play'}</span>
-                    </Button>
-                    
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={nextStep}
-                      className="flex items-center space-x-2"
-                    >
-                      <span>Next</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Desktop Navigation Controls */}
-            <div className="hidden lg:flex justify-center items-center space-x-6 mt-12">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={prevStep}
-                className="flex items-center space-x-2 hover:scale-105 transition-transform"
-              >
-                <ChevronLeft className="w-5 h-5" />
-                <span>Previous Step</span>
-              </Button>
-              
-              <Button
-                variant={isAutoPlaying ? "destructive" : "outline"}
-                size="lg"
-                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                className="flex items-center space-x-2 hover:scale-105 transition-transform"
-              >
-                <Play className="w-5 h-5" />
-                <span>{isAutoPlaying ? 'Pause Auto Play' : 'Start Auto Play'}</span>
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={nextStep}
-                className="flex items-center space-x-2 hover:scale-105 transition-transform"
-              >
-                <span>Next Step</span>
-                <ChevronRight className="w-5 h-5" />
-              </Button>
             </div>
           </div>
         </div>
@@ -232,18 +199,29 @@ const ProcessSection = () => {
         <div className="text-center mt-20">
           <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-2xl max-w-4xl mx-auto border border-gray-100">
             <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Ready to Transform Your {isHouston ? 'Houston' : 'Dallas'} Floor?
+              Ready to Transform Your Concrete?
             </h3>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Get your instant quote today and see how our proven 5-step process can give you the floor of your dreams.
+              Get your instant quote today or call us now and see how our proven 5-step process can give you the floor of your dreams.
             </p>
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              onClick={() => window.location.href = quoteUrl}
-            >
-              Get Instant Quote
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                onClick={() => window.location.href = quoteUrl}
+              >
+                Get Instant Quote
+              </Button>
+              <Button 
+                variant="outline"
+                size="lg" 
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                onClick={() => window.location.href = `tel:${phoneNumber}`}
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call Now
+              </Button>
+            </div>
           </div>
         </div>
       </div>
