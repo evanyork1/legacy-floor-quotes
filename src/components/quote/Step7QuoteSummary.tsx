@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import type { FormData } from './types';
@@ -25,6 +24,9 @@ export const Step7QuoteSummary = ({ formData, estimatedPrice }: Step7Props) => {
         'value': 1.0,
         'currency': 'USD'
       });
+
+      // Add the new quote form tracking event
+      (window as any).gtag("event", "quote_form");
     }
   }, []);
 
