@@ -46,7 +46,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">{serviceArea}</span>
+                <span className="text-gray-300 text-sm sm:text-base">We proudly serve Plano and surrounding areas including Frisco, McKinney, Allen, Prosper, Celina, and beyond. Not sure if we service your area? Just ask — we're expanding fast!</span>
               </div>
             </div>
           </div>
@@ -58,8 +58,6 @@ const Footer = () => {
               <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Home</a></li>
               <li><a href={quotePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Get Quote</a></li>
               <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Gallery</a></li>
-              <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">About Us</a></li>
-              <li><a href="/apply" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Become an Installer</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Warranty Info</a></li>
               <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Terms and Conditions</a></li>
               <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Privacy Policy</a></li>

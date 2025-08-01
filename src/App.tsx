@@ -18,6 +18,9 @@ import EmployeePanel from "./pages/EmployeePanel";
 import NotFound from "./pages/NotFound";
 import LandingVisual from "./pages/LandingVisual";
 import JAK from "./pages/JAK";
+import Warranty from "./pages/Warranty";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -43,6 +46,9 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/landingvisual" element={<LandingVisual />} />
             <Route path="/jak" element={<JAK />} />
+            <Route path="/warranty" element={<Warranty />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/adminpanel2025" element={<AdminPanel />} />
             <Route path="/jingram" element={<EmployeePanel />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
