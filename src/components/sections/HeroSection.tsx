@@ -57,7 +57,7 @@ const HeroSection = () => {
             <div className="max-w-2xl space-y-8 sm:space-y-10">
               <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 {title}{" "}
-                <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
                   Experts
                 </span>
               </h1>
@@ -122,7 +122,7 @@ const HeroSection = () => {
               ) : isHoustonLanding ? (
                 <>
                   {title}{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
                     Experts
                   </span>
                 </>

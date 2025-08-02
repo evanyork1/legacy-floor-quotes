@@ -25,8 +25,8 @@ const HowItWorksSection = () => {
     step: "1",
     title: isDFW ? "Get a Custom Quote" : "Create Your Own Quote",
     description: isDFW 
-      ? "Use our intelligent quote builder or meet with a member of our team"
-      : "Use our intelligent quote builder to get accurate pricing instantly",
+      ? "Get a free personalized quote based on your project"
+      : "Get a free personalized quote based on your project",
     gradient: "from-blue-500 to-blue-700"
   }, {
     step: "2",
