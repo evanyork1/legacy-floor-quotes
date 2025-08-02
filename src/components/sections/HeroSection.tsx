@@ -54,30 +54,30 @@ const HeroSection = () => {
           />
         ))}
         
-        <div className="container mx-auto px-6 lg:px-8 relative w-full z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="max-w-2xl space-y-8 sm:space-y-10">
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+        <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-16 lg:pt-0">
+            <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 {title}{" "}
                 <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                   Experts
                 </span>
               </h1>
               
-              <div className="space-y-2 sm:space-y-3">
-                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-white leading-relaxed">
+              <div className="text-center lg:text-left">
+                <div className="text-base sm:text-lg lg:text-xl xl:text-2xl text-white leading-snug">
                   {subtext}
                 </div>
               </div>
               
-              <div className="relative mb-8 sm:mb-10">
-                <div className="flex flex-col sm:flex-row gap-4">
+              <div className="relative mt-6 sm:mt-8">
+                <div className="flex flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                   <Button 
                     asChild 
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                   >
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+                      <Phone className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       Call Us Now
                     </a>
                   </Button>
@@ -85,10 +85,10 @@ const HeroSection = () => {
                   <Button 
                     onClick={() => navigate('/gallery')} 
                     variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                    className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                   >
                     See Gallery
-                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
+                    <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
               </div>
