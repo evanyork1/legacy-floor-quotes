@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { LandingCommercialHeader } from "@/components/landing/LandingCommercialHeader";
-import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
@@ -109,7 +109,7 @@ const DFWCommercialLanding = () => {
         </section>
         
         <div id="footer">
-          <LandingMinimalFooter />
+          <Footer />
         </div>
         
         <CommercialContactModal open={isContactModalOpen} onOpenChange={setIsContactModalOpen} />

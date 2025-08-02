@@ -1,5 +1,5 @@
 
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, MapIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const Footer = () => {
@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="lg:col-span-1 space-y-6">
             <div className="space-y-4">
               <img 
-                src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
+                src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" 
                 alt="Legacy Industrial Coatings Logo" 
                 className="h-16 w-auto" 
               />
@@ -83,11 +83,11 @@ const Footer = () => {
               <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <Instagram className="h-5 w-5 text-white" />
               </a>
-              <a href="#" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+              <a href="https://www.facebook.com/legacyindustrialcoatings" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <Facebook className="h-5 w-5 text-white" />
               </a>
-              <a href="#" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
-                <Linkedin className="h-5 w-5 text-white" />
+              <a href="https://maps.app.goo.gl/2idbg4BFnZVKvLNK9" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+                <MapIcon className="h-5 w-5 text-white" />
               </a>
             </div>
 
@@ -101,7 +101,7 @@ const Footer = () => {
               </div>
               <div className="flex items-start space-x-2">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm break-all">
+                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
                   support@legacyindustrialcoatings.com
                 </a>
               </div>
@@ -110,7 +110,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-700 pt-8">
+        <div className="border-t border-gray-700 pt-6">
           <div className="text-center">
             <div className="text-gray-400 text-xs">
               ©2025 Legacy Industrial Coatings. All Rights Reserved.

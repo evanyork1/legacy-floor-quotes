@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { LandingMinimalHeader } from "@/components/landing/LandingMinimalHeader";
-import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
@@ -60,7 +60,7 @@ const DFWResLanding = () => {
         <CustomQuoteSection />
         <CTASection />
         <div id="footer">
-          <LandingMinimalFooter />
+          <Footer />
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteOnlyHeader } from "@/components/quote/QuoteOnlyHeader";
-import { QuoteOnlyFooterDFW } from "@/components/quote/QuoteOnlyFooterDFW";
+import Footer from "@/components/Footer";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
@@ -90,7 +90,7 @@ const QuoteDFW = () => {
         </div>
       </div>
 
-      <QuoteOnlyFooterDFW />
+      <Footer />
     </div>
   );
 };

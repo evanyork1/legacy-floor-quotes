@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteOnlyHeader } from "@/components/quote/QuoteOnlyHeader";
-import { QuoteOnlyFooterHouston } from "@/components/quote/QuoteOnlyFooterHouston";
+import Footer from "@/components/Footer";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
@@ -62,7 +62,7 @@ const Quote = () => {
         </div>
       </div>
 
-      <QuoteOnlyFooterHouston />
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { LandingMinimalHeaderHouston } from "@/components/landing/LandingMinimalHeaderHouston";
-import { LandingMinimalFooterHouston } from "@/components/landing/LandingMinimalFooterHouston";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
@@ -56,7 +56,7 @@ const Houston = () => {
         <CommercialSection />
         <CTASection />
         <div id="footer">
-          <LandingMinimalFooterHouston />
+          <Footer />
         </div>
       </div>
     </>
