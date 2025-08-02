@@ -7,6 +7,7 @@ import { LandingGallery } from "@/components/landing/LandingGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
+import Footer from "@/components/Footer";
 const JAK = () => {
   const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
   const scrollToQuote = () => {
@@ -279,6 +280,7 @@ const JAK = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>;
 };
 export default JAK;

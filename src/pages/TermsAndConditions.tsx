@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "@/components/Footer";
 
 const TermsAndConditions = () => {
   return (
@@ -81,6 +82,7 @@ const TermsAndConditions = () => {
           </Card>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { LandingGallery } from "@/components/landing/LandingGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const LandingVisual = () => {
   const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
@@ -270,6 +271,7 @@ const LandingVisual = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>;
 };
 

@@ -1,5 +1,6 @@
 
 import React from "react";
+import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Settings, 
@@ -185,6 +186,7 @@ const AdminPanel = () => {
           </TabsContent>
         </Tabs>
       </div>
+      <Footer />
     </div>
   );
 };

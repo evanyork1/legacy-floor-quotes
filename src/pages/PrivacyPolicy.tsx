@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "@/components/Footer";
 
 const PrivacyPolicy = () => {
   return (
@@ -61,6 +62,7 @@ const PrivacyPolicy = () => {
           </Card>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
