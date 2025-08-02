@@ -45,28 +45,28 @@ const Contact = () => {
                     {/* Contact Information */}
                     <div className="bg-white rounded-xl shadow-lg p-8">
                       <h3 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <div className="flex items-center">
-                          <Phone className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
+                          <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
                           <a 
                             href="tel:214-305-6516" 
-                            className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                            className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors"
                           >
                             (214) 305-6516
                           </a>
                         </div>
                         <div className="flex items-center">
-                          <Mail className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
+                          <Mail className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
                           <a 
                             href="mailto:support@legacyindustrialcoatings.com" 
-                            className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors break-all"
+                            className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors break-all"
                           >
                             support@legacyindustrialcoatings.com
                           </a>
                         </div>
                         <div className="flex items-center">
-                          <MapPin className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
-                          <span className="text-lg font-bold text-gray-900">
+                          <MapPin className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                          <span className="text-base font-bold text-gray-900">
                             6010 W Spring Creek Parkway, Plano, TX 75024
                           </span>
                         </div>
@@ -77,7 +77,7 @@ const Contact = () => {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                       <div className="h-64 relative">
                         <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.8264982837387!2d-96.8244!3d33.0198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3c5b8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2s6010%20W%20Spring%20Creek%20Pkwy%2C%20Plano%2C%20TX%2075024!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dOWTgOz-5YKqFo&q=Legacy+Industrial+Coatings,6010+W+Spring+Creek+Parkway,Plano,TX+75024&zoom=15&maptype=roadmap"
                           width="100%"
                           height="100%"
                           style={{ border: 0 }}
@@ -88,7 +88,7 @@ const Contact = () => {
                           className="absolute inset-0"
                         ></iframe>
                       </div>
-                      <div className="p-4 bg-gray-50">
+                      <div className="p-3 bg-gray-50">
                         <h4 className="font-semibold text-gray-900">Legacy Industrial Coatings</h4>
                         <p className="text-sm text-gray-600">6010 W Spring Creek Parkway, Plano, TX 75024</p>
                       </div>
