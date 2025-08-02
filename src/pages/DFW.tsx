@@ -11,6 +11,7 @@ import ProcessSection from "@/components/sections/ProcessSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
+import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 
 const DFW = () => {
   return (
@@ -57,6 +58,7 @@ const DFW = () => {
         <ProcessSection />
         <GalleryPreview />
         <CommercialSection />
+        <CustomQuoteSection />
         <CTASection />
         <div id="footer">
           <Footer />

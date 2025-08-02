@@ -8,8 +8,8 @@ import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import ProcessSection from "@/components/sections/ProcessSection";
-
 import CTASection from "@/components/sections/CTASection";
+import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 
 const DFWResLanding = () => {
   return (
@@ -55,6 +55,7 @@ const DFWResLanding = () => {
         <HowItWorksSection />
         <TestimonialsSection />
         <GalleryPreview />
+        <CustomQuoteSection />
         <CTASection />
         <div id="footer">
           <LandingMinimalFooter />

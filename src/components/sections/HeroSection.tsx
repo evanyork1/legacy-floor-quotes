@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { LeadForm } from "@/components/landing/LeadForm";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -11,11 +12,58 @@ const HeroSection = () => {
   const isCommercial = location.pathname === '/dfwcommercial';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   const isHoustonLanding = location.pathname === '/houstonreslanding';
-  const quotePath = isDFW ? '/quotedfw' : '/quotehou';
   const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day"));
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
   const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"));
 
+  // For DFW and DFW Res Landing pages, use the new design
+  if (isDFW) {
+    return (
+      <section 
+        className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/lovable-uploads/ca4188dd-c83d-4e6b-83ba-1fa6d780b466.png')`
+        }}
+      >
+        <div className="container mx-auto px-6 lg:px-8 relative w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="max-w-2xl space-y-8 sm:space-y-10">
+              <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+                {title}{" "}
+                <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
+                  Experts
+                </span>
+              </h1>
+              
+              <div className="space-y-2 sm:space-y-3">
+                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-white leading-relaxed">
+                  {subtext}
+                </div>
+              </div>
+              
+              <div className="relative mb-8 sm:mb-10">
+                <Button 
+                  onClick={() => navigate('/gallery')} 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                >
+                  See Gallery
+                  <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
+                </Button>
+              </div>
+            </div>
+            
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-md">
+                <LeadForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Original design for other pages
   return (
     <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
@@ -31,7 +79,7 @@ const HeroSection = () => {
                   </span>
                   {" "}Flooring Experts
                 </>
-              ) : isDFW || isHoustonLanding ? (
+              ) : isHoustonLanding ? (
                 <>
                   {title}{" "}
                   <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
@@ -52,7 +100,7 @@ const HeroSection = () => {
               )}
             </h1>
             
-            {isDFW || isHoustonLanding || isCommercial ? (
+            {isHoustonLanding || isCommercial ? (
               <div className="space-y-2 sm:space-y-3">
                 <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
                   {subtext}
@@ -69,14 +117,14 @@ const HeroSection = () => {
               <div className="relative mb-8 sm:mb-10">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    onClick={() => navigate(quotePath)} 
+                    onClick={() => navigate('/quotehou')} 
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                   >
                     Get Instant Quote
                     <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
                   </Button>
                   
-                  {(isDFW || isHoustonLanding) && (
+                  {isHoustonLanding && (
                     <Button 
                       asChild 
                       variant="outline" 

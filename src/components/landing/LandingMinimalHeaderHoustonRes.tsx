@@ -20,9 +20,9 @@ export const LandingMinimalHeaderHoustonRes = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png" 
+              src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-24 sm:h-16 md:h-20 lg:h-40 w-auto" 
+              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto" 
             />
           </div>
 

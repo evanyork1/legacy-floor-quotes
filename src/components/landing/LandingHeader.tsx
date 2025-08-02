@@ -18,7 +18,7 @@ export const LandingHeader = ({ isJAK = false }: LandingHeaderProps) => {
   const phoneHref = isJAK ? "tel:562-285-6770" : "tel:214-305-6516";
   const logoSrc = isJAK 
     ? "/lovable-uploads/9d272b96-7df8-41b8-a4dc-05d65b8fadfa.png"
-    : "/lovable-uploads/de4de16e-71f2-4d7d-822d-5532d41f72cd.png";
+    : "/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png";
   const logoAlt = isJAK ? "JAK Concrete Coatings" : "Legacy Industrial Coatings";
   const buttonColor = isJAK 
     ? "bg-orange-600 hover:bg-orange-700" 
