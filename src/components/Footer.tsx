@@ -63,6 +63,22 @@ const Footer = () => {
                   <p>United States</p>
                 </div>
               </div>
+              
+              {/* Contact Details */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                    (214) 305-6516
+                  </a>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                  <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                    support@legacyindustrialcoatings.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -74,7 +90,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Follow & Contact Info */}
+          {/* Follow */}
           <div className="space-y-6">
             <h3 className="text-xl font-bold text-white tracking-wider">FOLLOW</h3>
             
@@ -89,22 +105,6 @@ const Footer = () => {
               <a href="https://maps.app.goo.gl/2idbg4BFnZVKvLNK9" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <MapIcon className="h-5 w-5 text-white" />
               </a>
-            </div>
-
-            {/* Contact Details */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                  (214) 305-6516
-                </a>
-              </div>
-              <div className="flex items-start space-x-2">
-                <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                  support@legacyindustrialcoatings.com
-                </a>
-              </div>
             </div>
           </div>
         </div>
