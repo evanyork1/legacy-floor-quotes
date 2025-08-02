@@ -26,11 +26,11 @@ const Footer = () => {
           {/* Company Info & Logo */}
           <div className="lg:col-span-1 space-y-6">
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-white">
-                LEGACY<br />
-                <span className="text-blue-400">INDUSTRIAL</span><br />
-                COATINGS
-              </h2>
+              <img 
+                src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
+                alt="Legacy Industrial Coatings Logo" 
+                className="h-16 w-auto" 
+              />
               <div className="space-y-2 text-sm text-gray-300">
                 <p>Licensed & Insured</p>
                 <p>Family Owned & Operated</p>
@@ -43,10 +43,11 @@ const Footer = () => {
             <h3 className="text-xl font-bold text-white tracking-wider">MENU</h3>
             <ul className="space-y-3">
               <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
-              <li><a href={quotePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GET QUOTE</a></li>
+              <li><a href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GET QUOTE</a></li>
               <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GALLERY</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>
-              <li><a href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">CONTACT</a></li>
+              <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">TERMS</a></li>
+              <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">PRIVACY</a></li>
             </ul>
           </div>
 
@@ -68,12 +69,8 @@ const Footer = () => {
           {/* Service Areas */}
           <div className="space-y-6">
             <h3 className="text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
-            <div className="text-gray-300 text-sm space-y-1">
-              <p>Dallas, Fort Worth, Plano,</p>
-              <p>Frisco, McKinney, Allen,</p>
-              <p>Prosper, Celina, Richardson,</p>
-              <p>Garland, Irving, Carrollton,</p>
-              <p>and More!</p>
+            <div className="text-gray-300 text-sm">
+              <p>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Prosper, Celina, Richardson, Garland, Irving, Carrollton, and More!</p>
             </div>
           </div>
 
