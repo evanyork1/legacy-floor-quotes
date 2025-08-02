@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LeadForm } from "@/components/landing/LeadForm";
-import { LandingMinimalFooter } from "@/components/landing/LandingMinimalFooter";
 import { Phone, Mail, MapPin } from "lucide-react";
 const Contact = () => {
   return <>
@@ -42,14 +41,14 @@ const Contact = () => {
                   
                   <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
                     <div className="flex items-center">
-                      <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                      <a href="tel:214-305-6516" className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                      <Phone className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
+                      <a href="tel:214-305-6516" className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
                         (214) 305-6516
                       </a>
                     </div>
                     <div className="flex items-center">
-                      <Mail className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                      <a href="mailto:support@legacyindustrialcoatings.com" className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                      <Mail className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
+                      <a href="mailto:support@legacyindustrialcoatings.com" className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
                         support@legacyindustrialcoatings.com
                       </a>
                     </div>
@@ -80,7 +79,7 @@ const Contact = () => {
           </section>
         </main>
 
-        <LandingMinimalFooter />
+        <Footer />
       </div>
     </>;
 };
