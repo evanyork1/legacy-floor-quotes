@@ -19,13 +19,10 @@ const HeroSection = () => {
 
   // Gallery images for rotating background
   const galleryImages = [
-    '/lovable-uploads/ca4188dd-c83d-4e6b-83ba-1fa6d780b466.png',
     '/lovable-uploads/85530262-ab7f-4339-af86-ed63ee721679.png',
     '/lovable-uploads/259c870a-cc78-430c-867f-54d087457e73.png',
     '/lovable-uploads/4118a438-beef-487b-949a-0e4db42b6da7.png',
-    '/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png',
-    '/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png',
-    '/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png'
+    '/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png'
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
