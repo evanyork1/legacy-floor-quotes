@@ -44,14 +44,13 @@ const HeroSection = () => {
         {galleryImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 md:bg-fixed ${
               index === currentImageIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
-              backgroundAttachment: 'fixed',
               willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
             }}
           />
