@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LeadForm } from "@/components/landing/LeadForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -17,20 +18,20 @@ const HeroSection = () => {
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
   const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"));
 
-  // Gallery images for rotating background
-  const galleryImages = [
+  // Gallery images for rotating background - memoized for performance
+  const galleryImages = useMemo(() => [
     '/lovable-uploads/85530262-ab7f-4339-af86-ed63ee721679.png',
     '/lovable-uploads/259c870a-cc78-430c-867f-54d087457e73.png',
     '/lovable-uploads/4118a438-beef-487b-949a-0e4db42b6da7.png',
     '/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png'
-  ];
+  ], []);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
-    }, 4000);
+    }, 5000); // Increased interval for better performance
 
     return () => clearInterval(interval);
   }, [galleryImages.length]);
@@ -39,15 +40,16 @@ const HeroSection = () => {
   if (isDFW) {
     return (
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Images with Fade Transition */}
+        {/* Background Images with Optimized Fade Transition */}
         {galleryImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
               index === currentImageIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
+              willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
             }}
           />
         ))}
@@ -206,10 +208,11 @@ const HeroSection = () => {
             )}
           </div>
           <div className="relative">
-            <img 
-              src={isCommercial ? "/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png" : "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"} 
-              alt={isCommercial ? "Airplane hangar with polished concrete flooring" : "Premium garage floor coating with luxury vehicles"} 
-              className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500" 
+            <OptimizedImage 
+              src={isCommercial ? "/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png" : "/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png"}
+              alt={isCommercial ? "Airplane hangar with polished concrete flooring" : "Premium garage floor coating with luxury vehicles"}
+              className="relative w-full h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              priority={true}
             />
           </div>
         </div>

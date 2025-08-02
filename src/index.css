@@ -100,4 +100,26 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Performance optimizations */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Reduce paint operations */
+  .transition-transform,
+  .transition-all {
+    will-change: transform;
+  }
+
+  .transition-opacity {
+    will-change: opacity;
+  }
+
+  /* Optimize hover effects */
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover {
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 }

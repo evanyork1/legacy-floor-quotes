@@ -1,13 +1,14 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { X } from "lucide-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export const LandingGallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // Your actual gallery images
-  const galleryImages = [
+  // Memoized gallery images for performance
+  const galleryImages = useMemo(() => [
     {
       id: 1,
       src: "/lovable-uploads/5e144751-0c9d-4d92-85c2-5cf59fe90395.png",
@@ -53,7 +54,7 @@ export const LandingGallery = () => {
       src: "/lovable-uploads/624693af-bec7-4554-be4d-134ef392147c.png",
       alt: "Sports cars on high-end garage floor coating"
     }
-  ];
+  ], []);
 
   const openImage = (src: string) => {
     setSelectedImage(src);
@@ -66,18 +67,19 @@ export const LandingGallery = () => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {galleryImages.map((image) => (
+        {galleryImages.map((image, index) => (
           <Card 
             key={image.id} 
-            className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+            className="overflow-hidden hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer"
             onClick={() => openImage(image.src)}
           >
             <CardContent className="p-0">
               <div className="aspect-[4/3] overflow-hidden">
-                <img
+                <OptimizedImage
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  priority={index < 3} // Load first 3 images with priority
                 />
               </div>
             </CardContent>
