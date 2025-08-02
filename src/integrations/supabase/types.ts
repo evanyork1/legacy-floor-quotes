@@ -134,6 +134,42 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          phone: string
+          privacy_policy_agreed: boolean
+          questions_comments: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          phone: string
+          privacy_policy_agreed?: boolean
+          questions_comments?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          phone?: string
+          privacy_policy_agreed?: boolean
+          questions_comments?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       location_pricing: {
         Row: {
           id: number
