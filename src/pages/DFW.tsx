@@ -51,7 +51,9 @@ const DFW = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <HeroSection />
-        <TrustedBrandSection />
+        <div className="mt-16 sm:mt-20 lg:mt-24">
+          <TrustedBrandSection />
+        </div>
         <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />

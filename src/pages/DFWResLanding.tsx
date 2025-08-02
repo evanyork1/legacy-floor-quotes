@@ -49,7 +49,9 @@ const DFWResLanding = () => {
       <div className="min-h-screen bg-white">
         <LandingMinimalHeader />
         <HeroSection />
-        <FeaturesSection />
+        <div className="mt-16 sm:mt-20 lg:mt-24">
+          <FeaturesSection />
+        </div>
         <ProcessSection />
         <TrustedBrandSection />
         <HowItWorksSection />
