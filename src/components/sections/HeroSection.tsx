@@ -39,69 +39,87 @@ const HeroSection = () => {
   // For DFW and DFW Res Landing pages, use the new design
   if (isDFW) {
     return (
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Images with Optimized Fade Transition */}
-        {galleryImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
-              willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
-            }}
-          />
-        ))}
-        
-        <div className="container mx-auto px-6 lg:px-8 relative w-full z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="max-w-2xl space-y-8 sm:space-y-10">
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-                {title}{" "}
-                <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
-                  Experts
+      <>
+        {/* Top Bar with Phone Number */}
+        <div className="bg-blue-600 text-white py-2 px-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <a href="tel:214-305-6516" className="flex items-center text-sm font-medium hover:text-blue-200 transition-colors">
+              <Phone className="mr-2 h-4 w-4" />
+              (214) 305-6516
+            </a>
+            <Button 
+              onClick={() => navigate('/quotedfw')} 
+              className="bg-white text-blue-600 hover:bg-blue-50 text-xs px-3 py-1 rounded-full font-medium"
+            >
+              GET A FREE QUOTE
+            </Button>
+          </div>
+        </div>
+
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+          {/* Background Images with Optimized Fade Transition */}
+          {galleryImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
+                willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
+              }}
+            />
+          ))}
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative w-full z-10">
+            {/* Mobile-First Layout */}
+            <div className="text-center mb-8 lg:mb-12">
+              <div className="text-sm sm:text-base text-white/80 mb-2 uppercase tracking-wider">
+                WELCOME TO {isDFW ? 'DALLAS - FORT WORTH' : 'HOUSTON'}, TEXAS'S
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                EPOXY FLOORING{" "}
+                <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
+                  EXPERTS!
                 </span>
               </h1>
               
-              <div className="space-y-2 sm:space-y-3">
-                <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-white leading-relaxed">
-                  {subtext}
-                </div>
-              </div>
-              
-              <div className="relative mb-8 sm:mb-10">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    asChild 
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                  >
-                    <a href="tel:214-305-6516">
-                      <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
-                      Call Us Now
-                    </a>
-                  </Button>
-                  
-                  <Button 
-                    onClick={() => navigate('/gallery')} 
-                    variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
-                  >
-                    See Gallery
-                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
-                  </Button>
-                </div>
+              {/* Mobile Optimized Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <Button 
+                  onClick={() => navigate('/gallery')} 
+                  className="bg-blue-500 hover:bg-blue-600 text-white text-base sm:text-lg px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
+                >
+                  VIEW GALLERY
+                </Button>
+                
+                <Button 
+                  asChild 
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-base sm:text-lg px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 bg-transparent w-full sm:w-auto"
+                >
+                  <a href="tel:214-305-6516">
+                    CALL NOW
+                  </a>
+                </Button>
               </div>
             </div>
-            
-            <div className="flex justify-center lg:justify-end lg:pr-2">
-              <div className="w-full max-w-md">
-                <LeadForm />
+
+            {/* Quote Form Section - Mobile Optimized */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 max-w-lg mx-auto shadow-2xl">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                  GET A FAST, FREE QUOTE
+                </h2>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  Fill in the form below to get started!
+                </p>
               </div>
+              <LeadForm />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </>
     );
   }
 
