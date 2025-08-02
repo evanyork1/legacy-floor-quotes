@@ -8,70 +8,76 @@ import { RefreshCw, Save } from "lucide-react";
 
 interface WebhooksTabProps {
   webhookUrl: string;
+  leadWebhookUrl: string;
   savingWebhook: boolean;
   onWebhookUrlChange: (url: string) => void;
+  onLeadWebhookUrlChange: (url: string) => void;
   onSaveWebhookUrl: () => void;
 }
 
 const WebhooksTab: React.FC<WebhooksTabProps> = ({
   webhookUrl,
+  leadWebhookUrl,
   savingWebhook,
   onWebhookUrlChange,
+  onLeadWebhookUrlChange,
   onSaveWebhookUrl
 }) => {
   return (
-    <Card className="bg-gray-800 border-gray-700">
-      <CardHeader>
-        <CardTitle className="text-white">Email Notifications via Zapier</CardTitle>
-        <p className="text-gray-400">Configure webhook to trigger email notifications when quotes are submitted</p>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div>
-          <Label className="text-gray-300">Zapier Webhook URL</Label>
-          <Input 
-            value={webhookUrl}
-            onChange={(e) => onWebhookUrlChange(e.target.value)}
-            placeholder="https://hooks.zapier.com/hooks/catch/..."
-            className="bg-gray-600 border-gray-500 text-white"
-          />
-          <p className="text-xs text-gray-400 mt-1">
-            Paste your Zapier webhook URL here to receive quote notifications
-          </p>
-        </div>
-        
-        <Button 
-          onClick={onSaveWebhookUrl} 
-          disabled={savingWebhook}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
-          {savingWebhook ? (
-            <>
-              <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-              Saving...
-            </>
-          ) : (
-            <>
-              <Save className="h-4 w-4 mr-2" />
-              Save Webhook URL
-            </>
-          )}
-        </Button>
+    <div className="space-y-6">
+      {/* Quote Webhooks */}
+      <Card className="bg-gray-800 border-gray-700">
+        <CardHeader>
+          <CardTitle className="text-white">Quote Email Notifications via Zapier</CardTitle>
+          <p className="text-gray-400">Configure webhook to trigger email notifications when quotes are submitted</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <Label className="text-gray-300">Quote Zapier Webhook URL</Label>
+            <Input 
+              value={webhookUrl}
+              onChange={(e) => onWebhookUrlChange(e.target.value)}
+              placeholder="https://hooks.zapier.com/hooks/catch/..."
+              className="bg-gray-600 border-gray-500 text-white"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Paste your Zapier webhook URL here to receive quote notifications
+            </p>
+          </div>
+          
+          <Button 
+            onClick={onSaveWebhookUrl} 
+            disabled={savingWebhook}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            {savingWebhook ? (
+              <>
+                <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4 mr-2" />
+                Save Webhook URLs
+              </>
+            )}
+          </Button>
 
-        <div className="bg-gray-700 p-4 rounded-lg">
-          <h3 className="text-white font-medium mb-2">Setup Instructions:</h3>
-          <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
-            <li>Go to Zapier and create a new Zap</li>
-            <li>Choose "Webhooks by Zapier" as the trigger</li>
-            <li>Select "Catch Hook" as the trigger event</li>
-            <li>Copy the webhook URL and paste it above</li>
-            <li>Set up your action (Gmail, Outlook, etc.) to send formatted emails</li>
-            <li>Test by submitting a quote on your website</li>
-          </ol>
-        </div>
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Quote Setup Instructions:</h3>
+            <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+              <li>Go to Zapier and create a new Zap</li>
+              <li>Choose "Webhooks by Zapier" as the trigger</li>
+              <li>Select "Catch Hook" as the trigger event</li>
+              <li>Copy the webhook URL and paste it above</li>
+              <li>Set up your action (Gmail, Outlook, etc.) to send formatted emails</li>
+              <li>Test by submitting a quote on your website</li>
+            </ol>
+          </div>
 
-        <div className="bg-gray-700 p-4 rounded-lg">
-          <h3 className="text-white font-medium mb-2">Webhook Data Structure:</h3>
-          <pre className="text-gray-300 text-xs overflow-x-auto">
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Quote Webhook Data Structure:</h3>
+            <pre className="text-gray-300 text-xs overflow-x-auto">
 {`{
   "timestamp": "2024-01-01T12:00:00Z",
   "event_type": "quote_submitted",
@@ -88,10 +94,64 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
     "damage_photos_count": 1
   }
 }`}
-          </pre>
-        </div>
-      </CardContent>
-    </Card>
+            </pre>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Lead Form Webhooks */}
+      <Card className="bg-gray-800 border-gray-700">
+        <CardHeader>
+          <CardTitle className="text-white">Lead Form Email Notifications via Zapier</CardTitle>
+          <p className="text-gray-400">Configure webhook to trigger email notifications when lead forms are submitted</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <Label className="text-gray-300">Lead Form Zapier Webhook URL</Label>
+            <Input 
+              value={leadWebhookUrl}
+              onChange={(e) => onLeadWebhookUrlChange(e.target.value)}
+              placeholder="https://hooks.zapier.com/hooks/catch/..."
+              className="bg-gray-600 border-gray-500 text-white"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Paste your Zapier webhook URL here to receive lead form notifications
+            </p>
+          </div>
+
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Lead Form Setup Instructions:</h3>
+            <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+              <li>Go to Zapier and create a new Zap</li>
+              <li>Choose "Webhooks by Zapier" as the trigger</li>
+              <li>Select "Catch Hook" as the trigger event</li>
+              <li>Copy the webhook URL and paste it above</li>
+              <li>Set up your action (Gmail, Outlook, etc.) to send formatted emails</li>
+              <li>Test by submitting a lead form on your website</li>
+            </ol>
+          </div>
+
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Lead Webhook Data Structure:</h3>
+            <pre className="text-gray-300 text-xs overflow-x-auto">
+{`{
+  "timestamp": "2024-01-01T12:00:00Z",
+  "event_type": "lead_submitted",
+  "lead": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "phone": "555-123-4567",
+    "questions_comments": "I'm interested in...",
+    "privacy_policy_agreed": true,
+    "source": "website_lead_form"
+  }
+}`}
+            </pre>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

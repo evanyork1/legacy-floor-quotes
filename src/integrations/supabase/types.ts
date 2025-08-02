@@ -134,7 +134,7 @@ export type Database = {
         }
         Relationships: []
       }
-      leads: {
+      "Lead Form Subissions": {
         Row: {
           created_at: string
           email: string
@@ -294,18 +294,21 @@ export type Database = {
         Row: {
           dfw_webhook_url: string | null
           id: number
+          lead_webhook_url: string | null
           updated_at: string | null
           zapier_webhook_url: string | null
         }
         Insert: {
           dfw_webhook_url?: string | null
           id?: number
+          lead_webhook_url?: string | null
           updated_at?: string | null
           zapier_webhook_url?: string | null
         }
         Update: {
           dfw_webhook_url?: string | null
           id?: number
+          lead_webhook_url?: string | null
           updated_at?: string | null
           zapier_webhook_url?: string | null
         }

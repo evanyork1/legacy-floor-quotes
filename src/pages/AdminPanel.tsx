@@ -31,6 +31,8 @@ const AdminPanel = () => {
     archivingQuoteId,
     webhookUrl,
     setWebhookUrl,
+    leadWebhookUrl,
+    setLeadWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,
@@ -169,10 +171,12 @@ const AdminPanel = () => {
           </TabsContent>
 
           <TabsContent value="webhooks">
-            <WebhooksTab
+            <WebhooksTab 
               webhookUrl={webhookUrl}
+              leadWebhookUrl={leadWebhookUrl}
               savingWebhook={savingWebhook}
               onWebhookUrlChange={setWebhookUrl}
+              onLeadWebhookUrlChange={setLeadWebhookUrl}
               onSaveWebhookUrl={saveWebhookUrl}
             />
           </TabsContent>

@@ -9,6 +9,7 @@ export const useAdminData = () => {
   const [showArchived, setShowArchived] = useState(false);
   const [archivingQuoteId, setArchivingQuoteId] = useState<string | null>(null);
   const [webhookUrl, setWebhookUrl] = useState("");
+  const [leadWebhookUrl, setLeadWebhookUrl] = useState("");
   const [savingWebhook, setSavingWebhook] = useState(false);
   const { toast } = useToast();
 
@@ -215,7 +216,7 @@ export const useAdminData = () => {
     try {
       const { data, error } = await supabase
         .from('webhook_settings')
-        .select('zapier_webhook_url')
+        .select('zapier_webhook_url, lead_webhook_url')
         .eq('id', 1)
         .single();
 
@@ -226,6 +227,9 @@ export const useAdminData = () => {
 
       if (data?.zapier_webhook_url) {
         setWebhookUrl(data.zapier_webhook_url);
+      }
+      if (data?.lead_webhook_url) {
+        setLeadWebhookUrl(data.lead_webhook_url);
       }
     } catch (error) {
       console.error('Error fetching webhook settings:', error);
@@ -240,6 +244,7 @@ export const useAdminData = () => {
         .upsert({ 
           id: 1, 
           zapier_webhook_url: webhookUrl || null,
+          lead_webhook_url: leadWebhookUrl || null,
           updated_at: new Date().toISOString()
         });
 
@@ -249,13 +254,13 @@ export const useAdminData = () => {
 
       toast({
         title: "Success",
-        description: "Webhook URL saved successfully",
+        description: "Webhook URLs saved successfully",
       });
     } catch (error) {
-      console.error('Error saving webhook URL:', error);
+      console.error('Error saving webhook URLs:', error);
       toast({
         title: "Error",
-        description: "Failed to save webhook URL",
+        description: "Failed to save webhook URLs",
         variant: "destructive",
       });
     } finally {
@@ -280,6 +285,8 @@ export const useAdminData = () => {
     archivingQuoteId,
     webhookUrl,
     setWebhookUrl,
+    leadWebhookUrl,
+    setLeadWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,
