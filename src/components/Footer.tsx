@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           
           {/* Company Info & Logo */}
           <div className="lg:col-span-1 space-y-6">
@@ -95,13 +95,13 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm whitespace-nowrap">
                   (214) 305-6516
                 </a>
               </div>
               <div className="flex items-start space-x-2">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-xs leading-tight">
                   support@legacyindustrialcoatings.com
                 </a>
               </div>
