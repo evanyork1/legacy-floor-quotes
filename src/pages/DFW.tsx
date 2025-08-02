@@ -59,8 +59,8 @@ const DFW = () => {
         <TestimonialsSection />
         <ProcessSection />
         <GalleryPreview />
-        <CommercialSection />
         <CustomQuoteSection />
+        <CommercialSection />
         <CTASection />
         <div id="footer">
           <Footer />

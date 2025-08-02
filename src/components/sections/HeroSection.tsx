@@ -57,7 +57,7 @@ const HeroSection = () => {
             <div className="max-w-2xl space-y-8 sm:space-y-10">
               <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 {title}{" "}
-                <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                   Experts
                 </span>
               </h1>
@@ -122,7 +122,7 @@ const HeroSection = () => {
               ) : isHoustonLanding ? (
                 <>
                   {title}{" "}
-                  <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                     Experts
                   </span>
                 </>
@@ -157,7 +157,7 @@ const HeroSection = () => {
               <div className="relative mb-8 sm:mb-10">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    onClick={() => navigate('/quotehou')} 
+                    onClick={() => navigate('/contact')} 
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                   >
                     Get Instant Quote

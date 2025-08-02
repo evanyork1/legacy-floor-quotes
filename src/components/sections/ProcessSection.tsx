@@ -9,7 +9,7 @@ const ProcessSection = () => {
   const location = useLocation();
   
   const isHouston = location.pathname === '/houstonreslanding';
-  const quoteUrl = isHouston ? '/quotehou' : '/quotedfw';
+  const quoteUrl = '/contact';
   const phoneNumber = isHouston ? '713-766-5566' : '214-305-6516';
 
   const steps = [

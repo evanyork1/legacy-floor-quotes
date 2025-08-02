@@ -9,7 +9,7 @@ const CTASection = () => {
   
   // Determine quote path based on current location
   const isCommercial = location.pathname === '/dfwcommercial';
-  const quotePath = (location.pathname === '/dfw' || location.pathname === '/dfwreslanding') ? '/quotedfw' : '/quotehou';
+  const quotePath = '/contact';
 
   return (
     <section className="py-20 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
