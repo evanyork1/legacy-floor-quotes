@@ -33,66 +33,62 @@ const Contact = () => {
                   </p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-12 items-start">
-                  {/* Contact Form */}
-                  <div className="bg-white rounded-xl shadow-lg p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Get Your Free Quote</h2>
-                    <LeadForm />
+                {/* Contact Form - Full Width */}
+                <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Get Your Free Quote</h2>
+                  <LeadForm />
+                </div>
+
+                {/* Contact Information */}
+                <div className="text-center mb-12">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                  <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+                    <div className="flex items-center">
+                      <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                      <a 
+                        href="tel:214-305-6516" 
+                        className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                      >
+                        (214) 305-6516
+                      </a>
+                    </div>
+                    <div className="flex items-center">
+                      <Mail className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                      <a 
+                        href="mailto:support@legacyindustrialcoatings.com" 
+                        className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                      >
+                        support@legacyindustrialcoatings.com
+                      </a>
+                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-                  {/* Contact Info & Map */}
-                  <div className="space-y-8">
-                    {/* Contact Information */}
-                    <div className="bg-white rounded-xl shadow-lg p-8">
-                      <h3 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
-                      <div className="space-y-3">
-                        <div className="flex items-center">
-                          <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                          <a 
-                            href="tel:214-305-6516" 
-                            className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors"
-                          >
-                            (214) 305-6516
-                          </a>
-                        </div>
-                        <div className="flex items-center">
-                          <Mail className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                          <a 
-                            href="mailto:support@legacyindustrialcoatings.com" 
-                            className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors break-all"
-                          >
-                            support@legacyindustrialcoatings.com
-                          </a>
-                        </div>
-                        <div className="flex items-center">
-                          <MapPin className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                          <span className="text-base font-bold text-gray-900">
-                            6010 W Spring Creek Parkway, Plano, TX 75024
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Map */}
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                      <div className="h-64 relative">
-                        <iframe
-                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dOWTgOz-5YKqFo&q=Legacy+Industrial+Coatings,6010+W+Spring+Creek+Parkway,Plano,TX+75024&zoom=15&maptype=roadmap"
-                          width="100%"
-                          height="100%"
-                          style={{ border: 0 }}
-                          allowFullScreen
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                          title="Legacy Industrial Coatings Location"
-                          className="absolute inset-0"
-                        ></iframe>
-                      </div>
-                      <div className="p-3 bg-gray-50">
-                        <h4 className="font-semibold text-gray-900">Legacy Industrial Coatings</h4>
-                        <p className="text-sm text-gray-600">6010 W Spring Creek Parkway, Plano, TX 75024</p>
-                      </div>
-                    </div>
+          {/* Map Section */}
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-6">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Our Location</h3>
+                  <p className="text-gray-600">6010 W Spring Creek Parkway, Plano, TX 75024</p>
+                </div>
+                
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="h-80 relative">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.7160152289116!2d-96.83307428842483!3d33.0639425691567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c174291843217%3A0x32e0e382c9cbc631!2sLegacy%20Industrial%20Epoxy%20Floor%20Coating!5e0!3m2!1sen!2sus!4v1754138480849!5m2!1sen!2sus"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Legacy Industrial Coatings Location"
+                      className="absolute inset-0"
+                    ></iframe>
                   </div>
                 </div>
               </div>
