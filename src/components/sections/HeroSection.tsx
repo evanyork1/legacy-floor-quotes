@@ -20,10 +20,12 @@ const HeroSection = () => {
   // Gallery images for rotating background
   const galleryImages = [
     '/lovable-uploads/ca4188dd-c83d-4e6b-83ba-1fa6d780b466.png',
+    '/lovable-uploads/85530262-ab7f-4339-af86-ed63ee721679.png',
+    '/lovable-uploads/259c870a-cc78-430c-867f-54d087457e73.png',
+    '/lovable-uploads/4118a438-beef-487b-949a-0e4db42b6da7.png',
+    '/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png',
     '/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png',
-    '/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png',
-    '/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg',
-    '/lovable-uploads/e57c7675-310f-4345-ba29-137d7f5b6fc2.png'
+    '/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png'
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -39,13 +41,21 @@ const HeroSection = () => {
   // For DFW and DFW Res Landing pages, use the new design
   if (isDFW) {
     return (
-      <section 
-        className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat transition-all duration-1000"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${galleryImages[currentImageIndex]}')`
-        }}
-      >
-        <div className="container mx-auto px-6 lg:px-8 relative w-full">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Images with Fade Transition */}
+        {galleryImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`
+            }}
+          />
+        ))}
+        
+        <div className="container mx-auto px-6 lg:px-8 relative w-full z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="max-w-2xl space-y-8 sm:space-y-10">
               <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
@@ -85,7 +95,7 @@ const HeroSection = () => {
               </div>
             </div>
             
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-end lg:pr-2">
               <div className="w-full max-w-md">
                 <LeadForm />
               </div>
