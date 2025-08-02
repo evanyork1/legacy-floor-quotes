@@ -57,9 +57,9 @@ const HeroSection = () => {
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
           {/* Mobile Layout - Hero content first, form below */}
           <div className="lg:hidden">
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col">
               {/* Hero content - takes up most of viewport */}
-              <div className="flex-1 flex items-center justify-center pt-20 pb-8">
+              <div className="min-h-screen flex items-center justify-center pt-20">
                 <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
                   <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
                     {title}{" "}
@@ -99,9 +99,9 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form - positioned below hero content */}
-              <div className="flex justify-center pb-8">
-                <div className="w-full max-w-md px-4">
+              {/* Quote form - positioned much lower with more bottom padding */}
+              <div className="flex justify-center pb-16">
+                <div className="w-full max-w-md">
                   <LeadForm />
                 </div>
               </div>
