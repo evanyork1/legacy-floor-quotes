@@ -51,8 +51,8 @@ const DFW = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <HeroSection />
-        <FeaturesSection />
         <TrustedBrandSection />
+        <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />
         <ProcessSection />

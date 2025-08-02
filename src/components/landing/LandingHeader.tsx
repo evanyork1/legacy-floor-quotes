@@ -35,7 +35,7 @@ export const LandingHeader = ({ isJAK = false }: LandingHeaderProps) => {
             <img 
               src={logoSrc}
               alt={logoAlt}
-              className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto" 
+              className="h-10 sm:h-11 md:h-13 lg:h-14 w-auto" 
             />
           </div>
           <div className="flex items-center gap-4">

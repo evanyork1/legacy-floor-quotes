@@ -49,9 +49,9 @@ const DFWResLanding = () => {
       <div className="min-h-screen bg-white">
         <LandingMinimalHeader />
         <HeroSection />
-        <TrustedBrandSection />
-        <ProcessSection />
         <FeaturesSection />
+        <ProcessSection />
+        <TrustedBrandSection />
         <HowItWorksSection />
         <TestimonialsSection />
         <GalleryPreview />

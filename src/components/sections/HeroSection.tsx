@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LeadForm } from "@/components/landing/LeadForm";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -16,13 +17,32 @@ const HeroSection = () => {
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
   const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"));
 
+  // Gallery images for rotating background
+  const galleryImages = [
+    '/lovable-uploads/ca4188dd-c83d-4e6b-83ba-1fa6d780b466.png',
+    '/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png',
+    '/lovable-uploads/a75e1253-9da2-40ae-82e0-a78d8e1a4967.png',
+    '/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg',
+    '/lovable-uploads/e57c7675-310f-4345-ba29-137d7f5b6fc2.png'
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [galleryImages.length]);
+
   // For DFW and DFW Res Landing pages, use the new design
   if (isDFW) {
     return (
       <section 
-        className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat"
+        className="relative min-h-screen flex items-center bg-cover bg-center bg-no-repeat transition-all duration-1000"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/lovable-uploads/ca4188dd-c83d-4e6b-83ba-1fa6d780b466.png')`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${galleryImages[currentImageIndex]}')`
         }}
       >
         <div className="container mx-auto px-6 lg:px-8 relative w-full">
@@ -42,13 +62,26 @@ const HeroSection = () => {
               </div>
               
               <div className="relative mb-8 sm:mb-10">
-                <Button 
-                  onClick={() => navigate('/gallery')} 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                >
-                  See Gallery
-                  <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    asChild 
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                  >
+                    <a href="tel:214-305-6516">
+                      <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+                      Call Us Now
+                    </a>
+                  </Button>
+                  
+                  <Button 
+                    onClick={() => navigate('/gallery')} 
+                    variant="outline"
+                    className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                  >
+                    See Gallery
+                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
+                  </Button>
+                </div>
               </div>
             </div>
             

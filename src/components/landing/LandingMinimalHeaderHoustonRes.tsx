@@ -22,7 +22,7 @@ export const LandingMinimalHeaderHoustonRes = () => {
             <img 
               src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
               alt="Legacy Industrial Coatings" 
-              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto" 
+              className="h-12 sm:h-16 md:h-19 lg:h-22 w-auto" 
             />
           </div>
 
