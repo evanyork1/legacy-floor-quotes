@@ -1,16 +1,11 @@
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
   const isDFW = location.pathname === '/dfw';
   const isCommercial = location.pathname === '/dfwcommercial';
-  const serviceArea = isCommercial ? "Dallas-Fort Worth Metroplex" : (isDFW ? "Dallas, Plano, Houston, Phoenix" : "Nationwide Service");
   
   // Determine paths based on current location
   const homePath = isDFW ? "/dfw" : "/houston";
@@ -24,59 +19,104 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-16 sm:py-20 lg:py-24">
+    <footer className="bg-slate-800 text-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-14 lg:gap-16 mb-12 sm:mb-14 lg:mb-16">
-          {/* Company Info */}
-          <div className="space-y-4 sm:space-y-6">
-            <div className="flex items-center mb-4 sm:mb-6">
-              {/* Logo space if needed */}
-            </div>
-            <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">Family owned and operated in Dallas, we are committed to installing the highest quality residential and commercial flooring products available.</p>
-            <div className="space-y-2 sm:space-y-3">
-              <div className="flex items-center">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base break-all">support@legacyindustrialcoatings.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">
-                  214-305-6516
-                </a>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">We proudly serve Plano and surrounding areas including Frisco, McKinney, Allen, Prosper, Celina, and beyond. Not sure if we service your area? Just ask — we're expanding fast!</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+          
+          {/* Company Info & Logo */}
+          <div className="lg:col-span-1 space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-white">
+                LEGACY<br />
+                <span className="text-blue-400">INDUSTRIAL</span><br />
+                COATINGS
+              </h2>
+              <div className="space-y-2 text-sm text-gray-300">
+                <p>Licensed & Insured</p>
+                <p>Family Owned & Operated</p>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Quick Links</h3>
-            <ul className="space-y-2 sm:space-y-3">
-              <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Home</a></li>
-              <li><a href={quotePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Get Quote</a></li>
-              <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Gallery</a></li>
-              <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Warranty Info</a></li>
-              <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Terms and Conditions</a></li>
-              <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm sm:text-base">Privacy Policy</a></li>
+          {/* Menu */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-white tracking-wider">MENU</h3>
+            <ul className="space-y-3">
+              <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
+              <li><a href={quotePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GET QUOTE</a></li>
+              <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GALLERY</a></li>
+              <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>
+              <li><a href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">CONTACT</a></li>
             </ul>
           </div>
 
-          {/* Third column can be added here if needed */}
+          {/* Contact */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-white tracking-wider">CONTACT</h3>
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-white font-semibold mb-2">Main Office</h4>
+                <div className="text-gray-300 text-sm space-y-1">
+                  <p>6010 W Spring Creek Parkway</p>
+                  <p>Plano, TX 75024</p>
+                  <p>United States</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Service Areas */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
+            <div className="text-gray-300 text-sm space-y-1">
+              <p>Dallas, Fort Worth, Plano,</p>
+              <p>Frisco, McKinney, Allen,</p>
+              <p>Prosper, Celina, Richardson,</p>
+              <p>Garland, Irving, Carrollton,</p>
+              <p>and More!</p>
+            </div>
+          </div>
+
+          {/* Follow & Contact Info */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-white tracking-wider">FOLLOW</h3>
+            
+            {/* Social Media Icons */}
+            <div className="flex space-x-3">
+              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+                <Instagram className="h-5 w-5 text-white" />
+              </a>
+              <a href="#" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+                <Facebook className="h-5 w-5 text-white" />
+              </a>
+              <a href="#" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+                <Linkedin className="h-5 w-5 text-white" />
+              </a>
+            </div>
+
+            {/* Contact Details */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                  (214) 305-6516
+                </a>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm break-all">
+                  support@legacyindustrialcoatings.com
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-6 sm:pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-              © 2025 Legacy Industrial Coatings. All rights reserved.
-            </div>
-            <div className="flex justify-center">
-              <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 p-3 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-110">
-                <Instagram className="h-6 w-6 text-white" />
-              </a>
+        <div className="border-t border-gray-700 pt-8">
+          <div className="text-center">
+            <div className="text-gray-400 text-xs">
+              ©2025 Legacy Industrial Coatings. All Rights Reserved.
             </div>
           </div>
         </div>
