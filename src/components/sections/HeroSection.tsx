@@ -55,7 +55,61 @@ const HeroSection = () => {
         ))}
         
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-16 lg:pt-0">
+          {/* Mobile Layout - Hero content first, form below */}
+          <div className="lg:hidden">
+            <div className="flex flex-col min-h-screen">
+              {/* Hero content - takes up most of viewport */}
+              <div className="flex-1 flex items-center justify-center pt-20 pb-8">
+                <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
+                    {title}{" "}
+                    <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
+                      Experts
+                    </span>
+                  </h1>
+                  
+                  <div className="text-center">
+                    <div className="text-base sm:text-lg text-white leading-snug">
+                      {subtext}
+                    </div>
+                  </div>
+                  
+                  <div className="relative mt-6 sm:mt-8">
+                    <div className="flex flex-row gap-3 sm:gap-4 justify-center">
+                      <Button 
+                        asChild 
+                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                      >
+                        <a href="tel:214-305-6516">
+                          <Phone className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                          Call Us Now
+                        </a>
+                      </Button>
+                      
+                      <Button 
+                        onClick={() => navigate('/gallery')} 
+                        variant="outline"
+                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                      >
+                        See Gallery
+                        <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Quote form - positioned below hero content */}
+              <div className="flex justify-center pb-8">
+                <div className="w-full max-w-md px-4">
+                  <LeadForm />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Layout - Original side-by-side layout */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 {title}{" "}
