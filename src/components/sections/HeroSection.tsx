@@ -59,13 +59,13 @@ const HeroSection = () => {
         ))}
         
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
-          {/* Mobile Layout - Everything overlaid on background */}
+          {/* Mobile Layout - Hero content first, form below */}
           <div className="lg:hidden">
-            <div className="relative min-h-screen flex flex-col">
-              {/* Hero content - positioned as overlay */}
-              <div className="flex-1 flex items-center justify-center pt-20 pb-8">
-                <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
-                  <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
+            <div className="flex flex-col">
+              {/* Hero content - takes up most of viewport */}
+              <div className="h-[75vh] flex items-center justify-center pt-20">
+                <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
                     {title}{" "}
                     <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                       Experts
@@ -103,8 +103,8 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form - positioned at bottom as overlay */}
-              <div className="flex justify-center pb-8">
+              {/* Quote form - positioned much lower with more bottom padding */}
+              <div className="flex justify-center pb-16">
                 <div className="w-full max-w-md">
                   <LeadForm />
                 </div>
