@@ -12,6 +12,13 @@ const CommercialLinkSection = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
             <CardContent className="p-12 text-center">
+              <div className="mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1496307653780-48ee7de8d744" 
+                  alt="Commercial floor solution" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-6"
+                />
+              </div>
               <div className="text-blue-600 mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
                 <Building className="h-16 w-16" />
               </div>
