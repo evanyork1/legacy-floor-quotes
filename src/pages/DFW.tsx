@@ -13,6 +13,7 @@ import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
+import HomepageFAQ from "@/components/sections/HomepageFAQ";
 
 const DFW = () => {
   return (
@@ -62,6 +63,7 @@ const DFW = () => {
         <FeaturesSection />
         <GalleryPreview />
         <CustomQuoteSection />
+        <HomepageFAQ />
         <CommercialLinkSection />
         <CTASection />
         <div id="footer">
