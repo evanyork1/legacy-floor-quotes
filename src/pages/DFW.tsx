@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
-import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
@@ -56,12 +55,11 @@ const DFW = () => {
         <WhyChooseSection />
         <EpoxyVsPolyureaSection />
         <ProcessSection />
+        <TestimonialsSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
         <FeaturesSection />
-        <HowItWorksSection />
-        <TestimonialsSection />
         <GalleryPreview />
         <CustomQuoteSection />
         <CommercialSection />
