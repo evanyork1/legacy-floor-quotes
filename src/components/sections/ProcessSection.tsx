@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Play, Pause, Phone } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
 const ProcessSection = () => {
@@ -152,7 +152,6 @@ const ProcessSection = () => {
               onClick={() => window.location.href = '/contact'}
               className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
-              <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
               Get A Quote
             </Button>
             
@@ -161,7 +160,7 @@ const ProcessSection = () => {
               variant="outline"
               className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
-              <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+              <Calendar className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
               Book An Estimate
             </Button>
           </div>
