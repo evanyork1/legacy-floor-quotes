@@ -4,7 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone } from "lucide-react";
+import { LeadForm } from "@/components/landing/LeadForm";
+import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
 
 const Commercial = () => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ const Commercial = () => {
     {
       title: "Industrial Epoxy",
       description: "Heavy-duty epoxy systems designed for manufacturing, warehouses, and industrial facilities. Chemical resistant, extremely durable, and built to withstand the toughest conditions."
+    },
+    {
+      title: "Flake Floors",
+      description: "Decorative and durable flake flooring systems perfect for commercial spaces. Provides excellent slip resistance, hides imperfections, and offers endless design possibilities for retail stores, restaurants, and showrooms."
     }
   ];
 
@@ -144,13 +149,23 @@ const Commercial = () => {
               <p className="text-xl lg:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
                 Professional flooring systems for businesses across Dallas-Fort Worth
               </p>
-              <Button 
-                onClick={() => window.dispatchEvent(new CustomEvent('openCommercialModal'))}
-                className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Get Commercial Quote
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  onClick={() => navigate('/contact')}
+                  className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                >
+                  Get A Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button 
+                  onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                >
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Book An Estimate
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -180,7 +195,11 @@ const Commercial = () => {
                       </p>
                       <Button 
                         variant="outline" 
-                        onClick={() => navigate(service.title === "Concrete Polishing" ? "/concrete-polishing" : "/industrial-epoxy")}
+                        onClick={() => navigate(
+                          service.title === "Concrete Polishing" ? "/concrete-polishing" : 
+                          service.title === "Industrial Epoxy" ? "/industrial-epoxy" : 
+                          "/flake-floors"
+                        )}
                         className="group-hover:bg-blue-50 border-blue-200 hover:border-blue-400"
                       >
                         Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -258,19 +277,40 @@ const Commercial = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button 
-                onClick={() => window.dispatchEvent(new CustomEvent('openCommercialModal'))}
-                className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                onClick={() => navigate('/contact')}
+                className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
               >
-                <Phone className="mr-2 h-5 w-5" />
-                Get Commercial Quote
+                Get A Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-                onClick={() => window.open('tel:+19726730355', '_self')}
+                onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4 rounded-full"
+                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
               >
-                Call (972) 673-0355
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Get Your Commercial Quote
+                </h2>
+                <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                  Ready to transform your commercial space? Fill out the form below and we'll get back to you with a detailed quote.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <LeadForm />
+              </div>
             </div>
           </div>
         </section>
