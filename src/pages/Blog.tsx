@@ -18,6 +18,7 @@ const Blog = () => {
       id: 1,
       title: "The Ultimate Guide to Garage Floor Coatings in Dallas-Fort Worth",
       excerpt: "Discover why polyurea garage floor coatings are revolutionizing homes across DFW, from Plano to Prosper. Learn about installation, benefits, and what makes Legacy Industrial Coatings the trusted choice for Dallas homeowners.",
+      image: "/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png",
       content: `
         <h2>Why Dallas Homeowners Are Choosing Polyurea Over Epoxy</h2>
         <p>In the Dallas-Fort Worth metroplex, where summer temperatures soar and weather can be unpredictable, choosing the right garage floor coating is crucial. Homeowners in Plano, Frisco, Prosper, and Celina are increasingly turning to polyurea coatings over traditional epoxy for several compelling reasons.</p>
@@ -30,147 +31,74 @@ const Blog = () => {
         
         <h3>The Legacy Difference in North Texas</h3>
         <p>At Legacy Industrial Coatings, we've perfected our installation process specifically for North Texas conditions. Our team understands the unique challenges of concrete in this region, from foundation settling to temperature fluctuations. We've successfully transformed garages across Dallas, Plano, Frisco, McKinney, Allen, and surrounding communities.</p>
-        
-        <h3>Investment Value for DFW Real Estate</h3>
-        <p>The North Texas real estate market is competitive, and garage floor coatings have become a sought-after feature for homebuyers in Plano, Frisco, and Prosper. A professionally installed polyurea floor not only protects your investment but can increase your home's value and appeal to potential buyers.</p>
-        
-        <h3>Maintenance Made Simple</h3>
-        <p>Between Dallas dust storms and tracked-in mud from Texas rain, garage floors take a beating. Polyurea's non-porous surface means spills wipe up easily, and regular maintenance requires nothing more than occasional mopping. No more oil stains or tire marks permanently embedded in your concrete.</p>
       `,
       author: "Legacy Industrial Coatings Team",
       date: "January 15, 2024",
       readTime: "8 min read",
       category: "Residential",
       tags: ["Garage Floors", "Polyurea", "Dallas", "Home Improvement"],
-      location: "Dallas-Fort Worth"
+      location: "Dallas-Fort Worth",
+      featured: true
     },
     {
       id: 2,
       title: "Commercial Flooring Solutions: Why Plano Businesses Choose Legacy Industrial Coatings",
       excerpt: "From automotive shops in Frisco to warehouses in Dallas, discover how commercial-grade polyurea and polished concrete solutions are transforming business spaces across North Texas.",
+      image: "/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png",
       content: `
         <h2>Meeting the Demands of North Texas Commercial Spaces</h2>
         <p>Commercial facilities across the Dallas-Fort Worth area face unique flooring challenges. From automotive dealerships in Plano to manufacturing facilities in Frisco, business owners need flooring solutions that can withstand heavy traffic, chemical exposure, and the demanding pace of North Texas commerce.</p>
         
         <h3>Automotive Industry Solutions</h3>
         <p>The automotive sector is thriving in communities like Plano and Frisco, with numerous dealerships and repair facilities. These businesses require floors that can handle hydraulic fluid spills, hot tire marks, and heavy vehicle traffic. Our commercial-grade polyurea systems provide the chemical resistance and durability these facilities demand.</p>
-        
-        <h3>Warehouse and Distribution Centers</h3>
-        <p>With Dallas serving as a major logistics hub, warehouse flooring must withstand forklift traffic, pallet drops, and constant movement. Our polished concrete solutions provide the smooth, durable surface needed for efficient operations while reducing maintenance costs and improving safety.</p>
-        
-        <h3>Food Service and Processing</h3>
-        <p>Restaurants and food processing facilities in the DFW area require floors that meet strict health department standards. Our antimicrobial coatings resist bacteria growth while providing easy cleanup and slip resistance, essential for fast-paced commercial kitchens.</p>
-        
-        <h3>Healthcare and Laboratory Facilities</h3>
-        <p>Medical facilities across Plano, Frisco, and surrounding areas need specialized flooring that can withstand chemical disinfectants while maintaining a professional appearance. Our healthcare-grade coatings provide the seamless, non-porous surface required for these critical environments.</p>
-        
-        <h3>Minimizing Business Downtime</h3>
-        <p>We understand that downtime costs money. That's why we offer flexible scheduling, including after-hours and weekend installations, to keep your Plano or Dallas business running smoothly. Our fast-cure polyurea systems can often be installed overnight, allowing normal operations to resume the next business day.</p>
-        
-        <h3>Local Partnership and Support</h3>
-        <p>As a trusted partner to North Texas businesses, Legacy Industrial Coatings provides ongoing support and maintenance programs. We're not just contractors; we're local partners invested in the success of the DFW business community.</p>
       `,
       author: "Legacy Industrial Coatings Team",
       date: "January 10, 2024",
       readTime: "7 min read",
       category: "Commercial",
       tags: ["Commercial Flooring", "Business", "Plano", "Industrial"],
-      location: "Plano, Texas"
+      location: "Plano, Texas",
+      featured: false
     },
     {
       id: 3,
       title: "Garage Floor Coating Maintenance: Keeping Your Prosper Home's Floor Looking New",
-      excerpt: "Learn the simple maintenance tips that keep polyurea garage floors in Prosper, Celina, and North Dallas looking showroom-perfect year after year. Expert advice from Legacy Industrial Coatings.",
+      excerpt: "Learn the simple maintenance tips that keep polyurea garage floors in Prosper, Celina, and North Dallas looking showroom-perfect year after year.",
+      image: "/lovable-uploads/8d8cf4a3-4ed7-4f9b-8909-0cf80a149ecc.png",
       content: `
         <h2>Protecting Your Investment in North Texas</h2>
-        <p>Your new garage floor coating represents a significant investment in your Prosper or Celina home. With proper maintenance, these floors can look showroom-perfect for decades. Here's everything North Texas homeowners need to know about maintaining their polyurea garage floors.</p>
-        
-        <h3>Daily and Weekly Care</h3>
-        <p>The beauty of polyurea coatings lies in their low maintenance requirements. For homes in Prosper and surrounding areas, simple daily care involves:</p>
-        <ul>
-          <li>Sweeping or using a leaf blower to remove debris</li>
-          <li>Wiping up spills immediately with a damp cloth</li>
-          <li>Weekly mopping with warm water and mild detergent</li>
-        </ul>
-        
-        <h3>Dealing with North Texas Weather</h3>
-        <p>The DFW climate brings unique challenges, from dust storms to sudden temperature changes. Here's how to protect your floor:</p>
-        
-        <h4>Summer Heat Protection</h4>
-        <p>While polyurea handles heat better than epoxy, placing mats under motorcycles or lawn equipment that might leak fluids provides extra protection during Dallas's scorching summers.</p>
-        
-        <h4>Winter Considerations</h4>
-        <p>North Texas winters can bring ice and road salt on vehicle tires. Simply rinse these off with water to prevent any potential surface dulling over time.</p>
-        
-        <h3>Addressing Common Concerns</h3>
-        <p>Homeowners in Plano and Frisco often worry about specific maintenance scenarios:</p>
-        
-        <h4>Oil and Fluid Spills</h4>
-        <p>Unlike concrete, polyurea won't absorb spills. Even automotive fluids can be wiped away without staining, making cleanup effortless.</p>
-        
-        <h4>Tire Marks</h4>
-        <p>The flexibility of polyurea means tire marks are virtually eliminated. Any scuff marks can be removed with a simple cleaning solution.</p>
-        
-        <h3>Long-term Care for Maximum Lifespan</h3>
-        <p>With proper care, garage floors in Prosper and Celina homes can maintain their appearance for 15-20 years or more. Annual professional inspections can identify any minor issues before they become problems.</p>
-        
-        <h3>When to Call the Professionals</h3>
-        <p>Legacy Industrial Coatings provides ongoing support to our North Texas customers. If you notice any changes in your floor's appearance or have questions about care, our team is just a phone call away.</p>
+        <p>Your new garage floor coating represents a significant investment in your Prosper or Celina home. With proper maintenance, these floors can look showroom-perfect for decades.</p>
       `,
       author: "Legacy Industrial Coatings Team",
       date: "January 5, 2024",
       readTime: "6 min read",
       category: "Maintenance",
       tags: ["Maintenance", "Prosper", "Garage Care", "Home Tips"],
-      location: "Prosper, Texas"
+      location: "Prosper, Texas",
+      featured: false
     },
     {
       id: 4,
       title: "Why Celina Homeowners Are Upgrading to Decorative Concrete Coatings",
-      excerpt: "Explore the growing trend of decorative garage floors in Celina and North Dallas. From metallic epoxy to flake systems, discover how Legacy Industrial Coatings transforms ordinary garages into stunning spaces.",
+      excerpt: "Explore the growing trend of decorative garage floors in Celina and North Dallas. From metallic epoxy to flake systems, discover stunning transformations.",
+      image: "/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png",
       content: `
         <h2>The Aesthetic Revolution in North Texas Garages</h2>
-        <p>Gone are the days when garages were purely functional spaces. Homeowners in Celina, Little Elm, and throughout North Dallas are transforming their garages into extensions of their homes with decorative concrete coatings that rival any interior design magazine.</p>
-        
-        <h3>Celina's Growing Home Design Trend</h3>
-        <p>As Celina continues to grow with new construction and custom homes, homeowners are increasingly viewing their garages as valuable living space. The three-car garages common in Celina neighborhoods provide the perfect canvas for decorative flooring that matches the home's sophisticated design aesthetic.</p>
-        
-        <h3>Popular Decorative Options in North Texas</h3>
-        
-        <h4>Metallic Epoxy Systems</h4>
-        <p>These stunning floors create a unique, three-dimensional appearance with swirling metallic patterns. Popular in upscale Celina and Prosper neighborhoods, these floors reflect light beautifully and create a truly one-of-a-kind surface.</p>
-        
-        <h4>Decorative Flake Systems</h4>
-        <p>Our signature flake floors combine durability with style. Choose from dozens of color combinations to complement your home's exterior or create a bold statement. These systems are particularly popular in Frisco and Plano for their perfect balance of beauty and practicality.</p>
-        
-        <h4>Solid Color Coatings</h4>
-        <p>Sometimes elegance lies in simplicity. Our solid color systems provide a clean, sophisticated look that enhances the architectural beauty of Celina's modern homes.</p>
-        
-        <h3>Functional Beauty for North Texas Living</h3>
-        <p>Decorative doesn't mean sacrificing function. These beautiful floors still provide all the durability and chemical resistance needed for garage use, while elevating the space aesthetically.</p>
-        
-        <h3>Integration with Home Design</h3>
-        <p>Working with interior designers and builders across the DFW area, we help coordinate garage floor colors and patterns with overall home design themes. This attention to detail has made us the preferred choice for custom homes in Celina and surrounding communities.</p>
-        
-        <h3>The Entertainment Space Revolution</h3>
-        <p>Many Celina homeowners are converting portions of their garages into entertainment spaces, workshops, or home gyms. Decorative coatings provide the perfect foundation for these multi-use spaces, offering comfort and style for extended use.</p>
-        
-        <h3>Return on Investment</h3>
-        <p>Beyond personal enjoyment, decorative garage floors add significant value to North Texas homes. Real estate professionals in Celina and Prosper report that these features are increasingly sought after by homebuyers.</p>
-        
-        <h3>Professional Installation Makes the Difference</h3>
-        <p>The key to stunning decorative floors lies in proper installation. Legacy Industrial Coatings' experienced team ensures perfect surface preparation and application, delivering results that exceed expectations for Celina homeowners.</p>
+        <p>Gone are the days when garages were purely functional spaces. Homeowners in Celina, Little Elm, and throughout North Dallas are transforming their garages into extensions of their homes.</p>
       `,
       author: "Legacy Industrial Coatings Team",
       date: "December 28, 2023",
       readTime: "9 min read",
       category: "Design",
       tags: ["Decorative Floors", "Celina", "Home Design", "Custom Homes"],
-      location: "Celina, Texas"
+      location: "Celina, Texas",
+      featured: false
     }
   ];
 
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
+  const featuredPost = blogPosts.find(post => post.featured);
+  const regularPosts = blogPosts.filter(post => !post.featured);
 
   return (
     <>
