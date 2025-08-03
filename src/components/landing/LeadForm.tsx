@@ -96,7 +96,7 @@ export const LeadForm = () => {
           
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              GET A FAST, FREE QUOTE
+              GET A SAME DAY QUOTE
             </h3>
             <p className="text-gray-600">
               Fill in the form below to get started!

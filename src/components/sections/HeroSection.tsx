@@ -2,12 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LeadForm } from "@/components/landing/LeadForm";
+import { BookingModal } from "@/components/landing/BookingModal";
 import { useState, useEffect, useMemo } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
@@ -89,11 +91,11 @@ const HeroSection = () => {
                       </Button>
                       
                       <Button 
-                        onClick={() => navigate('/gallery')} 
+                        onClick={() => setShowBookingModal(true)} 
                         variant="outline"
                         className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                       >
-                        See Gallery
+                        Book An Estimate
                         <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
                     </div>
@@ -139,11 +141,11 @@ const HeroSection = () => {
                   </Button>
                   
                   <Button 
-                    onClick={() => navigate('/gallery')} 
+                    onClick={() => setShowBookingModal(true)} 
                     variant="outline"
                     className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                   >
-                    See Gallery
+                    Book An Estimate
                     <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
@@ -157,6 +159,11 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        <BookingModal 
+          isOpen={showBookingModal} 
+          onClose={() => setShowBookingModal(false)} 
+        />
       </section>
     );
   }
@@ -273,6 +280,11 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
     </section>
   );
 };
