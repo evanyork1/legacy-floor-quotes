@@ -114,30 +114,18 @@ const Blog = () => {
         <link rel="canonical" href="https://legacyindustrialcoatings.com/blog" />
       </Helmet>
       
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-white">
         <Header />
         
-        {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-primary/10 to-primary/5">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-              Expert Insights on <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Flooring Solutions</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
-              Professional tips, industry insights, and expert advice on garage floor coatings and commercial flooring solutions from the Legacy Industrial Coatings team.
-            </p>
-          </div>
-        </section>
-
         {selectedPost ? (
           /* Article View */
-          <section className="py-20 bg-background">
+          <section className="py-20 bg-white">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <Button 
                   variant="ghost" 
                   onClick={() => setSelectedPost(null)}
-                  className="mb-8 text-primary hover:text-primary/80"
+                  className="mb-8 text-blue-600 hover:text-blue-700"
                 >
                   ← Back to Blog
                 </Button>
@@ -146,17 +134,17 @@ const Blog = () => {
                   <div className="mb-8">
                     <div className="flex items-center gap-4 mb-4">
                       <Badge variant="secondary">{selectedPost.category}</Badge>
-                      <div className="flex items-center gap-2 text-muted-foreground">
+                      <div className="flex items-center gap-2 text-gray-500">
                         <MapPin className="h-4 w-4" />
                         <span className="text-sm">{selectedPost.location}</span>
                       </div>
                     </div>
                     
-                    <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight">
+                    <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
                       {selectedPost.title}
                     </h1>
                     
-                    <div className="flex items-center gap-6 text-muted-foreground mb-6">
+                    <div className="flex items-center gap-6 text-gray-500 mb-6">
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
                         <span>{selectedPost.date}</span>
@@ -167,25 +155,25 @@ const Blog = () => {
                       </div>
                     </div>
                     
-                    <p className="text-xl text-muted-foreground leading-relaxed">
+                    <p className="text-xl text-gray-600 leading-relaxed">
                       {selectedPost.excerpt}
                     </p>
                   </div>
                   
                   <div 
-                    className="prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground"
+                    className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-li:text-gray-600 prose-strong:text-gray-900"
                     dangerouslySetInnerHTML={{ __html: selectedPost.content }} 
                   />
                   
-                  <div className="mt-12 p-6 bg-primary/5 rounded-lg border border-primary/20">
-                    <h3 className="text-xl font-semibold text-foreground mb-3">Ready to Get Started?</h3>
-                    <p className="text-muted-foreground mb-4">
+                  <div className="mt-12 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">Ready to Get Started?</h3>
+                    <p className="text-gray-600 mb-4">
                       Contact Legacy Industrial Coatings for expert flooring solutions in {selectedPost.location} and surrounding areas.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Button 
                         onClick={() => navigate('/contact')}
-                        className="bg-primary text-primary-foreground hover:bg-primary/90"
+                        className="bg-blue-600 text-white hover:bg-blue-700"
                       >
                         Get A Quote
                         <ArrowRight className="ml-2 h-4 w-4" />
@@ -193,7 +181,7 @@ const Blog = () => {
                       <Button 
                         onClick={() => setShowBookingModal(true)}
                         variant="outline"
-                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                        className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
                       >
                         <Calendar className="mr-2 h-4 w-4" />
                         Book An Estimate
@@ -205,40 +193,124 @@ const Blog = () => {
             </div>
           </section>
         ) : (
-          /* Blog Listing */
-          <section className="py-20 bg-background">
+          <>
+        
+        {/* Hero Section */}
+        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              Expert <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Insights</span> & Tips
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+              Stay informed with the latest insights, tips, and guides about garage floor coatings, 
+              polyurea systems, maintenance, and industry best practices from our experts.
+            </p>
+          </div>
+        </section>
+
+        {/* Featured Post Section */}
+        {featuredPost && (
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-                {blogPosts.map((post) => (
-                  <Card key={post.id} className="cursor-pointer hover:shadow-lg transition-shadow border border-border hover:border-primary/30">
-                    <CardHeader>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Badge variant="secondary">{post.category}</Badge>
-                        <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Article</h2>
+                </div>
+                
+                <Card className="overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                  <div className="grid lg:grid-cols-2 gap-0">
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={featuredPost.image} 
+                        alt={featuredPost.title}
+                        className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge className="bg-blue-600 text-white">Featured</Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
+                      <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          {featuredPost.date}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {featuredPost.readTime}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-4 w-4" />
+                          {featuredPost.location}
+                        </div>
+                      </div>
+                      <Badge variant="outline" className="w-fit mb-4">{featuredPost.category}</Badge>
+                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                        {featuredPost.title}
+                      </h3>
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {featuredPost.excerpt}
+                      </p>
+                      <Button 
+                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 w-fit"
+                        onClick={() => setSelectedPost(featuredPost)}
+                      >
+                        Read Article
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Blog Posts Grid */}
+        <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Articles</h2>
+                <p className="text-lg text-gray-600">
+                  Explore our collection of expert guides and industry insights
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {regularPosts.map((post) => (
+                  <Card key={post.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group bg-white">
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge variant="outline" className="bg-white/90">{post.category}</Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {post.date}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {post.readTime}
+                        </div>
+                        <div className="flex items-center gap-1">
                           <MapPin className="h-3 w-3" />
-                          <span className="text-xs">{post.location}</span>
+                          {post.location}
                         </div>
                       </div>
-                      <CardTitle className="text-xl leading-tight hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
                         {post.title}
-                      </CardTitle>
-                      <CardDescription className="text-muted-foreground">
+                      </h3>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
                         {post.excerpt}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{post.date}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{post.readTime}</span>
-                          </div>
-                        </div>
-                      </div>
+                      </p>
                       <div className="flex flex-wrap gap-1 mb-4">
                         {post.tags.map((tag) => (
                           <Badge key={tag} variant="outline" className="text-xs">
@@ -247,23 +319,25 @@ const Blog = () => {
                         ))}
                       </div>
                       <Button 
-                        variant="ghost" 
-                        className="w-full justify-between text-primary hover:text-primary/80 hover:bg-primary/10"
+                        variant="outline" 
+                        className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white w-full"
                         onClick={() => setSelectedPost(post)}
                       >
                         Read More
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
+        </>
         )}
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
+        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Ready to Transform Your Space?
@@ -275,7 +349,7 @@ const Blog = () => {
               <Button 
                 onClick={() => navigate('/contact')}
                 variant="secondary"
-                className="bg-background text-primary hover:bg-background/90 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 Get A Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -283,7 +357,7 @@ const Blog = () => {
               <Button 
                 onClick={() => setShowBookingModal(true)}
                 variant="outline"
-                className="border-2 border-background bg-transparent text-primary-foreground hover:bg-background hover:text-primary px-8 py-3 rounded-full transition-all duration-300"
+                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
               >
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
