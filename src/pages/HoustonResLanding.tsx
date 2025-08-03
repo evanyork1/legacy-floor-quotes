@@ -53,7 +53,6 @@ const HoustonResLanding = () => {
         <TrustedBrandSection />
         <ProcessSection />
         <TestimonialsSectionHoustonRes />
-        <HowItWorksSection />
         <GalleryPreview />
         <CommercialSection />
         <CTASection />

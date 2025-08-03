@@ -55,7 +55,6 @@ const DFWResLanding = () => {
         <ProcessSection />
         <TestimonialsSection />
         <TrustedBrandSection />
-        <HowItWorksSection />
         <GalleryPreview />
         <CustomQuoteSection />
         <CTASection />
