@@ -105,8 +105,10 @@ const HeroSection = () => {
               
               {/* Quote form */}
               <div className="flex justify-center pb-16">
-                <div className="w-full max-w-md">
-                  <LeadForm />
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <div className="w-full max-w-md">
+                    <LeadForm />
+                  </div>
                 </div>
               </div>
             </div>
