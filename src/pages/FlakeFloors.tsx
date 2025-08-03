@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -203,6 +204,69 @@ const FlakeFloors = () => {
                   <p className="text-gray-600 leading-relaxed">{step.description}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Common questions about our garage floor coating services
+                </p>
+              </div>
+              
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem value="item-1" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    How long does a garage floor coating take to install?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    Most residential garage floors are installed in just one day, and ready for vehicle use within 24–48 hours.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-2" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    How much does a garage floor coating cost?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    For a 3-car garage using a premium polyurea flake system, pricing typically ranges from $3,600–$5,000. While cheaper epoxy jobs may be available for less, they often fail within a year.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-3" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    Will the coating peel, chip, or discolor?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    No. We use industrial-grade polyurea that resists hot tires, impact, and UV rays. It won't chip, peel, or yellow like standard epoxy systems.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-4" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    How do I clean and maintain the floor after it's installed?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    Simply sweep and mop with a mild cleaner as needed. Our coatings are non-porous and resist stains, dust, and grime.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-5" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    Do you offer a warranty?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    Yes. Our polyurea coatings come with a limited lifetime warranty against peeling, discoloration, and cracking under normal use.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
         </section>

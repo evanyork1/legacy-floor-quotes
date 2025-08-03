@@ -26,8 +26,11 @@ const Header = () => {
     name: "Gallery",
     path: "/gallery"
   }, {
-    name: "How It Works",
-    path: `${homePath}#how-it-works`
+    name: "FAQ",
+    path: "/faq"
+  }, {
+    name: "Blog",
+    path: "/blog"
   }, {
     name: "About",
     path: `${homePath}#testimonials`
@@ -60,7 +63,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map(item => (
-              <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-sm lg:text-base">
+              <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm">
                 {item.name}
               </a>
             ))}
