@@ -46,14 +46,13 @@ const HeroSection = () => {
         {galleryImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 md:bg-fixed ${
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 md:bg-fixed ${
               index === currentImageIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
-              backgroundSize: window.innerWidth < 768 ? 'contain' : 'cover',
+              backgroundSize: 'cover',
               backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
               willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
             }}
           />
@@ -104,10 +103,12 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form - positioned much lower with more bottom padding */}
-              <div className="flex justify-center pb-16">
-                <div className="w-full max-w-md">
-                  <LeadForm />
+              {/* Quote form section with gray background to frame photos */}
+              <div className="bg-gray-200/90 backdrop-blur-sm">
+                <div className="flex justify-center py-8 px-4">
+                  <div className="w-full max-w-md">
+                    <LeadForm />
+                  </div>
                 </div>
               </div>
             </div>
