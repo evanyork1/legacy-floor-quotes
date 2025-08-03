@@ -46,13 +46,14 @@ const HeroSection = () => {
         {galleryImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 md:bg-fixed ${
+            className={`absolute inset-0 bg-center bg-no-repeat transition-opacity duration-1000 md:bg-fixed ${
               index === currentImageIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${image}')`,
-              backgroundSize: 'cover',
+              backgroundSize: window.innerWidth < 768 ? 'contain' : 'cover',
               backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
               willChange: index === currentImageIndex || index === (currentImageIndex + 1) % galleryImages.length ? 'opacity' : 'auto'
             }}
           />
@@ -63,9 +64,9 @@ const HeroSection = () => {
           <div className="lg:hidden">
             <div className="flex flex-col">
               {/* Hero content - takes up most of viewport */}
-              <div className="h-[75vh] flex items-center justify-center pt-20">
-                <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
-                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
+              <div className="h-[65vh] flex items-center justify-center pt-20">
+                <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
+                  <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
                     {title}{" "}
                     <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                       Experts
