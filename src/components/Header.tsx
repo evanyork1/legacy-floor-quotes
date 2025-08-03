@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,7 +55,12 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
           {/* Logo - Responsive sizing - 20% smaller */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate(homePath)}>
-            <img src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" alt="Legacy Industrial Coatings" className="h-12 sm:h-16 md:h-19 lg:h-22 w-auto" />
+            <OptimizedImage 
+              src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
+              alt="Legacy Industrial Coatings" 
+              className="h-12 sm:h-16 md:h-19 lg:h-22 w-auto" 
+              priority={true}
+            />
           </div>
 
           {/* Desktop Navigation */}
