@@ -59,13 +59,13 @@ const HeroSection = () => {
         ))}
         
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
-          {/* Mobile Layout - Hero content first, form below */}
+          {/* Mobile Layout - Hero content with gray block below */}
           <div className="lg:hidden">
             <div className="flex flex-col">
-              {/* Hero content - takes up most of viewport */}
-              <div className="h-[75vh] flex items-center justify-center pt-20">
-                <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
-                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
+              {/* Hero content - takes up more space with larger text */}
+              <div className="h-[60vh] flex items-center justify-center pt-20">
+                <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
+                  <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
                     {title}{" "}
                     <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                       Experts
@@ -73,19 +73,19 @@ const HeroSection = () => {
                   </h1>
                   
                   <div className="text-center">
-                    <div className="text-base sm:text-lg text-white leading-snug">
+                    <div className="text-lg sm:text-xl text-white leading-snug">
                       {subtext}
                     </div>
                   </div>
                   
-                  <div className="relative mt-6 sm:mt-8">
-                    <div className="flex flex-row gap-3 sm:gap-4 justify-center">
+                  <div className="relative mt-8 sm:mt-10">
+                    <div className="flex flex-row gap-4 sm:gap-5 justify-center">
                       <Button 
                         asChild 
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                       >
                         <a href="tel:214-305-6516">
-                          <Phone className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                          <Phone className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
                           Call Us Now
                         </a>
                       </Button>
@@ -93,20 +93,23 @@ const HeroSection = () => {
                       <Button 
                         onClick={() => setShowBookingModal(true)} 
                         variant="outline"
-                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
                       >
                         Book An Estimate
-                        <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                        <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
                       </Button>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Quote form - positioned much lower with more bottom padding */}
-              <div className="flex justify-center pb-16">
-                <div className="w-full max-w-md">
-                  <LeadForm />
+              {/* Gray block that starts above quote form and extends beyond */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gray-800/90 -mt-20 h-[calc(100%+8rem)] z-0"></div>
+                <div className="relative z-10 flex justify-center pt-8 pb-20">
+                  <div className="w-full max-w-md">
+                    <LeadForm />
+                  </div>
                 </div>
               </div>
             </div>
