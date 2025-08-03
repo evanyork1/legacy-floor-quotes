@@ -4,7 +4,6 @@ import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight, Phon
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { OptimizedImage } from "@/components/OptimizedImage";
 const FeaturesSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const location = useLocation();
@@ -96,11 +95,7 @@ const FeaturesSection = () => {
                 <CardContent className="p-8">
                   {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-6 relative">
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
-                      <OptimizedImage 
-                        src={feature.image} 
-                        alt={feature.title} 
-                        className="relative w-full h-64 object-cover rounded-xl shadow-lg" 
-                      />
+                      <img src={feature.image} alt={feature.title} className="relative w-full h-64 object-cover rounded-xl shadow-lg" />
                     </div>}
                   <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}

@@ -35,10 +35,8 @@ export const OptimizedImage = ({
 
   // Set up intersection observer for lazy loading
   const setRef = useCallback((node: HTMLImageElement | null) => {
-    if (imgRef.current && !priority) {
+    if (imgRef.current) {
       // Clean up previous observer
-      const observer = new IntersectionObserver(() => {});
-      observer.disconnect();
     }
     
     if (node && !priority) {
@@ -60,8 +58,11 @@ export const OptimizedImage = ({
           ref={setRef}
           src={src}
           alt={alt}
-          className="w-full h-full object-cover transition-opacity duration-300"
-          style={{ opacity: isLoaded ? 1 : 0 }}
+          className={cn(
+            "transition-opacity duration-300",
+            isLoaded ? "opacity-100" : "opacity-0",
+            className
+          )}
           onLoad={onLoad}
           onClick={onClick}
           loading={priority ? "eager" : "lazy"}

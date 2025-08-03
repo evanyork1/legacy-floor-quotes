@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Pause, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { OptimizedImage } from "@/components/OptimizedImage";
 const ProcessSection = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
@@ -108,11 +107,7 @@ const ProcessSection = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
                 <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
                   <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
-                    <OptimizedImage 
-                      src={steps[activeStep].image} 
-                      alt={steps[activeStep].title} 
-                      className="w-full h-full object-cover" 
-                    />
+                    <img src={steps[activeStep].image} alt={steps[activeStep].title} className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
