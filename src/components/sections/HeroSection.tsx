@@ -103,14 +103,15 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form section with gray background to frame photos */}
-              <div className="bg-gray-200/90 backdrop-blur-sm">
-                <div className="flex justify-center py-8 px-4">
-                  <div className="w-full max-w-md">
-                    <LeadForm />
-                  </div>
+              {/* Quote form */}
+              <div className="flex justify-center pb-8">
+                <div className="w-full max-w-md">
+                  <LeadForm />
                 </div>
               </div>
+              
+              {/* Gray section to frame the background photos */}
+              <div className="bg-gray-200/90 backdrop-blur-sm h-64 md:h-0"></div>
             </div>
           </div>
 
