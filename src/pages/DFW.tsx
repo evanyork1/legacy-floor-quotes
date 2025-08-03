@@ -8,7 +8,7 @@ import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import GalleryPreview from "@/components/sections/GalleryPreview";
-import CommercialSection from "@/components/sections/CommercialSection";
+import CommercialLinkSection from "@/components/sections/CommercialLinkSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
@@ -62,7 +62,7 @@ const DFW = () => {
         <FeaturesSection />
         <GalleryPreview />
         <CustomQuoteSection />
-        <CommercialSection />
+        <CommercialLinkSection />
         <CTASection />
         <div id="footer">
           <Footer />

@@ -29,6 +29,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const FlakeFloors = lazy(() => import("./pages/FlakeFloors"));
 const IndustrialEpoxy = lazy(() => import("./pages/IndustrialEpoxy"));
 const ConcretePolishing = lazy(() => import("./pages/ConcretePolishing"));
+const Commercial = lazy(() => import("./pages/Commercial"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/flake-floors" element={<FlakeFloors />} />
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
+              <Route path="/commercial" element={<Commercial />} />
               <Route path="/adminpanel2025" element={<AdminPanel />} />
               <Route path="/jingram" element={<EmployeePanel />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
