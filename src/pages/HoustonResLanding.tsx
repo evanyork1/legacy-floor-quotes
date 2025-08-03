@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
-
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import TestimonialsSectionHoustonRes from "@/components/sections/TestimonialsSectionHoustonRes";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
@@ -53,6 +53,7 @@ const HoustonResLanding = () => {
         <TrustedBrandSection />
         <ProcessSection />
         <TestimonialsSectionHoustonRes />
+        <HowItWorksSection />
         <GalleryPreview />
         <CommercialSection />
         <CTASection />
