@@ -16,7 +16,7 @@ const CommercialLinkSection = () => {
                 <img 
                   src="/lovable-uploads/fa247baa-ccf6-438b-b7b1-47d07ae07d74.png" 
                   alt="Commercial floor solution" 
-                  className="w-3/4 h-48 object-cover rounded-lg shadow-lg mb-6 mx-auto"
+                  className="w-3/4 h-56 object-cover rounded-lg shadow-lg mb-6 mx-auto"
                 />
               </div>
               <div className="text-blue-600 mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
