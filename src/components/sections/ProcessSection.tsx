@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Pause, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const ProcessSection = () => {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const location = useLocation();
@@ -149,7 +150,7 @@ const ProcessSection = () => {
         <div className="text-center mt-20">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
             <Button 
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => navigate('/contact')}
               className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
               Get A Quote

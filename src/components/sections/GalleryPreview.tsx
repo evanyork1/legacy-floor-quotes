@@ -1,12 +1,14 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { X, ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 export const GalleryPreview = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const navigate = useNavigate();
 
   // Photos in the same order as they appear on the gallery page
@@ -84,15 +86,31 @@ export const GalleryPreview = () => {
         </div>
 
         <div className="text-center">
-          <Button 
-            onClick={() => navigate('/contact')}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-          >
-            Get A Quote
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={() => navigate('/contact')}
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            >
+              Get A Quote
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            
+            <Button
+              onClick={() => setShowBookingModal(true)}
+              variant="outline"
+              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Book An Estimate
+            </Button>
+          </div>
         </div>
       </div>
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
 
       {/* Image Modal */}
       {selectedImage && (

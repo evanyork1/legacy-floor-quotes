@@ -1,9 +1,12 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, Calendar } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 const CTASection = () => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -41,12 +44,28 @@ const CTASection = () => {
             </a>
           </Button>
         ) : (
-          <Button onClick={() => navigate(quotePath)} className="bg-white text-blue-600 hover:bg-gray-50 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-            Get A Quote
-            <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button onClick={() => navigate('/contact')} className="bg-white text-blue-600 hover:bg-gray-50 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              Get A Quote
+              <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+            </Button>
+            
+            <Button
+              onClick={() => setShowBookingModal(true)}
+              variant="outline"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            >
+              <Calendar className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              Book An Estimate
+            </Button>
+          </div>
         )}
       </div>
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
     </section>
   );
 };
