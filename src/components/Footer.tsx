@@ -86,7 +86,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
             <div className="text-gray-300 text-sm">
-              <p>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Prosper, Celina, Richardson, Garland, Irving, Carrollton, and More!</p>
+              <p>Plano, Frisco, Dallas, Celina, Little Elm, McKinney, Allen, Prosper, The Colony, Aubrey, Lewisville, Carrollton, Richardson, Garland, Anna, Melissa, Fairview, Parker, Princeton, Sachse, Wylie, Murphy, Farmers Branch, North Dallas, Addison, Hebron, Highland Village, Flower Mound, Coppell</p>
             </div>
           </div>
 
