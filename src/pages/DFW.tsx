@@ -63,9 +63,9 @@ const DFW = () => {
         <FeaturesSection />
         <GalleryPreview />
         <CustomQuoteSection />
-        <HomepageFAQ />
         <CommercialLinkSection />
         <CTASection />
+        <HomepageFAQ />
         <div id="footer">
           <Footer />
         </div>
