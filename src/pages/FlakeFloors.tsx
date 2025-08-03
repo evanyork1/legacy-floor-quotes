@@ -69,7 +69,7 @@ const FlakeFloors = () => {
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Our signature polyurea flake floor system combines superior durability with stunning aesthetics. 
-                  With a lifetime warranty and endless customization options, it's the perfect solution for your garage or workspace.
+                  Perfect for garage floors, patios, outdoor spaces, and even commercial applications. With a lifetime warranty and endless customization options, it's the ideal solution for any space.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
@@ -110,8 +110,7 @@ const FlakeFloors = () => {
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Polyurea flake floors are our premium flooring solution that combines a high-performance polyurea base coat 
-                with decorative vinyl flakes, topped with a crystal-clear protective topcoat. This system creates a durable, 
-                beautiful, and long-lasting floor that outperforms traditional epoxy coatings in every way.
+                with decorative vinyl flakes, topped with a crystal-clear protective topcoat. Perfect for garage floors, these systems also excel in patios, outdoor entertainment areas, and commercial spaces. This versatile solution creates a durable, beautiful, and long-lasting floor that outperforms traditional epoxy coatings in every way.
               </p>
             </div>
 
@@ -146,7 +145,7 @@ const FlakeFloors = () => {
                 Why Choose Flake Floors?
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover the advantages that make polyurea flake floors the preferred choice for discerning homeowners.
+                Discover the advantages that make polyurea flake floors the preferred choice for garage floors, patios, and commercial spaces alike.
               </p>
             </div>
             
