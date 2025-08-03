@@ -52,8 +52,8 @@ const HoustonResLanding = () => {
         <FeaturesSection />
         <TrustedBrandSection />
         <ProcessSection />
-        <HowItWorksSection />
         <TestimonialsSectionHoustonRes />
+        <HowItWorksSection />
         <GalleryPreview />
         <CommercialSection />
         <CTASection />

@@ -34,6 +34,31 @@ const HowItWorksSection = () => {
     description: "Relax while we transform your space with professional installation",
     gradient: "from-blue-700 to-indigo-700"
   }];
-  return;
+  return (
+    <section className="py-20 bg-gradient-to-br from-white to-slate-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+            How It Works
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Our streamlined process makes it easy to get your perfect floor coating
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="text-center group">
+              <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${step.gradient} text-white flex items-center justify-center text-xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                {step.step}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 export default HowItWorksSection;
