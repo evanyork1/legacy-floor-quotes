@@ -26,6 +26,9 @@ const Warranty = lazy(() => import("./pages/Warranty"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Contact = lazy(() => import("./pages/Contact"));
+const FlakeFloors = lazy(() => import("./pages/FlakeFloors"));
+const IndustrialEpoxy = lazy(() => import("./pages/IndustrialEpoxy"));
+const ConcretePolishing = lazy(() => import("./pages/ConcretePolishing"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -62,6 +65,9 @@ const App = () => (
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/flake-floors" element={<FlakeFloors />} />
+              <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
+              <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/adminpanel2025" element={<AdminPanel />} />
               <Route path="/jingram" element={<EmployeePanel />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -64,19 +64,50 @@ const FeaturesSection = () => {
         </div>
         
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {features.map((feature, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
-              <CardContent className="p-8">
-                {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-6 relative">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
-                    <img src={feature.image} alt={feature.title} className="relative w-full h-64 object-cover rounded-xl shadow-lg" />
-                  </div>}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </CardContent>
-            </Card>)}
+          {features.map((feature, index) => {
+            const getNavigationPath = (title: string) => {
+              switch (title) {
+                case "Flake Floors":
+                  return "/flake-floors";
+                case "Industrial Epoxy":
+                  return "/industrial-epoxy";
+                case "Concrete Polishing":
+                  return "/concrete-polishing";
+                default:
+                  return "#";
+              }
+            };
+
+            const isClickable = (isDFW || isHouston || isCommercial) && 
+                              ["Flake Floors", "Industrial Epoxy", "Concrete Polishing"].includes(feature.title);
+
+            return (
+              <Card 
+                key={index} 
+                className={`border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50 ${
+                  isClickable ? 'cursor-pointer hover:scale-105' : ''
+                }`}
+                onClick={isClickable ? () => navigate(getNavigationPath(feature.title)) : undefined}
+              >
+                <CardContent className="p-8">
+                  {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-6 relative">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
+                      <img src={feature.image} alt={feature.title} className="relative w-full h-64 object-cover rounded-xl shadow-lg" />
+                    </div>}
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  {isClickable && (
+                    <div className="mt-4 text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Learn More →
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Call to Action Button */}
