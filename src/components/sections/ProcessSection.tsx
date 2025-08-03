@@ -147,7 +147,24 @@ const ProcessSection = () => {
 
         {/* CTA Section */}
         <div className="text-center mt-20">
-          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <Button 
+              onClick={() => window.location.href = '/contact'}
+              className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+              Get A Quote
+            </Button>
+            
+            <Button
+              onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
+              variant="outline"
+              className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+              Book An Estimate
+            </Button>
+          </div>
         </div>
       </div>
     </section>;
