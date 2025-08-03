@@ -41,7 +41,7 @@ const HeroSection = () => {
   // For DFW and DFW Res Landing pages, use the new design
   if (isDFW) {
     return (
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[600px] lg:min-h-screen flex items-center overflow-hidden">
         {/* Background Images with Optimized Fade Transition */}
         {galleryImages.map((image, index) => (
           <div
@@ -59,55 +59,53 @@ const HeroSection = () => {
         ))}
         
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
-          {/* Mobile Layout - Hero content with larger text */}
-          <div className="lg:hidden">
-            <div className="flex flex-col">
-              {/* Hero content - takes up more space with larger text */}
-              <div className="h-[60vh] flex items-center justify-center pt-20">
-                <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
-                  <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
-                    {title}{" "}
-                    <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
-                      Experts
-                    </span>
-                  </h1>
-                  
-                  <div className="text-center">
-                    <div className="text-lg sm:text-xl text-white leading-snug">
-                      {subtext}
-                    </div>
+          {/* Mobile Layout - Hero content with overlapping form */}
+          <div className="lg:hidden relative h-full">
+            {/* Hero content - centered in fixed height container */}
+            <div className="flex items-center justify-center h-[600px] pt-20">
+              <div className="max-w-2xl space-y-6 sm:space-y-8 text-center px-4">
+                <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
+                  {title}{" "}
+                  <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
+                    Experts
+                  </span>
+                </h1>
+                
+                <div className="text-center">
+                  <div className="text-lg sm:text-xl text-white leading-snug">
+                    {subtext}
                   </div>
-                  
-                  <div className="relative mt-8 sm:mt-10">
-                    <div className="flex flex-row gap-4 sm:gap-5 justify-center">
-                      <Button 
-                        asChild 
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                      >
-                        <a href="tel:214-305-6516">
-                          <Phone className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
-                          Call Us Now
-                        </a>
-                      </Button>
-                      
-                      <Button 
-                        onClick={() => setShowBookingModal(true)} 
-                        variant="outline"
-                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
-                      >
-                        Book An Estimate
-                        <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
-                      </Button>
-                    </div>
+                </div>
+                
+                <div className="relative mt-8 sm:mt-10">
+                  <div className="flex flex-row gap-4 sm:gap-5 justify-center">
+                    <Button 
+                      asChild 
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    >
+                      <a href="tel:214-305-6516">
+                        <Phone className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
+                        Call Us Now
+                      </a>
+                    </Button>
+                    
+                    <Button 
+                      onClick={() => setShowBookingModal(true)} 
+                      variant="outline"
+                      className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                    >
+                      Book An Estimate
+                      <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
+                    </Button>
                   </div>
                 </div>
               </div>
-              
-              {/* Quote form */}
-              <div className="flex justify-center pb-16">
-                <div className="w-full max-w-md">
-                  <LeadForm />
-                </div>
+            </div>
+            
+            {/* Quote form - absolutely positioned overlapping the hero */}
+            <div className="absolute bottom-0 left-0 right-0 mx-auto z-20 px-4 pb-4">
+              <div className="max-w-md mx-auto bg-white rounded-lg shadow-2xl p-4">
+                <LeadForm />
               </div>
             </div>
           </div>
