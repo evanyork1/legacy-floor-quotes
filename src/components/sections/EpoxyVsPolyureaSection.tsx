@@ -91,14 +91,17 @@ const EpoxyVsPolyureaSection = () => {
         </div>
 
         {/* Fun Fact */}
-        <div className="bg-blue-600 rounded-2xl p-8 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Fun Fact
-            </h3>
-            <p className="text-xl text-blue-100">
-              Over 50% of our projects start by removing a failed epoxy floor.
-            </p>
+        <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-xl max-w-2xl mx-auto">
+          <div className="flex items-center space-x-3">
+            <div className="bg-blue-600 rounded-full p-2">
+              <span className="text-white text-sm font-bold">💡</span>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-blue-800 mb-1">Fun Fact</h4>
+              <p className="text-blue-700">
+                Over 50% of our projects start by removing a failed epoxy floor.
+              </p>
+            </div>
           </div>
         </div>
       </div>
