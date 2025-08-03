@@ -41,7 +41,9 @@ const HeroSection = () => {
   // For DFW and DFW Res Landing pages, use the new design
   if (isDFW) {
     return (
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative overflow-hidden">
+        {/* Hero Container - Fixed Height on Mobile */}
+        <div className="h-[70vh] lg:min-h-screen relative flex items-center">
         {/* Background Images with Optimized Fade Transition */}
         {galleryImages.map((image, index) => (
           <div
@@ -103,12 +105,6 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form */}
-              <div className="flex justify-center pb-16">
-                <div className="w-full max-w-md">
-                  <LeadForm />
-                </div>
-              </div>
             </div>
           </div>
 
@@ -156,6 +152,16 @@ const HeroSection = () => {
               <div className="w-full max-w-md">
                 <LeadForm />
               </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        {/* Background Transition Section for Mobile */}
+        <div className="lg:hidden bg-gradient-to-b from-transparent via-gray-100/50 to-gray-50 py-8">
+          <div className="container mx-auto px-4">
+            <div className="max-w-md mx-auto">
+              <LeadForm />
             </div>
           </div>
         </div>
