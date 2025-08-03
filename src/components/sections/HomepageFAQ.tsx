@@ -1,8 +1,3 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { BookingModal } from "@/components/landing/BookingModal";
 import {
   Accordion,
   AccordionContent,
@@ -11,8 +6,6 @@ import {
 } from "@/components/ui/accordion";
 
 const HomepageFAQ = () => {
-  const [showBookingModal, setShowBookingModal] = useState(false);
-  const navigate = useNavigate();
   const faqs = [
     {
       question: "How long does a garage floor coating take to install?",
@@ -61,34 +54,8 @@ const HomepageFAQ = () => {
               </AccordionItem>
             ))}
           </Accordion>
-          
-          <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')} 
-                className="bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-              >
-                Get A Quote
-                <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-              
-              <Button
-                onClick={() => setShowBookingModal(true)}
-                variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-              >
-                <Calendar className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Book An Estimate
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
-      
-      <BookingModal 
-        isOpen={showBookingModal} 
-        onClose={() => setShowBookingModal(false)} 
-      />
     </section>
   );
 };

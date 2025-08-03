@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 const FAQ = () => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const navigate = useNavigate();
 
   const residentialFAQs = [
@@ -131,11 +134,11 @@ const FAQ = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
+                onClick={() => setShowBookingModal(true)}
                 variant="outline"
-                onClick={() => window.open('tel:+14698704668', '_self')}
                 className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
             </div>
@@ -219,11 +222,11 @@ const FAQ = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
+                onClick={() => setShowBookingModal(true)}
                 variant="outline"
-                onClick={() => window.open('tel:+14698704668', '_self')}
                 className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
             </div>
@@ -232,6 +235,11 @@ const FAQ = () => {
 
         <Footer />
       </div>
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
     </>
   );
 };
