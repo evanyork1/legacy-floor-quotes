@@ -38,7 +38,7 @@ const EpoxyVsPolyureaSection = () => {
               <img 
                 src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" 
                 alt="Failed epoxy floor showing chips and peeling" 
-                className="w-1/2 h-52 object-cover rounded-xl"
+                className="w-3/5 h-60 object-cover rounded-xl"
               />
             </div>
             <div className="bg-red-50 rounded-2xl p-8 border-2 border-red-200">
@@ -64,7 +64,7 @@ const EpoxyVsPolyureaSection = () => {
               <img 
                 src="/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png" 
                 alt="Beautiful polyurea floor with decorative flakes" 
-                className="w-1/2 h-52 object-cover rounded-xl"
+                className="w-3/5 h-60 object-cover rounded-xl"
               />
             </div>
             <div className="bg-green-50 rounded-2xl p-8 border-2 border-green-200 relative">
