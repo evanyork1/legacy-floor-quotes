@@ -63,7 +63,6 @@ const TrustedBrandSection = () => {
               src={imageSource} 
               loading="lazy"
               decoding="async"
-              fetchPriority="low"
             />
           </div>
           
