@@ -100,7 +100,7 @@ const FeaturesSection = () => {
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                   {isClickable && (
-                    <div className="mt-4 text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="mt-4 text-blue-600 text-sm font-medium transition-opacity duration-300">
                       Learn More →
                     </div>
                   )}
