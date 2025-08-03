@@ -65,7 +65,7 @@ const HeroSection = () => {
               {/* Hero content - takes up most of viewport */}
               <div className="h-[75vh] flex items-center justify-center pt-20">
                 <div className="max-w-2xl space-y-4 sm:space-y-6 text-center">
-                  <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
                     {title}{" "}
                     <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                       Experts
@@ -73,7 +73,7 @@ const HeroSection = () => {
                   </h1>
                   
                   <div className="text-center">
-                    <div className="text-lg sm:text-xl text-white leading-snug">
+                    <div className="text-base sm:text-lg text-white leading-snug">
                       {subtext}
                     </div>
                   </div>
@@ -103,15 +103,12 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Quote form */}
-              <div className="flex justify-center pb-8">
+              {/* Quote form - positioned much lower with more bottom padding */}
+              <div className="flex justify-center pb-16">
                 <div className="w-full max-w-md">
                   <LeadForm />
                 </div>
               </div>
-              
-              {/* Gray section to frame the background photos */}
-              <div className="bg-gray-200/90 backdrop-blur-sm h-64 md:h-0"></div>
             </div>
           </div>
 
