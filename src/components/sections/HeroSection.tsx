@@ -61,9 +61,9 @@ const HeroSection = () => {
         <div className="container mx-auto px-4 lg:px-8 relative w-full z-10">
           {/* Mobile Layout - Hero content with larger text */}
           <div className="lg:hidden">
-            <div className="flex flex-col min-h-screen">
-              {/* Hero content - takes up less space */}
-              <div className="flex-1 flex items-center justify-center pt-20 pb-8">
+            <div className="flex flex-col">
+              {/* Hero content - takes up more space with larger text */}
+              <div className="h-[60vh] flex items-center justify-center pt-20">
                 <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
                   <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
                     {title}{" "}
@@ -102,13 +102,9 @@ const HeroSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          
-          {/* Gray section for quote form */}
-          <div className="lg:hidden bg-gray-100 py-12">
-            <div className="container mx-auto px-4">
-              <div className="flex justify-center">
+              
+              {/* Quote form */}
+              <div className="flex justify-center pb-16">
                 <div className="w-full max-w-md">
                   <LeadForm />
                 </div>
