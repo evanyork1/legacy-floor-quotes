@@ -226,30 +226,6 @@ const Blog = () => {
                     className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-li:text-gray-600 prose-strong:text-gray-900"
                     dangerouslySetInnerHTML={{ __html: selectedPost.content }} 
                   />
-                  
-                  <div className="mt-12 p-6 bg-blue-50 rounded-lg border border-blue-200">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">Ready to Get Started?</h3>
-                    <p className="text-gray-600 mb-4">
-                      Contact Legacy Industrial Coatings for expert flooring solutions in {selectedPost.location} and surrounding areas.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button 
-                        onClick={() => navigate('/contact')}
-                        className="bg-blue-600 text-white hover:bg-blue-700"
-                      >
-                        Get A Quote
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                      <Button 
-                        onClick={() => setShowBookingModal(true)}
-                        variant="outline"
-                        className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                      >
-                        <Calendar className="mr-2 h-4 w-4" />
-                        Book An Estimate
-                      </Button>
-                    </div>
-                  </div>
                 </article>
               </div>
             </div>
