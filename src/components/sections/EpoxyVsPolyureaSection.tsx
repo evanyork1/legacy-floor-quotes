@@ -30,78 +30,58 @@ const EpoxyVsPolyureaSection = () => {
           </p>
         </div>
 
-        {/* Comparison Images */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {/* Failed Epoxy Image */}
-          <div className="text-center">
-            <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200">
-              <img 
-                src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" 
-                alt="Failed epoxy floor showing chips and peeling" 
-                className="w-full h-64 object-cover rounded-xl mb-4"
-              />
-              <h3 className="text-xl font-bold text-red-800 mb-2">Failed Epoxy Floor</h3>
-              <p className="text-red-700">Chips, peels, and discoloration after just months</p>
-            </div>
-          </div>
-
-          {/* Polyurea Success Image */}
-          <div className="text-center">
-            <div className="bg-green-50 rounded-2xl p-6 border-2 border-green-200 relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold">
-                  OUR FLOORS
-                </span>
-              </div>
-              <img 
-                src="/lovable-uploads/71189d7b-31bb-4620-a027-b6106b60b376.png" 
-                alt="Beautiful polyurea floor with decorative flakes" 
-                className="w-full h-64 object-cover rounded-xl mb-4"
-              />
-              <h3 className="text-xl font-bold text-green-800 mb-2">Polyurea Flake Floor</h3>
-              <p className="text-green-700">Durable, beautiful, and built to last decades</p>
-            </div>
-          </div>
-        </div>
-
         {/* Comparison Grid */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
           {/* Epoxy Column */}
-          <div className="bg-red-50 rounded-2xl p-8 border-2 border-red-200">
-            <h3 className="text-2xl font-bold text-red-800 mb-6 text-center">
-              Cheap Epoxy Coatings
-            </h3>
-            <div className="space-y-4">
-              {epoxyFeatures.map((feature, index) => (
-                <div key={index} className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 mt-1">
-                    <X className="w-5 h-5 text-red-500" />
+          <div className="space-y-6">
+            <img 
+              src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" 
+              alt="Failed epoxy floor showing chips and peeling" 
+              className="w-full h-48 object-cover rounded-xl"
+            />
+            <div className="bg-red-50 rounded-2xl p-8 border-2 border-red-200">
+              <h3 className="text-2xl font-bold text-red-800 mb-6 text-center">
+                Cheap Epoxy Coatings
+              </h3>
+              <div className="space-y-4">
+                {epoxyFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 mt-1">
+                      <X className="w-5 h-5 text-red-500" />
+                    </div>
+                    <p className="text-red-700 font-medium">{feature}</p>
                   </div>
-                  <p className="text-red-700 font-medium">{feature}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Polyurea Column */}
-          <div className="bg-green-50 rounded-2xl p-8 border-2 border-green-200 relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <span className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold">
-                RECOMMENDED
-              </span>
-            </div>
-            <h3 className="text-2xl font-bold text-green-800 mb-6 text-center">
-              Our Polyurea Flake Floors
-            </h3>
-            <div className="space-y-4">
-              {polyureFeatures.map((feature, index) => (
-                <div key={index} className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 mt-1">
-                    <Check className="w-5 h-5 text-green-500" />
+          <div className="space-y-6">
+            <img 
+              src="/lovable-uploads/71189d7b-31bb-4620-a027-b6106b60b376.png" 
+              alt="Beautiful polyurea floor with decorative flakes" 
+              className="w-full h-48 object-cover rounded-xl"
+            />
+            <div className="bg-green-50 rounded-2xl p-8 border-2 border-green-200 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                  RECOMMENDED
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-green-800 mb-6 text-center">
+                Our Polyurea Flake Floors
+              </h3>
+              <div className="space-y-4">
+                {polyureFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 mt-1">
+                      <Check className="w-5 h-5 text-green-500" />
+                    </div>
+                    <p className="text-green-700 font-medium">{feature}</p>
                   </div>
-                  <p className="text-green-700 font-medium">{feature}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
