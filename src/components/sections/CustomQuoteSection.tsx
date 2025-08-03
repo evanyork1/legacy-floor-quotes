@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,13 +15,16 @@ export const CustomQuoteSection = () => {
           <p className="text-gray-600 mb-6">
             Get an instant quote tailored to your specific needs with our quick tool.
           </p>
-          <Button
+          <CTAButton
             onClick={() => navigate('/contact')}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            variant="primary"
+            size="md"
+            icon={<ArrowRight />}
+            iconPosition="right"
+            fullWidthMobile={true}
           >
             Try our 90-second Instant Quote Tool
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          </CTAButton>
         </div>
       </div>
     </section>

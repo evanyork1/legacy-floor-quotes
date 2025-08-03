@@ -42,7 +42,7 @@ export const LandingMinimalHeader = () => {
             </a>
             <Button 
               onClick={() => navigate('/quotedfw')} 
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base w-auto"
             >
               Get Quote
             </Button>

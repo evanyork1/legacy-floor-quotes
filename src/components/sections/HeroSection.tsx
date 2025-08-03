@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { ArrowRight, Phone, Calendar } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LeadForm } from "@/components/landing/LeadForm";
@@ -80,26 +81,31 @@ const HeroSection = () => {
                     </div>
                   </div>
                   
-                  <div className="relative mt-8 sm:mt-10">
-                    <div className="flex flex-row gap-4 sm:gap-5 justify-center">
-                      <Button 
+                   <div className="relative mt-8 sm:mt-10">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
+                      <CTAButton 
                         asChild 
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                        variant="primary"
+                        size="md"
+                        icon={<Phone />}
+                        fullWidthMobile={true}
                       >
                         <a href="tel:214-305-6516">
-                          <Phone className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
                           Call Us Now
                         </a>
-                      </Button>
+                      </CTAButton>
                       
-                      <Button 
+                      <CTAButton 
                         onClick={() => setShowBookingModal(true)} 
                         variant="outline"
-                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                        size="md"
+                        icon={<ArrowRight />}
+                        iconPosition="right"
+                        fullWidthMobile={true}
+                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
                       >
                         Book An Estimate
-                        <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
-                      </Button>
+                      </CTAButton>
                     </div>
                   </div>
                 </div>
@@ -124,26 +130,30 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              <div className="relative mt-6 sm:mt-8">
-                <div className="flex flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <Button 
+               <div className="relative mt-6 sm:mt-8">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                  <CTAButton 
                     asChild 
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    variant="primary"
+                    size="sm"
+                    icon={<Phone />}
+                    fullWidthMobile={false}
                   >
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       Call Us Now
                     </a>
-                  </Button>
+                  </CTAButton>
                   
-                  <Button 
+                  <CTAButton 
                     onClick={() => setShowBookingModal(true)} 
                     variant="outline"
-                    className="border-2 border-white bg-white text-blue-600 hover:bg-transparent hover:text-white text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    size="sm"
+                    icon={<Calendar />}
+                    fullWidthMobile={false}
+                    className="border-2 border-white bg-white text-blue-600 hover:bg-transparent hover:text-white"
                   >
-                    <Calendar className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     Book An Estimate
-                  </Button>
+                  </CTAButton>
                 </div>
               </div>
             </div>
@@ -227,19 +237,24 @@ const HeroSection = () => {
             {!isCommercial && (
               <div className="relative mb-8 sm:mb-10">
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
+                  <CTAButton 
                     onClick={() => navigate('/contact')} 
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    variant="primary"
+                    size="lg"
+                    icon={<ArrowRight />}
+                    iconPosition="right"
+                    fullWidthMobile={true}
                   >
                     Get A Quote
-                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 lg:h-5 lg:w-5" />
-                  </Button>
+                  </CTAButton>
                   
                   {isHoustonLanding && (
-                    <Button 
+                    <CTAButton 
                       asChild 
                       variant="outline" 
-                      className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
+                      size="lg"
+                      icon={<Phone />}
+                      fullWidthMobile={true}
                     >
                       <a 
                         href="tel:214-305-6516"
@@ -250,10 +265,9 @@ const HeroSection = () => {
                           }
                         }}
                       >
-                        <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
                         Call Us Now
                       </a>
-                    </Button>
+                    </CTAButton>
                   )}
                 </div>
               </div>
@@ -261,18 +275,20 @@ const HeroSection = () => {
             
             {isCommercial && (
               <div className="relative mb-8 sm:mb-10 mt-8">
-                <Button 
+                <CTAButton 
                   onClick={() => {
                     // We need to pass the modal opening function here
                     // This will be handled by the parent component
                     const event = new CustomEvent('openCommercialModal');
                     window.dispatchEvent(event);
                   }}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm sm:text-base lg:text-lg px-4 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                  variant="primary"
+                  size="lg"
+                  icon={<Phone />}
+                  fullWidthMobile={true}
                 >
-                  <Phone className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
                   Get A Quote
-                </Button>
+                </CTAButton>
               </div>
             )}
           </div>

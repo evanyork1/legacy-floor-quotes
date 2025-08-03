@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Play, Pause, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { useLocation, useNavigate } from "react-router-dom";
 const ProcessSection = () => {
   const navigate = useNavigate();
@@ -149,21 +150,26 @@ const ProcessSection = () => {
         {/* CTA Section */}
         <div className="text-center mt-20">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <Button 
+            <CTAButton 
               onClick={() => navigate('/contact')}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              variant="primary"
+              size="lg"
+              icon={<ArrowRight />}
+              iconPosition="right"
+              fullWidthMobile={true}
             >
               Get A Quote
-            </Button>
+            </CTAButton>
             
-            <Button
+            <CTAButton
               onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
               variant="outline"
-              className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              size="lg"
+              icon={<Calendar />}
+              fullWidthMobile={true}
             >
-              <Calendar className="mr-2 sm:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
               Book An Estimate
-            </Button>
+            </CTAButton>
           </div>
         </div>
       </div>

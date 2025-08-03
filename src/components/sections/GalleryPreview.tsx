@@ -1,6 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { ArrowRight, Calendar, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -87,22 +88,26 @@ export const GalleryPreview = () => {
 
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <CTAButton 
               onClick={() => navigate('/contact')}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+              variant="primary"
+              size="lg"
+              icon={<ArrowRight />}
+              iconPosition="right"
+              fullWidthMobile={true}
             >
               Get A Quote
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            </CTAButton>
             
-            <Button
+            <CTAButton
               onClick={() => setShowBookingModal(true)}
               variant="outline"
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+              size="lg"
+              icon={<Calendar />}
+              fullWidthMobile={true}
             >
-              <Calendar className="mr-2 h-5 w-5" />
               Book An Estimate
-            </Button>
+            </CTAButton>
           </div>
         </div>
       </div>
