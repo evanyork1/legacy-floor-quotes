@@ -14,7 +14,7 @@ const CommercialLinkSection = () => {
             <CardContent className="p-12 text-center">
               <div className="mb-8">
                 <img 
-                  src="/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg" 
+                  src="/lovable-uploads/77dbbade-9254-4af6-872f-f75c0f6f9607.png" 
                   alt="Commercial floor solution" 
                   className="w-full h-64 object-cover rounded-lg shadow-lg mb-6"
                 />
