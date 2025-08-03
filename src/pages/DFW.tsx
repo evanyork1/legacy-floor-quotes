@@ -12,6 +12,8 @@ import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialSection from "@/components/sections/CommercialSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
+import WhyChooseSection from "@/components/sections/WhyChooseSection";
+import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 
 const DFW = () => {
   return (
@@ -51,13 +53,15 @@ const DFW = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <HeroSection />
+        <WhyChooseSection />
+        <EpoxyVsPolyureaSection />
+        <ProcessSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
         <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />
-        <ProcessSection />
         <GalleryPreview />
         <CustomQuoteSection />
         <CommercialSection />
