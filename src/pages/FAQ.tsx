@@ -122,26 +122,9 @@ const FAQ = () => {
               Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Questions</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Find answers to the most common questions about our garage floor coatings, installation process, and maintenance. 
-              Can't find what you're looking for? Contact us directly for personalized assistance.
+               Find answers to the most common questions about our garage floor coatings, installation process, and maintenance. 
+               Can't find what you're looking for? Contact us directly for personalized assistance.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                Get A Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                onClick={() => setShowBookingModal(true)}
-                variant="outline"
-                className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                Book An Estimate
-              </Button>
-            </div>
           </div>
         </section>
 
