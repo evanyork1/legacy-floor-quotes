@@ -8,45 +8,28 @@ import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } fro
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-
 const ResidentialPatio = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
-
-  const benefits = [
-    {
-      icon: <Shield className="h-8 w-8 text-blue-600" />,
-      title: "Lifetime Warranty",
-      description: "Our polyurea patio floors come with an industry-leading lifetime warranty, ensuring your outdoor investment is protected for years to come."
-    },
-    {
-      icon: <Clock className="h-8 w-8 text-blue-600" />,
-      title: "Fast Installation",
-      description: "Most residential patio projects can be completed in just one day, minimizing disruption to your outdoor living space."
-    },
-    {
-      icon: <Palette className="h-8 w-8 text-blue-600" />,
-      title: "Customizable Design",
-      description: "Choose from a wide variety of flake colors and patterns to create a unique patio surface that complements your outdoor décor and landscape."
-    },
-    {
-      icon: <Wrench className="h-8 w-8 text-blue-600" />,
-      title: "Low Maintenance",
-      description: "Once installed, patio flake floors require minimal maintenance - just simple cleaning with standard outdoor cleaning products."
-    }
-  ];
-
-  const features = [
-    "Weather and UV resistant",
-    "Slip-resistant texture for safety",
-    "Freeze-thaw resistant",
-    "Impact and abrasion resistant",
-    "Easy to clean and maintain",
-    "Available in multiple color combinations"
-  ];
-
-  return (
-    <>
+  const benefits = [{
+    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    title: "Lifetime Warranty",
+    description: "Our polyurea patio floors come with an industry-leading lifetime warranty, ensuring your outdoor investment is protected for years to come."
+  }, {
+    icon: <Clock className="h-8 w-8 text-blue-600" />,
+    title: "Fast Installation",
+    description: "Most residential patio projects can be completed in just one day, minimizing disruption to your outdoor living space."
+  }, {
+    icon: <Palette className="h-8 w-8 text-blue-600" />,
+    title: "Customizable Design",
+    description: "Choose from a wide variety of flake colors and patterns to create a unique patio surface that complements your outdoor décor and landscape."
+  }, {
+    icon: <Wrench className="h-8 w-8 text-blue-600" />,
+    title: "Low Maintenance",
+    description: "Once installed, patio flake floors require minimal maintenance - just simple cleaning with standard outdoor cleaning products."
+  }];
+  const features = ["Weather and UV resistant", "Slip-resistant texture for safety", "Freeze-thaw resistant", "Impact and abrasion resistant", "Easy to clean and maintain", "Available in multiple color combinations"];
+  return <>
       <Helmet>
         <title>Polyurea Patio Floors - Premium Outdoor Patio Coatings | Legacy Industrial Coatings</title>
         <meta name="description" content="Transform your outdoor patio with our premium polyurea flake floors. Lifetime warranty, weather-resistant, and endless customization options. Perfect for outdoor living spaces." />
@@ -69,25 +52,18 @@ const ResidentialPatio = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Patio Polyurea Floors</span>
+                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Patio Coatings</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Transform your outdoor living space with our signature polyurea flake patio system. Designed specifically for outdoor environments, 
                   these floors combine superior weather resistance with stunning aesthetics. Perfect for patios, pool decks, outdoor entertainment areas, and walkways. With a lifetime warranty and endless customization options, it's the ideal solution for any outdoor space.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    onClick={() => navigate('/contact')}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  >
+                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     Get Free Quote
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={() => setShowBookingModal(true)}
-                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
-                  >
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
@@ -95,11 +71,7 @@ const ResidentialPatio = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img 
-                  src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" 
-                  alt="Beautiful polyurea flake patio installation" 
-                  className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
-                />
+                <img src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" alt="Beautiful polyurea flake patio installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
               </div>
             </div>
           </div>
@@ -122,20 +94,14 @@ const ResidentialPatio = () => {
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Superior Outdoor Performance Features</h3>
                 <div className="space-y-4">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
+                  {features.map((feature, index) => <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
                       <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" 
-                  alt="Close-up of polyurea flake patio floor texture" 
-                  className="w-full h-80 object-cover rounded-xl shadow-lg"
-                />
+                <img src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
               </div>
             </div>
           </div>
@@ -154,8 +120,7 @@ const ResidentialPatio = () => {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
+              {benefits.map((benefit, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
                   <CardContent className="p-6">
                     <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       {benefit.icon}
@@ -163,8 +128,7 @@ const ResidentialPatio = () => {
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">{benefit.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </section>
@@ -182,31 +146,25 @@ const ResidentialPatio = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  step: "01",
-                  title: "Surface Preparation",
-                  description: "We thoroughly clean and prepare your concrete patio surface, addressing any cracks or imperfections and ensuring proper drainage slopes."
-                },
-                {
-                  step: "02", 
-                  title: "Polyurea Base Application",
-                  description: "Our weather-resistant polyurea base coat is applied, providing superior durability and protection against UV rays, rain, and temperature changes."
-                },
-                {
-                  step: "03",
-                  title: "Flake Broadcast & Topcoat",
-                  description: "Decorative flakes are broadcast into the base coat, then sealed with a crystal-clear UV-stable protective topcoat for lasting outdoor beauty."
-                }
-              ].map((step, index) => (
-                <div key={index} className="text-center">
+              {[{
+              step: "01",
+              title: "Surface Preparation",
+              description: "We thoroughly clean and prepare your concrete patio surface, addressing any cracks or imperfections and ensuring proper drainage slopes."
+            }, {
+              step: "02",
+              title: "Polyurea Base Application",
+              description: "Our weather-resistant polyurea base coat is applied, providing superior durability and protection against UV rays, rain, and temperature changes."
+            }, {
+              step: "03",
+              title: "Flake Broadcast & Topcoat",
+              description: "Decorative flakes are broadcast into the base coat, then sealed with a crystal-clear UV-stable protective topcoat for lasting outdoor beauty."
+            }].map((step, index) => <div key={index} className="text-center">
                   <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-2xl font-bold w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                     {step.step}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -284,19 +242,11 @@ const ResidentialPatio = () => {
               Get a free quote for your custom polyurea patio floor installation. Our experts will help you choose the perfect design for your outdoor living space.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                variant="secondary"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
+              <Button onClick={() => navigate('/contact')} variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Get Free Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                variant="outline"
-                onClick={() => setShowBookingModal(true)}
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10"
-              >
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
@@ -304,15 +254,10 @@ const ResidentialPatio = () => {
           </div>
         </section>
 
-        <BookingModal 
-          isOpen={showBookingModal} 
-          onClose={() => setShowBookingModal(false)} 
-        />
+        <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
 
         <Footer />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default ResidentialPatio;
