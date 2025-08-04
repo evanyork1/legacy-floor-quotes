@@ -35,7 +35,7 @@ const Header = () => {
     path: `${homePath}#testimonials`
   }, {
     name: "Contact",
-    path: `${homePath}#footer`
+    path: "/contact"
   }];
 
   const residentialItems = [

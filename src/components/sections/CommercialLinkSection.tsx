@@ -31,10 +31,11 @@ const CommercialLinkSection = () => {
               </p>
               <Button 
                 onClick={() => navigate('/commercial')}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
               >
-                Learn More About Commercial Floor Options
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <span className="hidden sm:inline text-lg">Learn More About Commercial Floor Options</span>
+                <span className="sm:hidden text-base">Learn More</span>
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </CardContent>
           </Card>

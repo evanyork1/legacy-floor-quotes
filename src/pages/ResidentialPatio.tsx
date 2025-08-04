@@ -101,7 +101,7 @@ const ResidentialPatio = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/30d7d05c-5ad3-4a3f-ac08-3d1f3192aaaf.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
+                <img src="/lovable-uploads/527e9b8a-a124-4c0a-9735-37c08cb429b2.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
               </div>
             </div>
           </div>
