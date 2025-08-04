@@ -69,23 +69,20 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map(item => (
-              <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm">
-                {item.name}
-              </a>
-            ))}
+            <a href={navItems[0].path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm">
+              {navItems[0].name}
+            </a>
             
             {/* Products Dropdown */}
-            <div className="relative" onMouseLeave={() => setIsProductsOpen(false)}>
+            <div className="relative" onMouseEnter={() => setIsProductsOpen(true)} onMouseLeave={() => setIsProductsOpen(false)}>
               <button 
-                onMouseEnter={() => setIsProductsOpen(true)}
                 className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
               >
                 Products
                 <ChevronDown className="ml-1 h-3 w-3" />
               </button>
               {isProductsOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                   {productItems.map(item => (
                     <a 
                       key={item.name} 
@@ -98,6 +95,12 @@ const Header = () => {
                 </div>
               )}
             </div>
+            
+            {navItems.slice(1).map(item => (
+              <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm">
+                {item.name}
+              </a>
+            ))}
             
             <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base">
               <a href="tel:214-305-6516">
