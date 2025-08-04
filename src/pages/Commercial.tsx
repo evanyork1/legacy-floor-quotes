@@ -139,32 +139,43 @@ const Commercial = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-800/20"></div>
-          <div className="container mx-auto px-4 relative">
-            <div className="text-center">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                Commercial Flooring Solutions
-              </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-                Professional flooring systems for businesses across Dallas-Fort Worth
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  onClick={() => navigate('/contact')}
-                  className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                >
-                  Get A Quote
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-transparent"
-                >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Book An Estimate
-                </Button>
+        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                  Professional <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Commercial Flooring</span> Solutions
+                </h1>
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  Transform your commercial space with our professional flooring systems. 
+                  We specialize in industrial epoxy, concrete polishing, and decorative floors perfect for 
+                  warehouses, retail stores, restaurants, and commercial facilities across Dallas-Fort Worth.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    onClick={() => navigate('/contact')}
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  >
+                    Get Commercial Quote
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => window.open('tel:+12143056516', '_self')}
+                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    Call Now
+                  </Button>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <img 
+                  src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" 
+                  alt="Professional commercial flooring installation" 
+                  className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
+                />
               </div>
             </div>
           </div>
