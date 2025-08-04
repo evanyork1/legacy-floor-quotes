@@ -58,7 +58,7 @@ const CTASection = () => {
               icon={<ArrowRight />}
               iconPosition="right"
               fullWidthMobile={true}
-              className="bg-white text-blue-600 hover:bg-gray-50"
+              className="bg-background text-primary hover:bg-muted"
             >
               Get A Quote
             </CTAButton>
