@@ -53,12 +53,12 @@ const CTASection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton 
               onClick={() => navigate('/contact')} 
-              variant="primary"
+              variant="outline"
               size="lg"
               icon={<ArrowRight />}
               iconPosition="right"
               fullWidthMobile={true}
-              className="bg-white text-blue-600 hover:bg-gray-50"
+              className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white"
             >
               Get A Quote
             </CTAButton>
