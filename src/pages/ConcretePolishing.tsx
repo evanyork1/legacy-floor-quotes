@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Building, Sparkles, Droplets, Recycle, CheckCircle, Phone } from "lucide-react";
+import { ArrowRight, Building, Sparkles, Droplets, Recycle, CheckCircle, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ConcretePolishing = () => {
@@ -121,11 +121,11 @@ const ConcretePolishing = () => {
                   </Button>
                   <Button 
                     variant="outline"
-                    onClick={() => window.open('tel:+14698704668', '_self')}
+                    onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
                     className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
                   >
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call Now
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book An Estimate
                   </Button>
                 </div>
               </div>
@@ -338,11 +338,11 @@ const ConcretePolishing = () => {
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.open('tel:+14698704668', '_self')}
+                onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
                 className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
               >
-                <Phone className="mr-2 h-5 w-5" />
-                Call Now
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
               </Button>
             </div>
           </div>
