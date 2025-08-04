@@ -21,15 +21,15 @@ const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
           
           {/* Company Info & Logo */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="sm:col-span-2 lg:col-span-1 space-y-6">
             <div className="space-y-4">
               <img 
                 src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" 
                 alt="Legacy Industrial Coatings Logo" 
-                className="h-16 w-auto" 
+                className="h-12 sm:h-16 w-auto" 
               />
               <div className="space-y-2 text-sm text-gray-300">
                 <p>Licensed & Insured</p>
@@ -39,9 +39,9 @@ const Footer = () => {
           </div>
 
           {/* Menu */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white tracking-wider">MENU</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">MENU</h3>
+            <ul className="space-y-2 sm:space-y-3">
               <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
               <li><a href="/faq" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">FAQ</a></li>
               <li><a href="/blog" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">BLOG</a></li>
@@ -52,8 +52,8 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white tracking-wider">CONTACT</h3>
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">CONTACT</h3>
             <div className="space-y-4">
               <div>
                 <h4 className="text-white font-semibold mb-2">Main Office</h4>
@@ -67,16 +67,16 @@ const Footer = () => {
           </div>
 
           {/* Service Areas */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
-            <div className="text-gray-300 text-sm">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
+            <div className="text-gray-300 text-xs sm:text-sm leading-relaxed">
               <p>Plano, Frisco, Dallas, Celina, Little Elm, McKinney, Allen, Prosper, The Colony, Aubrey, Lewisville, Carrollton, Richardson, Garland, Anna, Melissa, Fairview, Parker, Princeton, Sachse, Wylie, Murphy, Farmers Branch, North Dallas, Addison, Hebron, Highland Village, Flower Mound, Coppell</p>
             </div>
           </div>
 
           {/* Follow */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white tracking-wider">FOLLOW</h3>
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">FOLLOW</h3>
             
             {/* Social Media Icons */}
             <div className="flex space-x-3">

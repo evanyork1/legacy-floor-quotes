@@ -13,12 +13,12 @@ const PrivacyPolicy = () => {
         />
       </Helmet>
       
-      <div className="min-h-screen bg-background py-12">
+      <div className="min-h-screen bg-background py-8 sm:py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <Card>
-            <CardContent className="p-8">
-              <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-primary">Privacy Policy</h1>
+            <CardContent className="p-4 sm:p-6 lg:p-8">
+              <div className="text-center mb-6 sm:mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-primary">Privacy Policy</h1>
               </div>
 
               <div className="space-y-4 text-sm leading-relaxed">

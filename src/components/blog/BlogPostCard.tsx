@@ -17,18 +17,19 @@ export const BlogPostCard = React.memo(({ post, onSelectPost }: BlogPostCardProp
         <img 
           src={post.image} 
           alt={post.title}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        <div className="absolute top-4 left-4">
-          <Badge variant="outline" className="bg-white/90">{post.category}</Badge>
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+          <Badge variant="outline" className="bg-white/90 text-xs sm:text-sm">{post.category}</Badge>
         </div>
       </div>
-      <CardContent className="p-6">
-        <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-gray-500 mb-3">
           <div className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            {post.date}
+            <span className="hidden sm:inline">{post.date}</span>
+            <span className="sm:hidden">{post.date.split(',')[0]}</span>
           </div>
           <div className="flex items-center gap-1">
             <Clock className="h-3 w-3" />
@@ -39,10 +40,10 @@ export const BlogPostCard = React.memo(({ post, onSelectPost }: BlogPostCardProp
             {post.location}
           </div>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
           {post.title}
         </h3>
-        <p className="text-gray-600 mb-4 leading-relaxed">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">
           {post.excerpt}
         </p>
         <div className="flex flex-wrap gap-1 mb-4">
