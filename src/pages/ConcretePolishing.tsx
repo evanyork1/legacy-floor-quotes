@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Building, Sparkles, Droplets, Recycle, CheckCircle, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 const ConcretePolishing = () => {
   const navigate = useNavigate();
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   const applications = [
     {
@@ -121,7 +124,7 @@ const ConcretePolishing = () => {
                   </Button>
                   <Button 
                     variant="outline"
-                    onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
+                    onClick={() => setShowBookingModal(true)}
                     className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
                   >
                     <Calendar className="mr-2 h-5 w-5" />
@@ -338,7 +341,7 @@ const ConcretePolishing = () => {
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
+                onClick={() => setShowBookingModal(true)}
                 className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
               >
                 <Calendar className="mr-2 h-5 w-5" />
@@ -347,6 +350,11 @@ const ConcretePolishing = () => {
             </div>
           </div>
         </section>
+
+        <BookingModal 
+          isOpen={showBookingModal} 
+          onClose={() => setShowBookingModal(false)} 
+        />
 
         <Footer />
       </div>

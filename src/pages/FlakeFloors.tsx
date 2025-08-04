@@ -4,11 +4,14 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Phone } from "lucide-react";
+import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 const FlakeFloors = () => {
   const navigate = useNavigate();
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   const benefits = [
     {
@@ -82,11 +85,11 @@ const FlakeFloors = () => {
                   </Button>
                   <Button 
                     variant="outline"
-                    onClick={() => window.open('tel:+14698704668', '_self')}
+                    onClick={() => setShowBookingModal(true)}
                     className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
                   >
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call Now
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book An Estimate
                   </Button>
                 </div>
               </div>
@@ -291,15 +294,20 @@ const FlakeFloors = () => {
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.open('tel:+14698704668', '_self')}
+                onClick={() => setShowBookingModal(true)}
                 className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
               >
-                <Phone className="mr-2 h-5 w-5" />
-                Call Now
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
               </Button>
             </div>
           </div>
         </section>
+
+        <BookingModal 
+          isOpen={showBookingModal} 
+          onClose={() => setShowBookingModal(false)} 
+        />
 
         <Footer />
       </div>
