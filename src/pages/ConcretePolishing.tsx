@@ -172,8 +172,8 @@ const ConcretePolishing = () => {
               </div>
               <div className="relative">
                 <img 
-                  src="/lovable-uploads/624693af-bec7-4554-be4d-134ef392147c.png" 
-                  alt="Close-up of polished concrete surface" 
+                  src="/lovable-uploads/fee5b01c-b997-4a5e-994f-83f57fe35fbd.png" 
+                  alt="Polished concrete floor in modern commercial space with reflective finish" 
                   className="w-full h-80 object-cover rounded-xl shadow-lg"
                 />
               </div>
