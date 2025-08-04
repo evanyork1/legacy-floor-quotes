@@ -211,7 +211,7 @@ const Commercial = () => {
               {commercialImages.map((image, index) => <div key={index} className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
                   <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                    <img src={image.src} alt={image.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    
                   </div>
                 </div>)}
             </div>
@@ -243,10 +243,7 @@ const Commercial = () => {
 
         <Footer />
         
-        <BookingModal 
-          isOpen={isBookingModalOpen} 
-          onClose={() => setIsBookingModalOpen(false)} 
-        />
+        <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
       </div>
     </>;
 };
