@@ -19,6 +19,7 @@ const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const EmployeePanel = lazy(() => import("./pages/EmployeePanel"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const LandingVisual = lazy(() => import("./pages/LandingVisual"));
+const ServiceAreas = lazy(() => import("./pages/ServiceAreas"));
 
 const Warranty = lazy(() => import("./pages/Warranty"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
@@ -59,6 +60,7 @@ const App = () => (
               <Route path="/quotedfw" element={<QuoteDFW />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />
+              <Route path="/service-areas" element={<ServiceAreas />} />
               
               <Route path="/warranty" element={<Warranty />} />
               <Route path="/terms" element={<TermsAndConditions />} />
