@@ -175,7 +175,7 @@ export const LeadForm = () => {
               disabled={isSubmitting}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-none text-lg font-semibold"
             >
-              {isSubmitting ? "Submitting..." : "SUBMIT"}
+              {isSubmitting ? "Submitting..." : "GET MORE INFO"}
             </Button>
           </form>
         </CardContent>
