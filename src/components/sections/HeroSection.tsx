@@ -144,8 +144,9 @@ const HeroSection = () => {
                   
                   <a 
                     href="tel:214-305-6516"
-                    className="text-white text-lg flex items-center hover:text-blue-200 transition-colors"
+                    className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
                   >
+                    <Phone size={18} />
                     Call us at: 214-305-6516
                   </a>
                 </div>
