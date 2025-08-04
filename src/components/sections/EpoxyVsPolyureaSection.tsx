@@ -18,15 +18,15 @@ const EpoxyVsPolyureaSection = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gray-900">
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Epoxy vs. Polyurea: What You Should Know
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Epoxy vs. <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Polyurea</span>: What You Should Know
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Not all garage coatings are the same. Here's why homeowners across DFW are ditching epoxy.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Not all garage coatings are the same. Here's why homeowners across DFW are ditching epoxy for our premium polyurea solutions.
           </p>
         </div>
 
@@ -34,24 +34,25 @@ const EpoxyVsPolyureaSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
           {/* Epoxy Column */}
           <div className="space-y-6">
-            <div className="flex justify-center mb-4">
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-red-200 to-red-300 rounded-2xl blur opacity-30"></div>
               <img 
                 src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" 
                 alt="Failed epoxy floor showing chips and peeling" 
-                className="w-3/5 h-60 object-cover rounded-xl"
+                className="relative w-full h-64 object-cover rounded-2xl shadow-xl"
               />
             </div>
-            <div className="bg-red-50 rounded-2xl p-8 border-2 border-red-200">
-              <h3 className="text-2xl font-bold text-red-800 mb-6 text-center">
+            <div className="bg-white rounded-2xl p-8 border border-red-200 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <h3 className="text-2xl font-bold text-red-600 mb-6 text-center">
                 Cheap Epoxy Coatings
               </h3>
               <div className="space-y-4">
                 {epoxyFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <X className="w-5 h-5 text-red-500" />
+                  <div key={index} className="flex items-start space-x-4 p-3 rounded-lg bg-red-50/50">
+                    <div className="flex-shrink-0 mt-1 bg-red-100 p-1 rounded-full">
+                      <X className="w-4 h-4 text-red-500" />
                     </div>
-                    <p className="text-red-700 font-medium">{feature}</p>
+                    <p className="text-gray-700 font-medium leading-relaxed">{feature}</p>
                   </div>
                 ))}
               </div>
@@ -60,29 +61,30 @@ const EpoxyVsPolyureaSection = () => {
 
           {/* Polyurea Column */}
           <div className="space-y-6">
-            <div className="flex justify-center mb-4">
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
               <img 
                 src="/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png" 
                 alt="Beautiful polyurea floor with decorative flakes" 
-                className="w-3/5 h-60 object-cover rounded-xl"
+                className="relative w-full h-64 object-cover rounded-2xl shadow-xl"
               />
-            </div>
-            <div className="bg-green-50 rounded-2xl p-8 border-2 border-green-200 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
                   RECOMMENDED
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-6 text-center">
+            </div>
+            <div className="bg-white rounded-2xl p-8 border border-green-200 shadow-xl hover:shadow-2xl transition-all duration-500 relative">
+              <h3 className="text-2xl font-bold text-green-600 mb-6 text-center">
                 Our Polyurea Flake Floors
               </h3>
               <div className="space-y-4">
                 {polyureFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <Check className="w-5 h-5 text-green-500" />
+                  <div key={index} className="flex items-start space-x-4 p-3 rounded-lg bg-green-50/50">
+                    <div className="flex-shrink-0 mt-1 bg-green-100 p-1 rounded-full">
+                      <Check className="w-4 h-4 text-green-500" />
                     </div>
-                    <p className="text-green-700 font-medium">{feature}</p>
+                    <p className="text-gray-700 font-medium leading-relaxed">{feature}</p>
                   </div>
                 ))}
               </div>
@@ -91,16 +93,18 @@ const EpoxyVsPolyureaSection = () => {
         </div>
 
         {/* Fun Fact */}
-        <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-xl max-w-2xl mx-auto">
-          <div className="flex items-center space-x-3">
-            <div className="bg-blue-600 rounded-full p-2">
-              <span className="text-white text-sm font-bold">💡</span>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold text-blue-800 mb-1">Fun Fact</h4>
-              <p className="text-blue-700">
-                Over 50% of our projects start by removing a failed epoxy floor.
-              </p>
+        <div className="bg-white rounded-2xl border border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-500 max-w-2xl mx-auto">
+          <div className="p-8">
+            <div className="flex items-start space-x-4">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-full p-3 flex-shrink-0">
+                <span className="text-white text-lg">💡</span>
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 mb-3">Fun Fact</h4>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  Over 50% of our projects start by removing a failed epoxy floor. Don't make the same mistake — choose polyurea from the start.
+                </p>
+              </div>
             </div>
           </div>
         </div>
