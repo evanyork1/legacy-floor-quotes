@@ -34,12 +34,11 @@ const EpoxyVsPolyureaSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
           {/* Epoxy Column */}
           <div className="space-y-6">
-            <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-red-200 to-red-300 rounded-2xl blur opacity-30"></div>
+            <div>
               <img 
                 src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" 
                 alt="Failed epoxy floor showing chips and peeling" 
-                className="relative w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"
+                className="w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"
               />
             </div>
             <div className="bg-white rounded-2xl p-8 border border-red-200 shadow-xl hover:shadow-2xl transition-all duration-500">
@@ -62,11 +61,10 @@ const EpoxyVsPolyureaSection = () => {
           {/* Polyurea Column */}
           <div className="space-y-6">
             <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
               <img 
                 src="/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png" 
                 alt="Beautiful polyurea floor with decorative flakes" 
-                className="relative w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"
+                className="w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"
               />
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
