@@ -16,7 +16,7 @@ export const CustomQuoteSection = () => {
             Get an instant quote tailored to your specific needs with our quick tool.
           </p>
           <CTAButton
-            onClick={() => navigate('/contact')}
+            onClick={() => navigate('/quotedfw')}
             variant="primary"
             size="md"
             icon={<ArrowRight />}
