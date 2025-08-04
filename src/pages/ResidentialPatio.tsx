@@ -37,7 +37,7 @@ const ResidentialPatio = () => {
         
         <meta property="og:title" content="Polyurea Patio Floors - Premium Outdoor Patio Coatings | Legacy Industrial Coatings" />
         <meta property="og:description" content="Transform your outdoor patio with our premium polyurea flake floors. Lifetime warranty, weather-resistant, and endless customization options." />
-        <meta property="og:image" content="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" />
+        <meta property="og:image" content="/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png" />
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/residential-patio" />
@@ -71,7 +71,7 @@ const ResidentialPatio = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" alt="Beautiful polyurea flake patio installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src="/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png" alt="Beautiful polyurea flake patio installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ const ResidentialPatio = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
+                <img src="/lovable-uploads/30d7d05c-5ad3-4a3f-ac08-3d1f3192aaaf.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
               </div>
             </div>
           </div>
