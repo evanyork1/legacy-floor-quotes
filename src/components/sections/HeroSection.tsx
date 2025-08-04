@@ -69,7 +69,7 @@ const HeroSection = () => {
               {/* Hero content - takes up more space with larger text */}
               <div className="h-[60vh] flex items-center justify-center pt-20">
                 <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
-                  <h1 className="text-6xl sm:text-7xl font-bold text-white leading-tight">
+                  <h1 className="text-6xl sm:text-7xl font-bold text-white leading-none sm:leading-tight">
                     {title}{" "}
                     <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                       Experts
