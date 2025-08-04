@@ -13,15 +13,13 @@ const Houston = lazy(() => import("./pages/Houston"));
 const Quote = lazy(() => import("./pages/Quote"));
 const DFW = lazy(() => import("./pages/DFW"));
 const DFWResLanding = lazy(() => import("./pages/DFWResLanding"));
-const DFWCommercialLanding = lazy(() => import("./pages/DFWCommercialLanding"));
-const HoustonResLanding = lazy(() => import("./pages/HoustonResLanding"));
 const QuoteDFW = lazy(() => import("./pages/QuoteDFW"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const EmployeePanel = lazy(() => import("./pages/EmployeePanel"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const LandingVisual = lazy(() => import("./pages/LandingVisual"));
-const JAK = lazy(() => import("./pages/JAK"));
+
 const Warranty = lazy(() => import("./pages/Warranty"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -58,12 +56,10 @@ const App = () => (
               <Route path="/quotehou" element={<Quote />} />
               <Route path="/dfw" element={<DFW />} />
               <Route path="/dfwreslanding" element={<DFWResLanding />} />
-              <Route path="/dfwcommercial" element={<DFWCommercialLanding />} />
-              <Route path="/houstonreslanding" element={<HoustonResLanding />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />
-              <Route path="/jak" element={<JAK />} />
+              
               <Route path="/warranty" element={<Warranty />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
