@@ -74,14 +74,17 @@ const Commercial = () => {
     src: "/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png",
     alt: "Industrial epoxy floor installation"
   }, {
-    src: "/lovable-uploads/de857ed2-571d-46fc-a514-07461bffbb2b.png",
-    alt: "Commercial kitchen flooring solution"
+    src: "/lovable-uploads/701db69b-4439-4779-9115-583d175298af.png",
+    alt: "Helicopter hangar with polished concrete floors"
   }, {
-    src: "/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png",
-    alt: "Polished concrete commercial space"
+    src: "/lovable-uploads/d1b328fa-3e30-4126-8266-ae64a33edd79.png",
+    alt: "Medical facility with epoxy flooring"
   }, {
-    src: "/lovable-uploads/77dbbade-9254-4af6-872f-f75c0f6f9607.png",
-    alt: "Commercial flooring with decorative elements"
+    src: "/lovable-uploads/36244d7f-fc1a-4402-928c-de98a796b0d7.png",
+    alt: "Garage with polished concrete flooring"
+  }, {
+    src: "/lovable-uploads/79ce02fc-d147-4c75-b50f-753c518a0483.png",
+    alt: "Aircraft maintenance hangar flooring"
   }];
   return <>
       <Helmet>
