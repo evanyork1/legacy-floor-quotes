@@ -44,7 +44,7 @@ export const blogPostsData: BlogPost[] = [
       <p>Legacy Industrial Coatings is DFW's trusted name in polyurea garage floors. Reach out today for a quote — and see why homeowners from Plano to Prosper are ditching epoxy for good.</p>
     `,
     author: "Legacy Industrial Coatings Team",
-    date: "January 15, 2024",
+    date: "July 28, 2025",
     readTime: "8 min read",
     category: "Residential",
     tags: ["Garage Floors", "Polyurea", "Dallas", "Home Improvement"],
@@ -83,7 +83,7 @@ export const blogPostsData: BlogPost[] = [
       <p>Plano, Frisco, McKinney, and surrounding cities trust Legacy to deliver flooring that performs. Contact us today to schedule an on-site assessment and get a detailed quote.</p>
     `,
     author: "Legacy Industrial Coatings Team",
-    date: "January 10, 2024",
+    date: "July 22, 2025",
     readTime: "7 min read",
     category: "Commercial",
     tags: ["Commercial Flooring", "Business", "Plano", "Industrial"],
@@ -115,7 +115,7 @@ export const blogPostsData: BlogPost[] = [
       <p>Need help or have questions about care? Legacy offers ongoing support to every customer.</p>
     `,
     author: "Legacy Industrial Coatings Team",
-    date: "January 5, 2024",
+    date: "July 15, 2025",
     readTime: "6 min read",
     category: "Maintenance",
     tags: ["Maintenance", "Prosper", "Garage Care", "Home Tips"],
@@ -126,7 +126,7 @@ export const blogPostsData: BlogPost[] = [
     id: 4,
     title: "Why Celina Homeowners Are Upgrading to Decorative Concrete Coatings",
     excerpt: "Explore the growing trend of decorative garage floors in Celina and North Dallas. From metallic epoxy to flake systems, discover stunning transformations.",
-    image: "/lovable-uploads/9acbbf4d-30b4-4070-9bb9-5e1e7f9f7d8e.png",
+    image: "/lovable-uploads/de857ed2-571d-46fc-a514-07461bffbb2b.png",
     content: `
       <p>Celina and North Dallas homeowners are increasingly choosing decorative concrete coatings to upgrade the look and feel of their garages and patios. These aren't just functional — they're beautiful.</p>
       
@@ -150,7 +150,7 @@ export const blogPostsData: BlogPost[] = [
       <p>Contact Legacy Industrial Coatings to view our full color chart and book your upgrade today.</p>
     `,
     author: "Legacy Industrial Coatings Team",
-    date: "December 28, 2023",
+    date: "July 8, 2025",
     readTime: "9 min read",
     category: "Design",
     tags: ["Decorative Floors", "Celina", "Home Design", "Custom Homes"],
