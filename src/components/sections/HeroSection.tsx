@@ -148,7 +148,7 @@ const HeroSection = () => {
                     onClick={() => setShowBookingModal(true)} 
                     variant="outline"
                     size="sm"
-                    icon={<Calendar />}
+                    icon={<Phone />}
                     fullWidthMobile={false}
                     className="border-2 border-white bg-white text-blue-600 hover:bg-transparent hover:text-white"
                   >
