@@ -26,6 +26,7 @@ const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FlakeFloors = lazy(() => import("./pages/FlakeFloors"));
+const ResidentialPatio = lazy(() => import("./pages/ResidentialPatio"));
 const IndustrialEpoxy = lazy(() => import("./pages/IndustrialEpoxy"));
 const ConcretePolishing = lazy(() => import("./pages/ConcretePolishing"));
 const Commercial = lazy(() => import("./pages/Commercial"));
@@ -67,6 +68,7 @@ const App = () => (
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/flake-floors" element={<FlakeFloors />} />
+              <Route path="/residential-patio" element={<ResidentialPatio />} />
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/commercial" element={<Commercial />} />
