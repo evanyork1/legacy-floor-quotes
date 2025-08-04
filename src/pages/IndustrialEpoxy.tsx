@@ -188,7 +188,7 @@ const IndustrialEpoxy = () => {
                   ))}
                 </div>
                 
-                <div className="mt-8 relative flex justify-center">
+                <div className="mt-8 relative">
                   <img 
                     src="/lovable-uploads/c7682b64-17bd-49b5-ac6c-96416093f159.png" 
                     alt="Helicopter hangar with industrial epoxy flooring" 
