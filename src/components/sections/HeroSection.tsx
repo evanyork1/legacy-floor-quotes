@@ -99,7 +99,7 @@ const HeroSection = () => {
                         onClick={() => setShowBookingModal(true)} 
                         variant="outline"
                         size="md"
-                        icon={<ArrowRight />}
+                        icon={<Phone />}
                         iconPosition="right"
                         fullWidthMobile={true}
                         className="border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
