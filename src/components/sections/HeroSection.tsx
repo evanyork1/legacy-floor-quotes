@@ -89,7 +89,8 @@ const HeroSection = () => {
                       size="md"
                       icon={<Phone />}
                       iconPosition="left"
-                      fullWidthMobile={true}
+                      fullWidthMobile={false}
+                      className="max-w-xs mx-auto sm:mx-0"
                     >
                       Call Us Now
                     </CTAButton>
@@ -100,8 +101,8 @@ const HeroSection = () => {
                         size="md"
                         icon={<Phone />}
                         iconPosition="right"
-                        fullWidthMobile={true}
-                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+                        fullWidthMobile={false}
+                        className="border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent max-w-xs mx-auto sm:mx-0"
                       >
                         Book An Estimate
                       </CTAButton>

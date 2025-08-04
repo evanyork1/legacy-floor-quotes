@@ -51,17 +51,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Mobile Phone Banner */}
-      <div className="md:hidden bg-blue-900 text-white py-2 text-center">
-        <a 
-          href="tel:214-305-6516" 
-          className="flex items-center justify-center text-sm font-medium hover:text-blue-100 transition-colors"
-        >
-          <Phone className="mr-2 h-3 w-3" />
-          214-305-6516
-        </a>
-      </div>
-      
       <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
