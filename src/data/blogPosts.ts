@@ -19,7 +19,7 @@ export const blogPostsData: BlogPost[] = [
     id: 1,
     title: "The Ultimate Guide to Garage Floor Coatings in Dallas-Fort Worth",
     excerpt: "Discover why polyurea garage floor coatings are revolutionizing homes across DFW, from Plano to Prosper. Learn about installation, benefits, and what makes Legacy Industrial Coatings the trusted choice for Dallas homeowners.",
-    image: "/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png",
+    image: "/lovable-uploads/008e4edb-0e9b-4952-8a51-b7d92f110955.png",
     content: `
       <p>If you're a homeowner in Dallas–Fort Worth, you know just how much wear and tear your garage floor goes through. From hot tires in summer to spilled tools and car fluids, your concrete floor takes a beating. That's why more DFW homeowners are turning to polyurea garage floor coatings — a modern, industrial-grade solution designed to last.</p>
       
