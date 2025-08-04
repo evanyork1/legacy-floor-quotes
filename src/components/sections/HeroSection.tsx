@@ -88,6 +88,7 @@ const HeroSection = () => {
                         variant="primary"
                         size="md"
                         icon={<Phone />}
+                        iconPosition="left"
                         fullWidthMobile={true}
                       >
                         <a href="tel:214-305-6516">
@@ -137,6 +138,7 @@ const HeroSection = () => {
                     variant="primary"
                     size="sm"
                     icon={<Phone />}
+                    iconPosition="left"
                     fullWidthMobile={false}
                   >
                     <a href="tel:214-305-6516">
