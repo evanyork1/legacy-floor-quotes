@@ -190,8 +190,8 @@ const IndustrialEpoxy = () => {
                 
                 <div className="mt-8 relative">
                   <img 
-                    src="/lovable-uploads/26488809-d060-4237-a3aa-177b4c95165a.png" 
-                    alt="Industrial epoxy flooring application" 
+                    src="/lovable-uploads/c75d4356-dff1-48ce-905e-976c782945d7.png" 
+                    alt="Industrial warehouse with white epoxy flooring and yellow equipment" 
                     className="w-full h-64 object-cover rounded-xl shadow-lg"
                   />
                 </div>
