@@ -1,13 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LeadForm } from "@/components/landing/LeadForm";
+import { BookingModal } from "@/components/landing/BookingModal";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
 const Commercial = () => {
   const navigate = useNavigate();
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const services = [{
     title: "Concrete Polishing",
     description: "Transform your concrete floors with our professional polishing services. Achieve a high-gloss, durable finish that's perfect for retail spaces, showrooms, and high-traffic commercial areas."
@@ -124,9 +127,9 @@ const Commercial = () => {
                     Get Commercial Quote
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <Button variant="outline" onClick={() => window.open('tel:+12143056516', '_self')} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call Now
+                  <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book An Estimate
                   </Button>
                 </div>
               </div>
@@ -236,6 +239,11 @@ const Commercial = () => {
         </section>
 
         <Footer />
+        
+        <BookingModal 
+          isOpen={isBookingModalOpen} 
+          onClose={() => setIsBookingModalOpen(false)} 
+        />
       </div>
     </>;
 };
