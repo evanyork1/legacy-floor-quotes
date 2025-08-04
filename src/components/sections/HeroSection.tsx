@@ -123,7 +123,7 @@ const HeroSection = () => {
               
               <div className="text-center lg:text-left">
                 <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white leading-snug">
-                  {subtext}
+                  Residential & Commercial Floor Coatings<br />That Last
                 </div>
               </div>
               
