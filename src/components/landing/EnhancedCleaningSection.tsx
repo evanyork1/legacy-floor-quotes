@@ -42,8 +42,8 @@ export const EnhancedCleaningSection = () => {
             <h4 className="font-semibold mb-4 text-center text-lg">Before & After Professional Cleaning</h4>
             <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-md border-2 border-gray-200">
               <img 
-                alt="Before and after professional cleaning transformation showing dramatic improvement from dirty to sparkling clean garage floor" 
-                src="/lovable-uploads/8472be90-1217-403b-9613-2a25f353ea44.jpg" 
+                alt="Professionally cleaned and polished concrete floor showing pristine, reflective finish in modern commercial space" 
+                src="/lovable-uploads/5d93ae56-1cab-4795-a9d4-0389c901bd35.png" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
               />
             </div>
