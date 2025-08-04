@@ -112,9 +112,9 @@ const HeroSection = () => {
           </div>
 
           {/* Desktop Layout - Original side-by-side layout */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-4 lg:gap-6 items-center">
-            <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+          <div className="hidden lg:grid lg:grid-cols-2 gap-3 lg:gap-4 items-center">
+            <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left pl-8 xl:pl-16">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight">
                 {title}{" "}
                 <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                   Experts
@@ -122,7 +122,7 @@ const HeroSection = () => {
               </h1>
               
               <div className="text-center lg:text-left">
-                <div className="text-base sm:text-lg lg:text-xl xl:text-2xl text-white leading-snug">
+                <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white leading-snug">
                   {subtext}
                 </div>
               </div>
@@ -151,7 +151,7 @@ const HeroSection = () => {
               </div>
             </div>
             
-            <div className="flex justify-center lg:justify-end lg:pr-2">
+            <div className="flex justify-center lg:justify-start lg:pl-4">
               <div className="w-full max-w-md">
                 <LeadForm />
               </div>
