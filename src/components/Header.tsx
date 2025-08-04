@@ -21,7 +21,7 @@ const Header = () => {
     path: homePath
   }, {
     name: "Commercial",
-    path: `${homePath}#commercial`
+    path: "/commercial"
   }, {
     name: "Gallery",
     path: "/gallery"
