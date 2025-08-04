@@ -83,18 +83,16 @@ const HeroSection = () => {
                   
                    <div className="relative mt-8 sm:mt-10">
                     <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
-                      <CTAButton 
-                        asChild 
-                        variant="primary"
-                        size="md"
-                        icon={<Phone />}
-                        iconPosition="left"
-                        fullWidthMobile={true}
-                      >
-                        <a href="tel:214-305-6516">
-                          Call Us Now
-                        </a>
-                      </CTAButton>
+                    <CTAButton
+                      onClick={() => window.location.href = "tel:214-305-6516"}
+                      variant="primary"
+                      size="md"
+                      icon={<Phone />}
+                      iconPosition="left"
+                      fullWidthMobile={true}
+                    >
+                      Call Us Now
+                    </CTAButton>
                       
                       <CTAButton 
                         onClick={() => setShowBookingModal(true)} 
@@ -133,17 +131,15 @@ const HeroSection = () => {
               
                <div className="relative mt-6 sm:mt-8">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <CTAButton 
-                    asChild 
+                  <CTAButton
+                    onClick={() => window.location.href = "tel:214-305-6516"}
                     variant="primary"
                     size="sm"
                     icon={<Phone />}
                     iconPosition="left"
                     fullWidthMobile={false}
                   >
-                    <a href="tel:214-305-6516">
-                      Call Us Now
-                    </a>
+                    Call Us Now
                   </CTAButton>
                   
                   <CTAButton 
