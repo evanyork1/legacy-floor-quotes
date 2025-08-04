@@ -9,7 +9,8 @@ const ServiceAreas = () => {
     "Allen", "Prosper", "The Colony", "Aubrey", "Lewisville", "Carrollton", 
     "Richardson", "Garland", "Anna", "Melissa", "Fairview", "Parker", 
     "Princeton", "Sachse", "Wylie", "Murphy", "Farmers Branch", "North Dallas", 
-    "Addison", "Hebron", "Highland Village", "Flower Mound", "Coppell"
+    "Addison", "Hebron", "Highland Village", "Flower Mound", "Coppell",
+    "Van Alstyne", "Sherman", "Denison", "Gunter", "Howe", "Blue Ridge"
   ];
 
   return (
