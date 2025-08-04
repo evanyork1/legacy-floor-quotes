@@ -114,7 +114,7 @@ const HeroSection = () => {
           </div>
 
           {/* Desktop Layout - Original side-by-side layout */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="hidden lg:grid lg:grid-cols-2 gap-4 lg:gap-6 items-center">
             <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 {title}{" "}
@@ -163,7 +163,7 @@ const HeroSection = () => {
         </div>
 
         {/* Background Transition Section for Mobile */}
-        <div className="lg:hidden bg-gradient-to-b from-transparent via-gray-100/50 to-gray-50 py-8">
+        <div className="lg:hidden bg-gradient-to-b from-transparent via-gray-100/50 to-gray-50 py-4">
           <div className="container mx-auto px-4">
             <div className="max-w-md mx-auto">
               <LeadForm />
