@@ -47,9 +47,6 @@ const Footer = () => {
               <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GALLERY</a></li>
               <li><a href="/faq" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">FAQ</a></li>
               <li><a href="/blog" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">BLOG</a></li>
-              <li><a href="/flake-floors" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">FLAKE FLOORS</a></li>
-              <li><a href="/industrial-epoxy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">INDUSTRIAL EPOXY</a></li>
-              <li><a href="/concrete-polishing" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">CONCRETE POLISHING</a></li>
               <li><a href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">GET QUOTE</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>
               <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">TERMS</a></li>
