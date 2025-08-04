@@ -1,11 +1,12 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -39,6 +40,12 @@ const Header = () => {
     path: `${homePath}#footer`
   }];
 
+  const productItems = [
+    { name: "Flake Floors", path: "/flake-floors" },
+    { name: "Industrial Epoxy", path: "/industrial-epoxy" },
+    { name: "Concrete Polishing", path: "/concrete-polishing" }
+  ];
+
   return (
     <>
       {/* Mobile Phone Banner */}
@@ -67,6 +74,31 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
+            
+            {/* Products Dropdown */}
+            <div className="relative" onMouseLeave={() => setIsProductsOpen(false)}>
+              <button 
+                onMouseEnter={() => setIsProductsOpen(true)}
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
+              >
+                Products
+                <ChevronDown className="ml-1 h-3 w-3" />
+              </button>
+              {isProductsOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  {productItems.map(item => (
+                    <a 
+                      key={item.name} 
+                      href={item.path}
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+            
             <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 lg:px-6 text-sm lg:text-base">
               <a href="tel:214-305-6516">
                 <Phone className="mr-2 h-4 w-4" />
@@ -90,6 +122,22 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
+              
+              {/* Mobile Products Section */}
+              <div className="px-4">
+                <div className="text-gray-800 font-semibold text-base mb-2">Products</div>
+                {productItems.map(item => (
+                  <a 
+                    key={item.name} 
+                    href={item.path}
+                    className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium py-2 text-sm pl-4 rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              
               <div className="px-4 pt-2">
                 <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full py-3 text-base font-medium">
                   <a href="tel:214-305-6516" onClick={() => setIsMenuOpen(false)}>
