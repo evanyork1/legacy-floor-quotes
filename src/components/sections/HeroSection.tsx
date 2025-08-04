@@ -131,27 +131,20 @@ const HeroSection = () => {
               
                <div className="relative mt-6 sm:mt-8">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <CTAButton
-                    onClick={() => window.location.href = "tel:214-305-6516"}
+                  <CTAButton 
+                    onClick={() => setShowBookingModal(true)} 
                     variant="primary"
                     size="sm"
-                    icon={<Phone />}
+                    icon={<Calendar />}
                     iconPosition="left"
                     fullWidthMobile={false}
                   >
-                    Call Us Now
-                  </CTAButton>
-                  
-                  <CTAButton 
-                    onClick={() => setShowBookingModal(true)} 
-                    variant="outline"
-                    size="sm"
-                    icon={<Calendar />}
-                    fullWidthMobile={false}
-                    className="border-2 border-white bg-white text-blue-600 hover:bg-transparent hover:text-white"
-                  >
                     Book An Estimate
                   </CTAButton>
+                  
+                  <div className="text-white font-bold text-lg flex items-center">
+                    Call us at: 214-305-6516
+                  </div>
                 </div>
               </div>
             </div>
