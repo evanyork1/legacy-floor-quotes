@@ -5,7 +5,7 @@ export const QuickFeaturesSection = () => {
     {
       icon: Clock,
       title: "Same Day Estimate",
-      description: "We will come out same day to measure your space and provide an accurate free quote."
+      description: "Fast estimates the same day."
     },
     {
       icon: Calendar,
