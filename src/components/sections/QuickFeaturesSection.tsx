@@ -1,0 +1,48 @@
+import { Clock, Calendar, DollarSign } from "lucide-react";
+
+export const QuickFeaturesSection = () => {
+  const features = [
+    {
+      icon: Clock,
+      title: "Same Day Estimate",
+      description: "We will come out same day to measure your space and provide an accurate free quote."
+    },
+    {
+      icon: Calendar,
+      title: "Instant Online Booking",
+      description: "Click Book an Estimate to schedule your own appointment with us"
+    },
+    {
+      icon: DollarSign,
+      title: "Honest Pricing",
+      description: "We offer premium products at a fair price"
+    }
+  ];
+
+  return (
+    <section className="py-12 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <div key={index} className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                    <IconComponent className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};

@@ -14,6 +14,7 @@ import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
+import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 
 const DFW = () => {
   return (
@@ -53,6 +54,7 @@ const DFW = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <HeroSection />
+        <QuickFeaturesSection />
         <WhyChooseSection />
         <EpoxyVsPolyureaSection />
         <ProcessSection />
