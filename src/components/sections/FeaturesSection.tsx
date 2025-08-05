@@ -98,18 +98,17 @@ const FeaturesSection = () => {
                 )}
                 {(isDFW || isHouston) && (
                   <div className="mt-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
+                    <button
                       onClick={() => {
                         if (feature.title === "Flake Floors") navigate('/flake-floors');
                         else if (feature.title === "Industrial Epoxy") navigate('/industrial-epoxy');
                         else if (feature.title === "Concrete Polishing") navigate('/concrete-polishing');
                       }}
-                      className="w-full"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
                     >
                       Learn More
-                    </Button>
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
                   </div>
                 )}
               </CardContent>
