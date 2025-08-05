@@ -91,6 +91,7 @@ const Header = () => {
             {/* Commercial Dropdown */}
             <div className="relative" onMouseEnter={() => setIsCommercialOpen(true)} onMouseLeave={() => setIsCommercialOpen(false)}>
               <button 
+                onClick={() => navigate('/commercial')}
                 className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
               >
                 Commercial
