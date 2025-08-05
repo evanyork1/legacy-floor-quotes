@@ -205,7 +205,7 @@ const HeroSection = () => {
         {/* Floating Quote Button - Right Side */}
         <Button
           onClick={() => navigate('/quotedfw')}
-          className="fixed right-0 top-1/2 transform -translate-y-1/2 -rotate-90 origin-center bg-transparent text-white font-bold px-8 py-6 text-xl shadow-2xl z-50 rounded-l-xl rounded-r-none border-4 border-white hover:bg-white hover:text-gray-900 transition-all duration-300"
+          className="fixed -right-1 top-1/2 transform -translate-y-1/2 -rotate-90 origin-center bg-transparent text-white font-bold px-12 py-8 text-xl shadow-2xl z-50 rounded-l-xl rounded-r-none border-4 border-white hover:bg-white hover:text-gray-900 transition-all duration-300"
           style={{ transformOrigin: 'center center' }}
         >
           INSTANT GARAGE QUOTE
