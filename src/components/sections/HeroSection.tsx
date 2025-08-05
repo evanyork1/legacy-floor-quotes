@@ -219,18 +219,16 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Floating Quote Button - Right Side - Smaller on Mobile */}
-        <Button
-          onClick={() => navigate('/quotedfw')}
-          className={`fixed right-[-90px] sm:right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-3 py-4 sm:px-5 sm:py-6 text-sm sm:text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 ${
-            scrolledPastHero 
-              ? 'bg-blue-600 text-white border-blue-600' 
-              : 'bg-transparent text-white border-white'
-          }`}
-          style={{ transformOrigin: 'center center' }}
-        >
-          INSTANT GARAGE QUOTE
-        </Button>
+        {/* Floating Quote Button - Right Side - Only visible when scrolled past hero */}
+        {scrolledPastHero && (
+          <Button
+            onClick={() => navigate('/quotedfw')}
+            className="fixed right-[-90px] sm:right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-3 py-4 sm:px-5 sm:py-6 text-sm sm:text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 bg-blue-600 text-white border-blue-600"
+            style={{ transformOrigin: 'center center' }}
+          >
+            INSTANT GARAGE QUOTE
+          </Button>
+        )}
 
         <BookingModal 
           isOpen={showBookingModal} 

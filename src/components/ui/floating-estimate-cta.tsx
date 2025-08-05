@@ -1,10 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
 
 export const FloatingEstimateCTA = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight * 0.7; // 70vh hero height
+      setScrolledPastHero(window.scrollY > heroHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!scrolledPastHero) return null;
 
   return (
     <>
