@@ -83,16 +83,20 @@ const HeroSection = () => {
                 <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
                   {/* Google Reviews Badge - positioned above title */}
                   <div className="flex justify-center mb-6">
-                    <div className="flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-gray-200">
-                      <span className="text-lg font-bold mr-2" style={{ color: '#4285F4' }}>Google</span>
-                      <div className="flex items-center gap-1 mr-3">
-                        <span className="text-2xl">⭐</span>
-                        <span className="text-2xl">⭐</span>
-                        <span className="text-2xl">⭐</span>
-                        <span className="text-2xl">⭐</span>
-                        <span className="text-2xl">⭐</span>
+                    <div className="flex items-center bg-white rounded-full px-4 py-2 shadow-lg border border-gray-200">
+                      <div className="flex items-center">
+                        <span className="font-bold text-blue-500">G</span>
+                        <span className="font-bold text-red-500">o</span>
+                        <span className="font-bold text-yellow-500">o</span>
+                        <span className="font-bold text-blue-500">g</span>
+                        <span className="font-bold text-green-500">l</span>
+                        <span className="font-bold text-red-500">e</span>
                       </div>
-                      <span className="text-lg font-medium text-gray-700">170+ reviews</span>
+                      <div className="flex items-center ml-2">
+                        <span className="text-yellow-400 text-sm">★★★★★</span>
+                        <span className="ml-1 text-gray-700 font-medium text-sm">170+</span>
+                        <span className="ml-1 text-gray-700 text-sm">reviews</span>
+                      </div>
                     </div>
                   </div>
                   
@@ -215,10 +219,10 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Floating Quote Button - Right Side */}
+        {/* Floating Quote Button - Right Side - Smaller on Mobile */}
         <Button
           onClick={() => navigate('/quotedfw')}
-          className={`fixed right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-5 py-6 text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 ${
+          className={`fixed right-[-90px] sm:right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-3 py-4 sm:px-5 sm:py-6 text-sm sm:text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 ${
             scrolledPastHero 
               ? 'bg-blue-600 text-white border-blue-600' 
               : 'bg-transparent text-white border-white'

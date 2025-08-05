@@ -15,6 +15,7 @@ import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
+import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
 
 const DFW = () => {
   return (
@@ -71,6 +72,7 @@ const DFW = () => {
         <div id="footer">
           <Footer />
         </div>
+        <FloatingEstimateCTA />
       </div>
     </>
   );
