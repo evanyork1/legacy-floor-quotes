@@ -60,7 +60,7 @@ const ResidentialPatio = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                    Get Free Quote
+                    Contact Us
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
@@ -243,7 +243,7 @@ const ResidentialPatio = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button onClick={() => navigate('/contact')} variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Get Free Quote
+                Contact Us
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">

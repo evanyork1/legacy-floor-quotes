@@ -289,7 +289,7 @@ const FlakeFloors = () => {
                 variant="secondary"
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                Get Free Quote
+                Contact Us
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
