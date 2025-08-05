@@ -22,8 +22,8 @@ const TrustedBrandSection = () => {
     description: "Cracks, chips, or stains — we've seen it all and know how to make it look great again."
   }, {
     icon: <Star className="h-8 w-8 text-blue-600" />,
-    title: "170+ Five Star Reviews",
-    description: "Our reputation is important to us. See why we are the number one coatings company in Dallas by hearing what our clients have to say."
+    title: "Confident, Competent Professionals",
+    description: "We don't just coat floors, we guide you from quote to completion with expert care. Our team is trained, responsive, and committed to getting it done right the first time."
   }, {
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
     title: "Over 5 Million Square Feet Installed",
