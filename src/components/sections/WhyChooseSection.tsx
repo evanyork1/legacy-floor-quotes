@@ -9,8 +9,8 @@ const WhyChooseSection = () => {
     },
     {
       icon: Clock,
-      title: "Confident, Competent Professionals",
-      description: "We don't just coat floors, we guide you from quote to completion with expert care. Our team is trained, responsive, and committed to getting it done right the first time."
+      title: "One-Day Installation",
+      description: "We'll transform your garage or commercial space in just one day. No long timelines or delays—just efficient, professional service that respects your time."
     },
     {
       icon: Sparkles,
