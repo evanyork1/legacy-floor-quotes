@@ -5,17 +5,17 @@ export const QuickFeaturesSection = () => {
     {
       icon: Clock,
       title: "Same Day Estimate",
-      description: "Fast estimates the same day."
+      description: "We'll be at your door within hours."
     },
     {
       icon: Calendar,
       title: "Online Booking",
-      description: "Schedule your own in person estimate in seconds."
+      description: "Pick your day and time no phone calls needed."
     },
     {
       icon: DollarSign,
       title: "Honest Pricing",
-      description: "Premium products at a fair price."
+      description: "Clear, upfront pricing with no surprises."
     }
   ];
 
