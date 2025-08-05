@@ -15,7 +15,7 @@ export const QuickFeaturesSection = () => {
     {
       icon: DollarSign,
       title: "Honest Pricing",
-      description: "We offer premium products at a fair price"
+      description: "Premium products at a fair price."
     }
   ];
 
