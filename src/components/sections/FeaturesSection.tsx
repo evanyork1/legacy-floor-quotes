@@ -56,6 +56,86 @@ const FeaturesSection = () => {
     description: "Choose what works best for you - virtual consultations or meet with our experts on-site. No need to take time out of your day unless you prefer the personal touch."
   }];
   const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW || isHouston ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
-  return;
+  
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {sectionTitle}
+          </h2>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <div className="flex flex-col items-center text-center">
+                  <div className="mb-4">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                  {feature.image && (
+                    <div className="mt-4 w-full">
+                      <img 
+                        src={feature.image} 
+                        alt={feature.title}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {(isDFW || isHouston) && (
+          <div className="mt-12 text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <CTAButton
+                variant="primary"
+                onClick={() => navigate(isDFW ? '/quotedfw' : '/quotehou')}
+                className="min-w-[200px]"
+              >
+                Get Free Quote
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </CTAButton>
+              
+              <Button
+                variant="outline"
+                onClick={() => setShowBookingModal(true)}
+                className="min-w-[200px] border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                Book Estimate
+              </Button>
+              
+              <Button
+                variant="ghost"
+                asChild
+                className="min-w-[200px] text-blue-600 hover:bg-blue-50"
+              >
+                <a href="tel:214-305-6516" className="flex items-center">
+                  <Phone className="mr-2 h-4 w-4" />
+                  (214) 305-6516
+                </a>
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
+    </section>
+  );
 };
 export default FeaturesSection;
