@@ -9,13 +9,18 @@ export const FloatingEstimateCTA = () => {
   return (
     <>
       {/* Fixed bottom CTA block */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-blue-600 text-white shadow-2xl border-t-4 border-blue-500">
-        <div className="container mx-auto px-4 py-4">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl">
+        <div className="container mx-auto px-4 py-6">
           <div 
-            className="text-center cursor-pointer" 
+            className="text-center cursor-pointer group transition-all duration-200 hover:scale-105" 
             onClick={() => setShowBookingModal(true)}
           >
-            <div className="text-lg font-bold">Book An Estimate</div>
+            <div className="text-xl font-bold tracking-wide group-hover:text-blue-200 transition-colors">
+              Book An Estimate
+            </div>
+            <div className="text-sm text-blue-200 mt-1 opacity-90">
+              Click to schedule your free consultation
+            </div>
           </div>
         </div>
       </div>

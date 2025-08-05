@@ -83,7 +83,7 @@ const HeroSection = () => {
                 <div className="max-w-2xl space-y-6 sm:space-y-8 text-center">
                   {/* Google Reviews Badge - positioned above title */}
                   <div className="flex justify-center mb-6">
-                    <div className="flex items-center bg-white rounded-full px-4 py-2 shadow-lg border border-gray-200">
+                    <div className="flex items-center">
                       <div className="flex items-center">
                         <span className="font-bold text-blue-500">G</span>
                         <span className="font-bold text-red-500">o</span>
@@ -94,8 +94,8 @@ const HeroSection = () => {
                       </div>
                       <div className="flex items-center ml-2">
                         <span className="text-yellow-400 text-sm">★★★★★</span>
-                        <span className="ml-1 text-gray-700 font-medium text-sm">170+</span>
-                        <span className="ml-1 text-gray-700 text-sm">reviews</span>
+                        <span className="ml-1 text-white font-medium text-sm">170+</span>
+                        <span className="ml-1 text-white text-sm">reviews</span>
                       </div>
                     </div>
                   </div>
