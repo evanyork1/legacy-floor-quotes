@@ -76,7 +76,19 @@ const FeaturesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {features.map((feature, index) => (
-            <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
+            <Card 
+              key={index} 
+              className={`border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 ${
+                (isDFW || isHouston) ? 'cursor-pointer' : ''
+              }`}
+              onClick={() => {
+                if (isDFW || isHouston) {
+                  if (feature.title === "Flake Floors") navigate('/flake-floors');
+                  else if (feature.title === "Industrial Epoxy") navigate('/industrial-epoxy');
+                  else if (feature.title === "Concrete Polishing") navigate('/concrete-polishing');
+                }
+              }}
+            >
               <CardContent className="p-6">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 p-3 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors duration-300">
@@ -98,17 +110,10 @@ const FeaturesSection = () => {
                 )}
                 {(isDFW || isHouston) && (
                   <div className="mt-4 text-center">
-                    <button
-                      onClick={() => {
-                        if (feature.title === "Flake Floors") navigate('/flake-floors');
-                        else if (feature.title === "Industrial Epoxy") navigate('/industrial-epoxy');
-                        else if (feature.title === "Concrete Polishing") navigate('/concrete-polishing');
-                      }}
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200"
-                    >
+                    <div className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200">
                       Learn More
                       <ArrowRight className="h-4 w-4" />
-                    </button>
+                    </div>
                   </div>
                 )}
               </CardContent>
