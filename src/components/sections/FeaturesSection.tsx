@@ -80,13 +80,18 @@ const FeaturesSection = () => {
                   <p className="text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
-                  {feature.image && (
+                   {feature.image && (
                     <div className="mt-4 w-full">
                       <img 
                         src={feature.image} 
                         alt={feature.title}
                         className="w-full h-48 object-cover rounded-lg"
                       />
+                      <div className="mt-4">
+                        <Button variant="outline" className="w-full">
+                          Learn More
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -95,40 +100,6 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {(isDFW || isHouston) && (
-          <div className="mt-12 text-center">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <CTAButton
-                variant="primary"
-                onClick={() => navigate(isDFW ? '/quotedfw' : '/quotehou')}
-                className="min-w-[200px]"
-              >
-                Get Free Quote
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </CTAButton>
-              
-              <Button
-                variant="outline"
-                onClick={() => setShowBookingModal(true)}
-                className="min-w-[200px] border-blue-600 text-blue-600 hover:bg-blue-50"
-              >
-                <Calendar className="mr-2 h-4 w-4" />
-                Book Estimate
-              </Button>
-              
-              <Button
-                variant="ghost"
-                asChild
-                className="min-w-[200px] text-blue-600 hover:bg-blue-50"
-              >
-                <a href="tel:214-305-6516" className="flex items-center">
-                  <Phone className="mr-2 h-4 w-4" />
-                  (214) 305-6516
-                </a>
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
       
       <BookingModal 
