@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight, Calendar } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -89,14 +89,14 @@ const FeaturesSection = () => {
                         alt={feature.title}
                         className="w-full h-48 object-cover rounded-lg"
                       />
-                      <div className="mt-4 text-center">
+                      <div className="mt-4 text-center w-full">
                         <button 
                           onClick={() => {
                             if (feature.title === "Flake Floors") navigate('/flakefloors');
                             else if (feature.title === "Industrial Epoxy") navigate('/industrialepoxy');
                             else if (feature.title === "Concrete Polishing") navigate('/concretepolishing');
                           }}
-                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center justify-center gap-1 transition-colors"
+                          className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1 transition-colors mx-auto"
                         >
                           Learn More
                           <ArrowRight className="h-4 w-4" />
@@ -112,14 +112,13 @@ const FeaturesSection = () => {
 
         {(isDFW || isHouston) && (
           <div className="mt-12 text-center">
-            <Button
+            <CTAButton
               variant="outline"
               onClick={() => setShowBookingModal(true)}
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              icon={<Calendar />}
             >
-              <Calendar className="mr-2 h-4 w-4" />
               Book An Estimate
-            </Button>
+            </CTAButton>
           </div>
         )}
       </div>
