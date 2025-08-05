@@ -81,9 +81,9 @@ const ProcessSection = () => {
         <div className="max-w-7xl mx-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {/* Desktop Progress Bar */}
           <div className="hidden lg:flex justify-center items-center mb-12 relative gap-16">
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded-full transform -translate-y-1/2"></div>
-            <div className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full transform -translate-y-1/2 transition-all duration-1000 ease-out" style={{
-            width: `${activeStep / (steps.length - 1) * 100}%`
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-1 bg-gray-200 rounded-full" style={{ width: 'calc(100% - 12rem)' }}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full transition-all duration-1000 ease-out" style={{
+            width: `calc((100% - 12rem) * ${activeStep / (steps.length - 1)})`
           }}></div>
             
             {steps.map((step, index) => <button key={index} onClick={() => goToStep(index)} className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${index <= activeStep ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'}`}>
