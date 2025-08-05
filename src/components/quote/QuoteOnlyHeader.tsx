@@ -14,7 +14,7 @@ export const QuoteOnlyHeader = ({ phone, onPhoneClick, showCallButton = false }:
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-28">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer" onClick={() => window.location.href = '/dfw'}>
             <img 
               src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
               alt="Legacy Industrial Coatings" 
