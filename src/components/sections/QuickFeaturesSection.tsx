@@ -9,8 +9,8 @@ export const QuickFeaturesSection = () => {
     },
     {
       icon: Calendar,
-      title: "Instant Online Booking",
-      description: "Click Book an Estimate to schedule your own appointment with us"
+      title: "Online Booking",
+      description: "Schedule your own in person estimate in seconds."
     },
     {
       icon: DollarSign,
