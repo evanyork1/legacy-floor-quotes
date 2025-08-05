@@ -60,7 +60,7 @@ const CTASection = () => {
               fullWidthMobile={true}
               className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white"
             >
-              Get A Quote
+              Contact Us
             </CTAButton>
             
             <CTAButton
