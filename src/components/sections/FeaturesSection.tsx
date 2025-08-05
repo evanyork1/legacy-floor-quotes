@@ -92,9 +92,9 @@ const FeaturesSection = () => {
                       <div className="mt-4 text-center w-full">
                         <button 
                           onClick={() => {
-                            if (feature.title === "Flake Floors") navigate('/flakefloors');
-                            else if (feature.title === "Industrial Epoxy") navigate('/industrialepoxy');
-                            else if (feature.title === "Concrete Polishing") navigate('/concretepolishing');
+                            if (feature.title === "Flake Floors") navigate('/flake-floors');
+                            else if (feature.title === "Industrial Epoxy") navigate('/industrial-epoxy');
+                            else if (feature.title === "Concrete Polishing") navigate('/concrete-polishing');
                           }}
                           className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1 transition-colors mx-auto"
                         >
