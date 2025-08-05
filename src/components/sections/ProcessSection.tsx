@@ -81,21 +81,21 @@ const ProcessSection = () => {
         <div className="max-w-7xl mx-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {/* Desktop Progress Bar */}
           <div className="hidden lg:flex justify-center items-center mb-12 relative gap-16">
-            {/* Background progress line */}
-            <div className="absolute top-1/2 transform -translate-y-1/2 h-1 bg-gray-200 rounded-full" style={{ 
-              left: '24px', 
-              right: '24px',
-              width: 'calc(100% - 48px)'
-            }}></div>
-            {/* Active progress line */}
-            <div className="absolute top-1/2 transform -translate-y-1/2 h-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full transition-all duration-1000 ease-out" style={{
-              left: '24px',
-              width: activeStep === 0 ? '0%' : `calc((100% - 48px) * ${activeStep / (steps.length - 1)})`
-            }}></div>
-            
-            {steps.map((step, index) => <button key={index} onClick={() => goToStep(index)} className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${index <= activeStep ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'}`}>
-                {step.number}
-              </button>)}
+            {/* Render step buttons with connecting lines */}
+            {steps.map((step, index) => (
+              <div key={index} className="flex items-center">
+                <button 
+                  onClick={() => goToStep(index)} 
+                  className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${index <= activeStep ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'}`}
+                >
+                  {step.number}
+                </button>
+                {/* Connection line (except for last step) */}
+                {index < steps.length - 1 && (
+                  <div className={`w-16 h-1 ${index < activeStep ? 'bg-blue-600' : 'bg-gray-200'} transition-all duration-300`}></div>
+                )}
+              </div>
+            ))}
           </div>
 
           {/* Main Content Area */}
