@@ -80,7 +80,7 @@ const ProcessSection = () => {
         {/* Process Steps Container */}
         <div className="max-w-7xl mx-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {/* Desktop Progress Bar */}
-          <div className="hidden lg:flex justify-between items-center mb-12 relative">
+          <div className="hidden lg:flex justify-center items-center mb-12 relative gap-16">
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded-full transform -translate-y-1/2"></div>
             <div className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full transform -translate-y-1/2 transition-all duration-1000 ease-out" style={{
             width: `${activeStep / (steps.length - 1) * 100}%`
