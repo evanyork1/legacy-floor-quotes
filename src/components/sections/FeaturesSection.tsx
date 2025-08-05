@@ -69,30 +69,20 @@ const FeaturesSection = () => {
         
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {features.map((feature, index) => {
-            const getNavigationPath = (title: string) => {
-              switch (title) {
-                case "Flake Floors":
-                  return "/flake-floors";
-                case "Industrial Epoxy":
-                  return "/industrial-epoxy";
-                case "Concrete Polishing":
-                  return "/concrete-polishing";
-                default:
-                  return "#";
-              }
-            };
-
-            const isClickable = (isDFW || isHouston || isCommercial) && 
-                              ["Flake Floors", "Industrial Epoxy", "Concrete Polishing"].includes(feature.title);
-
-            return (
-              <Card 
-                key={index} 
-                className={`border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50 ${
-                  isClickable ? 'cursor-pointer hover:scale-105' : ''
-                }`}
-                onClick={isClickable ? () => navigate(getNavigationPath(feature.title)) : undefined}
-              >
+          const getNavigationPath = (title: string) => {
+            switch (title) {
+              case "Flake Floors":
+                return "/flake-floors";
+              case "Industrial Epoxy":
+                return "/industrial-epoxy";
+              case "Concrete Polishing":
+                return "/concrete-polishing";
+              default:
+                return "#";
+            }
+          };
+          const isClickable = (isDFW || isHouston || isCommercial) && ["Flake Floors", "Industrial Epoxy", "Concrete Polishing"].includes(feature.title);
+          return <Card key={index} className={`border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50 ${isClickable ? 'cursor-pointer hover:scale-105' : ''}`} onClick={isClickable ? () => navigate(getNavigationPath(feature.title)) : undefined}>
                 <CardContent className="p-8">
                   {(isDFW || isHouston || isCommercial) && feature.image && <div className="mb-6 relative">
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-20"></div>
@@ -103,64 +93,32 @@ const FeaturesSection = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                  {isClickable && (
-                    <div className="mt-4 text-blue-600 text-sm font-medium transition-opacity duration-300">
+                  {isClickable && <div className="mt-4 text-blue-600 text-sm font-medium transition-opacity duration-300">
                       Learn More →
-                    </div>
-                  )}
+                    </div>}
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
 
         {/* Call to Action Button */}
         <div className="text-center">
-          {isCommercial ? (
-            <CTAButton 
-              onClick={() => {
-                const event = new CustomEvent('openCommercialModal');
-                window.dispatchEvent(event);
-              }}
-              variant="primary" 
-              size="lg" 
-              icon={<Phone />}
-              fullWidthMobile={true}
-            >
+          {isCommercial ? <CTAButton onClick={() => {
+          const event = new CustomEvent('openCommercialModal');
+          window.dispatchEvent(event);
+        }} variant="primary" size="lg" icon={<Phone />} fullWidthMobile={true}>
               Get A Quote
-            </CTAButton>
-          ) : (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton 
-                onClick={() => navigate('/contact')} 
-                variant="primary"
-                size="lg"
-                icon={<ArrowRight />}
-                iconPosition="right"
-                fullWidthMobile={true}
-              >
-                Get A Quote
-              </CTAButton>
+            </CTAButton> : <div className="flex flex-col sm:flex-row gap-4 justify-center">
               
-              <CTAButton
-                onClick={() => setShowBookingModal(true)}
-                variant="outline"
-                size="lg"
-                icon={<Calendar />}
-                fullWidthMobile={true}
-              >
+              
+              <CTAButton onClick={() => setShowBookingModal(true)} variant="outline" size="lg" icon={<Calendar />} fullWidthMobile={true}>
                 Book An Estimate
               </CTAButton>
-            </div>
-          )}
+            </div>}
         </div>
       </div>
       
-      <BookingModal 
-        isOpen={showBookingModal} 
-        onClose={() => setShowBookingModal(false)} 
-      />
+      <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
     </section>;
 };
-
 export default FeaturesSection;

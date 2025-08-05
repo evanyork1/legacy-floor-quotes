@@ -152,34 +152,16 @@ const ProcessSection = () => {
         {/* CTA Section */}
         <div className="text-center mt-20">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <CTAButton 
-              onClick={() => navigate('/contact')}
-              variant="primary"
-              size="lg"
-              icon={<ArrowRight />}
-              iconPosition="right"
-              fullWidthMobile={true}
-            >
-              Get A Quote
-            </CTAButton>
             
-            <CTAButton
-              onClick={() => setIsBookingModalOpen(true)}
-              variant="outline"
-              size="lg"
-              icon={<Calendar />}
-              fullWidthMobile={true}
-            >
+            
+            <CTAButton onClick={() => setIsBookingModalOpen(true)} variant="outline" size="lg" icon={<Calendar />} fullWidthMobile={true}>
               Book An Estimate
             </CTAButton>
           </div>
         </div>
       </div>
       
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={() => setIsBookingModalOpen(false)} 
-      />
+      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
     </section>;
 };
 export default ProcessSection;
