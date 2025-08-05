@@ -80,7 +80,7 @@ const ProcessSection = () => {
         {/* Process Steps Container */}
         <div className="max-w-7xl mx-auto" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {/* Desktop Progress Bar */}
-          <div className="hidden lg:flex justify-center items-center mb-12 relative gap-16">
+          <div className="hidden lg:flex justify-center items-center mb-12 relative">
             {/* Render step buttons with connecting lines */}
             {steps.map((step, index) => (
               <div key={index} className="flex items-center">
@@ -92,7 +92,7 @@ const ProcessSection = () => {
                 </button>
                 {/* Connection line (except for last step) */}
                 {index < steps.length - 1 && (
-                  <div className={`w-16 h-1 ${index < activeStep ? 'bg-blue-600' : 'bg-gray-200'} transition-all duration-300`}></div>
+                  <div className={`w-24 h-1 ${index < activeStep ? 'bg-blue-600' : 'bg-gray-200'} transition-all duration-300`}></div>
                 )}
               </div>
             ))}
