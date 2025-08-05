@@ -132,16 +132,20 @@ const HeroSection = () => {
             <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left pl-8 xl:pl-16">
               {/* Google Reviews Badge - positioned above title */}
               <div className="flex justify-center lg:justify-start mb-4">
-              <div className="flex items-center text-sm text-gray-600">
-                  <span className="text-lg font-bold mr-2" style={{ color: '#4285F4' }}>Google</span>
-                  <div className="flex items-center gap-1 mr-3">
-                    <span className="text-2xl">⭐</span>
-                    <span className="text-2xl">⭐</span>
-                    <span className="text-2xl">⭐</span>
-                    <span className="text-2xl">⭐</span>
-                    <span className="text-2xl">⭐</span>
-                  </div>
-                  <span className="text-lg font-medium text-gray-700">170+ reviews</span>
+              <div className="flex items-center text-sm">
+                <div className="flex items-center">
+                  <span className="font-bold text-blue-500">G</span>
+                  <span className="font-bold text-red-500">o</span>
+                  <span className="font-bold text-yellow-500">o</span>
+                  <span className="font-bold text-blue-500">g</span>
+                  <span className="font-bold text-green-500">l</span>
+                  <span className="font-bold text-red-500">e</span>
+                </div>
+                <div className="flex items-center ml-2">
+                  <span className="text-yellow-400 text-sm">★★★★★</span>
+                  <span className="ml-1 text-white font-medium">170+ reviews</span>
+                  <span className="ml-1 text-gray-400">›</span>
+                </div>
                 </div>
               </div>
               
