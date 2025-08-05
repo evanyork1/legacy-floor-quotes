@@ -4,9 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLocation } from "react-router-dom";
 
 const HomepageFAQ = () => {
-  const faqs = [
+  const location = useLocation();
+  const isProsper = location.pathname === '/epoxy-flooring-prosper';
+  
+  const baseFaqs = [
     {
       question: "How long does a garage floor coating take to install?",
       answer: "Most residential garage floors are installed in just one day, and ready for vehicle use within 24–48 hours."
@@ -28,6 +32,19 @@ const HomepageFAQ = () => {
       answer: "Yes. Our polyurea coatings come with a limited lifetime warranty against peeling, discoloration, and cracking under normal use."
     }
   ];
+
+  const prosperFaqs = [
+    {
+      question: "Do you service neighborhoods like Windsong Ranch and Star Trail?",
+      answer: "Yes — we frequently install floors in Prosper's newest residential communities."
+    },
+    {
+      question: "How soon can I get an estimate in Prosper?",
+      answer: "Same-day estimates available when you call before 2pm!"
+    }
+  ];
+
+  const faqs = isProsper ? [...baseFaqs, ...prosperFaqs] : baseFaqs;
 
   return (
     <section className="py-16 bg-muted/30">
