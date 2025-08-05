@@ -18,9 +18,10 @@ const HeroSection = () => {
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   const isHoustonLanding = location.pathname === '/houstonreslanding';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
-  const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day")));
+  const isFrisco = location.pathname === '/epoxy-flooring-frisco';
+  const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day"))));
   const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
-  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results")));
+  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
 
   // Gallery images for rotating background - memoized for performance
   const galleryImages = useMemo(() => [
@@ -51,8 +52,8 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // For DFW, DFW Res Landing, and Prosper pages, use the new design
-  if (isDFW || isProsper) {
+  // For DFW, DFW Res Landing, Prosper, and Frisco pages, use the new design
+  if (isDFW || isProsper || isFrisco) {
     return (
       <section className="relative overflow-hidden">
         {/* Hero Container - Fixed Height on Mobile */}
@@ -174,7 +175,7 @@ const HeroSection = () => {
               
               <div className="text-center lg:text-left">
                 <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white leading-snug">
-                  {isProsper ? subtext : "Residential & Commercial Floor Coatings That Last"}
+                  {isProsper || isFrisco ? subtext : "Residential & Commercial Floor Coatings That Last"}
                 </div>
               </div>
               

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 const TestimonialsSection = () => {
   const location = useLocation();
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
+  const isFrisco = location.pathname === '/epoxy-flooring-frisco';
   
   const testimonials = [{
     name: "Bharat Arimilli",
@@ -49,7 +50,7 @@ const TestimonialsSection = () => {
             </div>
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
-            {isProsper ? "What Homeowners Near Prosper Are Saying" : "What Our Customers Say"}
+            {isProsper ? "What Homeowners Near Prosper Are Saying" : isFrisco ? "What Frisco Homeowners Are Saying" : "What Our Customers Say"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Our customers love talking about the work we have done. Read from hundreds of customers their experience with us.

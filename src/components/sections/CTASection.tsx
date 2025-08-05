@@ -14,6 +14,7 @@ const CTASection = () => {
   // Determine quote path based on current location
   const isCommercial = location.pathname === '/dfwcommercial';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
+  const isFrisco = location.pathname === '/epoxy-flooring-frisco';
   const quotePath = '/contact';
 
   return (
@@ -21,7 +22,7 @@ const CTASection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-800/90"></div>
       <div className="container mx-auto px-4 text-center relative">
         <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-          {isCommercial ? "Ready for your commercial flooring project?" : (isProsper ? "Ready To Transform Your Floor in Prosper?" : "Ready to discover your new floor?")}
+          {isCommercial ? "Ready for your commercial flooring project?" : (isProsper ? "Ready To Transform Your Floor in Prosper?" : (isFrisco ? "Ready To Transform Your Floor in Frisco?" : "Ready to discover your new floor?"))}
         </h2>
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           {isCommercial 

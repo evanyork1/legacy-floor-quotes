@@ -56,6 +56,84 @@ const FeaturesSection = () => {
     description: "Choose what works best for you - virtual consultations or meet with our experts on-site. No need to take time out of your day unless you prefer the personal touch."
   }];
   const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW || isHouston ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
-  return;
+  
+  return (
+    <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="features">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+            {sectionTitle}
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            {isCommercial 
+              ? "Specialized commercial flooring solutions designed for high-traffic industrial environments"
+              : isDFW || isHouston
+                ? "Discover the Legacy difference with premium coating solutions designed to last"
+                : "From our network of certified installers to our lifetime warranty, we deliver excellence at every step"
+            }
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {features.map((feature, index) => (
+            <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 p-3 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors duration-300">
+                    {feature.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">{feature.description}</p>
+                  </div>
+                </div>
+                {feature.image && (
+                  <div className="mt-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {(isDFW || isHouston) && (
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CTAButton 
+                onClick={() => navigate('/contact')} 
+                variant="primary"
+                size="lg"
+                icon={<ArrowRight />}
+                iconPosition="right"
+                fullWidthMobile={true}
+              >
+                Get Your Quote
+              </CTAButton>
+              
+              <CTAButton
+                onClick={() => setShowBookingModal(true)}
+                variant="outline"
+                size="lg"
+                icon={<Calendar />}
+                fullWidthMobile={true}
+              >
+                Book An Estimate
+              </CTAButton>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
+    </section>
+  );
 };
 export default FeaturesSection;

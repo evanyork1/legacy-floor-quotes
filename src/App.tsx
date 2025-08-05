@@ -14,6 +14,7 @@ const Quote = lazy(() => import("./pages/Quote"));
 const DFW = lazy(() => import("./pages/DFW"));
 const DFWResLanding = lazy(() => import("./pages/DFWResLanding"));
 const ProsperTX = lazy(() => import("./pages/ProsperTX"));
+const FriscoTX = lazy(() => import("./pages/FriscoTX"));
 const QuoteDFW = lazy(() => import("./pages/QuoteDFW"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
@@ -59,7 +60,8 @@ const App = () => (
               <Route path="/quotehou" element={<Quote />} />
               <Route path="/dfw" element={<DFW />} />
               <Route path="/dfwreslanding" element={<DFWResLanding />} />
-              <Route path="/epoxy-flooring-prosper" element={<ProsperTX />} />
+        <Route path="/epoxy-flooring-prosper" element={<ProsperTX />} />
+        <Route path="/epoxy-flooring-frisco" element={<FriscoTX />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />

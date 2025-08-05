@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 const HomepageFAQ = () => {
   const location = useLocation();
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
+  const isFrisco = location.pathname === '/epoxy-flooring-frisco';
   
   const baseFaqs = [
     {
@@ -44,7 +45,18 @@ const HomepageFAQ = () => {
     }
   ];
 
-  const faqs = isProsper ? [...baseFaqs, ...prosperFaqs] : baseFaqs;
+  const friscoFaqs = [
+    {
+      question: "Do you serve Phillips Creek Ranch, Starwood, and other Frisco communities?",
+      answer: "Yes, we regularly install in Frisco's premier neighborhoods."
+    },
+    {
+      question: "Can I get a same-day quote in Frisco?",
+      answer: "Absolutely. Call us before 2pm for a same-day estimate."
+    }
+  ];
+
+  const faqs = isProsper ? [...baseFaqs, ...prosperFaqs] : isFrisco ? [...baseFaqs, ...friscoFaqs] : baseFaqs;
 
   return (
     <section className="py-16 bg-muted/30">
