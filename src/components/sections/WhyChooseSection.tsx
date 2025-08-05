@@ -5,17 +5,17 @@ const WhyChooseSection = () => {
     {
       icon: Shield,
       title: "Lifetime Warranty",
-      description: "We'll be at your door within hours."
+      description: "We stand behind every floor we install. Our coatings are backed by a lifetime warranty—no flaking, peeling, or failing, ever. Peace of mind, built in."
     },
     {
       icon: Clock,
       title: "One-Day Installation",
-      description: "Pick your day and time no phone calls needed."
+      description: "We'll transform your garage or commercial space in just one day. No long timelines or delays—just efficient, professional service that respects your time."
     },
     {
       icon: Sparkles,
       title: "Clean Look, Low Maintenance",
-      description: "Clear, upfront pricing with no surprises."
+      description: "Our premium flake system is designed to hide dust and dirt, keeping your floor looking spotless with minimal effort."
     }
   ];
 
