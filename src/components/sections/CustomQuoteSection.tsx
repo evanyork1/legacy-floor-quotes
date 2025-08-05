@@ -3,5 +3,5 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 export const CustomQuoteSection = () => {
   const navigate = useNavigate();
-  return;
+  return null;
 };
