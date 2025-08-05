@@ -57,10 +57,10 @@ const DFW = () => {
         <EpoxyVsPolyureaSection />
         <ProcessSection />
         <TestimonialsSection />
+        <FeaturesSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
-        <FeaturesSection />
         <GalleryPreview />
         <CustomQuoteSection />
         <CommercialLinkSection />
