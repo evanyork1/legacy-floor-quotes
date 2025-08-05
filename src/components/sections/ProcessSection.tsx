@@ -115,7 +115,7 @@ const ProcessSection = () => {
               {/* Left Side - Image */}
               <div className="relative order-2 lg:order-1">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
-                <div className="relative bg-white rounded-2xl p-8 shadow-2xl overflow-hidden">
+                <div className="relative overflow-hidden">
                   <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
                     <img src={steps[activeStep].image} alt={steps[activeStep].title} className="w-full h-full object-cover" />
                   </div>
