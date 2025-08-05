@@ -97,7 +97,7 @@ const FeaturesSection = () => {
                   </div>
                 )}
                 {(isDFW || isHouston) && (
-                  <div className="mt-4">
+                  <div className="mt-4 text-center">
                     <button
                       onClick={() => {
                         if (feature.title === "Flake Floors") navigate('/flake-floors');
