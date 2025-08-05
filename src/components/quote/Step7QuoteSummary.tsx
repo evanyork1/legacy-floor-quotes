@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import type { FormData } from './types';
 interface Step7Props {
@@ -9,6 +10,10 @@ export const Step7QuoteSummary = ({
   formData,
   estimatedPrice
 }: Step7Props) => {
+  const location = useLocation();
+  const isDFW = location.pathname.includes('/quotedfw');
+  const monthlyPayment = Math.round(estimatedPrice / 24);
+
   useEffect(() => {
     // Track quote request conversion when step 7 loads
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -44,6 +49,18 @@ export const Step7QuoteSummary = ({
               ${estimatedPrice.toLocaleString()}
             </div>
             <p className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6">Estimated Total Investment</p>
+            
+            {isDFW && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
+                <p className="text-blue-800 font-medium text-base sm:text-lg mb-2">
+                  Monthly Payment with our financing
+                </p>
+                <p className="text-blue-600 text-sm sm:text-base mb-2">24 months 0% interest</p>
+                <div className="text-2xl sm:text-3xl font-bold text-blue-700">
+                  ${monthlyPayment.toLocaleString()}
+                </div>
+              </div>
+            )}
             
             <div className="bg-white rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
               <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Quote Summary:</h3>
