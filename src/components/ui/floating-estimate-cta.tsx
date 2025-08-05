@@ -18,9 +18,6 @@ export const FloatingEstimateCTA = () => {
             <div className="text-xl font-bold tracking-wide group-hover:text-blue-200 transition-colors">
               Book An Estimate
             </div>
-            <div className="text-sm text-blue-200 mt-1 opacity-90">
-              Click to schedule your free consultation
-            </div>
           </div>
         </div>
       </div>
