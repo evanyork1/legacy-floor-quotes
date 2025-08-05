@@ -218,7 +218,7 @@ const HeroSection = () => {
         {/* Floating Quote Button - Right Side */}
         <Button
           onClick={() => navigate('/quotedfw')}
-          className={`fixed right-[-130px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-4 py-4 text-sm shadow-2xl z-50 rounded-l-xl rounded-r-none border-2 transition-all duration-300 ${
+          className={`fixed right-[-130px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-6 py-8 text-xl shadow-2xl z-50 rounded-l-xl rounded-r-none border-4 transition-all duration-300 ${
             scrolledPastHero 
               ? 'bg-blue-600 text-white border-blue-600' 
               : 'bg-transparent text-white border-white'
