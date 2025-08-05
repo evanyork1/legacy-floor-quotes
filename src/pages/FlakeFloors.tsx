@@ -80,7 +80,7 @@ const FlakeFloors = () => {
                     onClick={() => navigate('/contact')}
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
-                    Get Free Quote
+                    Contact Us
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <Button 
