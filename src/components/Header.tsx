@@ -8,6 +8,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResidentialOpen, setIsResidentialOpen] = useState(false);
   const [isCommercialOpen, setIsCommercialOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -25,18 +26,16 @@ const Header = () => {
     name: "Gallery",
     path: "/gallery"
   }, {
-    name: "FAQ",
-    path: "/faq"
-  }, {
-    name: "Blog",
-    path: "/blog"
-  }, {
-    name: "About",
-    path: `${homePath}#testimonials`
-  }, {
     name: "Contact",
     path: "/contact"
   }];
+
+  const aboutItems = [
+    { name: "About Us", path: `${homePath}#testimonials` },
+    { name: "Blog", path: "/blog" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Financing", path: "/financing" }
+  ];
 
   const residentialItems = [
     { name: "Garage Floors", path: "/flake-floors" },
@@ -111,6 +110,29 @@ const Header = () => {
                 </div>
               )}
             </div>
+
+            {/* About Dropdown */}
+            <div className="relative" onMouseEnter={() => setIsAboutOpen(true)} onMouseLeave={() => setIsAboutOpen(false)}>
+              <button 
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
+              >
+                About
+                <ChevronDown className="ml-1 h-3 w-3" />
+              </button>
+              {isAboutOpen && (
+                <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  {aboutItems.map(item => (
+                    <a 
+                      key={item.name} 
+                      href={item.path}
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
             
             {navItems.slice(1).map(item => (
               <a key={item.name} href={item.path} className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm">
@@ -161,6 +183,21 @@ const Header = () => {
               <div className="px-4">
                 <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
                 {commercialItems.map(item => (
+                  <a 
+                    key={item.name} 
+                    href={item.path}
+                    className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium py-2 text-sm pl-4 rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+
+              {/* Mobile About Section */}
+              <div className="px-4">
+                <div className="text-gray-800 font-semibold text-base mb-2">About</div>
+                {aboutItems.map(item => (
                   <a 
                     key={item.name} 
                     href={item.path}
