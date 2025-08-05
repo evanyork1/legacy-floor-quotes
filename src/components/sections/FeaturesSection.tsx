@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CTAButton } from "@/components/ui/cta-button";
-import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight, Phone, Calendar } from "lucide-react";
+import { Layers, Building, Sparkles, Users, Shield, Headphones, ArrowRight, Calendar } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
+
 const FeaturesSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const location = useLocation();
@@ -12,6 +12,7 @@ const FeaturesSection = () => {
   const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isCommercial = location.pathname === '/dfwcommercial';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
+  
   const features = isCommercial ? [{
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
     title: "Concrete Polishing",
@@ -55,6 +56,7 @@ const FeaturesSection = () => {
     title: "World Class Service",
     description: "Choose what works best for you - virtual consultations or meet with our experts on-site. No need to take time out of your day unless you prefer the personal touch."
   }];
+  
   const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW || isHouston ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
   
   return (
@@ -80,17 +82,25 @@ const FeaturesSection = () => {
                   <p className="text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
-                   {feature.image && (
+                  {feature.image && (
                     <div className="mt-4 w-full">
                       <img 
                         src={feature.image} 
                         alt={feature.title}
                         className="w-full h-48 object-cover rounded-lg"
                       />
-                      <div className="mt-4">
-                        <Button variant="outline" className="w-full">
+                      <div className="mt-4 text-center">
+                        <button 
+                          onClick={() => {
+                            if (feature.title === "Flake Floors") navigate('/flakefloors');
+                            else if (feature.title === "Industrial Epoxy") navigate('/industrialepoxy');
+                            else if (feature.title === "Concrete Polishing") navigate('/concretepolishing');
+                          }}
+                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center justify-center gap-1 transition-colors"
+                        >
                           Learn More
-                        </Button>
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
                       </div>
                     </div>
                   )}
@@ -100,6 +110,18 @@ const FeaturesSection = () => {
           ))}
         </div>
 
+        {(isDFW || isHouston) && (
+          <div className="mt-12 text-center">
+            <Button
+              variant="outline"
+              onClick={() => setShowBookingModal(true)}
+              className="border-blue-600 text-blue-600 hover:bg-blue-50"
+            >
+              <Calendar className="mr-2 h-4 w-4" />
+              Book An Estimate
+            </Button>
+          </div>
+        )}
       </div>
       
       <BookingModal 
@@ -109,4 +131,5 @@ const FeaturesSection = () => {
     </section>
   );
 };
+
 export default FeaturesSection;
