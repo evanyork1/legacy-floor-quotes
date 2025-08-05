@@ -21,8 +21,8 @@ export const EnhancedValueProps = () => {
     },
     {
       icon: Box,
-      title: "We Move Your Stuff",
-      description: "Boxes, cabinets, gym gear, - we move it all out and back in when we are done",
+      title: "Confident, Competent Professionals",
+      description: "We don't just coat floors, we guide you from quote to completion with expert care. Our team is trained, responsive, and committed to getting it done right the first time.",
       bgColor: "bg-blue-100",
       iconColor: "text-blue-600"
     },
