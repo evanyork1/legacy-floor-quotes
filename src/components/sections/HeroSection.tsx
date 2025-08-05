@@ -132,7 +132,7 @@ const HeroSection = () => {
             <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left pl-8 xl:pl-16">
               {/* Google Reviews Badge - positioned above title */}
               <div className="flex justify-center lg:justify-start mb-4">
-                <div className="flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-gray-200">
+              <div className="flex items-center text-sm text-gray-600">
                   <span className="text-lg font-bold mr-2" style={{ color: '#4285F4' }}>Google</span>
                   <div className="flex items-center gap-1 mr-3">
                     <span className="text-2xl">⭐</span>
