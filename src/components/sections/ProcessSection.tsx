@@ -3,10 +3,12 @@ import { ChevronLeft, ChevronRight, Play, Pause, Calendar, ArrowRight } from "lu
 import { Button } from "@/components/ui/button";
 import { CTAButton } from "@/components/ui/cta-button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BookingModal } from "@/components/landing/BookingModal";
 const ProcessSection = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const location = useLocation();
   const isHouston = location.pathname === '/houstonreslanding';
   const quoteUrl = '/contact';
@@ -162,7 +164,7 @@ const ProcessSection = () => {
             </CTAButton>
             
             <CTAButton
-              onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
+              onClick={() => setIsBookingModalOpen(true)}
               variant="outline"
               size="lg"
               icon={<Calendar />}
@@ -173,6 +175,11 @@ const ProcessSection = () => {
           </div>
         </div>
       </div>
+      
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={() => setIsBookingModalOpen(false)} 
+      />
     </section>;
 };
 export default ProcessSection;
