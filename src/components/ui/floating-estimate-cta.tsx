@@ -14,7 +14,6 @@ export const FloatingEstimateCTA = () => {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="text-lg font-bold">BOOK AN ESTIMATE</div>
-              <div className="text-sm text-blue-100">https://www.billygo.com/schedule/</div>
             </div>
             <Button
               onClick={() => setShowBookingModal(true)}
