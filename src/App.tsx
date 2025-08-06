@@ -60,7 +60,7 @@ const App = () => (
               <Route path="/houston" element={<Houston />} />
               <Route path="/quotehou" element={<Quote />} />
               <Route path="/dfw" element={<DFW />} />
-              <Route path="/dfwreslanding" element={<DFWResLanding />} />
+              <Route path="/dfwreslanding" element={<Navigate to="/dfw" replace />} />
         
         
               <Route path="/quotedfw" element={<QuoteDFW />} />
