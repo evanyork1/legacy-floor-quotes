@@ -78,12 +78,12 @@ const AdditionalServices = () => {
         <Header />
 
         <main className="pt-20">
-          <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
-            <div className="container mx-auto px-6 max-w-6xl">
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-                Garage Makeover & Additional Services
+          <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                Complete Garage Makeovers & <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Additional Services</span>
               </h1>
-              <p className="text-lg text-gray-600 max-w-3xl">
+              <p className="text-lg text-gray-600 max-w-3xl leading-relaxed">
                 Many of our customers choose a complete garage makeover—pairing their new floor with painting, storage, and organization. Explore our most popular add-ons below.
               </p>
             </div>
@@ -107,12 +107,15 @@ const AdditionalServices = () => {
                     </div>
                   </div>
                   <div className="w-full">
-                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
-                      {s.title}
-                    </h2>
-                    <p className="text-gray-600 text-base sm:text-lg">
-                      {s.description}
-                    </p>
+                    <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+                      <div className="h-1 w-12 bg-blue-600 rounded-full mb-4" />
+                      <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
+                        {s.title}
+                      </h2>
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                        {s.description}
+                      </p>
+                    </div>
                   </div>
                 </article>
               ))}
