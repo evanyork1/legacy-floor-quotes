@@ -9,7 +9,7 @@ const services = [
     title: "Garage Painting",
     description:
       "Complete wall and ceiling painting to brighten and protect your garage. We prep, patch, and use premium coatings for a durable, clean finish that elevates your space.",
-    image: "/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png",
+    image: "/lovable-uploads/e6aa0cda-80ea-469f-ab5f-30989e74af4e.png",
     alt: "Garage painting service with fresh, bright walls",
   },
   {
@@ -17,7 +17,7 @@ const services = [
     title: "Custom Cabinetry",
     description:
       "Built-for-you storage systems that fit your garage and your lifestyle. From tall lockers to workbenches and drawers, we create a place for everything.",
-    image: "/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png",
+    image: "/lovable-uploads/19b6918b-3c37-48e4-9681-41b3c0ab2c7e.png",
     alt: "Custom garage cabinetry with organized storage",
   },
   {
@@ -25,7 +25,7 @@ const services = [
     title: "Slat Walls & Hanging Racks",
     description:
       "Maximize vertical space with durable slat walls and overhead racks. Keep tools, bikes, and seasonal items tidy, accessible, and off the floor.",
-    image: "/lovable-uploads/c7682b64-17bd-49b5-ac6c-96416093f159.png",
+    image: "/lovable-uploads/7b92e865-5b2a-4be6-9b66-c58c37dd8ddd.png",
     alt: "Garage slat wall system with hanging racks",
   },
   {
@@ -33,7 +33,7 @@ const services = [
     title: "Pest Control",
     description:
       "A proactive treatment that helps protect your floor and home for years. Seal entry points and deter pests to preserve your investment.",
-    image: "/lovable-uploads/4118a438-beef-487b-949a-0e4db42b6da7.png",
+    image: "/lovable-uploads/28970f22-c3c2-4790-8cbf-82a44a8a842a.png",
     alt: "Pest control service for garages",
   },
   {
@@ -41,7 +41,7 @@ const services = [
     title: "Pressure Washing",
     description:
       "Deep cleaning for driveways, patios, and walkways. Remove grime, mildew, and stains to refresh your exterior surfaces before or after your floor install.",
-    image: "/lovable-uploads/30880d71-5ddb-4653-8b75-4f05283e8728.png",
+    image: "/lovable-uploads/ce390221-ff76-49ca-81ac-435650e52d2a.png",
     alt: "Pressure washing concrete surfaces",
   },
 ];
