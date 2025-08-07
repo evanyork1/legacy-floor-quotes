@@ -1,8 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Users, Award, Heart, Star } from "lucide-react";
+import { Users, Award, Heart, Star, ArrowRight, Calendar } from "lucide-react";
+import { useState } from "react";
+import { CTAButton } from "@/components/ui/cta-button";
+import { BookingModal } from "@/components/landing/BookingModal";
+import { useNavigate } from "react-router-dom";
 const About = () => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const navigate = useNavigate();
+  
   const values = [{
     icon: Users,
     title: "Family Foundation",
@@ -204,18 +211,39 @@ const About = () => {
               Ready to see what it's like to work with a company that truly cares about your project?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/quotedfw" className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center">
-                Get Your Free Quote
-              </a>
-              <a href="tel:214-305-6516" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center">
-                Call (214) 305-6516
-              </a>
+              <CTAButton 
+                onClick={() => navigate('/contact')} 
+                variant="outline"
+                size="lg"
+                icon={<ArrowRight />}
+                iconPosition="right"
+                fullWidthMobile={true}
+                className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white"
+              >
+                Contact Us
+              </CTAButton>
+              
+              <CTAButton
+                onClick={() => setShowBookingModal(true)}
+                variant="outline"
+                size="lg"
+                icon={<Calendar />}
+                fullWidthMobile={true}
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600"
+              >
+                Book An Estimate
+              </CTAButton>
             </div>
           </div>
         </section>
       </main>
 
       <Footer />
+      
+      <BookingModal 
+        isOpen={showBookingModal} 
+        onClose={() => setShowBookingModal(false)} 
+      />
     </>;
 };
 export default About;
