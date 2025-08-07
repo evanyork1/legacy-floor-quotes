@@ -30,17 +30,19 @@ const Header = () => {
     path: "/contact"
   }];
 
-  const aboutItems = [
-    { name: "About Us", path: "/about" },
-    { name: "Blog", path: "/blog" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Financing", path: "/financing" }
-  ];
+const aboutItems = [
+  { name: "About Us", path: "/about" },
+  { name: "Blog", path: "/blog" },
+  { name: "Additional Services", path: "/additional-services" },
+  { name: "FAQ", path: "/faq" },
+  { name: "Financing", path: "/financing" }
+];
 
-  const residentialItems = [
-    { name: "Garage Floors", path: "/flake-floors" },
-    { name: "Patios", path: "/residential-patio" }
-  ];
+const residentialItems = [
+  { name: "Garage Floors", path: "/flake-floors" },
+  { name: "Patios", path: "/residential-patio" },
+  { name: "Additional Services", path: "/additional-services" }
+];
 
   const commercialItems = [
     { name: "Flake Floors", path: "/flake-floors" },

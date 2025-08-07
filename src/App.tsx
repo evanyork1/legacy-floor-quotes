@@ -36,6 +36,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Financing = lazy(() => import("./pages/Financing"));
 const About = lazy(() => import("./pages/About"));
+const AdditionalServices = lazy(() => import("./pages/AdditionalServices"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -73,10 +74,10 @@ const App = () => (
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/flake-floors" element={<FlakeFloors />} />
-              <Route path="/residential-patio" element={<ResidentialPatio />} />
-              <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
-              <Route path="/concrete-polishing" element={<ConcretePolishing />} />
+<Route path="/flake-floors" element={<FlakeFloors />} />
+<Route path="/residential-patio" element={<ResidentialPatio />} />
+<Route path="/additional-services" element={<AdditionalServices />} />
+<Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
