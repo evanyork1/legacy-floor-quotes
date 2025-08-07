@@ -1,8 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CTAButton } from "@/components/ui/cta-button";
-import { Phone } from "lucide-react";
+import CTASection from "@/components/sections/CTASection";
 
 const services = [
   {
@@ -120,24 +119,7 @@ const AdditionalServices = () => {
             </div>
           </section>
 
-          <section className="py-16">
-            <div className="container mx-auto px-6 max-w-4xl">
-              <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 sm:p-10 text-center shadow-xl">
-                <h3 className="text-2xl sm:text-3xl font-bold mb-3">Ready to plan your garage makeover?</h3>
-                <p className="text-white/90 mb-6">
-                  Contact our team or call now—let's create a clean, organized, and durable garage you'll love.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <CTAButton asChild variant="primary" size="lg" fullWidthMobile>
-                    <a href="/contact">Contact Us</a>
-                  </CTAButton>
-                  <CTAButton asChild variant="outline" size="lg" fullWidthMobile icon={<Phone />}>
-                    <a href="tel:214-305-6516">(214) 305-6516</a>
-                  </CTAButton>
-                </div>
-              </div>
-            </div>
-          </section>
+<CTASection />
         </main>
 
         <Footer />
