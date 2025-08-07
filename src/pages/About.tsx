@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { OptimizedImage } from "@/components/OptimizedImage";
 import { Users, Award, Heart, Star } from "lucide-react";
 
 const About = () => {
@@ -63,7 +62,7 @@ const About = () => {
                 </div>
               </div>
               <div className="relative">
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png"
                   alt="Legacy Industrial Coatings professional truck and equipment ready for service"
                   className="rounded-2xl shadow-2xl w-full h-auto"
@@ -121,7 +120,7 @@ const About = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/f51e2674-703e-41e2-af60-3230aa51f8fe.png"
                   alt="Legacy craftsman carefully preparing garage floor surface with professional equipment"
                   className="rounded-lg shadow-lg w-full h-64 object-cover"
@@ -131,7 +130,7 @@ const About = () => {
               </div>
 
               <div className="space-y-4">
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/0fd4e444-b540-4c31-b624-49d7b2cb00a6.png"
                   alt="Legacy professional applying premium floor coating with precision and care"
                   className="rounded-lg shadow-lg w-full h-64 object-cover"
@@ -141,7 +140,7 @@ const About = () => {
               </div>
 
               <div className="space-y-4">
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/7d71c2b1-b5e5-4bd4-9e4d-427a3d20283f.png"
                   alt="Legacy team member working in residential garage with professional floor coating equipment"
                   className="rounded-lg shadow-lg w-full h-64 object-cover"
@@ -183,12 +182,12 @@ const About = () => {
                 </div>
               </div>
               <div className="space-y-6">
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/998d8e69-d5c2-455a-9074-40a5cd13c2a0.png"
                   alt="Legacy team working on large commercial floor coating project with professional results"
                   className="rounded-lg shadow-lg w-full h-auto"
                 />
-                <OptimizedImage
+                <img
                   src="/lovable-uploads/5818f249-f4d8-4a09-b3cf-0434ccff0e29.png"
                   alt="Commercial installation showcasing Legacy's professional capabilities and attention to detail"
                   className="rounded-lg shadow-lg w-full h-auto"
