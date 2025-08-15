@@ -98,11 +98,7 @@ const ResidentialGarageFloors = () => {
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                   The <span className="text-blue-600">Legacy Service</span> Experience
                 </h2>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  Over 80% of our Google reviews talk about the experience customers had with our company, not just the product. 
-                  THAT is why we are different. You will always be handled with care, can call or text your point of contact, 
-                  will not fall through the cracks, and we are your advisors.
-                </p>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">Over 80% of our Google reviews talk about the experience customers had with our company, not just the product. That is why we are different. You will always be handled with care, can call or text your point of contact, will not fall through the cracks, and we are your advisors.</p>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   From the first conversation to a finished floor, you'll experience what sets Legacy apart. 
                   We don't just install floors – we build relationships and deliver an exceptional experience every step of the way.
