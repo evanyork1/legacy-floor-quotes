@@ -87,22 +87,55 @@ const ResidentialGarageFloors = () => {
         <WhyChooseSection />
         
         {/* Legacy Service Experience Section */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
-              </div>
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  The <span className="text-blue-600">Legacy Service</span> Experience
+        <section className="py-24 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="w-full h-full bg-repeat" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="inline-flex items-center bg-blue-600/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  ⭐ What Sets Us Apart
+                </div>
+                <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight">
+                  The <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Legacy Service</span><br />Experience
                 </h2>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">Over 80% of our Google reviews talk about the experience customers had with our company, not just the product. That is why we are different. You will always be handled with care, can call or text your point of contact, will not fall through the cracks, and we are your advisors.</p>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  From the first conversation to a finished floor, you'll experience what sets Legacy apart. 
-                  We don't just install floors – we build relationships and deliver an exceptional experience every step of the way.
-                </p>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 bg-blue-400 rounded-full mt-3"></div>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      <span className="text-white font-semibold">80% of our Google reviews</span> talk about the experience customers had with our company, not just the product. That is why we are different.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 bg-blue-400 rounded-full mt-3"></div>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      You will always be <span className="text-white font-semibold">handled with care</span>, can call or text your point of contact, will not fall through the cracks, and we are your advisors.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 bg-blue-400 rounded-full mt-3"></div>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      <span className="text-white font-semibold">From the first conversation to a finished floor</span>, you'll experience what sets Legacy apart. We don't just install floors – we build relationships.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2 relative">
+                <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-3xl blur-xl"></div>
+                <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 border border-white/20">
+                  <img 
+                    src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" 
+                    alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" 
+                    className="w-full h-96 object-cover rounded-xl shadow-2xl" 
+                  />
+                </div>
+                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl border border-blue-500">
+                  <div className="text-3xl font-bold">80%</div>
+                  <div className="text-sm opacity-90">Reviews mention our service</div>
+                </div>
               </div>
             </div>
           </div>
