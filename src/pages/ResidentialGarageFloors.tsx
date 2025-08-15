@@ -92,7 +92,7 @@ const ResidentialGarageFloors = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png" alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
               </div>
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
