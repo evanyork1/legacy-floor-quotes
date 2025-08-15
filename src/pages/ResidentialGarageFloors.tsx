@@ -109,36 +109,7 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* What Are Garage Floor Coatings Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Premium <span className="text-blue-600">Garage Floor Coatings</span> for Your Home
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Our residential garage floor system combines a high-performance polyurea base with decorative vinyl flakes 
-                and a crystal-clear protective topcoat. This creates a stunning, durable surface that transforms your garage 
-                from a utilitarian space into a beautiful extension of your home. Say goodbye to stained, cracked concrete 
-                and hello to a floor that adds real value to your property.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Perfect for Residential Garages</h3>
-                <div className="space-y-4">
-                  {features.map((feature, index) => <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
-                    </div>)}
-                </div>
-              </div>
-              <div className="relative">
-                <img src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" alt="Close-up of residential garage floor flake coating texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         <EpoxyVsPolyureaSection />
 
