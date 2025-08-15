@@ -4,6 +4,10 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
+import WhyChooseSection from "@/components/sections/WhyChooseSection";
+import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -105,7 +109,9 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
-
+        
+        <QuickFeaturesSection />
+        
         {/* What Are Garage Floor Coatings Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
@@ -144,6 +150,8 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
+        <WhyChooseSection />
+
         {/* Benefits Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
           <div className="container mx-auto px-4">
@@ -171,6 +179,8 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
+
+        <EpoxyVsPolyureaSection />
 
         {/* Process Section */}
         <section className="py-20 bg-white">
@@ -213,6 +223,8 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
+
+        <TestimonialsSection />
 
         {/* FAQ Section */}
         <section className="py-20 bg-white">
