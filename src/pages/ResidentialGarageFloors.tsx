@@ -91,8 +91,9 @@ const ResidentialGarageFloors = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                  ⭐ What Sets Us Apart
+                <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-2xl shadow-xl mb-6">
+                  <div className="text-2xl font-bold mr-3">80%</div>
+                  <div className="text-sm">Reviews mention our service</div>
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 leading-tight">
                   The <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Legacy Service</span> Experience
@@ -126,10 +127,6 @@ const ResidentialGarageFloors = () => {
                     alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" 
                     className="w-full h-96 object-cover rounded-2xl shadow-2xl" 
                   />
-                </div>
-                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 rounded-2xl shadow-xl">
-                  <div className="text-3xl font-bold">80%</div>
-                  <div className="text-sm opacity-90">Reviews mention our service</div>
                 </div>
               </div>
             </div>
