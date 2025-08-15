@@ -69,7 +69,7 @@ const ResidentialGarageFloors = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Beautiful <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> for Your Home
+                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> for Your Home
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Transform your residential garage into a beautiful, functional space with our premium polyurea flake floor coatings. 
