@@ -56,7 +56,7 @@ const ResidentialGarageFloors = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> <span className="text-gray-900">in One Day</span>
+                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="lg:hidden" /> <span className="text-gray-900">in One Day</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
@@ -82,6 +82,36 @@ const ResidentialGarageFloors = () => {
         
         <QuickFeaturesSection />
         
+        <TestimonialsSection />
+        
+        <WhyChooseSection />
+        
+        {/* Legacy Service Experience Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <img src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" alt="Legacy Industrial Coatings team providing excellent customer service" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+              </div>
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                  The <span className="text-blue-600">Legacy Service</span> Experience
+                </h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  Over 80% of our Google reviews talk about the experience customers had with our company, not just the product. 
+                  THAT is why we are different. You will always be handled with care, can call or text your point of contact, 
+                  will not fall through the cracks, and we are your advisors.
+                </p>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  From the first conversation to a finished floor, you'll experience what sets Legacy apart. 
+                  We don't just install floors – we build relationships and deliver an exceptional experience every step of the way.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* What Are Garage Floor Coatings Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
@@ -114,17 +144,7 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
-        <WhyChooseSection />
-
-        {/* Benefits Section */}
-        
-
         <EpoxyVsPolyureaSection />
-
-        {/* Process Section */}
-        
-
-        <TestimonialsSection />
 
         {/* FAQ Section */}
         <section className="py-20 bg-white">
