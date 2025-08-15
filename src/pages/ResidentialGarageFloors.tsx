@@ -12,45 +12,28 @@ import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } fro
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-
 const ResidentialGarageFloors = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
-
-  const benefits = [
-    {
-      icon: <Shield className="h-8 w-8 text-blue-600" />,
-      title: "Lifetime Warranty",
-      description: "Our residential garage floor coatings come with an industry-leading lifetime warranty, protecting your home investment for years to come."
-    },
-    {
-      icon: <Clock className="h-8 w-8 text-blue-600" />,
-      title: "One-Day Installation",
-      description: "Transform your garage in just one day! Most residential garages are completed in a single day with minimal disruption to your routine."
-    },
-    {
-      icon: <Palette className="h-8 w-8 text-blue-600" />,
-      title: "Custom Design Options",
-      description: "Choose from dozens of flake colors and patterns to create a garage floor that perfectly complements your home's style."
-    },
-    {
-      icon: <Wrench className="h-8 w-8 text-blue-600" />,
-      title: "Easy Home Maintenance",
-      description: "Keep your garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
-    }
-  ];
-
-  const features = [
-    "Resists hot tire marks and oil stains",
-    "Slip-resistant surface for family safety",
-    "UV stable colors that won't fade or yellow",
-    "Impact resistant against dropped tools",
-    "Easy to clean with household products",
-    "Adds value to your home"
-  ];
-
-  return (
-    <>
+  const benefits = [{
+    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    title: "Lifetime Warranty",
+    description: "Our residential garage floor coatings come with an industry-leading lifetime warranty, protecting your home investment for years to come."
+  }, {
+    icon: <Clock className="h-8 w-8 text-blue-600" />,
+    title: "One-Day Installation",
+    description: "Transform your garage in just one day! Most residential garages are completed in a single day with minimal disruption to your routine."
+  }, {
+    icon: <Palette className="h-8 w-8 text-blue-600" />,
+    title: "Custom Design Options",
+    description: "Choose from dozens of flake colors and patterns to create a garage floor that perfectly complements your home's style."
+  }, {
+    icon: <Wrench className="h-8 w-8 text-blue-600" />,
+    title: "Easy Home Maintenance",
+    description: "Keep your garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
+  }];
+  const features = ["Resists hot tire marks and oil stains", "Slip-resistant surface for family safety", "UV stable colors that won't fade or yellow", "Impact resistant against dropped tools", "Easy to clean with household products", "Adds value to your home"];
+  return <>
       <Helmet>
         <title>Residential Garage Floor Coatings - Polyurea Flake Floors | Legacy Industrial Coatings</title>
         <meta name="description" content="Transform your residential garage with premium polyurea flake floor coatings. Lifetime warranty, one-day installation, and beautiful custom designs. Perfect for homeowners seeking durable garage floors." />
@@ -81,18 +64,11 @@ const ResidentialGarageFloors = () => {
                   With lifetime warranty protection and same-day installation, it's the perfect home improvement investment.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    onClick={() => navigate('/contact')}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  >
+                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     Contact Us
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={() => setShowBookingModal(true)}
-                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300"
-                  >
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
                     Get Free Home Estimate
                   </Button>
@@ -100,11 +76,7 @@ const ResidentialGarageFloors = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img 
-                  src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" 
-                  alt="Beautiful residential garage floor with polyurea flake coating" 
-                  className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
-                />
+                <img src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" alt="Beautiful residential garage floor with polyurea flake coating" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
               </div>
             </div>
           </div>
@@ -131,20 +103,14 @@ const ResidentialGarageFloors = () => {
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Perfect for Residential Garages</h3>
                 <div className="space-y-4">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
+                  {features.map((feature, index) => <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
                       <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" 
-                  alt="Close-up of residential garage floor flake coating texture" 
-                  className="w-full h-80 object-cover rounded-xl shadow-lg"
-                />
+                <img src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" alt="Close-up of residential garage floor flake coating texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
               </div>
             </div>
           </div>
@@ -153,76 +119,12 @@ const ResidentialGarageFloors = () => {
         <WhyChooseSection />
 
         {/* Benefits Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Why Homeowners Choose Our Garage Floors
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover why thousands of homeowners have chosen our garage floor coatings to enhance their homes.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
-                  <CardContent className="p-6">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {benefit.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         <EpoxyVsPolyureaSection />
 
         {/* Process Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Your Garage Floor Installation Process
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Professional installation in your home ensures your garage floor will look amazing and perform for decades.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  step: "01",
-                  title: "Home Consultation & Prep",
-                  description: "We visit your home to assess your garage and thoroughly prepare the concrete surface, ensuring optimal results."
-                },
-                {
-                  step: "02", 
-                  title: "Premium Base Application",
-                  description: "Our high-performance polyurea base coat is applied to your garage floor, providing superior durability for daily home use."
-                },
-                {
-                  step: "03",
-                  title: "Custom Flake Design",
-                  description: "Your chosen decorative flakes are broadcast and sealed with a protective topcoat that will keep your garage beautiful for life."
-                }
-              ].map((step, index) => (
-                <div key={index} className="text-center">
-                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-2xl font-bold w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         <TestimonialsSection />
 
@@ -299,19 +201,11 @@ const ResidentialGarageFloors = () => {
               Get a free estimate for your residential garage floor coating. Our home improvement experts will help you design the perfect floor for your garage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                variant="secondary"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
+              <Button onClick={() => navigate('/contact')} variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Contact Us
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                variant="outline"
-                onClick={() => setShowBookingModal(true)}
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10"
-              >
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Get Free Home Estimate
               </Button>
@@ -319,15 +213,10 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
-        <BookingModal 
-          isOpen={showBookingModal} 
-          onClose={() => setShowBookingModal(false)} 
-        />
+        <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
 
         <Footer />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default ResidentialGarageFloors;
