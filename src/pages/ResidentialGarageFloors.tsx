@@ -56,12 +56,10 @@ const ResidentialGarageFloors = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> for Your Home <span className="text-blue-600">in One Day</span>
+                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> <span className="text-blue-600">in One Day</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Transform your residential garage into a beautiful, functional space with our premium polyurea flake floor coatings. 
-                  Designed specifically for homeowners who want a garage that's as impressive as the rest of their home. 
-                  With lifetime warranty protection and same-day installation, it's the perfect home improvement investment.
+                  Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
