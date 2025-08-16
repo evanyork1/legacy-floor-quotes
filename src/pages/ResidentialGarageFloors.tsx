@@ -2,19 +2,17 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { LeadForm } from "@/components/landing/LeadForm";
+
 const ResidentialGarageFloors = () => {
-  const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
   const benefits = [{
     icon: <Shield className="h-8 w-8 text-blue-600" />,
@@ -33,7 +31,7 @@ const ResidentialGarageFloors = () => {
     title: "Easy Home Maintenance",
     description: "Keep your garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
   }];
-  const features = ["Resists hot tire marks and oil stains", "Slip-resistant surface for family safety", "UV stable colors that won't fade or yellow", "Impact resistant against dropped tools", "Easy to clean with household products", "Adds value to your home"];
+  
   return <>
       <Helmet>
         <title>Residential Garage Floor Coatings - Polyurea Flake Floors | Legacy Industrial Coatings</title>
