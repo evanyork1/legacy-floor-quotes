@@ -13,11 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { LeadForm } from "@/components/landing/LeadForm";
-
 const FlowerMound = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
-
   const benefits = [{
     icon: <Shield className="h-8 w-8 text-blue-600" />,
     title: "Lifetime Warranty",
@@ -35,18 +33,8 @@ const FlowerMound = () => {
     title: "Easy Home Maintenance",
     description: "Keep your Flower Mound garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
   }];
-
-  const features = [
-    "Resists hot tire marks and oil stains",
-    "Slip-resistant surface for family safety",
-    "UV stable colors that won't fade or yellow",
-    "Impact resistant against dropped tools",
-    "Easy to clean with household products",
-    "Adds value to your Flower Mound home"
-  ];
-
-  return (
-    <>
+  const features = ["Resists hot tire marks and oil stains", "Slip-resistant surface for family safety", "UV stable colors that won't fade or yellow", "Impact resistant against dropped tools", "Easy to clean with household products", "Adds value to your Flower Mound home"];
+  return <>
       <Helmet>
         <title>Flower Mound Garage Floor Coatings - Polyurea Flake Floors | Legacy Industrial Coatings</title>
         <meta name="description" content="Transform your Flower Mound garage with premium polyurea flake floor coatings. Lifetime warranty, one-day installation, and beautiful custom designs. Perfect for Flower Mound homeowners seeking durable garage floors." />
@@ -112,11 +100,7 @@ const FlowerMound = () => {
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
                     <div className="relative overflow-hidden">
-                      <img 
-                        src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" 
-                        alt="Before: Concrete garage floor before coating installation in Flower Mound" 
-                        className="w-full h-full object-cover" 
-                      />
+                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation in Flower Mound" className="w-full h-full object-cover" />
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                           BEFORE
@@ -125,11 +109,7 @@ const FlowerMound = () => {
                     </div>
                     {/* After Image */}
                     <div className="relative overflow-hidden">
-                      <img 
-                        src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" 
-                        alt="After: Beautiful Flower Mound garage floor with polyurea flake coating" 
-                        className="w-full h-full object-cover" 
-                      />
+                      <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful Flower Mound garage floor with polyurea flake coating" className="w-full h-full object-cover" />
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                           AFTER
@@ -207,11 +187,7 @@ const FlowerMound = () => {
               <div className="order-1 lg:order-2 relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative">
-                  <img 
-                    src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" 
-                    alt="Legacy Industrial Coatings team member preparing Flower Mound garage floor with hand grinder" 
-                    className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-2xl" 
-                  />
+                  <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing Flower Mound garage floor with hand grinder" className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-2xl" />
                 </div>
               </div>
             </div>
@@ -243,11 +219,7 @@ const FlowerMound = () => {
               <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img 
-                      src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
-                      alt="Before garage floor transformation in Flower Mound" 
-                      className="w-full h-full object-cover" 
-                    />
+                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation in Flower Mound" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -255,11 +227,7 @@ const FlowerMound = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img 
-                      src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
-                      alt="After garage floor transformation with flake coating in Flower Mound" 
-                      className="w-full h-full object-cover" 
-                    />
+                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating in Flower Mound" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -285,11 +253,7 @@ const FlowerMound = () => {
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img 
-                      src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" 
-                      alt="Before garage floor coating in Flower Mound" 
-                      className="w-full h-full object-cover" 
-                    />
+                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating in Flower Mound" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -297,11 +261,7 @@ const FlowerMound = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img 
-                      src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" 
-                      alt="After garage floor with beautiful flake finish in Flower Mound" 
-                      className="w-full h-full object-cover" 
-                    />
+                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor with beautiful flake finish in Flower Mound" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -315,131 +275,13 @@ const FlowerMound = () => {
         </section>
 
         {/* How Garage Floor Coatings Benefit Your Home */}
-        <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                How Garage Floor Coatings <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Benefit</span> Your Flower Mound Home
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4">
-                Discover why Flower Mound homeowners choose professional garage floor coatings for lasting beauty and protection
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {benefits.map((benefit, index) => (
-                <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm">
-                  <CardContent className="p-6 text-center">
-                    <div className="flex justify-center mb-4">
-                      {benefit.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         {/* Garage Floor Features Section */}
-        <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Why Flower Mound Homeowners <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Love</span> Our Garage Floors
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                Our polyurea flake floor systems are engineered for Flower Mound's climate and lifestyle demands
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-white rounded-lg border border-blue-100">
-                  <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-gray-800 font-medium text-sm sm:text-base">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         {/* Garage Floor Process Section */}
-        <section className="py-12 md:py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Our Proven <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Installation Process</span>
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                Every Flower Mound garage floor coating follows our meticulous 7-step process for lasting results
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-              {[
-                {
-                  step: "01",
-                  title: "Surface Preparation",
-                  description: "We thoroughly clean and prepare your concrete floor, addressing any cracks or imperfections for optimal adhesion."
-                },
-                {
-                  step: "02", 
-                  title: "Diamond Grinding",
-                  description: "Professional diamond grinding creates the perfect surface profile for maximum coating adhesion and longevity."
-                },
-                {
-                  step: "03",
-                  title: "Crack Repair",
-                  description: "We repair and fill any cracks or joints using specialized materials designed for long-term durability."
-                },
-                {
-                  step: "04",
-                  title: "Base Coat Application", 
-                  description: "Our premium polyurea base coat is applied to create a strong foundation for your floor system."
-                },
-                {
-                  step: "05",
-                  title: "Flake Broadcast",
-                  description: "Decorative flakes are broadcast into the wet base coat for beauty, texture, and slip resistance."
-                },
-                {
-                  step: "06",
-                  title: "Top Coat Protection",
-                  description: "A clear polyurea top coat seals and protects your floor while providing a beautiful finish."
-                },
-                {
-                  step: "07",
-                  title: "Final Inspection",
-                  description: "We conduct a thorough quality inspection to ensure your new floor meets our high standards."
-                }
-              ].map((item, index) => (
-                <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white">
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
-                        {item.step}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         {/* FAQ Section */}
         <section className="py-12 md:py-20 bg-white">
@@ -529,12 +371,7 @@ const FlowerMound = () => {
                   Call 214-305-6516
                 </a>
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={() => setShowBookingModal(true)}
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full transition-all duration-300"
-              >
+              <Button variant="outline" size="lg" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full transition-all duration-300">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book Free Estimate
               </Button>
@@ -543,33 +380,12 @@ const FlowerMound = () => {
         </section>
 
         {/* Lead Form Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                  Get Your Free Flower Mound Garage Floor Estimate
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600 px-4">
-                  See how much you can save on your Flower Mound garage floor transformation
-                </p>
-              </div>
-              <LeadForm />
-            </div>
-          </div>
-        </section>
+        
 
         <Footer />
         
-        {showBookingModal && (
-          <BookingModal 
-            isOpen={showBookingModal}
-            onClose={() => setShowBookingModal(false)}
-          />
-        )}
+        {showBookingModal && <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />}
       </div>
-    </>
-  );
+    </>;
 };
-
 export default FlowerMound;
