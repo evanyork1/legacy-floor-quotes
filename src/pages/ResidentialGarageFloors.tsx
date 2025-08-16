@@ -94,7 +94,7 @@ const ResidentialGarageFloors = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <div className="relative h-[500px] md:h-[600px] lg:h-[650px] overflow-hidden rounded-2xl shadow-2xl">
+                <div className="relative h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-2xl">
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
                     <div className="relative overflow-hidden">
