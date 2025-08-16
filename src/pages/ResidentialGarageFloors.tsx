@@ -52,7 +52,7 @@ const ResidentialGarageFloors = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-700 to-blue-900 flex items-center">
           <div className="container mx-auto px-4 w-full">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="text-center lg:text-left">
