@@ -74,7 +74,7 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
                   Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="sm:hidden" /> <span className="text-gray-900">in One Day</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
