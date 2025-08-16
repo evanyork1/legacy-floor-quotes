@@ -55,6 +55,24 @@ const ResidentialGarageFloors = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
+                {/* Google Reviews Badge - positioned above title */}
+                <div className="flex justify-center lg:justify-start mb-6">
+                  <div className="flex items-center">
+                    <div className="flex items-center">
+                      <span className="font-bold text-blue-500">G</span>
+                      <span className="font-bold text-red-500">o</span>
+                      <span className="font-bold text-yellow-500">o</span>
+                      <span className="font-bold text-blue-500">g</span>
+                      <span className="font-bold text-green-500">l</span>
+                      <span className="font-bold text-red-500">e</span>
+                    </div>
+                    <div className="flex items-center ml-2">
+                      <span className="text-yellow-400 text-sm">★★★★★</span>
+                      <span className="ml-1 text-gray-900 font-medium text-sm">170+</span>
+                      <span className="ml-1 text-gray-600 text-sm">reviews</span>
+                    </div>
+                  </div>
+                </div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                   Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="lg:hidden" /> <span className="text-gray-900">in One Day</span>
                 </h1>
