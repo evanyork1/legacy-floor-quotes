@@ -19,21 +19,21 @@ const FlowerMound = () => {
   const benefits = [{
     icon: <Shield className="h-8 w-8 text-blue-600" />,
     title: "Lifetime Warranty",
-    description: "Our Flower Mound garage floor coatings come with an industry-leading lifetime warranty, protecting your home investment for years to come."
+    description: "Our garage floor coatings come with an industry-leading lifetime warranty, protecting your home investment for years to come."
   }, {
     icon: <Clock className="h-8 w-8 text-blue-600" />,
     title: "One-Day Installation",
-    description: "Transform your Flower Mound garage in just one day! Most residential garages are completed in a single day with minimal disruption to your routine."
+    description: "Transform your garage in just one day! Most residential garages are completed in a single day with minimal disruption to your routine."
   }, {
     icon: <Palette className="h-8 w-8 text-blue-600" />,
     title: "Custom Design Options",
-    description: "Choose from dozens of flake colors and patterns to create a garage floor that perfectly complements your Flower Mound home's style."
+    description: "Choose from dozens of flake colors and patterns to create a garage floor that perfectly complements your home's style."
   }, {
     icon: <Wrench className="h-8 w-8 text-blue-600" />,
     title: "Easy Home Maintenance",
-    description: "Keep your Flower Mound garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
+    description: "Keep your garage floor looking pristine with simple sweeping and occasional mopping - no special cleaners required."
   }];
-  const features = ["Resists hot tire marks and oil stains", "Slip-resistant surface for family safety", "UV stable colors that won't fade or yellow", "Impact resistant against dropped tools", "Easy to clean with household products", "Adds value to your Flower Mound home"];
+  const features = ["Resists hot tire marks and oil stains", "Slip-resistant surface for family safety", "UV stable colors that won't fade or yellow", "Impact resistant against dropped tools", "Easy to clean with household products", "Adds value to your home"];
   return <>
       <Helmet>
         <title>Flower Mound Garage Floor Coatings - Polyurea Flake Floors | Legacy Industrial Coatings</title>
@@ -142,7 +142,7 @@ const FlowerMound = () => {
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
-                    Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of Flower Mound homeowners from start to finish.
+                    Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of homeowners from start to finish.
                   </p>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
@@ -180,7 +180,7 @@ const FlowerMound = () => {
                   </div>
                   
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication—it's a service experience built with intention, powered by technology, and backed by people who genuinely care about Flower Mound customers.
+                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication—it's a service experience built with intention, powered by technology, and backed by people who genuinely care about our customers.
                   </p>
                 </div>
               </div>
@@ -210,7 +210,7 @@ const FlowerMound = () => {
                 Real Flower Mound Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                See how we transform ordinary concrete floors into stunning, durable surfaces that Flower Mound homeowners love
+                See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
               </p>
             </div>
             
@@ -238,7 +238,7 @@ const FlowerMound = () => {
                 <div className="lg:pl-8 px-4 lg:px-0">
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">From Stained to Stunning</h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    This Flower Mound homeowner's garage went from a stained, cracked concrete floor to a beautiful flake system that completely transformed the space. The durable polyurea coating not only looks amazing but provides decades of protection.
+                    This homeowner's garage went from a stained, cracked concrete floor to a beautiful flake system that completely transformed the space. The durable polyurea coating not only looks amazing but provides decades of protection.
                   </p>
                 </div>
               </div>
@@ -248,7 +248,7 @@ const FlowerMound = () => {
                 <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Complete Garage Makeover</h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    A typical Flower Mound garage transformation showing how our flake floor coating system turns an ordinary concrete floor into a showroom-quality surface that adds value to your home.
+                    A typical garage transformation showing how our flake floor coating system turns an ordinary concrete floor into a showroom-quality surface that adds value to your home.
                   </p>
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
@@ -347,7 +347,7 @@ const FlowerMound = () => {
                     <span className="font-semibold text-gray-900">How much does a garage floor coating cost?</span>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6 text-gray-600">
-                    Pricing varies based on your garage size and specific requirements. Most Flower Mound homeowners invest between $3-6 per square foot for a premium polyurea flake system. We provide free, no-obligation estimates so you can make an informed decision. Consider it an investment that adds value to your home while providing decades of enjoyment.
+                    Pricing varies based on your garage size and specific requirements. Most homeowners invest between $3-6 per square foot for a premium polyurea flake system. We provide free, no-obligation estimates so you can make an informed decision. Consider it an investment that adds value to your home while providing decades of enjoyment.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -362,7 +362,7 @@ const FlowerMound = () => {
               Ready to Transform Your Flower Mound Garage?
             </h2>
             <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-90 px-4">
-              Join hundreds of satisfied Flower Mound homeowners who've upgraded their garages with our premium floor coatings. Get your free estimate today!
+              Join hundreds of satisfied homeowners who've upgraded their garages with our premium floor coatings. Get your free estimate today!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
               <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
