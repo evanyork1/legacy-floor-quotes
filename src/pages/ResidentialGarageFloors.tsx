@@ -104,7 +104,7 @@ const ResidentialGarageFloors = () => {
                         className="w-full h-full object-cover" 
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                           BEFORE
                         </span>
                       </div>
@@ -117,7 +117,7 @@ const ResidentialGarageFloors = () => {
                         className="w-full h-full object-cover" 
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-semibold border border-blue-600">
                           AFTER
                         </span>
                       </div>
@@ -235,7 +235,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
                     </div>
@@ -247,7 +247,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
@@ -277,7 +277,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
                     </div>
@@ -289,7 +289,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
@@ -307,7 +307,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
                     </div>
@@ -319,7 +319,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
@@ -349,7 +349,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
                     </div>
@@ -361,7 +361,7 @@ const ResidentialGarageFloors = () => {
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
