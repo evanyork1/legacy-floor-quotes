@@ -74,8 +74,9 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
-                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="sm:hidden" /> <span className="text-gray-900">in One Day</span>
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+                  Premium<br />
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> <span className="text-gray-900">in One Day</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
