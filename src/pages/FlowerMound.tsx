@@ -359,7 +359,7 @@ const FlowerMound = () => {
         <section className="py-12 md:py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
-              Ready to Transform Your Flower Mound Garage?
+              Ready to Transform Your Garage?
             </h2>
             <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-90 px-4">
               Join hundreds of satisfied homeowners who've upgraded their garages with our premium floor coatings. Get your free estimate today!
