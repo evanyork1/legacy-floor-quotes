@@ -12,6 +12,7 @@ import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phon
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
+import { ContactForm } from "@/components/ContactForm";
 const ResidentialGarageFloors = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -88,7 +89,7 @@ const ResidentialGarageFloors = () => {
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
-                    Get My Free Estimate
+                    Book My Free Estimate
                   </Button>
                 </div>
               </div>
@@ -372,6 +373,26 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
+        {/* Have More Questions Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                  Have More Questions?
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Our experts are here to help. Get in touch with us directly and we'll get back to you right away.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <ContactForm />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
@@ -463,13 +484,15 @@ const ResidentialGarageFloors = () => {
               Get a free estimate for your residential garage floor coating. Our home improvement experts will help you design the perfect floor for your garage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => navigate('/contact')} variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Contact Us
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <a href="tel:214-305-6516">
+                  <Phone className="mr-2 h-5 w-5" />
+                  214-305-6516
+                </a>
               </Button>
               <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
-                Get Free Home Estimate
+                Book My Free Estimate
               </Button>
             </div>
           </div>
