@@ -45,7 +45,7 @@ const ResidentialGarageFloors = () => {
         <meta property="og:image" content="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" />
         
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://legacyindustrialcoatings.com/residential-garage-floors" />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/garagefloors" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

@@ -77,7 +77,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
 <Route path="/flake-floors" element={<FlakeFloors />} />
 <Route path="/residential-patio" element={<ResidentialPatio />} />
-<Route path="/residential-garage-floors" element={<ResidentialGarageFloors />} />
+<Route path="/garagefloors" element={<ResidentialGarageFloors />} />
 <Route path="/additional-services" element={<AdditionalServices />} />
 <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />

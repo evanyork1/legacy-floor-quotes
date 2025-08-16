@@ -39,7 +39,7 @@ const aboutItems = [
 ];
 
 const residentialItems = [
-  { name: "Garage Floors", path: "/residential-garage-floors" },
+  { name: "Garage Floors", path: "/garagefloors" },
   { name: "Patios", path: "/residential-patio" },
   { name: "Additional Services", path: "/additional-services" }
 ];
