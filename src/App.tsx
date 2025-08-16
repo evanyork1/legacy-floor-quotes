@@ -31,6 +31,7 @@ const FlakeFloors = lazy(() => import("./pages/FlakeFloors"));
 const ResidentialPatio = lazy(() => import("./pages/ResidentialPatio"));
 const ResidentialGarageFloors = lazy(() => import("./pages/ResidentialGarageFloors"));
 const FlowerMound = lazy(() => import("./pages/FlowerMound"));
+const Prosper = lazy(() => import("./pages/Prosper"));
 const IndustrialEpoxy = lazy(() => import("./pages/IndustrialEpoxy"));
 const ConcretePolishing = lazy(() => import("./pages/ConcretePolishing"));
 const Commercial = lazy(() => import("./pages/Commercial"));
@@ -79,7 +80,8 @@ const App = () => (
 <Route path="/flake-floors" element={<FlakeFloors />} />
 <Route path="/residential-patio" element={<ResidentialPatio />} />
 <Route path="/garagefloors" element={<ResidentialGarageFloors />} />
-<Route path="/flower-mound" element={<FlowerMound />} />
+          <Route path="/flower-mound" element={<FlowerMound />} />
+          <Route path="/prosper" element={<Prosper />} />
 <Route path="/additional-services" element={<AdditionalServices />} />
 <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
