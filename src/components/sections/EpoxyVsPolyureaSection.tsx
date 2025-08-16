@@ -50,7 +50,7 @@ const EpoxyVsPolyureaSection = () => {
                 <span className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg ring-4 ring-green-200">OUR PRODUCT</span>
               </div>
             </div>
-            <div className="bg-white rounded-2xl p-8 border-4 border-green-300 shadow-xl hover:shadow-2xl transition-all duration-500 relative bg-gradient-to-br from-green-50 to-white">
+            <div className="bg-white rounded-2xl p-8 border-4 border-green-600 shadow-xl hover:shadow-2xl transition-all duration-500 relative">
               <h3 className="text-2xl font-bold text-green-600 mb-6 text-center">
                 Our Polyurea Flake Floors
               </h3>
