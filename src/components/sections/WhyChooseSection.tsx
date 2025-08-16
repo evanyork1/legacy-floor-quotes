@@ -16,6 +16,16 @@ const WhyChooseSection = () => {
       icon: Sparkles,
       title: "Clean Look, Low Maintenance",
       description: "Our premium flake system is designed to hide dust and dirt, keeping your floor looking spotless with minimal effort."
+    },
+    {
+      icon: Clock,
+      title: "Same-Day Estimates",
+      description: "Get your quote within hours, not weeks."
+    },
+    {
+      icon: Shield,
+      title: "Direct Contact",
+      description: "Call or text your project lead anytime."
     }
   ];
 

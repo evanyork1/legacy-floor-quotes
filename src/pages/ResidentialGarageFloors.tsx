@@ -102,9 +102,45 @@ const ResidentialGarageFloors = () => {
         
         <QuickFeaturesSection />
         
-        <TestimonialsSection />
+        {/* Featured Google Review */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Card className="border-2 border-blue-200 shadow-xl bg-gradient-to-br from-blue-50 to-white">
+                <CardContent className="p-8">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        M
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center mb-2">
+                        <h3 className="font-bold text-gray-900 mr-2">Matthew Schultz</h3>
+                        <span className="text-sm text-gray-500">Local Guide • 16 reviews • 10 photos</span>
+                      </div>
+                      <div className="flex items-center mb-3">
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} className="text-yellow-400 text-lg">★</span>
+                          ))}
+                        </div>
+                        <span className="ml-2 text-sm text-gray-500">6 days ago</span>
+                        <span className="ml-2 bg-green-600 text-white text-xs px-2 py-1 rounded">NEW</span>
+                      </div>
+                      <p className="text-gray-800 leading-relaxed text-lg">
+                        <strong>Great price</strong><br />
+                        Great communication, friendly service, excellent quality and a beautiful finished product. It is incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now. The team we interacted with was professional and it went from communication to completion. Easily one of the best (minor) investments we've made in our home.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
         
-        <WhyChooseSection />
+        <TestimonialsSection />
         
         {/* Legacy Service Experience Section */}
         <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
@@ -119,14 +155,46 @@ const ResidentialGarageFloors = () => {
                   The <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Legacy Service</span> Experience
                 </h2>
                 <div className="space-y-6">
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
                     Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of you from start to finish.
                   </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Instant Confirmations</h4>
+                        <p className="text-gray-600">Booking confirmations and reminders</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <Clock className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Every Stage Updates</h4>
+                        <p className="text-gray-600">Follow-up at every stage</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <Calendar className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Always Informed</h4>
+                        <p className="text-gray-600">Always know what's next</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <Phone className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Direct Contact</h4>
+                        <p className="text-gray-600">Just a call or text away</p>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    When you book with us, you'll get instant confirmations and reminders, so you're never left guessing. We follow up at every stage, keep you updated, and make sure you always know what's next. Your dedicated point of contact is only a call or text away, so you're never waiting days for a response.
-                  </p>
-                  <p className="text-lg text-gray-600 leading-relaxed">
-                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication it's a service experience built with intention, powered by technology, and backed by people who genuinely care.
+                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication—it's a service experience built with intention, powered by technology, and backed by people who genuinely care.
                   </p>
                 </div>
               </div>
@@ -143,6 +211,9 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
+        
+        <WhyChooseSection />
+        
 
         {/* What Are Garage Floor Coatings Section */}
         
@@ -205,6 +276,24 @@ const ResidentialGarageFloors = () => {
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600 leading-relaxed">
                     Yes! Your residential garage floor comes with our limited lifetime warranty against peeling, discoloration, and cracking under normal home use.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-6" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    Do you offer financing?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    Yes. Get started for as low as $99 down with 0% financing.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-7" className="border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    How fast can I schedule?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    We often provide estimates the same day you contact us.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
