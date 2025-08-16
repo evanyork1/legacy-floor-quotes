@@ -57,6 +57,40 @@ const TestimonialsSection = () => {
           </p>
         </div>
         
+        {/* Featured Matthew Schultz Review */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="border border-blue-200 shadow-lg bg-white">
+            <CardContent className="p-6">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">
+                    M
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center mb-2">
+                    <h3 className="font-bold text-gray-900 mr-2">Matthew Schultz</h3>
+                    <span className="text-xs text-gray-500">Local Guide • 16 reviews • 10 photos</span>
+                  </div>
+                  <div className="flex items-center mb-3">
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <span className="ml-2 text-xs text-gray-500">6 days ago</span>
+                    <span className="ml-2 bg-green-600 text-white text-xs px-2 py-1 rounded">NEW</span>
+                  </div>
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    <strong>Great price</strong><br />
+                    Great communication, friendly service, excellent quality and a beautiful finished product. It is incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now. The team we interacted with was professional and it went from communication to completion. Easily one of the best (minor) investments we've made in our home.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 mb-12">
           {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
               <CardContent className="p-4 sm:p-6">

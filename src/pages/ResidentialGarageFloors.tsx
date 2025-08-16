@@ -102,43 +102,6 @@ const ResidentialGarageFloors = () => {
         
         <QuickFeaturesSection />
         
-        {/* Featured Google Review */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <Card className="border-2 border-blue-200 shadow-xl bg-gradient-to-br from-blue-50 to-white">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                        M
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center mb-2">
-                        <h3 className="font-bold text-gray-900 mr-2">Matthew Schultz</h3>
-                        <span className="text-sm text-gray-500">Local Guide • 16 reviews • 10 photos</span>
-                      </div>
-                      <div className="flex items-center mb-3">
-                        <div className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className="text-yellow-400 text-lg">★</span>
-                          ))}
-                        </div>
-                        <span className="ml-2 text-sm text-gray-500">6 days ago</span>
-                        <span className="ml-2 bg-green-600 text-white text-xs px-2 py-1 rounded">NEW</span>
-                      </div>
-                      <p className="text-gray-800 leading-relaxed text-lg">
-                        <strong>Great price</strong><br />
-                        Great communication, friendly service, excellent quality and a beautiful finished product. It is incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now. The team we interacted with was professional and it went from communication to completion. Easily one of the best (minor) investments we've made in our home.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
         
         <TestimonialsSection />
         
