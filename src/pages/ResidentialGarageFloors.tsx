@@ -12,7 +12,7 @@ import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phon
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { ContactForm } from "@/components/ContactForm";
+import { LeadForm } from "@/components/landing/LeadForm";
 const ResidentialGarageFloors = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -376,7 +376,7 @@ const ResidentialGarageFloors = () => {
         {/* Have More Questions Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-2xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Have More Questions?
@@ -386,9 +386,7 @@ const ResidentialGarageFloors = () => {
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <ContactForm />
-              </div>
+              <LeadForm />
             </div>
           </div>
         </section>
