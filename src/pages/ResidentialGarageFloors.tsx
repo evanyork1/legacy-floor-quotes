@@ -8,7 +8,7 @@ import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } from "lucide-react";
+import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
@@ -62,9 +62,11 @@ const ResidentialGarageFloors = () => {
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                    Contact Us
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <a href="tel:214-305-6516">
+                      <Phone className="mr-2 h-5 w-5" />
+                      214-305-6516
+                    </a>
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
