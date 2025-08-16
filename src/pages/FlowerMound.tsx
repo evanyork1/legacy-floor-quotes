@@ -371,7 +371,7 @@ const FlowerMound = () => {
                   Call 214-305-6516
                 </a>
               </Button>
-              <Button variant="outline" size="lg" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full transition-all duration-300">
+              <Button variant="outline" size="lg" onClick={() => setShowBookingModal(true)} className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full transition-all duration-300">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book Free Estimate
               </Button>
