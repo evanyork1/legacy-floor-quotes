@@ -373,23 +373,6 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
-        {/* Have More Questions Section */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Have More Questions?
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Our experts are here to help. Get in touch with us directly and we'll get back to you right away.
-                </p>
-              </div>
-
-              <LeadForm />
-            </div>
-          </div>
-        </section>
 
         {/* FAQ Section */}
         <section className="py-20 bg-white">
