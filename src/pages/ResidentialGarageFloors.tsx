@@ -52,10 +52,10 @@ const ResidentialGarageFloors = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
           <div className="container mx-auto px-4 w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="text-center lg:text-left">
                 {/* Google Reviews Badge - positioned above title */}
                 <div className="flex justify-center lg:justify-start mb-6">
                   <div className="flex items-center">
@@ -74,28 +74,28 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="lg:hidden" /> <span className="text-gray-900">in One Day</span>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+                  Premium <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span><br className="sm:hidden" /> <span className="text-gray-900">in One Day</span>
                 </h1>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
+                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-5 w-5" />
+                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                       214-305-6516
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
-                    <Calendar className="mr-2 h-5 w-5" />
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300 text-sm sm:text-base">
+                    <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     Book My Free Estimate
                   </Button>
                 </div>
               </div>
-              <div className="relative">
+              <div className="relative mt-8 lg:mt-0">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <div className="relative h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-2xl">
+                <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-2xl">
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
                     <div className="relative overflow-hidden">
@@ -104,8 +104,8 @@ const ResidentialGarageFloors = () => {
                         alt="Before: Concrete garage floor before coating installation" 
                         className="w-full h-full object-cover" 
                       />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
+                        <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                           BEFORE
                         </span>
                       </div>
@@ -117,8 +117,8 @@ const ResidentialGarageFloors = () => {
                         alt="After: Beautiful residential garage floor with polyurea flake coating" 
                         className="w-full h-full object-cover" 
                       />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-semibold border border-blue-600">
+                      <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
+                        <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                           AFTER
                         </span>
                       </div>
@@ -136,57 +136,57 @@ const ResidentialGarageFloors = () => {
         <TestimonialsSection />
         
         {/* Legacy Service Experience Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
+        <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-2xl shadow-xl mb-6">
-                  <div className="text-2xl font-bold mr-3">80%</div>
-                  <div className="text-sm">Reviews mention our service</div>
+                <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl shadow-xl mb-6">
+                  <div className="text-xl sm:text-2xl font-bold mr-2 sm:mr-3">80%</div>
+                  <div className="text-xs sm:text-sm">Reviews mention our service</div>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
                   The <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Legacy Service</span> Experience
                 </h2>
-                <div className="space-y-6">
-                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                <div className="space-y-4 md:space-y-6">
+                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
                     Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of you from start to finish.
                   </p>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="font-semibold text-gray-900">Instant Confirmations</h4>
-                        <p className="text-gray-600">Booking confirmations and reminders</p>
+                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Instant Confirmations</h4>
+                        <p className="text-gray-600 text-sm sm:text-base">Booking confirmations and reminders</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Clock className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="font-semibold text-gray-900">Every Stage Updates</h4>
-                        <p className="text-gray-600">Follow-up at every stage</p>
+                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Every Stage Updates</h4>
+                        <p className="text-gray-600 text-sm sm:text-base">Follow-up at every stage</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Calendar className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="font-semibold text-gray-900">Always Informed</h4>
-                        <p className="text-gray-600">Always know what's next</p>
+                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Always Informed</h4>
+                        <p className="text-gray-600 text-sm sm:text-base">Always know what's next</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Phone className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="font-semibold text-gray-900">Direct Contact</h4>
-                        <p className="text-gray-600">Just a call or text away</p>
+                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Direct Contact</h4>
+                        <p className="text-gray-600 text-sm sm:text-base">Just a call or text away</p>
                       </div>
                     </div>
                   </div>
                   
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                     From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication—it's a service experience built with intention, powered by technology, and backed by people who genuinely care.
                   </p>
                 </div>
@@ -197,7 +197,7 @@ const ResidentialGarageFloors = () => {
                   <img 
                     src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" 
                     alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" 
-                    className="w-full h-96 object-cover rounded-2xl shadow-2xl" 
+                    className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-2xl" 
                   />
                 </div>
               </div>
@@ -214,28 +214,28 @@ const ResidentialGarageFloors = () => {
         <EpoxyVsPolyureaSection />
 
         {/* Before & After Showcase Section */}
-        <section className="py-20 bg-white">
+        <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
               </p>
             </div>
             
-            <div className="grid gap-12 lg:gap-16">
+            <div className="grid gap-8 lg:gap-12">
               {/* Transformation 1 */}
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div className="grid grid-cols-2 gap-2 h-80 lg:h-96">
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
                     <img 
                       src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
                       alt="Before garage floor transformation" 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
@@ -247,37 +247,37 @@ const ResidentialGarageFloors = () => {
                       alt="After garage floor transformation with flake coating" 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="lg:pl-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">From Stained to Stunning</h3>
-                  <p className="text-gray-600 leading-relaxed">
+                <div className="lg:pl-8 px-4 lg:px-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">From Stained to Stunning</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     This homeowner's garage went from a stained, cracked concrete floor to a beautiful flake system that completely transformed the space. The durable polyurea coating not only looks amazing but provides decades of protection.
                   </p>
                 </div>
               </div>
 
               {/* Transformation 2 */}
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div className="order-2 lg:order-1 lg:pr-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Complete Garage Makeover</h3>
-                  <p className="text-gray-600 leading-relaxed">
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Complete Garage Makeover</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     A typical residential garage transformation showing how our flake floor coating system turns an ordinary concrete floor into a showroom-quality surface that adds value to the home.
                   </p>
                 </div>
-                <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-80 lg:h-96">
+                <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
                     <img 
                       src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" 
                       alt="Before garage floor coating" 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
@@ -289,7 +289,7 @@ const ResidentialGarageFloors = () => {
                       alt="After garage floor with beautiful flake finish" 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
@@ -299,15 +299,15 @@ const ResidentialGarageFloors = () => {
               </div>
 
               {/* Transformation 3 - Large Space */}
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div className="grid grid-cols-2 gap-2 h-80 lg:h-96">
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
                     <img 
                       src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" 
                       alt="Before large garage space concrete floor" 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
                       </span>
