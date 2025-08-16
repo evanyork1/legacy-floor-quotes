@@ -70,7 +70,7 @@ const ResidentialGarageFloors = () => {
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
-                    Get Free Home Estimate
+                    Book Online Now
                   </Button>
                 </div>
               </div>
