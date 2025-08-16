@@ -101,24 +101,15 @@ const ResidentialGarageFloors = () => {
                   The <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Legacy Service</span> Experience
                 </h2>
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-2 h-2 bg-blue-600 rounded-full mt-3"></div>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                      <span className="text-gray-900 font-semibold">80% of our Google reviews</span> talk about the experience customers had with our company, not just the product. That is why we are different.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-2 h-2 bg-blue-600 rounded-full mt-3"></div>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                      You will always be <span className="text-gray-900 font-semibold">handled with care</span>, can call or text your point of contact, will not fall through the cracks, and we are your advisors.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-2 h-2 bg-blue-600 rounded-full mt-3"></div>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                      <span className="text-gray-900 font-semibold">From the first conversation to a finished floor</span>, you'll experience what sets Legacy apart. We don't just install floors – we build relationships.
-                    </p>
-                  </div>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of you from start to finish.
+                  </p>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    When you book with us, you'll get instant confirmations and reminders, so you're never left guessing. We follow up at every stage, keep you updated, and make sure you always know what's next. Your dedicated point of contact is only a call or text away, so you're never waiting days for a response.
+                  </p>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication it's a service experience built with intention, powered by technology, and backed by people who genuinely care.
+                  </p>
                 </div>
               </div>
               <div className="order-1 lg:order-2 relative">
