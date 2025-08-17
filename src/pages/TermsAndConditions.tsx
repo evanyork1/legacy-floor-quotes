@@ -74,6 +74,10 @@ const TermsAndConditions = () => {
                   <strong>12. RETURN TO USE</strong> 12 hrs: Light traffic. 24 hrs: Full use. Customer is liable for damage if used earlier.
                 </p>
                 
+                <p>
+                  <strong>13. SMS TERMS OF SERVICE</strong> By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from Legacy Industrial Coatings. This includes SMS messages for conversations (external). Message frequency varies. Message and data rates may apply. See privacy policy at https://preview--legacy-floor-quotes.lovable.app/privacy. Message HELP for help. Reply STOP to any message to opt out.
+                </p>
+                
                 <p className="text-right italic">
                   Effective August 2025
                 </p>
