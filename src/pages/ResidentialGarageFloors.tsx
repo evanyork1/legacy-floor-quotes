@@ -433,15 +433,10 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <section className="py-8 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                
-                
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="bg-white rounded-xl shadow-lg p-4">
                 <LeadForm />
               </div>
             </div>
