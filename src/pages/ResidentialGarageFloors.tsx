@@ -8,6 +8,7 @@ import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import { LeadForm } from "@/components/landing/LeadForm";
 import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
@@ -474,6 +475,26 @@ const ResidentialGarageFloors = () => {
                 <Calendar className="mr-2 h-5 w-5" />
                 Book My Free Estimate
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Contact Legacy Industrial Coatings
+                </h2>
+                <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                  Ready to transform your garage? Fill out the form below and we'll get back to you with a detailed quote.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <LeadForm />
+              </div>
             </div>
           </div>
         </section>
