@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
+import { LeadForm } from "@/components/landing/LeadForm";
 
 const Prosper = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -474,6 +475,17 @@ const Prosper = () => {
                 <Calendar className="mr-2 h-5 w-5" />
                 Book My Free Estimate
               </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* Contact Form Section */}
+        <section className="py-8 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white rounded-xl shadow-lg p-4">
+                <LeadForm />
+              </div>
             </div>
           </div>
         </section>
