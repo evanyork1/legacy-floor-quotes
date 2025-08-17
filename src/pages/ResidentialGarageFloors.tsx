@@ -464,7 +464,7 @@ const ResidentialGarageFloors = () => {
               Get a free estimate for your residential garage floor coating. Our home improvement experts will help you design the perfect floor for your garage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild className="bg-white hover:bg-gray-50 text-blue-600 hover:text-blue-700 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <a href="tel:214-305-6516">
                   <Phone className="mr-2 h-5 w-5" />
                   214-305-6516
