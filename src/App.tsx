@@ -60,8 +60,8 @@ const App = () => (
           <ScrollToTop />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
-              {/* Redirect root to dfw to make it the new homepage */}
-              <Route path="/" element={<Navigate to="/dfw" replace />} />
+              {/* DFW is now the homepage */}
+              <Route path="/" element={<DFW />} />
               <Route path="/houston" element={<Houston />} />
               <Route path="/quotehou" element={<Quote />} />
               <Route path="/dfw" element={<DFW />} />
