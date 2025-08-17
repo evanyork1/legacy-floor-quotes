@@ -134,9 +134,11 @@ export const LeadForm = () => {
               </label>
             </div>
             
-            <Button type="submit" disabled={isSubmitting} className="w-64 mx-auto bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-none text-lg font-semibold">
-              {isSubmitting ? "Submitting..." : "GET MORE INFO"}
-            </Button>
+            <div className="flex justify-center">
+              <Button type="submit" disabled={isSubmitting} className="w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-none text-lg font-semibold">
+                {isSubmitting ? "Submitting..." : "GET MORE INFO"}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
