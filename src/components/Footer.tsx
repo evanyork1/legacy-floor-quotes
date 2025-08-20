@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
-  const isDFW = location.pathname === '/dfw';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw';
   const isCommercial = location.pathname === '/dfwcommercial';
   
   // Determine paths based on current location

@@ -9,7 +9,7 @@ const FeaturesSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isCommercial = location.pathname === '/dfwcommercial';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   

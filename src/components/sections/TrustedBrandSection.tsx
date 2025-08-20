@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 const TrustedBrandSection = () => {
   const location = useLocation();
   const isCommercial = location.pathname === '/dfwcommercial';
-  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/houstonreslanding';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const services = isCommercial ? [{
     icon: <Users className="h-8 w-8 text-blue-600" />,
     title: "Hundreds of Commercial Projects Completed",

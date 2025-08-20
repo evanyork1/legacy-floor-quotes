@@ -13,14 +13,14 @@ const HeroSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Determine quote path and content based on current location
-  const isDFW = location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isCommercial = location.pathname === '/dfwcommercial';
   const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   const isHoustonLanding = location.pathname === '/houstonreslanding';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
   const isFrisco = location.pathname === '/epoxy-flooring-frisco';
   const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day"))));
-  const locationText = isDFW ? "Dallas - Fort Worth, TX" : "Houston, TX";
+  const locationText = isHouston ? "Houston, TX" : "Dallas - Fort Worth, TX";
   const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
 
   // Gallery images for rotating background - memoized for performance
