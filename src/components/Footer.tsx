@@ -99,9 +99,9 @@ const Footer = () => {
                   (214) 305-6516
                 </a>
               </div>
-              <div className="flex items-start space-x-2">
+              <div className="flex items-start space-x-2 -ml-1">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                <a href="mailto:support@legacyindustrialcoatings.com" className="text-gray-300 hover:text-blue-400 transition-colors text-sm break-all">
                   support@legacyindustrialcoatings.com
                 </a>
               </div>
