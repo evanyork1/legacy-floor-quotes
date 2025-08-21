@@ -60,26 +60,26 @@ const FeaturesSection = () => {
   const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW || isHouston ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
   
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             Our Solutions
           </h2>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-4">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
                   {feature.image && (
@@ -111,7 +111,7 @@ const FeaturesSection = () => {
         </div>
 
         {(isDFW || isHouston) && (
-          <div className="mt-12 text-center">
+          <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
             <CTAButton
               variant="outline"
               onClick={() => setShowBookingModal(true)}

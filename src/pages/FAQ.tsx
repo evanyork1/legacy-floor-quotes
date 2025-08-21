@@ -116,12 +116,12 @@ const FAQ = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
               Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Questions</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
                Find answers to the most common questions about our garage floor coatings, installation process, and maintenance. 
                Can't find what you're looking for? Contact us directly for personalized assistance.
             </p>
@@ -129,25 +129,25 @@ const FAQ = () => {
         </section>
 
         {/* Residential FAQ Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <div className="text-center mb-8 sm:mb-12">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
                   Residential Garage Floors
                 </h2>
-                <p className="text-lg text-gray-600">
+                <p className="text-base sm:text-lg text-gray-600 px-4">
                   Common questions about residential garage floor coatings
                 </p>
               </div>
               
-              <Accordion type="single" collapsible className="space-y-4">
+              <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
                 {residentialFAQs.map((faq, index) => (
-                  <AccordionItem key={`residential-${index}`} value={`residential-${index}`} className="border border-gray-200 rounded-lg px-6">
-                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                  <AccordionItem key={`residential-${index}`} value={`residential-${index}`} className="border border-gray-200 rounded-lg px-4 sm:px-6">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600 text-sm sm:text-base">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-600 leading-relaxed">
+                    <AccordionContent className="text-gray-600 leading-relaxed text-sm sm:text-base">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -158,25 +158,25 @@ const FAQ = () => {
         </section>
 
         {/* Commercial FAQ Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <div className="text-center mb-8 sm:mb-12">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
                   Commercial & Industrial Floors
                 </h2>
-                <p className="text-lg text-gray-600">
+                <p className="text-base sm:text-lg text-gray-600 px-4">
                   Questions about commercial and industrial flooring solutions
                 </p>
               </div>
               
-              <Accordion type="single" collapsible className="space-y-4">
+              <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
                 {commercialFAQs.map((faq, index) => (
-                  <AccordionItem key={`commercial-${index}`} value={`commercial-${index}`} className="border border-gray-200 rounded-lg px-6 bg-white">
-                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                  <AccordionItem key={`commercial-${index}`} value={`commercial-${index}`} className="border border-gray-200 rounded-lg px-4 sm:px-6 bg-white">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600 text-sm sm:text-base">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-600 leading-relaxed">
+                    <AccordionContent className="text-gray-600 leading-relaxed text-sm sm:text-base">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -187,29 +187,29 @@ const FAQ = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
               Still Have Questions?
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-4">
               Our flooring experts are here to help. Get personalized answers and a free quote for your project.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Button 
                 onClick={() => navigate('/contact')}
                 variant="secondary"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
               >
                 Get A Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button 
                 onClick={() => setShowBookingModal(true)}
                 variant="outline"
-                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300"
+                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-300 text-sm sm:text-base"
               >
-                <Calendar className="mr-2 h-5 w-5" />
+                <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 Book An Estimate
               </Button>
             </div>

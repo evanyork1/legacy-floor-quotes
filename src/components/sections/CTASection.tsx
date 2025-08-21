@@ -18,13 +18,13 @@ const CTASection = () => {
   const quotePath = '/contact';
 
   return (
-    <section className="py-20 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-800/90"></div>
-      <div className="container mx-auto px-4 text-center relative">
-        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+      <div className="container mx-auto px-4 sm:px-6 text-center relative">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 sm:mb-6">
           {isCommercial ? "Ready for your commercial flooring project?" : (isProsper ? "Ready To Transform Your Floor in Prosper?" : (isFrisco ? "Ready To Transform Your Floor in Frisco?" : "Ready to discover your new floor?"))}
         </h2>
-        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
           {isCommercial 
             ? "Contact our commercial specialists for a professional consultation and project assessment"
             : "Get your free instant quote and experience Legacy's full-service approach"
@@ -52,7 +52,7 @@ const CTASection = () => {
             </a>
           </CTAButton>
         ) : (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <CTAButton 
               onClick={() => navigate('/contact')} 
               variant="outline"
@@ -60,7 +60,7 @@ const CTASection = () => {
               icon={<ArrowRight />}
               iconPosition="right"
               fullWidthMobile={true}
-              className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white"
+              className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white text-sm sm:text-base"
             >
               Contact Us
             </CTAButton>
@@ -71,7 +71,7 @@ const CTASection = () => {
               size="lg"
               icon={<Calendar />}
               fullWidthMobile={true}
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 text-sm sm:text-base"
             >
               Book An Estimate
             </CTAButton>

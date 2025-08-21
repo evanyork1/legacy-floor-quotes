@@ -65,14 +65,14 @@ const ProcessSection = () => {
   const handleMouseLeave = () => {
     setTimeout(() => setIsAutoPlaying(true), 2000);
   };
-  return <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
-      <div className="container mx-auto px-4">
+  return <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             Our Proven 5-Step Process
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             Each step is carefully executed by our expert team to ensure your floor looks amazing and lasts for decades.
           </p>
         </div>
@@ -111,7 +111,7 @@ const ProcessSection = () => {
             </div>
 
             {/* Step Content */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
+            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-[400px] sm:min-h-[500px]">
               {/* Left Side - Image */}
               <div className="relative order-2 lg:order-1">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
@@ -123,20 +123,20 @@ const ProcessSection = () => {
               </div>
 
               {/* Right Side - Content */}
-              <div className="order-1 lg:order-2">
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center">
-                      <span className="text-2xl font-bold text-white">{steps[activeStep].number}</span>
+              <div className="order-1 lg:order-2 px-4 lg:px-0">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-center space-x-3 sm:space-x-4">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg sm:text-2xl font-bold text-white">{steps[activeStep].number}</span>
                     </div>
                     <div>
-                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 leading-tight">
                         {steps[activeStep].title}
                       </h3>
                     </div>
                   </div>
                   
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
                     {steps[activeStep].description}
                   </p>
                 </div>
@@ -157,8 +157,8 @@ const ProcessSection = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-20">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+        <div className="text-center mt-12 sm:mt-16 lg:mt-20">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
             
             
             <CTAButton onClick={() => setIsBookingModalOpen(true)} variant="outline" size="lg" icon={<Calendar />} fullWidthMobile={true}>

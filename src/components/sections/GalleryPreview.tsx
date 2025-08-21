@@ -42,18 +42,18 @@ export const GalleryPreview = () => {
   const closeImage = () => {
     setSelectedImage(null);
   };
-  return <section className="py-20 bg-gradient-to-br from-white to-slate-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+  return <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-slate-50">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             See Our Latest Work
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             See the quality and craftsmanship that goes into every installation
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto mb-8 sm:mb-12">
           {previewImages.map(image => <Card key={image.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => openImage(image.src)}>
               <CardContent className="p-0">
                 <div className="aspect-[4/3] overflow-hidden">

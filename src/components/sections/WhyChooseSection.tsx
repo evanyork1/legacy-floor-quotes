@@ -30,45 +30,45 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16 lg:items-center">
           {/* Image */}
-          <div className="mb-12 lg:mb-0">
+          <div className="mb-8 sm:mb-10 lg:mb-0">
             <div className="relative">
               <img
                 src="/lovable-uploads/8d8cf4a3-4ed7-4f9b-8909-0cf80a149ecc.png"
                 alt="Beautiful garage floor with concrete coating"
-                className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover rounded-2xl shadow-2xl"
+                className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
             </div>
           </div>
 
           {/* Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
                 Why Homeowners Across DFW Choose{" "}
                 <span className="text-blue-600">Legacy</span>
               </h2>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {features.map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
-                  <div key={index} className="flex items-start space-x-4">
+                  <div key={index} className="flex items-start space-x-3 sm:space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <IconComponent className="w-6 h-6 text-white" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                         {feature.description}
                       </p>
                     </div>

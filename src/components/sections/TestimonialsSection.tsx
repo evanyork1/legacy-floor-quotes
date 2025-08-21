@@ -27,9 +27,9 @@ const TestimonialsSection = () => {
     rating: 5,
     text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their floor coated. Definitely recommending to my family and friends. :)"
   }];
-  return <section className="py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 relative">
+  return <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative">
           {/* Yellow Reviews Badge - Fixed for mobile */}
           <div className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 sm:-translate-y-4">
             
@@ -49,18 +49,18 @@ const TestimonialsSection = () => {
               </div>
             </div>
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             {isProsper ? "What Homeowners Near Prosper Are Saying" : isFrisco ? "What Frisco Homeowners Are Saying" : "What Our Customers Say"}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             Our customers love talking about the work we have done. Read from hundreds of customers their experience with us.
           </p>
         </div>
         
         {/* Featured Matthew Schultz Review */}
-        <div className="max-w-4xl mx-auto mb-12">
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-12 px-4">
           <Card className="border border-blue-200 shadow-lg bg-white">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex-1">
                 <div className="flex items-center mb-2">
                   <h3 className="font-bold text-gray-900 mr-2">Matthew Schultz</h3>
@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
           </Card>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 px-4">
           {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30">
               <CardContent className="p-4 sm:p-6">
                 <div className="flex mb-4">

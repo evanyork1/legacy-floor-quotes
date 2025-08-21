@@ -20,22 +20,22 @@ export const QuickFeaturesSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-8 sm:py-10 lg:py-12 bg-gray-100">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
               <div key={index} className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                    <IconComponent className="w-8 h-8 text-white" />
+                <div className="flex justify-center mb-3 sm:mb-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                    <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
