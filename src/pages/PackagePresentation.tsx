@@ -118,93 +118,93 @@ const PackagePresentation = () => {
       const whiteColor = rgb(1, 1, 1);
       const orangeColor = rgb(1, 0.6, 0.2);
       
-      // Square Footage (top left field - centered in box)
+      // Square Footage (centered in top left box) 
       page.drawText(`${totalSqft}`, {
         x: 230,
-        y: templateImage.height - 270,
-        size: 32,
+        y: templateImage.height - 240,
+        size: 28,
         font,
         color: whiteColor,
       });
       
-      // Color (top middle field - centered in box)
+      // Color (centered in top middle box)
       if (color) {
         page.drawText(color, {
-          x: 510,
-          y: templateImage.height - 270,
-          size: 32,
+          x: 515,
+          y: templateImage.height - 240,
+          size: 28,
           font,
           color: whiteColor,
         });
       }
       
-      // Install Day (top right field - centered in box)
+      // Install Day (centered in top right box)
       if (installDate) {
         page.drawText(format(installDate, 'MMM dd'), {
           x: 780,
-          y: templateImage.height - 270,
-          size: 32,
+          y: templateImage.height - 240,
+          size: 28,
           font,
           color: whiteColor,
         });
       }
       
-      // Platinum pricing - positioned right after MO/ and DEPOSIT/ 
+      // Platinum pricing - right after MO/ and DEPOSIT/ labels
       const platinumMonthly = platinumTotal / 24;
       const platinumDeposit = platinumTotal * 0.5;
       
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
-        x: 520,
-        y: templateImage.height - 555,
-        size: 32,
+        x: 500,
+        y: templateImage.height - 347,
+        size: 28,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
-        x: 760,
-        y: templateImage.height - 555,
-        size: 32,
+        x: 730,
+        y: templateImage.height - 347,
+        size: 28,
         font,
         color: whiteColor,
       });
       
-      // Gold pricing - positioned right after MO/ and DEPOSIT/
+      // Gold pricing - right after MO/ and DEPOSIT/ labels
       const goldMonthly = goldTotal / 24;
       const goldDeposit = goldTotal * 0.5;
       
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
-        x: 520,
-        y: templateImage.height - 785,
-        size: 32,
+        x: 580,
+        y: templateImage.height - 645,
+        size: 28,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
-        x: 760,
-        y: templateImage.height - 785,
-        size: 32,
+        x: 770,
+        y: templateImage.height - 645,
+        size: 28,
         font,
         color: whiteColor,
       });
       
-      // Silver pricing - positioned right after MO/ and DEPOSIT/
+      // Silver pricing - right after MO/ and DEPOSIT/ labels
       const silverMonthly = silverTotal / 24;
       const silverDeposit = silverTotal * 0.5;
       
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
-        x: 520,
-        y: templateImage.height - 958,
-        size: 32,
+        x: 580,
+        y: templateImage.height - 800,
+        size: 28,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
-        x: 760,
-        y: templateImage.height - 958,
-        size: 32,
+        x: 770,
+        y: templateImage.height - 800,
+        size: 28,
         font,
         color: whiteColor,
       });
