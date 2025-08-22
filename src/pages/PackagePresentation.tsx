@@ -130,8 +130,8 @@ const PackagePresentation = () => {
           deposit: { x: w * 0.78, y: h * 0.66 }  // Centered under "DEPOSIT/" in platinum section
         },
         gold: {
-          monthly: { x: w * 0.51, y: h * 0.445 }, // Moved up to align with orange labels
-          deposit: { x: w * 0.77, y: h * 0.445 }  // Moved up to align with orange labels
+          monthly: { x: w * 0.51, y: h * 0.435 }, // Moved down slightly
+          deposit: { x: w * 0.77, y: h * 0.435 }  // Moved down slightly
         },
         silver: {
           monthly: { x: w * 0.51, y: h * 0.195 }, // Moved up to align with orange labels
