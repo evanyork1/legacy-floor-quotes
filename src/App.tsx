@@ -40,6 +40,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const Financing = lazy(() => import("./pages/Financing"));
 const About = lazy(() => import("./pages/About"));
 const AdditionalServices = lazy(() => import("./pages/AdditionalServices"));
+const PackagePresentation = lazy(() => import("./pages/PackagePresentation"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -89,6 +90,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
+              <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/adminpanel2025" element={<AdminPanel />} />
               <Route path="/jingram" element={<EmployeePanel />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
