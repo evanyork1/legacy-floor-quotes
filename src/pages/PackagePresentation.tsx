@@ -124,18 +124,18 @@ const PackagePresentation = () => {
         colorBox: { x: w * 0.50, y: h * 0.75 }, // Top middle box center  
         dateBox: { x: w * 0.79, y: h * 0.75 }, // Top right box center
         
-        // Pricing positions (moved further down and left with larger font)
+        // Pricing positions (properly centered under orange labels)
         platinum: {
-          monthly: { x: w * 0.52, y: h * 0.66 }, // After "MO/" in platinum section (moved further down and left)
-          deposit: { x: w * 0.73, y: h * 0.66 }  // After "DEPOSIT/" in platinum section (moved further down and left)
+          monthly: { x: w * 0.52, y: h * 0.66 }, // Centered under "MO/" in platinum section
+          deposit: { x: w * 0.78, y: h * 0.66 }  // Centered under "DEPOSIT/" in platinum section
         },
         gold: {
-          monthly: { x: w * 0.54, y: h * 0.415 }, // After "MO/" in gold section (centered under orange text)
-          deposit: { x: w * 0.75, y: h * 0.415 }  // After "DEPOSIT/" in gold section (moved right)
+          monthly: { x: w * 0.52, y: h * 0.415 }, // Centered under "MO/" in gold section
+          deposit: { x: w * 0.78, y: h * 0.415 }  // Centered under "DEPOSIT/" in gold section
         },
         silver: {
-          monthly: { x: w * 0.54, y: h * 0.165 }, // After "MO/" in silver section (centered under orange text)
-          deposit: { x: w * 0.75, y: h * 0.165 }  // After "DEPOSIT/" in silver section (moved right)
+          monthly: { x: w * 0.52, y: h * 0.165 }, // Centered under "MO/" in silver section
+          deposit: { x: w * 0.78, y: h * 0.165 }  // Centered under "DEPOSIT/" in silver section
         }
       };
 
