@@ -77,7 +77,11 @@ const PackagePresentation = () => {
       }
 
       // Fetch the template image
-      const templateResponse = await fetch('/legacy-template.png');
+      const templateResponse = await fetch('/lovable-uploads/4611ba02-7e49-4f74-9000-aef05b3e4658.png');
+      if (!templateResponse.ok) {
+        alert('Template image not found. Please contact support.');
+        return;
+      }
       const templateArrayBuffer = await templateResponse.arrayBuffer();
       
       // Create new PDF document
