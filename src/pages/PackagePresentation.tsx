@@ -16,8 +16,6 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 interface SpaceData {
   type: 'garage' | 'patio';
   sqft: number;
-  tier: string;
-  price: number;
 }
 
 const PackagePresentation = () => {
@@ -41,23 +39,13 @@ const PackagePresentation = () => {
   const addSpace = (type: 'garage' | 'patio') => {
     setSpaces([...spaces, {
       type,
-      sqft: 0,
-      tier: 'platinum',
-      price: type === 'garage' ? garagePricing.platinum : patioPricing.platinum
+      sqft: 0
     }]);
   };
 
   const updateSpace = (index: number, field: keyof SpaceData, value: any) => {
     const newSpaces = [...spaces];
     newSpaces[index] = { ...newSpaces[index], [field]: value };
-    
-    // Recalculate price when sqft or tier changes
-    if (field === 'sqft' || field === 'tier') {
-      const space = newSpaces[index];
-      const pricing = space.type === 'garage' ? garagePricing : patioPricing;
-      newSpaces[index].price = pricing[space.tier as keyof typeof pricing] * space.sqft;
-    }
-    
     setSpaces(newSpaces);
   };
 
@@ -65,9 +53,21 @@ const PackagePresentation = () => {
     setSpaces(spaces.filter((_, i) => i !== index));
   };
 
-  const totalPrice = spaces.reduce((sum, space) => sum + space.price, 0);
-  const halfDown = totalPrice / 2;
-  const monthlyPayment = halfDown / 24; // 24 months 0%
+  // Calculate totals for all three tiers
+  const platinumTotal = spaces.reduce((sum, space) => {
+    const pricing = space.type === 'garage' ? garagePricing.platinum : patioPricing.platinum;
+    return sum + (space.sqft * pricing);
+  }, 0);
+
+  const goldTotal = spaces.reduce((sum, space) => {
+    const pricing = space.type === 'garage' ? garagePricing.gold : patioPricing.gold;
+    return sum + (space.sqft * pricing);
+  }, 0);
+
+  const silverTotal = spaces.reduce((sum, space) => {
+    const pricing = space.type === 'garage' ? garagePricing.silver : patioPricing.silver;
+    return sum + (space.sqft * pricing);
+  }, 0);
 
   const generatePDF = async () => {
     try {
@@ -139,25 +139,9 @@ const PackagePresentation = () => {
         });
       }
       
-      // Calculate pricing for each tier
-      const platinumTotal = spaces.reduce((sum, space) => {
-        const pricing = space.type === 'garage' ? garagePricing.platinum : patioPricing.platinum;
-        return sum + (space.sqft * pricing);
-      }, 0);
-      
-      const goldTotal = spaces.reduce((sum, space) => {
-        const pricing = space.type === 'garage' ? garagePricing.gold : patioPricing.gold;
-        return sum + (space.sqft * pricing);
-      }, 0);
-      
-      const silverTotal = spaces.reduce((sum, space) => {
-        const pricing = space.type === 'garage' ? garagePricing.silver : patioPricing.silver;
-        return sum + (space.sqft * pricing);
-      }, 0);
-      
-      // Platinum pricing
-      const platinumMonthly = (platinumTotal * 0.5) / 24; // 50% down, remaining over 24 months
-      const platinumDeposit = platinumTotal * 0.5;
+      // Platinum pricing - monthly payment based on TOTAL, not remaining after deposit
+      const platinumMonthly = platinumTotal / 24; // Full total over 24 months
+      const platinumDeposit = platinumTotal * 0.5; // 50% deposit
       
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
         x: 500,
@@ -176,7 +160,7 @@ const PackagePresentation = () => {
       });
       
       // Gold pricing
-      const goldMonthly = (goldTotal * 0.5) / 24;
+      const goldMonthly = goldTotal / 24; // Full total over 24 months
       const goldDeposit = goldTotal * 0.5;
       
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
@@ -196,7 +180,7 @@ const PackagePresentation = () => {
       });
       
       // Silver pricing
-      const silverMonthly = (silverTotal * 0.5) / 24;
+      const silverMonthly = silverTotal / 24; // Full total over 24 months
       const silverDeposit = silverTotal * 0.5;
       
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
@@ -325,32 +309,11 @@ const PackagePresentation = () => {
                           />
                         </div>
                         
-                        <div>
-                          <Label>Tier</Label>
-                          <Select 
-                            value={space.tier} 
-                            onValueChange={(value) => updateSpace(index, 'tier', value)}
-                          >
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="platinum">
-                                Platinum - ${space.type === 'garage' ? '9.50' : '10.50'}/sq ft
-                              </SelectItem>
-                              <SelectItem value="gold">
-                                Gold - ${space.type === 'garage' ? '7.00' : '8.00'}/sq ft
-                              </SelectItem>
-                              <SelectItem value="silver">
-                                Silver - ${space.type === 'garage' ? '6.00' : '7.00'}/sq ft
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                        <div className="text-sm text-gray-600">
+                          <div>Platinum: ${space.type === 'garage' ? '9.50' : '10.50'}/sq ft</div>
+                          <div>Gold: ${space.type === 'garage' ? '7.00' : '8.00'}/sq ft</div>
+                          <div>Silver: ${space.type === 'garage' ? '6.00' : '7.00'}/sq ft</div>
                         </div>
-                      </div>
-                      
-                      <div className="mt-2 text-right">
-                        <span className="text-lg font-semibold">${space.price.toFixed(2)}</span>
                       </div>
                     </Card>
                   ))}
@@ -372,28 +335,54 @@ const PackagePresentation = () => {
                       {spaces.map((space, index) => (
                         <div key={index} className="flex justify-between">
                           <span className="capitalize">
-                            {space.type} ({space.sqft} sq ft, {space.tier})
+                            {space.type} ({space.sqft} sq ft)
                           </span>
-                          <span>${space.price.toFixed(2)}</span>
                         </div>
                       ))}
                     </div>
                     
                     <hr />
                     
-                    <div className="space-y-2 text-lg font-semibold">
-                      <div className="flex justify-between">
-                        <span>Total Price:</span>
-                        <span>${totalPrice.toFixed(2)}</span>
+                    <div className="space-y-4">
+                      <div className="bg-gray-100 p-3 rounded">
+                        <h4 className="font-semibold text-purple-600">PLATINUM</h4>
+                        <div className="flex justify-between">
+                          <span>Total: ${platinumTotal.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Monthly: ${(platinumTotal / 24).toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Deposit: ${(platinumTotal * 0.5).toFixed(2)}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between text-green-600">
-                        <span>50% Down:</span>
-                        <span>${halfDown.toFixed(2)}</span>
+
+                      <div className="bg-gray-100 p-3 rounded">
+                        <h4 className="font-semibold text-yellow-600">GOLD</h4>
+                        <div className="flex justify-between">
+                          <span>Total: ${goldTotal.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Monthly: ${(goldTotal / 24).toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Deposit: ${(goldTotal * 0.5).toFixed(2)}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between text-blue-600">
-                        <span>Monthly Payment:</span>
-                        <span>${monthlyPayment.toFixed(2)}</span>
+
+                      <div className="bg-gray-100 p-3 rounded">
+                        <h4 className="font-semibold text-gray-600">SILVER</h4>
+                        <div className="flex justify-between">
+                          <span>Total: ${silverTotal.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Monthly: ${(silverTotal / 24).toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Deposit: ${(silverTotal * 0.5).toFixed(2)}</span>
+                        </div>
                       </div>
+                      
                       <p className="text-sm text-gray-600 mt-2">
                         24 months at 0% interest
                       </p>
