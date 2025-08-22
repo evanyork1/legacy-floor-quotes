@@ -25,8 +25,6 @@ const PackagePresentation = () => {
   const [spaces, setSpaces] = useState<SpaceData[]>([]);
   const [color, setColor] = useState("");
   const [installDate, setInstallDate] = useState<Date>();
-  const [customerName, setCustomerName] = useState("");
-  const [address, setAddress] = useState("");
 
   // Pricing tiers
   const garagePricing = {
@@ -89,28 +87,18 @@ const PackagePresentation = () => {
         pdf.setFontSize(14);
         pdf.setTextColor(0, 0, 0);
         
-        // Customer name
-        if (customerName) {
-          pdf.text(customerName, 20, 40);
-        }
-        
-        // Address
-        if (address) {
-          pdf.text(address, 20, 50);
-        }
-        
         // Install date
         if (installDate) {
-          pdf.text(`Install Date: ${format(installDate, 'PP')}`, 20, 60);
+          pdf.text(`Install Date: ${format(installDate, 'PP')}`, 20, 40);
         }
         
         // Color
         if (color) {
-          pdf.text(`Color: ${color}`, 20, 70);
+          pdf.text(`Color: ${color}`, 20, 50);
         }
         
         // Spaces breakdown
-        let yPos = 90;
+        let yPos = 70;
         spaces.forEach((space, index) => {
           pdf.text(`${space.type.toUpperCase()} - ${space.sqft} sq ft - ${space.tier.toUpperCase()} - $${space.price.toFixed(2)}`, 20, yPos);
           yPos += 10;
@@ -150,26 +138,6 @@ const PackagePresentation = () => {
                 <CardTitle>Project Details</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="customerName">Customer Name</Label>
-                  <Input
-                    id="customerName"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Enter customer name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Enter project address"
-                  />
-                </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="color">Color</Label>
                   <Input
