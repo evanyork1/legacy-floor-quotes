@@ -77,7 +77,7 @@ const PackagePresentation = () => {
       }
 
       // Fetch the template image
-      const templateResponse = await fetch('/lovable-uploads/4611ba02-7e49-4f74-9000-aef05b3e4658.png');
+      const templateResponse = await fetch('/lovable-uploads/a19b162b-be7c-491b-af12-48d5df7bcb23.png');
       if (!templateResponse.ok) {
         alert('Template image not found. Please contact support.');
         return;
@@ -115,8 +115,8 @@ const PackagePresentation = () => {
       // Square Footage (top left field)
       page.drawText(`${totalSqft}`, {
         x: 175,
-        y: templateImage.height - 310,
-        size: textSize,
+        y: templateImage.height - 320,
+        size: 24,
         font,
         color: whiteColor,
       });
@@ -125,8 +125,8 @@ const PackagePresentation = () => {
       if (color) {
         page.drawText(color, {
           x: 460,
-          y: templateImage.height - 310,
-          size: textSize,
+          y: templateImage.height - 320,
+          size: 24,
           font,
           color: whiteColor,
         });
@@ -135,72 +135,72 @@ const PackagePresentation = () => {
       // Install Day (top right field)
       if (installDate) {
         page.drawText(format(installDate, 'MMM dd'), {
-          x: 760,
-          y: templateImage.height - 310,
-          size: textSize,
+          x: 750,
+          y: templateImage.height - 320,
+          size: 24,
           font,
           color: whiteColor,
         });
       }
       
-      // Platinum pricing - monthly payment based on TOTAL, not remaining after deposit
-      const platinumMonthly = platinumTotal / 24; // Full total over 24 months
-      const platinumDeposit = platinumTotal * 0.5; // 50% deposit
+      // Platinum pricing - monthly payment and deposit
+      const platinumMonthly = platinumTotal / 24;
+      const platinumDeposit = platinumTotal * 0.5;
       
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 435,
-        size: textSize,
+        x: 430,
+        y: templateImage.height - 445,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2), // Orange color
       });
       
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
-        x: 680,
-        y: templateImage.height - 435,
-        size: textSize,
+        x: 650,
+        y: templateImage.height - 445,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2),
       });
       
       // Gold pricing
-      const goldMonthly = goldTotal / 24; // Full total over 24 months
+      const goldMonthly = goldTotal / 24;
       const goldDeposit = goldTotal * 0.5;
       
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 740,
-        size: textSize,
+        x: 430,
+        y: templateImage.height - 850,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2),
       });
       
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
-        x: 680,
-        y: templateImage.height - 740,
-        size: textSize,
+        x: 650,
+        y: templateImage.height - 850,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2),
       });
       
       // Silver pricing
-      const silverMonthly = silverTotal / 24; // Full total over 24 months
+      const silverMonthly = silverTotal / 24;
       const silverDeposit = silverTotal * 0.5;
       
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 1045,
-        size: textSize,
+        x: 430,
+        y: templateImage.height - 1255,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2),
       });
       
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
-        x: 680,
-        y: templateImage.height - 1045,
-        size: textSize,
+        x: 650,
+        y: templateImage.height - 1255,
+        size: 32,
         font,
-        color: orangeColor,
+        color: rgb(1, 0.647, 0.2),
       });
       
       // Save the PDF
