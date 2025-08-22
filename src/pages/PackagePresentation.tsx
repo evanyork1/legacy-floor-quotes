@@ -130,12 +130,12 @@ const PackagePresentation = () => {
           deposit: { x: w * 0.73, y: h * 0.66 }  // After "DEPOSIT/" in platinum section (moved further down and left)
         },
         gold: {
-          monthly: { x: w * 0.52, y: h * 0.415 }, // After "MO/" in gold section (moved further down and left)
-          deposit: { x: w * 0.73, y: h * 0.415 }  // After "DEPOSIT/" in gold section (moved further down and left)
+          monthly: { x: w * 0.54, y: h * 0.415 }, // After "MO/" in gold section (centered under orange text)
+          deposit: { x: w * 0.75, y: h * 0.415 }  // After "DEPOSIT/" in gold section (moved right)
         },
         silver: {
-          monthly: { x: w * 0.52, y: h * 0.165 }, // After "MO/" in silver section (moved further down and left)
-          deposit: { x: w * 0.73, y: h * 0.165 }  // After "DEPOSIT/" in silver section (moved further down and left)
+          monthly: { x: w * 0.54, y: h * 0.165 }, // After "MO/" in silver section (centered under orange text)
+          deposit: { x: w * 0.75, y: h * 0.165 }  // After "DEPOSIT/" in silver section (moved right)
         }
       };
 
