@@ -152,7 +152,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 445,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2), // Orange color
+        color: whiteColor,
       });
       
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
@@ -160,7 +160,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 445,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2),
+        color: whiteColor,
       });
       
       // Gold pricing
@@ -172,7 +172,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 850,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2),
+        color: whiteColor,
       });
       
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
@@ -180,7 +180,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 850,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2),
+        color: whiteColor,
       });
       
       // Silver pricing
@@ -192,7 +192,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 1255,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2),
+        color: whiteColor,
       });
       
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
@@ -200,7 +200,7 @@ const PackagePresentation = () => {
         y: templateImage.height - 1255,
         size: 32,
         font,
-        color: rgb(1, 0.647, 0.2),
+        color: whiteColor,
       });
       
       // Save the PDF
