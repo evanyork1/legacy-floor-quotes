@@ -154,16 +154,16 @@ const PackagePresentation = () => {
       const platinumDeposit = platinumTotal * 0.5;
       
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
-        x: 430,
-        y: templateImage.height - 445,
+        x: 470,
+        y: templateImage.height - 380,
         size: 32,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
-        x: 650,
-        y: templateImage.height - 445,
+        x: 720,
+        y: templateImage.height - 380,
         size: 32,
         font,
         color: whiteColor,
@@ -174,16 +174,16 @@ const PackagePresentation = () => {
       const goldDeposit = goldTotal * 0.5;
       
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
-        x: 430,
-        y: templateImage.height - 850,
+        x: 470,
+        y: templateImage.height - 680,
         size: 32,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
-        x: 650,
-        y: templateImage.height - 850,
+        x: 720,
+        y: templateImage.height - 680,
         size: 32,
         font,
         color: whiteColor,
@@ -194,16 +194,16 @@ const PackagePresentation = () => {
       const silverDeposit = silverTotal * 0.5;
       
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
-        x: 430,
-        y: templateImage.height - 1255,
+        x: 470,
+        y: templateImage.height - 1140,
         size: 32,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
-        x: 650,
-        y: templateImage.height - 1255,
+        x: 720,
+        y: templateImage.height - 1140,
         size: 32,
         font,
         color: whiteColor,
