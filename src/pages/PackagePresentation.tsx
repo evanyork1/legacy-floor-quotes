@@ -124,18 +124,18 @@ const PackagePresentation = () => {
         colorBox: { x: w * 0.52, y: h * 0.74 }, // Top middle box center  
         dateBox: { x: w * 0.81, y: h * 0.74 }, // Top right box center
         
-        // Pricing positions (after MO/ and DEPOSIT/ labels)
+        // Pricing positions (raised up about an inch and moved right)
         platinum: {
-          monthly: { x: w * 0.54, y: h * 0.625 }, // After "MO/" in platinum section
-          deposit: { x: w * 0.75, y: h * 0.625 }  // After "DEPOSIT/" in platinum section
+          monthly: { x: w * 0.57, y: h * 0.70 }, // After "MO/" in platinum section (raised up)
+          deposit: { x: w * 0.78, y: h * 0.70 }  // After "DEPOSIT/" in platinum section (raised up)
         },
         gold: {
-          monthly: { x: w * 0.54, y: h * 0.38 }, // After "MO/" in gold section  
-          deposit: { x: w * 0.75, y: h * 0.38 }  // After "DEPOSIT/" in gold section
+          monthly: { x: w * 0.57, y: h * 0.455 }, // After "MO/" in gold section (raised up)
+          deposit: { x: w * 0.78, y: h * 0.455 }  // After "DEPOSIT/" in gold section (raised up)
         },
         silver: {
-          monthly: { x: w * 0.54, y: h * 0.125 }, // After "MO/" in silver section
-          deposit: { x: w * 0.75, y: h * 0.125 }  // After "DEPOSIT/" in silver section
+          monthly: { x: w * 0.57, y: h * 0.205 }, // After "MO/" in silver section (raised up)
+          deposit: { x: w * 0.78, y: h * 0.205 }  // After "DEPOSIT/" in silver section (raised up)
         }
       };
 
@@ -146,15 +146,16 @@ const PackagePresentation = () => {
       };
 
       // Write white text on the PDF using proper positioning
-      const fontSize = 22;
+      const topBoxFontSize = 28; // Larger font for top boxes
+      const pricingFontSize = 22; // Regular font for pricing
       const whiteColor = rgb(1, 1, 1);
       
       // Square Footage (centered in top left box)
       const sqftText = `${totalSqft}`;
       page.drawText(sqftText, {
-        x: getCenteredTextX(sqftText, fontSize, anchors.sqftBox.x),
+        x: getCenteredTextX(sqftText, topBoxFontSize, anchors.sqftBox.x),
         y: anchors.sqftBox.y,
-        size: fontSize,
+        size: topBoxFontSize,
         font,
         color: whiteColor,
       });
@@ -162,9 +163,9 @@ const PackagePresentation = () => {
       // Color (centered in top middle box)
       if (color) {
         page.drawText(color, {
-          x: getCenteredTextX(color, fontSize, anchors.colorBox.x),
+          x: getCenteredTextX(color, topBoxFontSize, anchors.colorBox.x),
           y: anchors.colorBox.y,
-          size: fontSize,
+          size: topBoxFontSize,
           font,
           color: whiteColor,
         });
@@ -174,9 +175,9 @@ const PackagePresentation = () => {
       if (installDate) {
         const dateText = format(installDate, 'MMM dd');
         page.drawText(dateText, {
-          x: getCenteredTextX(dateText, fontSize, anchors.dateBox.x),
+          x: getCenteredTextX(dateText, topBoxFontSize, anchors.dateBox.x),
           y: anchors.dateBox.y,
-          size: fontSize,
+          size: topBoxFontSize,
           font,
           color: whiteColor,
         });
@@ -189,7 +190,7 @@ const PackagePresentation = () => {
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
         x: anchors.platinum.monthly.x,
         y: anchors.platinum.monthly.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
@@ -197,7 +198,7 @@ const PackagePresentation = () => {
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
         x: anchors.platinum.deposit.x,
         y: anchors.platinum.deposit.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
@@ -209,7 +210,7 @@ const PackagePresentation = () => {
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
         x: anchors.gold.monthly.x,
         y: anchors.gold.monthly.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
@@ -217,7 +218,7 @@ const PackagePresentation = () => {
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
         x: anchors.gold.deposit.x,
         y: anchors.gold.deposit.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
@@ -229,7 +230,7 @@ const PackagePresentation = () => {
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
         x: anchors.silver.monthly.x,
         y: anchors.silver.monthly.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
@@ -237,7 +238,7 @@ const PackagePresentation = () => {
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
         x: anchors.silver.deposit.x,
         y: anchors.silver.deposit.y,
-        size: fontSize,
+        size: pricingFontSize,
         font,
         color: whiteColor,
       });
