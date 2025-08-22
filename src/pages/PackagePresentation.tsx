@@ -113,98 +113,131 @@ const PackagePresentation = () => {
       // Calculate total square footage
       const totalSqft = spaces.reduce((sum, space) => sum + space.sqft, 0);
       
-      // Write white text on the PDF
-      const textSize = 28;
-      const whiteColor = rgb(1, 1, 1);
-      const orangeColor = rgb(1, 0.6, 0.2);
+      // Template positioning system based on percentage anchors
+      const w = templateImage.width;
+      const h = templateImage.height;
       
-      // Square Footage (inside the top left rounded box)
-      page.drawText(`${totalSqft}`, {
-        x: 230,
-        y: templateImage.height - 265,
-        size: 24,
+      // Define text positioning anchors (percentage-based for responsiveness)
+      const anchors = {
+        // Top info boxes (centered in each box)
+        sqftBox: { x: w * 0.23, y: h * 0.74 }, // Top left box center
+        colorBox: { x: w * 0.52, y: h * 0.74 }, // Top middle box center  
+        dateBox: { x: w * 0.81, y: h * 0.74 }, // Top right box center
+        
+        // Pricing positions (after MO/ and DEPOSIT/ labels)
+        platinum: {
+          monthly: { x: w * 0.54, y: h * 0.625 }, // After "MO/" in platinum section
+          deposit: { x: w * 0.75, y: h * 0.625 }  // After "DEPOSIT/" in platinum section
+        },
+        gold: {
+          monthly: { x: w * 0.54, y: h * 0.38 }, // After "MO/" in gold section  
+          deposit: { x: w * 0.75, y: h * 0.38 }  // After "DEPOSIT/" in gold section
+        },
+        silver: {
+          monthly: { x: w * 0.54, y: h * 0.125 }, // After "MO/" in silver section
+          deposit: { x: w * 0.75, y: h * 0.125 }  // After "DEPOSIT/" in silver section
+        }
+      };
+
+      // Helper function to center text horizontally
+      const getCenteredTextX = (text: string, fontSize: number, anchorX: number) => {
+        const textWidth = font.widthOfTextAtSize(text, fontSize);
+        return anchorX - (textWidth / 2);
+      };
+
+      // Write white text on the PDF using proper positioning
+      const fontSize = 22;
+      const whiteColor = rgb(1, 1, 1);
+      
+      // Square Footage (centered in top left box)
+      const sqftText = `${totalSqft}`;
+      page.drawText(sqftText, {
+        x: getCenteredTextX(sqftText, fontSize, anchors.sqftBox.x),
+        y: anchors.sqftBox.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
-      // Color (inside the top middle rounded box)
+      // Color (centered in top middle box)
       if (color) {
         page.drawText(color, {
-          x: 515,
-          y: templateImage.height - 265,
-          size: 24,
+          x: getCenteredTextX(color, fontSize, anchors.colorBox.x),
+          y: anchors.colorBox.y,
+          size: fontSize,
           font,
           color: whiteColor,
         });
       }
       
-      // Install Day (inside the top right rounded box)
+      // Install Day (centered in top right box)
       if (installDate) {
-        page.drawText(format(installDate, 'MMM dd'), {
-          x: 780,
-          y: templateImage.height - 265,
-          size: 24,
+        const dateText = format(installDate, 'MMM dd');
+        page.drawText(dateText, {
+          x: getCenteredTextX(dateText, fontSize, anchors.dateBox.x),
+          y: anchors.dateBox.y,
+          size: fontSize,
           font,
           color: whiteColor,
         });
       }
       
-      // Platinum pricing - directly after MO/ and DEPOSIT/ text
+      // Platinum pricing
       const platinumMonthly = platinumTotal / 24;
       const platinumDeposit = platinumTotal * 0.5;
       
       page.drawText(`$${platinumMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 360,
-        size: 24,
+        x: anchors.platinum.monthly.x,
+        y: anchors.platinum.monthly.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${platinumDeposit.toFixed(0)}`, {
-        x: 700,
-        y: templateImage.height - 360,
-        size: 24,
+        x: anchors.platinum.deposit.x,
+        y: anchors.platinum.deposit.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
-      // Gold pricing - directly after MO/ and DEPOSIT/ text  
+      // Gold pricing
       const goldMonthly = goldTotal / 24;
       const goldDeposit = goldTotal * 0.5;
       
       page.drawText(`$${goldMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 630,
-        size: 24,
+        x: anchors.gold.monthly.x,
+        y: anchors.gold.monthly.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${goldDeposit.toFixed(0)}`, {
-        x: 700,
-        y: templateImage.height - 630,
-        size: 24,
+        x: anchors.gold.deposit.x,
+        y: anchors.gold.deposit.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
-      // Silver pricing - directly after MO/ and DEPOSIT/ text
+      // Silver pricing
       const silverMonthly = silverTotal / 24;
       const silverDeposit = silverTotal * 0.5;
       
       page.drawText(`$${silverMonthly.toFixed(0)}`, {
-        x: 500,
-        y: templateImage.height - 905,
-        size: 24,
+        x: anchors.silver.monthly.x,
+        y: anchors.silver.monthly.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
       
       page.drawText(`$${silverDeposit.toFixed(0)}`, {
-        x: 700,
-        y: templateImage.height - 905,
-        size: 24,
+        x: anchors.silver.deposit.x,
+        y: anchors.silver.deposit.y,
+        size: fontSize,
         font,
         color: whiteColor,
       });
