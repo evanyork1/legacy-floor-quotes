@@ -120,9 +120,9 @@ const PackagePresentation = () => {
       // Define text positioning anchors (percentage-based for responsiveness)
       const anchors = {
         // Top info boxes (centered in each box, moved left and up)
-        sqftBox: { x: w * 0.21, y: h * 0.76 }, // Top left box center
-        colorBox: { x: w * 0.50, y: h * 0.76 }, // Top middle box center  
-        dateBox: { x: w * 0.79, y: h * 0.76 }, // Top right box center
+        sqftBox: { x: w * 0.21, y: h * 0.75 }, // Top left box center
+        colorBox: { x: w * 0.50, y: h * 0.75 }, // Top middle box center  
+        dateBox: { x: w * 0.79, y: h * 0.75 }, // Top right box center
         
         // Pricing positions (raised up about an inch and moved right)
         platinum: {
