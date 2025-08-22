@@ -130,12 +130,12 @@ const PackagePresentation = () => {
           deposit: { x: w * 0.78, y: h * 0.66 }  // Centered under "DEPOSIT/" in platinum section
         },
         gold: {
-          monthly: { x: w * 0.52, y: h * 0.415 }, // Centered under "MO/" in gold section
-          deposit: { x: w * 0.78, y: h * 0.415 }  // Centered under "DEPOSIT/" in gold section
+          monthly: { x: w * 0.51, y: h * 0.415 }, // Adjusted to match platinum alignment
+          deposit: { x: w * 0.77, y: h * 0.415 }  // Adjusted to match platinum alignment
         },
         silver: {
-          monthly: { x: w * 0.52, y: h * 0.165 }, // Centered under "MO/" in silver section
-          deposit: { x: w * 0.78, y: h * 0.165 }  // Centered under "DEPOSIT/" in silver section
+          monthly: { x: w * 0.51, y: h * 0.165 }, // Adjusted to match platinum alignment
+          deposit: { x: w * 0.77, y: h * 0.165 }  // Adjusted to match platinum alignment
         }
       };
 
