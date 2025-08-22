@@ -124,18 +124,18 @@ const PackagePresentation = () => {
         colorBox: { x: w * 0.50, y: h * 0.75 }, // Top middle box center  
         dateBox: { x: w * 0.79, y: h * 0.75 }, // Top right box center
         
-        // Pricing positions (raised up about an inch and moved right)
+        // Pricing positions (moved down and left with larger font)
         platinum: {
-          monthly: { x: w * 0.57, y: h * 0.70 }, // After "MO/" in platinum section (raised up)
-          deposit: { x: w * 0.78, y: h * 0.70 }  // After "DEPOSIT/" in platinum section (raised up)
+          monthly: { x: w * 0.55, y: h * 0.68 }, // After "MO/" in platinum section (moved down and left)
+          deposit: { x: w * 0.76, y: h * 0.68 }  // After "DEPOSIT/" in platinum section (moved down and left)
         },
         gold: {
-          monthly: { x: w * 0.57, y: h * 0.455 }, // After "MO/" in gold section (raised up)
-          deposit: { x: w * 0.78, y: h * 0.455 }  // After "DEPOSIT/" in gold section (raised up)
+          monthly: { x: w * 0.55, y: h * 0.435 }, // After "MO/" in gold section (moved down and left)
+          deposit: { x: w * 0.76, y: h * 0.435 }  // After "DEPOSIT/" in gold section (moved down and left)
         },
         silver: {
-          monthly: { x: w * 0.57, y: h * 0.205 }, // After "MO/" in silver section (raised up)
-          deposit: { x: w * 0.78, y: h * 0.205 }  // After "DEPOSIT/" in silver section (raised up)
+          monthly: { x: w * 0.55, y: h * 0.185 }, // After "MO/" in silver section (moved down and left)
+          deposit: { x: w * 0.76, y: h * 0.185 }  // After "DEPOSIT/" in silver section (moved down and left)
         }
       };
 
@@ -147,7 +147,7 @@ const PackagePresentation = () => {
 
       // Write white text on the PDF using proper positioning
       const topBoxFontSize = 42; // Much larger font for top boxes
-      const pricingFontSize = 22; // Regular font for pricing
+      const pricingFontSize = 28; // Larger font for pricing
       const whiteColor = rgb(1, 1, 1);
       
       // Square Footage (centered in top left box)
