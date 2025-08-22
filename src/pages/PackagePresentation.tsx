@@ -146,7 +146,7 @@ const PackagePresentation = () => {
       };
 
       // Write white text on the PDF using proper positioning
-      const topBoxFontSize = 28; // Larger font for top boxes
+      const topBoxFontSize = 42; // Much larger font for top boxes
       const pricingFontSize = 22; // Regular font for pricing
       const whiteColor = rgb(1, 1, 1);
       
