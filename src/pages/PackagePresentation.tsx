@@ -70,19 +70,25 @@ const PackagePresentation = () => {
   }, 0);
 
   const generatePDF = async () => {
+    console.log('PDF generation started');
     try {
       if (!Array.isArray(spaces) || spaces.length === 0) {
         alert('Please add at least one space before generating PDF.');
         return;
       }
+      console.log('Spaces validation passed:', spaces);
 
       // Fetch the template image
+      console.log('Fetching template image...');
       const templateResponse = await fetch('/lovable-uploads/a19b162b-be7c-491b-af12-48d5df7bcb23.png');
       if (!templateResponse.ok) {
+        console.error('Template response not ok:', templateResponse.status, templateResponse.statusText);
         alert('Template image not found. Please contact support.');
         return;
       }
+      console.log('Template image fetched successfully');
       const templateArrayBuffer = await templateResponse.arrayBuffer();
+      console.log('Template array buffer created, size:', templateArrayBuffer.byteLength);
       
       // Create new PDF document
       const pdfDoc = await PDFDocument.create();
