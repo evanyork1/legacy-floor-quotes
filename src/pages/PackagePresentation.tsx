@@ -232,16 +232,17 @@ const PackagePresentation = () => {
       <Helmet>
         <title>Package Presentation - Legacy Epoxy Floors</title>
         <meta name="description" content="Create professional package presentations for customers" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Helmet>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Package Presentation</h1>
-            <p className="text-xl text-gray-600">Legacy Epoxy Floors</p>
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Package Presentation</h1>
+            <p className="text-lg sm:text-xl text-gray-600">Legacy Epoxy Floors</p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-2">
             {/* Input Form */}
             <Card>
               <CardHeader>
@@ -286,43 +287,56 @@ const PackagePresentation = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <Button onClick={() => addSpace('garage')} variant="outline" size="sm">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button 
+                      onClick={() => addSpace('garage')} 
+                      variant="outline" 
+                      size="default"
+                      className="w-full sm:w-auto"
+                    >
                       Add Garage
                     </Button>
-                    <Button onClick={() => addSpace('patio')} variant="outline" size="sm">
+                    <Button 
+                      onClick={() => addSpace('patio')} 
+                      variant="outline" 
+                      size="default"
+                      className="w-full sm:w-auto"
+                    >
                       Add Patio
                     </Button>
                   </div>
 
                   {spaces.map((space, index) => (
-                    <Card key={index} className="p-4">
+                    <Card key={index} className="p-3 sm:p-4">
                       <div className="flex justify-between items-start mb-4">
-                        <h4 className="font-semibold capitalize">{space.type}</h4>
+                        <h4 className="font-semibold capitalize text-base sm:text-lg">{space.type}</h4>
                         <Button 
                           onClick={() => removeSpace(index)} 
                           variant="destructive" 
                           size="sm"
+                          className="min-h-[36px] px-3"
                         >
                           Remove
                         </Button>
                       </div>
                       
-                      <div className="grid gap-4 md:grid-cols-2">
+                      <div className="grid gap-4 sm:grid-cols-2">
                         <div>
-                          <Label>Square Footage</Label>
+                          <Label className="text-sm font-medium">Square Footage</Label>
                           <Input
                             type="number"
                             value={space.sqft || ''}
                             onChange={(e) => updateSpace(index, 'sqft', parseFloat(e.target.value) || 0)}
                             placeholder="Enter sq ft"
+                            className="mt-1 h-10"
+                            inputMode="numeric"
                           />
                         </div>
                         
-                        <div className="text-sm text-gray-600">
-                          <div>Platinum: ${space.type === 'garage' ? '9.50' : '10.50'}/sq ft</div>
-                          <div>Gold: ${space.type === 'garage' ? '7.00' : '8.00'}/sq ft</div>
-                          <div>Silver: ${space.type === 'garage' ? '6.00' : '7.00'}/sq ft</div>
+                        <div className="text-xs sm:text-sm text-gray-600 space-y-1">
+                          <div className="font-medium text-purple-600">Platinum: ${space.type === 'garage' ? '9.50' : '10.50'}/sq ft</div>
+                          <div className="font-medium text-yellow-600">Gold: ${space.type === 'garage' ? '7.00' : '8.00'}/sq ft</div>
+                          <div className="font-medium text-gray-600">Silver: ${space.type === 'garage' ? '6.00' : '7.00'}/sq ft</div>
                         </div>
                       </div>
                     </Card>
@@ -334,16 +348,16 @@ const PackagePresentation = () => {
             {/* Summary */}
             <Card>
               <CardHeader>
-                <CardTitle>Quote Summary</CardTitle>
+                <CardTitle className="text-lg sm:text-xl">Quote Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {spaces.length === 0 ? (
-                  <p className="text-gray-500">Add spaces to see pricing</p>
+                  <p className="text-gray-500 text-center py-8">Add spaces to see pricing</p>
                 ) : (
                   <>
                     <div className="space-y-2">
                       {spaces.map((space, index) => (
-                        <div key={index} className="flex justify-between">
+                        <div key={index} className="flex justify-between text-sm sm:text-base">
                           <span className="capitalize">
                             {space.type} ({space.sqft} sq ft)
                           </span>
@@ -353,54 +367,69 @@ const PackagePresentation = () => {
                     
                     <hr />
                     
-                    <div className="space-y-4">
-                      <div className="bg-gray-100 p-3 rounded">
-                        <h4 className="font-semibold text-purple-600">PLATINUM</h4>
-                        <div className="flex justify-between">
-                          <span>Total: ${platinumTotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Monthly: ${(platinumTotal / 24).toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Deposit: ${(platinumTotal * 0.5).toFixed(2)}</span>
-                        </div>
-                      </div>
-
-                      <div className="bg-gray-100 p-3 rounded">
-                        <h4 className="font-semibold text-yellow-600">GOLD</h4>
-                        <div className="flex justify-between">
-                          <span>Total: ${goldTotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Monthly: ${(goldTotal / 24).toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Deposit: ${(goldTotal * 0.5).toFixed(2)}</span>
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
+                        <h4 className="font-semibold text-purple-600 text-base sm:text-lg mb-2">PLATINUM</h4>
+                        <div className="grid grid-cols-1 gap-1 text-sm sm:text-base">
+                          <div className="flex justify-between">
+                            <span>Total:</span>
+                            <span className="font-medium">${platinumTotal.toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Monthly:</span>
+                            <span className="font-medium">${(platinumTotal / 24).toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Deposit:</span>
+                            <span className="font-medium">${(platinumTotal * 0.5).toFixed(2)}</span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="bg-gray-100 p-3 rounded">
-                        <h4 className="font-semibold text-gray-600">SILVER</h4>
-                        <div className="flex justify-between">
-                          <span>Total: ${silverTotal.toFixed(2)}</span>
+                      <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
+                        <h4 className="font-semibold text-yellow-600 text-base sm:text-lg mb-2">GOLD</h4>
+                        <div className="grid grid-cols-1 gap-1 text-sm sm:text-base">
+                          <div className="flex justify-between">
+                            <span>Total:</span>
+                            <span className="font-medium">${goldTotal.toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Monthly:</span>
+                            <span className="font-medium">${(goldTotal / 24).toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Deposit:</span>
+                            <span className="font-medium">${(goldTotal * 0.5).toFixed(2)}</span>
+                          </div>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Monthly: ${(silverTotal / 24).toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Deposit: ${(silverTotal * 0.5).toFixed(2)}</span>
+                      </div>
+
+                      <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
+                        <h4 className="font-semibold text-gray-600 text-base sm:text-lg mb-2">SILVER</h4>
+                        <div className="grid grid-cols-1 gap-1 text-sm sm:text-base">
+                          <div className="flex justify-between">
+                            <span>Total:</span>
+                            <span className="font-medium">${silverTotal.toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Monthly:</span>
+                            <span className="font-medium">${(silverTotal / 24).toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Deposit:</span>
+                            <span className="font-medium">${(silverTotal * 0.5).toFixed(2)}</span>
+                          </div>
                         </div>
                       </div>
                       
-                      <p className="text-sm text-gray-600 mt-2">
+                      <p className="text-xs sm:text-sm text-gray-600 text-center mt-3">
                         24 months at 0% interest
                       </p>
                     </div>
 
                     <Button 
                       onClick={generatePDF} 
-                      className="w-full mt-6"
+                      className="w-full mt-6 h-12 text-base font-medium"
                       disabled={spaces.length === 0}
                     >
                       <Download className="mr-2 h-4 w-4" />
