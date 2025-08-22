@@ -11,8 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon, Download } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 interface SpaceData {
   type: 'garage' | 'patio';
@@ -71,50 +70,167 @@ const PackagePresentation = () => {
   const monthlyPayment = halfDown / 24; // 24 months 0%
 
   const generatePDF = async () => {
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    // Load the template image
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = '/legacy-template.jpg';
-    
-    return new Promise((resolve) => {
-      img.onload = () => {
-        // Add template image as background
-        pdf.addImage(img, 'JPEG', 0, 0, 210, 297);
-        
-        // Add text overlays (adjust positions based on template)
-        pdf.setFontSize(14);
-        pdf.setTextColor(0, 0, 0);
-        
-        // Install date
-        if (installDate) {
-          pdf.text(`Install Date: ${format(installDate, 'PP')}`, 20, 40);
-        }
-        
-        // Color
-        if (color) {
-          pdf.text(`Color: ${color}`, 20, 50);
-        }
-        
-        // Spaces breakdown
-        let yPos = 70;
-        spaces.forEach((space, index) => {
-          pdf.text(`${space.type.toUpperCase()} - ${space.sqft} sq ft - ${space.tier.toUpperCase()} - $${space.price.toFixed(2)}`, 20, yPos);
-          yPos += 10;
+    try {
+      if (!Array.isArray(spaces) || spaces.length === 0) {
+        alert('Please add at least one space before generating PDF.');
+        return;
+      }
+
+      // Fetch the template image
+      const templateResponse = await fetch('/legacy-template.png');
+      const templateArrayBuffer = await templateResponse.arrayBuffer();
+      
+      // Create new PDF document
+      const pdfDoc = await PDFDocument.create();
+      
+      // Embed the template image
+      const templateImage = await pdfDoc.embedPng(templateArrayBuffer);
+      
+      // Add a page with the template dimensions
+      const page = pdfDoc.addPage([templateImage.width, templateImage.height]);
+      
+      // Draw the template image as background
+      page.drawImage(templateImage, {
+        x: 0,
+        y: 0,
+        width: templateImage.width,
+        height: templateImage.height,
+      });
+      
+      // Embed font for white text
+      const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+      
+      // Calculate total square footage
+      const totalSqft = spaces.reduce((sum, space) => sum + space.sqft, 0);
+      
+      // Write white text on the PDF
+      const textSize = 28;
+      const whiteColor = rgb(1, 1, 1);
+      const orangeColor = rgb(1, 0.6, 0.2);
+      
+      // Square Footage (top left field)
+      page.drawText(`${totalSqft}`, {
+        x: 175,
+        y: templateImage.height - 310,
+        size: textSize,
+        font,
+        color: whiteColor,
+      });
+      
+      // Color (top middle field)
+      if (color) {
+        page.drawText(color, {
+          x: 460,
+          y: templateImage.height - 310,
+          size: textSize,
+          font,
+          color: whiteColor,
         });
-        
-        // Totals
-        pdf.setFontSize(16);
-        pdf.text(`Total: $${totalPrice.toFixed(2)}`, 20, yPos + 20);
-        pdf.text(`50% Down: $${halfDown.toFixed(2)}`, 20, yPos + 35);
-        pdf.text(`Monthly Payment: $${monthlyPayment.toFixed(2)} (24 months)`, 20, yPos + 50);
-        
-        // Save the PDF
-        pdf.save('legacy-package-presentation.pdf');
-        resolve(pdf);
-      };
-    });
+      }
+      
+      // Install Day (top right field)
+      if (installDate) {
+        page.drawText(format(installDate, 'MMM dd'), {
+          x: 760,
+          y: templateImage.height - 310,
+          size: textSize,
+          font,
+          color: whiteColor,
+        });
+      }
+      
+      // Calculate pricing for each tier
+      const platinumTotal = spaces.reduce((sum, space) => {
+        const pricing = space.type === 'garage' ? garagePricing.platinum : patioPricing.platinum;
+        return sum + (space.sqft * pricing);
+      }, 0);
+      
+      const goldTotal = spaces.reduce((sum, space) => {
+        const pricing = space.type === 'garage' ? garagePricing.gold : patioPricing.gold;
+        return sum + (space.sqft * pricing);
+      }, 0);
+      
+      const silverTotal = spaces.reduce((sum, space) => {
+        const pricing = space.type === 'garage' ? garagePricing.silver : patioPricing.silver;
+        return sum + (space.sqft * pricing);
+      }, 0);
+      
+      // Platinum pricing
+      const platinumMonthly = (platinumTotal * 0.5) / 24; // 50% down, remaining over 24 months
+      const platinumDeposit = platinumTotal * 0.5;
+      
+      page.drawText(`$${platinumMonthly.toFixed(0)}`, {
+        x: 500,
+        y: templateImage.height - 435,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      page.drawText(`$${platinumDeposit.toFixed(0)}`, {
+        x: 680,
+        y: templateImage.height - 435,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      // Gold pricing
+      const goldMonthly = (goldTotal * 0.5) / 24;
+      const goldDeposit = goldTotal * 0.5;
+      
+      page.drawText(`$${goldMonthly.toFixed(0)}`, {
+        x: 500,
+        y: templateImage.height - 740,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      page.drawText(`$${goldDeposit.toFixed(0)}`, {
+        x: 680,
+        y: templateImage.height - 740,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      // Silver pricing
+      const silverMonthly = (silverTotal * 0.5) / 24;
+      const silverDeposit = silverTotal * 0.5;
+      
+      page.drawText(`$${silverMonthly.toFixed(0)}`, {
+        x: 500,
+        y: templateImage.height - 1045,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      page.drawText(`$${silverDeposit.toFixed(0)}`, {
+        x: 680,
+        y: templateImage.height - 1045,
+        size: textSize,
+        font,
+        color: orangeColor,
+      });
+      
+      // Save the PDF
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      
+      // Download the PDF
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'legacy-package-presentation.pdf';
+      link.click();
+      
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
   };
 
   return (
