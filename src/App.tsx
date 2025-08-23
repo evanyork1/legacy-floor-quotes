@@ -1,106 +1,84 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import { lazy, Suspense } from "react";
-import ScrollToTop from "./components/ScrollToTop";
-
-// Lazy load pages for code splitting
-const Houston = lazy(() => import("./pages/Houston"));
-const Quote = lazy(() => import("./pages/Quote"));
-const DFW = lazy(() => import("./pages/DFW"));
-const DFWResLanding = lazy(() => import("./pages/DFWResLanding"));
-
-
-const QuoteDFW = lazy(() => import("./pages/QuoteDFW"));
-const Gallery = lazy(() => import("./pages/Gallery"));
-const AdminPanel = lazy(() => import("./pages/AdminPanel"));
-const EmployeePanel = lazy(() => import("./pages/EmployeePanel"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const LandingVisual = lazy(() => import("./pages/LandingVisual"));
-const ServiceAreas = lazy(() => import("./pages/ServiceAreas"));
-
-const Warranty = lazy(() => import("./pages/Warranty"));
-const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const Contact = lazy(() => import("./pages/Contact"));
-const FlakeFloors = lazy(() => import("./pages/FlakeFloors"));
-const ResidentialPatio = lazy(() => import("./pages/ResidentialPatio"));
-const ResidentialGarageFloors = lazy(() => import("./pages/ResidentialGarageFloors"));
-const FlowerMound = lazy(() => import("./pages/FlowerMound"));
-const Prosper = lazy(() => import("./pages/Prosper"));
-const IndustrialEpoxy = lazy(() => import("./pages/IndustrialEpoxy"));
-const ConcretePolishing = lazy(() => import("./pages/ConcretePolishing"));
-const Commercial = lazy(() => import("./pages/Commercial"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-const Blog = lazy(() => import("./pages/Blog"));
-const Financing = lazy(() => import("./pages/Financing"));
-const About = lazy(() => import("./pages/About"));
-const AdditionalServices = lazy(() => import("./pages/AdditionalServices"));
-const PackagePresentation = lazy(() => import("./pages/PackagePresentation"));
-
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse text-blue-600 text-lg">Loading...</div>
-  </div>
-);
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/hooks/useAuth";
+import About from "./pages/About";
+import AdditionalServices from "./pages/AdditionalServices";
+import Blog from "./pages/Blog";
+import Commercial from "./pages/Commercial";
+import ConcretePolishing from "./pages/ConcretePolishing";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
+import Financing from "./pages/Financing";
+import FlakeFloors from "./pages/FlakeFloors";
+import FlowerMound from "./pages/FlowerMound";
+import Gallery from "./pages/Gallery";
+import Houston from "./pages/Houston";
+import IndustrialEpoxy from "./pages/IndustrialEpoxy";
+import NotFound from "./pages/NotFound";
+import PackagePresentation from "./pages/PackagePresentation";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Prosper from "./pages/Prosper";
+import Quote from "./pages/Quote";
+import QuoteDFW from "./pages/QuoteDFW";
+import ResidentialGarageFloors from "./pages/ResidentialGarageFloors";
+import ResidentialPatio from "./pages/ResidentialPatio";
+import ServiceAreas from "./pages/ServiceAreas";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import Warranty from "./pages/Warranty";
+import AdminPanel from "./pages/AdminPanel";
+import EmployeePanel from "./pages/EmployeePanel";
+import DFW from "./pages/DFW";
+import DFWResLanding from "./pages/DFWResLanding";
+import LandingVisual from "./pages/LandingVisual";
+import Auth from "./pages/Auth";
+import SalesDashboard from "./pages/SalesDashboard";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<DFW />} />
+            <Route path="/houston" element={<Houston />} />
+            <Route path="/quotehou" element={<Quote />} />
+            <Route path="/dfw" element={<DFW />} />
+            <Route path="/quotedfw" element={<QuoteDFW />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/landingvisual" element={<LandingVisual />} />
+            <Route path="/service-areas" element={<ServiceAreas />} />
+            <Route path="/warranty" element={<Warranty />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/flake-floors" element={<FlakeFloors />} />
+            <Route path="/residential-patio" element={<ResidentialPatio />} />
+            <Route path="/garagefloors" element={<ResidentialGarageFloors />} />
+            <Route path="/flower-mound" element={<FlowerMound />} />
+            <Route path="/prosper" element={<Prosper />} />
+            <Route path="/additional-services" element={<AdditionalServices />} />
+            <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
+            <Route path="/commercial" element={<Commercial />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/financing" element={<Financing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/packagepresentation" element={<PackagePresentation />} />
+            <Route path="/adminpanel2025" element={<AdminPanel />} />
+            <Route path="/jingram" element={<EmployeePanel />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/sales-dashboard" element={<SalesDashboard />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
         <Toaster />
-        <SonnerToaster />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              {/* DFW is now the homepage */}
-              <Route path="/" element={<DFW />} />
-              <Route path="/houston" element={<Houston />} />
-              <Route path="/quotehou" element={<Quote />} />
-              <Route path="/dfw" element={<DFW />} />
-              <Route path="/dfwreslanding" element={<Navigate to="/dfw" replace />} />
-        
-        
-              <Route path="/quotedfw" element={<QuoteDFW />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/landingvisual" element={<LandingVisual />} />
-              <Route path="/service-areas" element={<ServiceAreas />} />
-              
-              <Route path="/warranty" element={<Warranty />} />
-              <Route path="/terms" element={<TermsAndConditions />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/contact" element={<Contact />} />
-<Route path="/flake-floors" element={<FlakeFloors />} />
-<Route path="/residential-patio" element={<ResidentialPatio />} />
-<Route path="/garagefloors" element={<ResidentialGarageFloors />} />
-          <Route path="/flower-mound" element={<FlowerMound />} />
-          <Route path="/prosper" element={<Prosper />} />
-<Route path="/additional-services" element={<AdditionalServices />} />
-<Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
-              <Route path="/commercial" element={<Commercial />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/financing" element={<Financing />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/packagepresentation" element={<PackagePresentation />} />
-              <Route path="/adminpanel2025" element={<AdminPanel />} />
-              <Route path="/jingram" element={<EmployeePanel />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
-);
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;

@@ -12,7 +12,7 @@ import { UserPlus, Mail, Trash2 } from 'lucide-react';
 interface User {
   id: string;
   email: string;
-  full_name?: string;
+  full_name?: string | null;
   role: 'admin' | 'rep';
   created_at: string;
 }
@@ -37,41 +37,67 @@ export function UserManagement() {
   }, []);
 
   const fetchUsers = async () => {
-    // Get profiles with their roles
-    const { data: profiles, error: profilesError } = await supabase
-      .from('profiles')
-      .select(`
-        id,
-        full_name,
-        user_roles!inner(role)
-      `);
+    try {
+      // First, get all profiles
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, full_name');
 
-    if (profilesError) {
-      console.error('Error fetching users:', profilesError);
-      return;
+      if (profilesError) {
+        console.error('Error fetching profiles:', profilesError);
+        return;
+      }
+
+      if (!profilesData || profilesData.length === 0) {
+        setUsers([]);
+        return;
+      }
+
+      // Get user roles for these profile IDs
+      const profileIds = profilesData.map(p => p.id);
+      const { data: rolesData, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('user_id, role')
+        .in('user_id', profileIds);
+
+      if (rolesError) {
+        console.error('Error fetching roles:', rolesError);
+        return;
+      }
+
+      // Get auth users to get email addresses
+      const { data: authData, error: authError } = await supabase.auth.admin.listUsers();
+
+      if (authError) {
+        console.error('Error fetching auth users:', authError);
+        return;
+      }
+
+      // Combine all the data
+      const combinedUsers: User[] = profilesData
+        .map((profile): User | null => {
+          const roleData = rolesData?.find(r => r.user_id === profile.id);
+          const authUser = authData?.users?.find((user: any) => user.id === profile.id);
+          
+          if (!roleData || !authUser) {
+            return null; // Skip users without roles or auth data
+          }
+
+          return {
+            id: profile.id,
+            email: authUser.email || 'Unknown',
+            full_name: profile.full_name || null,
+            role: roleData.role as 'admin' | 'rep',
+            created_at: authUser.created_at || '',
+          };
+        })
+        .filter((user): user is User => user !== null);
+
+      setUsers(combinedUsers);
+    } catch (error) {
+      console.error('Error in fetchUsers:', error);
+      setUsers([]);
     }
-
-    // Get auth users to get email addresses
-    const { data: authUsers, error: authError } = await supabase.auth.admin.listUsers();
-
-    if (authError) {
-      console.error('Error fetching auth users:', authError);
-      return;
-    }
-
-    // Combine profile and auth data
-    const combinedUsers = profiles?.map((profile: any) => {
-      const authUser = authUsers.users.find(user => user.id === profile.id);
-      return {
-        id: profile.id,
-        email: authUser?.email || 'Unknown',
-        full_name: profile.full_name,
-        role: (profile as any).user_roles.role,
-        created_at: authUser?.created_at || '',
-      };
-    }) || [];
-
-    setUsers(combinedUsers);
   };
 
   const fetchPendingInvites = async () => {
