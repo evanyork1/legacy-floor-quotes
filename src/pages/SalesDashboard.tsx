@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Target, Users, Trophy, BookOpen, Presentation, Shield } from 'lucide-react';
+import { Loader2, Target, Users, Trophy, BookOpen, Presentation, Shield, UserPlus } from 'lucide-react';
 import { ProspectingSection } from '@/components/sales/ProspectingSection';
 import { GoalsSection } from '@/components/sales/GoalsSection';
 import { SalesSection } from '@/components/sales/SalesSection';
@@ -61,6 +61,16 @@ export default function SalesDashboard() {
                 <Shield className="h-3 w-3" />
                 Admin Mode
               </Badge>
+            )}
+            {isAdmin && (
+              <Button
+                variant="outline"
+                onClick={() => navigate('/auth#user-management')}
+                className="flex items-center gap-2"
+              >
+                <UserPlus className="h-4 w-4" />
+                Manage Users
+              </Button>
             )}
             <Button
               variant="outline"

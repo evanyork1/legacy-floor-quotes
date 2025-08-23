@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
-import { Loader2, UserPlus, Mail, Trash2 } from 'lucide-react';
+import { Loader2, UserPlus, Mail, Trash2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 interface PendingInvite {
@@ -22,12 +22,14 @@ interface PendingInvite {
 
 export default function Auth() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, hasRole } = useAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const adminSectionRef = useRef<HTMLDivElement>(null);
   
   // User management states
   const [inviteEmail, setInviteEmail] = useState('');
@@ -39,24 +41,38 @@ export default function Auth() {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate('/sales-dashboard');
+        // Only redirect non-admins automatically
+        const adminRole = await hasRole('admin');
+        const isAdminByEmail = session.user.email === 'evan@licoat.com';
+        if (!adminRole && !isAdminByEmail) {
+          navigate('/sales-dashboard');
+        }
       }
     };
     checkUser();
-  }, [navigate]);
+  }, [navigate, hasRole]);
 
   useEffect(() => {
     const checkAdminRole = async () => {
       if (user) {
         const adminRole = await hasRole('admin');
-        setIsAdmin(adminRole);
-        if (adminRole) {
+        const isAdminByEmail = user.email === 'evan@licoat.com';
+        const adminStatus = adminRole || isAdminByEmail;
+        setIsAdmin(adminStatus);
+        if (adminStatus) {
           fetchPendingInvites();
         }
       }
     };
     checkAdminRole();
   }, [user, hasRole]);
+
+  useEffect(() => {
+    // Scroll to admin section if hash is present
+    if (location.hash === '#user-management' && adminSectionRef.current) {
+      adminSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.hash, isAdmin]);
 
   const fetchPendingInvites = async () => {
     const { data, error } = await supabase
@@ -189,11 +205,24 @@ export default function Auth() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl space-y-6">
+        {user && (
+          <div className="flex items-center justify-between bg-background/95 backdrop-blur rounded-lg p-4 border">
+            <div>
+              <p className="text-sm text-muted-foreground">You're signed in as</p>
+              <p className="font-medium">{user.user_metadata?.full_name || user.email}</p>
+            </div>
+            <Button variant="outline" onClick={() => navigate('/sales-dashboard')} className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Dashboard
+            </Button>
+          </div>
+        )}
+        
         <Card className="w-full max-w-md mx-auto">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Welcome</CardTitle>
             <CardDescription>
-              Sign in to access your sales dashboard
+              {user ? 'Manage your account' : 'Sign in to access your sales dashboard'}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -277,7 +306,7 @@ export default function Auth() {
 
         {/* Admin User Management Section */}
         {user && isAdmin && (
-          <div className="space-y-6">
+          <div ref={adminSectionRef} className="space-y-6">
             {/* Invite User Form */}
             <Card>
               <CardHeader>
