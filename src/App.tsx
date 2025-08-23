@@ -28,8 +28,6 @@ import ResidentialPatio from "./pages/ResidentialPatio";
 import ServiceAreas from "./pages/ServiceAreas";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
-import AdminPanel from "./pages/AdminPanel";
-import EmployeePanel from "./pages/EmployeePanel";
 import DFW from "./pages/DFW";
 import DFWResLanding from "./pages/DFWResLanding";
 import LandingVisual from "./pages/LandingVisual";
@@ -70,8 +68,6 @@ function App() {
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
-              <Route path="/adminpanel2025" element={<AdminPanel />} />
-              <Route path="/jingram" element={<EmployeePanel />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
               <Route path="*" element={<NotFound />} />
