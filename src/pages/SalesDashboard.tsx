@@ -4,23 +4,39 @@ import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, Target, Users, Trophy, BookOpen, Presentation } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Loader2, Target, Users, Trophy, BookOpen, Presentation, Shield } from 'lucide-react';
 import { ProspectingSection } from '@/components/sales/ProspectingSection';
 import { GoalsSection } from '@/components/sales/GoalsSection';
 import { SalesSection } from '@/components/sales/SalesSection';
+import { SalesManagement } from '@/components/admin/SalesManagement';
 import { TrainingSection } from '@/components/sales/TrainingSection';
+import { TrainingManagement } from '@/components/admin/TrainingManagement';
 import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
 
 export default function SalesDashboard() {
-  const { user, loading, signOut } = useAuth();
+  const { user, loading, signOut, hasRole } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('prospecting');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
       navigate('/auth');
     }
   }, [user, loading, navigate]);
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (user) {
+        // Fallback for evan@licoat.com until user_roles is updated
+        const isAdminByRole = await hasRole('admin');
+        const isAdminByEmail = user.email === 'evan@licoat.com';
+        setIsAdmin(isAdminByRole || isAdminByEmail);
+      }
+    };
+    checkAdminStatus();
+  }, [user, hasRole]);
 
   if (loading) {
     return (
@@ -40,6 +56,12 @@ export default function SalesDashboard() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold">Sales Dashboard</h1>
           <div className="flex items-center gap-4">
+            {isAdmin && (
+              <Badge variant="default" className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                Admin Mode
+              </Badge>
+            )}
             <Button
               variant="outline"
               onClick={() => navigate('/packagepresentation')}
@@ -95,11 +117,18 @@ export default function SalesDashboard() {
           </TabsContent>
 
           <TabsContent value="sales" className="space-y-6">
-            <SalesSection />
+            {isAdmin ? <SalesManagement /> : <SalesSection />}
           </TabsContent>
 
           <TabsContent value="training" className="space-y-6">
-            <TrainingSection />
+            {isAdmin ? (
+              <div className="space-y-6">
+                <TrainingManagement />
+                <TrainingSection />
+              </div>
+            ) : (
+              <TrainingSection />
+            )}
           </TabsContent>
 
           <TabsContent value="leaderboard" className="space-y-6">
