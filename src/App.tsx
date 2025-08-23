@@ -1,6 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/hooks/useAuth";
 import About from "./pages/About";
@@ -40,43 +41,45 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<DFW />} />
-            <Route path="/houston" element={<Houston />} />
-            <Route path="/quotehou" element={<Quote />} />
-            <Route path="/dfw" element={<DFW />} />
-            <Route path="/quotedfw" element={<QuoteDFW />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/landingvisual" element={<LandingVisual />} />
-            <Route path="/service-areas" element={<ServiceAreas />} />
-            <Route path="/warranty" element={<Warranty />} />
-            <Route path="/terms" element={<TermsAndConditions />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/flake-floors" element={<FlakeFloors />} />
-            <Route path="/residential-patio" element={<ResidentialPatio />} />
-            <Route path="/garagefloors" element={<ResidentialGarageFloors />} />
-            <Route path="/flower-mound" element={<FlowerMound />} />
-            <Route path="/prosper" element={<Prosper />} />
-            <Route path="/additional-services" element={<AdditionalServices />} />
-            <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
-            <Route path="/commercial" element={<Commercial />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/financing" element={<Financing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/packagepresentation" element={<PackagePresentation />} />
-            <Route path="/adminpanel2025" element={<AdminPanel />} />
-            <Route path="/jingram" element={<EmployeePanel />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/sales-dashboard" element={<SalesDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
-        <Toaster />
-      </AuthProvider>
+      <HelmetProvider>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<DFW />} />
+              <Route path="/houston" element={<Houston />} />
+              <Route path="/quotehou" element={<Quote />} />
+              <Route path="/dfw" element={<DFW />} />
+              <Route path="/quotedfw" element={<QuoteDFW />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/landingvisual" element={<LandingVisual />} />
+              <Route path="/service-areas" element={<ServiceAreas />} />
+              <Route path="/warranty" element={<Warranty />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/flake-floors" element={<FlakeFloors />} />
+              <Route path="/residential-patio" element={<ResidentialPatio />} />
+              <Route path="/garagefloors" element={<ResidentialGarageFloors />} />
+              <Route path="/flower-mound" element={<FlowerMound />} />
+              <Route path="/prosper" element={<Prosper />} />
+              <Route path="/additional-services" element={<AdditionalServices />} />
+              <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
+              <Route path="/commercial" element={<Commercial />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/financing" element={<Financing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/packagepresentation" element={<PackagePresentation />} />
+              <Route path="/adminpanel2025" element={<AdminPanel />} />
+              <Route path="/jingram" element={<EmployeePanel />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/sales-dashboard" element={<SalesDashboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+          <Toaster />
+        </AuthProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }
