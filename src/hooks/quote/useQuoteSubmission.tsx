@@ -126,6 +126,11 @@ export const useQuoteSubmission = () => {
             description: "We've received your quote and will contact you soon.",
           });
         }
+
+        // Track contact form submission
+        if (typeof (window as any).gtag !== 'undefined') {
+          (window as any).gtag("event", "contact_form");
+        }
       } catch (webhookError) {
         console.error('Webhook call failed:', webhookError);
         // Still show success since quote was saved

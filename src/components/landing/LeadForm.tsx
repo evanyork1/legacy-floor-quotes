@@ -58,6 +58,11 @@ export const LeadForm = () => {
       toast.success("Thank you! Your information has been submitted.");
       setShowModal(true);
 
+      // Track contact form submission
+      if (typeof (window as any).gtag !== 'undefined') {
+        (window as any).gtag("event", "contact_form");
+      }
+
       // Reset form
       setFormData({
         firstName: "",

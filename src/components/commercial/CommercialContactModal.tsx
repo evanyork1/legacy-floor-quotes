@@ -69,6 +69,11 @@ export const CommercialContactModal = ({ open, onOpenChange }: CommercialContact
       setShowThankYou(true);
       form.reset();
       
+      // Track contact form submission
+      if (typeof (window as any).gtag !== 'undefined') {
+        (window as any).gtag("event", "contact_form");
+      }
+      
       // Auto-close modal after 3 seconds
       setTimeout(() => {
         setShowThankYou(false);
