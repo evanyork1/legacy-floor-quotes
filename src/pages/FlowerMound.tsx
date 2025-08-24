@@ -199,9 +199,8 @@ const FlowerMound = () => {
         {/* CTA Buttons in same section */}
         <section className="bg-gradient-to-b from-gray-50 to-white -mt-12 pt-0 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16">
-              <div className="hidden lg:block"></div> {/* Empty space to align with right column on desktop */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <div className="flex justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
                 <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto">
                   <a href="tel:214-305-6516" className="flex items-center justify-center">
                     <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
