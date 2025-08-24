@@ -270,6 +270,62 @@ const FlowerMound = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Transformation 3 - Large Space */}
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
+                  <div className="relative overflow-hidden rounded-xl">
+                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage space concrete floor in Flower Mound" className="w-full h-full object-cover" />
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                        BEFORE
+                      </span>
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-xl">
+                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage space with premium flake coating in Flower Mound" className="w-full h-full object-cover" />
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
+                        AFTER
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:pl-8 px-4 lg:px-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Large Space Transformation</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    Even larger Flower Mound garage spaces benefit tremendously from our coating systems. This transformation shows how our flake floors can completely change the look and feel of any size garage space.
+                  </p>
+                </div>
+              </div>
+
+              {/* Transformation 4 */}
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Professional Results Every Time</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    Our process consistently delivers beautiful results for Flower Mound homeowners. From preparation to final topcoat, every step is performed with precision to ensure your garage floor looks perfect and lasts for decades.
+                  </p>
+                </div>
+                <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
+                  <div className="relative overflow-hidden rounded-xl">
+                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before garage floor concrete surface in Flower Mound" className="w-full h-full object-cover" />
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
+                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                        BEFORE
+                      </span>
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-xl">
+                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating installation in Flower Mound" className="w-full h-full object-cover" />
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
+                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
+                        AFTER
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
