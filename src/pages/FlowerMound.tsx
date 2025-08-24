@@ -196,6 +196,38 @@ const FlowerMound = () => {
         
         <WhyChooseSection />
         
+        {/* CTA Section */}
+        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+                Ready to Transform Your 
+                <span className="block bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Flower Mound Garage?
+                </span>
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-600 mb-8 md:mb-10 leading-relaxed px-4">
+                Join hundreds of satisfied Flower Mound homeowners who've transformed their garages with our lifetime warranty coating system.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
+                <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg">
+                  <a href="tel:214-305-6516">
+                    <Phone className="mr-3 h-5 w-5" />
+                    Call 214-305-6516
+                  </a>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowBookingModal(true)} 
+                  className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full transition-all duration-300 text-lg"
+                >
+                  <Calendar className="mr-3 h-5 w-5" />
+                  Book Free Estimate
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* What Are Garage Floor Coatings Section */}
         
