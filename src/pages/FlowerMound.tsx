@@ -200,10 +200,10 @@ const FlowerMound = () => {
         <section className="bg-gradient-to-b from-gray-50 to-white -mt-12 pt-0 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16">
-              <div></div> {/* Empty space to align with right column */}
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
-                  <a href="tel:214-305-6516">
+              <div className="hidden lg:block"></div> {/* Empty space to align with right column on desktop */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto">
+                  <a href="tel:214-305-6516" className="flex items-center justify-center">
                     <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     214-305-6516
                   </a>
@@ -211,7 +211,7 @@ const FlowerMound = () => {
                 <Button 
                   variant="outline" 
                   onClick={() => setShowBookingModal(true)} 
-                  className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300 text-sm sm:text-base"
+                  className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300 text-sm sm:text-base w-full sm:w-auto"
                 >
                   <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Book My Free Estimate
