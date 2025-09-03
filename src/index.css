@@ -36,6 +36,19 @@
 
     --radius: 0.5rem;
 
+    /* Navy blue color system for company branding */
+    --navy-50: 240 100% 98%;
+    --navy-100: 240 100% 95%;
+    --navy-200: 240 84% 88%;
+    --navy-300: 240 71% 77%;
+    --navy-400: 240 51% 65%;
+    --navy-500: 240 39% 51%;
+    --navy-600: 240 51% 41%;
+    --navy-700: 240 65% 32%;
+    --navy-800: 240 71% 24%;
+    --navy-900: 240 84% 16%;
+    --navy-950: 240 100% 9%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;

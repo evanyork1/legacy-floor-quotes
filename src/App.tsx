@@ -33,6 +33,7 @@ import DFWResLanding from "./pages/DFWResLanding";
 import LandingVisual from "./pages/LandingVisual";
 import Auth from "./pages/Auth";
 import SalesDashboard from "./pages/SalesDashboard";
+import FlakeFloorTemplate from "./pages/FlakeFloorTemplate";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ function App() {
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
+              <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
               <Route path="*" element={<NotFound />} />
