@@ -107,5 +107,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+document.querySelectorAll('button').forEach(function(element) {
+  element.addEventListener('click', function() {
+      if (element.innerText == 'GET MORE INFO') {
+        gtag("event", "contact_form");
+
+      };
+  });
+});
+</script>
   </body>
 </html>
