@@ -47,6 +47,7 @@ const FlakeFloorTemplate = () => {
     gradient: "from-amber-400 to-amber-600",
     features: [
       "Premium Thickness Polyurea Floor System",
+      "Full Color & Flake Selection - Choose from our entire design catalog",
       
       "Lifetime Warranty"
     ],
