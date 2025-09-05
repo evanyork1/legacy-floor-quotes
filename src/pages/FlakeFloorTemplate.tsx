@@ -197,33 +197,33 @@ const FlakeFloorTemplate = () => {
 
                   {/* Pricing Inputs */}
                   <div className="space-y-5 border-t-2 pt-6 print:space-y-4 print:pt-4 print:border-gray-300 bg-gradient-to-br from-slate-50 to-white print:bg-white rounded-lg p-4 print:p-3">
-                    <h4 className="font-bold text-navy-900 text-lg print:text-base uppercase tracking-wide">Investment Details</h4>
+                    <h4 className="font-bold text-navy-900 text-lg print:text-base uppercase tracking-wide text-center">Investment Details</h4>
                     
-                    <div className="space-y-4 print:space-y-3">
-                      <div>
+                    <div className="space-y-4 print:space-y-3 flex flex-col items-center">
+                      <div className="text-center">
                         <Label className="text-sm text-slate-700 font-semibold mb-2 block uppercase tracking-wide">Monthly Payment</Label>
                         <Input 
                           value={pkg.monthly} 
                           onChange={e => pkg.setMonthly(e.target.value)} 
-                          className="w-24 h-10 text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
+                          className="w-32 h-12 mx-auto text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
                         />
                       </div>
                       
-                      <div>
+                      <div className="text-center">
                         <Label className="text-sm text-slate-700 font-semibold mb-2 block uppercase tracking-wide">Total Investment</Label>
                         <Input 
                           value={pkg.total} 
                           onChange={e => pkg.setTotal(e.target.value)} 
-                          className="w-24 h-10 text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
+                          className="w-32 h-12 mx-auto text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
                         />
                       </div>
                       
-                      <div>
+                      <div className="text-center">
                         <Label className="text-sm text-slate-700 font-semibold mb-2 block uppercase tracking-wide">50% Deposit</Label>
                         <Input 
                           value={pkg.deposit} 
                           onChange={e => pkg.setDeposit(e.target.value)} 
-                          className="w-24 h-10 text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
+                          className="w-32 h-12 mx-auto text-center text-base font-bold border-2 border-slate-200 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 print:text-sm shadow-sm" 
                         />
                       </div>
                     </div>
