@@ -157,8 +157,8 @@ const FlakeFloorTemplate = () => {
                 } print:shadow-md print:ring-1 print:ring-gray-300`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 print:-top-3">
-                    <Badge className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 text-sm font-bold shadow-lg border-0 print:bg-blue-600">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-50 print:-top-3">
+                    <Badge className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 text-sm font-bold shadow-xl border-0 print:bg-blue-600 whitespace-nowrap">
                       ⭐ MOST POPULAR
                     </Badge>
                   </div>
