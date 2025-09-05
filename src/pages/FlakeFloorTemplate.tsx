@@ -105,7 +105,7 @@ const FlakeFloorTemplate = () => {
               Transform your space with our premium coating solutions
             </p>
             
-            <div className="flex justify-center gap-12 print:gap-10">
+            <div className="flex justify-center gap-12 print:gap-10 mb-8">
               <div className="space-y-3">
                 <Label htmlFor="squareFootage" className="text-navy-900 font-semibold text-center block text-sm uppercase tracking-wide">
                   Square Footage
@@ -114,7 +114,7 @@ const FlakeFloorTemplate = () => {
                   id="squareFootage" 
                   value={squareFootage} 
                   onChange={e => setSquareFootage(e.target.value)} 
-                  className="w-28 h-14 text-center text-lg font-medium border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm" 
+                  className="w-32 h-14 text-center text-lg font-medium border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm bg-white" 
                 />
               </div>
               
@@ -126,7 +126,7 @@ const FlakeFloorTemplate = () => {
                   id="color" 
                   value={color} 
                   onChange={e => setColor(e.target.value)} 
-                  className="w-28 h-14 text-center text-lg font-medium border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm" 
+                  className="w-32 h-14 text-center text-lg font-medium border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm bg-white" 
                 />
               </div>
               
@@ -139,7 +139,7 @@ const FlakeFloorTemplate = () => {
                   type="date" 
                   value={installDate} 
                   onChange={e => setInstallDate(e.target.value)} 
-                  className="w-32 h-14 text-center text-lg font-medium border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm" 
+                  className="w-36 h-14 text-center text-lg font-medium border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm bg-white [&::-webkit-calendar-picker-indicator]:opacity-0" 
                 />
               </div>
             </div>
