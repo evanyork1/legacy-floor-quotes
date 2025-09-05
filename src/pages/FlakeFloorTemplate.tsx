@@ -138,10 +138,9 @@ const FlakeFloorTemplate = () => {
                 </Label>
                 <Input 
                   id="installDate" 
-                  type="date" 
                   value={installDate} 
                   onChange={e => setInstallDate(e.target.value)} 
-                  className="w-36 h-14 text-center text-lg font-medium border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm bg-white [&::-webkit-calendar-picker-indicator]:opacity-0 print:w-28 print:h-8 print:text-sm" 
+                  className="w-36 h-14 text-center text-lg font-medium border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 print:border-gray-400 print:focus:ring-0 shadow-sm bg-white print:w-28 print:h-8 print:text-sm" 
                 />
               </div>
             </div>
