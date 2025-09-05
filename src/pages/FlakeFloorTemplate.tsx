@@ -97,7 +97,7 @@ const FlakeFloorTemplate = () => {
 
         <div className="max-w-7xl mx-auto px-6 py-12 print:py-8">
           {/* Project Details Input Section */}
-          <div className="mb-16 print:mb-12">
+          <div className="mb-24 print:mb-16">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-navy-900 to-blue-800 bg-clip-text text-transparent text-center mb-4 print:text-4xl print:text-navy-900">
               Flake Floor Packages
             </h1>
@@ -105,7 +105,7 @@ const FlakeFloorTemplate = () => {
               Transform your space with our premium coating solutions
             </p>
             
-            <div className="flex justify-center gap-12 print:gap-10 mb-8">
+            <div className="flex justify-center gap-12 print:gap-10 mb-12">
               <div className="space-y-3">
                 <Label htmlFor="squareFootage" className="text-navy-900 font-semibold text-center block text-sm uppercase tracking-wide">
                   Square Footage
