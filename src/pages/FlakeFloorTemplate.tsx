@@ -26,35 +26,30 @@ const FlakeFloorTemplate = () => {
 
   const packages = [
     {
-      name: "Silver",
+      name: "Platinum",
       popular: false,
       features: [
-        "Concrete Prep",
-        "Primer Coat",
-        "Base Coat",
-        "Decorative Flakes",
-        "Clear Topcoat",
-        "Basic Warranty"
+        "Fastest Installation - Installed within 4 days or sooner",
+        "White-Glove Service - We move your belongings out and back in for you",
+        "Professional Cleanings - 2 maintenance visits 1st year to keep the floor looking brand new",
+        "Premium Thickness Polyurea Floor System - Our flagship, lifetime-warrantied coating",
+        "Full Color & Flake Selection - Choose from our entire design catalog",
+        "Lifetime Warranty"
       ],
-      monthly: silverMonthly,
-      setMonthly: setSilverMonthly,
-      total: silverTotal,
-      setTotal: setSilverTotal,
-      deposit: silverDeposit,
-      setDeposit: setSilverDeposit
+      monthly: platinumMonthly,
+      setMonthly: setPlatinumMonthly,
+      total: platinumTotal,
+      setTotal: setPlatinumTotal,
+      deposit: platinumDeposit,
+      setDeposit: setPlatinumDeposit
     },
     {
       name: "Gold",
       popular: true,
       features: [
-        "Concrete Prep & Repair",
-        "Premium Primer",
-        "Base Coat",
-        "Premium Decorative Flakes",
-        "2 Clear Topcoats",
-        "UV Protection",
-        "Extended Warranty",
-        "Free Touch-ups (1 Year)"
+        "Premium Thickness Polyurea Floor System - Our flagship, lifetime-warrantied coating",
+        "Full Color & Flake Selection - Choose from our entire design catalog",
+        "Lifetime Warranty"
       ],
       monthly: goldMonthly,
       setMonthly: setGoldMonthly,
@@ -64,26 +59,19 @@ const FlakeFloorTemplate = () => {
       setDeposit: setGoldDeposit
     },
     {
-      name: "Platinum",
+      name: "Silver",
       popular: false,
       features: [
-        "Complete Concrete Restoration",
-        "Premium Primer System",
-        "Multiple Base Coats",
-        "Premium Decorative Flakes",
-        "3 Clear Topcoats",
-        "UV & Chemical Protection",
-        "Lifetime Warranty",
-        "Annual Maintenance",
-        "Free Touch-ups (Lifetime)",
-        "Priority Service"
+        "Quality Floor at Entry-Level Price - Professional polyurea coating that outperforms DIY kits",
+        "Basic Color Selection",
+        "15 Year Warranty"
       ],
-      monthly: platinumMonthly,
-      setMonthly: setPlatinumMonthly,
-      total: platinumTotal,
-      setTotal: setPlatinumTotal,
-      deposit: platinumDeposit,
-      setDeposit: setPlatinumDeposit
+      monthly: silverMonthly,
+      setMonthly: setSilverMonthly,
+      total: silverTotal,
+      setTotal: setSilverTotal,
+      deposit: silverDeposit,
+      setDeposit: setSilverDeposit
     }
   ];
 
@@ -114,43 +102,41 @@ const FlakeFloorTemplate = () => {
               Flake Floor Pricing Presentation
             </h1>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 print:gap-4 print:mb-6">
+            <div className="flex justify-center gap-8 mb-8 print:gap-6 print:mb-6">
               <div className="space-y-2">
-                <Label htmlFor="squareFootage" className="text-navy-900 font-semibold">
+                <Label htmlFor="squareFootage" className="text-navy-900 font-semibold text-center block">
                   Square Footage
                 </Label>
                 <Input
                   id="squareFootage"
                   value={squareFootage}
                   onChange={(e) => setSquareFootage(e.target.value)}
-                  placeholder="Enter sq ft"
-                  className="border-navy-200 focus:border-navy-500 print:border-gray-400"
+                  className="border-navy-200 focus:border-navy-500 print:border-gray-400 w-32 h-12 text-center"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="color" className="text-navy-900 font-semibold">
-                  Color Selection
+                <Label htmlFor="color" className="text-navy-900 font-semibold text-center block">
+                  Color
                 </Label>
                 <Input
                   id="color"
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
-                  placeholder="Enter color choice"
-                  className="border-navy-200 focus:border-navy-500 print:border-gray-400"
+                  className="border-navy-200 focus:border-navy-500 print:border-gray-400 w-32 h-12 text-center"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="installDate" className="text-navy-900 font-semibold">
-                  Installation Date
+                <Label htmlFor="installDate" className="text-navy-900 font-semibold text-center block">
+                  Install Day
                 </Label>
                 <Input
                   id="installDate"
                   type="date"
                   value={installDate}
                   onChange={(e) => setInstallDate(e.target.value)}
-                  className="border-navy-200 focus:border-navy-500 print:border-gray-400"
+                  className="border-navy-200 focus:border-navy-500 print:border-gray-400 w-32 h-12 text-center"
                 />
               </div>
             </div>
@@ -203,37 +189,34 @@ const FlakeFloorTemplate = () => {
                   <div className="space-y-4 border-t pt-4 print:space-y-3 print:pt-3 print:border-gray-300">
                     <h4 className="font-semibold text-navy-900">Pricing</h4>
                     
-                    <div className="space-y-3 print:space-y-2">
-                      <div>
-                        <Label className="text-sm text-navy-700 font-medium">Monthly Payment</Label>
-                        <Input
-                          value={pkg.monthly}
-                          onChange={(e) => pkg.setMonthly(e.target.value)}
-                          placeholder="$0.00"
-                          className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base"
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label className="text-sm text-navy-700 font-medium">Total Investment</Label>
-                        <Input
-                          value={pkg.total}
-                          onChange={(e) => pkg.setTotal(e.target.value)}
-                          placeholder="$0.00"
-                          className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base"
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label className="text-sm text-navy-700 font-medium">50% Deposit</Label>
-                        <Input
-                          value={pkg.deposit}
-                          onChange={(e) => pkg.setDeposit(e.target.value)}
-                          placeholder="$0.00"
-                          className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base"
-                        />
-                      </div>
-                    </div>
+                     <div className="space-y-3 print:space-y-2">
+                       <div>
+                         <Label className="text-sm text-navy-700 font-medium">Monthly Payment</Label>
+                         <Input
+                           value={pkg.monthly}
+                           onChange={(e) => pkg.setMonthly(e.target.value)}
+                           className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base h-12"
+                         />
+                       </div>
+                       
+                       <div>
+                         <Label className="text-sm text-navy-700 font-medium">Total Investment</Label>
+                         <Input
+                           value={pkg.total}
+                           onChange={(e) => pkg.setTotal(e.target.value)}
+                           className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base h-12"
+                         />
+                       </div>
+                       
+                       <div>
+                         <Label className="text-sm text-navy-700 font-medium">50% Deposit</Label>
+                         <Input
+                           value={pkg.deposit}
+                           onChange={(e) => pkg.setDeposit(e.target.value)}
+                           className="mt-1 border-navy-200 focus:border-navy-500 text-lg font-semibold print:border-gray-400 print:text-base h-12"
+                         />
+                       </div>
+                     </div>
                   </div>
                 </CardContent>
               </Card>
