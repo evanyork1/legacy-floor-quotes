@@ -31,7 +31,7 @@ const FlakeFloorTemplate = () => {
       "Fastest Installation - Installed within 4 days or sooner",
       "White-Glove Service - We move your belongings out and back in for you",
       "Professional Cleanings - 2 maintenance visits 1st year to keep the floor looking brand new",
-      "Premium Thickness Polyurea Floor System - Our flagship, lifetime-warrantied coating",
+      "Premium Thickness Polyurea Floor System",
       "Full Color & Flake Selection - Choose from our entire design catalog",
       "Lifetime Warranty"
     ],
@@ -47,7 +47,7 @@ const FlakeFloorTemplate = () => {
     icon: <Star className="h-6 w-6" />,
     gradient: "from-amber-400 to-amber-600",
     features: [
-      "Premium Thickness Polyurea Floor System - Our flagship, lifetime-warrantied coating",
+      "Premium Thickness Polyurea Floor System",
       "Full Color & Flake Selection - Choose from our entire design catalog",
       "Lifetime Warranty"
     ],
