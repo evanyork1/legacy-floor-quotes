@@ -150,11 +150,11 @@ const FlakeFloorTemplate = () => {
             {packages.map((pkg, index) => (
               <Card 
                 key={pkg.name} 
-                className={`relative border-0 overflow-hidden transition-all duration-300 ${
+                className={`relative border-0 transition-all duration-300 ${
                   pkg.popular 
                     ? 'ring-2 ring-blue-500 shadow-2xl scale-105 print:scale-100 bg-white' 
                     : 'shadow-xl hover:shadow-2xl bg-white/80 backdrop-blur-sm'
-                } print:shadow-md print:ring-1 print:ring-gray-300`}
+                } print:shadow-md print:ring-1 print:ring-gray-300 overflow-visible`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-50 print:-top-3">
