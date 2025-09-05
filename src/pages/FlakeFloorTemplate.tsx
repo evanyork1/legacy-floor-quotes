@@ -71,7 +71,7 @@ const FlakeFloorTemplate = () => {
           <div className="mb-8 print:mb-6">
             <h1 className="text-3xl font-bold text-navy-900 text-center mb-6 print:text-2xl print:mb-4">Flake Floor Packages</h1>
             
-            <div className="flex justify-center gap-8 mb-8 print:gap-6 print:mb-6">
+            <div className="flex justify-center gap-8 mb-12 print:gap-6 print:mb-10">
               <div className="space-y-2">
                 <Label htmlFor="squareFootage" className="text-navy-900 font-semibold text-center block">
                   Square Footage
@@ -90,7 +90,7 @@ const FlakeFloorTemplate = () => {
                 <Label htmlFor="installDate" className="text-navy-900 font-semibold text-center block">
                   Install Day
                 </Label>
-                <Input id="installDate" type="date" value={installDate} onChange={e => setInstallDate(e.target.value)} className="border-navy-200 focus:border-navy-500 print:border-gray-400 w-32 h-12 text-center" />
+                <Input id="installDate" type="date" value={installDate} onChange={e => setInstallDate(e.target.value)} className="border-navy-200 focus:border-navy-500 print:border-gray-400 w-32 h-12 text-center" placeholder="" />
               </div>
             </div>
           </div>
@@ -104,11 +104,11 @@ const FlakeFloorTemplate = () => {
                     </Badge>
                   </div>}
                 
-                <CardHeader className="text-center pb-4 print:pb-2">
-                  <CardTitle className={`text-2xl font-bold print:text-xl ${pkg.popular ? 'text-navy-600' : 'text-navy-900'}`}>
-                    {pkg.name}
-                  </CardTitle>
-                </CardHeader>
+                 <CardHeader className="text-center pb-4 print:pb-2">
+                   <CardTitle className={`text-2xl font-bold print:text-xl ${pkg.popular ? 'text-navy-600 font-extrabold text-3xl print:text-2xl' : 'text-navy-900'}`}>
+                     {pkg.name}
+                   </CardTitle>
+                 </CardHeader>
                 
                 <CardContent className="space-y-6 print:space-y-4">
                   {/* Features */}
@@ -116,12 +116,12 @@ const FlakeFloorTemplate = () => {
                     <h4 className="font-semibold text-navy-900 border-b border-navy-200 pb-2 print:border-gray-300">
                       Included Features
                     </h4>
-                    <ul className="space-y-2 print:space-y-1">
-                      {pkg.features.map((feature, index) => <li key={index} className="flex items-start gap-2 text-sm">
-                          <Check className="h-4 w-4 text-navy-600 mt-0.5 flex-shrink-0 print:text-gray-700" />
-                          <span className="text-gray-700">{feature}</span>
-                        </li>)}
-                    </ul>
+                     <ul className="space-y-2 print:space-y-1">
+                       {pkg.features.map((feature, index) => <li key={index} className="flex items-start gap-2 text-sm">
+                           <Check className="h-4 w-4 text-navy-600 mt-0.5 flex-shrink-0 print:text-gray-700" />
+                           <span className={`text-gray-700 ${pkg.popular ? 'font-bold' : ''}`}>{feature}</span>
+                         </li>)}
+                     </ul>
                   </div>
 
                   {/* Pricing Inputs */}
