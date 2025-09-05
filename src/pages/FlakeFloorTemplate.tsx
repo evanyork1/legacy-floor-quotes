@@ -47,6 +47,8 @@ const FlakeFloorTemplate = () => {
     icon: <Star className="h-6 w-6" />,
     gradient: "from-amber-400 to-amber-600",
     features: [
+      "One Day Install",
+      "Most Purchased Floor",
       "Premium Thickness Polyurea Floor System",
       "Full Color & Flake Selection - Choose from our entire design catalog",
       "Lifetime Warranty"
