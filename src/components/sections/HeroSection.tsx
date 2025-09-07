@@ -96,7 +96,7 @@ const HeroSection = () => {
                       </div>
                       <div className="flex items-center ml-2">
                         <span className="text-yellow-400 text-sm">★★★★★</span>
-                        <span className="ml-1 text-white font-medium text-sm">170+</span>
+                        <span className="ml-1 text-white font-medium text-sm">180+</span>
                         <span className="ml-1 text-white text-sm">reviews</span>
                       </div>
                     </div>
@@ -160,7 +160,7 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-center ml-2">
                   <span className="text-yellow-400 text-sm">★★★★★</span>
-                  <span className="ml-1 text-white font-medium">170+ reviews</span>
+                  <span className="ml-1 text-white font-medium">180+ reviews</span>
                   <span className="ml-1 text-gray-400">›</span>
                 </div>
                 </div>
