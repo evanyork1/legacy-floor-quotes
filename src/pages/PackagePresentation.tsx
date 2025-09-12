@@ -127,15 +127,18 @@ const PackagePresentation = () => {
         // Pricing positions (properly centered under orange labels)
         platinum: {
           monthly: { x: w * 0.52, y: h * 0.66 }, // Centered under "MO/" in platinum section
-          deposit: { x: w * 0.78, y: h * 0.66 }  // Centered under "DEPOSIT/" in platinum section
+          deposit: { x: w * 0.78, y: h * 0.66 }, // Centered under "DEPOSIT/" in platinum section
+          total: { x: w * 0.90, y: h * 0.60 }    // Bottom right corner of platinum section
         },
         gold: {
           monthly: { x: w * 0.51, y: h * 0.435 }, // Moved down slightly
-          deposit: { x: w * 0.77, y: h * 0.435 }  // Moved down slightly
+          deposit: { x: w * 0.77, y: h * 0.435 }, // Moved down slightly
+          total: { x: w * 0.90, y: h * 0.375 }    // Bottom right corner of gold section
         },
         silver: {
           monthly: { x: w * 0.51, y: h * 0.195 }, // Moved up to align with orange labels
-          deposit: { x: w * 0.77, y: h * 0.195 }  // Moved up to align with orange labels
+          deposit: { x: w * 0.77, y: h * 0.195 }, // Moved up to align with orange labels
+          total: { x: w * 0.90, y: h * 0.135 }    // Bottom right corner of silver section
         }
       };
 
@@ -239,6 +242,39 @@ const PackagePresentation = () => {
         x: anchors.silver.deposit.x,
         y: anchors.silver.deposit.y,
         size: pricingFontSize,
+        font,
+        color: whiteColor,
+      });
+      
+      // Add total amounts in bottom right corners of each package
+      const totalFontSize = 24; // Slightly smaller font for totals
+      
+      // Platinum total (bottom right corner)
+      const platinumTotalText = `$${platinumTotal.toFixed(0)}`;
+      page.drawText(platinumTotalText, {
+        x: anchors.platinum.total.x,
+        y: anchors.platinum.total.y,
+        size: totalFontSize,
+        font,
+        color: whiteColor,
+      });
+      
+      // Gold total (bottom right corner)  
+      const goldTotalText = `$${goldTotal.toFixed(0)}`;
+      page.drawText(goldTotalText, {
+        x: anchors.gold.total.x,
+        y: anchors.gold.total.y,
+        size: totalFontSize,
+        font,
+        color: whiteColor,
+      });
+      
+      // Silver total (bottom right corner)
+      const silverTotalText = `$${silverTotal.toFixed(0)}`;
+      page.drawText(silverTotalText, {
+        x: anchors.silver.total.x,
+        y: anchors.silver.total.y,
+        size: totalFontSize,
         font,
         color: whiteColor,
       });
