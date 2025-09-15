@@ -224,7 +224,7 @@ const ResidentialPatio = () => {
                     Do you offer a warranty on outdoor installations?
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600 leading-relaxed">
-                    Yes. Our polyurea patio coatings come with a limited lifetime warranty against peeling, discoloration, and cracking under normal outdoor use.
+                    Yes. Most of our outdoor options do come with a warranty. Length depends on which option is chosen.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
