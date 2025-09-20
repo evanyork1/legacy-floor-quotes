@@ -2,70 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional design system inspired by enterprise-grade construction and industrial companies */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
   :root {
-    /* Core Brand Colors - Professional Navy & Steel Blue Palette */
     --background: 0 0% 100%;
-    --foreground: 210 11% 15%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 15%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 15%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    /* Primary Brand - Professional Navy */
-    --primary: 210 100% 12%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 210 100% 16%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-    /* Secondary - Steel Blue */
-    --secondary: 210 20% 92%;
-    --secondary-foreground: 210 11% 15%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    /* Accent - Refined Blue */
-    --accent: 212 27% 84%;
-    --accent-foreground: 210 11% 15%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    /* Professional Grays */
-    --muted: 210 20% 96%;
-    --muted-foreground: 210 6% 46%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 210 20% 90%;
-    --input: 210 20% 94%;
-    --ring: 210 100% 12%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
-    --radius: 0.375rem;
+    --radius: 0.5rem;
 
-    /* Professional Brand Palette */
-    --brand-navy-50: 210 100% 98%;
-    --brand-navy-100: 210 95% 95%;
-    --brand-navy-200: 210 85% 88%;
-    --brand-navy-300: 210 75% 76%;
-    --brand-navy-400: 210 65% 64%;
-    --brand-navy-500: 210 55% 52%;
-    --brand-navy-600: 210 80% 35%;
-    --brand-navy-700: 210 90% 25%;
-    --brand-navy-800: 210 95% 18%;
-    --brand-navy-900: 210 100% 12%;
-    --brand-navy-950: 210 100% 8%;
-
-    /* Professional Steel Blue Tones */
-    --steel-50: 210 40% 98%;
-    --steel-100: 210 40% 95%;
-    --steel-200: 210 35% 88%;
-    --steel-300: 210 30% 76%;
-    --steel-400: 210 25% 64%;
-    --steel-500: 210 20% 52%;
-    --steel-600: 210 25% 40%;
-    --steel-700: 210 30% 28%;
-    --steel-800: 210 35% 20%;
-    --steel-900: 210 40% 12%;
+    /* Navy blue color system for company branding */
+    --navy-50: 240 100% 98%;
+    --navy-100: 240 100% 95%;
+    --navy-200: 240 84% 88%;
+    --navy-300: 240 71% 77%;
+    --navy-400: 240 51% 65%;
+    --navy-500: 240 39% 51%;
+    --navy-600: 240 51% 41%;
+    --navy-700: 240 65% 32%;
+    --navy-800: 240 71% 24%;
+    --navy-900: 240 84% 16%;
+    --navy-950: 240 100% 9%;
 
     --sidebar-background: 0 0% 98%;
 
@@ -85,43 +67,41 @@
   }
 
   .dark {
-    /* Dark mode with professional navy theme */
-    --background: 210 100% 4%;
-    --foreground: 210 20% 92%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 210 100% 6%;
-    --card-foreground: 210 20% 92%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 210 100% 6%;
-    --popover-foreground: 210 20% 92%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 210 20% 92%;
-    --primary-foreground: 210 100% 12%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 210 30% 14%;
-    --secondary-foreground: 210 20% 92%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 30% 14%;
-    --muted-foreground: 210 10% 60%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 210 30% 18%;
-    --accent-foreground: 210 20% 92%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 210 30% 18%;
-    --input: 210 30% 18%;
-    --ring: 210 20% 92%;
-    
-    --sidebar-background: 210 100% 4%;
-    --sidebar-foreground: 210 20% 92%;
-    --sidebar-primary: 210 20% 92%;
-    --sidebar-primary-foreground: 210 100% 12%;
-    --sidebar-accent: 210 30% 14%;
-    --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 210 30% 18%;
-    --sidebar-ring: 210 20% 92%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -132,56 +112,8 @@
 
   body {
     @apply bg-background text-foreground;
-    /* Professional typography */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    font-optical-sizing: auto;
     /* Improve mobile scrolling performance */
     -webkit-overflow-scrolling: touch;
-    /* Smooth text rendering */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* Professional Typography Scale */
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-  }
-
-  h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-  }
-
-  /* Professional button styles */
-  .btn-primary {
-    @apply bg-brand-navy-900 text-white hover:bg-brand-navy-800 border-0;
-    @apply px-6 py-3 font-semibold text-sm tracking-wide uppercase;
-    @apply transition-all duration-200 shadow-sm hover:shadow-md;
-    @apply rounded-none;
-  }
-
-  .btn-secondary {
-    @apply bg-transparent text-brand-navy-900 border-2 border-brand-navy-900;
-    @apply hover:bg-brand-navy-900 hover:text-white;
-    @apply px-6 py-3 font-semibold text-sm tracking-wide uppercase;
-    @apply transition-all duration-200;
-    @apply rounded-none;
   }
 
   /* Mobile-first optimizations */
