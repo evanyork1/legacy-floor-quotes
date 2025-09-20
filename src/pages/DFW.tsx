@@ -1,8 +1,8 @@
 
 import { Helmet } from "react-helmet-async";
-import Header from "@/components/Header";
+import ProfessionalHeader from "@/components/ProfessionalHeader";
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/sections/HeroSection";
+import ProfessionalHeroSection from "@/components/sections/ProfessionalHeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -53,8 +53,8 @@ const DFW = () => {
       </Helmet>
       
       <div className="min-h-screen bg-white">
-        <Header />
-        <HeroSection />
+      <ProfessionalHeader />
+      <ProfessionalHeroSection />
         <QuickFeaturesSection />
         <WhyChooseSection />
         <EpoxyVsPolyureaSection />
