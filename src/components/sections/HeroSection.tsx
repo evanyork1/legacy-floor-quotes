@@ -15,13 +15,11 @@ const HeroSection = () => {
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isCommercial = location.pathname === '/dfwcommercial';
-  const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
-  const isHoustonLanding = location.pathname === '/houstonreslanding';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
   const isFrisco = location.pathname === '/epoxy-flooring-frisco';
-  const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : (isHouston ? "Houston's Epoxy Flooring" : "Get Your Dream Garage Floor in One Day"))));
-  const locationText = isHouston ? "Houston, TX" : "Dallas - Fort Worth, TX";
-  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : (isHouston ? "Residential & Commercial Floor Coatings That Last" : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
+  const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day")));
+  const locationText = "Dallas - Fort Worth, TX";
+  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results")));
 
   // Gallery images for rotating background - memoized for performance
   const galleryImages = useMemo(() => [
@@ -256,13 +254,6 @@ const HeroSection = () => {
                   </span>
                   {" "}Flooring Experts
                 </>
-              ) : isHoustonLanding ? (
-                <>
-                  {title}{" "}
-                  <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
-                    Experts
-                  </span>
-                </>
               ) : (
                 title.split(" ").map((word, index) => {
                   if (word === "One" || word === "Day") {
@@ -277,7 +268,7 @@ const HeroSection = () => {
               )}
             </h1>
             
-            {isHoustonLanding || isCommercial ? (
+            {isCommercial ? (
               <div className="space-y-2 sm:space-y-3">
                 <div className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
                   {subtext}
@@ -303,28 +294,6 @@ const HeroSection = () => {
                   >
                     Get A Quote
                   </CTAButton>
-                  
-                  {isHoustonLanding && (
-                    <CTAButton 
-                      asChild 
-                      variant="outline" 
-                      size="lg"
-                      icon={<Phone />}
-                      fullWidthMobile={true}
-                    >
-                      <a 
-                        href="tel:214-305-6516"
-                        onClick={() => {
-                          // Call new conversion tracking for /dfwreslanding
-                          if (typeof window !== 'undefined' && window.location.pathname === '/dfwreslanding' && (window as any).gtag_report_conversion_new) {
-                            (window as any).gtag_report_conversion_new('tel:214-305-6516');
-                          }
-                        }}
-                      >
-                        Call Us Now
-                      </a>
-                    </CTAButton>
-                  )}
                 </div>
               </div>
             )}

@@ -21,29 +21,30 @@ const DFW = () => {
   return (
     <>
       <Helmet>
-        <title>Premium Concrete Coatings Dallas, TX - Legacy Industrial Coatings</title>
-        <meta name="description" content="Premium concrete coatings and epoxy flooring in Dallas-Fort Worth, TX. Professional garage floor coating with lifetime warranty. Get your dream floor installed in one day." />
+        <title>DFW Epoxy Flooring Experts | Dallas, Plano, Frisco | Legacy Industrial Coatings</title>
+        <meta name="description" content="Premier epoxy flooring contractors serving Dallas, Plano, Frisco, McKinney, Allen & DFW metroplex. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
         <meta name="author" content="Legacy Industrial Coatings" />
-        <meta name="keywords" content="concrete coatings Dallas, epoxy flooring Dallas, garage floor coating DFW, polyurea coating Dallas, floor installation Dallas, garage renovation DFW" />
+        <meta name="keywords" content="DFW epoxy flooring, Dallas garage floor coating, Plano concrete coatings, Frisco polyurea flooring, McKinney epoxy contractors, Allen garage floors, Richardson floor coating, Carrollton garage flooring, Garland epoxy installation, Lewisville concrete coating, The Colony garage renovation, Prosper floor contractors, Celina epoxy flooring" />
         
-        {/* Geo-location meta tags for Dallas, TX */}
+        {/* Geo-location meta tags for DFW metroplex */}
         <meta name="geo.region" content="US-TX" />
-        <meta name="geo.placename" content="Dallas" />
+        <meta name="geo.placename" content="Dallas-Fort Worth Metroplex" />
         <meta name="geo.position" content="32.7767;-96.7970" />
         <meta name="ICBM" content="32.7767, -96.7970" />
+        <meta name="DC.coverage" content="Dallas, Plano, Frisco, McKinney, Allen, Richardson, Garland, Carrollton, Lewisville, The Colony, Prosper, Celina" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Premium Concrete Coatings Dallas, TX - Legacy Industrial Coatings" />
-        <meta property="og:description" content="Premium concrete coatings and epoxy flooring in Dallas-Fort Worth, TX. Professional garage floor coating with lifetime warranty. Get your dream floor installed in one day." />
+        <meta property="og:title" content="DFW Epoxy Flooring Experts | Dallas, Plano, Frisco | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Premier epoxy flooring contractors serving Dallas, Plano, Frisco, McKinney, Allen & DFW metroplex. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
         <meta property="og:image" content="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" />
         <meta property="og:url" content="https://legacyindustrialcoatings.com" />
         <meta property="og:site_name" content="Legacy Industrial Coatings" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Premium Concrete Coatings Dallas, TX - Legacy Industrial Coatings" />
-        <meta name="twitter:description" content="Premium concrete coatings and epoxy flooring in Dallas-Fort Worth, TX. Professional garage floor coating with lifetime warranty. Get your dream floor installed in one day." />
+        <meta name="twitter:title" content="DFW Epoxy Flooring Experts | Dallas, Plano, Frisco | Legacy Industrial Coatings" />
+        <meta name="twitter:description" content="Premier epoxy flooring contractors serving Dallas, Plano, Frisco, McKinney, Allen & DFW metroplex. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
         <meta name="twitter:image" content="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" />
 
         {/* Additional SEO and mobile optimization */}

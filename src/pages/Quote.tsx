@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
-import { useQuoteFormHouston } from "@/hooks/useQuoteFormHouston";
+import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
 
 const Quote = () => {
   const {
@@ -15,13 +15,11 @@ const Quote = () => {
     updateFormData,
     nextStep,
     prevStep,
-    handleFileUpload,
-    removePhoto,
     calculatePrice,
     canProceed,
     handleSubmit,
     isSubmitting
-  } = useQuoteFormHouston();
+  } = useQuoteFormDFW();
 
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
@@ -44,8 +42,6 @@ const Quote = () => {
                 currentStep={currentStep}
                 formData={formData}
                 updateFormData={updateFormData}
-                handleFileUpload={handleFileUpload}
-                removePhoto={removePhoto}
                 estimatedPrice={calculatePrice()}
               />
               <QuoteNavigation

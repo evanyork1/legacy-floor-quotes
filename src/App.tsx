@@ -15,7 +15,7 @@ import Financing from "./pages/Financing";
 import FlakeFloors from "./pages/FlakeFloors";
 import FlowerMound from "./pages/FlowerMound";
 import Gallery from "./pages/Gallery";
-import Houston from "./pages/Houston";
+
 import IndustrialEpoxy from "./pages/IndustrialEpoxy";
 import NotFound from "./pages/NotFound";
 import PackagePresentation from "./pages/PackagePresentation";
@@ -45,8 +45,6 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<DFW />} />
-              <Route path="/houston" element={<Houston />} />
-              <Route path="/quotehou" element={<Quote />} />
               <Route path="/dfw" element={<DFW />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
               <Route path="/gallery" element={<Gallery />} />

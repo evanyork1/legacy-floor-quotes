@@ -10,9 +10,8 @@ const ProcessSection = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const location = useLocation();
-  const isHouston = location.pathname === '/houstonreslanding';
   const quoteUrl = '/contact';
-  const phoneNumber = isHouston ? '713-766-5566' : '214-305-6516';
+  const phoneNumber = '214-305-6516';
   const steps = [{
     number: 1,
     title: "Diamond Grind Surface Preparation",

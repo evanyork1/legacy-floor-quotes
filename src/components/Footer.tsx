@@ -4,12 +4,6 @@ import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
-  const isDFW = location.pathname === '/' || location.pathname === '/dfw';
-  const isCommercial = location.pathname === '/dfwcommercial';
-  
-  // Determine paths based on current location
-  const homePath = isDFW ? "/dfw" : "/houston";
-  const quotePath = isDFW ? "/quotedfw" : "/quotehou";
   
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
@@ -42,7 +36,7 @@ const Footer = () => {
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">MENU</h3>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href={homePath} className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
+              <li><a href="/" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
               <li><a href="/faq" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">FAQ</a></li>
               <li><a href="/blog" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">BLOG</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>

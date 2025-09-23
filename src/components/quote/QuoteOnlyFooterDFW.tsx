@@ -31,7 +31,7 @@ export const QuoteOnlyFooterDFW = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-sm sm:text-base">Plano, Dallas, Houston, Phoenix</span>
+                <span className="text-gray-300 text-sm sm:text-base">Dallas, Plano, Frisco, McKinney</span>
               </div>
             </div>
           </div>

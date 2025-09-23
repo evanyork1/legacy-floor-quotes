@@ -11,7 +11,6 @@ const FeaturesSection = () => {
   const navigate = useNavigate();
   const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
   const isCommercial = location.pathname === '/dfwcommercial';
-  const isHouston = location.pathname === '/houston' || location.pathname === '/houstonreslanding';
   
   const features = isCommercial ? [{
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
@@ -28,7 +27,7 @@ const FeaturesSection = () => {
     title: "Specialty Coatings",
     description: "Custom commercial flooring solutions including anti-static, chemical-resistant, and FDA-compliant coatings for specialized industrial applications.",
     image: "/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png"
-  }] : isDFW || isHouston ? [{
+  }] : isDFW ? [{
     icon: <Layers className="h-8 w-8 text-blue-600" />,
     title: "Flake Floors",
     description: "Our standard product is a Polyurea flake floor system. This is a Lifetime Warrantied product that has been perfected with science to look great and perform for years to come.",
@@ -57,7 +56,7 @@ const FeaturesSection = () => {
     description: "Choose what works best for you - virtual consultations or meet with our experts on-site. No need to take time out of your day unless you prefer the personal touch."
   }];
   
-  const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW || isHouston ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
+  const sectionTitle = isCommercial ? "Commercial & Industrial Flooring Solutions" : isDFW ? "Premium Polyurea, Epoxy, and Polished Floors" : "Why Choose Legacy Industrial Coatings?";
   
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
@@ -110,7 +109,7 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {(isDFW || isHouston) && (
+        {isDFW && (
           <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
             <CTAButton
               variant="outline"

@@ -13,8 +13,8 @@ interface QuoteStepRendererProps {
   currentStep: number;
   formData: FormData;
   updateFormData: (field: keyof FormData, value: any) => void;
-  handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>, type: 'exterior' | 'damage') => void;
-  removePhoto: (index: number, type: 'exterior' | 'damage') => void;
+  handleFileUpload?: (e: React.ChangeEvent<HTMLInputElement>, type: 'exterior' | 'damage') => void;
+  removePhoto?: (index: number, type: 'exterior' | 'damage') => void;
   estimatedPrice: number;
 }
 
