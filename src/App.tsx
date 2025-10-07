@@ -62,6 +62,7 @@ function App() {
               <Route path="/additional-services" element={<AdditionalServices />} />
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
+              <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/financing" element={<Financing />} />
