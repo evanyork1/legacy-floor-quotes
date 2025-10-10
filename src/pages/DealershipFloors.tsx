@@ -92,24 +92,24 @@ const DealershipFloors = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-800 text-primary-foreground overflow-hidden">
-        <div className="relative z-10 container mx-auto px-4 py-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5 text-white/90 text-xs font-medium tracking-wide uppercase">
                 Automotive Facilities
               </div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
                 Professional Dealership Flooring Solutions
               </h1>
-              <p className="text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
                 Polished concrete, epoxy, and traffic coatings engineered for showrooms, service lanes, service bays, and parking structures.
               </p>
-              <div className="pt-2 flex flex-col sm:flex-row items-start gap-4">
+              <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
                 <a
                   href="tel:214-305-6516"
                   onClick={handlePhoneClick}
-                  className="text-2xl md:text-3xl font-bold tracking-wide hover:text-white/90 transition-colors underline decoration-2 underline-offset-4"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide hover:text-white/90 transition-colors underline decoration-2 underline-offset-4"
                 >
                   214-305-6516
                 </a>
@@ -117,7 +117,7 @@ const DealershipFloors = () => {
                   size="lg"
                   onClick={() => setIsBookingOpen(true)}
                   variant="secondary"
-                  className="px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all text-sm font-semibold"
+                  className="w-full sm:w-auto px-6 py-3 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all text-sm font-semibold"
                 >
                   Schedule Free Estimate
                 </Button>
@@ -142,16 +142,16 @@ const DealershipFloors = () => {
       </section>
 
       {/* Floor Options Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Specialized Flooring Systems</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">Specialized Flooring Systems</h2>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
               Three distinct solutions engineered for automotive environments
             </p>
           </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {floorOptions.map((option, index) => <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
@@ -181,18 +181,18 @@ const DealershipFloors = () => {
       </section>
 
       {/* Why Dealerships Choose Legacy */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6 text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-foreground">
                 The Legacy Advantage
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start">
-                  <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mr-3 sm:mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Minimal Disruption</h3>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Minimal Disruption</h3>
                     <p className="text-muted-foreground">
                       Efficient installation schedules coordinated with your operations to keep your dealership running smoothly.
                     </p>
@@ -231,16 +231,16 @@ const DealershipFloors = () => {
       </section>
 
       {/* Applications Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Comprehensive Solutions</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">Comprehensive Solutions</h2>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
               Specialized flooring for every area of your automotive facility
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
             {applications.map((app, index) => <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-start mb-4">
@@ -267,16 +267,16 @@ const DealershipFloors = () => {
       </section>
 
       {/* Benefits Grid */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Performance Benefits</h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Performance Benefits</h2>
+            <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto px-4">
               Engineered specifically for automotive facility demands
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {benefits.map((benefit, index) => <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-lg hover:bg-white/20 transition-all">
                 <div className="flex items-center">
                   <CheckCircle2 className="w-6 h-6 mr-3 flex-shrink-0" />
@@ -291,23 +291,23 @@ const DealershipFloors = () => {
       
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Transform Your Dealership Floors
           </h2>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto text-blue-100 px-4">
             Schedule a free consultation to discuss your facility's flooring needs
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-3xl md:text-4xl font-bold hover:text-blue-200 transition-colors">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+            <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-2xl sm:text-3xl md:text-4xl font-bold hover:text-blue-200 transition-colors underline decoration-2 underline-offset-4">
               214-305-6516
             </a>
-            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6 shadow-lg">
+            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="w-full sm:w-auto bg-white text-blue-600 hover:bg-blue-50 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg">
               Schedule Free Estimate
             </Button>
           </div>
-          <p className="mt-8 text-blue-100 text-lg">
+          <p className="mt-6 sm:mt-8 text-blue-100 text-sm sm:text-base md:text-lg">
             Serving Dallas-Fort Worth and surrounding areas
           </p>
         </div>
