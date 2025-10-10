@@ -9,7 +9,7 @@ import { BookingModal } from "@/components/landing/BookingModal";
 
 import heroImage from "@/assets/dealership-hero.jpg";
 import officeImage from "@/assets/dealership-office-floor.png";
-import polishedShowroomImage from "@/assets/polished-concrete-showroom.jpg";
+import polishedShowroomImage from "@/assets/dealership-showroom-polished.jpg";
 import serviceBayImage from "@/assets/service-bay.jpg";
 import trafficLanesImage from "@/assets/traffic-coating-lanes.jpg";
 import parkingStructureImage from "@/assets/parking-structure.jpg";
@@ -91,25 +91,25 @@ const DealershipFloors = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-800 text-primary-foreground overflow-hidden">
-        <div className="relative z-10 container mx-auto px-4 py-20">
+      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-800 text-primary-foreground overflow-hidden">
+        <div className="relative z-10 container mx-auto px-4 py-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 ring-1 ring-white/10 bg-white/5 text-white/90 text-xs font-medium tracking-widest uppercase">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5 text-white/90 text-xs font-medium tracking-wide uppercase">
                 Automotive Facilities
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
                 Professional Dealership Flooring Solutions
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed">
+              <p className="text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
                 Polished concrete, epoxy, and traffic coatings engineered for showrooms, service lanes, service bays, and parking structures.
               </p>
-              <div className="pt-4 flex flex-col sm:flex-row items-start gap-6">
+              <div className="pt-2 flex flex-col sm:flex-row items-start gap-4">
                 <a
                   href="tel:214-305-6516"
                   onClick={handlePhoneClick}
-                  className="text-3xl md:text-4xl font-bold tracking-wide hover:text-white/90 transition-colors"
+                  className="text-2xl md:text-3xl font-bold tracking-wide hover:text-white/90 transition-colors underline decoration-2 underline-offset-4"
                 >
                   214-305-6516
                 </a>
@@ -117,7 +117,7 @@ const DealershipFloors = () => {
                   size="lg"
                   onClick={() => setIsBookingOpen(true)}
                   variant="secondary"
-                  className="px-8 py-6 rounded-lg shadow-xl hover:shadow-2xl transition-all text-base font-semibold"
+                  className="px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all text-sm font-semibold"
                 >
                   Schedule Free Estimate
                 </Button>
@@ -126,14 +126,14 @@ const DealershipFloors = () => {
 
             {/* Right Image */}
             <div className="relative lg:block hidden">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-xl overflow-hidden shadow-xl">
                 <img
                   src={heroImage}
                   alt="Professional car dealership showroom with polished concrete flooring"
-                  className="w-full h-[600px] object-cover"
+                  className="w-full h-[400px] object-cover"
                   loading="eager"
                 />
-                <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none" />
+                <div className="absolute inset-0 ring-1 ring-white/10 rounded-xl pointer-events-none" />
               </div>
             </div>
           </div>
