@@ -84,46 +84,42 @@ const DealershipFloors = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#3b82f6] text-white overflow-hidden">
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDE2djRoLTR2LTRoNHptMCAxMnY0aC00di00aDR6bS0xMiAwdjRoLTR2LTRoNHptMTItMTJ2NGgtNHYtNGg0em0tMTIgMHY0aC00di00aDR6bTAgMTJ2NGgtNHYtNGg0eiIvPjwvZz48L2c+PC9zdmc+')] opacity-40" />
-        
-        <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
-          <div className="max-w-5xl mx-auto text-center space-y-8">
-            {/* Main heading with better typography */}
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-              Professional Dealership
-              <br />
-              <span className="text-white/90">Flooring Solutions</span>
+      <section className="relative min-h-[72vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-700 text-primary-foreground overflow-hidden">
+        <div className="relative z-10 container mx-auto px-4 py-24 md:py-36">
+          <div className="max-w-5xl mx-auto md:mx-0 text-center md:text-left space-y-8">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 ring-1 ring-white/10 bg-[hsl(var(--primary-foreground)/0.06)] text-[hsl(var(--primary-foreground)/0.8)] text-xs tracking-widest uppercase">
+              Automotive Facilities
+            </div>
+            <h1 className="text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight">
+              Professional Dealership Flooring Solutions
             </h1>
-            
-            {/* Subtitle with improved spacing */}
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
-              Premium flooring systems engineered for showrooms, service bays, and high-traffic areas
+            <p className="text-xl md:text-2xl text-[hsl(var(--primary-foreground)/0.85)] max-w-3xl md:max-w-2xl leading-relaxed font-normal">
+              Polished concrete, epoxy, and traffic coatings engineered for showrooms, service lanes, service bays, and parking structures.
             </p>
-            
-            {/* CTA section with professional layout */}
-            <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
-              <a 
-                href="tel:214-305-6516" 
-                onClick={handlePhoneClick} 
-                className="text-3xl md:text-4xl font-bold hover:text-white/80 transition-all duration-300 tracking-wide"
+            <div className="pt-2 flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-6">
+              <a
+                href="tel:214-305-6516"
+                onClick={handlePhoneClick}
+                className="text-3xl md:text-4xl font-semibold tracking-wide hover:opacity-90 transition-opacity"
               >
                 214-305-6516
               </a>
-              <Button 
-                size="lg" 
-                onClick={() => setIsBookingOpen(true)} 
-                className="bg-white text-blue-600 hover:bg-white/95 hover:scale-105 transition-all duration-300 text-lg px-10 py-7 shadow-xl font-semibold rounded-lg"
+              <Button
+                size="lg"
+                onClick={() => setIsBookingOpen(true)}
+                variant="secondary"
+                className="px-8 py-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
                 Schedule Free Estimate
               </Button>
             </div>
           </div>
         </div>
-        
-        {/* Bottom fade effect */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/placeholder-hero-dealership.png')] bg-cover bg-center" />
+          <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 to-navy-700/80" />
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Floor Options Section */}
