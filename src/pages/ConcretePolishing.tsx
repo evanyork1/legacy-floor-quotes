@@ -7,6 +7,9 @@ import { ArrowRight, Building, Sparkles, Droplets, Recycle, CheckCircle, Calenda
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
+import polishingShowroom from "@/assets/polishing-gallery-showroom.jpg";
+import polishingWarehouse from "@/assets/polishing-gallery-warehouse.jpg";
+import polishingOffice from "@/assets/polishing-gallery-office.png";
 const ConcretePolishing = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -152,6 +155,43 @@ const ConcretePolishing = () => {
                     <p className="text-gray-600 text-sm leading-relaxed">{application.description}</p>
                   </CardContent>
                 </Card>)}
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Projects Gallery */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Featured <span className="text-blue-600">Project Gallery</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Real results from our commercial polishing projects.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src={polishingShowroom} alt="High-end automotive showroom with polished concrete floors showcasing luxury vehicles" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Luxury Automotive Showroom</p>
+                </div>
+              </div>
+              
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src={polishingWarehouse} alt="Industrial warehouse polished concrete with yellow safety markings" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Industrial Warehouse</p>
+                </div>
+              </div>
+              
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src={polishingOffice} alt="Modern dealership office space with polished concrete flooring" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Modern Dealership Office</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
