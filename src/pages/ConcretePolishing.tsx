@@ -104,26 +104,60 @@ const ConcretePolishing = () => {
           </div>
         </section>
 
-        {/* What is Concrete Polishing Section */}
+        {/* Why Work With Legacy Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                What is <span className="text-blue-600">Concrete Polishing?</span>
+                Why Work With <span className="text-blue-600">Legacy?</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Mechanical process using diamond grinding tools to densify and polish concrete, creating harder, stain-resistant surfaces with beautiful high-gloss finishes.
+                Professional crews, industrial equipment, and a commitment to excellence on every project.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Performance Benefits</h3>
-                <div className="space-y-4">
-                  {features.map((feature, index) => <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
-                    </div>)}
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Flexible Scheduling</h3>
+                      <p className="text-gray-600">Day or night — we work around your operations to avoid disruptions.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Detail-Oriented Crews</h3>
+                      <p className="text-gray-600">Clean, efficient teams that take pride in every job.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Competitive Pricing</h3>
+                      <p className="text-gray-600">Fair pricing without cutting corners on quality or service.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Industrial-Grade Equipment</h3>
+                      <p className="text-gray-600">Experienced technicians with professional tools deliver flawless results.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <CheckCircle className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Visible Difference</h3>
+                      <p className="text-gray-600">You'll see the difference in shine, safety, and speed of execution.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="relative">
@@ -164,10 +198,10 @@ const ConcretePolishing = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Featured <span className="text-blue-600">Project Gallery</span>
+                Results That <span className="text-blue-600">Speak for Themselves</span>
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Real results from our commercial polishing projects.
+                From showrooms to warehouses, we deliver flawless finishes that last.
               </p>
             </div>
             
