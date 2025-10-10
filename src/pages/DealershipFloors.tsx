@@ -6,47 +6,54 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookingModal } from "@/components/landing/BookingModal";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import heroImage from "@/assets/dealership-hero.jpg";
+import officeImage from "@/assets/dealership-office.png";
+import showroomImage from "@/assets/dealership-showroom.jpg";
+import serviceBayImage from "@/assets/service-bay.jpg";
+import serviceLaneImage from "@/assets/service-lane.jpg";
+import parkingDeckImage from "@/assets/parking-deck.jpg";
 const DealershipFloors = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const floorOptions = [{
     title: "Polished Concrete",
     description: "High-gloss finishes that create mirror-like reflections, elevating vehicle presentation and enhancing your brand image. Dust-free, low-maintenance surface ideal for customer-facing spaces.",
     icon: Store,
-    image: "/lovable-uploads/placeholder-showroom.png",
+    image: showroomImage,
     benefits: ["Mirror-like reflections", "Zero dust emission", "Minimal maintenance", "Enhanced aesthetics"]
   }, {
     title: "Epoxy Systems",
     description: "Chemical-resistant coatings engineered for service bays and maintenance areas. Withstands oils, fluids, and heavy equipment while maintaining a clean, professional appearance.",
     icon: Wrench,
-    image: "/lovable-uploads/placeholder-maintenance.png",
+    image: serviceBayImage,
     benefits: ["Chemical resistant", "Oil-proof surface", "Impact resistant", "Easy cleanup"]
   }, {
     title: "Traffic Coatings",
     description: "Heavy-duty systems designed for service lanes and parking decks. Prevents tire marking, resists wear from constant vehicle traffic, and maintains appearance in all weather conditions.",
     icon: ParkingCircle,
-    image: "/lovable-uploads/placeholder-service-lane.png",
+    image: serviceLaneImage,
     benefits: ["Tire mark proof", "Extreme durability", "All-weather performance", "Custom striping"]
   }];
   const applications = [{
     name: "Showrooms",
     description: "Polished concrete with mirror-like clarity that showcases vehicles and reinforces brand excellence",
     icon: Store,
-    image: "/lovable-uploads/placeholder-dealership-showroom.png"
+    image: showroomImage
   }, {
     name: "Service Lanes",
     description: "Traffic coatings engineered for constant vehicle movement and professional appearance",
     icon: ParkingCircle,
-    image: "/lovable-uploads/placeholder-service-lane-2.png"
+    image: serviceLaneImage
   }, {
     name: "Service Bays",
     description: "Epoxy systems resistant to chemicals, oils, and the rigors of daily maintenance operations",
     icon: Wrench,
-    image: "/lovable-uploads/placeholder-maintenance-bay.png"
+    image: serviceBayImage
   }, {
     name: "Parking Structures",
     description: "Durable coatings for covered and exposed areas with superior weather resistance",
     icon: Building2,
-    image: "/lovable-uploads/placeholder-parking-deck.png"
+    image: parkingDeckImage
   }];
   const benefits = ["Enhanced Brand Image", "Chemical & Oil Resistance", "Easy Maintenance & Cleaning", "Long-Term Durability", "Safety & Slip Resistance", "Professional Appearance"];
   const galleryImages = [{
@@ -84,42 +91,54 @@ const DealershipFloors = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[72vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-700 text-primary-foreground overflow-hidden">
-        <div className="relative z-10 container mx-auto px-4 py-24 md:py-36">
-          <div className="max-w-5xl mx-auto md:mx-0 text-center md:text-left space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 ring-1 ring-white/10 bg-[hsl(var(--primary-foreground)/0.06)] text-[hsl(var(--primary-foreground)/0.8)] text-xs tracking-widest uppercase">
-              Automotive Facilities
+      <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-800 text-primary-foreground overflow-hidden">
+        <div className="relative z-10 container mx-auto px-4 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 ring-1 ring-white/10 bg-white/5 text-white/90 text-xs font-medium tracking-widest uppercase">
+                Automotive Facilities
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+                Professional Dealership Flooring Solutions
+              </h1>
+              <p className="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed">
+                Polished concrete, epoxy, and traffic coatings engineered for showrooms, service lanes, service bays, and parking structures.
+              </p>
+              <div className="pt-4 flex flex-col sm:flex-row items-start gap-6">
+                <a
+                  href="tel:214-305-6516"
+                  onClick={handlePhoneClick}
+                  className="text-3xl md:text-4xl font-bold tracking-wide hover:text-white/90 transition-colors"
+                >
+                  214-305-6516
+                </a>
+                <Button
+                  size="lg"
+                  onClick={() => setIsBookingOpen(true)}
+                  variant="secondary"
+                  className="px-8 py-6 rounded-lg shadow-xl hover:shadow-2xl transition-all text-base font-semibold"
+                >
+                  Schedule Free Estimate
+                </Button>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight">
-              Professional Dealership Flooring Solutions
-            </h1>
-            <p className="text-xl md:text-2xl text-[hsl(var(--primary-foreground)/0.85)] max-w-3xl md:max-w-2xl leading-relaxed font-normal">
-              Polished concrete, epoxy, and traffic coatings engineered for showrooms, service lanes, service bays, and parking structures.
-            </p>
-            <div className="pt-2 flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-6">
-              <a
-                href="tel:214-305-6516"
-                onClick={handlePhoneClick}
-                className="text-3xl md:text-4xl font-semibold tracking-wide hover:opacity-90 transition-opacity"
-              >
-                214-305-6516
-              </a>
-              <Button
-                size="lg"
-                onClick={() => setIsBookingOpen(true)}
-                variant="secondary"
-                className="px-8 py-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              >
-                Schedule Free Estimate
-              </Button>
+
+            {/* Right Image */}
+            <div className="relative lg:block hidden">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <OptimizedImage
+                  src={heroImage}
+                  alt="Professional car dealership showroom with polished concrete flooring"
+                  className="w-full h-[600px] object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none" />
+              </div>
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/lovable-uploads/placeholder-hero-dealership.png')] bg-cover bg-center" />
-          <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 to-navy-700/80" />
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Floor Options Section */}
@@ -132,7 +151,7 @@ const DealershipFloors = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
             {floorOptions.map((option, index) => <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
@@ -140,8 +159,12 @@ const DealershipFloors = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-foreground">{option.title}</h3>
                   <p className="text-muted-foreground mb-6">{option.description}</p>
-                  <div className="aspect-video bg-muted rounded-lg mb-6 flex items-center justify-center text-muted-foreground">
-                    Image Placeholder: {option.title}
+                  <div className="aspect-video rounded-lg mb-6 overflow-hidden">
+                    <OptimizedImage
+                      src={option.image}
+                      alt={`${option.title} for car dealerships`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <ul className="space-y-2">
                     {option.benefits.map((benefit, idx) => <li key={idx} className="flex items-center text-sm text-muted-foreground">
@@ -193,8 +216,12 @@ const DealershipFloors = () => {
                 </div>
               </div>
             </div>
-            <div className="aspect-square bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-              Image Placeholder: Professional dealership showroom with immaculate flooring
+            <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+              <OptimizedImage
+                src={officeImage}
+                alt="Professional dealership office with polished concrete flooring"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -222,8 +249,12 @@ const DealershipFloors = () => {
                       <p className="text-muted-foreground">{app.description}</p>
                     </div>
                   </div>
-                  <div className="aspect-video bg-muted rounded-lg flex items-center justify-center text-muted-foreground mt-4">
-                    Image Placeholder: {app.name}
+                  <div className="aspect-video rounded-lg overflow-hidden mt-4">
+                    <OptimizedImage
+                      src={app.image}
+                      alt={`${app.name} flooring for dealerships`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </CardContent>
               </Card>)}
