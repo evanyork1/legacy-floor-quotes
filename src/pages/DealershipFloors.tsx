@@ -125,12 +125,12 @@ const DealershipFloors = () => {
             </div>
 
             {/* Right Image */}
-            <div className="relative lg:block hidden">
+            <div className="relative block">
               <div className="relative rounded-xl overflow-hidden shadow-xl">
                 <img
                   src={heroImage}
                   alt="Professional car dealership showroom with polished concrete flooring"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[250px] sm:h-[350px] lg:h-[400px] object-cover"
                   loading="eager"
                 />
                 <div className="absolute inset-0 ring-1 ring-white/10 rounded-xl pointer-events-none" />
@@ -151,7 +151,7 @@ const DealershipFloors = () => {
             </p>
           </div>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {floorOptions.map((option, index) => <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
@@ -199,26 +199,26 @@ const DealershipFloors = () => {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mr-3 sm:mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Show-Quality Results</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Show-Quality Results</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">
                       Immaculate finishes that reflect your brand's commitment to excellence and enhance vehicle presentation.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mr-3 sm:mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Long-Term Partnership</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Long-Term Partnership</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">
                       Comprehensive maintenance programs designed to preserve your investment and maintain pristine appearance.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+            <div className="aspect-video sm:aspect-square rounded-lg overflow-hidden shadow-xl">
               <img
                 src={officeImage}
                 alt="Professional dealership office with polished concrete flooring"
@@ -240,7 +240,7 @@ const DealershipFloors = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {applications.map((app, index) => <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-start mb-4">
@@ -276,7 +276,7 @@ const DealershipFloors = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {benefits.map((benefit, index) => <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-lg hover:bg-white/20 transition-all">
                 <div className="flex items-center">
                   <CheckCircle2 className="w-6 h-6 mr-3 flex-shrink-0" />
