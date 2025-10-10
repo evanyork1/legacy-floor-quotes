@@ -9,42 +9,42 @@ import { BookingModal } from "@/components/landing/BookingModal";
 const DealershipFloors = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const floorOptions = [{
-    title: "Polished Concrete for Showrooms",
-    description: "High-gloss, impressive finishes that elevate presentation and impress clients. Our polished concrete creates mirror-like reflections that showcase your vehicles in the best possible light.",
+    title: "Polished Concrete",
+    description: "High-gloss finishes that create mirror-like reflections, elevating vehicle presentation and enhancing your brand image. Dust-free, low-maintenance surface ideal for customer-facing spaces.",
     icon: Store,
     image: "/lovable-uploads/placeholder-showroom.png",
-    benefits: ["Mirror-like finish", "Enhances vehicle presentation", "Low maintenance", "Dust-free surface"]
+    benefits: ["Mirror-like reflections", "Zero dust emission", "Minimal maintenance", "Enhanced aesthetics"]
   }, {
-    title: "Epoxy for Maintenance Areas",
-    description: "Oil and spill-resistant systems that handle the toughest service bay conditions. Chemical-resistant formulations designed specifically for automotive fluids and heavy-duty shop operations.",
+    title: "Epoxy Systems",
+    description: "Chemical-resistant coatings engineered for service bays and maintenance areas. Withstands oils, fluids, and heavy equipment while maintaining a clean, professional appearance.",
     icon: Wrench,
     image: "/lovable-uploads/placeholder-maintenance.png",
-    benefits: ["Chemical resistant", "Oil & fluid proof", "Easy to clean", "Impact resistant"]
+    benefits: ["Chemical resistant", "Oil-proof surface", "Impact resistant", "Easy cleanup"]
   }, {
-    title: "Traffic Coatings for Service Lanes",
-    description: "Heavy-duty systems that prevent wear and tire marking in high-traffic service lanes and parking decks. Engineered to withstand constant vehicle traffic and maintain professional appearance.",
+    title: "Traffic Coatings",
+    description: "Heavy-duty systems designed for service lanes and parking decks. Prevents tire marking, resists wear from constant vehicle traffic, and maintains appearance in all weather conditions.",
     icon: ParkingCircle,
     image: "/lovable-uploads/placeholder-service-lane.png",
-    benefits: ["Tire mark resistant", "High traffic durability", "Weather resistant", "Professional striping"]
+    benefits: ["Tire mark proof", "Extreme durability", "All-weather performance", "Custom striping"]
   }];
   const applications = [{
     name: "Showrooms",
-    description: "Mirror-like polished concrete that creates stunning reflections and elevates vehicle presentation",
+    description: "Polished concrete with mirror-like clarity that showcases vehicles and reinforces brand excellence",
     icon: Store,
     image: "/lovable-uploads/placeholder-dealership-showroom.png"
   }, {
     name: "Service Lanes",
-    description: "Durable traffic coatings that handle heavy vehicle traffic and resist tire marking",
+    description: "Traffic coatings engineered for constant vehicle movement and professional appearance",
     icon: ParkingCircle,
     image: "/lovable-uploads/placeholder-service-lane-2.png"
   }, {
-    name: "Maintenance Areas",
-    description: "Chemical-resistant epoxy that stands up to oils, fluids, and daily shop operations",
+    name: "Service Bays",
+    description: "Epoxy systems resistant to chemicals, oils, and the rigors of daily maintenance operations",
     icon: Wrench,
     image: "/lovable-uploads/placeholder-maintenance-bay.png"
   }, {
-    name: "Parking Decks",
-    description: "Weather-resistant systems designed for both covered and exposed parking areas",
+    name: "Parking Structures",
+    description: "Durable coatings for covered and exposed areas with superior weather resistance",
     icon: Building2,
     image: "/lovable-uploads/placeholder-parking-deck.png"
   }];
@@ -92,24 +92,18 @@ const DealershipFloors = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-20 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-            High-Performance Floors Built for Dealerships
+            Professional Dealership Flooring Solutions
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
-            Serving Texas dealerships with premium flooring systems built for performance and presentation
+            Premium flooring systems engineered for showrooms, service bays, and high-traffic areas
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6">
-              <Phone className="mr-2" />
-              Get A Quote
-            </Button>
-            <Button size="lg" variant="outline" onClick={() => setIsBookingOpen(true)} className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6">
-              Book An Estimate
-            </Button>
-          </div>
-          <div className="mt-8">
-            <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-2xl font-bold hover:text-blue-200 transition-colors">
-              📞 214-305-6516
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-3xl md:text-4xl font-bold hover:text-blue-200 transition-colors">
+              214-305-6516
             </a>
+            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6 shadow-lg">
+              Schedule Free Estimate
+            </Button>
           </div>
         </div>
       </section>
@@ -118,9 +112,9 @@ const DealershipFloors = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Premium Flooring Solutions</h2>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Specialized Flooring Systems</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Three specialized systems designed to meet every area of your dealership
+              Three distinct solutions engineered for automotive environments
             </p>
           </div>
 
@@ -153,33 +147,33 @@ const DealershipFloors = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-6 text-foreground">
-                Why Dealerships Choose Legacy
+                The Legacy Advantage
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start">
                   <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Minimal Downtime</h3>
+                    <h3 className="text-xl font-bold mb-2 text-foreground">Minimal Disruption</h3>
                     <p className="text-muted-foreground">
-                      Fast installation schedules designed around your business hours. We work efficiently to minimize disruption to your operations.
+                      Efficient installation schedules coordinated with your operations to keep your dealership running smoothly.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Immaculate Finishes</h3>
+                    <h3 className="text-xl font-bold mb-2 text-foreground">Show-Quality Results</h3>
                     <p className="text-muted-foreground">
-                      Show-quality floors that enhance your vehicles and brand image. Our finishes reflect the quality and professionalism of your dealership.
+                      Immaculate finishes that reflect your brand's commitment to excellence and enhance vehicle presentation.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle2 className="w-6 h-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-foreground">Ongoing Maintenance Options</h3>
+                    <h3 className="text-xl font-bold mb-2 text-foreground">Long-Term Partnership</h3>
                     <p className="text-muted-foreground">
-                      Keep your floors looking new year after year with our professional maintenance programs tailored for dealerships.
+                      Comprehensive maintenance programs designed to preserve your investment and maintain pristine appearance.
                     </p>
                   </div>
                 </div>
@@ -196,9 +190,9 @@ const DealershipFloors = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Complete Dealership Coverage</h2>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Comprehensive Solutions</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From showroom to service bay, we have the right flooring solution for every area
+              Specialized flooring for every area of your automotive facility
             </p>
           </div>
 
@@ -227,9 +221,9 @@ const DealershipFloors = () => {
       <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Dealership Flooring Benefits</h2>
+            <h2 className="text-4xl font-bold mb-4">Performance Benefits</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Engineered for the unique demands of automotive environments
+              Engineered specifically for automotive facility demands
             </p>
           </div>
 
@@ -251,21 +245,20 @@ const DealershipFloors = () => {
       <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Upgrade Your Dealership Floors?
+            Transform Your Dealership Floors
           </h2>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
-            Get a free consultation and discover how our flooring solutions can enhance your dealership
+            Schedule a free consultation to discuss your facility's flooring needs
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6">
-              <Phone className="mr-2" />
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-3xl md:text-4xl font-bold hover:text-blue-200 transition-colors">
+              214-305-6516
+            </a>
+            <Button size="lg" onClick={() => setIsBookingOpen(true)} className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6 shadow-lg">
               Schedule Free Estimate
             </Button>
           </div>
-          <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-3xl font-bold hover:text-blue-200 transition-colors inline-block">
-            📞 214-305-6516
-          </a>
-          <p className="mt-4 text-blue-100">
+          <p className="mt-8 text-blue-100 text-lg">
             Serving Dallas-Fort Worth and surrounding areas
           </p>
         </div>
