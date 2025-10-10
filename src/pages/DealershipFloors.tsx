@@ -159,12 +159,13 @@ const DealershipFloors = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-foreground">{option.title}</h3>
                   <p className="text-muted-foreground mb-6">{option.description}</p>
-                  <div className="aspect-video rounded-lg mb-6 overflow-hidden">
+                  <div className="aspect-video rounded-lg mb-6 overflow-hidden bg-black">
                     <img
                       src={option.image}
                       alt={`${option.title} for car dealerships`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover opacity-100"
                       loading="lazy"
+                      style={{ filter: 'none' }}
                     />
                   </div>
                   <ul className="space-y-2">
