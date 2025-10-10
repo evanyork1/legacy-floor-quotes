@@ -12,20 +12,20 @@ const ConcretePolishing = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const applications = [{
     icon: <Building className="h-8 w-8 text-blue-600" />,
+    title: "Warehouses",
+    description: "Dustproof surfaces that boost lighting and cut maintenance costs."
+  }, {
+    icon: <Building className="h-8 w-8 text-blue-600" />,
     title: "Retail Stores",
-    description: "High-gloss polished concrete creates an attractive, durable surface that enhances the shopping experience while reducing maintenance costs."
+    description: "High-gloss finish that enhances customer experience and reduces upkeep."
   }, {
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
     title: "Restaurants & Hospitality",
-    description: "Easy-to-clean, stain-resistant surfaces perfect for food service environments requiring both aesthetics and hygiene."
-  }, {
-    icon: <Building className="h-8 w-8 text-blue-600" />,
-    title: "Warehouses",
-    description: "Dustproof, high-traffic surfaces that improve lighting efficiency and reduce maintenance in distribution and storage facilities."
+    description: "Stain-resistant, easy-to-clean surface ideal for food service."
   }, {
     icon: <Recycle className="h-8 w-8 text-blue-600" />,
     title: "Manufacturing",
-    description: "Durable, chemical-resistant floors that withstand industrial processes while maintaining a professional appearance."
+    description: "Chemical-resistant floors built for heavy industrial use."
   }];
   const benefits = [{
     title: "Cost-Effective",
@@ -80,9 +80,7 @@ const ConcretePolishing = () => {
                   Professional <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Concrete Polishing</span> Services
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Transform your existing concrete into beautiful, high-performance polished floors. 
-                  Our professional concrete polishing services create durable, attractive surfaces perfect for 
-                  commercial spaces, warehouses, retail stores, and restaurants.
+                  Transform existing concrete into durable, high-performance polished floors for warehouses, retail, restaurants, and more.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
@@ -111,9 +109,7 @@ const ConcretePolishing = () => {
                 What is <span className="text-blue-600">Concrete Polishing?</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Concrete polishing is a mechanical process that uses progressively finer diamond grinding tools to create 
-                a smooth, durable, and attractive floor surface from existing concrete. The process densifies the concrete, 
-                making it harder, more stain-resistant, and easier to maintain while creating a beautiful high-gloss finish.
+                Mechanical process using diamond grinding tools to densify and polish concrete, creating harder, stain-resistant surfaces with beautiful high-gloss finishes.
               </p>
             </div>
 
@@ -160,6 +156,43 @@ const ConcretePolishing = () => {
           </div>
         </section>
 
+        {/* Project Gallery Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Our <span className="text-blue-600">Recent Projects</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                See the quality and craftsmanship of our polished concrete work.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src="/src/assets/polishing-showroom-cars.jpg" alt="Polished concrete showroom floor with luxury vehicles" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Automotive Showroom</p>
+                </div>
+              </div>
+              
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src="/src/assets/polishing-warehouse.jpg" alt="Industrial warehouse polished concrete floor" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Warehouse Facility</p>
+                </div>
+              </div>
+              
+              <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src="/src/assets/polishing-dealership-office.png" alt="Commercial office space with polished concrete" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-6 font-semibold">Dealership Office</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Polish Levels Section */}
         
 
@@ -176,8 +209,7 @@ const ConcretePolishing = () => {
               Transform Your Concrete Today
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Contact us for a free consultation and discover how polished concrete can enhance your commercial space 
-              while reducing long-term maintenance costs.
+              Get a free consultation and discover how polished concrete enhances your space while cutting maintenance costs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button onClick={() => navigate('/contact')} variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
