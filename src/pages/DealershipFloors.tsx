@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { OptimizedImage } from "@/components/OptimizedImage";
+
 import heroImage from "@/assets/dealership-hero.jpg";
 import officeImage from "@/assets/dealership-office-floor.png";
 import polishedShowroomImage from "@/assets/polished-concrete-showroom.jpg";
@@ -127,11 +127,11 @@ const DealershipFloors = () => {
             {/* Right Image */}
             <div className="relative lg:block hidden">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <OptimizedImage
+                <img
                   src={heroImage}
                   alt="Professional car dealership showroom with polished concrete flooring"
                   className="w-full h-[600px] object-cover"
-                  priority
+                  loading="eager"
                 />
                 <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none" />
               </div>
@@ -160,10 +160,11 @@ const DealershipFloors = () => {
                   <h3 className="text-2xl font-bold mb-4 text-foreground">{option.title}</h3>
                   <p className="text-muted-foreground mb-6">{option.description}</p>
                   <div className="aspect-video rounded-lg mb-6 overflow-hidden">
-                    <OptimizedImage
+                    <img
                       src={option.image}
                       alt={`${option.title} for car dealerships`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <ul className="space-y-2">
@@ -217,10 +218,11 @@ const DealershipFloors = () => {
               </div>
             </div>
             <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
-              <OptimizedImage
+              <img
                 src={officeImage}
                 alt="Professional dealership office with polished concrete flooring"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>
@@ -250,10 +252,11 @@ const DealershipFloors = () => {
                     </div>
                   </div>
                   <div className="aspect-video rounded-lg overflow-hidden mt-4">
-                    <OptimizedImage
+                    <img
                       src={app.image}
                       alt={`${app.name} flooring for dealerships`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                 </CardContent>
