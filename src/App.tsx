@@ -35,7 +35,7 @@ import Auth from "./pages/Auth";
 import SalesDashboard from "./pages/SalesDashboard";
 import FlakeFloorTemplate from "./pages/FlakeFloorTemplate";
 import DealershipFloors from "./pages/DealershipFloors";
-import WarehousePolishing from "./pages/WarehousePolishing";
+
 
 const queryClient = new QueryClient();
 
@@ -72,7 +72,7 @@ function App() {
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               <Route path="/dealershipfloors" element={<DealershipFloors />} />
-              <Route path="/warehousepolishing" element={<WarehousePolishing />} />
+              
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
               <Route path="*" element={<NotFound />} />
