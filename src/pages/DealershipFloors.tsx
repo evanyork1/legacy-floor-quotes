@@ -8,18 +8,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import heroImage from "@/assets/dealership-hero.jpg";
-import officeImage from "@/assets/dealership-office.png";
-import showroomImage from "@/assets/dealership-showroom.jpg";
+import officeImage from "@/assets/dealership-office-floor.png";
+import polishedShowroomImage from "@/assets/polished-concrete-showroom.jpg";
 import serviceBayImage from "@/assets/service-bay.jpg";
-import serviceLaneImage from "@/assets/service-lane.jpg";
-import parkingDeckImage from "@/assets/parking-deck.jpg";
+import trafficLanesImage from "@/assets/traffic-coating-lanes.jpg";
+import parkingStructureImage from "@/assets/parking-structure.jpg";
 const DealershipFloors = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const floorOptions = [{
     title: "Polished Concrete",
     description: "High-gloss finishes that create mirror-like reflections, elevating vehicle presentation and enhancing your brand image. Dust-free, low-maintenance surface ideal for customer-facing spaces.",
     icon: Store,
-    image: showroomImage,
+    image: polishedShowroomImage,
     benefits: ["Mirror-like reflections", "Zero dust emission", "Minimal maintenance", "Enhanced aesthetics"]
   }, {
     title: "Epoxy Systems",
@@ -31,19 +31,19 @@ const DealershipFloors = () => {
     title: "Traffic Coatings",
     description: "Heavy-duty systems designed for service lanes and parking decks. Prevents tire marking, resists wear from constant vehicle traffic, and maintains appearance in all weather conditions.",
     icon: ParkingCircle,
-    image: serviceLaneImage,
+    image: trafficLanesImage,
     benefits: ["Tire mark proof", "Extreme durability", "All-weather performance", "Custom striping"]
   }];
   const applications = [{
     name: "Showrooms",
     description: "Polished concrete with mirror-like clarity that showcases vehicles and reinforces brand excellence",
     icon: Store,
-    image: showroomImage
+    image: polishedShowroomImage
   }, {
     name: "Service Lanes",
     description: "Traffic coatings engineered for constant vehicle movement and professional appearance",
     icon: ParkingCircle,
-    image: serviceLaneImage
+    image: trafficLanesImage
   }, {
     name: "Service Bays",
     description: "Epoxy systems resistant to chemicals, oils, and the rigors of daily maintenance operations",
@@ -53,7 +53,7 @@ const DealershipFloors = () => {
     name: "Parking Structures",
     description: "Durable coatings for covered and exposed areas with superior weather resistance",
     icon: Building2,
-    image: parkingDeckImage
+    image: parkingStructureImage
   }];
   const benefits = ["Enhanced Brand Image", "Chemical & Oil Resistance", "Easy Maintenance & Cleaning", "Long-Term Durability", "Safety & Slip Resistance", "Professional Appearance"];
   const galleryImages = [{
