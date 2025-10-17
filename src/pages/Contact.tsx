@@ -3,7 +3,6 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { Phone, Mail } from "lucide-react";
-
 const Contact = () => {
   return <>
       <Helmet>
@@ -40,7 +39,7 @@ const Contact = () => {
                   <div className="bg-white rounded-xl shadow-lg p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <h3 className="text-xl font-bold text-gray-900">DFW Office</h3>
-                      <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">DFW</span>
+                      
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center">
@@ -63,7 +62,7 @@ const Contact = () => {
                   <div className="bg-white rounded-xl shadow-lg p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <h3 className="text-xl font-bold text-gray-900">Phoenix Office</h3>
-                      <span className="bg-orange-600 text-white text-xs px-2 py-1 rounded">PHX</span>
+                      
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center">
