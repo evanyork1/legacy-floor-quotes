@@ -14,12 +14,33 @@ const HeroSection = () => {
 
   // Determine quote path and content based on current location
   const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isPHX = location.pathname === '/phx';
   const isCommercial = location.pathname === '/dfwcommercial';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
   const isFrisco = location.pathname === '/epoxy-flooring-frisco';
-  const title = isCommercial ? "DFW's Commercial Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day")));
-  const locationText = "Dallas - Fort Worth, TX";
-  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results")));
+  
+  const title = isCommercial ? "DFW's Commercial Flooring" : (isPHX ? "Phoenix's Epoxy Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day"))));
+  const locationText = isPHX ? "Phoenix, AZ" : "Dallas - Fort Worth, TX";
+  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Residential & Commercial Floor Coatings That Last" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
+  
+  const phoneNumber = isPHX ? "602-560-0974" : "214-305-6516";
+  const quotePath = isPHX ? "/quotephx" : "/quotedfw";
+  
+  const handlePhoneClick = () => {
+    if (typeof window !== 'undefined') {
+      if (isPHX) {
+        if ((window as any).gtag_report_conversion_phx) {
+          (window as any).gtag_report_conversion_phx(`tel:${phoneNumber}`);
+        } else if ((window as any).gtag_report_conversion) {
+          (window as any).gtag_report_conversion(`tel:${phoneNumber}`);
+        }
+      } else {
+        if ((window as any).gtag_report_conversion) {
+          (window as any).gtag_report_conversion(`tel:${phoneNumber}`);
+        }
+      }
+    }
+  };
 
   // Gallery images for rotating background - memoized for performance
   const galleryImages = useMemo(() => [
@@ -50,8 +71,8 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // For DFW, DFW Res Landing, Prosper, and Frisco pages, use the new design
-  if (isDFW || isProsper || isFrisco) {
+  // For DFW, PHX, DFW Res Landing, Prosper, and Frisco pages, use the new design
+  if (isDFW || isPHX || isProsper || isFrisco) {
     return (
       <section className="relative overflow-hidden">
         {/* Hero Container - Fixed Height on Mobile */}
@@ -128,11 +149,12 @@ const HeroSection = () => {
                       </CTAButton>
                       
                       <a 
-                        href="tel:214-305-6516"
+                        href={`tel:${phoneNumber}`}
+                        onClick={handlePhoneClick}
                         className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
                       >
                         <Phone size={18} />
-                        214-305-6516
+                        {phoneNumber}
                       </a>
                     </div>
                   </div>
@@ -191,11 +213,12 @@ const HeroSection = () => {
                   </CTAButton>
                   
                   <a 
-                    href="tel:214-305-6516"
+                    href={`tel:${phoneNumber}`}
+                    onClick={handlePhoneClick}
                     className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
                   >
                     <Phone size={18} />
-                    214-305-6516
+                    {phoneNumber}
                   </a>
                 </div>
               </div>
@@ -222,7 +245,7 @@ const HeroSection = () => {
         {/* Floating Quote Button - Right Side - Only visible when scrolled past hero */}
         {scrolledPastHero && (
           <Button
-            onClick={() => navigate('/quotedfw')}
+            onClick={() => navigate(quotePath)}
             className="fixed right-[-90px] sm:right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-3 py-4 sm:px-5 sm:py-6 text-sm sm:text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 bg-blue-600 text-white border-blue-600"
             style={{ transformOrigin: 'center center' }}
           >

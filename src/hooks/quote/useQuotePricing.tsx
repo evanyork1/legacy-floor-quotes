@@ -9,7 +9,8 @@ export const useQuotePricing = (formData: FormData) => {
   const { toast } = useToast();
   const location = useLocation();
   const isDFW = location.pathname.includes('/quotedfw') || location.pathname.includes('/dfw');
-  const locationKey = isDFW ? 'DFW' : 'Houston';
+  const isPHX = location.pathname.includes('/quotephx') || location.pathname.includes('/phx');
+  const locationKey = isPHX ? 'Phoenix' : (isDFW ? 'DFW' : 'Houston');
 
   const { data: pricingSettings } = useQuery({
     queryKey: ['location-pricing', locationKey],

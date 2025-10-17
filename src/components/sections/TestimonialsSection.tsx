@@ -5,8 +5,9 @@ const TestimonialsSection = () => {
   const location = useLocation();
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
   const isFrisco = location.pathname === '/epoxy-flooring-frisco';
+  const isPHX = location.pathname === '/phx';
   
-  const testimonials = [{
+  const dfwTestimonials = [{
     name: "Bharat Arimilli",
     location: "Plano, TX",
     rating: 5,
@@ -27,6 +28,30 @@ const TestimonialsSection = () => {
     rating: 5,
     text: "I have nothing but great things to say about Legacy Industrial coating! From the first consultation to the actual Job. The people who work here are fantastic and so easy to work with! Would definitely recommend to anyone looking to get their floor coated. Definitely recommending to my family and friends. :)"
   }];
+
+  const phxTestimonials = [{
+    name: "Sarah M.",
+    location: "Scottsdale, AZ",
+    rating: 5,
+    text: "Legacy did an amazing job on our garage floor! The team was professional, showed up on time, and the finished product exceeded our expectations. Our Scottsdale neighbors have been asking for their contact info!"
+  }, {
+    name: "Mike R.",
+    location: "Mesa, AZ",
+    rating: 5,
+    text: "Best decision we made for our home. The crew was friendly and efficient. Our garage looks incredible now and the floor is so easy to clean. Highly recommend to anyone in the Phoenix area!"
+  }, {
+    name: "Jennifer L.",
+    location: "Tempe, AZ",
+    rating: 5,
+    text: "From quote to completion, everything was seamless. Great communication, fair pricing, and beautiful results. Our garage floor looks like something out of a magazine. Thank you Legacy!"
+  }, {
+    name: "David K.",
+    location: "Phoenix, AZ",
+    rating: 5,
+    text: "Outstanding work! The team was professional and completed the job quickly. The floor coating has held up perfectly through our hot Arizona summers. Worth every penny!"
+  }];
+
+  const testimonials = isPHX ? phxTestimonials : dfwTestimonials;
   return <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-slate-50" id="testimonials">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative">
@@ -50,7 +75,7 @@ const TestimonialsSection = () => {
             </div>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
-            {isProsper ? "What Homeowners Near Prosper Are Saying" : isFrisco ? "What Frisco Homeowners Are Saying" : "What Our Customers Say"}
+            {isProsper ? "What Homeowners Near Prosper Are Saying" : isFrisco ? "What Frisco Homeowners Are Saying" : isPHX ? "What Phoenix Homeowners Are Saying" : "What Our Customers Say"}
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             Our customers love talking about the work we have done. Read from hundreds of customers their experience with us.

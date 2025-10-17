@@ -29,6 +29,8 @@ import ServiceAreas from "./pages/ServiceAreas";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
 import DFW from "./pages/DFW";
+import PHX from "./pages/PHX";
+import QuotePHX from "./pages/QuotePHX";
 import DFWResLanding from "./pages/DFWResLanding";
 import LandingVisual from "./pages/LandingVisual";
 import Auth from "./pages/Auth";
@@ -48,7 +50,9 @@ function App() {
             <Routes>
               <Route path="/" element={<DFW />} />
               <Route path="/dfw" element={<DFW />} />
+              <Route path="/phx" element={<PHX />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
+              <Route path="/quotephx" element={<QuotePHX />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />
               <Route path="/service-areas" element={<ServiceAreas />} />

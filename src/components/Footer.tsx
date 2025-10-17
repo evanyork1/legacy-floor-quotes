@@ -12,6 +12,16 @@ const Footer = () => {
     }
   };
 
+  const handlePhoneClickPHX = () => {
+    if (typeof window !== 'undefined') {
+      if ((window as any).gtag_report_conversion_phx) {
+        (window as any).gtag_report_conversion_phx('tel:602-560-0974');
+      } else if ((window as any).gtag_report_conversion) {
+        (window as any).gtag_report_conversion('tel:602-560-0974');
+      }
+    }
+  };
+
   return (
     <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
@@ -48,13 +58,34 @@ const Footer = () => {
           {/* Contact */}
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">CONTACT</h3>
-            <div className="space-y-4">
+            <div className="space-y-6">
+              {/* DFW Office */}
               <div>
-                <h4 className="text-white font-semibold mb-2">Main Office</h4>
+                <div className="flex items-center gap-2 mb-2">
+                  <h4 className="text-white font-semibold">DFW Office</h4>
+                  <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded">DFW</span>
+                </div>
                 <div className="text-gray-300 text-sm space-y-1">
                   <p>6010 W Spring Creek Parkway</p>
                   <p>Plano, TX 75024</p>
-                  <p>United States</p>
+                  <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors block">
+                    (214) 305-6516
+                  </a>
+                </div>
+              </div>
+              
+              {/* Phoenix Office */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <h4 className="text-white font-semibold">Phoenix Office</h4>
+                  <span className="bg-orange-600 text-white text-xs px-2 py-0.5 rounded">PHX</span>
+                </div>
+                <div className="text-gray-300 text-sm space-y-1">
+                  <p>7150 E Camelback Rd Ste. 444</p>
+                  <p>Scottsdale, AZ 85251</p>
+                  <a href="tel:602-560-0974" onClick={handlePhoneClickPHX} className="text-gray-300 hover:text-blue-400 transition-colors block">
+                    (602) 560-0974
+                  </a>
                 </div>
               </div>
             </div>
@@ -63,8 +94,9 @@ const Footer = () => {
           {/* Service Areas */}
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
-            <div className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-              <p>Plano, Frisco, Dallas, Celina, Little Elm, McKinney, Allen, Prosper, The Colony, Aubrey, Lewisville, Carrollton, Richardson, Garland, Anna, Melissa, Fairview, Parker, Princeton, Sachse, Wylie, Murphy, Farmers Branch, North Dallas, Addison, Hebron, Highland Village, Flower Mound, Coppell</p>
+            <div className="text-gray-300 text-sm leading-relaxed space-y-2">
+              <p className="font-semibold">Dallas-Fort Worth Metroplex</p>
+              <p className="font-semibold">Phoenix Metroplex</p>
             </div>
           </div>
 
