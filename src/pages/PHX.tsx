@@ -37,7 +37,7 @@ const PHX = () => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Phoenix Epoxy Flooring Experts | Scottsdale, Mesa, Tempe | Legacy Industrial Coatings" />
         <meta property="og:description" content="Premier epoxy flooring contractors serving Phoenix, Scottsdale, Mesa, Tempe, Gilbert, Chandler & greater Phoenix metro. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
-        <meta property="og:image" content="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" />
+        <meta property="og:image" content="/lovable-uploads/phx-social-preview.png" />
         <meta property="og:url" content="https://legacyindustrialcoatings.com/phx" />
         <meta property="og:site_name" content="Legacy Industrial Coatings" />
 
@@ -45,7 +45,7 @@ const PHX = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Phoenix Epoxy Flooring Experts | Scottsdale, Mesa, Tempe | Legacy Industrial Coatings" />
         <meta name="twitter:description" content="Premier epoxy flooring contractors serving Phoenix, Scottsdale, Mesa, Tempe, Gilbert, Chandler & greater Phoenix metro. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
-        <meta name="twitter:image" content="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" />
+        <meta name="twitter:image" content="/lovable-uploads/phx-social-preview.png" />
 
         {/* Additional SEO and mobile optimization */}
         <meta name="robots" content="index, follow" />
