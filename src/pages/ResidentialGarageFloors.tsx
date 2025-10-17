@@ -8,10 +8,12 @@ import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { LeadForm } from "@/components/landing/LeadForm";
-import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone } from "lucide-react";
+import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BookingModal } from "@/components/landing/BookingModal";
 const ResidentialGarageFloors = () => {
+  const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
   const benefits = [{
     icon: <Shield className="h-8 w-8 text-blue-600" />,
@@ -78,11 +80,9 @@ const ResidentialGarageFloors = () => {
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
-                    <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                      214-305-6516
-                    </a>
+                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                    <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    Contact Us
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300 text-sm sm:text-base">
                     <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
