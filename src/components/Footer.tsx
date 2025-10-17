@@ -1,17 +1,13 @@
-
 import { Mail, Phone, MapPin, Instagram, Facebook, MapIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
-
 const Footer = () => {
   const location = useLocation();
-  
   const handlePhoneClick = () => {
     // Call the Google Ads conversion tracking function
     if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
       (window as any).gtag_report_conversion('tel:214-305-6516');
     }
   };
-
   const handlePhoneClickPHX = () => {
     if (typeof window !== 'undefined') {
       if ((window as any).gtag_report_conversion_phx) {
@@ -21,20 +17,14 @@ const Footer = () => {
       }
     }
   };
-
-  return (
-    <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
+  return <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
           
           {/* Company Info & Logo */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-6">
             <div className="space-y-4">
-              <img 
-                src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" 
-                alt="Legacy Industrial Coatings Logo" 
-                className="h-12 sm:h-16 w-auto" 
-              />
+              <img src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" alt="Legacy Industrial Coatings Logo" className="h-12 sm:h-16 w-auto" />
               <div className="space-y-2 text-sm text-gray-300">
                 <p>Licensed & Insured</p>
                 <p>Family Owned & Operated</p>
@@ -63,7 +53,7 @@ const Footer = () => {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <h4 className="text-white font-semibold">DFW Office</h4>
-                  <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded">DFW</span>
+                  
                 </div>
                 <div className="text-gray-300 text-sm space-y-1">
                   <p>6010 W Spring Creek Parkway</p>
@@ -78,7 +68,7 @@ const Footer = () => {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <h4 className="text-white font-semibold">Phoenix Office</h4>
-                  <span className="bg-orange-600 text-white text-xs px-2 py-0.5 rounded">PHX</span>
+                  
                 </div>
                 <div className="text-gray-300 text-sm space-y-1">
                   <p>7150 E Camelback Rd Ste. 444</p>
@@ -120,10 +110,8 @@ const Footer = () => {
             {/* Contact Details */}
             <div className="space-y-3 pt-2">
               <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                  (214) 305-6516
-                </a>
+                
+                
               </div>
               <div className="flex items-start space-x-2 -ml-10">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
@@ -144,8 +132,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
