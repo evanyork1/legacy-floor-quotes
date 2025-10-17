@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -49,7 +49,7 @@ const FlowerMound = () => {
       </Helmet>
       
       <div className="min-h-screen bg-white">
-        <Header />
+        <HeaderGeneric />
         
         {/* Hero Section */}
         <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">

@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Users, Award, Heart, Star, ArrowRight, Calendar } from "lucide-react";
 import { useState } from "react";
@@ -13,7 +13,7 @@ const About = () => {
   const values = [{
     icon: Users,
     title: "Family Foundation",
-    description: "Started as a family business, we've kept our personal touch as we've grown across Dallas-Fort Worth."
+    description: "Started as a family business, we've kept our personal touch as we've grown nationwide."
   }, {
     icon: Award,
     title: "Skilled Craftsmanship",
@@ -29,12 +29,12 @@ const About = () => {
   }];
   return <>
       <Helmet>
-        <title>About Legacy Industrial Coatings - Your Trusted Dallas-Fort Worth Floor Coating Experts</title>
-        <meta name="description" content="Learn about Legacy Industrial Coatings, a family-owned company that has grown to be a recognized leader in epoxy floor coatings across Dallas-Fort Worth. Discover our commitment to quality craftsmanship and treating every floor like our own." />
-        <meta name="keywords" content="about legacy industrial coatings, family business, dallas fort worth epoxy, floor coating company, quality craftsmanship" />
+        <title>About Legacy Industrial Coatings - Professional Floor Coating Experts</title>
+        <meta name="description" content="Learn about Legacy Industrial Coatings, a family-owned company that has grown to be a recognized leader in epoxy floor coatings. Discover our commitment to quality craftsmanship and treating every floor like our own." />
+        <meta name="keywords" content="about legacy industrial coatings, family business, epoxy flooring, floor coating company, quality craftsmanship" />
       </Helmet>
 
-      <Header />
+      <HeaderGeneric />
       
       <main>
         {/* Hero Section */}
@@ -44,10 +44,10 @@ const About = () => {
               <div>
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
                   From Family Business to
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"> DFW Leader</span>
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"> Industry Leader</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Legacy Industrial Coatings started as a family company and has grown to be a recognized brand across Dallas-Fort Worth. We've built our reputation on one simple principle: treating every floor like it's our own.
+                  Legacy Industrial Coatings started as a family company and has grown to be a recognized brand nationwide. We've built our reputation on one simple principle: treating every floor like it's our own.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="text-center p-6 bg-white rounded-lg shadow-sm">
@@ -62,10 +62,6 @@ const About = () => {
               </div>
               <div className="relative">
                 <img src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png" alt="Legacy Industrial Coatings professional truck and equipment ready for service" className="rounded-2xl shadow-2xl w-full h-auto" />
-                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-lg">
-                  <div className="text-sm text-gray-600 mb-1">Proudly Serving</div>
-                  <div className="text-lg font-bold text-gray-900">Dallas-Fort Worth</div>
-                </div>
               </div>
             </div>
           </div>
@@ -79,7 +75,7 @@ const About = () => {
                 Our Story
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                What started as a family business has grown into something we're incredibly proud of. Legacy Industrial Coatings has become a name that Dallas-Fort Worth homeowners and businesses trust, not because we're the biggest, but because we care the most.
+                What started as a family business has grown into something we're incredibly proud of. Legacy Industrial Coatings has become a name that homeowners and businesses trust, not because we're the biggest, but because we care the most.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Every floor we work on gets our full attention and expertise. We don't rush through jobs or cut corners to maximize profits. We take our time, do things right, and stand behind our work because that's what builds lasting relationships with our customers.

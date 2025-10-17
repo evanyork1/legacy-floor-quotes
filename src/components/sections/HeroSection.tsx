@@ -148,14 +148,16 @@ const HeroSection = () => {
                         Book An Estimate
                       </CTAButton>
                       
-                      <a 
-                        href={`tel:${phoneNumber}`}
-                        onClick={handlePhoneClick}
-                        className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
-                      >
-                        <Phone size={18} />
-                        {phoneNumber}
-                      </a>
+                      {(isDFW || isPHX) && (
+                        <a 
+                          href={`tel:${phoneNumber}`}
+                          onClick={handlePhoneClick}
+                          className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
+                        >
+                          <Phone size={18} />
+                          {phoneNumber}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -212,14 +214,16 @@ const HeroSection = () => {
                     Book An Estimate
                   </CTAButton>
                   
-                  <a 
-                    href={`tel:${phoneNumber}`}
-                    onClick={handlePhoneClick}
-                    className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
-                  >
-                    <Phone size={18} />
-                    {phoneNumber}
-                  </a>
+                  {(isDFW || isPHX) && (
+                    <a 
+                      href={`tel:${phoneNumber}`}
+                      onClick={handlePhoneClick}
+                      className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
+                    >
+                      <Phone size={18} />
+                      {phoneNumber}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

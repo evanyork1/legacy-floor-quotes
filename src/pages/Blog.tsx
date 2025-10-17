@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -59,7 +59,7 @@ const Blog = () => {
       </Helmet>
       
       <div className="min-h-screen bg-white">
-        <Header />
+        <HeaderGeneric />
         
         {selectedPost ? (
           /* Article View */

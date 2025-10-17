@@ -49,7 +49,7 @@ const WhyChooseSection = () => {
           <div className="space-y-6 sm:space-y-8">
             <div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-                Why Homeowners Across DFW Choose{" "}
+                Why Homeowners Choose{" "}
                 <span className="text-blue-600">Legacy</span>
               </h2>
             </div>

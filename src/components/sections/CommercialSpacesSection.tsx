@@ -61,7 +61,7 @@ const CommercialSpacesSection = () => {
             Commercial Spaces We Install
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Professional flooring solutions for businesses across Dallas-Fort Worth
+            Professional flooring solutions for businesses nationwide
           </p>
         </div>
 

@@ -16,7 +16,7 @@ const EpoxyVsPolyureaSection = () => {
             Epoxy vs. <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Polyurea</span>: Why Legacy Floors Last
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Not all garage coatings are the same. Here's why homeowners across DFW are ditching epoxy for our premium polyurea solutions.
+            Not all garage coatings are the same. Here's why homeowners are ditching epoxy for our premium polyurea solutions.
           </p>
         </div>
 

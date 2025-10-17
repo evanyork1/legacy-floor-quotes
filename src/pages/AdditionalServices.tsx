@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/sections/CTASection";
 
@@ -75,7 +75,7 @@ const AdditionalServices = () => {
       </Helmet>
 
       <div className="min-h-screen bg-white">
-        <Header />
+        <HeaderGeneric />
 
         <main className="pt-20">
           <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">

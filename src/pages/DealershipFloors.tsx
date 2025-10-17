@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Phone, CheckCircle2, Building2, Wrench, ParkingCircle, Store } from "lucide-react";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -88,7 +88,7 @@ const DealershipFloors = () => {
         <link rel="canonical" href="https://legacyepoxyfloors.com/dealershipfloors" />
       </Helmet>
 
-      <Header />
+      <HeaderGeneric />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-navy-900 to-navy-800 text-primary-foreground overflow-hidden">

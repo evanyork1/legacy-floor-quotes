@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -54,7 +54,7 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderGeneric />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-20">

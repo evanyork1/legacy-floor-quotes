@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
@@ -15,7 +15,7 @@ const ServiceAreas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderGeneric />
       
       <main className="pt-20 sm:pt-24 pb-12 sm:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
