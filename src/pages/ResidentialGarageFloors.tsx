@@ -419,10 +419,7 @@ const ResidentialGarageFloors = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild className="bg-white hover:bg-gray-50 text-blue-600 hover:text-blue-700 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                <a href="tel:214-305-6516">
-                  <Phone className="mr-2 h-5 w-5" />
-                  214-305-6516
-                </a>
+                
               </Button>
               <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
