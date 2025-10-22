@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { CTAButton } from "@/components/ui/cta-button";
 import { ArrowRight, Phone, Calendar } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { LeadForm } from "@/components/landing/LeadForm";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { useState, useEffect, useMemo } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
@@ -21,7 +20,7 @@ const HeroSection = () => {
   
   const title = isCommercial ? "DFW's Commercial Flooring" : (isPHX ? "Phoenix's Epoxy Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day"))));
   const locationText = isPHX ? "Phoenix, AZ" : "Dallas - Fort Worth, TX";
-  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Residential & Commercial Floor Coatings That Last" : (isDFW ? "Residential & Commercial Floor Coatings That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
+  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Residential & Commercial Floors That Last" : (isDFW ? "Residential & Commercial Floors That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
   
   const phoneNumber = isPHX ? "602-560-0974" : "214-305-6516";
   const quotePath = isPHX ? "/quotephx" : "/quotedfw";
@@ -149,14 +148,16 @@ const HeroSection = () => {
                       </CTAButton>
                       
                       {(isDFW || isPHX) && (
-                        <a 
-                          href={`tel:${phoneNumber}`}
+                        <Button 
+                          asChild
                           onClick={handlePhoneClick}
-                          className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
+                          className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-6"
                         >
-                          <Phone size={18} />
-                          {phoneNumber}
-                        </a>
+                          <a href={`tel:${phoneNumber}`} className="flex items-center gap-2">
+                            <Phone size={18} />
+                            {phoneNumber}
+                          </a>
+                        </Button>
                       )}
                     </div>
                   </div>
@@ -166,11 +167,11 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Desktop Layout - Original side-by-side layout */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-3 lg:gap-4 items-center pt-16">
-            <div className="max-w-2xl space-y-4 sm:space-y-6 text-center lg:text-left pl-8 xl:pl-16">
+          {/* Desktop Layout - Centered single column */}
+          <div className="hidden lg:flex items-center justify-center pt-16 pb-12">
+            <div className="max-w-4xl space-y-6 text-center">
               {/* Google Reviews Badge - positioned above title */}
-              <div className="flex justify-center lg:justify-start mb-4">
+              <div className="flex justify-center mb-4">
               <div className="flex items-center text-sm">
                 <div className="flex items-center">
                   <span className="font-bold text-blue-500">G</span>
@@ -195,18 +196,18 @@ const HeroSection = () => {
                 </span>
               </h1>
               
-              <div className="text-center lg:text-left">
-                <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white leading-snug">
-                  {isProsper || isFrisco ? subtext : "Residential & Commercial Floor Coatings That Last"}
+              <div className="text-center">
+                <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-white leading-snug">
+                  {isProsper || isFrisco ? subtext : "Residential & Commercial Floors That Last"}
                 </div>
               </div>
               
-               <div className="relative mt-6 sm:mt-8">
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+               <div className="relative mt-8">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <CTAButton 
                     onClick={() => setShowBookingModal(true)} 
                     variant="primary"
-                    size="sm"
+                    size="lg"
                     icon={<Calendar />}
                     iconPosition="left"
                     fullWidthMobile={false}
@@ -215,35 +216,23 @@ const HeroSection = () => {
                   </CTAButton>
                   
                   {(isDFW || isPHX) && (
-                    <a 
-                      href={`tel:${phoneNumber}`}
+                    <Button 
+                      asChild
                       onClick={handlePhoneClick}
-                      className="text-white text-lg flex items-center gap-2 hover:text-blue-200 transition-colors"
+                      size="lg"
+                      className="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 text-lg"
                     >
-                      <Phone size={18} />
-                      {phoneNumber}
-                    </a>
+                      <a href={`tel:${phoneNumber}`} className="flex items-center gap-2">
+                        <Phone size={20} />
+                        {phoneNumber}
+                      </a>
+                    </Button>
                   )}
                 </div>
               </div>
             </div>
-            
-            <div className="flex justify-center lg:justify-start lg:pl-4">
-              <div className="w-full max-w-md">
-                <LeadForm />
-              </div>
-            </div>
           </div>
         </div>
-        </div>
-
-        {/* Background Transition Section for Mobile */}
-        <div className="lg:hidden bg-gradient-to-b from-transparent via-gray-100/50 to-gray-50 py-4">
-          <div className="container mx-auto px-4">
-            <div className="max-w-md mx-auto">
-              <LeadForm />
-            </div>
-          </div>
         </div>
 
         {/* Floating Quote Button - Right Side - Only visible when scrolled past hero */}
