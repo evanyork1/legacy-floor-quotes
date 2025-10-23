@@ -10,7 +10,6 @@ import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialLinkSection from "@/components/sections/CommercialLinkSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
-import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
@@ -55,14 +54,12 @@ const DFW = () => {
         <Header />
         <HeroSection />
         <QuickFeaturesSection />
-        
-        <WhyChooseSection />
+        <FeaturesSection />
         <AboutUsSection />
         <TestimonialsSection />
         <CommercialLinkSection />
         <EpoxyVsPolyureaSection />
         <ProcessSection />
-        <FeaturesSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
