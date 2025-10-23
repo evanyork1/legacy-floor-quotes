@@ -56,17 +56,18 @@ const DFW = () => {
         <HeroSection />
         <QuickFeaturesSection />
         
+        <WhyChooseSection />
         <AboutUsSection />
+        <TestimonialsSection />
+        <CommercialLinkSection />
         <EpoxyVsPolyureaSection />
         <ProcessSection />
-        <TestimonialsSection />
         <FeaturesSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
         <GalleryPreview />
         <CustomQuoteSection />
-        <CommercialLinkSection />
         <CTASection />
         <HomepageFAQ />
         <div id="footer">
