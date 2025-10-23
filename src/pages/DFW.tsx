@@ -5,12 +5,12 @@ import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import ProcessSection from "@/components/sections/ProcessSection";
+
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialLinkSection from "@/components/sections/CommercialLinkSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
-import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
+
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
@@ -58,8 +58,6 @@ const DFW = () => {
         <AboutUsSection />
         <TestimonialsSection />
         <CommercialLinkSection />
-        <EpoxyVsPolyureaSection />
-        <ProcessSection />
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <TrustedBrandSection />
         </div>
