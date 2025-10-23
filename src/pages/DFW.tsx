@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,10 +16,8 @@ import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
 import { AboutUsSection } from "@/components/sections/AboutUsSection";
-
 const DFW = () => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>DFW Epoxy Flooring Experts | Dallas, Plano, Frisco | Legacy Industrial Coatings</title>
         <meta name="description" content="Premier epoxy flooring contractors serving Dallas, Plano, Frisco, McKinney, Allen & DFW metroplex. Professional garage floor coatings with lifetime warranty. Licensed & insured." />
@@ -58,7 +55,7 @@ const DFW = () => {
         <Header />
         <HeroSection />
         <QuickFeaturesSection />
-        <WhyChooseSection />
+        
         <AboutUsSection />
         <EpoxyVsPolyureaSection />
         <ProcessSection />
@@ -77,8 +74,6 @@ const DFW = () => {
         </div>
         <FloatingEstimateCTA />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default DFW;
