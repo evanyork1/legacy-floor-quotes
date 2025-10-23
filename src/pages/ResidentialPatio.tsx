@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import ProcessSection from "@/components/sections/ProcessSection";
 import { ArrowRight, Shield, Clock, Palette, Wrench, CheckCircle, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -133,41 +134,7 @@ const ResidentialPatio = () => {
           </div>
         </section>
 
-        {/* Process Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Our Patio Floor Installation Process
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Professional outdoor installation ensures your patio floor will look amazing and perform through all weather conditions for decades.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[{
-              step: "01",
-              title: "Surface Preparation",
-              description: "We thoroughly clean and prepare your concrete patio surface, addressing any cracks or imperfections and ensuring proper drainage slopes."
-            }, {
-              step: "02",
-              title: "Polyurea Base Application",
-              description: "Our weather-resistant polyurea base coat is applied, providing superior durability and protection against UV rays, rain, and temperature changes."
-            }, {
-              step: "03",
-              title: "Flake Broadcast & Topcoat",
-              description: "Decorative flakes are broadcast into the base coat, then sealed with a crystal-clear UV-stable protective topcoat for lasting outdoor beauty."
-            }].map((step, index) => <div key={index} className="text-center">
-                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-2xl font-bold w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>)}
-            </div>
-          </div>
-        </section>
+        <ProcessSection />
 
         {/* FAQ Section */}
         <section className="py-20 bg-white">

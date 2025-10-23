@@ -7,6 +7,7 @@ import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ProcessSection from "@/components/sections/ProcessSection";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -197,6 +198,8 @@ const ResidentialGarageFloors = () => {
         
 
         <EpoxyVsPolyureaSection />
+        
+        <ProcessSection />
 
         {/* Before & After Showcase Section */}
         <section className="py-12 md:py-20 bg-white">
