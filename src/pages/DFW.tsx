@@ -5,12 +5,10 @@ import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TrustedBrandSection from "@/components/sections/TrustedBrandSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import CommercialLinkSection from "@/components/sections/CommercialLinkSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
-
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
@@ -64,7 +62,7 @@ const DFW = () => {
         <GalleryPreview />
         <CustomQuoteSection />
         <CTASection />
-        <HomepageFAQ />
+        
         <div id="footer">
           <Footer />
         </div>
