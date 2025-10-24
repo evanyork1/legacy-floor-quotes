@@ -61,10 +61,10 @@ const Rentals = () => {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                    Professional Floor Grinders
+                    Professional Grinding Equipment
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Lavina planetary grinding and polishing machines
+                    Lavina Grinders, Vacuums, and more
                   </p>
                 </div>
 
@@ -88,7 +88,6 @@ const Rentals = () => {
                 <Card className="mb-8">
                   <CardHeader>
                     <CardTitle className="text-2xl">Grinder Rental Pricing</CardTitle>
-                    <CardDescription>All models include dust collection system</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="overflow-x-auto">
