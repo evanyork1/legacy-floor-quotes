@@ -216,7 +216,7 @@ const About = () => {
                 fullWidthMobile={true}
                 className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white"
               >
-                Contact Us
+                Call Us Now
               </CTAButton>
               
               <CTAButton

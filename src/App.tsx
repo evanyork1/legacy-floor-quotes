@@ -5,7 +5,6 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/hooks/useAuth";
 import About from "./pages/About";
-import AdditionalServices from "./pages/AdditionalServices";
 import Blog from "./pages/Blog";
 import Commercial from "./pages/Commercial";
 import ConcretePolishing from "./pages/ConcretePolishing";
@@ -66,7 +65,6 @@ function App() {
               <Route path="/garagefloors" element={<ResidentialGarageFloors />} />
               <Route path="/flower-mound" element={<FlowerMound />} />
               <Route path="/prosper" element={<Prosper />} />
-              <Route path="/additional-services" element={<AdditionalServices />} />
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />

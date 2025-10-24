@@ -104,7 +104,7 @@ const ServiceAreas = () => {
                 href="/contact"
                 className="inline-flex items-center justify-center px-6 sm:px-8 py-3 border border-input text-sm sm:text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                Contact Us
+                Call Us Now
               </a>
             </div>
           </div>
