@@ -107,8 +107,8 @@ const Rentals = () => {
                               <div className="text-sm text-muted-foreground">L25GE-R</div>
                             </td>
                             <td className="py-3 px-4 font-semibold text-primary">$500</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$1,700</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$5,300</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$1,500</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$2,570</td>
                           </tr>
                           <tr className="border-b border-border">
                             <td className="py-3 px-4">
@@ -116,8 +116,8 @@ const Rentals = () => {
                               <div className="text-sm text-muted-foreground">L30GE-R</div>
                             </td>
                             <td className="py-3 px-4 font-semibold text-primary">$600</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$2,000</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$3,500</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$1,800</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$3,084</td>
                           </tr>
                         </tbody>
                       </table>
