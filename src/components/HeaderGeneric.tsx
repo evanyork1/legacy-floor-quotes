@@ -29,15 +29,13 @@ const HeaderGeneric = () => {
 const aboutItems = [
   { name: "About Us", path: "/about" },
   { name: "Blog", path: "/blog" },
-  { name: "Additional Services", path: "/additional-services" },
   { name: "FAQ", path: "/faq" },
   { name: "Financing", path: "/financing" }
 ];
 
 const residentialItems = [
   { name: "Garage Floors", path: "/garagefloors" },
-  { name: "Patios", path: "/residential-patio" },
-  { name: "Additional Services", path: "/additional-services" }
+  { name: "Patios", path: "/residential-patio" }
 ];
 
   const commercialItems = [

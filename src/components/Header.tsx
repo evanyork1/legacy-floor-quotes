@@ -33,9 +33,6 @@ const Header = () => {
     name: "Blog",
     path: "/blog"
   }, {
-    name: "Additional Services",
-    path: "/additional-services"
-  }, {
     name: "FAQ",
     path: "/faq"
   }, {
@@ -48,9 +45,6 @@ const Header = () => {
   }, {
     name: "Patios",
     path: "/residential-patio"
-  }, {
-    name: "Additional Services",
-    path: "/additional-services"
   }];
   const commercialItems = [{
     name: "Flake Floors",
