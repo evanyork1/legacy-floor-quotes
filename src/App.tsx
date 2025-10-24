@@ -37,6 +37,7 @@ import Auth from "./pages/Auth";
 import SalesDashboard from "./pages/SalesDashboard";
 import FlakeFloorTemplate from "./pages/FlakeFloorTemplate";
 import DealershipFloors from "./pages/DealershipFloors";
+import Rentals from "./pages/Rentals";
 
 
 const queryClient = new QueryClient();
@@ -76,6 +77,7 @@ function App() {
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               <Route path="/dealershipfloors" element={<DealershipFloors />} />
+              <Route path="/rentals" element={<Rentals />} />
               
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />

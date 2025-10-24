@@ -42,6 +42,7 @@ const Footer = () => {
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>
               <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">TERMS</a></li>
               <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">PRIVACY</a></li>
+              <li><a href="/rentals" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">EQUIPMENT RENTAL</a></li>
             </ul>
           </div>
 
