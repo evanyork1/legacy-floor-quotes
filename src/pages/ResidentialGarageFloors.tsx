@@ -124,8 +124,6 @@ const ResidentialGarageFloors = () => {
         
         <QuickFeaturesSection />
         
-        <EpoxyVsPolyureaSection />
-        
         {/* Legacy Service Experience Section */}
         <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
           <div className="container mx-auto px-4">
@@ -153,6 +151,8 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
+        
+        <EpoxyVsPolyureaSection />
         
         <WhyChooseSection />
         
