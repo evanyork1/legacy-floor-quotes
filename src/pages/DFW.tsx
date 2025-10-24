@@ -10,7 +10,7 @@ import CommercialLinkSection from "@/components/sections/CommercialLinkSection";
 import CTASection from "@/components/sections/CTASection";
 import { CustomQuoteSection } from "@/components/sections/CustomQuoteSection";
 import HomepageFAQ from "@/components/sections/HomepageFAQ";
-import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
+
 import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
 import { AboutUsSection } from "@/components/sections/AboutUsSection";
 const DFW = () => {
@@ -51,7 +51,6 @@ const DFW = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <HeroSection />
-        <QuickFeaturesSection />
         <FeaturesSection />
         <AboutUsSection />
         <TestimonialsSection />
