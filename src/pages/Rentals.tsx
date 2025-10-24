@@ -38,7 +38,7 @@ const Rentals = () => {
                   Equipment Rental Services
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground mb-8">
-                  Professional-grade equipment for contractors and DIY projects
+                  Professional-grade equipment for concrete coating contractors
                 </p>
                 <Button 
                   asChild 
@@ -51,6 +51,66 @@ const Rentals = () => {
                     Call (214) 305-6516
                   </a>
                 </Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Why Rent Equipment Section */}
+          <section className="py-16 sm:py-20 lg:py-24 bg-muted/30">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="max-w-5xl mx-auto">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-center">
+                  Why Rent Equipment?
+                </h2>
+                <p className="text-lg text-muted-foreground mb-12 text-center">
+                  Contractors choose to rent equipment rather than buy it for several reasons:
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-2xl">Cost Savings</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        By renting, contractors don't need to make the significant initial investment, freeing up money for other priorities that may take precedent at the time. Additionally, they can avoid maintenance expenses.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-2xl">Logistics</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        For many, owning a large amount of machines or tools may not be possible due to storage limitations. Renting allows access to professional equipment without the space requirements.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-2xl">Infrequent Use</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        Due to the type of work a contractor does, it might not make sense for them to own a range of equipment and/or tools. For example, for a contractor who rarely does polishing jobs, storing a polisher isn't the best use of space.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-2xl">Testing</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        For a contractor who is considering adding a new service to their repertoire, they may want to test out the equipment first before making such a huge purchase.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </section>
@@ -68,19 +128,19 @@ const Rentals = () => {
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
                   <div className="rounded-lg overflow-hidden shadow-lg">
                     <img 
                       src={lavinaGrinder} 
                       alt="Lavina 30G Elite Floor Grinder" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-64 object-cover"
                     />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-lg">
                     <img 
                       src={vacuumRental} 
                       alt="Industrial Vacuum for Dust Collection" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-64 object-cover"
                     />
                   </div>
                 </div>
@@ -107,27 +167,27 @@ const Rentals = () => {
                               <div className="font-semibold">Lavina 20GE</div>
                               <div className="text-sm text-muted-foreground">L20GE-R</div>
                             </td>
-                            <td className="py-3 px-4 font-semibold">$400</td>
-                            <td className="py-3 px-4 font-semibold">$1,200</td>
-                            <td className="py-3 px-4 font-semibold">$3,600</td>
+                            <td className="py-3 px-4 font-semibold">$300</td>
+                            <td className="py-3 px-4 font-semibold">$1,100</td>
+                            <td className="py-3 px-4 font-semibold">$3,500</td>
                           </tr>
                           <tr className="border-b border-border bg-primary/5">
                             <td className="py-3 px-4">
                               <div className="font-semibold">Lavina 25GE</div>
                               <div className="text-sm text-muted-foreground">L25GE-R</div>
                             </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$600</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$1,800</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$5,400</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$500</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$1,700</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$5,300</td>
                           </tr>
                           <tr className="border-b border-border">
                             <td className="py-3 px-4">
                               <div className="font-semibold">Lavina 30GE</div>
                               <div className="text-sm text-muted-foreground">L30GE-R</div>
                             </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$700</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$2,100</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$3,600</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$600</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$2,000</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$3,500</td>
                           </tr>
                         </tbody>
                       </table>
