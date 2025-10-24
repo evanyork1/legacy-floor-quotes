@@ -81,9 +81,11 @@ const ResidentialGarageFloors = () => {
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
-                    <ArrowRight className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Contact Us
+                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                    <a href="tel:214-305-6516">
+                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      214-305-6516
+                    </a>
                   </Button>
                   <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300 text-sm sm:text-base">
                     <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -122,8 +124,7 @@ const ResidentialGarageFloors = () => {
         
         <QuickFeaturesSection />
         
-        
-        
+        <EpoxyVsPolyureaSection />
         
         {/* Legacy Service Experience Section */}
         <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
@@ -141,42 +142,6 @@ const ResidentialGarageFloors = () => {
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
                     Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of you from start to finish.
                   </p>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Instant Confirmations</h4>
-                        <p className="text-gray-600 text-sm sm:text-base">Booking confirmations and reminders</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Every Stage Updates</h4>
-                        <p className="text-gray-600 text-sm sm:text-base">Follow-up at every stage</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Always Informed</h4>
-                        <p className="text-gray-600 text-sm sm:text-base">Always know what's next</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Direct Contact</h4>
-                        <p className="text-gray-600 text-sm sm:text-base">Just a call or text away</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
                 </div>
               </div>
               <div className="order-1 lg:order-2 relative">
@@ -190,12 +155,6 @@ const ResidentialGarageFloors = () => {
         </section>
         
         <WhyChooseSection />
-        
-
-        {/* What Are Garage Floor Coatings Section */}
-        
-
-        <EpoxyVsPolyureaSection />
         
         <ProcessSection />
 
