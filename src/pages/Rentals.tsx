@@ -55,6 +55,80 @@ const Rentals = () => {
             </div>
           </section>
 
+          {/* Floor Grinders Section */}
+          <section className="py-16 sm:py-20 lg:py-24">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                    Professional Floor Grinders
+                  </h2>
+                  <p className="text-lg text-muted-foreground">
+                    Lavina planetary grinding and polishing machines
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+                  <div className="rounded-lg overflow-hidden shadow-lg bg-white">
+                    <img 
+                      src={lavinaGrinder} 
+                      alt="Lavina 30G Elite Floor Grinder" 
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <div className="rounded-lg overflow-hidden shadow-lg bg-white">
+                    <img 
+                      src={vacuumRental} 
+                      alt="Industrial Vacuum for Dust Collection" 
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                </div>
+
+                <Card className="mb-8">
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Grinder Rental Pricing</CardTitle>
+                    <CardDescription>All models include dust collection system</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b-2 border-primary">
+                            <th className="text-left py-3 px-4 font-bold">Model</th>
+                            <th className="text-left py-3 px-4 font-bold">Day</th>
+                            <th className="text-left py-3 px-4 font-bold">Week</th>
+                            <th className="text-left py-3 px-4 font-bold">4 Weeks</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-border bg-primary/5">
+                            <td className="py-3 px-4">
+                              <div className="font-semibold">Lavina 25GE</div>
+                              <div className="text-sm text-muted-foreground">L25GE-R</div>
+                            </td>
+                            <td className="py-3 px-4 font-semibold text-primary">$500</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$1,700</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$5,300</td>
+                          </tr>
+                          <tr className="border-b border-border">
+                            <td className="py-3 px-4">
+                              <div className="font-semibold">Lavina 30GE</div>
+                              <div className="text-sm text-muted-foreground">L30GE-R</div>
+                            </td>
+                            <td className="py-3 px-4 font-semibold text-primary">$600</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$2,000</td>
+                            <td className="py-3 px-4 font-semibold text-primary">$3,500</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
+
           {/* Why Rent Equipment Section */}
           <section className="py-16 sm:py-20 lg:py-24 bg-muted/30">
             <div className="container mx-auto px-4 sm:px-6">
@@ -111,89 +185,6 @@ const Rentals = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Floor Grinders Section */}
-          <section className="py-16 sm:py-20 lg:py-24">
-            <div className="container mx-auto px-4 sm:px-6">
-              <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                    Professional Floor Grinders
-                  </h2>
-                  <p className="text-lg text-muted-foreground">
-                    Lavina planetary grinding and polishing machines
-                  </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
-                  <div className="rounded-lg overflow-hidden shadow-lg">
-                    <img 
-                      src={lavinaGrinder} 
-                      alt="Lavina 30G Elite Floor Grinder" 
-                      className="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden shadow-lg">
-                    <img 
-                      src={vacuumRental} 
-                      alt="Industrial Vacuum for Dust Collection" 
-                      className="w-full h-64 object-cover"
-                    />
-                  </div>
-                </div>
-
-                <Card className="mb-8">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">Grinder Rental Pricing</CardTitle>
-                    <CardDescription>All models include dust collection system</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b-2 border-primary">
-                            <th className="text-left py-3 px-4 font-bold">Model</th>
-                            <th className="text-left py-3 px-4 font-bold">Day</th>
-                            <th className="text-left py-3 px-4 font-bold">Week</th>
-                            <th className="text-left py-3 px-4 font-bold">4 Weeks</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="border-b border-border">
-                            <td className="py-3 px-4">
-                              <div className="font-semibold">Lavina 20GE</div>
-                              <div className="text-sm text-muted-foreground">L20GE-R</div>
-                            </td>
-                            <td className="py-3 px-4 font-semibold">$300</td>
-                            <td className="py-3 px-4 font-semibold">$1,100</td>
-                            <td className="py-3 px-4 font-semibold">$3,500</td>
-                          </tr>
-                          <tr className="border-b border-border bg-primary/5">
-                            <td className="py-3 px-4">
-                              <div className="font-semibold">Lavina 25GE</div>
-                              <div className="text-sm text-muted-foreground">L25GE-R</div>
-                            </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$500</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$1,700</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$5,300</td>
-                          </tr>
-                          <tr className="border-b border-border">
-                            <td className="py-3 px-4">
-                              <div className="font-semibold">Lavina 30GE</div>
-                              <div className="text-sm text-muted-foreground">L30GE-R</div>
-                            </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$600</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$2,000</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$3,500</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
           </section>
