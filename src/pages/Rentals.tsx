@@ -68,7 +68,7 @@ const Rentals = () => {
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+                <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12 max-w-4xl mx-auto">
                   <div className="rounded-lg overflow-hidden shadow-lg bg-white">
                     <img 
                       src={lavinaGrinder} 
@@ -87,40 +87,43 @@ const Rentals = () => {
 
                 <Card className="mb-8">
                   <CardHeader>
-                    <CardTitle className="text-2xl">Grinder Rental Pricing</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl">Grinder Rental Pricing</CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">Scroll horizontally to view all pricing options</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b-2 border-primary">
-                            <th className="text-left py-3 px-4 font-bold">Model</th>
-                            <th className="text-left py-3 px-4 font-bold">Day</th>
-                            <th className="text-left py-3 px-4 font-bold">Week</th>
-                            <th className="text-left py-3 px-4 font-bold">4 Weeks</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="border-b border-border bg-primary/5">
-                            <td className="py-3 px-4">
-                              <div className="font-semibold">Lavina 25GE</div>
-                              <div className="text-sm text-muted-foreground">L25GE-R</div>
-                            </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$500</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$1,500</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$2,570</td>
-                          </tr>
-                          <tr className="border-b border-border">
-                            <td className="py-3 px-4">
-                              <div className="font-semibold">Lavina 30GE</div>
-                              <div className="text-sm text-muted-foreground">L30GE-R</div>
-                            </td>
-                            <td className="py-3 px-4 font-semibold text-primary">$600</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$1,800</td>
-                            <td className="py-3 px-4 font-semibold text-primary">$3,084</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div className="overflow-x-auto -mx-2 sm:mx-0">
+                      <div className="inline-block min-w-full align-middle">
+                        <table className="w-full min-w-[500px]">
+                          <thead>
+                            <tr className="border-b-2 border-primary">
+                              <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-bold text-sm sm:text-base">Model</th>
+                              <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-bold text-sm sm:text-base">Day</th>
+                              <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-bold text-sm sm:text-base">Week</th>
+                              <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-bold text-sm sm:text-base">4 Weeks</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="border-b border-border bg-primary/5">
+                              <td className="py-2 sm:py-3 px-2 sm:px-4">
+                                <div className="font-semibold text-sm sm:text-base">Lavina 25GE</div>
+                                <div className="text-xs sm:text-sm text-muted-foreground">L25GE-R</div>
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$500</td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$1,500</td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$2,570</td>
+                            </tr>
+                            <tr className="border-b border-border">
+                              <td className="py-2 sm:py-3 px-2 sm:px-4">
+                                <div className="font-semibold text-sm sm:text-base">Lavina 30GE</div>
+                                <div className="text-xs sm:text-sm text-muted-foreground">L30GE-R</div>
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$600</td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$1,800</td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-primary text-sm sm:text-base">$3,084</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -139,13 +142,13 @@ const Rentals = () => {
                   Contractors choose to rent equipment rather than buy it for several reasons:
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Cost Savings</CardTitle>
+                      <CardTitle className="text-xl sm:text-2xl">Cost Savings</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm sm:text-base">
                         By renting, contractors don't need to make the significant initial investment, freeing up money for other priorities that may take precedent at the time. Additionally, they can avoid maintenance expenses.
                       </p>
                     </CardContent>
@@ -153,10 +156,10 @@ const Rentals = () => {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Logistics</CardTitle>
+                      <CardTitle className="text-xl sm:text-2xl">Logistics</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm sm:text-base">
                         For many, owning a large amount of machines or tools may not be possible due to storage limitations. Renting allows access to professional equipment without the space requirements.
                       </p>
                     </CardContent>
@@ -164,10 +167,10 @@ const Rentals = () => {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Infrequent Use</CardTitle>
+                      <CardTitle className="text-xl sm:text-2xl">Infrequent Use</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm sm:text-base">
                         Due to the type of work a contractor does, it might not make sense for them to own a range of equipment and/or tools. For example, for a contractor who rarely does polishing jobs, storing a polisher isn't the best use of space.
                       </p>
                     </CardContent>
@@ -175,10 +178,10 @@ const Rentals = () => {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Testing</CardTitle>
+                      <CardTitle className="text-xl sm:text-2xl">Testing</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm sm:text-base">
                         For a contractor who is considering adding a new service to their repertoire, they may want to test out the equipment first before making such a huge purchase.
                       </p>
                     </CardContent>
@@ -202,24 +205,24 @@ const Rentals = () => {
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Ram ProMaster 2500</CardTitle>
-                      <CardDescription>High-roof cargo van for equipment transport</CardDescription>
+                      <CardTitle className="text-xl sm:text-2xl">Ram ProMaster 2500</CardTitle>
+                      <CardDescription className="text-sm">High-roof cargo van for equipment transport</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="mb-4 rounded-lg overflow-hidden">
                         <img 
                           src={promasterVan} 
                           alt="Ram ProMaster 2500 Cargo Van" 
-                          className="w-full h-64 object-cover"
+                          className="w-full h-48 sm:h-64 object-cover"
                         />
                       </div>
-                      <div className="text-3xl font-bold text-primary mb-2">
-                        $400<span className="text-lg text-muted-foreground">/day</span>
+                      <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
+                        $400<span className="text-base sm:text-lg text-muted-foreground">/day</span>
                       </div>
-                      <ul className="space-y-2 text-muted-foreground">
+                      <ul className="space-y-1 sm:space-y-2 text-muted-foreground text-sm sm:text-base">
                         <li>• High-roof design for tall equipment</li>
                         <li>• 159" wheelbase for maximum cargo space</li>
                         <li>• Perfect for transporting grinders and tools</li>
@@ -229,21 +232,21 @@ const Rentals = () => {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-2xl">Ford F-250 + Trailer</CardTitle>
-                      <CardDescription>Heavy-duty truck with enclosed trailer</CardDescription>
+                      <CardTitle className="text-xl sm:text-2xl">Ford F-250 + Trailer</CardTitle>
+                      <CardDescription className="text-sm">Heavy-duty truck with enclosed trailer</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="mb-4 rounded-lg overflow-hidden">
                         <img 
                           src={fordTrailer} 
                           alt="Ford F-250 with Enclosed Trailer" 
-                          className="w-full h-64 object-cover"
+                          className="w-full h-48 sm:h-64 object-cover"
                         />
                       </div>
-                      <div className="text-3xl font-bold text-primary mb-2">
-                        $500<span className="text-lg text-muted-foreground">/day</span>
+                      <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
+                        $500<span className="text-base sm:text-lg text-muted-foreground">/day</span>
                       </div>
-                      <ul className="space-y-2 text-muted-foreground">
+                      <ul className="space-y-1 sm:space-y-2 text-muted-foreground text-sm sm:text-base">
                         <li>• Heavy-duty towing capacity</li>
                         <li>• Large enclosed trailer included</li>
                         <li>• Ideal for multiple equipment transport</li>
