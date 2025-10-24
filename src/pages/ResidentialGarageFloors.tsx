@@ -176,9 +176,7 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                   
-                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                    From your first conversation to the moment you walk across your finished floor, you'll feel the difference. It's more than just good communication—it's a service experience built with intention, powered by technology, and backed by people who genuinely care.
-                  </p>
+                  
                 </div>
               </div>
               <div className="order-1 lg:order-2 relative">
