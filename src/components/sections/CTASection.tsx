@@ -54,15 +54,14 @@ const CTASection = () => {
         ) : (
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <CTAButton 
-              onClick={() => navigate('/contact')} 
+              asChild
               variant="outline"
               size="lg"
-              icon={<ArrowRight />}
-              iconPosition="right"
+              icon={<Phone />}
               fullWidthMobile={true}
               className="!bg-white !text-blue-600 hover:!bg-gray-50 border-white text-sm sm:text-base"
             >
-              Contact Us
+              <a href="tel:214-305-6516">214-305-6516</a>
             </CTAButton>
             
             <CTAButton
