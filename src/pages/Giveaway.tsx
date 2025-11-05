@@ -6,10 +6,8 @@ import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import { GiveawayForm } from "@/components/landing/GiveawayForm";
-
 const Giveaway = () => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Free Garage Floor Giveaway - Win Premium Coating | Legacy Industrial Coatings</title>
         <meta name="description" content="Enter to win a FREE garage floor coating valued up to $4,000! Premium polyurea flake floor with lifetime warranty. Referral bonus - earn extra entries!" />
@@ -29,7 +27,7 @@ const Giveaway = () => {
         {/* Giveaway Form Hero Section */}
         <GiveawayForm />
         
-        <QuickFeaturesSection />
+        
         
         <EpoxyVsPolyureaSection />
         
@@ -39,8 +37,6 @@ const Giveaway = () => {
 
         <Footer />
       </div>
-    </>
-  );
+    </>;
 };
-
 export default Giveaway;
