@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import GiveawayHeader from "@/components/GiveawayHeader";
 import Footer from "@/components/Footer";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
@@ -21,6 +22,8 @@ const Giveaway = () => {
       </Helmet>
       
       <div className="min-h-screen bg-white">
+        <GiveawayHeader />
+        
         {/* Giveaway Form Hero Section */}
         <GiveawayForm />
         
