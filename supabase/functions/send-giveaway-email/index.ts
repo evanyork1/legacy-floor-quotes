@@ -24,11 +24,19 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Sending giveaway welcome email to: ${email}`);
 
+    const templateId = Deno.env.get("RESEND_GIVEAWAY_TEMPLATE_ID") || "giveaway-template";
+    console.log(`Using template: ${templateId}`);
+
     const emailResponse = await resend.emails.send({
       from: "Legacy Industrial Coatings <support@legacyindustrialcoatings.com>",
       to: [email],
       subject: "You're Entered! Free Garage Floor Coating Giveaway",
-      react: "giveaway-template"
+      template: {
+        id: templateId,
+        variables: {
+          NAME: name
+        }
+      }
     });
 
     console.log("Email sent successfully:", emailResponse);
@@ -42,6 +50,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
   } catch (error: any) {
     console.error("Error in send-giveaway-email function:", error);
+    console.error("Full error details:", JSON.stringify(error, null, 2));
     return new Response(
       JSON.stringify({ error: error.message }),
       {
