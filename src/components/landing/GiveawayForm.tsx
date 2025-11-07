@@ -22,19 +22,38 @@ export const GiveawayForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Insert into leads table with giveaway type
-      const { error } = await (supabase as any)
-        .from('leads')
+      // Insert into giveaway table
+      const { error } = await supabase
+        .from('giveaway')
         .insert({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          project_description: `GIVEAWAY ENTRY - Address: ${formData.address}${formData.referredBy ? ` | Referred By: ${formData.referredBy}` : ''}`
+          address: formData.address,
+          referred_by: formData.referredBy || null,
         });
 
       if (error) throw error;
 
-      toast.success("You're entered! Good luck!");
+      // Send welcome email
+      try {
+        await supabase.functions.invoke('send-giveaway-email', {
+          body: { name: formData.name, email: formData.email }
+        });
+      } catch (emailError) {
+        console.error('Error sending welcome email:', emailError);
+        // Don't fail the submission if email fails
+      }
+
+      // Track with Facebook Pixel
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'CompleteRegistration', {
+          content_name: 'Giveaway Entry',
+          status: 'completed'
+        });
+      }
+
+      toast.success("You're entered! Check your email for confirmation.");
       setFormData({
         name: "",
         email: "",
