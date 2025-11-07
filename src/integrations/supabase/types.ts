@@ -134,6 +134,39 @@ export type Database = {
         }
         Relationships: []
       }
+      giveaway: {
+        Row: {
+          address: string
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          referred_by: string | null
+          status: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          referred_by?: string | null
+          status?: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          referred_by?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       goals: {
         Row: {
           content: string
