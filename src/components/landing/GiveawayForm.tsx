@@ -6,14 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Trophy, CheckCircle2 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 export const GiveawayForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -24,29 +17,29 @@ export const GiveawayForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       // Insert into giveaway table
-      const { error } = await supabase
-        .from('giveaway')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.address,
-          referred_by: formData.referredBy || null,
-        });
-
+      const {
+        error
+      } = await supabase.from('giveaway').insert({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        referred_by: formData.referredBy || null
+      });
       if (error) throw error;
 
       // Send welcome email
       try {
         await supabase.functions.invoke('send-giveaway-email', {
-          body: { name: formData.name, email: formData.email }
+          body: {
+            name: formData.name,
+            email: formData.email
+          }
         });
       } catch (emailError) {
         console.error('Error sending welcome email:', emailError);
@@ -60,7 +53,6 @@ export const GiveawayForm = () => {
           status: 'completed'
         });
       }
-
       setShowSuccessDialog(true);
       setFormData({
         name: "",
@@ -76,9 +68,7 @@ export const GiveawayForm = () => {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+  return <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
       <div className="container mx-auto px-4 w-full">
         <div className="max-w-2xl mx-auto mb-12">
           <Card className="shadow-2xl border-0">
@@ -103,74 +93,48 @@ export const GiveawayForm = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="mt-1"
-                  />
+                  <Input id="name" type="text" required value={formData.name} onChange={e => setFormData({
+                  ...formData,
+                  name: e.target.value
+                })} className="mt-1" />
                 </div>
 
                 <div>
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="mt-1"
-                  />
+                  <Input id="email" type="email" required value={formData.email} onChange={e => setFormData({
+                  ...formData,
+                  email: e.target.value
+                })} className="mt-1" />
                 </div>
 
                 <div>
                   <Label htmlFor="phone">Phone Number *</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="mt-1"
-                    placeholder="(214) 555-0123"
-                  />
+                  <Input id="phone" type="tel" required value={formData.phone} onChange={e => setFormData({
+                  ...formData,
+                  phone: e.target.value
+                })} className="mt-1" placeholder="(214) 555-0123" />
                 </div>
 
                 <div>
                   <Label htmlFor="address">Full Address *</Label>
-                  <Input
-                    id="address"
-                    type="text"
-                    required
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="mt-1"
-                    placeholder="123 Main St, Dallas, TX 75001"
-                  />
+                  <Input id="address" type="text" required value={formData.address} onChange={e => setFormData({
+                  ...formData,
+                  address: e.target.value
+                })} className="mt-1" placeholder="123 Main St, Dallas, TX 75001" />
                 </div>
 
                 <div>
                   <Label htmlFor="referredBy">Referred By (Optional)</Label>
-                  <Input
-                    id="referredBy"
-                    type="text"
-                    value={formData.referredBy}
-                    onChange={(e) => setFormData({ ...formData, referredBy: e.target.value })}
-                    className="mt-1"
-                    placeholder="Enter referrer's name"
-                  />
+                  <Input id="referredBy" type="text" value={formData.referredBy} onChange={e => setFormData({
+                  ...formData,
+                  referredBy: e.target.value
+                })} className="mt-1" placeholder="Enter referrer's name" />
                   <p className="text-xs text-gray-500 mt-1">
                     If someone referred you, enter their name here to give them an extra entry!
                   </p>
                 </div>
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg"
-                >
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg">
                   {isSubmitting ? "Submitting..." : "Enter Giveaway"}
                 </Button>
               </form>
@@ -186,11 +150,7 @@ export const GiveawayForm = () => {
               <div className="grid grid-cols-2 h-full gap-1">
                 {/* Before Image */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" 
-                    alt="Before: Concrete garage floor before coating installation" 
-                    className="w-full h-full object-cover" 
-                  />
+                  <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                       BEFORE
@@ -199,11 +159,7 @@ export const GiveawayForm = () => {
                 </div>
                 {/* After Image */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" 
-                    alt="After: Beautiful residential garage floor with polyurea flake coating" 
-                    className="w-full h-full object-cover" 
-                  />
+                  <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful residential garage floor with polyurea flake coating" className="w-full h-full object-cover" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                       AFTER
@@ -233,19 +189,13 @@ export const GiveawayForm = () => {
               <p>
                 Check your email for confirmation and details about the drawing.
               </p>
-              <p className="text-sm text-gray-600">
-                Don't forget to share with friends using your name as a referral to earn extra entries!
-              </p>
+              
             </DialogDescription>
           </DialogHeader>
-          <Button 
-            onClick={() => setShowSuccessDialog(false)}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-          >
+          <Button onClick={() => setShowSuccessDialog(false)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
             Close
           </Button>
         </DialogContent>
       </Dialog>
-    </section>
-  );
+    </section>;
 };
