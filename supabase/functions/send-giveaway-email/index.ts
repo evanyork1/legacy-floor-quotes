@@ -28,10 +28,7 @@ const handler = async (req: Request): Promise<Response> => {
       from: "Legacy Industrial Coatings <support@legacyindustrialcoatings.com>",
       to: [email],
       subject: "You're Entered! Free Garage Floor Coating Giveaway",
-      react: "giveaway-template",
-      tags: {
-        name: name
-      }
+      react: "giveaway-template"
     });
 
     console.log("Email sent successfully:", emailResponse);
