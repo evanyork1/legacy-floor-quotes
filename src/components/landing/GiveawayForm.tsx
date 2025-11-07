@@ -5,7 +5,14 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Trophy } from "lucide-react";
+import { Trophy, CheckCircle2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const GiveawayForm = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +23,7 @@ export const GiveawayForm = () => {
     referredBy: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +61,7 @@ export const GiveawayForm = () => {
         });
       }
 
-      toast.success("You're entered! Check your email for confirmation.");
+      setShowSuccessDialog(true);
       setFormData({
         name: "",
         email: "",
@@ -83,7 +91,7 @@ export const GiveawayForm = () => {
                   Garage Floor <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Giveaway!</span>
                 </h1>
                 <p className="text-lg text-gray-600 mb-6">
-                  Enter to win a FREE garage floor coating (up to 400 sq ft value)
+                  Enter to win a FREE garage floor coating (up to <span className="text-green-600 font-bold">$4,000 value</span>)
                 </p>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                   <p className="text-sm text-gray-700">
@@ -207,6 +215,37 @@ export const GiveawayForm = () => {
           </div>
         </div>
       </div>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <CheckCircle2 className="w-10 h-10 text-green-600" />
+              </div>
+            </div>
+            <DialogTitle className="text-center text-2xl">You're Entered!</DialogTitle>
+            <DialogDescription className="text-center text-base space-y-3 pt-2">
+              <p className="font-semibold text-gray-900">
+                Thank you for entering the giveaway!
+              </p>
+              <p>
+                Check your email for confirmation and details about the drawing.
+              </p>
+              <p className="text-sm text-gray-600">
+                Don't forget to share with friends using your name as a referral to earn extra entries!
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <Button 
+            onClick={() => setShowSuccessDialog(false)}
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+          >
+            Close
+          </Button>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
