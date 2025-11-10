@@ -1,24 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
 import { useEffect } from "react";
-
 export const GiveawayFormRaf = () => {
-
   useEffect(() => {
     // Load Stripe buy button script
     const script = document.createElement('script');
     script.src = 'https://js.stripe.com/v3/buy-button.js';
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
-
-
-  return (
-    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+  return <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
       <div className="container mx-auto px-4 w-full">
         <div className="max-w-2xl mx-auto mb-12">
           <Card className="shadow-2xl border-0">
@@ -34,24 +28,19 @@ export const GiveawayFormRaf = () => {
                   Enter to win a FREE garage floor coating (up to <span className="text-green-600 font-bold">$4,000 value</span>)
                 </p>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <p className="text-sm text-gray-700 mb-2">
-                    Entries end on the 14th, and winner will be announced on the 17th
-                  </p>
+                  <p className="text-sm text-gray-700 mb-2">Entries end on the November 14th, and winner will be announced on the November 17th</p>
                   <p className="text-sm text-red-600 font-semibold">
                     *Must live in DFW to be considered.
                   </p>
                 </div>
               </div>
 
-              <div 
-                className="flex justify-center"
-                dangerouslySetInnerHTML={{
-                  __html: `<stripe-buy-button
+              <div className="flex justify-center" dangerouslySetInnerHTML={{
+              __html: `<stripe-buy-button
                     buy-button-id="buy_btn_1SRzz6LlGj155tt96auzNkzL"
                     publishable-key="pk_live_51PpgloLlGj155tt97tVJfMfnTRkQPE6iDq0F4XU4nWNpMRr5PsjnC8LhgdScZl7LMheCzYoUHQ2uMfLwtFpHloZO002DlVFsiK"
                   ></stripe-buy-button>`
-                }}
-              />
+            }} />
             </CardContent>
           </Card>
         </div>
@@ -64,11 +53,7 @@ export const GiveawayFormRaf = () => {
               <div className="grid grid-cols-2 h-full gap-1">
                 {/* Before Image */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" 
-                    alt="Before: Concrete garage floor before coating installation" 
-                    className="w-full h-full object-cover" 
-                  />
+                  <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                       BEFORE
@@ -77,11 +62,7 @@ export const GiveawayFormRaf = () => {
                 </div>
                 {/* After Image */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" 
-                    alt="After: Beautiful residential garage floor with polyurea flake coating" 
-                    className="w-full h-full object-cover" 
-                  />
+                  <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful residential garage floor with polyurea flake coating" className="w-full h-full object-cover" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                       AFTER
@@ -94,6 +75,5 @@ export const GiveawayFormRaf = () => {
         </div>
       </div>
 
-    </section>
-  );
+    </section>;
 };
