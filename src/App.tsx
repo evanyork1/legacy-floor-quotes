@@ -38,6 +38,7 @@ import FlakeFloorTemplate from "./pages/FlakeFloorTemplate";
 import DealershipFloors from "./pages/DealershipFloors";
 import Rentals from "./pages/Rentals";
 import Giveaway from "./pages/Giveaway";
+import GiveawayRaf from "./pages/GiveawayRaf";
 
 
 const queryClient = new QueryClient();
@@ -78,6 +79,7 @@ function App() {
               <Route path="/dealershipfloors" element={<DealershipFloors />} />
               <Route path="/rentals" element={<Rentals />} />
               <Route path="/giveaway" element={<Giveaway />} />
+              <Route path="/giveawayraf" element={<GiveawayRaf />} />
               
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
