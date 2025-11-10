@@ -122,6 +122,9 @@ export const GiveawayForm = () => {
                   ...formData,
                   address: e.target.value
                 })} className="mt-1" placeholder="123 Main St, Dallas, TX 75001" />
+                  <p className="text-sm text-red-600 font-medium mt-2">
+                    Must live in Dallas-Fort Worth area
+                  </p>
                 </div>
 
                 <div>
