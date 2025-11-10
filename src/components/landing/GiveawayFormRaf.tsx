@@ -1,24 +1,8 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
-import { Trophy, CheckCircle2 } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Trophy } from "lucide-react";
 import { useEffect } from "react";
 
 export const GiveawayFormRaf = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    referredBy: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   useEffect(() => {
     // Load Stripe buy button script
@@ -32,60 +16,6 @@ export const GiveawayFormRaf = () => {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Insert into giveaway table
-      const { error } = await supabase
-        .from('giveaway')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.address,
-          referred_by: formData.referredBy || null
-        });
-
-      if (error) throw error;
-
-      // Send welcome email
-      try {
-        await supabase.functions.invoke('send-giveaway-email', {
-          body: {
-            name: formData.name,
-            email: formData.email
-          }
-        });
-      } catch (emailError) {
-        console.error('Error sending welcome email:', emailError);
-        // Don't fail the submission if email fails
-      }
-
-      // Track with Facebook Pixel
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'CompleteRegistration', {
-          content_name: 'Giveaway Entry',
-          status: 'completed'
-        });
-      }
-
-      setShowSuccessDialog(true);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-        referredBy: ""
-      });
-    } catch (error) {
-      console.error('Error submitting giveaway entry:', error);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
@@ -113,80 +43,15 @@ export const GiveawayFormRaf = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number *</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="address">Full Address *</Label>
-                  <Input
-                    id="address"
-                    type="text"
-                    required
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="w-full"
-                  />
-                  <p className="text-sm text-red-600 mt-1">
-                    *Must live in DFW to be considered
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="referredBy">Referred By (Optional)</Label>
-                  <Input
-                    id="referredBy"
-                    type="text"
-                    value={formData.referredBy}
-                    onChange={(e) => setFormData({ ...formData, referredBy: e.target.value })}
-                    className="w-full"
-                    placeholder="Enter referrer's name"
-                  />
-                </div>
-
-                <div 
-                  className="flex justify-center"
-                  dangerouslySetInnerHTML={{
-                    __html: `<stripe-buy-button
-                      buy-button-id="buy_btn_1SRzz6LlGj155tt96auzNkzL"
-                      publishable-key="pk_live_51PpgloLlGj155tt97tVJfMfnTRkQPE6iDq0F4XU4nWNpMRr5PsjnC8LhgdScZl7LMheCzYoUHQ2uMfLwtFpHloZO002DlVFsiK"
-                    ></stripe-buy-button>`
-                  }}
-                />
-              </form>
+              <div 
+                className="flex justify-center"
+                dangerouslySetInnerHTML={{
+                  __html: `<stripe-buy-button
+                    buy-button-id="buy_btn_1SRzz6LlGj155tt96auzNkzL"
+                    publishable-key="pk_live_51PpgloLlGj155tt97tVJfMfnTRkQPE6iDq0F4XU4nWNpMRr5PsjnC8LhgdScZl7LMheCzYoUHQ2uMfLwtFpHloZO002DlVFsiK"
+                  ></stripe-buy-button>`
+                }}
+              />
             </CardContent>
           </Card>
         </div>
@@ -229,33 +94,6 @@ export const GiveawayFormRaf = () => {
         </div>
       </div>
 
-      {/* Success Dialog */}
-      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                <CheckCircle2 className="w-10 h-10 text-green-600" />
-              </div>
-            </div>
-            <DialogTitle className="text-center text-2xl">You're Entered!</DialogTitle>
-            <DialogDescription className="text-center text-base space-y-3 pt-2">
-              <p className="font-semibold text-gray-900">
-                Thank you for entering the giveaway!
-              </p>
-              <p>
-                Check your email for confirmation and details about the drawing.
-              </p>
-            </DialogDescription>
-          </DialogHeader>
-          <Button 
-            onClick={() => setShowSuccessDialog(false)} 
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-          >
-            Close
-          </Button>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
