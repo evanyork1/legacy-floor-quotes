@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CTAButton } from "@/components/ui/cta-button";
 import { Calendar, Phone } from "lucide-react";
@@ -53,7 +54,7 @@ const GarageLandingForm = () => {
                   icon={<Calendar />}
                   className="w-full sm:w-auto"
                 >
-                  Book An Estimate
+                  Book Same Day Estimate
                 </CTAButton>
                 
                 <CTAButton
@@ -63,8 +64,8 @@ const GarageLandingForm = () => {
                   icon={<Phone />}
                   className="w-full sm:w-auto"
                 >
-                  <a href="tel:972-649-1969">
-                    Call (972) 649-1969
+                  <a href="tel:214-305-6516">
+                    Call (214) 305-6516
                   </a>
                 </CTAButton>
               </div>
@@ -75,6 +76,42 @@ const GarageLandingForm = () => {
             </div>
           </div>
         </section>
+        
+        {/* Before & After Hero Section */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative h-64 sm:h-80 md:h-96">
+                  <img 
+                    src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
+                    alt="Before garage floor transformation" 
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide">
+                      BEFORE
+                    </span>
+                  </div>
+                </div>
+                <div className="relative h-64 sm:h-80 md:h-96">
+                  <img 
+                    src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
+                    alt="After garage floor transformation with flake coating" 
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide border-2 border-blue-600">
+                      AFTER
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <TestimonialsSection />
         
         <EpoxyVsPolyureaSection />
         
