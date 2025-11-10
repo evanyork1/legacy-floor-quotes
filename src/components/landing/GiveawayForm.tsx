@@ -84,8 +84,7 @@ export const GiveawayForm = () => {
                   Enter to win a FREE garage floor coating (up to <span className="text-green-600 font-bold">$4,000 value</span>)
                 </p>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <p className="text-sm text-gray-700">
-                    <strong>Referral Bonus:</strong> Every time someone enters with your name in the "Referred By" field, you get an additional entry! The more people you refer, the better your chances of winning.
+                  <p className="text-sm text-gray-700">Final entry November 14th, winner announced November 17th.<strong>Referral Bonus:</strong> Every time someone enters with your name in the "Referred By" field, you get an additional entry! The more people you refer, the better your chances of winning.
                   </p>
                 </div>
                 
