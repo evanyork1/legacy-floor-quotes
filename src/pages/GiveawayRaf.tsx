@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
-import { GiveawayForm } from "@/components/landing/GiveawayForm";
+import { GiveawayFormRaf } from "@/components/landing/GiveawayFormRaf";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 const GiveawayRaf = () => {
   return <>
@@ -25,7 +25,7 @@ const GiveawayRaf = () => {
         <GiveawayHeader />
         
         {/* Giveaway Form Hero Section */}
-        <GiveawayForm />
+        <GiveawayFormRaf />
         
         <EpoxyVsPolyureaSection />
         
