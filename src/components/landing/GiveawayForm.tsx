@@ -88,11 +88,7 @@ export const GiveawayForm = () => {
                     <strong>Referral Bonus:</strong> Every time someone enters with your name in the "Referred By" field, you get an additional entry! The more people you refer, the better your chances of winning.
                   </p>
                 </div>
-                <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-6">
-                  <p className="text-sm text-gray-700">
-                    <strong>DFW Area Only:</strong> You must live in the Dallas-Fort Worth metroplex to be eligible for this giveaway.
-                  </p>
-                </div>
+                
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
