@@ -39,6 +39,7 @@ import DealershipFloors from "./pages/DealershipFloors";
 import Rentals from "./pages/Rentals";
 import Giveaway from "./pages/Giveaway";
 import GiveawayRaf from "./pages/GiveawayRaf";
+import GarageLandingForm from "./pages/GarageLandingForm";
 
 
 const queryClient = new QueryClient();
@@ -78,8 +79,9 @@ function App() {
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               <Route path="/dealershipfloors" element={<DealershipFloors />} />
               <Route path="/rentals" element={<Rentals />} />
-              <Route path="/giveaway" element={<Giveaway />} />
-              <Route path="/giveawayraf" element={<GiveawayRaf />} />
+          <Route path="/giveaway" element={<Giveaway />} />
+          <Route path="/giveawayraf" element={<GiveawayRaf />} />
+          <Route path="/garagelandingform" element={<GarageLandingForm />} />
               
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
