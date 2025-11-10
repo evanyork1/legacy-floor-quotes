@@ -6,7 +6,14 @@ const GiveawayHeader = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-center h-16 sm:h-20 md:h-28">
+        <div className="flex items-center justify-center h-16 sm:h-20 md:h-28 relative">
+          {/* DFW Badge - Top Left */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2">
+            <span className="text-xs sm:text-sm font-medium text-gray-600">
+              DFW Residents Only
+            </span>
+          </div>
+          
           {/* Logo - Centered */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/dfw')}>
             <img 
