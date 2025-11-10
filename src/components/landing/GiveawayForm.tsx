@@ -92,15 +92,51 @@ export const GiveawayForm = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                
+                <div>
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input id="name" type="text" required value={formData.name} onChange={e => setFormData({
+                  ...formData,
+                  name: e.target.value
+                })} className="mt-1" />
+                </div>
 
-                
+                <div>
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input id="email" type="email" required value={formData.email} onChange={e => setFormData({
+                  ...formData,
+                  email: e.target.value
+                })} className="mt-1" />
+                </div>
 
-                
+                <div>
+                  <Label htmlFor="phone">Phone Number *</Label>
+                  <Input id="phone" type="tel" required value={formData.phone} onChange={e => setFormData({
+                  ...formData,
+                  phone: e.target.value
+                })} className="mt-1" placeholder="(214) 555-0123" />
+                </div>
 
-                
+                <div>
+                  <Label htmlFor="address">Full Address *</Label>
+                  <Input id="address" type="text" required value={formData.address} onChange={e => setFormData({
+                  ...formData,
+                  address: e.target.value
+                })} className="mt-1" placeholder="123 Main St, Dallas, TX 75001" />
+                  <p className="text-sm text-red-600 font-medium mt-2">
+                    Must live in Dallas-Fort Worth area
+                  </p>
+                </div>
 
-                
+                <div>
+                  <Label htmlFor="referredBy">Referred By (Optional)</Label>
+                  <Input id="referredBy" type="text" value={formData.referredBy} onChange={e => setFormData({
+                  ...formData,
+                  referredBy: e.target.value
+                })} className="mt-1" placeholder="Enter referrer's name" />
+                  <p className="text-xs text-gray-500 mt-1">
+                    If someone referred you, enter their name here to give them an extra entry!
+                  </p>
+                </div>
 
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg">
                   {isSubmitting ? "Submitting..." : "Enter Giveaway"}
