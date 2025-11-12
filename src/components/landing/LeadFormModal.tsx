@@ -55,7 +55,7 @@ export const LeadFormModal = ({ isOpen, onClose }: LeadFormModalProps) => {
               variant="outline"
               className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
             >
-              Schedule Your Time Now
+              Schedule Estimate Now
             </Button>
           </div>
         </div>
