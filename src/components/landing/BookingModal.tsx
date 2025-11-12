@@ -12,7 +12,7 @@ export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
         <iframe
           src="https://clienthub.getjobber.com/booking/6d9d5f65-b789-442b-929c-940430d7028d"
           className="w-full h-[70vh] border-0"
-          title="Book An Estimate"
+          title="Schedule Your Estimate Now"
         />
       </DialogContent>
     </Dialog>
