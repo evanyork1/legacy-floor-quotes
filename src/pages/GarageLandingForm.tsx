@@ -8,8 +8,6 @@ import ProcessSection from "@/components/sections/ProcessSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CTAButton } from "@/components/ui/cta-button";
-import { Calendar, Phone } from "lucide-react";
 import { BookingModal } from "@/components/landing/BookingModal";
 
 const GarageLandingForm = () => {
