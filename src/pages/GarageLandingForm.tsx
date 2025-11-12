@@ -38,14 +38,18 @@ const GarageLandingForm = () => {
                 {/* Left Column - Content */}
                 <div className="text-left">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-                    Transform Your Garage with{" "}
+                    Transform Your Garage Floor in Just{" "}
                     <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                      Premium Floor Coating
+                      One Day
                     </span>
                   </h1>
                   
-                  <p className="text-lg sm:text-xl text-gray-600">
-                    Professional installation, lifetime warranty, and stunning results. Get your free estimate today!
+                  <p className="text-lg sm:text-xl text-gray-600 mb-6">
+                    Premium polyurea floor coatings with professional installation and a lifetime warranty. Get your space transformed with stunning, durable results.
+                  </p>
+                  
+                  <p className="text-sm text-gray-500">
+                    Same-day estimates available • Serving Dallas-Fort Worth
                   </p>
                 </div>
 
