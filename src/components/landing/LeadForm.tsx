@@ -117,7 +117,7 @@ export const LeadForm = () => {
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
             </div>
             
-            <Textarea placeholder="Questions / Comments*" value={formData.questionsComments} onChange={e => setFormData(prev => ({
+            <Textarea placeholder="Questions / Comments" value={formData.questionsComments} onChange={e => setFormData(prev => ({
             ...prev,
             questionsComments: e.target.value
           }))} className="bg-gray-100 border-0 placeholder:text-gray-500 min-h-[100px]" />
@@ -141,7 +141,7 @@ export const LeadForm = () => {
             
             <div className="flex justify-center">
               <Button type="submit" disabled={isSubmitting} className="w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-none text-lg font-semibold">
-                {isSubmitting ? "Submitting..." : "REQUEST CALLBACK"}
+                {isSubmitting ? "Submitting..." : "SUBMIT"}
               </Button>
             </div>
           </form>

@@ -46,36 +46,8 @@ const GarageLandingForm = () => {
                     </span>
                   </h1>
                   
-                  <p className="text-lg sm:text-xl text-gray-600 mb-8 md:mb-10">
+                  <p className="text-lg sm:text-xl text-gray-600">
                     Professional installation, lifetime warranty, and stunning results. Get your free estimate today!
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                    <CTAButton
-                      onClick={() => setShowBookingModal(true)}
-                      variant="primary"
-                      size="lg"
-                      icon={<Calendar />}
-                      className="w-full sm:w-auto"
-                    >
-                      Book Same Day Estimate
-                    </CTAButton>
-                    
-                    <CTAButton
-                      asChild
-                      variant="outline"
-                      size="lg"
-                      icon={<Phone />}
-                      className="w-full sm:w-auto"
-                    >
-                      <a href="tel:214-305-6516">
-                        Call (214) 305-6516
-                      </a>
-                    </CTAButton>
-                  </div>
-                  
-                  <p className="text-sm text-gray-500">
-                    Same-day estimates available • Serving Dallas-Fort Worth
                   </p>
                 </div>
 
