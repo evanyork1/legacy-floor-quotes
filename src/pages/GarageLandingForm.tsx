@@ -6,6 +6,7 @@ import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import { LeadForm } from "@/components/landing/LeadForm";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CTAButton } from "@/components/ui/cta-button";
 import { Calendar, Phone } from "lucide-react";
@@ -31,48 +32,58 @@ const GarageLandingForm = () => {
       <div className="min-h-screen bg-white">
         <GiveawayHeader />
         
-        {/* Hero CTA Section */}
+        {/* Hero Section with Form */}
         <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 py-12 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-                Transform Your Garage with{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                  Premium Floor Coating
-                </span>
-              </h1>
-              
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto">
-                Professional installation, lifetime warranty, and stunning results. Get your free estimate today!
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <CTAButton
-                  onClick={() => setShowBookingModal(true)}
-                  variant="primary"
-                  size="lg"
-                  icon={<Calendar />}
-                  className="w-full sm:w-auto"
-                >
-                  Book Same Day Estimate
-                </CTAButton>
-                
-                <CTAButton
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  icon={<Phone />}
-                  className="w-full sm:w-auto"
-                >
-                  <a href="tel:214-305-6516">
-                    Call (214) 305-6516
-                  </a>
-                </CTAButton>
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Left Column - Content */}
+                <div className="text-left">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+                    Transform Your Garage with{" "}
+                    <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                      Premium Floor Coating
+                    </span>
+                  </h1>
+                  
+                  <p className="text-lg sm:text-xl text-gray-600 mb-8 md:mb-10">
+                    Professional installation, lifetime warranty, and stunning results. Get your free estimate today!
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <CTAButton
+                      onClick={() => setShowBookingModal(true)}
+                      variant="primary"
+                      size="lg"
+                      icon={<Calendar />}
+                      className="w-full sm:w-auto"
+                    >
+                      Book Same Day Estimate
+                    </CTAButton>
+                    
+                    <CTAButton
+                      asChild
+                      variant="outline"
+                      size="lg"
+                      icon={<Phone />}
+                      className="w-full sm:w-auto"
+                    >
+                      <a href="tel:214-305-6516">
+                        Call (214) 305-6516
+                      </a>
+                    </CTAButton>
+                  </div>
+                  
+                  <p className="text-sm text-gray-500">
+                    Same-day estimates available • Serving Dallas-Fort Worth
+                  </p>
+                </div>
+
+                {/* Right Column - Lead Form */}
+                <div className="w-full">
+                  <LeadForm />
+                </div>
               </div>
-              
-              <p className="mt-6 text-sm text-gray-500">
-                Same-day estimates available • Serving Dallas-Fort Worth
-              </p>
             </div>
           </div>
         </section>
