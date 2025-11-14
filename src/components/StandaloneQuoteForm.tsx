@@ -34,7 +34,7 @@ const StandaloneQuoteFormContent = () => {
         <div className="max-w-3xl mx-auto">
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
 
-          <Card className="shadow-2xl border-0 overflow-hidden">
+          <Card className="shadow-2xl border-2 border-primary/30 overflow-hidden">
             <CardContent className="p-4 sm:p-6 lg:p-8">
               <QuoteStepRenderer
                 currentStep={currentStep}
