@@ -33,14 +33,14 @@ export const Step5ColorChoice = ({ formData, updateFormData, colorOptions }: Ste
   const selectedColorData = selectedColorPreview ? colorOptions.find(c => c.id === selectedColorPreview) : null;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="text-center mb-8 sm:mb-12 px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Choose Your Look</h2>
-        <p className="text-base sm:text-lg text-gray-600">Select a floor color</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="text-center mb-4 sm:mb-6 px-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Choose Your Look</h2>
+        <p className="text-sm sm:text-base text-gray-600">Select a floor color</p>
       </div>
 
       <div className="max-w-4xl mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {colorOptions.map(color => (
             <ColorOption
               key={color.id}

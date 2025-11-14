@@ -78,13 +78,13 @@ export const Step6ContactInfo = ({
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="text-center mb-8 sm:mb-12 px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Your Quote Is On The Next Page!</h2>
-        <p className="text-base sm:text-lg text-gray-600">Almost done! We just need your contact details</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="text-center mb-4 sm:mb-6 px-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Your Quote Is On The Next Page!</h2>
+        <p className="text-sm sm:text-base text-gray-600">Almost done! We just need your contact details</p>
       </div>
 
-      <div className="max-w-xl mx-auto space-y-4 sm:space-y-6 px-4">
+      <div className="max-w-xl mx-auto space-y-3 sm:space-y-4 px-4">
         <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <Label htmlFor="name" className="text-sm sm:text-base font-medium">Name</Label>
