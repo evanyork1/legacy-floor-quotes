@@ -99,28 +99,28 @@ export const LeadForm = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <Input type="text" placeholder="First*" value={formData.firstName} onChange={e => setFormData(prev => ({
+              <Input type="text" placeholder="John" value={formData.firstName} onChange={e => setFormData(prev => ({
               ...prev,
               firstName: e.target.value
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
-              <Input type="text" placeholder="Last*" value={formData.lastName} onChange={e => setFormData(prev => ({
+              <Input type="text" placeholder="Smith" value={formData.lastName} onChange={e => setFormData(prev => ({
               ...prev,
               lastName: e.target.value
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
             </div>
             
             <div className="grid grid-cols-2 gap-3">
-              <Input type="email" placeholder="Email*" value={formData.email} onChange={e => setFormData(prev => ({
+              <Input type="email" placeholder="john@smith.com" value={formData.email} onChange={e => setFormData(prev => ({
               ...prev,
               email: e.target.value
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
-              <Input type="tel" placeholder="Phone*" value={formData.phone} onChange={e => setFormData(prev => ({
+              <Input type="tel" placeholder="214-555-0184" value={formData.phone} onChange={e => setFormData(prev => ({
               ...prev,
               phone: e.target.value
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
             </div>
             
-            <Textarea placeholder="Questions / Comments" value={formData.questionsComments} onChange={e => setFormData(prev => ({
+            <Textarea placeholder="I want an estimate for a 2 car garage." value={formData.questionsComments} onChange={e => setFormData(prev => ({
             ...prev,
             questionsComments: e.target.value
           }))} className="bg-gray-100 border-0 placeholder:text-gray-500 min-h-[100px]" />
@@ -144,7 +144,7 @@ export const LeadForm = () => {
             
             <div className="flex justify-center">
               <Button type="submit" disabled={isSubmitting} className="w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-none text-lg font-semibold">
-                {isSubmitting ? "Submitting..." : "SUBMIT"}
+                {isSubmitting ? "Submitting..." : "Claim Discount"}
               </Button>
             </div>
           </form>
