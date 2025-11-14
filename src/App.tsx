@@ -40,6 +40,7 @@ import Rentals from "./pages/Rentals";
 import Giveaway from "./pages/Giveaway";
 import GiveawayRaf from "./pages/GiveawayRaf";
 import GarageLandingForm from "./pages/GarageLandingForm";
+import GarageLandingInstant from "./pages/GarageLandingInstant";
 
 
 const queryClient = new QueryClient();
@@ -82,6 +83,7 @@ function App() {
           <Route path="/giveaway" element={<Giveaway />} />
           <Route path="/giveawayraf" element={<GiveawayRaf />} />
           <Route path="/garagelandingform" element={<GarageLandingForm />} />
+          <Route path="/garagelandinginstant" element={<GarageLandingInstant />} />
               
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
