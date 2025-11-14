@@ -265,8 +265,7 @@ const GarageLandingInstant = () => {
                   Ready to Transform Your Garage?
                 </h2>
                 <p className="text-base md:text-lg lg:text-xl text-blue-100 px-4">
-                  Don't miss out on our limited-time Thanksgiving special!
-                </p>
+              </p>
               </div>
               <div className="max-w-3xl mx-auto">
                 <Card className="shadow-xl border-0 overflow-hidden">
