@@ -81,56 +81,56 @@ export const LeadForm = () => {
   };
   return <>
       <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0">
-        <CardContent className="p-6">
+        <CardContent className="p-4 sm:p-5 md:p-6">
           {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <img src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" alt="Legacy Industrial Coatings" className="h-12 w-auto" />
+          <div className="flex justify-center mb-4 md:mb-6">
+            <img src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" alt="Legacy Industrial Coatings" className="h-10 sm:h-12 w-auto" />
           </div>
           
-          <div className="text-center mb-6">
-            <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-4 rounded-lg mb-3 font-bold text-sm">
+          <div className="text-center mb-4 md:mb-6">
+            <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-3 md:px-4 rounded-lg mb-2 md:mb-3 font-bold text-xs sm:text-sm">
               🎉 Get an extra $300 off before Thanksgiving!
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Same Day Estimate</h3>
-            <p className="text-gray-600">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Get Your Same Day Estimate</h3>
+            <p className="text-sm sm:text-base text-gray-600">
               Fill in the form below to get started!
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
               <Input type="text" placeholder="John" value={formData.firstName} onChange={e => setFormData(prev => ({
               ...prev,
               firstName: e.target.value
-            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
+            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500 text-sm md:text-base" />
               <Input type="text" placeholder="Smith" value={formData.lastName} onChange={e => setFormData(prev => ({
               ...prev,
               lastName: e.target.value
-            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
+            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500 text-sm md:text-base" />
             </div>
             
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
               <Input type="email" placeholder="john@smith.com" value={formData.email} onChange={e => setFormData(prev => ({
               ...prev,
               email: e.target.value
-            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
+            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500 text-sm md:text-base" />
               <Input type="tel" placeholder="214-555-0184" value={formData.phone} onChange={e => setFormData(prev => ({
               ...prev,
               phone: e.target.value
-            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500" />
+            }))} required className="bg-gray-100 border-0 placeholder:text-gray-500 text-sm md:text-base" />
             </div>
             
             <Textarea placeholder="I want an estimate for a 2 car garage." value={formData.questionsComments} onChange={e => setFormData(prev => ({
             ...prev,
             questionsComments: e.target.value
-          }))} className="bg-gray-100 border-0 placeholder:text-gray-500 min-h-[100px]" />
+          }))} className="bg-gray-100 border-0 placeholder:text-gray-500 min-h-[80px] md:min-h-[100px] text-sm md:text-base" />
             
-            <div className="flex items-start space-x-3 text-sm text-gray-600">
+            <div className="flex items-start space-x-2 md:space-x-3 text-sm text-gray-600">
               <Checkbox id="privacy" checked={formData.privacyPolicyAgreed} onCheckedChange={checked => setFormData(prev => ({
               ...prev,
               privacyPolicyAgreed: checked as boolean
             }))} className="mt-1" />
-              <label htmlFor="privacy" className="text-xs leading-4">
+              <label htmlFor="privacy" className="text-[10px] sm:text-xs leading-tight sm:leading-4">
                 By submitting this form, you agree to Legacy Industrial Coating's{" "}
                 <a href="/privacy" className="text-blue-600 hover:underline">
                   Privacy Policy
@@ -142,8 +142,8 @@ export const LeadForm = () => {
               </label>
             </div>
             
-            <div className="flex justify-center">
-              <Button type="submit" disabled={isSubmitting} className="w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-none text-lg font-semibold">
+            <div className="flex justify-center pt-2">
+              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 md:px-8 rounded-none text-base md:text-lg font-semibold">
                 {isSubmitting ? "Submitting..." : "Claim Discount"}
               </Button>
             </div>
