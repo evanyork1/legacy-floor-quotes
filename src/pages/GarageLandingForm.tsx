@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import GiveawayHeader from "@/components/GiveawayHeader";
 import Footer from "@/components/Footer";
-import WhyChooseSection from "@/components/sections/WhyChooseSection";
+
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -206,8 +206,6 @@ const GarageLandingForm = () => {
         
         <EpoxyVsPolyureaSection />
         
-        <WhyChooseSection />
-        
         <ProcessSection />
         
         {/* Mid-Page CTA Form */}
@@ -225,87 +223,6 @@ const GarageLandingForm = () => {
               <div className="max-w-2xl mx-auto">
                 <LeadForm />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Homeowner Questions About Garage Floors
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Common questions from homeowners about our garage floor coating services
-                </p>
-              </div>
-              
-              <Accordion type="single" collapsible className="space-y-4">
-                <AccordionItem value="item-1" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    How long does the garage floor installation take at my home?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    Most residential garage floors are completed in just one day. You can park your cars back in the garage within 24–48 hours.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-2" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    What does a residential garage floor coating cost?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    For a typical 2-3 car residential garage using our premium polyurea flake system, pricing ranges from $2,800–$4,500. This investment adds significant value to your home while providing a lifetime of beauty and durability.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-3" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    Will my garage floor coating handle daily home use?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    Absolutely! Our residential garage floors are designed to handle everything from hot tires and oil drips to kids' bikes and home storage. The coating won't chip, peel, or stain under normal home use.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-4" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    How do I maintain my garage floor?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    Maintenance is incredibly easy! Simply sweep as needed and mop occasionally with any household cleaner. No special products or treatments required.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-5" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    Does my residential garage floor come with a warranty?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    Yes! Your residential garage floor comes with our limited lifetime warranty against peeling, discoloration, and cracking under normal home use.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-6" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    Do you offer financing?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    Yes. Get started for as low as $99 down with 0% financing.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-7" className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    How fast can I schedule?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    We often provide estimates the same day you contact us.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
             </div>
           </div>
         </section>
