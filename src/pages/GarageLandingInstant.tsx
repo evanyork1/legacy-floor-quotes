@@ -13,10 +13,8 @@ import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
-
 const GarageLandingInstant = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
-  
   const {
     currentStep,
     totalSteps,
@@ -35,18 +33,9 @@ const GarageLandingInstant = () => {
   const removePhoto = () => {};
 
   // Custom final button for DFW quote form
-  const customFinalButton = (
-    <div className="order-1 sm:order-2 flex flex-col gap-3">
-      <Button 
-        asChild
-        className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
-      >
-        <a 
-          href="https://clienthub.getjobber.com/booking/6d9d5f65-b789-442b-929c-940430d7028d"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center"
-        >
+  const customFinalButton = <div className="order-1 sm:order-2 flex flex-col gap-3">
+      <Button asChild className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
+        <a href="https://clienthub.getjobber.com/booking/6d9d5f65-b789-442b-929c-940430d7028d" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
           <Calendar className="h-5 w-5 mr-2" />
           Book In Person Measurement
         </a>
@@ -54,9 +43,7 @@ const GarageLandingInstant = () => {
       <p className="text-xs text-center text-gray-600">
         Schedule your free measurement to finalize pricing
       </p>
-    </div>
-  );
-
+    </div>;
   return <>
       <Helmet>
         <title>Instant Quote - Garage Floor Coating | Legacy Industrial Coatings</title>
@@ -116,9 +103,7 @@ const GarageLandingInstant = () => {
                   <Card className="shadow-xl border-0 overflow-hidden">
                     <CardContent className="p-3 sm:p-4">
                       <div className="text-center mb-3">
-                        <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-4 rounded-lg mb-2 font-bold text-sm">
-                          🎉 Get an extra $300 off before Thanksgiving!
-                        </div>
+                        
                         <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Get Your Instant Quote</h3>
                         <p className="text-xs sm:text-sm text-gray-600">
                           Answer a few quick questions
@@ -128,24 +113,8 @@ const GarageLandingInstant = () => {
                       <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
                       
                       <div className="mt-3">
-                        <QuoteStepRenderer
-                          currentStep={currentStep}
-                          formData={formData}
-                          updateFormData={updateFormData}
-                          handleFileUpload={handleFileUpload}
-                          removePhoto={removePhoto}
-                          estimatedPrice={calculatePrice()}
-                        />
-                        <QuoteNavigation
-                          currentStep={currentStep}
-                          totalSteps={totalSteps}
-                          canProceed={canProceed()}
-                          isSubmitting={isSubmitting}
-                          onNext={nextStep}
-                          onPrevious={prevStep}
-                          onSubmit={handleSubmit}
-                          customFinalButton={customFinalButton}
-                        />
+                        <QuoteStepRenderer currentStep={currentStep} formData={formData} updateFormData={updateFormData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} estimatedPrice={calculatePrice()} />
+                        <QuoteNavigation currentStep={currentStep} totalSteps={totalSteps} canProceed={canProceed()} isSubmitting={isSubmitting} onNext={nextStep} onPrevious={prevStep} onSubmit={handleSubmit} customFinalButton={customFinalButton} />
                       </div>
                     </CardContent>
                   </Card>
@@ -307,24 +276,8 @@ const GarageLandingInstant = () => {
                     <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
                     
                     <div className="mt-4">
-                      <QuoteStepRenderer
-                        currentStep={currentStep}
-                        formData={formData}
-                        updateFormData={updateFormData}
-                        handleFileUpload={handleFileUpload}
-                        removePhoto={removePhoto}
-                        estimatedPrice={calculatePrice()}
-                      />
-                      <QuoteNavigation
-                        currentStep={currentStep}
-                        totalSteps={totalSteps}
-                        canProceed={canProceed()}
-                        isSubmitting={isSubmitting}
-                        onNext={nextStep}
-                        onPrevious={prevStep}
-                        onSubmit={handleSubmit}
-                        customFinalButton={customFinalButton}
-                      />
+                      <QuoteStepRenderer currentStep={currentStep} formData={formData} updateFormData={updateFormData} handleFileUpload={handleFileUpload} removePhoto={removePhoto} estimatedPrice={calculatePrice()} />
+                      <QuoteNavigation currentStep={currentStep} totalSteps={totalSteps} canProceed={canProceed()} isSubmitting={isSubmitting} onNext={nextStep} onPrevious={prevStep} onSubmit={handleSubmit} customFinalButton={customFinalButton} />
                     </div>
                   </CardContent>
                 </Card>
@@ -339,5 +292,4 @@ const GarageLandingInstant = () => {
       <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
     </>;
 };
-
 export default GarageLandingInstant;
