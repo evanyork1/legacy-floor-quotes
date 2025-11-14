@@ -116,7 +116,7 @@ const GarageLandingInstant = () => {
                   <Card className="shadow-xl border-0 overflow-hidden">
                     <CardContent className="p-3 sm:p-4">
                       <div className="text-center mb-3">
-                        <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-1.5 px-3 rounded-lg mb-2 font-bold text-xs">
+                        <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-4 rounded-lg mb-2 font-bold text-sm">
                           🎉 Get an extra $300 off before Thanksgiving!
                         </div>
                         <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Get Your Instant Quote</h3>

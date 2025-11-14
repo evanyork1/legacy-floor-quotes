@@ -24,32 +24,32 @@ export const QuoteNavigation = ({
   customFinalButton
 }: QuoteNavigationProps) => {
   return (
-    <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
+    <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100">
       <Button 
         variant="outline" 
         onClick={onPrevious} 
         disabled={currentStep === 1 || isSubmitting} 
-        className="flex items-center justify-center px-4 sm:px-6 py-2 text-sm sm:text-base order-2 sm:order-1"
+        className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm order-2 sm:order-1"
       >
-        <ArrowLeft className="h-4 w-4 mr-2" />
+        <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
         Previous
       </Button>
       {currentStep < totalSteps ? 
         <Button 
           onClick={onNext} 
           disabled={!canProceed} 
-          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 flex items-center justify-center px-4 sm:px-6 py-2 text-sm sm:text-base order-1 sm:order-2"
+          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm order-1 sm:order-2"
         >
           Next Step
-          <ArrowRight className="h-4 w-4 ml-2" />
+          <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5 sm:ml-2" />
         </Button> : 
         customFinalButton ? customFinalButton :
         <Button 
           onClick={onNext}
-          className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-4 sm:px-6 py-2 text-sm sm:text-base order-1 sm:order-2"
+          className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm order-1 sm:order-2"
         >
           Finish
-          <Check className="h-4 w-4 ml-2" />
+          <Check className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5 sm:ml-2" />
         </Button>
       }
     </div>
