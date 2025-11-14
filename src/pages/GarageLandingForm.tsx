@@ -48,26 +48,18 @@ const GarageLandingForm = () => {
                     Limited spots are open this week. Premium polyurea floor system with lifetime warranty. One day install.
                   </p>
                   
-                  {/* Google Reviews Badge */}
+                  {/* Google Reviews Badge - Full Version */}
                   <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md mb-4">
-                    <div className="flex items-center gap-1">
-                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
+                    <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium text-gray-700">Google Reviews</span>
+                      <span className="text-xs text-gray-500">180+ five star reviews</span>
                     </div>
-                    <span className="text-sm font-semibold text-gray-900">5.0 (180+ reviews)</span>
                   </div>
                   
                   <p className="text-sm text-gray-500">
@@ -84,100 +76,34 @@ const GarageLandingForm = () => {
           </div>
         </section>
         
-        {/* Before & After Showcase Section - Moved to second position */}
-        <section className="py-12 md:py-20 bg-white">
+        {/* Before & After Hero Section */}
+        <section className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
-              </p>
-            </div>
-            
-            <div className="grid gap-8 lg:gap-12">
-              {/* Transformation 1 */}
-              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                        BEFORE
-                      </span>
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
-                        AFTER
-                      </span>
-                    </div>
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative h-64 sm:h-80 md:h-96">
+                  <img 
+                    src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
+                    alt="Before garage floor transformation" 
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide">
+                      BEFORE
+                    </span>
                   </div>
                 </div>
-                <div className="lg:pl-8 px-4 lg:px-0">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">From Stained to Stunning</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    This homeowner's garage went from a stained, cracked concrete floor to a beautiful flake system that completely transformed the space. The durable polyurea coating not only looks amazing but provides decades of protection.
-                  </p>
-                </div>
-              </div>
-
-              {/* Transformation 2 */}
-              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Complete Garage Makeover</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Watch how a dated garage floor becomes a showpiece with our professional coating application. The transformation speaks for itself - from ordinary concrete to a stunning, maintenance-free surface.
-                  </p>
-                </div>
-                <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Before garage floor coating" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                        BEFORE
-                      </span>
-                    </div>
+                <div className="relative h-64 sm:h-80 md:h-96">
+                  <img 
+                    src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
+                    alt="After garage floor transformation with flake coating" 
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide border-2 border-blue-600">
+                      AFTER
+                    </span>
                   </div>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/d1b328fa-3e30-4126-8266-ae64a33edd79.png" alt="After garage floor coating" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
-                        AFTER
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Transformation 3 */}
-              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" alt="Before garage floor" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                        BEFORE
-                      </span>
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/0fd4e444-b540-4c31-b624-49d7b2cb00a6.png" alt="After garage floor" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
-                        AFTER
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="lg:pl-8 px-4 lg:px-0">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Premium Quality Results</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    See the incredible difference our premium polyurea system makes. This garage went from worn and uninviting to a polished, professional space that adds real value to the home.
-                  </p>
                 </div>
               </div>
             </div>
