@@ -113,21 +113,21 @@ const GarageLandingInstant = () => {
 
                 {/* Right Column - Instant Quote Form */}
                 <div className="w-full">
-                  <Card className="shadow-2xl border-0 overflow-hidden">
-                    <CardContent className="p-4 sm:p-5 md:p-6">
-                      <div className="text-center mb-4 md:mb-6">
-                        <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-3 md:px-4 rounded-lg mb-2 md:mb-3 font-bold text-xs sm:text-sm">
+                  <Card className="shadow-xl border-0 overflow-hidden">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="text-center mb-3">
+                        <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-1.5 px-3 rounded-lg mb-2 font-bold text-xs">
                           🎉 Get an extra $300 off before Thanksgiving!
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Get Your Instant Quote</h3>
-                        <p className="text-sm sm:text-base text-gray-600">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Get Your Instant Quote</h3>
+                        <p className="text-xs sm:text-sm text-gray-600">
                           Answer a few quick questions
                         </p>
                       </div>
                       
                       <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
                       
-                      <div className="mt-4 md:mt-6">
+                      <div className="mt-3">
                         <QuoteStepRenderer
                           currentStep={currentStep}
                           formData={formData}
@@ -302,11 +302,11 @@ const GarageLandingInstant = () => {
                 </p>
               </div>
               <div className="max-w-3xl mx-auto">
-                <Card className="shadow-2xl border-0 overflow-hidden">
-                  <CardContent className="p-4 sm:p-6 lg:p-8">
+                <Card className="shadow-xl border-0 overflow-hidden">
+                  <CardContent className="p-3 sm:p-4 lg:p-6">
                     <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />
                     
-                    <div className="mt-6">
+                    <div className="mt-4">
                       <QuoteStepRenderer
                         currentStep={currentStep}
                         formData={formData}
