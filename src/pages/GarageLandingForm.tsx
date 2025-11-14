@@ -38,15 +38,37 @@ const GarageLandingForm = () => {
                 {/* Left Column - Content */}
                 <div className="text-left">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-                    Transform Your Garage Floor in Just{" "}
+                    Get your floor installed{" "}
                     <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                      One Day
+                      before Thanksgiving
                     </span>
                   </h1>
                   
-                  <p className="text-lg sm:text-xl text-gray-600 mb-6">
-                    Premium polyurea floor coatings with professional installation and a lifetime warranty. Get your space transformed with stunning, durable results.
+                  <p className="text-lg sm:text-xl text-gray-600 mb-4">
+                    Limited spots are open this week. Premium polyurea floor system with lifetime warranty. One day install.
                   </p>
+                  
+                  {/* Google Reviews Badge */}
+                  <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md mb-4">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    </div>
+                    <span className="text-sm font-semibold text-gray-900">5.0 (180+ reviews)</span>
+                  </div>
                   
                   <p className="text-sm text-gray-500">
                     Same-day estimates available • Serving Dallas-Fort Worth
@@ -62,49 +84,7 @@ const GarageLandingForm = () => {
           </div>
         </section>
         
-        {/* Before & After Hero Section */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="relative h-64 sm:h-80 md:h-96">
-                  <img 
-                    src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
-                    alt="Before garage floor transformation" 
-                    className="w-full h-full object-cover" 
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide">
-                      BEFORE
-                    </span>
-                  </div>
-                </div>
-                <div className="relative h-64 sm:h-80 md:h-96">
-                  <img 
-                    src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
-                    alt="After garage floor transformation with flake coating" 
-                    className="w-full h-full object-cover" 
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide border-2 border-blue-600">
-                      AFTER
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <TestimonialsSection />
-        
-        <EpoxyVsPolyureaSection />
-        
-        <WhyChooseSection />
-        
-        <ProcessSection />
-
-        {/* Before & After Showcase Section */}
+        {/* Before & After Showcase Section - Moved to second position */}
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
@@ -150,12 +130,12 @@ const GarageLandingForm = () => {
                 <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Complete Garage Makeover</h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    A typical residential garage transformation showing how our flake floor coating system turns an ordinary concrete floor into a showroom-quality surface that adds value to the home.
+                    Watch how a dated garage floor becomes a showpiece with our professional coating application. The transformation speaks for itself - from ordinary concrete to a stunning, maintenance-free surface.
                   </p>
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover" />
+                    <img src="/lovable-uploads/dee22f69-e885-489a-a567-40d7d224064f.png" alt="Before garage floor coating" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -163,7 +143,7 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor with beautiful flake finish" className="w-full h-full object-cover" />
+                    <img src="/lovable-uploads/d1b328fa-3e30-4126-8266-ae64a33edd79.png" alt="After garage floor coating" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -173,11 +153,11 @@ const GarageLandingForm = () => {
                 </div>
               </div>
 
-              {/* Transformation 3 - Large Space */}
+              {/* Transformation 3 */}
               <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage space concrete floor" className="w-full h-full object-cover" />
+                    <img src="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" alt="Before garage floor" className="w-full h-full object-cover" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -185,8 +165,8 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage space with premium flake coating" className="w-full h-full object-cover" />
-                    <div className="absolute top-3 left-3">
+                    <img src="/lovable-uploads/0fd4e444-b540-4c31-b624-49d7b2cb00a6.png" alt="After garage floor" className="w-full h-full object-cover" />
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
@@ -194,39 +174,38 @@ const GarageLandingForm = () => {
                   </div>
                 </div>
                 <div className="lg:pl-8 px-4 lg:px-0">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Large Space Transformation</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Premium Quality Results</h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Even larger garage spaces benefit tremendously from our coating systems. This transformation shows how our flake floors can completely change the look and feel of any size garage space.
+                    See the incredible difference our premium polyurea system makes. This garage went from worn and uninviting to a polished, professional space that adds real value to the home.
                   </p>
                 </div>
               </div>
-
-              {/* Transformation 4 */}
-              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                <div className="order-2 lg:order-1 lg:pr-8 px-4 lg:px-0">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Professional Results Every Time</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Our process consistently delivers beautiful results. From preparation to final topcoat, every step is performed with precision to ensure your garage floor looks perfect and lasts for decades.
-                  </p>
-                </div>
-                <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before garage floor concrete surface" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                        BEFORE
-                      </span>
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating installation" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
-                        AFTER
-                      </span>
-                    </div>
-                  </div>
-                </div>
+            </div>
+          </div>
+        </section>
+        
+        <TestimonialsSection />
+        
+        <EpoxyVsPolyureaSection />
+        
+        <WhyChooseSection />
+        
+        <ProcessSection />
+        
+        {/* Mid-Page CTA Form */}
+        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                  Ready to Transform Your Garage?
+                </h2>
+                <p className="text-xl text-blue-100">
+                  Don't miss out on our limited-time Thanksgiving special!
+                </p>
+              </div>
+              <div className="max-w-2xl mx-auto">
+                <LeadForm />
               </div>
             </div>
           </div>

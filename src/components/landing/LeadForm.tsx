@@ -88,7 +88,10 @@ export const LeadForm = () => {
           </div>
           
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">GET A QUOTE TODAY!</h3>
+            <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-4 rounded-lg mb-3 font-bold text-sm">
+              🎉 Get an extra $300 off before Thanksgiving!
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Same Day Estimate</h3>
             <p className="text-gray-600">
               Fill in the form below to get started!
             </p>
