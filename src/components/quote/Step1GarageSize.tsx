@@ -53,31 +53,31 @@ export const Step1GarageSize = ({ formData, updateFormData }: Step1Props) => {
 
   return (
     <div className="space-y-4">
-      <div className="text-center mb-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 px-2">What size is your space?</h2>
-        <p className="text-sm sm:text-base text-gray-600 px-4">Choose the option that best describes your space</p>
+      <div className="text-center mb-3">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 px-2">What size is your space?</h2>
+        <p className="text-xs sm:text-sm text-gray-600 px-4">Choose the option that best describes your space</p>
       </div>
 
-      <div className="grid gap-2 sm:gap-3 max-w-2xl mx-auto px-2">
-        {garageOptions.map(option => <button key={option.id} onClick={() => updateFormData('garageType', option.id)} className={`p-3 sm:p-4 rounded-lg border-2 text-left transition-all hover:scale-[1.01] relative ${option.id === "custom" ? `bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-2 border-transparent bg-clip-padding shadow-md ${formData.garageType === option.id ? 'before:absolute before:inset-0 before:rounded-lg before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-lg shadow-purple-400/30' : 'before:absolute before:inset-0 before:rounded-lg before:p-[2px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-md hover:shadow-purple-400/20'}` : formData.garageType === option.id ? 'border-blue-600 bg-blue-50 shadow-md' : 'border-gray-200 hover:border-blue-300'}`} style={option.id === "custom" ? {
+      <div className="grid gap-1.5 sm:gap-2 max-w-2xl mx-auto px-2">
+        {garageOptions.map(option => <button key={option.id} onClick={() => updateFormData('garageType', option.id)} className={`p-2 sm:p-3 rounded-md border text-left transition-all hover:scale-[1.005] relative ${option.id === "custom" ? `bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border border-transparent bg-clip-padding shadow ${formData.garageType === option.id ? 'before:absolute before:inset-0 before:rounded-md before:p-[1.5px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:animate-pulse shadow-md shadow-purple-400/20' : 'before:absolute before:inset-0 before:rounded-md before:p-[1.5px] before:bg-gradient-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 hover:shadow-md hover:shadow-purple-400/10'}` : formData.garageType === option.id ? 'border-blue-600 bg-blue-50 shadow' : 'border-gray-200 hover:border-blue-300'}`} style={option.id === "custom" ? {
           background: formData.garageType === option.id ? 'linear-gradient(135deg, #fdf4ff, #fef7ed, #fff7ed)' : 'linear-gradient(135deg, #faf5ff, #fef2f2, #fff7ed)',
           position: 'relative'
         } : {}}>
-          {option.id === "custom" && <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-20 blur-sm -z-10" />}
+          {option.id === "custom" && <div className="absolute inset-0 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-15 blur-[2px] -z-10" />}
           <div className="flex items-center relative z-10">
             <div className="flex-1">
-              <h3 className={`text-base sm:text-lg font-semibold ${option.id === "custom" ? 'text-purple-900' : 'text-gray-900'}`}>
+              <h3 className={`text-sm sm:text-base font-semibold ${option.id === "custom" ? 'text-purple-900' : 'text-gray-900'}`}>
                 {option.label}
               </h3>
-              <p className={`mt-0.5 text-xs sm:text-sm ${option.id === "custom" ? 'text-purple-700' : 'text-gray-600'}`}>
+              <p className={`mt-0.5 text-[11px] sm:text-xs ${option.id === "custom" ? 'text-purple-700' : 'text-gray-600'}`}>
                 {option.desc}
               </p>
             </div>
-            <div className="pl-3">
-              {formData.garageType === option.id && <Check className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${option.id === "custom" ? 'text-purple-600' : 'text-blue-600'}`} />}
+            <div className="pl-2.5">
+              {formData.garageType === option.id && <Check className={`h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${option.id === "custom" ? 'text-purple-600' : 'text-blue-600'}`} />}
             </div>
           </div>
-          {option.id === "custom" && <div className="absolute top-3 right-[-34px] w-auto whitespace-nowrap transform rotate-45 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1 shadow-lg">
+          {option.id === "custom" && <div className="absolute top-2 right-[-28px] w-auto whitespace-nowrap transform rotate-45 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[9px] font-bold uppercase tracking-wider px-3 py-0.5 shadow">
             MOST ACCURATE
           </div>}
         </button>)}
