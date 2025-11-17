@@ -132,7 +132,7 @@ serve(async (req) => {
     
     formData.append('prompt', detailedPrompt)
     formData.append('model', 'gpt-image-1')
-    formData.append('size', '1792x1792') // Increased from 1024x1024 for better quality
+    formData.append('size', '1024x1024') // Max size supported by gpt-image-1 edits API
     formData.append('n', '1')
 
     // Build headers with organization and project if available
