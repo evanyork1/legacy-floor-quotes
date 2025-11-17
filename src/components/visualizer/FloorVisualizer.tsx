@@ -82,6 +82,7 @@ export const FloorVisualizer = () => {
       const selectedColorOption = colorOptions.find(c => c.id === colorIdToUse);
       if (!selectedColorOption) {
         toast.error('Selected color not found');
+        setIsProcessing(false);
         return;
       }
       const mask = await generateFloorMask(uploadedImage);
@@ -99,6 +100,7 @@ export const FloorVisualizer = () => {
       if (error) {
         console.error('Visualization error:', error);
         toast.error('Failed to visualize floor. Please try again.');
+        setIsProcessing(false);
         return;
       }
       if (data?.visualizedImage) {
@@ -110,6 +112,9 @@ export const FloorVisualizer = () => {
         if (newCount >= 3) {
           setTimeout(() => setShowQuoteModal(true), 500);
         }
+      } else {
+        console.error('No visualized image returned');
+        toast.error('Failed to generate visualization. Please try again.');
       }
     } catch (error) {
       console.error('Error during visualization:', error);
@@ -208,12 +213,14 @@ export const FloorVisualizer = () => {
                     handleVisualize(color.id);
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
-                        <div className="w-20 h-20 rounded-lg overflow-hidden mb-2">
-                          <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" loading="lazy" />
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20 rounded-lg overflow-hidden mb-2">
+                            <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" loading="lazy" />
+                          </div>
+                          <p className="text-sm font-medium text-navy-900 text-center">
+                            {color.name}
+                          </p>
                         </div>
-                        <p className="text-sm font-medium text-navy-900 text-center">
-                          {color.name}
-                        </p>
                         {selectedColor === color.id && <div className="mt-2 flex justify-center">
                             <div className="w-6 h-6 bg-navy-600 rounded-full flex items-center justify-center">
                               <svg className="w-4 h-4 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,7 +232,16 @@ export const FloorVisualizer = () => {
                   </div>
                   
                   {selectedColor && <div className="mt-6 pt-6 border-t border-navy-200">
-                      <Button size="lg" onClick={() => handleVisualize()} disabled={isProcessing} className="w-full bg-navy-600 hover:bg-navy-700 text-white">
+                      <Button 
+                        type="button"
+                        size="lg" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleVisualize();
+                        }} 
+                        disabled={isProcessing} 
+                        className="w-full bg-navy-600 hover:bg-navy-700 text-white"
+                      >
                       {isProcessing ? <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                           Creating your visualization...
@@ -244,7 +260,7 @@ export const FloorVisualizer = () => {
             <Card className="border-navy-200 sticky top-4 relative">
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center justify-between text-navy-900">
-                  <span>Your Visualization</span>
+                  <span>Your Garage</span>
                   {transformedImage && <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={handleDownload} className="border-navy-300 text-navy-700 hover:bg-navy-50">
                         <Download className="mr-2 h-4 w-4" />
