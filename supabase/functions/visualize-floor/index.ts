@@ -8,93 +8,69 @@ const corsHeaders = {
 
 // Detailed color profiles for accurate epoxy floor visualization
 const COLOR_PROFILES: Record<string, string> = {
-  'domino': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a BLACK AND WHITE SPECKLED floor coating
-- Base: Neutral grey epoxy base
-- Flakes: SMALL dense black and white decorative flakes (like salt and pepper)
-- Pattern: 60% white flakes, 40% black flakes, creating a classic speckled domino cookie appearance
-- Flake size: Very small 1/16" to 1/8" flakes, densely packed at 80%+ coverage
-- Texture: Fine speckled texture with visible individual flakes, matte to low-sheen finish
-- Color: Black and white ONLY - no other colors
-- Effect: High-contrast monochrome speckled floor similar to terrazzo or cookies & cream pattern
-CRITICAL: DO NOT make solid colored floor. Must show visible black and white flakes throughout. Use mask to limit edits to floor only. Preserve all other elements exactly.`,
+  'domino': `Apply Torginol Domino flake color to the floor surface. This is a premium epoxy coating with:
+- Black and white speckled pattern (like domino cookies or salt & pepper)
+- Small 1/16" to 1/8" decorative flakes densely packed
+- 60% white flakes, 40% black flakes
+- High-contrast monochrome appearance
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible black and white flakes, NOT solid color. Preserve all other elements exactly.`,
 
-  'tidal-wave': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a GREY floor with SUBTLE BLUE HINTS, not a blue floor
-- Base: Medium grey epoxy base
-- Flakes: SMALL decorative flakes in grey, dark grey, subtle blue-grey tones, and white accents
-- Pattern: 50% medium grey flakes, 30% dark grey/charcoal flakes, 15% subtle blue-grey tones, 5% white flakes
-- Flake size: Small 1/16" to 1/8" flakes, medium-dense at 70% coverage
-- Texture: Natural stone-like texture with subtle color variation, matte finish
-- Color: Predominantly GREY with very subtle blue undertones - looks like grey concrete with hints of blue, NOT a bright blue floor
-- Effect: Natural grey stone appearance with oceanic grey-blue undertones, subtle and sophisticated
-CRITICAL: DO NOT make bright blue floor. Must be predominantly GREY with subtle blue hints. Show visible flakes throughout. Use mask to limit edits to floor only.`,
+  'tidal-wave': `Apply Torginol Tidal Wave flake color to the floor surface. This is a premium epoxy coating with:
+- Predominantly grey with subtle blue undertones
+- Small 1/16" to 1/8" decorative flakes
+- Grey, charcoal, and subtle blue-grey tones with white accents
+- Natural stone-like appearance with oceanic grey-blue hints
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. This is a GREY floor with blue hints, NOT a bright blue floor. Must show visible flakes, NOT solid color.`,
 
-  'wombat': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a BROWN SPECKLED floor coating
-- Base: Medium brown epoxy base  
-- Flakes: SMALL decorative flakes in various brown tones (chocolate, tan, caramel)
-- Pattern: 50% medium brown flakes, 30% tan flakes, 20% light brown/cream flakes
-- Flake size: Small 1/16" to 1/8" flakes, medium-dense at 70% coverage
-- Texture: Warm earth-tone texture with visible brown flakes, matte finish
-- Color: Various brown tones creating a warm, earthy appearance
-- Effect: Natural brown stone appearance with warm earth tones
-CRITICAL: DO NOT make solid brown floor. Must show visible brown-toned flakes throughout. Use mask to limit edits to floor only.`,
+  'wombat': `Apply Torginol Wombat flake color to the floor surface. This is a premium epoxy coating with:
+- Various brown tones (chocolate, tan, caramel)
+- Small 1/16" to 1/8" decorative flakes
+- Warm earth-tone appearance
+- Natural brown stone texture
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible brown-toned flakes, NOT solid brown color.`,
 
-  'raven': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a DARK CHARCOAL/BLACK SPECKLED floor coating
-- Base: Deep charcoal grey to black epoxy base
-- Flakes: SMALL decorative flakes in black, charcoal, dark grey, with subtle silver highlights
-- Pattern: 70% black/charcoal flakes, 25% dark grey flakes, 5% subtle silver metallic flakes
-- Flake size: Small 1/16" to 1/8" flakes, dense at 80% coverage
-- Texture: Deep dark texture with subtle metallic highlights, low-sheen matte finish
-- Color: Very dark charcoal to black with subtle silver sparkle
-- Effect: Dramatic dark floor with sophisticated silver accents
-CRITICAL: DO NOT make solid black floor. Must show visible dark flakes with silver highlights. Use mask to limit edits to floor only.`,
+  'raven': `Apply Torginol Raven flake color to the floor surface. This is a premium epoxy coating with:
+- Deep charcoal to black with subtle silver highlights
+- Small 1/16" to 1/8" decorative flakes
+- Dark charcoal, black, and subtle metallic silver tones
+- Dramatic dark appearance with sophisticated accents
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible dark flakes with silver highlights, NOT solid black.`,
 
-  'cabin-fever': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a WARM BROWN floor with ORANGE-RED ACCENTS
-- Base: Rustic brown epoxy base
-- Flakes: SMALL decorative flakes in brown, burnt orange, rust red, and tan tones
-- Pattern: 45% rustic brown flakes, 30% burnt orange/rust flakes, 15% tan flakes, 10% cream flakes
-- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
-- Texture: Warm rustic texture with orange-brown tones, matte finish
-- Color: Warm brown base with distinctive burnt orange and rust red accents
-- Effect: Lodge-inspired floor with warm autumn/cabin colors
-CRITICAL: DO NOT make solid brown floor. Must show visible brown and orange-toned flakes. Use mask to limit edits to floor only.`,
+  'cabin-fever': `Apply Torginol Cabin Fever flake color to the floor surface. This is a premium epoxy coating with:
+- Warm brown with burnt orange and rust red accents
+- Small 1/16" to 1/8" decorative flakes
+- Rustic brown, orange, rust, and tan tones
+- Warm rustic appearance with distinctive orange-brown character
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible flakes in brown and orange tones, NOT solid color.`,
 
-  'coyote': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a LIGHT TAN/BEIGE SPECKLED floor coating
-- Base: Light tan/sandy beige epoxy base
-- Flakes: SMALL decorative flakes in tan, beige, cream, and light brown tones
-- Pattern: 50% tan flakes, 30% beige flakes, 15% cream flakes, 5% light brown flakes
-- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
-- Texture: Soft neutral texture with warm sandy tones, matte finish
-- Color: Light tan and beige tones creating a warm, sandy desert appearance
-- Effect: Desert-inspired floor with soft neutral earth tones
-CRITICAL: DO NOT make solid tan floor. Must show visible tan and beige flakes. Use mask to limit edits to floor only.`,
+  'coyote': `Apply Torginol Coyote flake color to the floor surface. This is a premium epoxy coating with:
+- Tan and beige tones with brown accents
+- Small 1/16" to 1/8" decorative flakes
+- Light tan, beige, cream, and brown tones
+- Natural desert sand appearance
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible tan and beige flakes, NOT solid color.`,
 
-  'creek-bed': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a MEDIUM GREY SPECKLED floor coating
-- Base: Medium grey epoxy base
-- Flakes: SMALL decorative flakes in various grey tones with white accents
-- Pattern: 50% medium grey flakes, 30% darker grey flakes, 15% light grey flakes, 5% white flakes
-- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
-- Texture: Natural stone-like grey texture with white highlights, matte finish
-- Color: Various grey tones creating a natural riverbed stone appearance
-- Effect: Natural grey stone floor with subtle white accents
-CRITICAL: DO NOT make solid grey floor. Must show visible grey-toned flakes with white accents. Use mask to limit edits to floor only.`,
+  'creek-bed': `Apply Torginol Creek Bed flake color to the floor surface. This is a premium epoxy coating with:
+- Neutral grey and beige mix (river stone appearance)
+- Small 1/16" to 1/8" decorative flakes
+- Grey, beige, taupe, and cream tones
+- Natural riverbed stone appearance
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible grey and beige flakes, NOT solid color.`,
 
-  'orbit': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
-- This is a SILVER-GREY METALLIC floor coating
-- Base: Light grey epoxy base with metallic sheen
-- Flakes: SMALL decorative metallic flakes in silver, light grey, and white
-- Pattern: 50% metallic silver flakes, 30% light grey flakes, 20% white flakes
-- Flake size: Small 1/16" to 1/8" metallic flakes, dense at 75% coverage
-- Texture: Modern metallic texture with subtle silver sparkle, low-sheen finish
-- Color: Silver-grey with metallic highlights creating a modern, sophisticated look
-- Effect: Contemporary metallic floor with silver sparkle and grey tones
-CRITICAL: DO NOT make solid silver floor. Must show visible metallic silver and grey flakes. Use mask to limit edits to floor only.`
+  'orbit': `Apply Torginol Orbit flake color to the floor surface. This is a premium epoxy coating with:
+- Dark base with metallic silver and blue accents
+- Small 1/16" to 1/8" decorative flakes
+- Charcoal, metallic silver, and subtle blue highlights
+- Cosmic appearance with metallic shimmer
+- Satin finish with visible texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible dark flakes with metallic accents, NOT solid color.`
 }
 
 serve(async (req) => {
@@ -136,7 +112,7 @@ serve(async (req) => {
     
     // Use detailed color profile or fallback to generic prompt
     const detailedPrompt = COLOR_PROFILES[colorId] || 
-      `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy floor coating with these specifications: SMALL VISIBLE DECORATIVE FLAKES creating speckled pattern (NOT solid color), satin matte finish with minimal shine, realistic textured appearance showing individual flakes. CRITICAL: DO NOT create solid colored floor - must show visible flake pattern. Use mask to limit edits to floor only. Preserve all other elements exactly as original.`
+      `Apply Torginol ${colorName} epoxy floor coating to the floor surface. Use small visible decorative flakes (1/16" to 1/8") creating a speckled pattern. Satin finish with realistic texture and minimal shine (NOT glossy). CRITICAL: Apply ONLY to floor area using mask. Must show visible flake pattern, NOT solid color. Preserve all other elements exactly.`
     
     formData.append('prompt', detailedPrompt)
     formData.append('model', 'gpt-image-1')
