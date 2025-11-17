@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
-import { ColorOption } from '@/components/quote/ColorOption';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LeadCaptureModal } from './LeadCaptureModal';
 import { colorOptions } from '@/constants/colorOptions';
@@ -116,22 +115,25 @@ export const FloorVisualizer = () => {
 
       if (error) {
         console.error('Visualization error:', error);
-        throw error;
+        toast.error('Failed to visualize floor. Please try again.');
+        return;
       }
 
       if (data?.visualizedImage) {
         setTransformedImage(data.visualizedImage);
-        toast.success('Realistic visualization created!');
-        
+        toast.success('Floor visualization complete!');
+
         const newCount = aiEnhancementsUsed + 1;
         setAiEnhancementsUsed(newCount);
         localStorage.setItem('fv_ai_used', newCount.toString());
-      } else {
-        throw new Error('No visualization returned');
+
+        if (!leadCaptured && newCount >= 3) {
+          setTimeout(() => setShowLeadModal(true), 500);
+        }
       }
     } catch (error) {
-      console.error('Error creating visualization:', error);
-      toast.error('Failed to create visualization. Please try again.');
+      console.error('Error during visualization:', error);
+      toast.error('An error occurred. Please try again.');
     } finally {
       setIsProcessing(false);
     }
@@ -143,172 +145,239 @@ export const FloorVisualizer = () => {
     const link = document.createElement('a');
     link.href = transformedImage;
     link.download = 'floor-visualization.png';
-    document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
     toast.success('Image downloaded!');
   };
 
   const handleReset = () => {
     setUploadedImage(null);
-    setTransformedImage(null);
     setSelectedColor(null);
+    setTransformedImage(null);
+    toast.success('Visualizer reset');
   };
 
-  const handleLeadCapture = (email: string, name: string) => {
-    console.log('Lead captured:', { email, name });
-    localStorage.setItem('fv_lead_captured', 'true');
+  const handleLeadCapture = () => {
     setLeadCaptured(true);
+    localStorage.setItem('fv_lead_captured', 'true');
     setShowLeadModal(false);
     toast.success('Thank you! You now have unlimited visualizations.');
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-4">AI Floor Visualizer</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Upload a photo of your space and see how different epoxy colors would look with AI-powered realistic visualization
-        </p>
+    <div className="w-full">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white py-12 md:py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <h1 className="text-3xl md:text-5xl font-bold">
+            Visualize Your Dream Floor
+          </h1>
+          <p className="text-lg md:text-xl text-navy-100 max-w-2xl mx-auto">
+            Upload a photo of your space and instantly see how different epoxy colors transform your floor
+          </p>
+        </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Upload Your Space</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                  id="floor-upload"
-                />
-                <label htmlFor="floor-upload" className="cursor-pointer">
-                  <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">
-                    Click to upload or drag and drop
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    PNG, JPG up to 5MB
-                  </p>
-                </label>
-              </div>
-
-              {uploadedImage && (
-                <div className="relative rounded-lg overflow-hidden">
-                  <img
-                    src={uploadedImage}
-                    alt="Uploaded space"
-                    className="w-full h-auto"
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
+          {/* Left Column - Upload & Colors */}
+          <div className="space-y-6">
+            {/* Upload Card */}
+            <Card className="border-navy-200">
+              <CardHeader className="bg-navy-50/50">
+                <CardTitle className="flex items-center gap-2 text-navy-900">
+                  <Upload className="h-5 w-5 text-navy-600" />
+                  Step 1: Upload Your Photo
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <div className="border-2 border-dashed border-navy-300 rounded-lg p-6 md:p-8 text-center hover:border-navy-500 hover:bg-navy-50/30 transition-all">
+                  <input
+                    type="file"
+                    id="floor-upload"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleFileUpload}
                   />
+                  <label
+                    htmlFor="floor-upload"
+                    className="cursor-pointer flex flex-col items-center gap-4"
+                  >
+                    <div className="p-4 bg-navy-100 rounded-full">
+                      <Upload className="h-8 w-8 text-navy-600" />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-base md:text-lg font-medium text-navy-900">
+                        Click to upload or drag and drop
+                      </p>
+                      <p className="text-sm text-navy-600">
+                        PNG, JPG up to 5MB • Best results with clear floor photos
+                      </p>
+                      {uploadedImage && (
+                        <p className="text-xs text-green-600 font-medium mt-2">
+                          ✓ Photo uploaded successfully
+                        </p>
+                      )}
+                    </div>
+                  </label>
                 </div>
-              )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Select Color</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {colorOptions.map((color) => (
-                  <ColorOption
-                    key={color.id}
-                    color={color}
-                    isSelected={selectedColor === color.id}
-                    onSelect={() => setSelectedColor(color.id)}
-                    onPreview={() => {}}
-                  />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="flex flex-col items-center gap-4">
-            <Button
-              onClick={handleVisualize}
-              disabled={isProcessing || !uploadedImage || !selectedColor}
-              size="lg"
-              className="w-full gap-2"
-            >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Creating Visualization...
-                </>
-              ) : (
-                <>
-                  <Wand2 className="w-4 h-4" />
-                  Visualize ({leadCaptured ? 'Unlimited' : `${3 - aiEnhancementsUsed} Free`})
-                </>
-              )}
-            </Button>
-
-            {isProcessing && (
-              <p className="text-sm text-muted-foreground text-center animate-pulse">
-                Creating realistic visualization (10-20 seconds)...
-              </p>
+            {/* Color Selection */}
+            {uploadedImage && (
+              <Card className="border-navy-200">
+                <CardHeader className="bg-navy-50/50">
+                  <CardTitle className="flex items-center gap-2 text-navy-900">
+                    <Wand2 className="h-5 w-5 text-navy-600" />
+                    Step 2: Choose Your Color
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
+                    {colorOptions.map((color) => (
+                      <div
+                        key={color.id}
+                        onClick={() => setSelectedColor(color.id)}
+                        className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${
+                          selectedColor === color.id
+                            ? 'border-navy-600 shadow-lg bg-navy-50'
+                            : 'border-navy-200 hover:border-navy-400'
+                        }`}
+                      >
+                        <div className="aspect-video rounded-md overflow-hidden mb-2">
+                          <img
+                            src={color.preview}
+                            alt={color.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <p className="text-sm font-medium text-navy-900 text-center">
+                          {color.name}
+                        </p>
+                        {selectedColor === color.id && (
+                          <div className="mt-2 flex justify-center">
+                            <div className="w-6 h-6 bg-navy-600 rounded-full flex items-center justify-center">
+                              <svg
+                                className="w-4 h-4 text-white"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path d="M5 13l4 4L19 7"></path>
+                              </svg>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {selectedColor && (
+                    <div className="mt-6 pt-6 border-t border-navy-200">
+                      <Button
+                        size="lg"
+                        onClick={handleVisualize}
+                        disabled={isProcessing}
+                        className="w-full bg-navy-600 hover:bg-navy-700 text-white"
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Creating your visualization...
+                          </>
+                        ) : (
+                          <>
+                            <Wand2 className="mr-2 h-5 w-5" />
+                            Visualize My Floor
+                          </>
+                        )}
+                      </Button>
+                      {!leadCaptured && (
+                        <p className="text-xs text-center text-navy-600 mt-3">
+                          {3 - aiEnhancementsUsed} free {3 - aiEnhancementsUsed === 1 ? 'visualization' : 'visualizations'} remaining
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
           </div>
-        </div>
 
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>Your Visualization</CardTitle>
-                {transformedImage && (
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={handleDownload}
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <Download className="w-4 h-4" />
-                      Download
-                    </Button>
-                    <Button
-                      onClick={handleReset}
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <RotateCcw className="w-4 h-4" />
-                      Reset
-                    </Button>
+          {/* Right Column - Visualization Result */}
+          <div>
+            <Card className="border-navy-200 sticky top-4">
+              <CardHeader className="bg-navy-50/50">
+                <CardTitle className="flex items-center justify-between text-navy-900">
+                  <span>Your Visualization</span>
+                  {transformedImage && (
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleDownload}
+                        className="border-navy-300 text-navy-700 hover:bg-navy-50"
+                      >
+                        <Download className="mr-2 h-4 w-4" />
+                        <span className="hidden sm:inline">Download</span>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleReset}
+                        className="border-navy-300 text-navy-700 hover:bg-navy-50"
+                      >
+                        <RotateCcw className="mr-2 h-4 w-4" />
+                        <span className="hidden sm:inline">Reset</span>
+                      </Button>
+                    </div>
+                  )}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-6">
+                {!uploadedImage ? (
+                  <div className="aspect-video bg-navy-50 rounded-lg flex flex-col items-center justify-center text-center p-6 md:p-8">
+                    <div className="p-4 bg-navy-100 rounded-full mb-4">
+                      <Wand2 className="h-12 w-12 text-navy-400" />
+                    </div>
+                    <p className="text-navy-600 font-medium mb-2">
+                      No image uploaded yet
+                    </p>
+                    <p className="text-sm text-navy-500">
+                      Upload a photo to get started
+                    </p>
+                  </div>
+                ) : transformedImage ? (
+                  <div className="space-y-4">
+                    <BeforeAfterSlider
+                      beforeImage={uploadedImage}
+                      afterImage={transformedImage}
+                      className="rounded-lg overflow-hidden"
+                    />
+                    <p className="text-sm text-navy-600 text-center">
+                      👆 Drag the slider to compare before and after
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="aspect-video rounded-lg overflow-hidden">
+                      <img
+                        src={uploadedImage}
+                        alt="Your uploaded floor"
+                        className="w-full h-full object-contain bg-navy-50"
+                      />
+                    </div>
+                    <p className="text-sm text-navy-600 text-center">
+                      Select a color and click "Visualize My Floor" to see the transformation
+                    </p>
                   </div>
                 )}
-              </div>
-            </CardHeader>
-            <CardContent>
-              {!uploadedImage && (
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Upload an image to get started</p>
-                </div>
-              )}
-
-              {uploadedImage && !transformedImage && (
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">
-                    Select a color and click Visualize
-                  </p>
-                </div>
-              )}
-
-              {uploadedImage && transformedImage && (
-                <BeforeAfterSlider
-                  beforeImage={uploadedImage}
-                  afterImage={transformedImage}
-                />
-              )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
 
