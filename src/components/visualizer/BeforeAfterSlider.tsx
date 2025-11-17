@@ -55,7 +55,7 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
   return (
     <div 
       ref={containerRef}
-      className={cn("relative w-full aspect-video overflow-hidden select-none bg-navy-50", className)}
+      className={cn("relative w-full overflow-hidden select-none bg-navy-50 flex items-center", className)}
       onMouseDown={handleStart}
       onTouchStart={handleStart}
     >
@@ -90,14 +90,6 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
             <div className="w-0.5 h-5 bg-navy-400" />
           </div>
         </div>
-      </div>
-
-      {/* Labels */}
-      <div className="absolute top-3 left-3 bg-navy-900/80 text-white px-3 py-1.5 rounded-md text-xs md:text-sm font-semibold backdrop-blur-sm">
-        Before
-      </div>
-      <div className="absolute top-3 right-3 bg-navy-900/80 text-white px-3 py-1.5 rounded-md text-xs md:text-sm font-semibold backdrop-blur-sm">
-        After
       </div>
     </div>
   );
