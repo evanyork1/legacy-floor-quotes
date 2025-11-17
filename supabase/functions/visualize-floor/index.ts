@@ -17,44 +17,44 @@ const COLOR_PROFILES: Record<string, string> = {
 CRITICAL: Apply ONLY to floor area using mask. Must show visible black and white flakes, NOT solid color. Preserve all other elements exactly.`,
 
   'tidal-wave': `Apply Torginol Tidal Wave flake color to the floor surface. This is a premium epoxy coating with:
-- Predominantly grey with subtle blue undertones
-- Small 1/16" to 1/8" decorative flakes
-- Grey, charcoal, and subtle blue-grey tones with white accents
-- Natural stone-like appearance with oceanic grey-blue hints
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. This is a GREY floor with blue hints, NOT a bright blue floor. Must show visible flakes, NOT solid color.`,
+- Light gray, medium gray, charcoal, and deep navy blue flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 50% mixed grays, 30% charcoal, 20% navy blue
+- Cool-toned, speckled appearance with subtle blue accents
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct gray and navy flakes as actual chips, NOT a blended or solid color. Preserve all other elements exactly.`,
 
   'wombat': `Apply Torginol Wombat flake color to the floor surface. This is a premium epoxy coating with:
-- Various brown tones (chocolate, tan, caramel)
-- Small 1/16" to 1/8" decorative flakes
-- Warm earth-tone appearance
-- Natural brown stone texture
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show visible brown-toned flakes, NOT solid brown color.`,
+- Light gray, warm gray, charcoal, and taupe flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 40% light gray, 30% warm gray, 20% charcoal, 10% taupe
+- Neutral, slightly warm stone-like appearance
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct gray and taupe flakes as actual chips, NOT a blended or solid color. Preserve all other elements exactly.`,
 
   'raven': `Apply Torginol Raven flake color to the floor surface. This is a premium epoxy coating with:
-- Deep charcoal to black with subtle silver highlights
-- Small 1/16" to 1/8" decorative flakes
-- Dark charcoal, black, and subtle metallic silver tones
-- Dramatic dark appearance with sophisticated accents
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show visible dark flakes with silver highlights, NOT solid black.`,
+- Charcoal black, dark gray, and small white accent flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 70% charcoal black, 20% dark gray, 10% white accents
+- Dark, high-contrast, modern appearance
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show visible black, gray, and white flake chips, NOT a blended solid color. Preserve all other elements exactly.`,
 
   'cabin-fever': `Apply Torginol Cabin Fever flake color to the floor surface. This is a premium epoxy coating with:
-- Warm brown with burnt orange and rust red accents
-- Small 1/16" to 1/8" decorative flakes
-- Rustic brown, orange, rust, and tan tones
-- Warm rustic appearance with distinctive orange-brown character
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show visible flakes in brown and orange tones, NOT solid color.`,
+- Tan, beige, warm gray, brown, and small black flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 40% tan/beige, 30% warm gray, 20% brown, 10% black
+- Warm, earthy, stone-like appearance
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct tan, gray, brown, and black flakes as individual chips, NOT a blended color. Preserve all other elements exactly.`,
 
   'coyote': `Apply Torginol Coyote flake color to the floor surface. This is a premium epoxy coating with:
-- Tan and beige tones with brown accents
-- Small 1/16" to 1/8" decorative flakes
-- Light tan, beige, cream, and brown tones
-- Natural desert sand appearance
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show visible tan and beige flakes, NOT solid color.`,
+- Light tan, off-white, medium gray, and black flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 45% light tan, 30% off-white, 20% gray, 5% black
+- Light, bright, sandy appearance
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct tan, white, gray, and black flake chips, NOT a blended color. Preserve all other elements exactly.`,
 
   'creek-bed': `Apply Torginol Creek Bed flake color to the floor surface. This is a premium epoxy coating with:
 - Neutral grey and beige mix (river stone appearance)
@@ -65,12 +65,12 @@ CRITICAL: Apply ONLY to floor area using mask. Must show visible tan and beige f
 CRITICAL: Apply ONLY to floor area using mask. Must show visible grey and beige flakes, NOT solid color.`,
 
   'orbit': `Apply Torginol Orbit flake color to the floor surface. This is a premium epoxy coating with:
-- Dark base with metallic silver and blue accents
-- Small 1/16" to 1/8" decorative flakes
-- Charcoal, metallic silver, and subtle blue highlights
-- Cosmic appearance with metallic shimmer
-- Satin finish with visible texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show visible dark flakes with metallic accents, NOT solid color.`
+- Bright blue, medium blue, black, white, and gray flakes
+- Small 1/16" to 1/8" decorative flakes densely packed
+- Approximate ratio: 40% blues, 30% gray/white mix, 30% black
+- Bold, high-contrast appearance with strong blue tones
+- Satin finish with visible flake texture, not glossy
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct blue, black, white, and gray flake chips, NOT a blended solid color. Preserve all other elements exactly.`
 }
 
 serve(async (req) => {
