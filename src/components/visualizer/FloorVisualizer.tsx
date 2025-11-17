@@ -16,6 +16,9 @@ export const FloorVisualizer = () => {
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  // Preview URLs for iOS Safari stability (display only)
+  const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
+  const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
@@ -32,10 +35,23 @@ export const FloorVisualizer = () => {
       return;
     }
     try {
+      // Revoke previous preview URLs to avoid memory leaks
+      if (uploadedPreviewUrl) {
+        URL.revokeObjectURL(uploadedPreviewUrl);
+      }
+      if (transformedPreviewUrl) {
+        URL.revokeObjectURL(transformedPreviewUrl);
+        setTransformedPreviewUrl(null);
+      }
+      setTransformedImage(null);
+
+      // Create a lightweight preview URL for Safari/iOS stability
+      const objectUrl = URL.createObjectURL(file);
+      setUploadedPreviewUrl(objectUrl);
+
       const reader = new FileReader();
       reader.onload = e => {
-        setUploadedImage(e.target?.result as string);
-        setTransformedImage(null);
+        setUploadedImage(e.target?.result as string); // base64 for API
         toast.success('Image uploaded successfully!');
       };
       reader.readAsDataURL(file);
@@ -104,6 +120,17 @@ export const FloorVisualizer = () => {
       }
       if (data?.visualizedImage) {
         setTransformedImage(data.visualizedImage);
+        // Create a stable preview URL for iOS Safari
+        try {
+          const res = await fetch(data.visualizedImage);
+          const blob = await res.blob();
+          if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
+          const afterUrl = URL.createObjectURL(blob);
+          setTransformedPreviewUrl(afterUrl);
+        } catch (e) {
+          console.error('Preview URL error:', e);
+          setTransformedPreviewUrl(null);
+        }
         toast.success('Floor visualization complete!');
         const newCount = aiEnhancementsUsed + 1;
         setAiEnhancementsUsed(newCount);
@@ -131,6 +158,10 @@ export const FloorVisualizer = () => {
     toast.success('Image downloaded!');
   };
   const handleReset = () => {
+    if (uploadedPreviewUrl) URL.revokeObjectURL(uploadedPreviewUrl);
+    if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
+    setUploadedPreviewUrl(null);
+    setTransformedPreviewUrl(null);
     setUploadedImage(null);
     setSelectedColor(null);
     setTransformedImage(null);
@@ -199,7 +230,7 @@ export const FloorVisualizer = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
                     {colorOptions.map(color => <div key={color.id} onClick={() => {
                   setSelectedColor(color.id);
-                  if (uploadedImage && transformedImage && !isProcessing) {
+                  if (uploadedImage && (transformedPreviewUrl || transformedImage) && !isProcessing) {
                     handleVisualize(color.id);
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
@@ -245,7 +276,7 @@ export const FloorVisualizer = () => {
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center justify-between text-navy-900">
                   <span>Your Garage</span>
-                  {transformedImage && <div className="flex gap-2">
+                  { (transformedPreviewUrl || transformedImage) && <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={handleDownload} className="border-navy-300 text-navy-700 hover:bg-navy-50">
                         <Download className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Download</span>
@@ -254,7 +285,7 @@ export const FloorVisualizer = () => {
                         <RotateCcw className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Reset</span>
                       </Button>
-                    </div>}
+                    </div> }
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
@@ -268,14 +299,14 @@ export const FloorVisualizer = () => {
                     <p className="text-sm text-navy-500">
                       Upload a photo to get started
                     </p>
-                  </div> : transformedImage ? <div className="space-y-4">
-                    <BeforeAfterSlider beforeImage={uploadedImage} afterImage={transformedImage} className="rounded-lg overflow-hidden min-h-[500px] md:min-h-[600px]" />
+                  </div> : (transformedPreviewUrl || transformedImage) ? <div className="space-y-4">
+                    <BeforeAfterSlider beforeImage={(uploadedPreviewUrl || uploadedImage)!} afterImage={(transformedPreviewUrl || transformedImage)!} className="rounded-lg overflow-hidden min-h-[500px] md:min-h-[600px]" />
                     <p className="text-sm text-navy-600 text-center">
                       👆 Drag the slider to compare before and after
                     </p>
                   </div> : <div className="space-y-4">
                     <div className="min-h-[500px] md:min-h-[600px] rounded-lg overflow-hidden flex items-center justify-center bg-navy-50">
-                      <img src={uploadedImage} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" loading="eager" />
+                      <img src={(uploadedPreviewUrl || uploadedImage) || ''} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" loading="eager" />
                     </div>
                     <p className="text-sm text-navy-600 text-center">
                       Select a color and click "Visualize My Floor" to see the transformation
@@ -284,7 +315,7 @@ export const FloorVisualizer = () => {
               </CardContent>
 
               {/* Get My Quote Button */}
-              {transformedImage && <div className="px-6 pb-6">
+              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
                   <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
                     Get My Quote
                   </Button>
