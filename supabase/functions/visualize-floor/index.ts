@@ -14,6 +14,9 @@ serve(async (req) => {
 
   try {
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY')
+    const openAIOrgId = Deno.env.get('OPENAI_ORG_ID')
+    const openAIProjectId = Deno.env.get('OPENAI_PROJECT_ID')
+    
     if (!openAIApiKey) {
       throw new Error('OpenAI API key not configured')
     }
@@ -21,6 +24,7 @@ serve(async (req) => {
     const { image, colorName, mask } = await req.json()
 
     console.log(`Transforming floor with ${colorName} color using gpt-image-1, mask provided: ${!!mask}`)
+    console.log(`Using org: ${openAIOrgId ? 'yes' : 'no'}, project: ${openAIProjectId ? 'yes' : 'no'}`)
 
     // Convert base64 image to blob
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '')
@@ -47,18 +51,70 @@ serve(async (req) => {
     formData.append('size', '1024x1024')
     formData.append('n', '1')
 
+    // Build headers with organization and project if available
+    const headers: Record<string, string> = {
+      'Authorization': `Bearer ${openAIApiKey}`,
+    }
+    
+    if (openAIOrgId) {
+      headers['OpenAI-Organization'] = openAIOrgId
+    }
+    
+    if (openAIProjectId) {
+      headers['OpenAI-Project'] = openAIProjectId
+    }
+
     // Call OpenAI Image Edit API with gpt-image-1
     const response = await fetch('https://api.openai.com/v1/images/edits', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
-      },
+      headers,
       body: formData,
     })
 
     if (!response.ok) {
       const error = await response.json()
-      console.error('OpenAI API error:', error)
+      console.error('OpenAI API error:', response.status, error)
+      
+      // Pass through specific error statuses to client
+      if (response.status === 429) {
+        return new Response(
+          JSON.stringify({ 
+            error: 'Rate limit exceeded. Please try again in a moment.',
+            details: error.error?.message 
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }, 
+            status: 429 
+          }
+        )
+      }
+      
+      if (response.status === 402) {
+        return new Response(
+          JSON.stringify({ 
+            error: 'Payment required. Please check your OpenAI billing.',
+            details: error.error?.message 
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }, 
+            status: 402 
+          }
+        )
+      }
+      
+      if (response.status === 403) {
+        return new Response(
+          JSON.stringify({ 
+            error: 'Access forbidden. Please verify your OpenAI organization.',
+            details: error.error?.message 
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }, 
+            status: 403 
+          }
+        )
+      }
+      
       throw new Error(`OpenAI API error: ${error.error?.message || 'Unknown error'}`)
     }
 
