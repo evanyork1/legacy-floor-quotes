@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
-import { LeadCaptureModal } from './LeadCaptureModal';
 import { VisualizerQuoteModal } from './VisualizerQuoteModal';
 import { LeadFormModal } from '@/components/landing/LeadFormModal';
 import { colorOptions } from '@/constants/colorOptions';
@@ -15,15 +14,12 @@ export const FloorVisualizer = () => {
   const [transformedImage, setTransformedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
-  const [showLeadModal, setShowLeadModal] = useState(false);
-  const [leadCaptured, setLeadCaptured] = useState(false);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
-    const captured = localStorage.getItem('fv_lead_captured') === 'true';
     setAiEnhancementsUsed(used);
-    setLeadCaptured(captured);
   }, []);
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -111,8 +107,8 @@ export const FloorVisualizer = () => {
         const newCount = aiEnhancementsUsed + 1;
         setAiEnhancementsUsed(newCount);
         localStorage.setItem('fv_ai_used', newCount.toString());
-        if (!leadCaptured && newCount >= 3) {
-          setTimeout(() => setShowLeadModal(true), 500);
+        if (newCount >= 3) {
+          setTimeout(() => setShowQuoteModal(true), 500);
         }
       }
     } catch (error) {
@@ -136,12 +132,6 @@ export const FloorVisualizer = () => {
     setTransformedImage(null);
     toast.success('Visualizer reset');
   };
-  const handleLeadCapture = () => {
-    setLeadCaptured(true);
-    localStorage.setItem('fv_lead_captured', 'true');
-    setShowLeadModal(false);
-    toast.success('Thank you! You now have unlimited visualizations.');
-  };
   return <div className="w-full">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white py-12 md:py-16 px-4">
@@ -158,7 +148,12 @@ export const FloorVisualizer = () => {
       {/* Before/After Example Section */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-navy-200">
-          
+          <img 
+            src="/lovable-uploads/Screenshot_2025-11-17_at_4.11.41 PM.png"
+            alt="Before and After Floor Transformation Example"
+            className="w-full object-contain"
+            loading="eager"
+          />
         </div>
       </div>
 
@@ -214,7 +209,7 @@ export const FloorVisualizer = () => {
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
                         <div className="w-20 h-20 rounded-lg overflow-hidden mb-2">
-                          <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" />
+                          <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" loading="lazy" />
                         </div>
                         <p className="text-sm font-medium text-navy-900 text-center">
                           {color.name}
@@ -280,7 +275,7 @@ export const FloorVisualizer = () => {
                     </p>
                   </div> : <div className="space-y-4">
                     <div className="min-h-[500px] md:min-h-[600px] rounded-lg overflow-hidden flex items-center justify-center bg-navy-50">
-                      <img src={uploadedImage} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" />
+                      <img src={uploadedImage} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" loading="eager" />
                     </div>
                     <p className="text-sm text-navy-600 text-center">
                       Select a color and click "Visualize My Floor" to see the transformation
@@ -306,8 +301,6 @@ export const FloorVisualizer = () => {
           </div>
         </div>
       </div>
-
-      <LeadCaptureModal isOpen={showLeadModal} onClose={() => setShowLeadModal(false)} onSubmit={handleLeadCapture} />
 
       {/* Quote Modal */}
       <VisualizerQuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} onSuccess={() => {
