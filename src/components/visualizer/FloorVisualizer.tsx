@@ -280,7 +280,7 @@ export const FloorVisualizer = () => {
                     <div className="mt-6 pt-6 border-t border-navy-200">
                       <Button
                         size="lg"
-                        onClick={handleVisualize}
+                        onClick={() => handleVisualize()}
                         disabled={isProcessing}
                         className="w-full bg-navy-600 hover:bg-navy-700 text-white"
                       >
