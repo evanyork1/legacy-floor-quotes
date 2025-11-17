@@ -178,16 +178,12 @@ export const FloorVisualizer = () => {
       </div>
 
       {/* Before/After Example Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-6">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-navy-200">
           <img 
-            src="/lovable-uploads/phx-social-preview.png"
+            src="/lovable-uploads/floor-visualizer-before-after.png"
             alt="Before and After Floor Transformation Example"
-            className="w-full object-contain"
-            onError={(e) => {
-              console.error('Failed to load before/after image');
-              e.currentTarget.style.display = 'none';
-            }}
+            className="w-full h-auto max-h-64 object-contain"
           />
         </div>
       </div>
