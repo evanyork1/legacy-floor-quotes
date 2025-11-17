@@ -46,7 +46,6 @@ serve(async (req) => {
     formData.append('model', 'gpt-image-1')
     formData.append('size', '1024x1024')
     formData.append('n', '1')
-    formData.append('response_format', 'b64_json')
 
     // Call OpenAI Image Edit API with gpt-image-1
     const response = await fetch('https://api.openai.com/v1/images/edits', {
