@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Loader2, Wand2, RotateCcw, ArrowRight } from 'lucide-react';
+import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LeadCaptureModal } from './LeadCaptureModal';
 import { VisualizerQuoteModal } from './VisualizerQuoteModal';
@@ -181,13 +181,9 @@ export const FloorVisualizer = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-navy-200">
           <img 
-            src="/lovable-uploads/phx-social-preview.png"
+            src="/lovable-uploads/Screenshot_2025-11-17_at_4.11.41 PM.png"
             alt="Before and After Floor Transformation Example"
             className="w-full object-contain"
-            onError={(e) => {
-              console.error('Failed to load before/after image');
-              e.currentTarget.style.display = 'none';
-            }}
           />
         </div>
       </div>
@@ -395,18 +391,13 @@ export const FloorVisualizer = () => {
               {/* Get My Quote Button */}
               {transformedImage && (
                 <div className="px-6 pb-6">
-                  <div className="max-w-md mx-auto">
-                    <Button
-                      size="lg"
-                      onClick={() => setShowQuoteModal(true)}
-                      className="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white py-7 px-8 text-xl font-bold shadow-xl hover:shadow-2xl border-2 border-blue-500 transform hover:scale-105 transition-all duration-200"
-                    >
-                      <span className="flex items-center justify-center gap-3">
-                        Get My Quote
-                        <ArrowRight className="h-6 w-6" />
-                      </span>
-                    </Button>
-                  </div>
+                  <Button
+                    size="lg"
+                    onClick={() => setShowQuoteModal(true)}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold"
+                  >
+                    Get My Quote
+                  </Button>
                 </div>
               )}
 
