@@ -89,10 +89,7 @@ export const FloorVisualizer = () => {
       return;
     }
 
-    if (!leadCaptured && aiEnhancementsUsed >= 3) {
-      setShowLeadModal(true);
-      return;
-    }
+    // Unlimited visualizations - no lead capture needed
 
     setIsProcessing(true);
     try {
@@ -178,7 +175,7 @@ export const FloorVisualizer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid lg:grid-cols-[400px,1fr] gap-6 md:gap-8">
           {/* Left Column - Upload & Colors */}
           <div className="space-y-6">
             {/* Upload Card */}
@@ -190,7 +187,7 @@ export const FloorVisualizer = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
-                <div className="border-2 border-dashed border-navy-300 rounded-lg p-6 md:p-8 text-center hover:border-navy-500 hover:bg-navy-50/30 transition-all">
+                <div className="border-2 border-dashed border-navy-300 rounded-lg p-4 text-center hover:border-navy-500 hover:bg-navy-50/30 transition-all">
                   <input
                     type="file"
                     id="floor-upload"
@@ -200,17 +197,17 @@ export const FloorVisualizer = () => {
                   />
                   <label
                     htmlFor="floor-upload"
-                    className="cursor-pointer flex flex-col items-center gap-4"
+                    className="cursor-pointer flex flex-col items-center gap-3"
                   >
-                    <div className="p-4 bg-navy-100 rounded-full">
-                      <Upload className="h-8 w-8 text-navy-600" />
+                    <div className="p-3 bg-navy-100 rounded-full">
+                      <Upload className="h-6 w-6 text-navy-600" />
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-base md:text-lg font-medium text-navy-900">
+                    <div className="space-y-1">
+                      <p className="text-sm md:text-base font-medium text-navy-900">
                         Click to upload or drag and drop
                       </p>
-                      <p className="text-sm text-navy-600">
-                        PNG, JPG up to 5MB • Best results with clear floor photos
+                      <p className="text-xs text-navy-600">
+                        PNG, JPG up to 5MB
                       </p>
                       {uploadedImage && (
                         <p className="text-xs text-green-600 font-medium mt-2">
@@ -244,9 +241,9 @@ export const FloorVisualizer = () => {
                             : 'border-navy-200 hover:border-navy-400'
                         }`}
                       >
-                        <div className="aspect-video rounded-md overflow-hidden mb-2">
+                        <div className="w-20 h-20 rounded-lg overflow-hidden mb-2">
                           <img
-                            src={color.preview}
+                            src={color.thumbnail}
                             alt={color.name}
                             className="w-full h-full object-cover"
                           />
@@ -283,24 +280,19 @@ export const FloorVisualizer = () => {
                         disabled={isProcessing}
                         className="w-full bg-navy-600 hover:bg-navy-700 text-white"
                       >
-                        {isProcessing ? (
-                          <>
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Creating your visualization...
-                          </>
-                        ) : (
-                          <>
-                            <Wand2 className="mr-2 h-5 w-5" />
-                            Visualize My Floor
-                          </>
-                        )}
-                      </Button>
-                      {!leadCaptured && (
-                        <p className="text-xs text-center text-navy-600 mt-3">
-                          {3 - aiEnhancementsUsed} free {3 - aiEnhancementsUsed === 1 ? 'visualization' : 'visualizations'} remaining
-                        </p>
+                      {isProcessing ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Creating your visualization...
+                        </>
+                      ) : (
+                        <>
+                          <Wand2 className="mr-2 h-5 w-5" />
+                          Visualize My Floor
+                        </>
                       )}
-                    </div>
+                    </Button>
+                  </div>
                   )}
                 </CardContent>
               </Card>
@@ -339,7 +331,7 @@ export const FloorVisualizer = () => {
               </CardHeader>
               <CardContent className="pt-6">
                 {!uploadedImage ? (
-                  <div className="aspect-video bg-navy-50 rounded-lg flex flex-col items-center justify-center text-center p-6 md:p-8">
+                  <div className="min-h-[500px] md:min-h-[600px] bg-navy-50 rounded-lg flex flex-col items-center justify-center text-center p-6 md:p-8">
                     <div className="p-4 bg-navy-100 rounded-full mb-4">
                       <Wand2 className="h-12 w-12 text-navy-400" />
                     </div>
@@ -355,7 +347,7 @@ export const FloorVisualizer = () => {
                     <BeforeAfterSlider
                       beforeImage={uploadedImage}
                       afterImage={transformedImage}
-                      className="rounded-lg overflow-hidden"
+                      className="rounded-lg overflow-hidden min-h-[500px] md:min-h-[600px]"
                     />
                     <p className="text-sm text-navy-600 text-center">
                       👆 Drag the slider to compare before and after
@@ -363,7 +355,7 @@ export const FloorVisualizer = () => {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <div className="aspect-video rounded-lg overflow-hidden">
+                    <div className="min-h-[500px] md:min-h-[600px] rounded-lg overflow-hidden flex items-center justify-center bg-navy-50">
                       <img
                         src={uploadedImage}
                         alt="Your uploaded floor"
