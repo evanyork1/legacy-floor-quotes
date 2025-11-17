@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LeadCaptureModal } from './LeadCaptureModal';
+import { VisualizerQuoteModal } from './VisualizerQuoteModal';
+import { LeadFormModal } from '@/components/landing/LeadFormModal';
 import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -16,6 +18,8 @@ export const FloorVisualizer = () => {
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
@@ -170,6 +174,17 @@ export const FloorVisualizer = () => {
           <p className="text-lg md:text-xl text-navy-100 max-w-2xl mx-auto">
             Upload a photo of your space and instantly see how different epoxy colors transform your floor
           </p>
+        </div>
+      </div>
+
+      {/* Before/After Example Section */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-navy-200">
+          <img 
+            src="/lovable-uploads/Screenshot_2025-11-17_at_4.11.41 PM.png"
+            alt="Before and After Floor Transformation Example"
+            className="w-full object-contain"
+          />
         </div>
       </div>
 
@@ -372,6 +387,20 @@ export const FloorVisualizer = () => {
                   </div>
                 )}
               </CardContent>
+
+              {/* Get My Quote Button */}
+              {transformedImage && (
+                <div className="px-6 pb-6">
+                  <Button
+                    size="lg"
+                    onClick={() => setShowQuoteModal(true)}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold"
+                  >
+                    Get My Quote
+                  </Button>
+                </div>
+              )}
+
               {isProcessing && uploadedImage && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/70 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
@@ -390,6 +419,22 @@ export const FloorVisualizer = () => {
         isOpen={showLeadModal}
         onClose={() => setShowLeadModal(false)}
         onSubmit={handleLeadCapture}
+      />
+
+      {/* Quote Modal */}
+      <VisualizerQuoteModal
+        isOpen={showQuoteModal}
+        onClose={() => setShowQuoteModal(false)}
+        onSuccess={() => {
+          setShowQuoteModal(false);
+          setShowSuccessModal(true);
+        }}
+      />
+
+      {/* Success/Thank You Modal */}
+      <LeadFormModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
       />
     </div>
   );
