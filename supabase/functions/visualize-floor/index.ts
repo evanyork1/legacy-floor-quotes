@@ -18,28 +18,35 @@ serve(async (req) => {
       throw new Error('OpenAI API key not configured')
     }
 
-    const { image, colorName, colorThumbnail } = await req.json()
+    const { image, colorName } = await req.json()
 
-    // Create a prompt for floor visualization
-    const prompt = `Transform this garage floor image by applying ${colorName} epoxy flake coating. The floor should have a realistic ${colorName.toLowerCase()} colored epoxy coating with decorative flakes scattered throughout. Make it look professional and high-quality, maintaining the same perspective and lighting as the original image. The coating should appear smooth and glossy with the characteristic flake pattern of epoxy garage floors.`
+    console.log(`Transforming floor with ${colorName} color using gpt-image-1`)
 
-    console.log(`Generating floor visualization with ${colorName} color`)
+    // Convert base64 image to blob
+    const base64Data = image.replace(/^data:image\/\w+;base64,/, '')
+    const binaryData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0))
+    const imageBlob = new Blob([binaryData], { type: 'image/png' })
 
-    // Call OpenAI DALL-E API for image generation
-    const response = await fetch('https://api.openai.com/v1/images/generations', {
+    // Create form data for image edit API
+    const formData = new FormData()
+    formData.append('image', imageBlob, 'floor.png')
+    
+    // Enhanced prompt for realistic floor-only transformation
+    const prompt = `Transform ONLY the floor surface in this image to a professional ${colorName} epoxy coating. The floor must have: realistic ${colorName.toLowerCase()} colored epoxy base with decorative color flakes scattered throughout, high-gloss wet-look finish typical of epoxy garage floors, proper light reflections and shine. CRITICAL: Do not change walls, ceiling, doors, windows, objects, lighting, shadows, or perspective. Only modify the floor surface texture and color to look like a freshly applied epoxy coating.`
+    
+    formData.append('prompt', prompt)
+    formData.append('model', 'gpt-image-1')
+    formData.append('size', '1024x1024')
+    formData.append('n', '1')
+    formData.append('response_format', 'b64_json')
+
+    // Call OpenAI Image Edit API with gpt-image-1
+    const response = await fetch('https://api.openai.com/v1/images/edits', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        model: 'dall-e-3',
-        prompt: prompt,
-        n: 1,
-        size: '1024x1024',
-        quality: 'standard',
-        response_format: 'b64_json'
-      }),
+      body: formData,
     })
 
     if (!response.ok) {
@@ -49,14 +56,15 @@ serve(async (req) => {
     }
 
     const data = await response.json()
-    const generatedImage = `data:image/png;base64,${data.data[0].b64_json}`
+    const editedImage = `data:image/png;base64,${data.data[0].b64_json}`
 
-    console.log('Floor visualization generated successfully')
+    console.log('Floor transformation completed successfully')
 
     return new Response(
       JSON.stringify({ 
-        visualizedImage: generatedImage,
-        colorUsed: colorName
+        visualizedImage: editedImage,
+        colorUsed: colorName,
+        method: 'ai-enhanced'
       }),
       { 
         headers: { 
