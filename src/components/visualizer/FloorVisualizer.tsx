@@ -16,7 +16,6 @@ export const FloorVisualizer = () => {
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
@@ -151,16 +150,7 @@ export const FloorVisualizer = () => {
       </div>
 
       {/* Before/After Example Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-navy-200">
-          <img 
-            src="/lovable-uploads/Screenshot_2025-11-17_at_4.11.41 PM.png"
-            alt="Before and After Floor Transformation Example"
-            className="w-full object-contain"
-            loading="eager"
-          />
-        </div>
-      </div>
+      
 
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-[400px,1fr] gap-6 md:gap-8">
@@ -232,16 +222,10 @@ export const FloorVisualizer = () => {
                   </div>
                   
                   {selectedColor && <div className="mt-6 pt-6 border-t border-navy-200">
-                      <Button 
-                        type="button"
-                        size="lg" 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleVisualize();
-                        }} 
-                        disabled={isProcessing} 
-                        className="w-full bg-navy-600 hover:bg-navy-700 text-white"
-                      >
+                      <Button type="button" size="lg" onClick={e => {
+                  e.preventDefault();
+                  handleVisualize();
+                }} disabled={isProcessing} className="w-full bg-navy-600 hover:bg-navy-700 text-white">
                       {isProcessing ? <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                           Creating your visualization...
