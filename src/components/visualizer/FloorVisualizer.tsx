@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
+import { Upload, Download, Loader2, Wand2, RotateCcw, ArrowRight } from 'lucide-react';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LeadCaptureModal } from './LeadCaptureModal';
 import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import dealershipBefore from '@/assets/dealership-showroom.jpg';
+import dealershipAfter from '@/assets/polishing-showroom-cars.jpg';
 
 export const FloorVisualizer = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -166,14 +168,43 @@ export const FloorVisualizer = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white py-12 md:py-16 px-4">
+      <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-12 md:py-16 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <h1 className="text-3xl md:text-5xl font-bold">
-            Visualize Your Dream Floor
+            Try Before You Buy
           </h1>
-          <p className="text-lg md:text-xl text-navy-100 max-w-2xl mx-auto">
-            Upload a photo of your space and instantly see how different epoxy colors transform your floor
+          <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+            See exactly how your space will look with our epoxy floor coatings before making a decision
           </p>
+        </div>
+      </div>
+
+      {/* Example Section */}
+      <div className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              See the Transformation
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Drag the slider to see a real before and after example
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <BeforeAfterSlider
+              beforeImage={dealershipBefore}
+              afterImage={dealershipAfter}
+              className="rounded-xl overflow-hidden shadow-2xl"
+            />
+          </div>
+
+          <div className="text-center mt-8">
+            <div className="inline-flex items-center gap-2 text-blue-600 font-medium">
+              <span>Now visualize your own space</span>
+              <ArrowRight className="h-5 w-5" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -182,15 +213,15 @@ export const FloorVisualizer = () => {
           {/* Left Column - Upload & Colors */}
           <div className="space-y-6">
             {/* Upload Card */}
-            <Card className="border-navy-200">
-              <CardHeader className="bg-navy-50/50">
-                <CardTitle className="flex items-center gap-2 text-navy-900">
-                  <Upload className="h-5 w-5 text-navy-600" />
+            <Card className="border-blue-200">
+              <CardHeader className="bg-blue-50/50">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
+                  <Upload className="h-5 w-5 text-blue-600" />
                   Step 1: Upload Your Photo
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
-                <div className="border-2 border-dashed border-navy-300 rounded-lg p-6 md:p-8 text-center hover:border-navy-500 hover:bg-navy-50/30 transition-all">
+                <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 md:p-8 text-center hover:border-blue-500 hover:bg-blue-50/30 transition-all">
                   <input
                     type="file"
                     id="floor-upload"
@@ -202,14 +233,14 @@ export const FloorVisualizer = () => {
                     htmlFor="floor-upload"
                     className="cursor-pointer flex flex-col items-center gap-4"
                   >
-                    <div className="p-4 bg-navy-100 rounded-full">
-                      <Upload className="h-8 w-8 text-navy-600" />
+                    <div className="p-4 bg-blue-100 rounded-full">
+                      <Upload className="h-8 w-8 text-blue-600" />
                     </div>
                     <div className="space-y-2">
-                      <p className="text-base md:text-lg font-medium text-navy-900">
+                      <p className="text-base md:text-lg font-medium text-gray-900">
                         Click to upload or drag and drop
                       </p>
-                      <p className="text-sm text-navy-600">
+                      <p className="text-sm text-gray-600">
                         PNG, JPG up to 5MB • Best results with clear floor photos
                       </p>
                       {uploadedImage && (
@@ -225,10 +256,10 @@ export const FloorVisualizer = () => {
 
             {/* Color Selection */}
             {uploadedImage && (
-              <Card className="border-navy-200">
-                <CardHeader className="bg-navy-50/50">
-                  <CardTitle className="flex items-center gap-2 text-navy-900">
-                    <Wand2 className="h-5 w-5 text-navy-600" />
+              <Card className="border-blue-200">
+                <CardHeader className="bg-blue-50/50">
+                  <CardTitle className="flex items-center gap-2 text-gray-900">
+                    <Wand2 className="h-5 w-5 text-blue-600" />
                     Step 2: Choose Your Color
                   </CardTitle>
                 </CardHeader>
@@ -240,8 +271,8 @@ export const FloorVisualizer = () => {
                         onClick={() => setSelectedColor(color.id)}
                         className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${
                           selectedColor === color.id
-                            ? 'border-navy-600 shadow-lg bg-navy-50'
-                            : 'border-navy-200 hover:border-navy-400'
+                            ? 'border-blue-600 shadow-lg bg-blue-50'
+                            : 'border-gray-200 hover:border-blue-400'
                         }`}
                       >
                         <div className="aspect-video rounded-md overflow-hidden mb-2">
@@ -251,12 +282,12 @@ export const FloorVisualizer = () => {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <p className="text-sm font-medium text-navy-900 text-center">
+                        <p className="text-sm font-medium text-gray-900 text-center">
                           {color.name}
                         </p>
                         {selectedColor === color.id && (
                           <div className="mt-2 flex justify-center">
-                            <div className="w-6 h-6 bg-navy-600 rounded-full flex items-center justify-center">
+                            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
                               <svg
                                 className="w-4 h-4 text-white"
                                 fill="none"
@@ -276,12 +307,12 @@ export const FloorVisualizer = () => {
                   </div>
                   
                   {selectedColor && (
-                    <div className="mt-6 pt-6 border-t border-navy-200">
+                    <div className="mt-6 pt-6 border-t border-gray-200">
                       <Button
                         size="lg"
                         onClick={handleVisualize}
                         disabled={isProcessing}
-                        className="w-full bg-navy-600 hover:bg-navy-700 text-white"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                       >
                         {isProcessing ? (
                           <>
@@ -296,7 +327,7 @@ export const FloorVisualizer = () => {
                         )}
                       </Button>
                       {!leadCaptured && (
-                        <p className="text-xs text-center text-navy-600 mt-3">
+                        <p className="text-xs text-center text-gray-600 mt-3">
                           {3 - aiEnhancementsUsed} free {3 - aiEnhancementsUsed === 1 ? 'visualization' : 'visualizations'} remaining
                         </p>
                       )}
@@ -309,9 +340,9 @@ export const FloorVisualizer = () => {
 
           {/* Right Column - Visualization Result */}
           <div>
-            <Card className="border-navy-200 sticky top-4">
-              <CardHeader className="bg-navy-50/50">
-                <CardTitle className="flex items-center justify-between text-navy-900">
+            <Card className="border-blue-200 sticky top-4">
+              <CardHeader className="bg-blue-50/50">
+                <CardTitle className="flex items-center justify-between text-gray-900">
                   <span>Your Visualization</span>
                   {transformedImage && (
                     <div className="flex gap-2">
@@ -319,7 +350,7 @@ export const FloorVisualizer = () => {
                         variant="outline"
                         size="sm"
                         onClick={handleDownload}
-                        className="border-navy-300 text-navy-700 hover:bg-navy-50"
+                        className="border-blue-300 text-blue-700 hover:bg-blue-50"
                       >
                         <Download className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Download</span>
@@ -328,7 +359,7 @@ export const FloorVisualizer = () => {
                         variant="outline"
                         size="sm"
                         onClick={handleReset}
-                        className="border-navy-300 text-navy-700 hover:bg-navy-50"
+                        className="border-blue-300 text-blue-700 hover:bg-blue-50"
                       >
                         <RotateCcw className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Reset</span>
@@ -339,14 +370,14 @@ export const FloorVisualizer = () => {
               </CardHeader>
               <CardContent className="pt-6">
                 {!uploadedImage ? (
-                  <div className="aspect-video bg-navy-50 rounded-lg flex flex-col items-center justify-center text-center p-6 md:p-8">
-                    <div className="p-4 bg-navy-100 rounded-full mb-4">
-                      <Wand2 className="h-12 w-12 text-navy-400" />
+                  <div className="aspect-video bg-blue-50 rounded-lg flex flex-col items-center justify-center text-center p-6 md:p-8">
+                    <div className="p-4 bg-blue-100 rounded-full mb-4">
+                      <Wand2 className="h-12 w-12 text-blue-400" />
                     </div>
-                    <p className="text-navy-600 font-medium mb-2">
+                    <p className="text-gray-700 font-medium mb-2">
                       No image uploaded yet
                     </p>
-                    <p className="text-sm text-navy-500">
+                    <p className="text-sm text-gray-500">
                       Upload a photo to get started
                     </p>
                   </div>
@@ -357,7 +388,7 @@ export const FloorVisualizer = () => {
                       afterImage={transformedImage}
                       className="rounded-lg overflow-hidden"
                     />
-                    <p className="text-sm text-navy-600 text-center">
+                    <p className="text-sm text-gray-600 text-center">
                       👆 Drag the slider to compare before and after
                     </p>
                   </div>
@@ -367,10 +398,10 @@ export const FloorVisualizer = () => {
                       <img
                         src={uploadedImage}
                         alt="Your uploaded floor"
-                        className="w-full h-full object-contain bg-navy-50"
+                        className="w-full h-full object-contain bg-blue-50"
                       />
                     </div>
-                    <p className="text-sm text-navy-600 text-center">
+                    <p className="text-sm text-gray-600 text-center">
                       Select a color and click "Visualize My Floor" to see the transformation
                     </p>
                   </div>
