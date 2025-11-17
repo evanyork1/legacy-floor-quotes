@@ -18,9 +18,9 @@ serve(async (req) => {
       throw new Error('OpenAI API key not configured')
     }
 
-    const { image, colorName } = await req.json()
+    const { image, colorName, mask } = await req.json()
 
-    console.log(`Transforming floor with ${colorName} color using gpt-image-1`)
+    console.log(`Transforming floor with ${colorName} color using gpt-image-1, mask provided: ${!!mask}`)
 
     // Convert base64 image to blob
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '')
@@ -31,8 +31,16 @@ serve(async (req) => {
     const formData = new FormData()
     formData.append('image', imageBlob, 'floor.png')
     
+    // Add mask if provided
+    if (mask) {
+      const maskBase64 = mask.replace(/^data:image\/\w+;base64,/, '')
+      const maskBinary = Uint8Array.from(atob(maskBase64), c => c.charCodeAt(0))
+      const maskBlob = new Blob([maskBinary], { type: 'image/png' })
+      formData.append('mask', maskBlob, 'mask.png')
+    }
+    
     // Enhanced prompt for realistic floor-only transformation
-    const prompt = `Transform ONLY the floor surface in this image to a professional ${colorName} epoxy coating. The floor must have: realistic ${colorName.toLowerCase()} colored epoxy base with decorative color flakes scattered throughout, high-gloss wet-look finish typical of epoxy garage floors, proper light reflections and shine. CRITICAL: Do not change walls, ceiling, doors, windows, objects, lighting, shadows, or perspective. Only modify the floor surface texture and color to look like a freshly applied epoxy coating.`
+    const prompt = `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy coating. The floor must have: realistic ${colorName.toLowerCase()} colored epoxy base with decorative color flakes scattered throughout, high-gloss wet-look finish typical of epoxy garage floors, proper light reflections and shine. CRITICAL: Use the mask to limit ALL edits strictly to the masked floor region. Do not change walls, ceiling, doors, windows, objects, lighting, shadows, or perspective. Only modify the masked floor surface texture and color to look like a freshly applied epoxy coating.`
     
     formData.append('prompt', prompt)
     formData.append('model', 'gpt-image-1')

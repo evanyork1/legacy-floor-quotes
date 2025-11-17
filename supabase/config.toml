@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.send-giveaway-email]
 verify_jwt = false
+
+[functions.visualize-floor]
+verify_jwt = false
