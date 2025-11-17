@@ -49,12 +49,12 @@ CRITICAL: Apply ONLY to floor area using mask. Must show visible black, gray, an
 CRITICAL: Apply ONLY to floor area using mask. Must show distinct TAN and GRAY flakes as individual chips. NO BROWN or RED tones - keep it neutral gray-tan. NOT a blended color. Preserve all other elements exactly.`,
 
   'coyote': `Apply Torginol Coyote flake color to the floor surface. This is a premium epoxy coating with:
-- Off-white, light gray, light tan, and black flakes
+- Off-white, light gray, light tan, light brown, and black flakes
 - VERY SMALL 1/16" decorative flakes (tiny chips, NOT large flakes)
-- Approximate ratio: 35% off-white, 30% light gray, 25% light tan, 10% black
-- Light, bright appearance - predominantly WHITE and GRAY with subtle tan accents
+- Approximate ratio: 30% off-white, 25% light gray, 20% light tan, 15% light brown, 10% black
+- Light, bright appearance with white, gray, tan, and subtle brown tones
 - Satin finish with visible flake texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Flakes must be VERY SMALL (1/16"). Must show distinct off-white, gray, and light tan flake chips with WHITE being dominant color, NOT overly tan. NOT a blended color. Preserve all other elements exactly.`,
+CRITICAL: Apply ONLY to floor area using mask. Flakes must be VERY SMALL (1/16"). Must show distinct off-white, gray, tan, and brown flake chips. NOT a blended color. Preserve all other elements exactly.`,
 
   'creek-bed': `Apply Torginol Creek Bed flake color to the floor surface. This is a premium epoxy coating with:
 - Neutral grey and beige mix (river stone appearance)
@@ -65,12 +65,12 @@ CRITICAL: Apply ONLY to floor area using mask. Flakes must be VERY SMALL (1/16")
 CRITICAL: Apply ONLY to floor area using mask. Must show visible grey and beige flakes, NOT solid color.`,
 
   'orbit': `Apply Torginol Orbit flake color to the floor surface. This is a premium epoxy coating with:
-- Charcoal black, dark blue, medium gray, bright blue, and white accent flakes
+- Dark blue, charcoal, medium gray, bright blue, and white accent flakes
 - Small 1/16" to 1/8" decorative flakes densely packed
-- Approximate ratio: 35% charcoal/black, 30% dark blue, 20% medium gray, 15% bright blue/white accents
-- Dark, bold appearance with charcoal base and blue accents
+- Approximate ratio: 30% dark blue, 25% charcoal/black, 25% medium gray, 20% bright blue/white accents
+- Bold blue and gray appearance with darker accents
 - Satin finish with visible flake texture, not glossy
-CRITICAL: Apply ONLY to floor area using mask. Must show distinct DARK charcoal and blue flakes as actual chips with DARKER overall appearance, NOT a blended solid color. Preserve all other elements exactly.`
+CRITICAL: Apply ONLY to floor area using mask. Must show distinct blue, charcoal, and gray flakes as actual chips, NOT a blended solid color. Preserve all other elements exactly.`
 }
 
 serve(async (req) => {
