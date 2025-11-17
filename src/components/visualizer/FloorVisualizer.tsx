@@ -83,17 +83,16 @@ export const FloorVisualizer = () => {
     });
   };
 
-  const handleVisualize = async () => {
-    if (!uploadedImage || !selectedColor) {
+  const handleVisualize = async (overrideColorId?: string) => {
+    if (!uploadedImage || !(overrideColorId || selectedColor)) {
       toast.error('Please upload an image and select a color');
       return;
     }
 
-    // Unlimited visualizations - no lead capture needed
-
     setIsProcessing(true);
     try {
-      const selectedColorOption = colorOptions.find(c => c.id === selectedColor);
+      const colorIdToUse = overrideColorId || selectedColor!;
+      const selectedColorOption = colorOptions.find(c => c.id === colorIdToUse);
       if (!selectedColorOption) {
         toast.error('Selected color not found');
         return;
@@ -234,7 +233,12 @@ export const FloorVisualizer = () => {
                     {colorOptions.map((color) => (
                       <div
                         key={color.id}
-                        onClick={() => setSelectedColor(color.id)}
+                        onClick={() => {
+                          setSelectedColor(color.id)
+                          if (uploadedImage && transformedImage && !isProcessing) {
+                            handleVisualize(color.id)
+                          }
+                        }}
                         className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${
                           selectedColor === color.id
                             ? 'border-navy-600 shadow-lg bg-navy-50'
@@ -301,7 +305,7 @@ export const FloorVisualizer = () => {
 
           {/* Right Column - Visualization Result */}
           <div>
-            <Card className="border-navy-200 sticky top-4">
+            <Card className="border-navy-200 sticky top-4 relative">
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center justify-between text-navy-900">
                   <span>Your Visualization</span>
@@ -368,6 +372,15 @@ export const FloorVisualizer = () => {
                   </div>
                 )}
               </CardContent>
+              {isProcessing && uploadedImage && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/70 backdrop-blur-sm">
+                  <div className="flex flex-col items-center text-white">
+                    <Loader2 className="h-10 w-10 animate-spin mb-3" />
+                    <p className="text-sm">Generating your floor visualization...</p>
+                    <p className="text-xs text-white/80 mt-1">This usually takes 10–20 seconds</p>
+                  </div>
+                </div>
+              )}
             </Card>
           </div>
         </div>
