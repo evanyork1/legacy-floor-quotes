@@ -63,7 +63,7 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
       <img 
         src={afterImage} 
         alt="After transformation" 
-        className="absolute inset-0 w-full h-full object-contain"
+        className="absolute inset-0 w-full h-full object-cover"
       />
       
       {/* Before Image (Clipped) */}
@@ -74,7 +74,7 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
         <img 
           src={beforeImage} 
           alt="Before transformation" 
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
 
