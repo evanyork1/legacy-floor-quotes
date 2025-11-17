@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -93,6 +93,9 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess }: VisualizerQ
           <DialogTitle className="text-center text-xl font-bold text-gray-900">
             Get Your Quote
           </DialogTitle>
+          <DialogDescription className="text-center text-muted-foreground">
+            Fill out the form below and we'll get back to you with a custom quote
+          </DialogDescription>
         </DialogHeader>
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
