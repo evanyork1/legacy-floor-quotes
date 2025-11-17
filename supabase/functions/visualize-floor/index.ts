@@ -8,85 +8,93 @@ const corsHeaders = {
 
 // Detailed color profiles for accurate epoxy floor visualization
 const COLOR_PROFILES: Record<string, string> = {
-  'domino': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 60% white flakes, 40% black flakes, evenly distributed
-- Flake density: 75-80% coverage creating a dense speckled pattern
-- Flake sizes: Varied from 1/8" to 1/4", randomly scattered for organic look
-- Texture: Individual flake edges clearly visible with natural textured depth, matte appearance
-- Finish: Satin clear topcoat with subtle sheen and visible texture (NOT glossy or reflective)
-- Effect: Professional epoxy floor with visible flake texture, natural matte finish, minimal shine
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'domino': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a BLACK AND WHITE SPECKLED floor coating
+- Base: Neutral grey epoxy base
+- Flakes: SMALL dense black and white decorative flakes (like salt and pepper)
+- Pattern: 60% white flakes, 40% black flakes, creating a classic speckled domino cookie appearance
+- Flake size: Very small 1/16" to 1/8" flakes, densely packed at 80%+ coverage
+- Texture: Fine speckled texture with visible individual flakes, matte to low-sheen finish
+- Color: Black and white ONLY - no other colors
+- Effect: High-contrast monochrome speckled floor similar to terrazzo or cookies & cream pattern
+CRITICAL: DO NOT make solid colored floor. Must show visible black and white flakes throughout. Use mask to limit edits to floor only. Preserve all other elements exactly.`,
 
-  'tidal-wave': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% ocean blue flakes, 30% grey flakes, 20% white flakes
-- Flake density: 70-75% coverage creating a coastal ocean-inspired pattern
-- Flake sizes: Varied from 1/8" to 1/4", creating wave-like visual movement
-- Texture: Organic distribution with blue-grey color flow, visible textured surface
-- Finish: Satin clear topcoat with natural matte appearance (NOT glossy or wet-looking)
-- Effect: Ocean-inspired epoxy floor with flowing blue-grey tones, visible texture, minimal reflection
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'tidal-wave': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a GREY floor with SUBTLE BLUE HINTS, not a blue floor
+- Base: Medium grey epoxy base
+- Flakes: SMALL decorative flakes in grey, dark grey, subtle blue-grey tones, and white accents
+- Pattern: 50% medium grey flakes, 30% dark grey/charcoal flakes, 15% subtle blue-grey tones, 5% white flakes
+- Flake size: Small 1/16" to 1/8" flakes, medium-dense at 70% coverage
+- Texture: Natural stone-like texture with subtle color variation, matte finish
+- Color: Predominantly GREY with very subtle blue undertones - looks like grey concrete with hints of blue, NOT a bright blue floor
+- Effect: Natural grey stone appearance with oceanic grey-blue undertones, subtle and sophisticated
+CRITICAL: DO NOT make bright blue floor. Must be predominantly GREY with subtle blue hints. Show visible flakes throughout. Use mask to limit edits to floor only.`,
 
-  'wombat': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% medium brown flakes, 30% tan flakes, 20% cream flakes
-- Flake density: 70-75% coverage creating warm earth-tone pattern
-- Flake sizes: Varied from 1/8" to 1/4", naturally scattered with visible texture
-- Texture: Rich brown tones with tan highlights, natural textured depth
-- Finish: Satin clear topcoat with subtle sheen (NOT glossy, minimal reflection)
-- Effect: Warm brown epoxy floor with natural earth-tone variation, visible flake texture, matte appearance
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'wombat': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a BROWN SPECKLED floor coating
+- Base: Medium brown epoxy base  
+- Flakes: SMALL decorative flakes in various brown tones (chocolate, tan, caramel)
+- Pattern: 50% medium brown flakes, 30% tan flakes, 20% light brown/cream flakes
+- Flake size: Small 1/16" to 1/8" flakes, medium-dense at 70% coverage
+- Texture: Warm earth-tone texture with visible brown flakes, matte finish
+- Color: Various brown tones creating a warm, earthy appearance
+- Effect: Natural brown stone appearance with warm earth tones
+CRITICAL: DO NOT make solid brown floor. Must show visible brown-toned flakes throughout. Use mask to limit edits to floor only.`,
 
-  'raven': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 70% deep black flakes, 20% charcoal grey flakes, 10% silver flakes
-- Flake density: 80-85% coverage creating dramatic dark pattern
-- Flake sizes: Varied from 1/8" to 1/4", densely distributed with visible texture
-- Texture: Deep black base with subtle grey and silver highlights, natural textured surface
-- Finish: Satin clear topcoat with minimal sheen (NOT glossy or mirror-like)
-- Effect: Dramatic dark epoxy floor with subtle metallic highlights, visible texture, matte finish
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'raven': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a DARK CHARCOAL/BLACK SPECKLED floor coating
+- Base: Deep charcoal grey to black epoxy base
+- Flakes: SMALL decorative flakes in black, charcoal, dark grey, with subtle silver highlights
+- Pattern: 70% black/charcoal flakes, 25% dark grey flakes, 5% subtle silver metallic flakes
+- Flake size: Small 1/16" to 1/8" flakes, dense at 80% coverage
+- Texture: Deep dark texture with subtle metallic highlights, low-sheen matte finish
+- Color: Very dark charcoal to black with subtle silver sparkle
+- Effect: Dramatic dark floor with sophisticated silver accents
+CRITICAL: DO NOT make solid black floor. Must show visible dark flakes with silver highlights. Use mask to limit edits to floor only.`,
 
-  'cabin-fever': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% rustic brown flakes, 30% burnt orange flakes, 20% cream flakes
-- Flake density: 70-75% coverage creating warm rustic pattern
-- Flake sizes: Varied from 1/8" to 1/4", organic distribution with visible texture
-- Texture: Warm rustic tones with burnt orange accents, natural textured depth
-- Finish: Satin clear topcoat with subtle sheen (NOT glossy, minimal reflection)
-- Effect: Rustic lodge-inspired epoxy floor with warm brown-orange tones, visible flake texture, natural matte appearance
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'cabin-fever': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a WARM BROWN floor with ORANGE-RED ACCENTS
+- Base: Rustic brown epoxy base
+- Flakes: SMALL decorative flakes in brown, burnt orange, rust red, and tan tones
+- Pattern: 45% rustic brown flakes, 30% burnt orange/rust flakes, 15% tan flakes, 10% cream flakes
+- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
+- Texture: Warm rustic texture with orange-brown tones, matte finish
+- Color: Warm brown base with distinctive burnt orange and rust red accents
+- Effect: Lodge-inspired floor with warm autumn/cabin colors
+CRITICAL: DO NOT make solid brown floor. Must show visible brown and orange-toned flakes. Use mask to limit edits to floor only.`,
 
-  'coyote': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% sandy tan flakes, 30% beige flakes, 20% cream flakes
-- Flake density: 70-75% coverage creating desert-inspired pattern
-- Flake sizes: Varied from 1/8" to 1/4", naturally scattered with visible texture
-- Texture: Soft tan tones with beige highlights, natural textured surface
-- Finish: Satin clear topcoat with subtle sheen (NOT glossy, minimal reflection)
-- Effect: Desert-inspired epoxy floor with warm tan-beige tones, visible flake texture, natural matte appearance
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'coyote': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a LIGHT TAN/BEIGE SPECKLED floor coating
+- Base: Light tan/sandy beige epoxy base
+- Flakes: SMALL decorative flakes in tan, beige, cream, and light brown tones
+- Pattern: 50% tan flakes, 30% beige flakes, 15% cream flakes, 5% light brown flakes
+- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
+- Texture: Soft neutral texture with warm sandy tones, matte finish
+- Color: Light tan and beige tones creating a warm, sandy desert appearance
+- Effect: Desert-inspired floor with soft neutral earth tones
+CRITICAL: DO NOT make solid tan floor. Must show visible tan and beige flakes. Use mask to limit edits to floor only.`,
 
-  'creek-bed': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% medium grey flakes, 30% stone grey flakes, 20% white flakes
-- Flake density: 70-75% coverage creating natural stone-like pattern
-- Flake sizes: Varied from 1/8" to 1/4", river rock inspired distribution with visible texture
-- Texture: Natural grey stone tones with white highlights, clearly visible textured surface
-- Finish: Satin clear topcoat with natural matte appearance (NOT glossy or wet-looking)
-- Effect: Natural stone-inspired epoxy floor with grey tones, visible flake texture, minimal shine
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+  'creek-bed': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a MEDIUM GREY SPECKLED floor coating
+- Base: Medium grey epoxy base
+- Flakes: SMALL decorative flakes in various grey tones with white accents
+- Pattern: 50% medium grey flakes, 30% darker grey flakes, 15% light grey flakes, 5% white flakes
+- Flake size: Small 1/16" to 1/8" flakes, medium at 70% coverage
+- Texture: Natural stone-like grey texture with white highlights, matte finish
+- Color: Various grey tones creating a natural riverbed stone appearance
+- Effect: Natural grey stone floor with subtle white accents
+CRITICAL: DO NOT make solid grey floor. Must show visible grey-toned flakes with white accents. Use mask to limit edits to floor only.`,
 
-  'orbit': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
-- Base: Satin-finish clear polyaspartic base coat
-- Flake composition: 50% metallic silver flakes, 30% grey flakes, 20% white flakes
-- Flake density: 75-80% coverage creating modern metallic pattern
-- Flake sizes: Varied from 1/8" to 1/4", creating subtle metallic texture effect
-- Texture: Metallic silver base with grey and white accents, visible textured surface
-- Finish: Satin clear topcoat with subtle metallic sheen (NOT mirror-like or overly glossy)
-- Effect: Modern metallic epoxy floor with subtle silver sparkle, visible texture, natural satin finish
-CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`
+  'orbit': `Transform ONLY the floor surface to have a premium epoxy coating with these EXACT specifications:
+- This is a SILVER-GREY METALLIC floor coating
+- Base: Light grey epoxy base with metallic sheen
+- Flakes: SMALL decorative metallic flakes in silver, light grey, and white
+- Pattern: 50% metallic silver flakes, 30% light grey flakes, 20% white flakes
+- Flake size: Small 1/16" to 1/8" metallic flakes, dense at 75% coverage
+- Texture: Modern metallic texture with subtle silver sparkle, low-sheen finish
+- Color: Silver-grey with metallic highlights creating a modern, sophisticated look
+- Effect: Contemporary metallic floor with silver sparkle and grey tones
+CRITICAL: DO NOT make solid silver floor. Must show visible metallic silver and grey flakes. Use mask to limit edits to floor only.`
 }
 
 serve(async (req) => {
@@ -128,7 +136,7 @@ serve(async (req) => {
     
     // Use detailed color profile or fallback to generic prompt
     const detailedPrompt = COLOR_PROFILES[colorId] || 
-      `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy coating with satin finish, visible decorative color flakes, realistic texture, and minimal shine (NOT glossy). CRITICAL: Use mask to limit edits to floor only. Preserve all other elements exactly as original.`
+      `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy floor coating with these specifications: SMALL VISIBLE DECORATIVE FLAKES creating speckled pattern (NOT solid color), satin matte finish with minimal shine, realistic textured appearance showing individual flakes. CRITICAL: DO NOT create solid colored floor - must show visible flake pattern. Use mask to limit edits to floor only. Preserve all other elements exactly as original.`
     
     formData.append('prompt', detailedPrompt)
     formData.append('model', 'gpt-image-1')
