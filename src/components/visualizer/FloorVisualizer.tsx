@@ -109,6 +109,7 @@ export const FloorVisualizer = () => {
         body: {
           image: uploadedImage,
           colorName: selectedColorOption.name,
+          colorId: selectedColorOption.id,
           mask: mask
         }
       });

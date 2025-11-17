@@ -6,6 +6,89 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+// Detailed color profiles for accurate epoxy floor visualization
+const COLOR_PROFILES: Record<string, string> = {
+  'domino': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 60% white flakes, 40% black flakes, evenly distributed
+- Flake density: 75-80% coverage creating a dense speckled pattern
+- Flake sizes: Varied from 1/8" to 1/4", randomly scattered for organic look
+- Texture: Individual flake edges clearly visible with natural depth
+- Finish: High-gloss clear topcoat with strong light reflections and wet-look shine
+- Effect: Professional epoxy floor with dimensional depth, visible texture variation
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'tidal-wave': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% ocean blue flakes, 30% grey flakes, 20% white flakes
+- Flake density: 70-75% coverage creating a coastal ocean-inspired pattern
+- Flake sizes: Varied from 1/8" to 1/4", creating wave-like visual movement
+- Texture: Organic distribution with blue-grey color flow, dimensional depth
+- Finish: High-gloss clear topcoat with reflective wet-look surface
+- Effect: Ocean-inspired epoxy floor with flowing blue-grey tones and natural texture
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'wombat': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% medium brown flakes, 30% tan flakes, 20% cream flakes
+- Flake density: 70-75% coverage creating warm earth-tone pattern
+- Flake sizes: Varied from 1/8" to 1/4", naturally scattered
+- Texture: Rich brown tones with tan highlights, organic depth
+- Finish: High-gloss clear topcoat with reflective shine
+- Effect: Warm brown epoxy floor with natural earth-tone variation and professional finish
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'raven': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 70% deep black flakes, 20% charcoal grey flakes, 10% silver flakes
+- Flake density: 80-85% coverage creating dramatic dark pattern
+- Flake sizes: Varied from 1/8" to 1/4", densely distributed
+- Texture: Deep black base with subtle grey and silver highlights for dimension
+- Finish: High-gloss clear topcoat with mirror-like reflections
+- Effect: Dramatic dark epoxy floor with subtle metallic highlights and professional depth
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'cabin-fever': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% rustic brown flakes, 30% burnt orange flakes, 20% cream flakes
+- Flake density: 70-75% coverage creating warm rustic pattern
+- Flake sizes: Varied from 1/8" to 1/4", organic distribution
+- Texture: Warm rustic tones with burnt orange accents, natural depth
+- Finish: High-gloss clear topcoat with warm reflective shine
+- Effect: Rustic lodge-inspired epoxy floor with warm brown-orange tones and natural texture
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'coyote': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% sandy tan flakes, 30% beige flakes, 20% cream flakes
+- Flake density: 70-75% coverage creating desert-inspired pattern
+- Flake sizes: Varied from 1/8" to 1/4", naturally scattered
+- Texture: Soft tan tones with beige highlights, subtle organic depth
+- Finish: High-gloss clear topcoat with reflective shine
+- Effect: Desert-inspired epoxy floor with warm tan-beige tones and natural variation
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'creek-bed': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% medium grey flakes, 30% stone grey flakes, 20% white flakes
+- Flake density: 70-75% coverage creating natural stone-like pattern
+- Flake sizes: Varied from 1/8" to 1/4", river rock inspired distribution
+- Texture: Natural grey stone tones with white highlights, organic depth
+- Finish: High-gloss clear topcoat with reflective wet-look surface
+- Effect: Natural stone-inspired epoxy floor with grey tones and river rock texture
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`,
+
+  'orbit': `Transform ONLY the floor surface to have a premium epoxy coating with these exact specifications:
+- Base: High-gloss clear polyaspartic base coat
+- Flake composition: 50% metallic silver flakes, 30% grey flakes, 20% white flakes
+- Flake density: 75-80% coverage creating modern metallic pattern
+- Flake sizes: Varied from 1/8" to 1/4", creating dimensional sparkle effect
+- Texture: Metallic silver base with grey and white accents for depth
+- Finish: High-gloss clear topcoat with mirror-like reflections and metallic shimmer
+- Effect: Modern metallic epoxy floor with silver sparkle and professional high-gloss finish
+CRITICAL: Use mask to limit edits to floor only. Preserve walls, ceiling, doors, windows, objects, lighting, shadows, and perspective exactly as original.`
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -21,9 +104,9 @@ serve(async (req) => {
       throw new Error('OpenAI API key not configured')
     }
 
-    const { image, colorName, mask } = await req.json()
+    const { image, colorName, colorId, mask } = await req.json()
 
-    console.log(`Transforming floor with ${colorName} color using gpt-image-1, mask provided: ${!!mask}`)
+    console.log(`Transforming floor with ${colorName} (${colorId}) using gpt-image-1, mask provided: ${!!mask}`)
     console.log(`Using org: ${openAIOrgId ? 'yes' : 'no'}, project: ${openAIProjectId ? 'yes' : 'no'}`)
 
     // Convert base64 image to blob
@@ -43,12 +126,13 @@ serve(async (req) => {
       formData.append('mask', maskBlob, 'mask.png')
     }
     
-    // Enhanced prompt for realistic floor-only transformation
-    const prompt = `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy coating. The floor must have: realistic ${colorName.toLowerCase()} colored epoxy base with decorative color flakes scattered throughout, high-gloss wet-look finish typical of epoxy garage floors, proper light reflections and shine. CRITICAL: Use the mask to limit ALL edits strictly to the masked floor region. Do not change walls, ceiling, doors, windows, objects, lighting, shadows, or perspective. Only modify the masked floor surface texture and color to look like a freshly applied epoxy coating.`
+    // Use detailed color profile or fallback to generic prompt
+    const detailedPrompt = COLOR_PROFILES[colorId] || 
+      `Transform ONLY the floor surface (use provided mask) to a professional ${colorName} epoxy coating with high-gloss finish, decorative color flakes, and realistic texture. CRITICAL: Use mask to limit edits to floor only. Preserve all other elements exactly as original.`
     
-    formData.append('prompt', prompt)
+    formData.append('prompt', detailedPrompt)
     formData.append('model', 'gpt-image-1')
-    formData.append('size', '1024x1024')
+    formData.append('size', '1792x1792') // Increased from 1024x1024 for better quality
     formData.append('n', '1')
 
     // Build headers with organization and project if available
