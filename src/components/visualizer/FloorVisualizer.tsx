@@ -334,7 +334,7 @@ export const FloorVisualizer = () => {
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center gap-2 text-navy-900">
                   <Upload className="h-5 w-5 text-navy-600" />
-                  Step 1: Upload Your Photo
+                  Upload Your Own Garage
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
@@ -437,16 +437,6 @@ export const FloorVisualizer = () => {
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center justify-between text-navy-900">
                   <span>Your Garage</span>
-                  { (transformedPreviewUrl || transformedImage) && <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={handleDownload} className="border-navy-300 text-navy-700 hover:bg-navy-50">
-                        <Download className="mr-2 h-4 w-4" />
-                        <span className="hidden sm:inline">Download</span>
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={handleReset} className="border-navy-300 text-navy-700 hover:bg-navy-50">
-                        <RotateCcw className="mr-2 h-4 w-4" />
-                        <span className="hidden sm:inline">Reset</span>
-                      </Button>
-                    </div> }
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
