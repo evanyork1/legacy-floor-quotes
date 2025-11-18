@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Loader2, Wand2, RotateCcw } from 'lucide-react';
+import { Upload, Download, Loader2, Wand2, RotateCcw, Send } from 'lucide-react';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { VisualizerQuoteModal } from './VisualizerQuoteModal';
 import { LeadFormModal } from '@/components/landing/LeadFormModal';
+import { CountdownTimer } from './CountdownTimer';
+import { RotatingFacts } from './RotatingFacts';
+import { ShareModal } from './ShareModal';
 import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -16,12 +19,37 @@ export const FloorVisualizer = () => {
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
+  
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
+  }, []);
+
+  // Auto-load demo photo on mount
+  useEffect(() => {
+    const loadDemoPhoto = async () => {
+      try {
+        const response = await fetch('/demo-garage.jpg');
+        const blob = await response.blob();
+        const file = new File([blob], 'demo-garage.jpg', { type: 'image/jpeg' });
+        
+        // Create preview URL for display
+        const objectUrl = URL.createObjectURL(file);
+        setUploadedPreviewUrl(objectUrl);
+        
+        // Resize for API processing
+        const resizedBase64 = await resizeImage(file);
+        setUploadedImage(resizedBase64);
+      } catch (error) {
+        console.error('Error loading demo photo:', error);
+      }
+    };
+    
+    loadDemoPhoto();
   }, []);
   const resizeImage = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -369,17 +397,25 @@ export const FloorVisualizer = () => {
               </CardContent>
 
               {/* Get My Quote Button */}
-              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
+              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6 space-y-3">
                   <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
                     Get My Quote
                   </Button>
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    onClick={() => setShowShareModal(true)}
+                    className="w-full border-navy-300 text-navy-700 hover:bg-navy-50 py-6 text-lg font-semibold"
+                  >
+                    <Send className="mr-2 h-5 w-5" />
+                    Share
+                  </Button>
                 </div>}
 
-              {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/70 backdrop-blur-sm">
+              {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
-                    <Loader2 className="h-10 w-10 animate-spin mb-3" />
-                    <p className="text-sm">Generating your floor visualization...</p>
-                    <p className="text-xs text-white/80 mt-1">This usually takes 10–20 seconds</p>
+                    <CountdownTimer duration={30} />
+                    <RotatingFacts />
                   </div>
                 </div>}
             </Card>
@@ -395,5 +431,13 @@ export const FloorVisualizer = () => {
 
       {/* Success/Thank You Modal */}
       <LeadFormModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        onDownload={handleDownload}
+        transformedImage={transformedImage || ''}
+      />
     </div>;
 };
