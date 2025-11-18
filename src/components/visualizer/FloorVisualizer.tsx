@@ -26,6 +26,9 @@ export const FloorVisualizer = () => {
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
+  // Batch processing state
+  const [colorCache, setColorCache] = useState<Record<string, string>>({});
+  const [batchProcessingProgress, setBatchProcessingProgress] = useState<{ total: number, completed: number } | null>(null);
   
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
@@ -133,6 +136,7 @@ export const FloorVisualizer = () => {
         setTransformedPreviewUrl(null);
       }
       setTransformedImage(null);
+      setColorCache({}); // Clear cache when uploading new image
 
       // Create a lightweight preview URL for Safari/iOS stability (for display only)
       const objectUrl = URL.createObjectURL(file);
@@ -144,12 +148,90 @@ export const FloorVisualizer = () => {
       setUploadedImage(resizedBase64);
       setIsUsingDemoPhoto(false);
       
-      toast.success('Image uploaded successfully!');
+      toast.success('Image uploaded! Processing all colors...');
+      
+      // Start batch processing all colors
+      await batchProcessAllColors(resizedBase64);
     } catch (error) {
       console.error('Error loading image:', error);
       toast.error('Failed to load image. Please try again.');
     }
   };
+  const batchProcessAllColors = async (imageData: string) => {
+    setIsProcessing(true);
+    setBatchProcessingProgress({ total: colorOptions.length, completed: 0 });
+    
+    const mask = await generateFloorMask(imageData);
+    const results: Record<string, string> = {};
+    let completedCount = 0;
+    let failedColors: string[] = [];
+
+    // Process all colors in parallel
+    const promises = colorOptions.map(async (color) => {
+      try {
+        const { data, error } = await supabase.functions.invoke('visualize-floor', {
+          body: {
+            image: imageData,
+            colorName: color.name,
+            colorId: color.id,
+            mask
+          }
+        });
+
+        if (error) throw error;
+        if (data?.visualizedImage) {
+          results[color.id] = data.visualizedImage;
+        } else {
+          failedColors.push(color.name);
+        }
+      } catch (error) {
+        console.error(`Failed to process ${color.name}:`, error);
+        failedColors.push(color.name);
+      } finally {
+        completedCount++;
+        setBatchProcessingProgress({ total: colorOptions.length, completed: completedCount });
+      }
+    });
+
+    await Promise.all(promises);
+
+    // Update cache with successful results
+    setColorCache(results);
+    
+    // Display the first successful color or currently selected color
+    const colorToDisplay = results[selectedColor || ''] || results[colorOptions[0].id];
+    if (colorToDisplay) {
+      setTransformedImage(colorToDisplay);
+      // Create preview URL for display
+      const blob = await (await fetch(colorToDisplay)).blob();
+      if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
+      const previewUrl = URL.createObjectURL(blob);
+      setTransformedPreviewUrl(previewUrl);
+    }
+
+    // Count this batch as 1 AI usage
+    const newCount = aiEnhancementsUsed + 1;
+    setAiEnhancementsUsed(newCount);
+    localStorage.setItem('fv_ai_used', newCount.toString());
+
+    if (newCount >= 3) {
+      setShowQuoteModal(true);
+    }
+
+    setIsProcessing(false);
+    setBatchProcessingProgress(null);
+
+    // Show results
+    const successCount = Object.keys(results).length;
+    if (successCount === colorOptions.length) {
+      toast.success('All colors processed! Click any color to switch instantly.');
+    } else if (successCount > 0) {
+      toast.success(`${successCount} colors ready! ${failedColors.length} failed: ${failedColors.join(', ')}`);
+    } else {
+      toast.error('Failed to process colors. Please try again.');
+    }
+  };
+
   const generateFloorMask = async (imageDataUrl: string): Promise<string> => {
     return new Promise(resolve => {
       const img = new Image();
@@ -390,8 +472,19 @@ export const FloorVisualizer = () => {
                       console.error('Error loading demo image:', error);
                       toast.error('Failed to load demo visualization');
                     }
+                  } else if (!isUsingDemoPhoto && colorCache[color.id]) {
+                    // User photo with cached color - instant switch
+                    const cachedImage = colorCache[color.id];
+                    setTransformedImage(cachedImage);
+                    
+                    // Update preview URL
+                    const blob = await (await fetch(cachedImage)).blob();
+                    if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
+                    const previewUrl = URL.createObjectURL(blob);
+                    setTransformedPreviewUrl(previewUrl);
                   } else if (!isUsingDemoPhoto && uploadedImage && !isProcessing) {
-                    // User uploaded their own photo, trigger AI
+                    // Fallback: trigger individual AI call if not in cache
+                    toast.info('Processing this color...');
                     handleVisualize(color.id);
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
@@ -485,10 +578,14 @@ export const FloorVisualizer = () => {
 
               {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
-                    <CountdownTimer duration={60} onComplete={() => {
-                      toast.error('Visualization is taking longer than expected. Please try again.');
-                      setIsProcessing(false);
-                    }} />
+                    <CountdownTimer 
+                      duration={60} 
+                      batchProgress={batchProcessingProgress}
+                      onComplete={() => {
+                        toast.error('Visualization is taking longer than expected. Please try again.');
+                        setIsProcessing(false);
+                      }} 
+                    />
                     <RotatingFacts />
                   </div>
                 </div>}
