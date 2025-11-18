@@ -21,6 +21,7 @@ export const FloorVisualizer = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [isLoadingDemo, setIsLoadingDemo] = useState(true);
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
@@ -42,24 +43,28 @@ export const FloorVisualizer = () => {
         // Process original demo photo
         const originalBlob = await originalResponse.blob();
         const originalFile = new File([originalBlob], 'demo-garage.jpg', { type: 'image/jpeg' });
-        const originalUrl = URL.createObjectURL(originalFile);
-        setUploadedPreviewUrl(originalUrl);
         const resizedOriginal = await resizeImage(originalFile);
-        setUploadedImage(resizedOriginal);
         
         // Process pre-visualized Domino image
         const dominoBlob = await dominoResponse.blob();
-        const dominoUrl = URL.createObjectURL(dominoBlob);
-        setTransformedPreviewUrl(dominoUrl);
         const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
         const resizedDomino = await resizeImage(dominoFile);
-        setTransformedImage(resizedDomino);
         
-        // Mark initial load as complete
+        // Create preview URLs
+        const originalUrl = URL.createObjectURL(originalBlob);
+        const dominoUrl = URL.createObjectURL(dominoBlob);
+        
+        // Set all states simultaneously to prevent flash
+        setUploadedPreviewUrl(originalUrl);
+        setUploadedImage(resizedOriginal);
+        setTransformedPreviewUrl(dominoUrl);
+        setTransformedImage(resizedDomino);
         setIsInitialLoad(false);
+        setIsLoadingDemo(false);
       } catch (error) {
         console.error('Error loading demo visualization:', error);
         setIsInitialLoad(false);
+        setIsLoadingDemo(false);
       }
     };
     
@@ -72,7 +77,7 @@ export const FloorVisualizer = () => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 1024;
+          const MAX_WIDTH = 800;
           
           let width = img.width;
           let height = img.height;
@@ -231,7 +236,7 @@ export const FloorVisualizer = () => {
         const newCount = aiEnhancementsUsed + 1;
         setAiEnhancementsUsed(newCount);
         localStorage.setItem('fv_ai_used', newCount.toString());
-        if (newCount >= 3) {
+        if (newCount >= 4) {
           setTimeout(() => setShowQuoteModal(true), 500);
         }
       } else {
@@ -278,7 +283,16 @@ export const FloorVisualizer = () => {
 
       {/* Before/After Example Section */}
       
-
+      {isLoadingDemo ? (
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+          <div className="flex items-center justify-center min-h-[600px]">
+            <div className="text-center">
+              <Loader2 className="h-12 w-12 animate-spin text-navy-600 mx-auto mb-4" />
+              <p className="text-navy-600 font-medium">Loading visualizer...</p>
+            </div>
+          </div>
+        </div>
+      ) : (
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-[400px,1fr] gap-6 md:gap-8">
           {/* Left Column - Upload & Colors */}
@@ -411,24 +425,26 @@ export const FloorVisualizer = () => {
               </CardContent>
 
               {/* Get My Quote Button */}
-              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6 space-y-3">
-                  <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
-                    Get My Quote
-                  </Button>
-                  <Button 
-                    size="lg"
-                    variant="outline"
-                    onClick={() => setShowShareModal(true)}
-                    className="w-full border-navy-300 text-navy-700 hover:bg-navy-50 py-6 text-lg font-semibold"
-                  >
-                    <Send className="mr-2 h-5 w-5" />
-                    Share
-                  </Button>
+              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
+                  <div className="max-w-md mx-auto space-y-3">
+                    <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
+                      Get My Quote
+                    </Button>
+                    <Button 
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setShowShareModal(true)}
+                      className="w-full border-navy-300 text-navy-700 hover:bg-navy-50 py-6 text-lg font-semibold"
+                    >
+                      <Send className="mr-2 h-5 w-5" />
+                      Share
+                    </Button>
+                  </div>
                 </div>}
 
               {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
-                    <CountdownTimer duration={30} />
+                    <CountdownTimer duration={45} />
                     <RotatingFacts />
                   </div>
                 </div>}
@@ -436,6 +452,7 @@ export const FloorVisualizer = () => {
           </div>
         </div>
       </div>
+      )}
 
       {/* Quote Modal */}
       <VisualizerQuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} onSuccess={() => {
