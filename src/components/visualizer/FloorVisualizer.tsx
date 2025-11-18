@@ -26,6 +26,7 @@ export const FloorVisualizer = () => {
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
+  
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
@@ -35,26 +36,25 @@ export const FloorVisualizer = () => {
   useEffect(() => {
     const loadDemoPhoto = async () => {
       try {
-        const [originalResponse, dominoResponse] = await Promise.all([fetch('/demo-garage.jpg'), fetch('/demo-garage-domino.jpg')]);
-
+        const [originalResponse, dominoResponse] = await Promise.all([
+          fetch('/demo-garage.jpg'),
+          fetch('/demo-garage-domino.jpg')
+        ]);
+        
         // Process original demo photo
         const originalBlob = await originalResponse.blob();
-        const originalFile = new File([originalBlob], 'demo-garage.jpg', {
-          type: 'image/jpeg'
-        });
+        const originalFile = new File([originalBlob], 'demo-garage.jpg', { type: 'image/jpeg' });
         const resizedOriginal = await resizeImage(originalFile);
-
+        
         // Process pre-visualized Domino image
         const dominoBlob = await dominoResponse.blob();
-        const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', {
-          type: 'image/jpeg'
-        });
+        const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
         const resizedDomino = await resizeImage(dominoFile);
-
+        
         // Create preview URLs
         const originalUrl = URL.createObjectURL(originalBlob);
         const dominoUrl = URL.createObjectURL(dominoBlob);
-
+        
         // Set all states simultaneously to prevent flash
         setUploadedPreviewUrl(originalUrl);
         setUploadedImage(resizedOriginal);
@@ -68,39 +68,40 @@ export const FloorVisualizer = () => {
         setIsLoadingDemo(false);
       }
     };
+    
     loadDemoPhoto();
   }, []);
   const resizeImage = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
           const MAX_WIDTH = 800;
+          
           let width = img.width;
           let height = img.height;
-          console.log('Original image dimensions:', {
-            width,
-            height
-          });
+          
+          console.log('Original image dimensions:', { width, height });
+          
           if (width > MAX_WIDTH) {
-            height = height * MAX_WIDTH / width;
+            height = (height * MAX_WIDTH) / width;
             width = MAX_WIDTH;
           }
+          
           canvas.width = width;
           canvas.height = height;
+          
           const ctx = canvas.getContext('2d');
           if (!ctx) {
             reject(new Error('Could not get canvas context'));
             return;
           }
+          
           ctx.drawImage(img, 0, 0, width, height);
           const resizedBase64 = canvas.toDataURL('image/jpeg', 0.9);
-          console.log('Resized image dimensions:', {
-            width,
-            height
-          });
+          console.log('Resized image dimensions:', { width, height });
           resolve(resizedBase64);
         };
         img.onerror = () => reject(new Error('Failed to load image'));
@@ -110,6 +111,7 @@ export const FloorVisualizer = () => {
       reader.readAsDataURL(file);
     });
   };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -141,6 +143,7 @@ export const FloorVisualizer = () => {
       const resizedBase64 = await resizeImage(file);
       setUploadedImage(resizedBase64);
       setIsUsingDemoPhoto(false);
+      
       toast.success('Image uploaded successfully!');
     } catch (error) {
       console.error('Error loading image:', error);
@@ -181,6 +184,7 @@ export const FloorVisualizer = () => {
     setIsProcessing(true);
     try {
       const colorIdToUse = overrideColorId || selectedColor!;
+      
       console.log('Starting visualization with resized image');
       const selectedColorOption = colorOptions.find(c => c.id === colorIdToUse);
       if (!selectedColorOption) {
@@ -190,6 +194,7 @@ export const FloorVisualizer = () => {
       }
       const mask = await generateFloorMask(uploadedImage);
       console.log('Generated mask for resized image');
+      
       const {
         data,
         error
@@ -213,7 +218,9 @@ export const FloorVisualizer = () => {
         setIsProcessing(false);
         return;
       }
+      
       console.log('Successfully received transformed image');
+      
       if (data?.visualizedImage) {
         setTransformedImage(data.visualizedImage);
         // Create a stable preview URL for iOS Safari
@@ -264,22 +271,25 @@ export const FloorVisualizer = () => {
     setIsUsingDemoPhoto(true);
     setAiEnhancementsUsed(0);
     localStorage.setItem('fv_ai_used', '0');
-
+    
     // Reload demo photo
     try {
-      const [originalResponse, dominoResponse] = await Promise.all([fetch('/demo-garage.jpg'), fetch('/demo-garage-domino.jpg')]);
+      const [originalResponse, dominoResponse] = await Promise.all([
+        fetch('/demo-garage.jpg'),
+        fetch('/demo-garage-domino.jpg')
+      ]);
+      
       const originalBlob = await originalResponse.blob();
-      const originalFile = new File([originalBlob], 'demo-garage.jpg', {
-        type: 'image/jpeg'
-      });
+      const originalFile = new File([originalBlob], 'demo-garage.jpg', { type: 'image/jpeg' });
       const resizedOriginal = await resizeImage(originalFile);
+      
       const dominoBlob = await dominoResponse.blob();
-      const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', {
-        type: 'image/jpeg'
-      });
+      const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
       const resizedDomino = await resizeImage(dominoFile);
+      
       const originalUrl = URL.createObjectURL(originalBlob);
       const dominoUrl = URL.createObjectURL(dominoBlob);
+      
       setUploadedPreviewUrl(originalUrl);
       setUploadedImage(resizedOriginal);
       setTransformedPreviewUrl(dominoUrl);
@@ -287,6 +297,7 @@ export const FloorVisualizer = () => {
     } catch (error) {
       console.error('Error reloading demo:', error);
     }
+    
     toast.success('Visualizer reset');
   };
   return <div className="w-full">
@@ -304,14 +315,17 @@ export const FloorVisualizer = () => {
 
       {/* Before/After Example Section */}
       
-      {isLoadingDemo ? <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+      {isLoadingDemo ? (
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
           <div className="flex items-center justify-center min-h-[600px]">
             <div className="text-center">
               <Loader2 className="h-12 w-12 animate-spin text-navy-600 mx-auto mb-4" />
               <p className="text-navy-600 font-medium">Loading visualizer...</p>
             </div>
           </div>
-        </div> : <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        </div>
+      ) : (
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-[400px,1fr] gap-6 md:gap-8">
           {/* Left Column - Upload & Colors */}
           <div className="space-y-6">
@@ -358,18 +372,18 @@ export const FloorVisualizer = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
                     {colorOptions.map(color => <div key={color.id} onClick={async () => {
                   setSelectedColor(color.id);
-
+                  
                   // If using demo photo, instantly load pre-rendered image
                   if (isUsingDemoPhoto && color.demoImage) {
                     try {
                       const response = await fetch(color.demoImage);
                       const blob = await response.blob();
-                      const file = new File([blob], `demo-garage-${color.id}.jpg`, {
-                        type: 'image/jpeg'
-                      });
+                      const file = new File([blob], `demo-garage-${color.id}.jpg`, { type: 'image/jpeg' });
                       const resized = await resizeImage(file);
+                      
                       if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
                       const previewUrl = URL.createObjectURL(blob);
+                      
                       setTransformedImage(resized);
                       setTransformedPreviewUrl(previewUrl);
                     } catch (error) {
@@ -423,7 +437,16 @@ export const FloorVisualizer = () => {
               <CardHeader className="bg-navy-50/50">
                 <CardTitle className="flex items-center justify-between text-navy-900">
                   <span>Your Garage</span>
-                  {transformedPreviewUrl || transformedImage}
+                  { (transformedPreviewUrl || transformedImage) && <div className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={handleDownload} className="border-navy-300 text-navy-700 hover:bg-navy-50">
+                        <Download className="mr-2 h-4 w-4" />
+                        <span className="hidden sm:inline">Download</span>
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={handleReset} className="border-navy-300 text-navy-700 hover:bg-navy-50">
+                        <RotateCcw className="mr-2 h-4 w-4" />
+                        <span className="hidden sm:inline">Reset</span>
+                      </Button>
+                    </div> }
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
@@ -437,14 +460,14 @@ export const FloorVisualizer = () => {
                     <p className="text-sm text-navy-500">
                       Upload a photo to get started
                     </p>
-                  </div> : transformedPreviewUrl || transformedImage ? <div className="space-y-4">
+                  </div> : (transformedPreviewUrl || transformedImage) ? <div className="space-y-4">
                     <BeforeAfterSlider beforeImage={(uploadedPreviewUrl || uploadedImage)!} afterImage={(transformedPreviewUrl || transformedImage)!} className="rounded-lg overflow-hidden min-h-[500px] md:min-h-[600px]" />
                     <p className="text-sm text-navy-600 text-center">
                       👆 Drag the slider to compare before and after
                     </p>
                   </div> : <div className="space-y-4">
                     <div className="min-h-[500px] md:min-h-[600px] rounded-lg overflow-hidden flex items-center justify-center bg-navy-50">
-                      <img src={uploadedPreviewUrl || uploadedImage || ''} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" loading="eager" />
+                      <img src={(uploadedPreviewUrl || uploadedImage) || ''} alt="Your uploaded floor" className="w-full h-full object-contain bg-navy-50" loading="eager" />
                     </div>
                     <p className="text-sm text-navy-600 text-center">
                       Select a color and click "Visualize My Floor" to see the transformation
@@ -453,12 +476,17 @@ export const FloorVisualizer = () => {
               </CardContent>
 
               {/* Get My Quote Button */}
-              {(transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
+              { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
                   <div className="max-w-md mx-auto space-y-3">
                     <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
                       Get My Quote
                     </Button>
-                    <Button size="lg" variant="outline" onClick={() => setShowShareModal(true)} className="w-full border-navy-300 text-navy-700 hover:bg-navy-50 py-6 text-lg font-semibold">
+                    <Button 
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setShowShareModal(true)}
+                      className="w-full border-navy-300 text-navy-700 hover:bg-navy-50 py-6 text-lg font-semibold"
+                    >
                       <Send className="mr-2 h-5 w-5" />
                       Share
                     </Button>
@@ -468,16 +496,17 @@ export const FloorVisualizer = () => {
               {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
                     <CountdownTimer duration={60} onComplete={() => {
-                  toast.error('Visualization is taking longer than expected. Please try again.');
-                  setIsProcessing(false);
-                }} />
+                      toast.error('Visualization is taking longer than expected. Please try again.');
+                      setIsProcessing(false);
+                    }} />
                     <RotatingFacts />
                   </div>
                 </div>}
             </Card>
           </div>
         </div>
-      </div>}
+      </div>
+      )}
 
       {/* Quote Modal */}
       <VisualizerQuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} onSuccess={() => {
@@ -489,6 +518,11 @@ export const FloorVisualizer = () => {
       <LeadFormModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
 
       {/* Share Modal */}
-      <ShareModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} onDownload={handleDownload} transformedImage={transformedImage || ''} />
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        onDownload={handleDownload}
+        transformedImage={transformedImage || ''}
+      />
     </div>;
 };
