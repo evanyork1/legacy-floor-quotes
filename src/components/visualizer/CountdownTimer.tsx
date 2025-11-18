@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 interface CountdownTimerProps {
   duration?: number;
   onComplete?: () => void;
+  batchProgress?: { total: number; completed: number } | null;
 }
 
-export const CountdownTimer = ({ duration = 60, onComplete }: CountdownTimerProps) => {
+export const CountdownTimer = ({ duration = 60, onComplete, batchProgress }: CountdownTimerProps) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       onComplete?.();
@@ -41,12 +42,25 @@ export const CountdownTimer = ({ duration = 60, onComplete }: CountdownTimerProp
         </svg>
       </div>
       <div className="text-center">
-        <p className="text-white text-sm font-medium">
-          Creating your visualization...
-        </p>
-        <p className="text-white/80 text-xs mt-1">
-          This may take up to a minute
-        </p>
+        {batchProgress ? (
+          <>
+            <p className="text-white text-sm font-medium">
+              Processing colors: {batchProgress.completed}/{batchProgress.total}
+            </p>
+            <p className="text-white/80 text-xs mt-1">
+              Generating all visualizations at once...
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-white text-sm font-medium">
+              Creating your visualization...
+            </p>
+            <p className="text-white/80 text-xs mt-1">
+              This may take up to a minute
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
