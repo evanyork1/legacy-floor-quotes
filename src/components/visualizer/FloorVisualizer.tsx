@@ -23,6 +23,47 @@ export const FloorVisualizer = () => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
   }, []);
+  const resizeImage = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 1024;
+          
+          let width = img.width;
+          let height = img.height;
+          
+          console.log('Original image dimensions:', { width, height });
+          
+          if (width > MAX_WIDTH) {
+            height = (height * MAX_WIDTH) / width;
+            width = MAX_WIDTH;
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject(new Error('Could not get canvas context'));
+            return;
+          }
+          
+          ctx.drawImage(img, 0, 0, width, height);
+          const resizedBase64 = canvas.toDataURL('image/jpeg', 0.9);
+          console.log('Resized image dimensions:', { width, height });
+          resolve(resizedBase64);
+        };
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -45,19 +86,19 @@ export const FloorVisualizer = () => {
       }
       setTransformedImage(null);
 
-      // Create a lightweight preview URL for Safari/iOS stability
+      // Create a lightweight preview URL for Safari/iOS stability (for display only)
       const objectUrl = URL.createObjectURL(file);
       setUploadedPreviewUrl(objectUrl);
 
-      const reader = new FileReader();
-      reader.onload = e => {
-        setUploadedImage(e.target?.result as string); // base64 for API
-        toast.success('Image uploaded successfully!');
-      };
-      reader.readAsDataURL(file);
+      // Resize the image for API processing (fixes iOS mask mismatch issues)
+      toast.info('Resizing image for optimal processing...');
+      const resizedBase64 = await resizeImage(file);
+      setUploadedImage(resizedBase64);
+      
+      toast.success('Image uploaded successfully!');
     } catch (error) {
       console.error('Error loading image:', error);
-      toast.error('Failed to load image');
+      toast.error('Failed to load image. Please try again.');
     }
   };
   const generateFloorMask = async (imageDataUrl: string): Promise<string> => {
@@ -94,6 +135,8 @@ export const FloorVisualizer = () => {
     setIsProcessing(true);
     try {
       const colorIdToUse = overrideColorId || selectedColor!;
+      
+      console.log('Starting visualization with resized image');
       const selectedColorOption = colorOptions.find(c => c.id === colorIdToUse);
       if (!selectedColorOption) {
         toast.error('Selected color not found');
@@ -101,6 +144,8 @@ export const FloorVisualizer = () => {
         return;
       }
       const mask = await generateFloorMask(uploadedImage);
+      console.log('Generated mask for resized image');
+      
       const {
         data,
         error
@@ -114,10 +159,19 @@ export const FloorVisualizer = () => {
       });
       if (error) {
         console.error('Visualization error:', error);
-        toast.error('Failed to visualize floor. Please try again.');
+        toast.error('Failed to visualize floor. Please try a different photo or color.');
         setIsProcessing(false);
         return;
       }
+      if (!data?.visualizedImage) {
+        console.error('No visualized image in response:', data);
+        toast.error('Visualization failed. Please try a different photo.');
+        setIsProcessing(false);
+        return;
+      }
+      
+      console.log('Successfully received transformed image');
+      
       if (data?.visualizedImage) {
         setTransformedImage(data.visualizedImage);
         // Create a stable preview URL for iOS Safari
