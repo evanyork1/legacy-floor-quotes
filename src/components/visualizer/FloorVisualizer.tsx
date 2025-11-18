@@ -236,7 +236,7 @@ export const FloorVisualizer = () => {
         const newCount = aiEnhancementsUsed + 1;
         setAiEnhancementsUsed(newCount);
         localStorage.setItem('fv_ai_used', newCount.toString());
-        if (newCount >= 4) {
+        if (newCount >= 3) {
           setTimeout(() => setShowQuoteModal(true), 500);
         }
       } else {
@@ -266,6 +266,8 @@ export const FloorVisualizer = () => {
     setUploadedImage(null);
     setSelectedColor(null);
     setTransformedImage(null);
+    setAiEnhancementsUsed(0);
+    localStorage.setItem('fv_ai_used', '0');
     toast.success('Visualizer reset');
   };
   return <div className="w-full">
@@ -444,7 +446,10 @@ export const FloorVisualizer = () => {
 
               {isProcessing && uploadedImage && <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-900/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
-                    <CountdownTimer duration={45} />
+                    <CountdownTimer duration={60} onComplete={() => {
+                      toast.error('Visualization is taking longer than expected. Please try again.');
+                      setIsProcessing(false);
+                    }} />
                     <RotatingFacts />
                   </div>
                 </div>}
