@@ -20,6 +20,7 @@ export const FloorVisualizer = () => {
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
@@ -53,8 +54,12 @@ export const FloorVisualizer = () => {
         const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
         const resizedDomino = await resizeImage(dominoFile);
         setTransformedImage(resizedDomino);
+        
+        // Mark initial load as complete
+        setIsInitialLoad(false);
       } catch (error) {
         console.error('Error loading demo visualization:', error);
+        setIsInitialLoad(false);
       }
     };
     
@@ -321,7 +326,7 @@ export const FloorVisualizer = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
                     {colorOptions.map(color => <div key={color.id} onClick={() => {
                   setSelectedColor(color.id);
-                  if (uploadedImage && (transformedPreviewUrl || transformedImage) && !isProcessing) {
+                  if (uploadedImage && (transformedPreviewUrl || transformedImage) && !isProcessing && !isInitialLoad) {
                     handleVisualize(color.id);
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
