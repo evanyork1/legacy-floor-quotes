@@ -22,6 +22,7 @@ export const FloorVisualizer = () => {
   const [showShareModal, setShowShareModal] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isLoadingDemo, setIsLoadingDemo] = useState(true);
+  const [isUsingDemoPhoto, setIsUsingDemoPhoto] = useState(true);
   // Preview URLs for iOS Safari stability (display only)
   const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
   const [transformedPreviewUrl, setTransformedPreviewUrl] = useState<string | null>(null);
@@ -141,6 +142,7 @@ export const FloorVisualizer = () => {
       toast.info('Resizing image for optimal processing...');
       const resizedBase64 = await resizeImage(file);
       setUploadedImage(resizedBase64);
+      setIsUsingDemoPhoto(false);
       
       toast.success('Image uploaded successfully!');
     } catch (error) {
@@ -258,16 +260,44 @@ export const FloorVisualizer = () => {
     link.click();
     toast.success('Image downloaded!');
   };
-  const handleReset = () => {
+  const handleReset = async () => {
     if (uploadedPreviewUrl) URL.revokeObjectURL(uploadedPreviewUrl);
     if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
     setUploadedPreviewUrl(null);
     setTransformedPreviewUrl(null);
     setUploadedImage(null);
-    setSelectedColor(null);
+    setSelectedColor("domino");
     setTransformedImage(null);
+    setIsUsingDemoPhoto(true);
     setAiEnhancementsUsed(0);
     localStorage.setItem('fv_ai_used', '0');
+    
+    // Reload demo photo
+    try {
+      const [originalResponse, dominoResponse] = await Promise.all([
+        fetch('/demo-garage.jpg'),
+        fetch('/demo-garage-domino.jpg')
+      ]);
+      
+      const originalBlob = await originalResponse.blob();
+      const originalFile = new File([originalBlob], 'demo-garage.jpg', { type: 'image/jpeg' });
+      const resizedOriginal = await resizeImage(originalFile);
+      
+      const dominoBlob = await dominoResponse.blob();
+      const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
+      const resizedDomino = await resizeImage(dominoFile);
+      
+      const originalUrl = URL.createObjectURL(originalBlob);
+      const dominoUrl = URL.createObjectURL(dominoBlob);
+      
+      setUploadedPreviewUrl(originalUrl);
+      setUploadedImage(resizedOriginal);
+      setTransformedPreviewUrl(dominoUrl);
+      setTransformedImage(resizedDomino);
+    } catch (error) {
+      console.error('Error reloading demo:', error);
+    }
+    
     toast.success('Visualizer reset');
   };
   return <div className="w-full">
@@ -340,9 +370,28 @@ export const FloorVisualizer = () => {
                 </CardHeader>
                 <CardContent className="pt-6">
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
-                    {colorOptions.map(color => <div key={color.id} onClick={() => {
+                    {colorOptions.map(color => <div key={color.id} onClick={async () => {
                   setSelectedColor(color.id);
-                  if (uploadedImage && (transformedPreviewUrl || transformedImage) && !isProcessing && !isInitialLoad) {
+                  
+                  // If using demo photo, instantly load pre-rendered image
+                  if (isUsingDemoPhoto && color.demoImage) {
+                    try {
+                      const response = await fetch(color.demoImage);
+                      const blob = await response.blob();
+                      const file = new File([blob], `demo-garage-${color.id}.jpg`, { type: 'image/jpeg' });
+                      const resized = await resizeImage(file);
+                      
+                      if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
+                      const previewUrl = URL.createObjectURL(blob);
+                      
+                      setTransformedImage(resized);
+                      setTransformedPreviewUrl(previewUrl);
+                    } catch (error) {
+                      console.error('Error loading demo image:', error);
+                      toast.error('Failed to load demo visualization');
+                    }
+                  } else if (!isUsingDemoPhoto && uploadedImage && !isProcessing) {
+                    // User uploaded their own photo, trigger AI
                     handleVisualize(color.id);
                   }
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
