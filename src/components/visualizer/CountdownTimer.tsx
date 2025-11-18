@@ -27,31 +27,32 @@ export const CountdownTimer = ({ duration = 30, onComplete }: CountdownTimerProp
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="relative w-32 h-32">
+      <div className="relative w-40 h-40">
         <svg className="w-full h-full transform -rotate-90">
           <circle
-            cx="64"
-            cy="64"
+            cx="80"
+            cy="80"
             r={radius}
-            stroke="hsl(var(--muted))"
-            strokeWidth="8"
+            stroke="rgba(255, 255, 255, 0.2)"
+            strokeWidth="10"
             fill="none"
           />
           <circle
-            cx="64"
-            cy="64"
+            cx="80"
+            cy="80"
             r={radius}
-            stroke="hsl(var(--primary))"
-            strokeWidth="8"
+            stroke="#06b6d4"
+            strokeWidth="10"
             fill="none"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
             className="transition-all duration-1000 ease-linear"
+            style={{ filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.6))' }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-4xl font-bold text-foreground">
+          <span className="text-6xl font-bold text-white drop-shadow-lg">
             {countdown}
           </span>
         </div>

@@ -26,14 +26,16 @@ export const RotatingFacts = () => {
   }, []);
 
   return (
-    <div className="mt-8 max-w-md mx-auto px-4">
-      <p
-        className={`text-center text-lg font-medium text-foreground transition-opacity duration-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        {facts[currentIndex]}
-      </p>
+    <div className="mt-8 max-w-2xl mx-auto px-4">
+      <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <p
+          className={`text-center text-xl font-semibold text-white transition-all duration-500 ${
+            isVisible ? 'opacity-100 transform scale-100' : 'opacity-0 transform scale-95'
+          }`}
+        >
+          {facts[currentIndex]}
+        </p>
+      </div>
     </div>
   );
 };
