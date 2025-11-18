@@ -318,8 +318,7 @@ export const FloorVisualizer = () => {
             {/* Upload Card */}
             <Card className="border-navy-200">
               <CardHeader className="bg-navy-50/50">
-                <CardTitle className="flex items-center gap-2 text-navy-900">
-                  <Upload className="h-5 w-5 text-navy-600" />
+                <CardTitle className="flex items-center gap-2 text-navy-900">Upload Your Own Garage                       <Upload className="h-5 w-5 text-navy-600" />
                   Step 1: Upload Your Photo
                 </CardTitle>
               </CardHeader>
