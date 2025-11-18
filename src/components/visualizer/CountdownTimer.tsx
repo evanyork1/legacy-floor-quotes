@@ -52,9 +52,11 @@ export const CountdownTimer = ({ duration = 30, onComplete }: CountdownTimerProp
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl font-bold text-white drop-shadow-lg">
-            {countdown}
-          </span>
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-2xl border-2 border-cyan-400/30">
+            <span className="text-7xl font-black text-navy-900">
+              {countdown}
+            </span>
+          </div>
         </div>
       </div>
     </div>
