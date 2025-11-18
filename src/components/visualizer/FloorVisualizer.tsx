@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 export const FloorVisualizer = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>("domino");
   const [transformedImage, setTransformedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [aiEnhancementsUsed, setAiEnhancementsUsed] = useState(0);
@@ -29,23 +29,32 @@ export const FloorVisualizer = () => {
     setAiEnhancementsUsed(used);
   }, []);
 
-  // Auto-load demo photo on mount
+  // Auto-load demo photo and pre-visualized Domino on mount
   useEffect(() => {
     const loadDemoPhoto = async () => {
       try {
-        const response = await fetch('/demo-garage.jpg');
-        const blob = await response.blob();
-        const file = new File([blob], 'demo-garage.jpg', { type: 'image/jpeg' });
+        const [originalResponse, dominoResponse] = await Promise.all([
+          fetch('/demo-garage.jpg'),
+          fetch('/demo-garage-domino.jpg')
+        ]);
         
-        // Create preview URL for display
-        const objectUrl = URL.createObjectURL(file);
-        setUploadedPreviewUrl(objectUrl);
+        // Process original demo photo
+        const originalBlob = await originalResponse.blob();
+        const originalFile = new File([originalBlob], 'demo-garage.jpg', { type: 'image/jpeg' });
+        const originalUrl = URL.createObjectURL(originalFile);
+        setUploadedPreviewUrl(originalUrl);
+        const resizedOriginal = await resizeImage(originalFile);
+        setUploadedImage(resizedOriginal);
         
-        // Resize for API processing
-        const resizedBase64 = await resizeImage(file);
-        setUploadedImage(resizedBase64);
+        // Process pre-visualized Domino image
+        const dominoBlob = await dominoResponse.blob();
+        const dominoUrl = URL.createObjectURL(dominoBlob);
+        setTransformedPreviewUrl(dominoUrl);
+        const dominoFile = new File([dominoBlob], 'demo-garage-domino.jpg', { type: 'image/jpeg' });
+        const resizedDomino = await resizeImage(dominoFile);
+        setTransformedImage(resizedDomino);
       } catch (error) {
-        console.error('Error loading demo photo:', error);
+        console.error('Error loading demo visualization:', error);
       }
     };
     
