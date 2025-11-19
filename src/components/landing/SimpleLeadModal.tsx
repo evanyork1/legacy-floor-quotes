@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Phone } from "lucide-react";
 
 interface SimpleLeadModalProps {
   isOpen: boolean;
@@ -16,6 +17,8 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showIframe, setShowIframe] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,25 +50,8 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
 
       if (error) throw error;
 
-      // Send webhook
-      await supabase.functions.invoke('send-lead-webhook', {
-        body: {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          phone: phone,
-          privacy_policy_agreed: true,
-          questions_comments: 'Facebook landing page - Same day estimate request'
-        }
-      });
-
-      toast.success("Thank you! We'll contact you shortly for your same-day estimate.");
-      
-      // Reset form and close modal
-      setName("");
-      setPhone("");
-      setEmail("");
-      onClose();
+      // Show success modal instead of closing
+      setShowSuccess(true);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast.error("There was an error submitting your request. Please try again.");
@@ -74,8 +60,74 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
     }
   };
 
+  const handleClose = () => {
+    setName("");
+    setPhone("");
+    setEmail("");
+    setShowSuccess(false);
+    setShowIframe(false);
+    onClose();
+  };
+
+  // Show booking iframe
+  if (showIframe) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-4xl max-h-[80vh] p-0">
+          <iframe
+            src="https://clienthub.getjobber.com/booking/6d9d5f65-b789-442b-929c-940430d7028d"
+            className="w-full h-[70vh] border-0"
+            title="Schedule Your Estimate"
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  // Show success modal with call/book options
+  if (showSuccess) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center text-xl font-bold text-gray-900">
+              Thank You for Submitting!
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-6 text-center">
+            <p className="text-gray-600">
+              We will reach out within 2 hours! Want to schedule your estimate faster?
+            </p>
+            
+            <div className="space-y-3">
+              <Button 
+                asChild 
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+              >
+                <a href="tel:214-305-6516">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call Us Now: 214-305-6516
+                </a>
+              </Button>
+              
+              <Button 
+                onClick={() => setShowIframe(true)}
+                variant="outline"
+                className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+              >
+                Schedule Estimate Now
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  // Show initial form
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
