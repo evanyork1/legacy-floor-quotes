@@ -284,26 +284,26 @@ const GarageFloorsDallasFB = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-16 md:py-20 bg-slate-900 text-white">
+        <section className="py-12 md:py-16 lg:py-20 bg-slate-900 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Left Content */}
-                <div>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <div className="order-2 lg:order-1">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight">
                     Get In Touch Today To Get A{" "}
                     <span className="text-blue-400">
                       Gorgeous Floor
                     </span>{" "}
                     You'll Love For Life!
                   </h2>
-                  <p className="text-lg text-gray-300 mb-8 leading-relaxed font-light">
+                  <p className="text-base md:text-lg text-gray-300 mb-6 md:mb-8 leading-relaxed font-light">
                     Join thousands of satisfied customers who have transformed their spaces with our premium polyurea coating system.
                   </p>
                   <Button 
                     size="lg" 
                     onClick={scrollToTop}
-                    className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-10 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all font-semibold"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-base md:text-lg px-8 md:px-10 py-5 md:py-6 rounded-lg shadow-lg hover:shadow-xl transition-all font-semibold"
                   >
                     <Phone className="mr-2 h-5 w-5" />
                     Request a Free Quote
@@ -311,11 +311,11 @@ const GarageFloorsDallasFB = () => {
                 </div>
 
                 {/* Right Image */}
-                <div className="relative">
+                <div className="relative order-1 lg:order-2">
                   <img 
-                    src="/lovable-uploads/garage-flake-floor-sports-car.png" 
-                    alt="Premium garage floor coating with luxury vehicles"
-                    className="relative w-full h-full object-cover rounded-lg shadow-xl"
+                    src="/lovable-uploads/garage-floor-sports-car.png" 
+                    alt="Premium garage floor coating with luxury sports car"
+                    className="w-full h-64 sm:h-80 md:h-96 lg:h-full object-cover rounded-lg shadow-xl"
                   />
                 </div>
               </div>
