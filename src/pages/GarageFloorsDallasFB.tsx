@@ -95,29 +95,34 @@ const GarageFloorsDallasFB = () => {
         <GiveawayHeader />
         
         {/* Hero Section with CTA Button */}
-        <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 md:py-28 lg:py-36 overflow-hidden">
-          {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGgxMnYxMkgzNnptMjQgMGgxMnYxMkgzNnptMCAwaDEydjEySDE2em0wIDI0aDEydjEySDE2eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyIC0xMikiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+        <section className="relative bg-slate-900 py-20 md:py-28 lg:py-36 overflow-hidden">
+          {/* Background image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/demo-garage-orbit.jpg')" }}
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-slate-900/85"></div>
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
                 Transform Your Garage Floor{" "}
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="text-blue-400">
                   in Just One Day
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto font-light">
                 Premium Polyurea Coating System with Lifetime Warranty - Professional Installation by Dallas' Top-Rated Team
               </p>
 
               <Button 
                 size="lg" 
                 onClick={() => setShowModal(true)}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-xl px-12 py-8 rounded-full shadow-2xl hover:shadow-blue-500/50 transition-all font-bold transform hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-10 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all font-semibold"
               >
-                <Phone className="mr-3 h-6 w-6" />
+                <Phone className="mr-2 h-5 w-5" />
                 Get A Same Day Estimate
               </Button>
             </div>
@@ -126,37 +131,37 @@ const GarageFloorsDallasFB = () => {
 
 
         {/* Testimonials Section */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
+        <section className="py-16 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 mb-4 bg-yellow-50 px-6 py-3 rounded-full border border-yellow-200">
+              <div className="inline-flex items-center gap-2 mb-4 bg-white px-6 py-3 rounded-lg border border-gray-200 shadow-sm">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
                 ))}
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3">
-                OVER 3,000+ SATISFIED CUSTOMERS
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                Over 3,000+ Satisfied Customers
               </h2>
-              <p className="text-xl text-gray-600 font-semibold">
-                RATED 5.0 BASED ON 180+ GOOGLE REVIEWS
+              <p className="text-lg text-gray-600">
+                Rated 5.0 Based on 180+ Google Reviews
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-blue-500 hover:scale-105">
+                <Card key={index} className="shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200">
                   <CardContent className="pt-6 pb-6">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
                       ))}
                     </div>
-                    <p className="text-gray-700 mb-4 leading-relaxed italic">
+                    <p className="text-gray-700 mb-4 leading-relaxed">
                       "{testimonial.text}"
                     </p>
                     <div className="border-t border-gray-200 pt-4 mt-4">
-                      <p className="font-bold text-gray-900">{testimonial.name}</p>
-                      <p className="text-sm text-blue-600">{testimonial.location}</p>
+                      <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                      <p className="text-sm text-gray-600">{testimonial.location}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -166,19 +171,18 @@ const GarageFloorsDallasFB = () => {
         </section>
 
         {/* What Sets Us Apart Section */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-slate-50 to-gray-100">
+        <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-12">
-              WHAT SETS US APART
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+              What Sets Us Apart
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Legacy Industrial (Us) */}
-              <Card className="shadow-2xl bg-gradient-to-br from-slate-900 to-blue-900 text-white border-none overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16 opacity-20"></div>
-                <CardContent className="pt-8 pb-8 relative z-10">
-                  <h3 className="text-2xl font-bold mb-6 text-center">Legacy Industrial Coatings</h3>
-                  <div className="space-y-4">
+              <Card className="shadow-lg bg-slate-900 text-white border-none">
+                <CardContent className="pt-8 pb-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Legacy Industrial Coatings</h3>
+                  <div className="space-y-3">
                     {[
                       "Cutting Edge Polyurea Technology - 4X Stronger Than Epoxy",
                       "Same Day Estimates & Fast 1-Day Installation",
@@ -186,9 +190,9 @@ const GarageFloorsDallasFB = () => {
                       "Never Fades, Never Cracks, Never Disappoints",
                       "Highly Skilled Technicians With 1000+ Installations"
                     ].map((item, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-white/10 p-3 rounded-lg backdrop-blur-sm">
-                        <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-base leading-relaxed">{item}</span>
+                      <div key={index} className="flex items-start gap-3 p-3">
+                        <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-relaxed">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -196,10 +200,10 @@ const GarageFloorsDallasFB = () => {
               </Card>
 
               {/* Other Companies */}
-              <Card className="shadow-2xl bg-white border-2 border-red-200">
+              <Card className="shadow-lg bg-white border border-gray-200">
                 <CardContent className="pt-8 pb-8">
-                  <h3 className="text-2xl font-bold mb-6 text-center text-gray-900">Other Companies</h3>
-                  <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold mb-6 text-center text-gray-900">Other Companies</h3>
+                  <div className="space-y-3">
                     {[
                       "Outdated Epoxy That Yellows & Fades",
                       "Long Wait Times For Quotes & Installation",
@@ -207,9 +211,9 @@ const GarageFloorsDallasFB = () => {
                       "Floors That Crack With Temperature Changes",
                       "Inexperienced Crews & Inconsistent Results"
                     ].map((item, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-red-50 p-3 rounded-lg">
-                        <X className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-base text-gray-700 leading-relaxed">{item}</span>
+                      <div key={index} className="flex items-start gap-3 p-3">
+                        <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-gray-700 leading-relaxed">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -221,56 +225,54 @@ const GarageFloorsDallasFB = () => {
               <Button 
                 size="lg" 
                 onClick={scrollToTop}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-lg px-10 py-6 rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-10 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
               >
-                REQUEST A FREE QUOTE
+                Request a Free Quote
               </Button>
             </div>
           </div>
         </section>
 
         {/* Before & After Transformations */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+        <section className="py-16 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                REAL GARAGE TRANSFORMATIONS
-              </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+              Real Garage Transformations
             </h2>
-            <p className="text-center text-gray-300 mb-12 text-lg">See the dramatic difference our coating system makes</p>
+            <p className="text-center text-gray-600 mb-12 text-lg">See the dramatic difference our coating system makes</p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
               {beforeAfterProjects.map((project, index) => (
-                <Card key={index} className="shadow-2xl overflow-hidden bg-white hover:scale-105 transition-transform duration-300">
+                <Card key={index} className="shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300 border border-gray-200">
                   <CardContent className="p-0">
-                    <div className="grid grid-cols-2 gap-2 p-4 bg-gradient-to-br from-gray-50 to-gray-100">
-                      <div className="relative overflow-hidden rounded-xl group">
+                    <div className="grid grid-cols-2 gap-2 p-4 bg-gray-50">
+                      <div className="relative overflow-hidden rounded-lg">
                         <img 
                           src={project.beforeImage} 
                           alt="Before garage floor transformation"
-                          className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300"
+                          className="w-full h-48 object-cover"
                         />
                         <div className="absolute top-2 left-2">
-                          <span className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                          <span className="bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
                             BEFORE
                           </span>
                         </div>
                       </div>
-                      <div className="relative overflow-hidden rounded-xl group">
+                      <div className="relative overflow-hidden rounded-lg">
                         <img 
                           src={project.afterImage} 
                           alt="After garage floor transformation"
-                          className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300"
+                          className="w-full h-48 object-cover"
                         />
                         <div className="absolute top-2 left-2">
-                          <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                          <span className="bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
                             AFTER
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="p-6 bg-white">
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2">{project.title}</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3>
                       <p className="text-gray-600 leading-relaxed">{project.description}</p>
                     </div>
                   </CardContent>
@@ -281,40 +283,38 @@ const GarageFloorsDallasFB = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGgxMnYxMkgzNnptMjQgMGgxMnYxMkgzNnptMCAwaDEydjEySDE2em0wIDI0aDEydjEySDE2eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyIC0xMikiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
-          <div className="container mx-auto px-4 relative z-10">
+        <section className="py-16 md:py-20 bg-slate-900 text-white">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Left Content */}
                 <div>
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                     Get In Touch Today To Get A{" "}
-                    <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <span className="text-blue-400">
                       Gorgeous Floor
                     </span>{" "}
                     You'll Love For Life!
                   </h2>
-                  <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                  <p className="text-lg text-gray-300 mb-8 leading-relaxed font-light">
                     Join thousands of satisfied customers who have transformed their spaces with our premium polyurea coating system.
                   </p>
                   <Button 
                     size="lg" 
                     onClick={scrollToTop}
-                    className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white text-lg px-10 py-6 rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all font-bold transform hover:scale-105"
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-10 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all font-semibold"
                   >
                     <Phone className="mr-2 h-5 w-5" />
-                    REQUEST A FREE QUOTE
+                    Request a Free Quote
                   </Button>
                 </div>
 
                 {/* Right Image */}
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 rounded-2xl transform rotate-3"></div>
                   <img 
                     src="/demo-garage-cabin-fever.jpg" 
                     alt="Premium garage floor coating with luxury vehicles"
-                    className="relative w-full h-full object-cover rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                    className="relative w-full h-full object-cover rounded-lg shadow-xl"
                   />
                 </div>
               </div>
