@@ -2,11 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import GiveawayHeader from "@/components/GiveawayHeader";
 import Footer from "@/components/Footer";
-import { LeadForm } from "@/components/landing/LeadForm";
-import { Star, Shield, Layers, Home, CheckCircle2, X } from "lucide-react";
+import { Star, CheckCircle2, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LeadFormModal } from "@/components/landing/LeadFormModal";
+import { SimpleLeadModal } from "@/components/landing/SimpleLeadModal";
 
 const GarageFloorsDallasFB = () => {
   const [showModal, setShowModal] = useState(false);
