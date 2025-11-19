@@ -313,7 +313,7 @@ const GarageFloorsDallasFB = () => {
                 {/* Right Image */}
                 <div className="relative">
                   <img 
-                    src="/demo-garage-cabin-fever.jpg" 
+                    src="/lovable-uploads/garage-flake-floor-sports-car.png" 
                     alt="Premium garage floor coating with luxury vehicles"
                     className="relative w-full h-full object-cover rounded-lg shadow-xl"
                   />
