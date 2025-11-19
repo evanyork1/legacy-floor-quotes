@@ -313,7 +313,7 @@ const GarageFloorsDallasFB = () => {
                 {/* Right Image */}
                 <div className="relative order-1 lg:order-2">
                   <img 
-                    src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" 
+                    src="/lovable-uploads/garage-floor-white-sports-car.png" 
                     alt="Premium garage floor coating with luxury sports car"
                     className="w-full h-64 sm:h-80 md:h-96 lg:h-full object-cover rounded-lg shadow-xl"
                   />
