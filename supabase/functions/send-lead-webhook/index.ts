@@ -95,14 +95,18 @@ serve(async (req) => {
       const responseText = await webhookResponse.text();
       console.error("Webhook error response:", responseText);
       
+      // Log the error but return success since the lead was already saved to the database
+      // This prevents the webhook failure from breaking the user experience
       return new Response(
         JSON.stringify({ 
-          error: "Webhook delivery failed", 
-          status: webhookResponse.status,
-          response: responseText 
+          message: "Lead saved successfully (webhook notification failed)",
+          webhook_error: {
+            status: webhookResponse.status,
+            response: responseText 
+          }
         }),
         { 
-          status: 500, 
+          status: 200, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
       );
