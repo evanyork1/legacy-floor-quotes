@@ -171,6 +171,56 @@ const GarageFloorsDallasFB = () => {
         </section>
 
         {/* What Sets Us Apart Section */}
+        {/* Before & After Transformations */}
+        <section className="py-16 md:py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+              Real Garage Transformations
+            </h2>
+            <p className="text-center text-gray-600 mb-12 text-lg">See the dramatic difference our coating system makes</p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+              {beforeAfterProjects.map((project, index) => (
+                <Card key={index} className="shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300 border border-gray-200">
+                  <CardContent className="p-0">
+                    <div className="grid grid-cols-2 gap-2 p-4 bg-gray-50">
+                      <div className="relative overflow-hidden rounded-lg">
+                        <img 
+                          src={project.beforeImage} 
+                          alt="Before garage floor transformation"
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="absolute top-2 left-2">
+                          <span className="bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
+                            BEFORE
+                          </span>
+                        </div>
+                      </div>
+                      <div className="relative overflow-hidden rounded-lg">
+                        <img 
+                          src={project.afterImage} 
+                          alt="After garage floor transformation"
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="absolute top-2 left-2">
+                          <span className="bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
+                            AFTER
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 bg-white">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">{project.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What Sets Us Apart Section */}
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
@@ -229,55 +279,6 @@ const GarageFloorsDallasFB = () => {
               >
                 Request a Free Quote
               </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Before & After Transformations */}
-        <section className="py-16 md:py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
-              Real Garage Transformations
-            </h2>
-            <p className="text-center text-gray-600 mb-12 text-lg">See the dramatic difference our coating system makes</p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-              {beforeAfterProjects.map((project, index) => (
-                <Card key={index} className="shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-                  <CardContent className="p-0">
-                    <div className="grid grid-cols-2 gap-2 p-4 bg-gray-50">
-                      <div className="relative overflow-hidden rounded-lg">
-                        <img 
-                          src={project.beforeImage} 
-                          alt="Before garage floor transformation"
-                          className="w-full h-48 object-cover"
-                        />
-                        <div className="absolute top-2 left-2">
-                          <span className="bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
-                            BEFORE
-                          </span>
-                        </div>
-                      </div>
-                      <div className="relative overflow-hidden rounded-lg">
-                        <img 
-                          src={project.afterImage} 
-                          alt="After garage floor transformation"
-                          className="w-full h-48 object-cover"
-                        />
-                        <div className="absolute top-2 left-2">
-                          <span className="bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
-                            AFTER
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-6 bg-white">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{project.description}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
             </div>
           </div>
         </section>
