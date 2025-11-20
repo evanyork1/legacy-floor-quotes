@@ -52,18 +52,6 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess }: VisualizerQ
 
       if (insertError) throw insertError;
 
-      // Call webhook
-      await supabase.functions.invoke('send-lead-webhook', {
-        body: {
-          first_name: firstName,
-          last_name: lastName,
-          email: values.email,
-          phone: values.phone,
-          questions_comments: 'Floor Visualizer Lead - Quote Request',
-          privacy_policy_agreed: true
-        }
-      });
-
       // Track analytics in visualizer_analytics table
       const sessionId = sessionStorage.getItem('visualizer_session_id');
       if (sessionId) {

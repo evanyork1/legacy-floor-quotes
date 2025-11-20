@@ -92,18 +92,6 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: Sh
 
       if (insertError) throw insertError;
 
-      // Call webhook
-      await supabase.functions.invoke('send-lead-webhook', {
-        body: {
-          first_name: firstName,
-          last_name: lastName,
-          email: values.email,
-          phone: values.phone,
-          questions_comments: 'Floor Visualizer - Send',
-          privacy_policy_agreed: true
-        }
-      });
-
       // Track analytics
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'visualizer_send', {
