@@ -552,6 +552,39 @@ export type Database = {
         }
         Relationships: []
       }
+      visualizer_analytics: {
+        Row: {
+          color_name: string | null
+          converted: boolean | null
+          created_at: string
+          event_type: string
+          garage_size: string | null
+          id: string
+          session_id: string
+          timestamp: string
+        }
+        Insert: {
+          color_name?: string | null
+          converted?: boolean | null
+          created_at?: string
+          event_type: string
+          garage_size?: string | null
+          id?: string
+          session_id: string
+          timestamp?: string
+        }
+        Update: {
+          color_name?: string | null
+          converted?: boolean | null
+          created_at?: string
+          event_type?: string
+          garage_size?: string | null
+          id?: string
+          session_id?: string
+          timestamp?: string
+        }
+        Relationships: []
+      }
       webhook_settings: {
         Row: {
           dfw_webhook_url: string | null
