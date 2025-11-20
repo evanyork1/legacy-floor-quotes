@@ -11,6 +11,36 @@ import { ShareModal } from './ShareModal';
 import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+
+// Generate or retrieve session ID for analytics tracking
+const getSessionId = () => {
+  let sessionId = sessionStorage.getItem('visualizer_session_id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    sessionStorage.setItem('visualizer_session_id', sessionId);
+  }
+  return sessionId;
+};
+
+// Track analytics events
+const trackEvent = async (
+  eventType: 'page_view' | 'photo_uploaded' | 'color_selected' | 'visualization_generated' | 'lead_submitted',
+  colorName?: string,
+  garageSize?: string
+) => {
+  try {
+    await supabase.from('visualizer_analytics').insert({
+      session_id: getSessionId(),
+      event_type: eventType,
+      color_name: colorName || null,
+      garage_size: garageSize || null,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Analytics tracking error:', error);
+  }
+};
+
 export const FloorVisualizer = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>("domino");
@@ -33,6 +63,11 @@ export const FloorVisualizer = () => {
   useEffect(() => {
     const used = parseInt(localStorage.getItem('fv_ai_used') || '0', 10);
     setAiEnhancementsUsed(used);
+  }, []);
+
+  // Track page view on mount
+  useEffect(() => {
+    trackEvent('page_view');
   }, []);
 
   // Auto-load demo photo and pre-visualized Domino on mount
@@ -148,6 +183,9 @@ export const FloorVisualizer = () => {
       setUploadedImage(resizedBase64);
       setIsUsingDemoPhoto(false);
       
+      // Track photo upload event
+      trackEvent('photo_uploaded');
+      
       toast.success('Image uploaded! Processing all colors...');
       
       // Start batch processing all colors
@@ -207,6 +245,10 @@ export const FloorVisualizer = () => {
       if (transformedPreviewUrl) URL.revokeObjectURL(transformedPreviewUrl);
       const previewUrl = URL.createObjectURL(blob);
       setTransformedPreviewUrl(previewUrl);
+      
+      // Track first visualization generated
+      const displayedColorId = Object.keys(results).find(id => results[id] === colorToDisplay) || colorOptions[0].id;
+      trackEvent('visualization_generated', displayedColorId);
     }
 
     // Count this batch as 1 AI usage
@@ -266,6 +308,9 @@ export const FloorVisualizer = () => {
     setIsProcessing(true);
     try {
       const colorIdToUse = overrideColorId || selectedColor!;
+      
+      // Track color selection
+      trackEvent('color_selected', colorIdToUse);
       
       console.log('Starting visualization with resized image');
       const selectedColorOption = colorOptions.find(c => c.id === colorIdToUse);

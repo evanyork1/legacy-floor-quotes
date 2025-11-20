@@ -64,6 +64,16 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess }: VisualizerQ
         }
       });
 
+      // Track analytics in visualizer_analytics table
+      const sessionId = sessionStorage.getItem('visualizer_session_id');
+      if (sessionId) {
+        await supabase.from('visualizer_analytics').insert({
+          session_id: sessionId,
+          event_type: 'lead_submitted',
+          timestamp: new Date().toISOString()
+        });
+      }
+
       // Track analytics
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'generate_lead', {
