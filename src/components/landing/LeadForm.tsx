@@ -40,21 +40,6 @@ export const LeadForm = () => {
         throw error;
       }
 
-      // Send webhook notification
-      try {
-        await supabase.functions.invoke('send-lead-webhook', {
-          body: {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            questions_comments: formData.questionsComments,
-            privacy_policy_agreed: formData.privacyPolicyAgreed
-          }
-        });
-      } catch (webhookError) {
-        console.error('Webhook error (non-blocking):', webhookError);
-      }
       toast.success("Thank you! Your information has been submitted.");
       setShowModal(true);
 
