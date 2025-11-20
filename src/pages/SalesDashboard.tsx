@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Target, Users, Trophy, BookOpen, Presentation, Shield, UserPlus } from 'lucide-react';
+import { Loader2, Target, Users, Trophy, BookOpen, Presentation, Shield, UserPlus, BarChart3 } from 'lucide-react';
 import { ProspectingSection } from '@/components/sales/ProspectingSection';
 import { GoalsSection } from '@/components/sales/GoalsSection';
 import { SalesSection } from '@/components/sales/SalesSection';
@@ -13,6 +13,7 @@ import { SalesManagement } from '@/components/admin/SalesManagement';
 import { TrainingSection } from '@/components/sales/TrainingSection';
 import { TrainingManagement } from '@/components/admin/TrainingManagement';
 import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
+import AnalyticsTab from '@/components/admin/AnalyticsTab';
 
 export default function SalesDashboard() {
   const { user, loading, signOut, hasRole } = useAuth();
@@ -92,7 +93,7 @@ export default function SalesDashboard() {
 
       <main className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="prospecting" className="flex items-center gap-2">
               <Target className="h-4 w-4" />
               Prospecting
@@ -113,6 +114,12 @@ export default function SalesDashboard() {
               <Users className="h-4 w-4" />
               Goals
             </TabsTrigger>
+            {isAdmin && (
+              <TabsTrigger value="analytics" className="flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Analytics
+              </TabsTrigger>
+            )}
           </TabsList>
 
           <TabsContent value="prospecting" className="space-y-6">
@@ -148,6 +155,12 @@ export default function SalesDashboard() {
           <TabsContent value="goals" className="space-y-6">
             <GoalsSection />
           </TabsContent>
+
+          {isAdmin && (
+            <TabsContent value="analytics" className="space-y-6">
+              <AnalyticsTab />
+            </TabsContent>
+          )}
         </Tabs>
       </main>
     </div>
