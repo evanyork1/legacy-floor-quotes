@@ -9,12 +9,16 @@ import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, Download, Send } from "lucide-react";
+import { uploadImageToStorage, generateUniqueFilename } from "@/lib/imageUpload";
 
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
   onDownload: () => void;
   transformedImage: string;
+  originalPhoto: string | null;
+  renderedPhoto: string | null;
+  selectedColorName: string;
 }
 
 const formSchema = z.object({
@@ -25,7 +29,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: ShareModalProps) => {
+export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage, originalPhoto, renderedPhoto, selectedColorName }: ShareModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
@@ -39,6 +43,20 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: Sh
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(' ') || firstName;
 
+      // Upload photos to storage if available
+      let originalPhotoUrl: string | null = null;
+      let renderedPhotoUrl: string | null = null;
+
+      if (originalPhoto) {
+        const originalFilename = generateUniqueFilename('visualizer-original');
+        originalPhotoUrl = await uploadImageToStorage(originalPhoto, originalFilename);
+      }
+
+      if (renderedPhoto) {
+        const renderedFilename = generateUniqueFilename('visualizer-rendered');
+        renderedPhotoUrl = await uploadImageToStorage(renderedPhoto, renderedFilename);
+      }
+
       // Insert to Lead Form Subissions table
       await supabase
         .from('Lead Form Subissions')
@@ -47,8 +65,11 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: Sh
           last_name: lastName,
           email: values.email,
           phone: values.phone,
-          questions_comments: 'Floor Visualizer - Download',
-          privacy_policy_agreed: true
+          questions_comments: `Floor Visualizer - Download${selectedColorName ? ` - ${selectedColorName}` : ''}`,
+          privacy_policy_agreed: true,
+          original_photo_url: originalPhotoUrl,
+          rendered_photo_url: renderedPhotoUrl,
+          selected_color: selectedColorName || null
         });
 
       // Track analytics
@@ -78,6 +99,20 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: Sh
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(' ') || firstName;
 
+      // Upload photos to storage if available
+      let originalPhotoUrl: string | null = null;
+      let renderedPhotoUrl: string | null = null;
+
+      if (originalPhoto) {
+        const originalFilename = generateUniqueFilename('visualizer-original');
+        originalPhotoUrl = await uploadImageToStorage(originalPhoto, originalFilename);
+      }
+
+      if (renderedPhoto) {
+        const renderedFilename = generateUniqueFilename('visualizer-rendered');
+        renderedPhotoUrl = await uploadImageToStorage(renderedPhoto, renderedFilename);
+      }
+
       // Insert to Lead Form Subissions table
       const { error: insertError } = await supabase
         .from('Lead Form Subissions')
@@ -86,8 +121,11 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage }: Sh
           last_name: lastName,
           email: values.email,
           phone: values.phone,
-          questions_comments: 'Floor Visualizer - Send',
-          privacy_policy_agreed: true
+          questions_comments: `Floor Visualizer - Send${selectedColorName ? ` - ${selectedColorName}` : ''}`,
+          privacy_policy_agreed: true,
+          original_photo_url: originalPhotoUrl,
+          rendered_photo_url: renderedPhotoUrl,
+          selected_color: selectedColorName || null
         });
 
       if (insertError) throw insertError;

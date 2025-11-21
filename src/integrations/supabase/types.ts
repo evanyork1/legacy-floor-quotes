@@ -206,9 +206,12 @@ export type Database = {
           first_name: string
           id: string
           last_name: string
+          original_photo_url: string | null
           phone: string
           privacy_policy_agreed: boolean
           questions_comments: string | null
+          rendered_photo_url: string | null
+          selected_color: string | null
           updated_at: string
         }
         Insert: {
@@ -217,9 +220,12 @@ export type Database = {
           first_name: string
           id?: string
           last_name: string
+          original_photo_url?: string | null
           phone: string
           privacy_policy_agreed?: boolean
           questions_comments?: string | null
+          rendered_photo_url?: string | null
+          selected_color?: string | null
           updated_at?: string
         }
         Update: {
@@ -228,9 +234,12 @@ export type Database = {
           first_name?: string
           id?: string
           last_name?: string
+          original_photo_url?: string | null
           phone?: string
           privacy_policy_agreed?: boolean
           questions_comments?: string | null
+          rendered_photo_url?: string | null
+          selected_color?: string | null
           updated_at?: string
         }
         Relationships: []
