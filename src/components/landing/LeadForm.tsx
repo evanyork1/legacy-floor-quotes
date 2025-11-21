@@ -126,7 +126,7 @@ export const LeadForm = () => {
             
             <div className="flex justify-center pt-2">
               <Button type="submit" disabled={isSubmitting} className="w-full sm:w-64 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 md:px-8 rounded-none text-base md:text-lg font-semibold">
-                {isSubmitting ? "Submitting..." : "Claim Discount"}
+                {isSubmitting ? "Submitting..." : "Request Info"}
               </Button>
             </div>
           </form>
