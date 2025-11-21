@@ -641,10 +641,17 @@ export const FloorVisualizer = () => {
       )}
 
       {/* Quote Modal */}
-      <VisualizerQuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} onSuccess={() => {
-      setShowQuoteModal(false);
-      setShowSuccessModal(true);
-    }} />
+      <VisualizerQuoteModal 
+        isOpen={showQuoteModal} 
+        onClose={() => setShowQuoteModal(false)} 
+        onSuccess={() => {
+          setShowQuoteModal(false);
+          setShowSuccessModal(true);
+        }}
+        originalPhoto={uploadedImage}
+        renderedPhoto={transformedImage}
+        selectedColorName={colorOptions.find(c => c.id === selectedColor)?.name || ''}
+      />
 
       {/* Success/Thank You Modal */}
       <LeadFormModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
@@ -655,6 +662,9 @@ export const FloorVisualizer = () => {
         onClose={() => setShowShareModal(false)}
         onDownload={handleDownload}
         transformedImage={transformedImage || ''}
+        originalPhoto={uploadedImage}
+        renderedPhoto={transformedImage}
+        selectedColorName={colorOptions.find(c => c.id === selectedColor)?.name || ''}
       />
     </div>;
 };
