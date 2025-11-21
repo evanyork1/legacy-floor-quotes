@@ -39,7 +39,6 @@ export const LeadForm = () => {
       if (error) {
         throw error;
       }
-
       toast.success("Thank you! Your information has been submitted.");
       setShowModal(true);
 
@@ -73,9 +72,7 @@ export const LeadForm = () => {
           </div>
           
           <div className="text-center mb-4 md:mb-6">
-            <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-3 md:px-4 rounded-lg mb-2 md:mb-3 font-bold text-xs sm:text-sm">
-              🎉 Get an extra $300 off before Thanksgiving!
-            </div>
+            
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Get Your Same Day Estimate</h3>
             <p className="text-sm sm:text-base text-gray-600">
               Fill in the form below to get started!
