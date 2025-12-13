@@ -44,6 +44,182 @@ export type Database = {
         }
         Relationships: []
       }
+      crm_activity_log: {
+        Row: {
+          activity_type: string
+          created_at: string
+          id: string
+          related_lead_id: string | null
+          user_id: string
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          id?: string
+          related_lead_id?: string | null
+          user_id: string
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          id?: string
+          related_lead_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_activity_log_related_lead_id_fkey"
+            columns: ["related_lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_activity_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_lead_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          lead_id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          lead_id: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          lead_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_lead_notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_lead_notes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_leads: {
+        Row: {
+          address: string | null
+          assigned_to: string | null
+          created_at: string
+          created_by: string
+          email: string | null
+          id: string
+          linkedin: string | null
+          name: string
+          phone: string | null
+          stage: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          created_by: string
+          email?: string | null
+          id?: string
+          linkedin?: string | null
+          name: string
+          phone?: string | null
+          stage?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          created_by?: string
+          email?: string | null
+          id?: string
+          linkedin?: string | null
+          name?: string
+          phone?: string | null
+          stage?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_leads_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_leads_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_sales_goals: {
+        Row: {
+          actual_amount: number
+          created_at: string
+          goal_amount: number
+          id: string
+          month: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_amount?: number
+          created_at?: string
+          goal_amount?: number
+          id?: string
+          month: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_amount?: number
+          created_at?: string
+          goal_amount?: number
+          id?: string
+          month?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_sales_goals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dfwquotes: {
         Row: {
           archived: boolean
@@ -623,6 +799,26 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_duplicate_lead: {
+        Args: { check_email: string; check_phone: string }
+        Returns: {
+          created_by_name: string
+          email: string
+          id: string
+          name: string
+          phone: string
+        }[]
+      }
+      get_crm_leaderboard: {
+        Args: { end_date: string; start_date: string }
+        Returns: {
+          appointments_booked: number
+          full_name: string
+          leads_added: number
+          notes_added: number
+          user_id: string
+        }[]
+      }
       get_prospecting_leaderboard: {
         Args: { week_end: string; week_start: string }
         Returns: {
