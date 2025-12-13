@@ -143,7 +143,8 @@ export default function Auth() {
 
       if (error) throw error;
 
-      navigate('/sales-dashboard');
+      // Redirect to requested page or default
+      navigate(redirectTo || '/sales-dashboard');
     } catch (error: any) {
       toast({
         title: 'Error',
@@ -232,10 +233,39 @@ export default function Auth() {
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Welcome</CardTitle>
             <CardDescription>
-              {user ? 'Manage your account' : 'Sign in to access your sales dashboard'}
+              {user ? 'Manage your account' : isCRMLogin ? 'Sign in to access the CRM' : 'Sign in to access your sales dashboard'}
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {isCRMLogin ? (
+              // CRM login - only show sign in form, no tabs
+              <form onSubmit={handleSignIn} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Sign In
+                </Button>
+              </form>
+            ) : (
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
@@ -311,6 +341,7 @@ export default function Auth() {
                 </form>
               </TabsContent>
             </Tabs>
+            )}
           </CardContent>
         </Card>
 
