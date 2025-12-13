@@ -37,20 +37,30 @@ export default function Auth() {
   const [inviteLoading, setInviteLoading] = useState(false);
   const [pendingInvites, setPendingInvites] = useState<PendingInvite[]>([]);
 
+  // Check if this is a CRM redirect (hide signup)
+  const searchParams = new URLSearchParams(location.search);
+  const redirectTo = searchParams.get('redirect');
+  const isCRMLogin = redirectTo === '/crm';
+
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        // Only redirect non-admins automatically
-        const adminRole = await hasRole('admin');
-        const isAdminByEmail = session.user.email === 'evan@licoat.com';
-        if (!adminRole && !isAdminByEmail) {
-          navigate('/sales-dashboard');
+        // Redirect to the requested page or default to sales-dashboard
+        if (redirectTo) {
+          navigate(redirectTo);
+        } else {
+          // Only redirect non-admins automatically
+          const adminRole = await hasRole('admin');
+          const isAdminByEmail = session.user.email === 'evan@licoat.com';
+          if (!adminRole && !isAdminByEmail) {
+            navigate('/sales-dashboard');
+          }
         }
       }
     };
     checkUser();
-  }, [navigate, hasRole]);
+  }, [navigate, hasRole, redirectTo]);
 
   useEffect(() => {
     const checkAdminRole = async () => {
