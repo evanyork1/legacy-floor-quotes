@@ -21,9 +21,11 @@ export function CRMAdminPanel() {
 
   // New user form
   const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [newFullName, setNewFullName] = useState('');
   const [newRole, setNewRole] = useState<'admin' | 'rep'>('rep');
-  const [inviting, setInviting] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [createdUser, setCreatedUser] = useState<{ email: string; password: string } | null>(null);
 
   useEffect(() => {
     loadData();
@@ -64,36 +66,57 @@ export function CRMAdminPanel() {
     }
   };
 
-  const handleInviteUser = async () => {
+  const handleCreateUser = async () => {
     if (!newEmail.trim()) {
       toast.error('Email is required');
       return;
     }
-
-    setInviting(true);
-
-    // Add to pending invites
-    const { error: inviteError } = await supabase
-      .from('pending_invites')
-      .insert({
-        email: newEmail.toLowerCase(),
-        role: newRole
-      });
-
-    if (inviteError) {
-      toast.error('Failed to create invite');
-      setInviting(false);
+    if (!newPassword.trim() || newPassword.length < 6) {
+      toast.error('Password must be at least 6 characters');
       return;
     }
 
-    // Generate invite link (in production you'd send this via email)
-    const inviteUrl = `${window.location.origin}/auth?email=${encodeURIComponent(newEmail)}`;
-    
-    toast.success(`Invite created! Share this link: ${inviteUrl}`);
-    setNewEmail('');
-    setNewFullName('');
-    setNewRole('rep');
-    setInviting(false);
+    setCreating(true);
+    setCreatedUser(null);
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const response = await fetch(
+        'https://byvazfrvoanojfayvsaz.supabase.co/functions/v1/create-crm-user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token}`
+          },
+          body: JSON.stringify({
+            email: newEmail.toLowerCase(),
+            password: newPassword,
+            full_name: newFullName,
+            role: newRole
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to create user');
+      }
+
+      toast.success('User created successfully!');
+      setCreatedUser({ email: newEmail, password: newPassword });
+      setNewEmail('');
+      setNewPassword('');
+      setNewFullName('');
+      setNewRole('rep');
+      await loadData();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to create user');
+    } finally {
+      setCreating(false);
+    }
   };
 
   const getUserGoal = (userId: string) => {
@@ -204,16 +227,27 @@ export function CRMAdminPanel() {
           </Card>
         </TabsContent>
 
-        {/* Invite Tab */}
+        {/* Create User Tab */}
         <TabsContent value="invite">
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <UserPlus className="h-5 w-5" />
-                Invite New User
+                Create New User
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {createdUser && (
+                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg space-y-2">
+                  <p className="font-medium text-green-600">✅ User created successfully!</p>
+                  <p className="text-sm"><strong>Email:</strong> {createdUser.email}</p>
+                  <p className="text-sm"><strong>Password:</strong> {createdUser.password}</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Share these credentials with the user. They can log in at /auth?redirect=/crm
+                  </p>
+                </div>
+              )}
+
               <div className="space-y-2">
                 <Label htmlFor="newEmail">Email Address</Label>
                 <Input
@@ -222,6 +256,28 @@ export function CRMAdminPanel() {
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
                   placeholder="user@example.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="newPassword">Password</Label>
+                <Input
+                  id="newPassword"
+                  type="text"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Minimum 6 characters"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="newFullName">Full Name</Label>
+                <Input
+                  id="newFullName"
+                  type="text"
+                  value={newFullName}
+                  onChange={(e) => setNewFullName(e.target.value)}
+                  placeholder="John Smith"
                 />
               </div>
 
@@ -239,17 +295,16 @@ export function CRMAdminPanel() {
               </div>
 
               <Button 
-                onClick={handleInviteUser} 
-                disabled={inviting || !newEmail.trim()}
+                onClick={handleCreateUser} 
+                disabled={creating || !newEmail.trim() || !newPassword.trim()}
                 className="w-full gap-2"
               >
                 <UserPlus className="h-4 w-4" />
-                {inviting ? 'Creating Invite...' : 'Create Invite Link'}
+                {creating ? 'Creating User...' : 'Create User'}
               </Button>
 
               <p className="text-sm text-muted-foreground">
-                This will create a pending invite. When the user signs up with this email, 
-                they'll automatically be assigned the selected role.
+                The user will be auto-confirmed and can log in immediately with these credentials.
               </p>
             </CardContent>
           </Card>
