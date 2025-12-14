@@ -175,7 +175,12 @@ export function CRMDashboard() {
       </div>
 
       {/* Leaderboard Section */}
-      <Tabs defaultValue="week" className="w-full">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <Trophy className="h-5 w-5 text-primary" />
+          Company Leaderboard
+        </h3>
+        <Tabs defaultValue="week" className="w-full">
         <TabsList className="grid w-full grid-cols-2 max-w-[300px]">
           <TabsTrigger value="week">This Week</TabsTrigger>
           <TabsTrigger value="lifetime">Lifetime</TabsTrigger>
@@ -260,7 +265,8 @@ export function CRMDashboard() {
             </Card>
           </div>
         </TabsContent>
-      </Tabs>
+        </Tabs>
+      </div>
 
       {/* Monthly Sales Goal - Moved to bottom */}
       <Card>
