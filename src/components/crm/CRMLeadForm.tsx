@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCRM } from '@/hooks/useCRM';
 import { LEAD_STAGES, type CRMLead, type DuplicateLead } from '@/types/crm';
@@ -16,7 +17,7 @@ interface CRMLeadFormProps {
 }
 
 export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
-  const { addLead, updateLead } = useCRM();
+  const { addLead, updateLead, addNote } = useCRM();
   const [loading, setLoading] = useState(false);
   const [duplicateLead, setDuplicateLead] = useState<DuplicateLead | null>(null);
   
@@ -29,6 +30,8 @@ export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
     linkedin: existingLead?.linkedin || '',
     stage: existingLead?.stage || 'new',
   });
+
+  const [initialNote, setInitialNote] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +57,11 @@ export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
         assigned_to: null
       });
 
-      if (result.success) {
+      if (result.success && result.lead) {
+        // Add initial note if provided
+        if (initialNote.trim()) {
+          await addNote(result.lead.id, initialNote);
+        }
         toast.success('Lead added');
         onClose();
       } else if (result.error === 'duplicate') {
@@ -163,6 +170,19 @@ export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
                   placeholder="LinkedIn profile URL"
                 />
               </div>
+
+              {!existingLead && (
+                <div className="space-y-2 sm:col-span-2">
+                  <Label htmlFor="initialNote">Initial Note (optional)</Label>
+                  <Textarea
+                    id="initialNote"
+                    value={initialNote}
+                    onChange={(e) => setInitialNote(e.target.value)}
+                    placeholder="Add any initial notes about this lead..."
+                    className="min-h-[80px]"
+                  />
+                </div>
+              )}
             </div>
 
             <div className="flex gap-3 pt-4">

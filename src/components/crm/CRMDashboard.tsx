@@ -3,20 +3,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCRM } from '@/hooks/useCRM';
 import { useAuth } from '@/hooks/useAuth';
 import type { CRMSalesGoal, LeaderboardEntry } from '@/types/crm';
-import { Target, TrendingUp, Users, Calendar, Edit2, Check, X } from 'lucide-react';
+import { Target, TrendingUp, Users, Calendar, Edit2, Check, X, Plus, Trophy, FileText } from 'lucide-react';
 import { format } from 'date-fns';
+import { CRMLeadForm } from './CRMLeadForm';
 
 export function CRMDashboard() {
   const { user } = useAuth();
-  const { leads, getCurrentGoal, setMonthlyGoal, getLeaderboard } = useCRM();
+  const { leads, getCurrentGoal, setMonthlyGoal, getLeaderboard, fetchLeads } = useCRM();
   const [goal, setGoal] = useState<CRMSalesGoal | null>(null);
-  const [weeklyStats, setWeeklyStats] = useState<LeaderboardEntry | null>(null);
-  const [lifetimeStats, setLifetimeStats] = useState<LeaderboardEntry | null>(null);
+  const [weeklyLeaderboard, setWeeklyLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [lifetimeLeaderboard, setLifetimeLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [isEditingGoal, setIsEditingGoal] = useState(false);
   const [newGoalAmount, setNewGoalAmount] = useState('');
+  const [showAddLead, setShowAddLead] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -29,8 +32,8 @@ export function CRMDashboard() {
       const weekly = await getLeaderboard('week');
       const lifetime = await getLeaderboard('lifetime');
       
-      setWeeklyStats(weekly.find(e => e.user_id === user?.id) || null);
-      setLifetimeStats(lifetime.find(e => e.user_id === user?.id) || null);
+      setWeeklyLeaderboard(weekly);
+      setLifetimeLeaderboard(lifetime);
     };
 
     loadData();
@@ -46,6 +49,11 @@ export function CRMDashboard() {
     setIsEditingGoal(false);
   };
 
+  const handleLeadAdded = async () => {
+    setShowAddLead(false);
+    await fetchLeads();
+  };
+
   const progressPercent = goal && goal.goal_amount > 0 
     ? Math.min((goal.actual_amount / goal.goal_amount) * 100, 100) 
     : 0;
@@ -59,12 +67,64 @@ export function CRMDashboard() {
   const myLeads = leads.filter(l => l.created_by === user?.id || l.assigned_to === user?.id);
   const myNewLeads = myLeads.filter(l => l.stage === 'new');
   const myWonLeads = myLeads.filter(l => l.stage === 'won');
+  const weeklyStats = weeklyLeaderboard.find(e => e.user_id === user?.id);
+
+  const getRankEmoji = (index: number) => {
+    if (index === 0) return '🥇';
+    if (index === 1) return '🥈';
+    if (index === 2) return '🥉';
+    return `#${index + 1}`;
+  };
+
+  const LeaderboardTable = ({ data, metric }: { data: LeaderboardEntry[], metric: 'leads' | 'notes' | 'appointments' }) => {
+    const sorted = [...data].sort((a, b) => {
+      if (metric === 'leads') return b.leads_added - a.leads_added;
+      if (metric === 'notes') return b.notes_added - a.notes_added;
+      return b.appointments_booked - a.appointments_booked;
+    }).slice(0, 5);
+
+    return (
+      <div className="space-y-2">
+        {sorted.length === 0 ? (
+          <p className="text-sm text-muted-foreground text-center py-2">No data</p>
+        ) : (
+          sorted.map((entry, index) => (
+            <div key={entry.user_id} className="flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-6">{getRankEmoji(index)}</span>
+                <span className="truncate">{entry.full_name}</span>
+              </div>
+              <span className="font-medium">
+                {metric === 'leads' && entry.leads_added}
+                {metric === 'notes' && entry.notes_added}
+                {metric === 'appointments' && entry.appointments_booked}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+    );
+  };
+
+  if (showAddLead) {
+    return (
+      <div className="md:ml-56">
+        <CRMLeadForm onClose={handleLeadAdded} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 md:ml-56">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-foreground">Dashboard</h2>
-        <span className="text-sm text-muted-foreground">{format(new Date(), 'MMMM yyyy')}</span>
+        <div className="flex items-center gap-3">
+          <Button onClick={() => setShowAddLead(true)} className="gap-2">
+            <Plus className="h-4 w-4" />
+            Add Lead
+          </Button>
+          <span className="text-sm text-muted-foreground hidden sm:block">{format(new Date(), 'MMMM yyyy')}</span>
+        </div>
       </div>
 
       {/* Sales Goal Progress */}
@@ -162,48 +222,93 @@ export function CRMDashboard() {
         </Card>
       </div>
 
-      {/* Activity Summary */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">This Week</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Leads Added</span>
-              <span className="font-medium">{weeklyStats?.leads_added || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Notes Added</span>
-              <span className="font-medium">{weeklyStats?.notes_added || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Appointments</span>
-              <span className="font-medium">{weeklyStats?.appointments_booked || 0}</span>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Leaderboard Section */}
+      <Tabs defaultValue="week" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 max-w-[300px]">
+          <TabsTrigger value="week">This Week</TabsTrigger>
+          <TabsTrigger value="lifetime">Lifetime</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="week" className="mt-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Users className="h-4 w-4 text-primary" />
+                  Most Leads Added
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={weeklyLeaderboard} metric="leads" />
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Lifetime</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Leads Added</span>
-              <span className="font-medium">{lifetimeStats?.leads_added || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Notes Added</span>
-              <span className="font-medium">{lifetimeStats?.notes_added || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Appointments</span>
-              <span className="font-medium">{lifetimeStats?.appointments_booked || 0}</span>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-primary" />
+                  Most Notes Added
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={weeklyLeaderboard} metric="notes" />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-primary" />
+                  Most Appointments
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={weeklyLeaderboard} metric="appointments" />
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="lifetime" className="mt-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Users className="h-4 w-4 text-primary" />
+                  Most Leads Added
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={lifetimeLeaderboard} metric="leads" />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-primary" />
+                  Most Notes Added
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={lifetimeLeaderboard} metric="notes" />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-primary" />
+                  Most Appointments
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={lifetimeLeaderboard} metric="appointments" />
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

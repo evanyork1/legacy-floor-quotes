@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { CRMLayout } from '@/components/crm/CRMLayout';
 import { CRMDashboard } from '@/components/crm/CRMDashboard';
 import { CRMLeadsView } from '@/components/crm/CRMLeadsView';
-import { CRMLeaderboard } from '@/components/crm/CRMLeaderboard';
+
 import { CRMSettings } from '@/components/crm/CRMSettings';
 import { CRMAdminPanel } from '@/components/crm/CRMAdminPanel';
 import { useCRM } from '@/hooks/useCRM';
@@ -39,8 +39,7 @@ export default function CRM() {
         return <CRMDashboard />;
       case 'leads':
         return <CRMLeadsView />;
-      case 'leaderboard':
-        return <CRMLeaderboard />;
+      // Leaderboard removed - now on dashboard
       case 'settings':
         return <CRMSettings />;
       case 'admin':
