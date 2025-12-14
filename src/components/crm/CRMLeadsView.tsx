@@ -4,25 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useCRM } from '@/hooks/useCRM';
 import { CRMLeadForm } from './CRMLeadForm';
 import { CRMLeadDetail } from './CRMLeadDetail';
+import { CRMKanbanView } from './CRMKanbanView';
 import { LEAD_STAGES, type CRMLead } from '@/types/crm';
-import { Plus, Search, Phone, Mail, MapPin } from 'lucide-react';
+import { formatPhoneNumber } from '@/lib/formatters';
+import { Plus, Search, Phone, Mail, MapPin, List, LayoutGrid } from 'lucide-react';
 import { format } from 'date-fns';
 
 export function CRMLeadsView() {
-  const { leads, loading } = useCRM();
+  const { leads, loading, fetchLeads } = useCRM();
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedLead, setSelectedLead] = useState<CRMLead | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [stageFilter, setStageFilter] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'list' | 'board'>('list');
 
   const filteredLeads = leads.filter(lead => {
+    const query = searchQuery.toLowerCase();
     const matchesSearch = 
-      lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.phone?.includes(searchQuery);
+      lead.name.toLowerCase().includes(query) ||
+      lead.email?.toLowerCase().includes(query) ||
+      lead.phone?.includes(searchQuery) ||
+      lead.address?.toLowerCase().includes(query) ||
+      lead.website?.toLowerCase().includes(query) ||
+      lead.linkedin?.toLowerCase().includes(query);
     
     const matchesStage = stageFilter === 'all' || lead.stage === stageFilter;
     
@@ -38,6 +46,10 @@ export function CRMLeadsView() {
       case 'lost': return 'bg-red-500/10 text-red-500 border-red-500/20';
       default: return 'bg-muted text-muted-foreground';
     }
+  };
+
+  const handleLeadUpdated = async () => {
+    await fetchLeads();
   };
 
   if (showAddForm) {
@@ -61,10 +73,20 @@ export function CRMLeadsView() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between">
         <h2 className="text-2xl font-bold text-foreground">Leads</h2>
-        <Button onClick={() => setShowAddForm(true)} className="gap-2">
-          <Plus className="h-4 w-4" />
-          Add Lead
-        </Button>
+        <div className="flex items-center gap-2">
+          <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as 'list' | 'board')}>
+            <ToggleGroupItem value="list" aria-label="List view" className="px-3">
+              <List className="h-4 w-4" />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="board" aria-label="Board view" className="px-3">
+              <LayoutGrid className="h-4 w-4" />
+            </ToggleGroupItem>
+          </ToggleGroup>
+          <Button onClick={() => setShowAddForm(true)} className="gap-2">
+            <Plus className="h-4 w-4" />
+            Add Lead
+          </Button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -72,7 +94,7 @@ export function CRMLeadsView() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search leads..."
+            placeholder="Search by name, phone, email, address..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -82,7 +104,7 @@ export function CRMLeadsView() {
           <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Filter by stage" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-background z-50">
             <SelectItem value="all">All Stages</SelectItem>
             {LEAD_STAGES.map(stage => (
               <SelectItem key={stage.value} value={stage.value}>
@@ -93,7 +115,7 @@ export function CRMLeadsView() {
         </Select>
       </div>
 
-      {/* Leads List */}
+      {/* Leads View */}
       {loading ? (
         <div className="text-center py-8 text-muted-foreground">Loading...</div>
       ) : filteredLeads.length === 0 ? (
@@ -104,6 +126,12 @@ export function CRMLeadsView() {
               : 'No leads yet. Add your first lead!'}
           </CardContent>
         </Card>
+      ) : viewMode === 'board' ? (
+        <CRMKanbanView 
+          leads={filteredLeads} 
+          onLeadClick={setSelectedLead}
+          onLeadUpdated={handleLeadUpdated}
+        />
       ) : (
         <div className="space-y-3">
           {filteredLeads.map(lead => (
@@ -125,7 +153,7 @@ export function CRMLeadsView() {
                       {lead.phone && (
                         <span className="flex items-center gap-1">
                           <Phone className="h-3 w-3" />
-                          {lead.phone}
+                          {formatPhoneNumber(lead.phone)}
                         </span>
                       )}
                       {lead.email && (

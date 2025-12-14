@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
-import type { CRMLead, CRMLeadNote, CRMSalesGoal, LeaderboardEntry, DuplicateLead, CRMUser } from '@/types/crm';
+import type { CRMLead, CRMLeadNote, CRMSalesGoal, LeaderboardEntry, DuplicateLead, CRMUser, CRMFollowUp } from '@/types/crm';
 import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, format } from 'date-fns';
 
 export function useCRM() {
@@ -294,6 +294,75 @@ export function useCRM() {
     return data as unknown as (CRMSalesGoal & { user_profile?: CRMUser })[];
   };
 
+  // ================ Follow-Up Functions ================
+
+  // Fetch follow-ups
+  const fetchFollowUps = async (): Promise<CRMFollowUp[]> => {
+    if (!user) return [];
+
+    const { data, error } = await supabase
+      .from('crm_follow_ups')
+      .select(`
+        *,
+        lead:crm_leads(id, name, phone, email)
+      `)
+      .order('scheduled_at', { ascending: true });
+
+    if (error || !data) return [];
+    return data as unknown as CRMFollowUp[];
+  };
+
+  // Add follow-up
+  const addFollowUp = async (followUp: {
+    lead_id?: string | null;
+    title: string;
+    notes?: string | null;
+    scheduled_at: string;
+    is_recurring?: boolean;
+    recurrence_interval?: string | null;
+  }): Promise<boolean> => {
+    if (!user) return false;
+
+    const { error } = await supabase
+      .from('crm_follow_ups')
+      .insert({
+        ...followUp,
+        user_id: user.id
+      });
+
+    return !error;
+  };
+
+  // Update follow-up
+  const updateFollowUp = async (id: string, updates: Partial<CRMFollowUp>): Promise<boolean> => {
+    const { error } = await supabase
+      .from('crm_follow_ups')
+      .update(updates)
+      .eq('id', id);
+
+    return !error;
+  };
+
+  // Complete follow-up
+  const completeFollowUp = async (id: string): Promise<boolean> => {
+    const { error } = await supabase
+      .from('crm_follow_ups')
+      .update({ completed: true })
+      .eq('id', id);
+
+    return !error;
+  };
+
+  // Delete follow-up
+  const deleteFollowUp = async (id: string): Promise<boolean> => {
+    const { error } = await supabase
+      .from('crm_follow_ups')
+      .delete()
+      .eq('id', id);
+
+    return !error;
+  };
+
   return {
     leads,
     loading,
@@ -311,6 +380,12 @@ export function useCRM() {
     setMonthlyGoal,
     updateUserSales,
     getAllUsers,
-    getAllGoals
+    getAllGoals,
+    // Follow-up functions
+    fetchFollowUps,
+    addFollowUp,
+    updateFollowUp,
+    completeFollowUp,
+    deleteFollowUp
   };
 }

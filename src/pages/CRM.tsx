@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { CRMLayout } from '@/components/crm/CRMLayout';
 import { CRMDashboard } from '@/components/crm/CRMDashboard';
 import { CRMLeadsView } from '@/components/crm/CRMLeadsView';
-
+import { CRMCalendarView } from '@/components/crm/CRMCalendarView';
 import { CRMSettings } from '@/components/crm/CRMSettings';
 import { CRMAdminPanel } from '@/components/crm/CRMAdminPanel';
 import { useCRM } from '@/hooks/useCRM';
@@ -39,7 +39,12 @@ export default function CRM() {
         return <CRMDashboard />;
       case 'leads':
         return <CRMLeadsView />;
-      // Leaderboard removed - now on dashboard
+      case 'calendar':
+        return (
+          <div className="md:ml-56">
+            <CRMCalendarView onBack={() => setActiveTab('dashboard')} />
+          </div>
+        );
       case 'settings':
         return <CRMSettings />;
       case 'admin':

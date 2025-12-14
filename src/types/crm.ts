@@ -47,6 +47,21 @@ export interface CRMSalesGoal {
   updated_at: string;
 }
 
+export interface CRMFollowUp {
+  id: string;
+  lead_id: string | null;
+  user_id: string;
+  scheduled_at: string;
+  title: string;
+  notes: string | null;
+  is_recurring: boolean;
+  recurrence_interval: string | null;
+  completed: boolean;
+  created_at: string;
+  updated_at: string;
+  lead?: CRMLead;
+}
+
 export interface LeaderboardEntry {
   user_id: string;
   full_name: string;
