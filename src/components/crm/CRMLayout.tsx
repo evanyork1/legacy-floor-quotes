@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LayoutDashboard, Users, Trophy, Settings, Shield, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, Shield, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
@@ -14,7 +14,6 @@ interface CRMLayoutProps {
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'leads', label: 'Leads', icon: Users },
-  { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
@@ -30,7 +29,7 @@ export function CRMLayout({ children, activeTab, onTabChange }: CRMLayoutProps) 
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top Header */}
       <header className="bg-card border-b border-border px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-foreground">Sales CRM</h1>
+        <h1 className="text-xl font-bold text-foreground">Legacy View</h1>
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted-foreground hidden sm:block">
             {user?.email}

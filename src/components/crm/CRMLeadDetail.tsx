@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCRM } from '@/hooks/useCRM';
 import { LEAD_STAGES, type CRMLead, type CRMLeadNote } from '@/types/crm';
-import { ArrowLeft, Edit2, Save, X, Phone, Mail, MapPin, Globe, Linkedin, Calendar, User, Send } from 'lucide-react';
+import { ArrowLeft, Edit2, Save, X, Phone, Mail, MapPin, Globe, Linkedin, Calendar, User, Send, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 
@@ -18,11 +17,14 @@ interface CRMLeadDetailProps {
 }
 
 export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
-  const { updateLead, addNote, getLeadNotes, logAppointment, isAdmin, deleteLead } = useCRM();
+  const { updateLead, addNote, getLeadNotes, logAppointment, isAdmin, deleteLead, fetchLeads } = useCRM();
   const [isEditing, setIsEditing] = useState(false);
   const [notes, setNotes] = useState<CRMLeadNote[]>([]);
   const [newNote, setNewNote] = useState('');
   const [loading, setLoading] = useState(false);
+  const [appointmentLoading, setAppointmentLoading] = useState(false);
+  const [stageLoading, setStageLoading] = useState(false);
+  const [currentStage, setCurrentStage] = useState(lead.stage);
 
   const [editData, setEditData] = useState({
     name: lead.name,
@@ -31,7 +33,6 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
     address: lead.address || '',
     website: lead.website || '',
     linkedin: lead.linkedin || '',
-    stage: lead.stage,
   });
 
   useEffect(() => {
@@ -55,6 +56,20 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
     setLoading(false);
   };
 
+  const handleStageChange = async (newStage: string) => {
+    setStageLoading(true);
+    setCurrentStage(newStage);
+    const success = await updateLead(lead.id, { stage: newStage });
+    if (success) {
+      toast.success('Stage updated');
+      await fetchLeads();
+    } else {
+      toast.error('Failed to update stage');
+      setCurrentStage(lead.stage);
+    }
+    setStageLoading(false);
+  };
+
   const handleAddNote = async () => {
     if (!newNote.trim()) return;
     
@@ -71,10 +86,14 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
   };
 
   const handleBookAppointment = async () => {
+    setAppointmentLoading(true);
     const success = await logAppointment(lead.id);
     if (success) {
       toast.success('Appointment logged');
+    } else {
+      toast.error('Failed to log appointment');
     }
+    setAppointmentLoading(false);
   };
 
   const handleDelete = async () => {
@@ -91,12 +110,12 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
 
   const getStageColor = (stage: string) => {
     switch (stage) {
-      case 'new': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
-      case 'contacted': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'quoted': return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
-      case 'won': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'lost': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default: return 'bg-muted text-muted-foreground';
+      case 'new': return 'border-blue-500 text-blue-600';
+      case 'contacted': return 'border-yellow-500 text-yellow-600';
+      case 'quoted': return 'border-purple-500 text-purple-600';
+      case 'won': return 'border-green-500 text-green-600';
+      case 'lost': return 'border-red-500 text-red-600';
+      default: return 'border-muted text-muted-foreground';
     }
   };
 
@@ -151,9 +170,11 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
                 Lead ID: {lead.id.slice(0, 8)}...
               </p>
             </div>
-            {isEditing ? (
-              <Select value={editData.stage} onValueChange={(v) => setEditData(prev => ({ ...prev, stage: v }))}>
-                <SelectTrigger className="w-[140px]">
+            {/* Always-visible stage selector */}
+            <div className="flex items-center gap-2">
+              {stageLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+              <Select value={currentStage} onValueChange={handleStageChange} disabled={stageLoading}>
+                <SelectTrigger className={`w-[140px] border-2 ${getStageColor(currentStage)}`}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -164,11 +185,7 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
                   ))}
                 </SelectContent>
               </Select>
-            ) : (
-              <Badge className={getStageColor(lead.stage)}>
-                {LEAD_STAGES.find(s => s.value === lead.stage)?.label || lead.stage}
-              </Badge>
-            )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -266,8 +283,17 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
 
       {/* Quick Actions */}
       <div className="flex gap-2">
-        <Button variant="outline" className="flex-1" onClick={handleBookAppointment}>
-          <Calendar className="h-4 w-4 mr-2" />
+        <Button 
+          variant="outline" 
+          className="flex-1" 
+          onClick={handleBookAppointment}
+          disabled={appointmentLoading}
+        >
+          {appointmentLoading ? (
+            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+          ) : (
+            <Calendar className="h-4 w-4 mr-2" />
+          )}
           Log Appointment
         </Button>
       </div>
