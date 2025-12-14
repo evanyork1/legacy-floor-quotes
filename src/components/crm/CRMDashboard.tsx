@@ -10,6 +10,7 @@ import type { CRMSalesGoal, LeaderboardEntry } from '@/types/crm';
 import { Target, TrendingUp, Users, Calendar, Edit2, Check, X, Plus, Trophy, FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import { CRMLeadForm } from './CRMLeadForm';
+import { CRMFollowUpsToday } from './CRMFollowUpsToday';
 
 export function CRMDashboard() {
   const { user } = useAuth();
@@ -127,57 +128,8 @@ export function CRMDashboard() {
         </div>
       </div>
 
-      {/* Sales Goal Progress */}
-      <Card>
-        <CardHeader className="pb-2">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Target className="h-5 w-5 text-primary" />
-              Monthly Sales Goal
-            </CardTitle>
-            {!isEditingGoal && (
-              <Button variant="ghost" size="sm" onClick={() => setIsEditingGoal(true)}>
-                <Edit2 className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-        </CardHeader>
-        <CardContent>
-          {isEditingGoal ? (
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">$</span>
-              <Input
-                type="number"
-                value={newGoalAmount}
-                onChange={(e) => setNewGoalAmount(e.target.value)}
-                placeholder="Enter goal amount"
-                className="max-w-[200px]"
-              />
-              <Button size="sm" onClick={handleSaveGoal}>
-                <Check className="h-4 w-4" />
-              </Button>
-              <Button size="sm" variant="ghost" onClick={() => setIsEditingGoal(false)}>
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-          ) : (
-            <>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm text-muted-foreground">
-                  ${goal?.actual_amount?.toLocaleString() || 0} of ${goal?.goal_amount?.toLocaleString() || 0}
-                </span>
-                <span className="text-sm font-medium">{progressPercent.toFixed(0)}%</span>
-              </div>
-              <div className="h-3 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className={`h-full transition-all ${getProgressColor(progressPercent)}`}
-                  style={{ width: `${progressPercent}%` }}
-                />
-              </div>
-            </>
-          )}
-        </CardContent>
-      </Card>
+      {/* Follow-Ups Today */}
+      <CRMFollowUpsToday />
 
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -309,6 +261,58 @@ export function CRMDashboard() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Monthly Sales Goal - Moved to bottom */}
+      <Card>
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Target className="h-5 w-5 text-primary" />
+              Monthly Sales Goal
+            </CardTitle>
+            {!isEditingGoal && (
+              <Button variant="ghost" size="sm" onClick={() => setIsEditingGoal(true)}>
+                <Edit2 className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent>
+          {isEditingGoal ? (
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground">$</span>
+              <Input
+                type="number"
+                value={newGoalAmount}
+                onChange={(e) => setNewGoalAmount(e.target.value)}
+                placeholder="Enter goal amount"
+                className="max-w-[200px]"
+              />
+              <Button size="sm" onClick={handleSaveGoal}>
+                <Check className="h-4 w-4" />
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setIsEditingGoal(false)}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          ) : (
+            <>
+              <div className="flex justify-between mb-2">
+                <span className="text-sm text-muted-foreground">
+                  ${goal?.actual_amount?.toLocaleString() || 0} of ${goal?.goal_amount?.toLocaleString() || 0}
+                </span>
+                <span className="text-sm font-medium">{progressPercent.toFixed(0)}%</span>
+              </div>
+              <div className="h-3 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className={`h-full transition-all ${getProgressColor(progressPercent)}`}
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

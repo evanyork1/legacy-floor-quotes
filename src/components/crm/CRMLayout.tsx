@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { LayoutDashboard, Users, Settings, Shield, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, Shield, LogOut, Calendar } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
@@ -14,6 +13,7 @@ interface CRMLayoutProps {
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'leads', label: 'Leads', icon: Users },
+  { id: 'calendar', label: 'Calendar', icon: Calendar },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
@@ -46,14 +46,14 @@ export function CRMLayout({ children, activeTab, onTabChange }: CRMLayoutProps) 
       </main>
 
       {/* Bottom Navigation (Mobile) */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border md:hidden z-40">
         <div className="flex justify-around">
           {allNavItems.map((item) => (
             <button
               key={item.id}
               onClick={() => onTabChange(item.id)}
               className={cn(
-                "flex flex-col items-center py-2 px-3 min-w-[60px]",
+                "flex flex-col items-center py-2 px-2 min-w-[50px]",
                 activeTab === item.id 
                   ? "text-primary" 
                   : "text-muted-foreground"

@@ -83,6 +83,56 @@ export type Database = {
           },
         ]
       }
+      crm_follow_ups: {
+        Row: {
+          completed: boolean | null
+          created_at: string | null
+          id: string
+          is_recurring: boolean | null
+          lead_id: string | null
+          notes: string | null
+          recurrence_interval: string | null
+          scheduled_at: string
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_recurring?: boolean | null
+          lead_id?: string | null
+          notes?: string | null
+          recurrence_interval?: string | null
+          scheduled_at: string
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_recurring?: boolean | null
+          lead_id?: string | null
+          notes?: string | null
+          recurrence_interval?: string | null
+          scheduled_at?: string
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_follow_ups_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       crm_lead_notes: {
         Row: {
           content: string

@@ -7,9 +7,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCRM } from '@/hooks/useCRM';
 import { LEAD_STAGES, type CRMLead, type CRMLeadNote } from '@/types/crm';
-import { ArrowLeft, Edit2, Save, X, Phone, Mail, MapPin, Globe, Linkedin, Calendar, User, Send, Loader2 } from 'lucide-react';
+import { formatPhoneNumber } from '@/lib/formatters';
+import { ArrowLeft, Edit2, Save, X, Phone, Mail, MapPin, Globe, Linkedin, Calendar, User, Send, Loader2, Clock, Plus } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { CRMFollowUpForm } from './CRMFollowUpForm';
 
 interface CRMLeadDetailProps {
   lead: CRMLead;
@@ -25,6 +27,7 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
   const [appointmentLoading, setAppointmentLoading] = useState(false);
   const [stageLoading, setStageLoading] = useState(false);
   const [currentStage, setCurrentStage] = useState(lead.stage);
+  const [showFollowUpForm, setShowFollowUpForm] = useState(false);
 
   const [editData, setEditData] = useState({
     name: lead.name,
@@ -89,7 +92,7 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
     setAppointmentLoading(true);
     const success = await logAppointment(lead.id);
     if (success) {
-      toast.success('Appointment logged');
+      toast.success('Appointment logged successfully!');
     } else {
       toast.error('Failed to log appointment');
     }
@@ -118,6 +121,16 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
       default: return 'border-muted text-muted-foreground';
     }
   };
+
+  if (showFollowUpForm) {
+    return (
+      <CRMFollowUpForm
+        onClose={() => setShowFollowUpForm(false)}
+        leadId={lead.id}
+        leadName={lead.name}
+      />
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -155,8 +168,8 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
       {/* Lead Info */}
       <Card>
         <CardHeader className="pb-2">
-          <div className="flex items-start justify-between">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div className="flex-1">
               {isEditing ? (
                 <Input
                   value={editData.name}
@@ -177,7 +190,7 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
                 <SelectTrigger className={`w-[140px] border-2 ${getStageColor(currentStage)}`}>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-background z-50">
                   {LEAD_STAGES.map(stage => (
                     <SelectItem key={stage.value} value={stage.value}>
                       {stage.label}
@@ -232,7 +245,9 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
               {lead.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-muted-foreground" />
-                  <a href={`tel:${lead.phone}`} className="text-primary hover:underline">{lead.phone}</a>
+                  <a href={`tel:${lead.phone}`} className="text-primary hover:underline">
+                    {formatPhoneNumber(lead.phone)}
+                  </a>
                 </div>
               )}
               {lead.email && (
@@ -282,10 +297,9 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
       </Card>
 
       {/* Quick Actions */}
-      <div className="flex gap-2">
+      <div className="grid grid-cols-2 gap-2">
         <Button 
           variant="outline" 
-          className="flex-1" 
           onClick={handleBookAppointment}
           disabled={appointmentLoading}
         >
@@ -295,6 +309,13 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
             <Calendar className="h-4 w-4 mr-2" />
           )}
           Log Appointment
+        </Button>
+        <Button 
+          variant="outline"
+          onClick={() => setShowFollowUpForm(true)}
+        >
+          <Clock className="h-4 w-4 mr-2" />
+          Add Follow-Up
         </Button>
       </div>
 
