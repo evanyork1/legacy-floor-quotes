@@ -70,6 +70,13 @@ export interface LeaderboardEntry {
   appointments_booked: number;
 }
 
+export interface SalesLeaderboardEntry {
+  user_id: string;
+  full_name: string;
+  deals: number;
+  revenue: number;
+}
+
 export interface DuplicateLead {
   id: string;
   name: string;

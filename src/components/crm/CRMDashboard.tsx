@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCRM } from '@/hooks/useCRM';
 import { useAuth } from '@/hooks/useAuth';
-import type { CRMSalesGoal, LeaderboardEntry } from '@/types/crm';
+import type { CRMSalesGoal, LeaderboardEntry, SalesLeaderboardEntry } from '@/types/crm';
 import { Target, TrendingUp, Users, Calendar, Edit2, Check, X, Plus, Trophy, FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import { CRMLeadForm } from './CRMLeadForm';
@@ -14,10 +14,12 @@ import { CRMFollowUpsToday } from './CRMFollowUpsToday';
 
 export function CRMDashboard() {
   const { user } = useAuth();
-  const { leads, getCurrentGoal, setMonthlyGoal, getLeaderboard, fetchLeads } = useCRM();
+  const { leads, getCurrentGoal, setMonthlyGoal, getLeaderboard, getSalesLeaderboard, fetchLeads } = useCRM();
   const [goal, setGoal] = useState<CRMSalesGoal | null>(null);
   const [weeklyLeaderboard, setWeeklyLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [lifetimeLeaderboard, setLifetimeLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [weeklySalesLeaderboard, setWeeklySalesLeaderboard] = useState<SalesLeaderboardEntry[]>([]);
+  const [lifetimeSalesLeaderboard, setLifetimeSalesLeaderboard] = useState<SalesLeaderboardEntry[]>([]);
   const [isEditingGoal, setIsEditingGoal] = useState(false);
   const [newGoalAmount, setNewGoalAmount] = useState('');
   const [showAddLead, setShowAddLead] = useState(false);
@@ -32,9 +34,13 @@ export function CRMDashboard() {
 
       const weekly = await getLeaderboard('week');
       const lifetime = await getLeaderboard('lifetime');
+      const weeklySales = await getSalesLeaderboard('week');
+      const lifetimeSales = await getSalesLeaderboard('lifetime');
       
       setWeeklyLeaderboard(weekly);
       setLifetimeLeaderboard(lifetime);
+      setWeeklySalesLeaderboard(weeklySales);
+      setLifetimeSalesLeaderboard(lifetimeSales);
     };
 
     loadData();
@@ -77,12 +83,10 @@ export function CRMDashboard() {
     return `#${index + 1}`;
   };
 
-  const LeaderboardTable = ({ data, metric }: { data: LeaderboardEntry[], metric: 'leads' | 'appointments' | 'sales' }) => {
+  const LeaderboardTable = ({ data, metric }: { data: LeaderboardEntry[], metric: 'leads' | 'appointments' }) => {
     const sorted = [...data].sort((a, b) => {
       if (metric === 'leads') return b.leads_added - a.leads_added;
-      if (metric === 'appointments') return b.appointments_booked - a.appointments_booked;
-      // For sales, we'll use leads_added as placeholder since sales data would need separate tracking
-      return b.leads_added - a.leads_added;
+      return b.appointments_booked - a.appointments_booked;
     }).slice(0, 5);
 
     return (
@@ -99,7 +103,34 @@ export function CRMDashboard() {
               <span className="font-medium">
                 {metric === 'leads' && entry.leads_added}
                 {metric === 'appointments' && entry.appointments_booked}
-                {metric === 'sales' && entry.leads_added}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+    );
+  };
+
+  const SalesLeaderboardTable = ({ data }: { data: SalesLeaderboardEntry[] }) => {
+    const sorted = [...data].sort((a, b) => b.deals - a.deals).slice(0, 5);
+
+    const formatCurrency = (amount: number) => {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(amount);
+    };
+
+    return (
+      <div className="space-y-2">
+        {sorted.length === 0 ? (
+          <p className="text-sm text-muted-foreground text-center py-2">No data</p>
+        ) : (
+          sorted.map((entry, index) => (
+            <div key={entry.user_id} className="flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-6">{getRankEmoji(index)}</span>
+                <span className="truncate">{entry.full_name}</span>
+              </div>
+              <span className="font-medium">
+                {entry.deals} ({formatCurrency(entry.revenue)})
               </span>
             </div>
           ))
@@ -221,7 +252,7 @@ export function CRMDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <LeaderboardTable data={weeklyLeaderboard} metric="sales" />
+                <SalesLeaderboardTable data={weeklySalesLeaderboard} />
               </CardContent>
             </Card>
           </div>
@@ -261,7 +292,7 @@ export function CRMDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <LeaderboardTable data={lifetimeLeaderboard} metric="sales" />
+                <SalesLeaderboardTable data={lifetimeSalesLeaderboard} />
               </CardContent>
             </Card>
           </div>

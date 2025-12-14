@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
-import type { CRMLead, CRMLeadNote, CRMSalesGoal, LeaderboardEntry, DuplicateLead, CRMUser, CRMFollowUp } from '@/types/crm';
+import type { CRMLead, CRMLeadNote, CRMSalesGoal, LeaderboardEntry, SalesLeaderboardEntry, DuplicateLead, CRMUser, CRMFollowUp } from '@/types/crm';
 import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, format } from 'date-fns';
 
 export function useCRM() {
@@ -209,6 +209,29 @@ export function useCRM() {
     return data as LeaderboardEntry[];
   };
 
+  // Get sales leaderboard
+  const getSalesLeaderboard = async (period: 'week' | 'lifetime'): Promise<SalesLeaderboardEntry[]> => {
+    const now = new Date();
+    let startDate: string;
+    let endDate: string;
+
+    if (period === 'week') {
+      startDate = format(startOfWeek(now, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+      endDate = format(endOfWeek(now, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+    } else {
+      startDate = '2020-01-01';
+      endDate = format(now, 'yyyy-MM-dd');
+    }
+
+    const { data, error } = await supabase.rpc('get_sales_leaderboard', {
+      month_start: startDate,
+      month_end: endDate
+    });
+
+    if (error || !data) return [];
+    return data as SalesLeaderboardEntry[];
+  };
+
   // Get current month sales goal
   const getCurrentGoal = async (): Promise<CRMSalesGoal | null> => {
     if (!user) return null;
@@ -376,6 +399,7 @@ export function useCRM() {
     getLeadNotes,
     logAppointment,
     getLeaderboard,
+    getSalesLeaderboard,
     getCurrentGoal,
     setMonthlyGoal,
     updateUserSales,
