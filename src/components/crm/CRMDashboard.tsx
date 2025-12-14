@@ -77,11 +77,12 @@ export function CRMDashboard() {
     return `#${index + 1}`;
   };
 
-  const LeaderboardTable = ({ data, metric }: { data: LeaderboardEntry[], metric: 'leads' | 'notes' | 'appointments' }) => {
+  const LeaderboardTable = ({ data, metric }: { data: LeaderboardEntry[], metric: 'leads' | 'appointments' | 'sales' }) => {
     const sorted = [...data].sort((a, b) => {
       if (metric === 'leads') return b.leads_added - a.leads_added;
-      if (metric === 'notes') return b.notes_added - a.notes_added;
-      return b.appointments_booked - a.appointments_booked;
+      if (metric === 'appointments') return b.appointments_booked - a.appointments_booked;
+      // For sales, we'll use leads_added as placeholder since sales data would need separate tracking
+      return b.leads_added - a.leads_added;
     }).slice(0, 5);
 
     return (
@@ -97,8 +98,8 @@ export function CRMDashboard() {
               </div>
               <span className="font-medium">
                 {metric === 'leads' && entry.leads_added}
-                {metric === 'notes' && entry.notes_added}
                 {metric === 'appointments' && entry.appointments_booked}
+                {metric === 'sales' && entry.leads_added}
               </span>
             </div>
           ))
@@ -203,24 +204,24 @@ export function CRMDashboard() {
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-primary" />
-                  Most Notes Added
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <LeaderboardTable data={weeklyLeaderboard} metric="notes" />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-primary" />
                   Most Appointments
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <LeaderboardTable data={weeklyLeaderboard} metric="appointments" />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                  Most Sales
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={weeklyLeaderboard} metric="sales" />
               </CardContent>
             </Card>
           </div>
@@ -243,24 +244,24 @@ export function CRMDashboard() {
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-primary" />
-                  Most Notes Added
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <LeaderboardTable data={lifetimeLeaderboard} metric="notes" />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-primary" />
                   Most Appointments
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <LeaderboardTable data={lifetimeLeaderboard} metric="appointments" />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                  Most Sales
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeaderboardTable data={lifetimeLeaderboard} metric="sales" />
               </CardContent>
             </Card>
           </div>
