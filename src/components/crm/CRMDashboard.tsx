@@ -11,6 +11,7 @@ import { Target, TrendingUp, Users, Calendar, Edit2, Check, X, Plus, Trophy, Fil
 import { format } from 'date-fns';
 import { CRMLeadForm } from './CRMLeadForm';
 import { CRMFollowUpsToday } from './CRMFollowUpsToday';
+import { CRMDashboardCalendar } from './CRMDashboardCalendar';
 
 export function CRMDashboard() {
   const { user } = useAuth();
@@ -160,8 +161,11 @@ export function CRMDashboard() {
         </div>
       </div>
 
-      {/* Follow-Ups Today */}
-      <CRMFollowUpsToday />
+      {/* Follow-Ups Today and Calendar */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <CRMFollowUpsToday />
+        <CRMDashboardCalendar />
+      </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

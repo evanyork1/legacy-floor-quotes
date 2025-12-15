@@ -23,6 +23,7 @@ export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
   
   const [formData, setFormData] = useState({
     name: existingLead?.name || '',
+    company: existingLead?.company || '',
     phone: existingLead?.phone || '',
     email: existingLead?.email || '',
     address: existingLead?.address || '',
@@ -100,6 +101,16 @@ export function CRMLeadForm({ onClose, existingLead }: CRMLeadFormProps) {
                   onChange={(e) => handleChange('name', e.target.value)}
                   placeholder="Contact name"
                   required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="company">Company</Label>
+                <Input
+                  id="company"
+                  value={formData.company}
+                  onChange={(e) => handleChange('company', e.target.value)}
+                  placeholder="Company name"
                 />
               </div>
 

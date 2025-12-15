@@ -31,6 +31,7 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
 
   const [editData, setEditData] = useState({
     name: lead.name,
+    company: lead.company || '',
     phone: lead.phone || '',
     email: lead.email || '',
     address: lead.address || '',
@@ -90,11 +91,12 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
 
   const handleBookAppointment = async () => {
     setAppointmentLoading(true);
-    const success = await logAppointment(lead.id);
-    if (success) {
+    const result = await logAppointment(lead.id);
+    if (result.success) {
       toast.success('Appointment logged successfully!');
     } else {
-      toast.error('Failed to log appointment');
+      toast.error(`Failed to log appointment: ${result.error || 'Unknown error'}`);
+      console.error('Appointment log error:', result.error);
     }
     setAppointmentLoading(false);
   };
@@ -205,6 +207,13 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
           {isEditing ? (
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
+                <Label>Company</Label>
+                <Input
+                  value={editData.company}
+                  onChange={(e) => setEditData(prev => ({ ...prev, company: e.target.value }))}
+                />
+              </div>
+              <div className="space-y-2">
                 <Label>Phone</Label>
                 <Input
                   value={editData.phone}
@@ -242,6 +251,12 @@ export function CRMLeadDetail({ lead, onClose }: CRMLeadDetailProps) {
             </div>
           ) : (
             <div className="space-y-3">
+              {lead.company && (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-medium text-muted-foreground">Company:</span>
+                  <span>{lead.company}</span>
+                </div>
+              )}
               {lead.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-muted-foreground" />
