@@ -180,15 +180,15 @@ export function CRMDashboardCalendar() {
         {/* Selected Day Events */}
         {selectedDate && (
           <div className="border-t pt-2">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="text-xs font-medium">
+            <div className="flex items-center justify-between mb-2 gap-2">
+              <h4 className="text-xs font-medium shrink-0">
                 {format(selectedDate, 'EEE, MMM d')}
               </h4>
-              <div className="flex gap-1">
-                <Button variant="outline" size="sm" onClick={() => handleAddNew('follow_up')} className="h-6 text-xs px-2">
+              <div className="flex gap-1 flex-wrap justify-end">
+                <Button variant="outline" size="sm" onClick={() => handleAddNew('follow_up')} className="h-7 text-xs px-2">
                   + Follow-Up
                 </Button>
-                <Button variant="outline" size="sm" onClick={() => handleAddNew('appointment')} className="h-6 text-xs px-2">
+                <Button variant="outline" size="sm" onClick={() => handleAddNew('appointment')} className="h-7 text-xs px-2">
                   + Appt
                 </Button>
               </div>
@@ -196,16 +196,16 @@ export function CRMDashboardCalendar() {
             {selectedDayEvents.length === 0 ? (
               <p className="text-xs text-muted-foreground">No events</p>
             ) : (
-              <div className="space-y-1.5 max-h-28 overflow-y-auto">
+              <div className="space-y-1.5 max-h-32 md:max-h-40 overflow-y-auto">
                 {selectedDayEvents.map(event => (
                   <div
                     key={event.id}
-                    className="flex items-center justify-between p-1.5 bg-muted/50 rounded text-xs"
+                    className="flex items-center justify-between p-1.5 bg-muted/50 rounded text-xs gap-1"
                   >
-                    <div className="flex items-center gap-1.5 min-w-0">
+                    <div className="flex items-center gap-1.5 min-w-0 flex-1">
                       <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${getDotColor(event.type)}`} />
                       <span className="truncate">{event.title}</span>
-                      <span className="text-muted-foreground shrink-0">
+                      <span className="text-muted-foreground shrink-0 text-[10px] md:text-xs">
                         {format(event.date, 'h:mm a')}
                       </span>
                     </div>

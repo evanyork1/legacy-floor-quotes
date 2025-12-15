@@ -141,161 +141,157 @@ export function CRMDashboard() {
   };
 
   if (showAddLead) {
-    return (
-      <div className="md:ml-56">
-        <CRMLeadForm onClose={handleLeadAdded} />
-      </div>
-    );
+    return <CRMLeadForm onClose={handleLeadAdded} />;
   }
 
   return (
-    <div className="space-y-6 md:ml-56">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-foreground">Dashboard</h2>
-        <div className="flex items-center gap-3">
-          <Button onClick={() => setShowAddLead(true)} className="gap-2">
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground">Dashboard</h2>
+        <div className="flex items-center gap-2 md:gap-3">
+          <Button onClick={() => setShowAddLead(true)} size="sm" className="gap-1 md:gap-2">
             <Plus className="h-4 w-4" />
-            Add Lead
+            <span className="hidden sm:inline">Add Lead</span>
           </Button>
-          <span className="text-sm text-muted-foreground hidden sm:block">{format(new Date(), 'MMMM yyyy')}</span>
+          <span className="text-xs md:text-sm text-muted-foreground hidden sm:block">{format(new Date(), 'MMMM yyyy')}</span>
         </div>
       </div>
 
       {/* Follow-Ups Today and Calendar */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         <CRMFollowUpsToday />
         <CRMDashboardCalendar />
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Users className="h-4 w-4 text-primary" />
-              <span className="text-sm text-muted-foreground">My Leads</span>
+          <CardContent className="p-3 md:pt-6 md:px-6">
+            <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-2">
+              <Users className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
+              <span className="text-xs md:text-sm text-muted-foreground">My Leads</span>
             </div>
-            <p className="text-2xl font-bold">{myLeads.length}</p>
+            <p className="text-xl md:text-2xl font-bold">{myLeads.length}</p>
           </CardContent>
         </Card>
         
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="h-4 w-4 text-green-500" />
-              <span className="text-sm text-muted-foreground">Won</span>
+          <CardContent className="p-3 md:pt-6 md:px-6">
+            <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-2">
+              <TrendingUp className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-500" />
+              <span className="text-xs md:text-sm text-muted-foreground">Won</span>
             </div>
-            <p className="text-2xl font-bold">{myWonLeads.length}</p>
+            <p className="text-xl md:text-2xl font-bold">{myWonLeads.length}</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Calendar className="h-4 w-4 text-blue-500" />
-              <span className="text-sm text-muted-foreground">New</span>
+          <CardContent className="p-3 md:pt-6 md:px-6">
+            <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-2">
+              <Calendar className="h-3.5 w-3.5 md:h-4 md:w-4 text-blue-500" />
+              <span className="text-xs md:text-sm text-muted-foreground">New</span>
             </div>
-            <p className="text-2xl font-bold">{myNewLeads.length}</p>
+            <p className="text-xl md:text-2xl font-bold">{myNewLeads.length}</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Target className="h-4 w-4 text-orange-500" />
-              <span className="text-sm text-muted-foreground">This Week</span>
+          <CardContent className="p-3 md:pt-6 md:px-6">
+            <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-2">
+              <Target className="h-3.5 w-3.5 md:h-4 md:w-4 text-orange-500" />
+              <span className="text-xs md:text-sm text-muted-foreground">This Week</span>
             </div>
-            <p className="text-2xl font-bold">{weeklyStats?.leads_added || 0}</p>
+            <p className="text-xl md:text-2xl font-bold">{weeklyStats?.leads_added || 0}</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Leaderboard Section */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-primary" />
+      <div className="space-y-3 md:space-y-4">
+        <h3 className="text-base md:text-lg font-semibold text-foreground flex items-center gap-2">
+          <Trophy className="h-4 w-4 md:h-5 md:w-5 text-primary" />
           Company Leaderboard
         </h3>
         <Tabs defaultValue="week" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 max-w-[300px]">
-          <TabsTrigger value="week">This Week</TabsTrigger>
-          <TabsTrigger value="lifetime">Lifetime</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 max-w-[250px] md:max-w-[300px]">
+          <TabsTrigger value="week" className="text-xs md:text-sm">This Week</TabsTrigger>
+          <TabsTrigger value="lifetime" className="text-xs md:text-sm">Lifetime</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="week" className="mt-4">
-          <div className="grid md:grid-cols-3 gap-4">
+        <TabsContent value="week" className="mt-3 md:mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Users className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <Users className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Leads Added
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <LeaderboardTable data={weeklyLeaderboard} metric="leads" />
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <Calendar className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Appointments
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <LeaderboardTable data={weeklyLeaderboard} metric="appointments" />
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <TrendingUp className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Sales
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <SalesLeaderboardTable data={weeklySalesLeaderboard} />
               </CardContent>
             </Card>
           </div>
         </TabsContent>
 
-        <TabsContent value="lifetime" className="mt-4">
-          <div className="grid md:grid-cols-3 gap-4">
+        <TabsContent value="lifetime" className="mt-3 md:mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Users className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <Users className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Leads Added
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <LeaderboardTable data={lifetimeLeaderboard} metric="leads" />
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <Calendar className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Appointments
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <LeaderboardTable data={lifetimeLeaderboard} metric="appointments" />
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-primary" />
+              <CardHeader className="p-3 md:p-6 pb-2">
+                <CardTitle className="text-xs md:text-sm flex items-center gap-2">
+                  <TrendingUp className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary" />
                   Most Sales
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 md:p-6 pt-0">
                 <SalesLeaderboardTable data={lifetimeSalesLeaderboard} />
               </CardContent>
             </Card>

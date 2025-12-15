@@ -41,7 +41,7 @@ export function CRMLayout({ children, activeTab, onTabChange }: CRMLayoutProps) 
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 pb-20 md:pb-4 overflow-auto">
+      <main className="flex-1 p-3 md:p-4 pb-24 md:pb-4 md:ml-56 overflow-auto">
         {children}
       </main>
 

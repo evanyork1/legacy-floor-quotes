@@ -116,6 +116,16 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Safe area support for notched devices */
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px);
+  }
+
+  /* Touch action for better mobile interactions */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+
   /* Mobile-first optimizations */
   @media (max-width: 768px) {
     /* Improve tap target sizes on mobile */

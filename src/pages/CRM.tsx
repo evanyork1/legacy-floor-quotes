@@ -40,11 +40,7 @@ export default function CRM() {
       case 'leads':
         return <CRMLeadsView />;
       case 'calendar':
-        return (
-          <div className="md:ml-56">
-            <CRMCalendarView onBack={() => setActiveTab('dashboard')} />
-          </div>
-        );
+        return <CRMCalendarView onBack={() => setActiveTab('dashboard')} />;
       case 'settings':
         return <CRMSettings />;
       case 'admin':

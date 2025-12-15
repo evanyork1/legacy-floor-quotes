@@ -53,38 +53,30 @@ export function CRMLeadsView() {
   };
 
   if (showAddForm) {
-    return (
-      <div className="md:ml-56">
-        <CRMLeadForm onClose={() => setShowAddForm(false)} />
-      </div>
-    );
+    return <CRMLeadForm onClose={() => setShowAddForm(false)} />;
   }
 
   if (selectedLead) {
-    return (
-      <div className="md:ml-56">
-        <CRMLeadDetail lead={selectedLead} onClose={() => setSelectedLead(null)} />
-      </div>
-    );
+    return <CRMLeadDetail lead={selectedLead} onClose={() => setSelectedLead(null)} />;
   }
 
   return (
-    <div className="space-y-4 md:ml-56">
+    <div className="space-y-3 md:space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between">
-        <h2 className="text-2xl font-bold text-foreground">Leads</h2>
+      <div className="flex flex-col sm:flex-row gap-3 justify-between">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground">Leads</h2>
         <div className="flex items-center gap-2">
           <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as 'list' | 'board')}>
-            <ToggleGroupItem value="list" aria-label="List view" className="px-3">
+            <ToggleGroupItem value="list" aria-label="List view" className="px-2 md:px-3 h-9">
               <List className="h-4 w-4" />
             </ToggleGroupItem>
-            <ToggleGroupItem value="board" aria-label="Board view" className="px-3">
+            <ToggleGroupItem value="board" aria-label="Board view" className="px-2 md:px-3 h-9">
               <LayoutGrid className="h-4 w-4" />
             </ToggleGroupItem>
           </ToggleGroup>
-          <Button onClick={() => setShowAddForm(true)} className="gap-2">
+          <Button onClick={() => setShowAddForm(true)} size="sm" className="gap-1 md:gap-2">
             <Plus className="h-4 w-4" />
-            Add Lead
+            <span className="hidden sm:inline">Add Lead</span>
           </Button>
         </div>
       </div>

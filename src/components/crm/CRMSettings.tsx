@@ -49,8 +49,8 @@ export function CRMSettings() {
   };
 
   return (
-    <div className="space-y-6 md:ml-56">
-      <h2 className="text-2xl font-bold text-foreground">Settings</h2>
+    <div className="space-y-4 md:space-y-6">
+      <h2 className="text-xl md:text-2xl font-bold text-foreground">Settings</h2>
 
       <Card>
         <CardHeader>
