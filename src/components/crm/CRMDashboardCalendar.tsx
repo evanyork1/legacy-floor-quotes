@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, Pencil, Trash2 } from 'lucide-react';
 import { 
   format, 
   startOfMonth, 
@@ -14,28 +14,29 @@ import {
   addMonths,
   subMonths,
   startOfWeek,
-  endOfWeek,
-  isPast
+  endOfWeek
 } from 'date-fns';
 import { useCRM } from '@/hooks/useCRM';
 import { CRMFollowUp } from '@/types/crm';
 import { CRMFollowUpForm } from './CRMFollowUpForm';
+import { toast } from 'sonner';
 
 interface CalendarEvent {
   id: string;
   title: string;
   date: Date;
-  type: 'follow-up' | 'overdue' | 'completed' | 'appointment';
+  type: 'follow_up' | 'appointment';
   followUp?: CRMFollowUp;
 }
 
 export function CRMDashboardCalendar() {
-  const { fetchFollowUps } = useCRM();
+  const { fetchFollowUps, deleteFollowUp } = useCRM();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [editingFollowUp, setEditingFollowUp] = useState<CRMFollowUp | null>(null);
   const [showNewFollowUp, setShowNewFollowUp] = useState(false);
+  const [newItemType, setNewItemType] = useState<'follow_up' | 'appointment'>('follow_up');
 
   useEffect(() => {
     loadEvents();
@@ -43,24 +44,15 @@ export function CRMDashboardCalendar() {
 
   const loadEvents = async () => {
     const followUps = await fetchFollowUps();
-    const calendarEvents: CalendarEvent[] = followUps.map(fu => {
-      const date = new Date(fu.scheduled_at);
-      let type: CalendarEvent['type'] = 'follow-up';
-      
-      if (fu.completed) {
-        type = 'completed';
-      } else if (isPast(date) && !isToday(date)) {
-        type = 'overdue';
-      }
-
-      return {
+    const calendarEvents: CalendarEvent[] = followUps
+      .filter(fu => !fu.completed)
+      .map(fu => ({
         id: fu.id,
         title: fu.title,
-        date,
-        type,
+        date: new Date(fu.scheduled_at),
+        type: fu.type || 'follow_up',
         followUp: fu
-      };
-    });
+      }));
     setEvents(calendarEvents);
   };
 
@@ -68,6 +60,21 @@ export function CRMDashboardCalendar() {
     setEditingFollowUp(null);
     setShowNewFollowUp(false);
     loadEvents();
+  };
+
+  const handleDelete = async (id: string) => {
+    const success = await deleteFollowUp(id);
+    if (success) {
+      toast.success('Deleted');
+      loadEvents();
+    } else {
+      toast.error('Failed to delete');
+    }
+  };
+
+  const handleAddNew = (type: 'follow_up' | 'appointment') => {
+    setNewItemType(type);
+    setShowNewFollowUp(true);
   };
 
   const monthStart = startOfMonth(currentMonth);
@@ -81,12 +88,7 @@ export function CRMDashboardCalendar() {
   };
 
   const getDotColor = (type: CalendarEvent['type']) => {
-    switch (type) {
-      case 'overdue': return 'bg-red-500';
-      case 'completed': return 'bg-green-500';
-      case 'appointment': return 'bg-purple-500';
-      default: return 'bg-blue-500';
-    }
+    return type === 'appointment' ? 'bg-purple-500' : 'bg-blue-500';
   };
 
   const selectedDayEvents = selectedDate ? getEventsForDay(selectedDate) : [];
@@ -96,35 +98,35 @@ export function CRMDashboardCalendar() {
   }
 
   if (showNewFollowUp) {
-    return <CRMFollowUpForm onClose={handleFormClose} />;
+    return <CRMFollowUpForm onClose={handleFormClose} type={newItemType} />;
   }
 
   return (
     <Card>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-primary" />
+          <CardTitle className="text-base flex items-center gap-2">
+            <Calendar className="h-4 w-4 text-primary" />
             My Calendar
           </CardTitle>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))} className="h-7 w-7">
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span className="text-sm font-medium min-w-[120px] text-center">
-              {format(currentMonth, 'MMMM yyyy')}
+            <span className="text-sm font-medium min-w-[100px] text-center">
+              {format(currentMonth, 'MMM yyyy')}
             </span>
-            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
+            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))} className="h-7 w-7">
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 px-3 pb-3">
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-1 text-center">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="text-xs font-medium text-muted-foreground py-2">
+        <div className="grid grid-cols-7 gap-0.5 text-center">
+          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
+            <div key={i} className="text-xs font-medium text-muted-foreground py-1">
               {day}
             </div>
           ))}
@@ -138,23 +140,23 @@ export function CRMDashboardCalendar() {
                 key={day.toISOString()}
                 onClick={() => setSelectedDate(day)}
                 className={`
-                  relative p-2 text-sm rounded-md transition-colors min-h-[44px]
-                  ${!isCurrentMonth ? 'text-muted-foreground/50' : ''}
+                  relative p-1 text-xs rounded transition-colors min-h-[36px]
+                  ${!isCurrentMonth ? 'text-muted-foreground/40' : ''}
                   ${isToday(day) ? 'bg-primary/10 font-bold' : ''}
                   ${isSelected ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'}
                 `}
               >
                 <span>{format(day, 'd')}</span>
                 {dayEvents.length > 0 && (
-                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
-                    {dayEvents.slice(0, 3).map((event, i) => (
+                  <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex gap-0.5">
+                    {dayEvents.slice(0, 2).map((event, i) => (
                       <div
                         key={i}
-                        className={`w-1.5 h-1.5 rounded-full ${getDotColor(event.type)}`}
+                        className={`w-1 h-1 rounded-full ${getDotColor(event.type)}`}
                       />
                     ))}
-                    {dayEvents.length > 3 && (
-                      <span className="text-[8px] text-muted-foreground">+{dayEvents.length - 3}</span>
+                    {dayEvents.length > 2 && (
+                      <span className="text-[7px] text-muted-foreground">+</span>
                     )}
                   </div>
                 )}
@@ -164,60 +166,66 @@ export function CRMDashboardCalendar() {
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap gap-4 text-xs border-t pt-3">
+        <div className="flex gap-4 text-xs border-t pt-2">
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-            <span>Scheduled</span>
+            <div className="w-2 h-2 rounded-full bg-blue-500" />
+            <span>Follow-Up</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-            <span>Overdue</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-            <span>Completed</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-purple-500" />
+            <div className="w-2 h-2 rounded-full bg-purple-500" />
             <span>Appointment</span>
           </div>
         </div>
 
         {/* Selected Day Events */}
         {selectedDate && (
-          <div className="border-t pt-3">
+          <div className="border-t pt-2">
             <div className="flex items-center justify-between mb-2">
-              <h4 className="text-sm font-medium">
-                {format(selectedDate, 'EEEE, MMMM d')}
+              <h4 className="text-xs font-medium">
+                {format(selectedDate, 'EEE, MMM d')}
               </h4>
-              <Button variant="outline" size="sm" onClick={() => setShowNewFollowUp(true)}>
-                Add Follow-Up
-              </Button>
+              <div className="flex gap-1">
+                <Button variant="outline" size="sm" onClick={() => handleAddNew('follow_up')} className="h-6 text-xs px-2">
+                  + Follow-Up
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => handleAddNew('appointment')} className="h-6 text-xs px-2">
+                  + Appt
+                </Button>
+              </div>
             </div>
             {selectedDayEvents.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No events scheduled</p>
+              <p className="text-xs text-muted-foreground">No events</p>
             ) : (
-              <div className="space-y-2 max-h-32 overflow-y-auto">
+              <div className="space-y-1.5 max-h-28 overflow-y-auto">
                 {selectedDayEvents.map(event => (
                   <div
                     key={event.id}
-                    className="flex items-center justify-between p-2 bg-muted/50 rounded-md cursor-pointer hover:bg-muted"
-                    onClick={() => event.followUp && setEditingFollowUp(event.followUp)}
+                    className="flex items-center justify-between p-1.5 bg-muted/50 rounded text-xs"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${getDotColor(event.type)}`} />
-                      <span className="text-sm">{event.title}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${getDotColor(event.type)}`} />
+                      <span className="truncate">{event.title}</span>
+                      <span className="text-muted-foreground shrink-0">
                         {format(event.date, 'h:mm a')}
                       </span>
-                      {event.type === 'completed' && (
-                        <Badge variant="secondary" className="text-xs">Done</Badge>
-                      )}
-                      {event.type === 'overdue' && (
-                        <Badge variant="destructive" className="text-xs">Overdue</Badge>
-                      )}
+                    </div>
+                    <div className="flex gap-0.5 shrink-0">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-6 w-6 p-0"
+                        onClick={() => event.followUp && setEditingFollowUp(event.followUp)}
+                      >
+                        <Pencil className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-6 w-6 p-0 text-destructive hover:text-destructive"
+                        onClick={() => handleDelete(event.id)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
                     </div>
                   </div>
                 ))}

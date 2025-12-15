@@ -94,6 +94,7 @@ export type Database = {
           recurrence_interval: string | null
           scheduled_at: string
           title: string
+          type: string
           updated_at: string | null
           user_id: string
         }
@@ -107,6 +108,7 @@ export type Database = {
           recurrence_interval?: string | null
           scheduled_at: string
           title: string
+          type?: string
           updated_at?: string | null
           user_id: string
         }
@@ -120,6 +122,7 @@ export type Database = {
           recurrence_interval?: string | null
           scheduled_at?: string
           title?: string
+          type?: string
           updated_at?: string | null
           user_id?: string
         }

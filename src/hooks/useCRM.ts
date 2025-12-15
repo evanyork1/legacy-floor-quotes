@@ -339,7 +339,7 @@ export function useCRM() {
     return data as unknown as CRMFollowUp[];
   };
 
-  // Add follow-up
+  // Add follow-up or appointment
   const addFollowUp = async (followUp: {
     lead_id?: string | null;
     title: string;
@@ -347,6 +347,7 @@ export function useCRM() {
     scheduled_at: string;
     is_recurring?: boolean;
     recurrence_interval?: string | null;
+    type?: 'follow_up' | 'appointment';
   }): Promise<boolean> => {
     if (!user) return false;
 
@@ -354,6 +355,7 @@ export function useCRM() {
       .from('crm_follow_ups')
       .insert({
         ...followUp,
+        type: followUp.type || 'follow_up',
         user_id: user.id
       });
 

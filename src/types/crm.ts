@@ -58,6 +58,7 @@ export interface CRMFollowUp {
   is_recurring: boolean;
   recurrence_interval: string | null;
   completed: boolean;
+  type: 'follow_up' | 'appointment';
   created_at: string;
   updated_at: string;
   lead?: CRMLead;
