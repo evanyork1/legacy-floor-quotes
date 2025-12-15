@@ -6,6 +6,7 @@ export interface CRMUser {
 export interface CRMLead {
   id: string;
   name: string;
+  company: string | null;
   phone: string | null;
   email: string | null;
   address: string | null;

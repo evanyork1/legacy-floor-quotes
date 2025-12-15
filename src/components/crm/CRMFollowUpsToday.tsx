@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Bell, Check, Clock, AlertTriangle } from 'lucide-react';
+import { Bell, Check, Clock, AlertTriangle, Pencil } from 'lucide-react';
 import { format, isToday, isPast, isBefore, startOfDay } from 'date-fns';
 import { useCRM } from '@/hooks/useCRM';
 import { CRMFollowUp } from '@/types/crm';
+import { CRMFollowUpForm } from './CRMFollowUpForm';
 import { toast } from 'sonner';
 
 interface CRMFollowUpsTodayProps {
@@ -16,6 +17,7 @@ export function CRMFollowUpsToday({ onViewCalendar }: CRMFollowUpsTodayProps) {
   const { fetchFollowUps, completeFollowUp } = useCRM();
   const [followUps, setFollowUps] = useState<CRMFollowUp[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingFollowUp, setEditingFollowUp] = useState<CRMFollowUp | null>(null);
 
   useEffect(() => {
     loadFollowUps();
@@ -50,10 +52,19 @@ export function CRMFollowUpsToday({ onViewCalendar }: CRMFollowUpsTodayProps) {
     }
   };
 
+  const handleEditClose = () => {
+    setEditingFollowUp(null);
+    loadFollowUps();
+  };
+
   const isOverdue = (scheduledAt: string) => {
     const date = new Date(scheduledAt);
     return isPast(date) && !isToday(date);
   };
+
+  if (editingFollowUp) {
+    return <CRMFollowUpForm onClose={handleEditClose} existingFollowUp={editingFollowUp} />;
+  }
 
   if (loading) {
     return (
@@ -120,14 +131,24 @@ export function CRMFollowUpsToday({ onViewCalendar }: CRMFollowUpsTodayProps) {
                       {overdue && <span className="text-destructive ml-1">(Overdue)</span>}
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-7 w-7 p-0 flex-shrink-0"
-                    onClick={() => handleComplete(followUp.id)}
-                  >
-                    <Check className="h-4 w-4" />
-                  </Button>
+                  <div className="flex gap-1 flex-shrink-0">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 w-7 p-0"
+                      onClick={() => setEditingFollowUp(followUp)}
+                    >
+                      <Pencil className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 w-7 p-0"
+                      onClick={() => handleComplete(followUp.id)}
+                    >
+                      <Check className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               );
             })}

@@ -174,8 +174,8 @@ export function useCRM() {
   };
 
   // Log appointment booked
-  const logAppointment = async (leadId: string): Promise<boolean> => {
-    if (!user) return false;
+  const logAppointment = async (leadId: string): Promise<{ success: boolean; error?: string }> => {
+    if (!user) return { success: false, error: 'Not authenticated' };
 
     const { error } = await supabase.from('crm_activity_log').insert({
       user_id: user.id,
@@ -183,7 +183,11 @@ export function useCRM() {
       related_lead_id: leadId
     });
 
-    return !error;
+    if (error) {
+      console.error('Failed to log appointment:', error);
+      return { success: false, error: error.message };
+    }
+    return { success: true };
   };
 
   // Get leaderboard
