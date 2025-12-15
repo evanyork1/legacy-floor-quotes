@@ -3,6 +3,12 @@ project_id = "byvazfrvoanojfayvsaz"
 [functions.create-crm-user]
 verify_jwt = false
 
+[functions.deactivate-user]
+verify_jwt = false
+
+[functions.reactivate-user]
+verify_jwt = false
+
 [functions.dfw-webhook-trigger]
 verify_jwt = false
 

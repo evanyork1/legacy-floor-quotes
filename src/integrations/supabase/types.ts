@@ -565,20 +565,26 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string
+          deactivated_at: string | null
           full_name: string | null
           id: string
+          is_active: boolean
           updated_at: string
         }
         Insert: {
           created_at?: string
+          deactivated_at?: string | null
           full_name?: string | null
           id: string
+          is_active?: boolean
           updated_at?: string
         }
         Update: {
           created_at?: string
+          deactivated_at?: string | null
           full_name?: string | null
           id?: string
+          is_active?: boolean
           updated_at?: string
         }
         Relationships: []
