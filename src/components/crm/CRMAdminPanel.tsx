@@ -5,19 +5,38 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { useCRM } from '@/hooks/useCRM';
 import type { CRMUser, CRMSalesGoal } from '@/types/crm';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { Shield, Users, DollarSign, UserPlus, Save } from 'lucide-react';
+import { Shield, Users, DollarSign, UserPlus, Save, UserMinus, UserCheck } from 'lucide-react';
 import { format, startOfMonth } from 'date-fns';
+
+interface ExtendedUser extends CRMUser {
+  is_active?: boolean;
+  deactivated_at?: string | null;
+}
 
 export function CRMAdminPanel() {
   const { getAllUsers, getAllGoals, updateUserSales, leads } = useCRM();
-  const [users, setUsers] = useState<CRMUser[]>([]);
+  const [users, setUsers] = useState<ExtendedUser[]>([]);
   const [goals, setGoals] = useState<(CRMSalesGoal & { user_profile?: CRMUser })[]>([]);
   const [salesInputs, setSalesInputs] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   // New user form
   const [newEmail, setNewEmail] = useState('');
@@ -29,15 +48,33 @@ export function CRMAdminPanel() {
 
   useEffect(() => {
     loadData();
+    getCurrentUser();
   }, []);
+
+  const getCurrentUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      setCurrentUserId(user.id);
+    }
+  };
 
   const loadData = async () => {
     setLoading(true);
-    const [usersData, goalsData] = await Promise.all([
-      getAllUsers(),
-      getAllGoals()
-    ]);
-    setUsers(usersData);
+    
+    // Fetch users with is_active field
+    const { data: profilesData, error: profilesError } = await supabase
+      .from('profiles')
+      .select('id, full_name, created_at, is_active, deactivated_at')
+      .order('is_active', { ascending: false })
+      .order('full_name', { ascending: true });
+
+    if (profilesError) {
+      console.error('Error fetching profiles:', profilesError);
+    }
+
+    const goalsData = await getAllGoals();
+    
+    setUsers((profilesData || []) as ExtendedUser[]);
     setGoals(goalsData);
 
     // Initialize sales inputs
@@ -63,6 +100,70 @@ export function CRMAdminPanel() {
       await loadData();
     } else {
       toast.error('Failed to update');
+    }
+  };
+
+  const handleDeactivateUser = async (userId: string) => {
+    setActionLoading(userId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const response = await fetch(
+        'https://byvazfrvoanojfayvsaz.supabase.co/functions/v1/deactivate-user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token}`
+          },
+          body: JSON.stringify({ user_id: userId })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to deactivate user');
+      }
+
+      toast.success('User deactivated successfully');
+      await loadData();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to deactivate user');
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleReactivateUser = async (userId: string) => {
+    setActionLoading(userId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const response = await fetch(
+        'https://byvazfrvoanojfayvsaz.supabase.co/functions/v1/reactivate-user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token}`
+          },
+          body: JSON.stringify({ user_id: userId })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to reactivate user');
+      }
+
+      toast.success('User reactivated successfully');
+      await loadData();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to reactivate user');
+    } finally {
+      setActionLoading(null);
     }
   };
 
@@ -131,6 +232,9 @@ export function CRMAdminPanel() {
     );
   }
 
+  const activeUsers = users.filter(u => u.is_active !== false);
+  const deactivatedUsers = users.filter(u => u.is_active === false);
+
   return (
     <div className="space-y-6 md:ml-56">
       <div className="flex items-center gap-3">
@@ -156,22 +260,114 @@ export function CRMAdminPanel() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {users.map(user => (
+                {/* Active Users */}
+                {activeUsers.map(user => (
                   <div 
                     key={user.id} 
                     className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
                   >
-                    <div>
-                      <p className="font-medium">{user.full_name || 'No name'}</p>
-                      <p className="text-sm text-muted-foreground">{user.id.slice(0, 8)}...</p>
+                    <div className="flex items-center gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium">{user.full_name || 'No name'}</p>
+                          <Badge variant="outline" className="text-green-600 border-green-600">
+                            Active
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{user.id.slice(0, 8)}...</p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm">
+                    <div className="flex items-center gap-3">
+                      <p className="text-sm text-muted-foreground">
                         Leads: {leads.filter(l => l.created_by === user.id).length}
                       </p>
+                      {user.id !== currentUserId && (
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button 
+                              variant="destructive" 
+                              size="sm"
+                              disabled={actionLoading === user.id}
+                            >
+                              <UserMinus className="h-4 w-4 mr-1" />
+                              {actionLoading === user.id ? 'Processing...' : 'Deactivate'}
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Deactivate User</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will revoke {user.full_name || 'this user'}'s access to the system. 
+                                They will not be able to log in, but all their data (leads, notes, sales) 
+                                will be preserved. You can reactivate them at any time.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction 
+                                onClick={() => handleDeactivateUser(user.id)}
+                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              >
+                                Deactivate
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      )}
+                      {user.id === currentUserId && (
+                        <Badge variant="secondary">You</Badge>
+                      )}
                     </div>
                   </div>
                 ))}
+
+                {/* Deactivated Users Section */}
+                {deactivatedUsers.length > 0 && (
+                  <>
+                    <div className="border-t pt-4 mt-4">
+                      <p className="text-sm font-medium text-muted-foreground mb-3">
+                        Deactivated Users ({deactivatedUsers.length})
+                      </p>
+                    </div>
+                    {deactivatedUsers.map(user => (
+                      <div 
+                        key={user.id} 
+                        className="flex items-center justify-between p-3 bg-muted/30 rounded-lg opacity-60"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <p className="font-medium">{user.full_name || 'No name'}</p>
+                              <Badge variant="outline" className="text-destructive border-destructive">
+                                Deactivated
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {user.deactivated_at 
+                                ? `Deactivated on ${format(new Date(user.deactivated_at), 'MMM d, yyyy')}`
+                                : user.id.slice(0, 8) + '...'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <p className="text-sm text-muted-foreground">
+                            Leads: {leads.filter(l => l.created_by === user.id).length}
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => handleReactivateUser(user.id)}
+                            disabled={actionLoading === user.id}
+                            className="text-green-600 border-green-600 hover:bg-green-50"
+                          >
+                            <UserCheck className="h-4 w-4 mr-1" />
+                            {actionLoading === user.id ? 'Processing...' : 'Reactivate'}
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -188,7 +384,7 @@ export function CRMAdminPanel() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {users.map(user => {
+                {activeUsers.map(user => {
                   const goal = getUserGoal(user.id);
                   return (
                     <div key={user.id} className="p-4 bg-muted/50 rounded-lg space-y-3">
