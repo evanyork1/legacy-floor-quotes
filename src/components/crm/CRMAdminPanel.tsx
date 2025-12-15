@@ -226,7 +226,7 @@ export function CRMAdminPanel() {
 
   if (loading) {
     return (
-      <div className="md:ml-56 text-center py-8 text-muted-foreground">
+      <div className="text-center py-8 text-muted-foreground">
         Loading admin panel...
       </div>
     );
@@ -236,17 +236,17 @@ export function CRMAdminPanel() {
   const deactivatedUsers = users.filter(u => u.is_active === false);
 
   return (
-    <div className="space-y-6 md:ml-56">
-      <div className="flex items-center gap-3">
-        <Shield className="h-6 w-6 text-primary" />
-        <h2 className="text-2xl font-bold text-foreground">Admin Panel</h2>
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex items-center gap-2 md:gap-3">
+        <Shield className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+        <h2 className="text-xl md:text-2xl font-bold text-foreground">Admin Panel</h2>
       </div>
 
       <Tabs defaultValue="users" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-4">
-          <TabsTrigger value="users">Users</TabsTrigger>
-          <TabsTrigger value="sales">Sales</TabsTrigger>
-          <TabsTrigger value="invite">Invite</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 mb-3 md:mb-4">
+          <TabsTrigger value="users" className="text-xs md:text-sm">Users</TabsTrigger>
+          <TabsTrigger value="sales" className="text-xs md:text-sm">Sales</TabsTrigger>
+          <TabsTrigger value="invite" className="text-xs md:text-sm">Invite</TabsTrigger>
         </TabsList>
 
         {/* Users Tab */}
@@ -264,21 +264,21 @@ export function CRMAdminPanel() {
                 {activeUsers.map(user => (
                   <div 
                     key={user.id} 
-                    className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-muted/50 rounded-lg"
                   >
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="font-medium">{user.full_name || 'No name'}</p>
-                          <Badge variant="outline" className="text-green-600 border-green-600">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="font-medium text-sm md:text-base truncate">{user.full_name || 'No name'}</p>
+                          <Badge variant="outline" className="text-green-600 border-green-600 text-xs">
                             Active
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{user.id.slice(0, 8)}...</p>
+                        <p className="text-xs text-muted-foreground">{user.id.slice(0, 8)}...</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <p className="text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2 justify-between sm:justify-end">
+                      <p className="text-xs md:text-sm text-muted-foreground">
                         Leads: {leads.filter(l => l.created_by === user.id).length}
                       </p>
                       {user.id !== currentUserId && (
@@ -288,12 +288,13 @@ export function CRMAdminPanel() {
                               variant="destructive" 
                               size="sm"
                               disabled={actionLoading === user.id}
+                              className="h-8 px-2 md:px-3"
                             >
-                              <UserMinus className="h-4 w-4 mr-1" />
-                              {actionLoading === user.id ? 'Processing...' : 'Deactivate'}
+                              <UserMinus className="h-4 w-4 md:mr-1" />
+                              <span className="hidden md:inline">{actionLoading === user.id ? 'Processing...' : 'Deactivate'}</span>
                             </Button>
                           </AlertDialogTrigger>
-                          <AlertDialogContent>
+                          <AlertDialogContent className="max-w-[90vw] sm:max-w-lg">
                             <AlertDialogHeader>
                               <AlertDialogTitle>Deactivate User</AlertDialogTitle>
                               <AlertDialogDescription>
@@ -315,7 +316,7 @@ export function CRMAdminPanel() {
                         </AlertDialog>
                       )}
                       {user.id === currentUserId && (
-                        <Badge variant="secondary">You</Badge>
+                        <Badge variant="secondary" className="text-xs">You</Badge>
                       )}
                     </div>
                   </div>
@@ -332,25 +333,25 @@ export function CRMAdminPanel() {
                     {deactivatedUsers.map(user => (
                       <div 
                         key={user.id} 
-                        className="flex items-center justify-between p-3 bg-muted/30 rounded-lg opacity-60"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-muted/30 rounded-lg opacity-60"
                       >
-                        <div className="flex items-center gap-3">
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <p className="font-medium">{user.full_name || 'No name'}</p>
-                              <Badge variant="outline" className="text-destructive border-destructive">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <p className="font-medium text-sm md:text-base truncate">{user.full_name || 'No name'}</p>
+                              <Badge variant="outline" className="text-destructive border-destructive text-xs">
                                 Deactivated
                               </Badge>
                             </div>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs text-muted-foreground">
                               {user.deactivated_at 
                                 ? `Deactivated on ${format(new Date(user.deactivated_at), 'MMM d, yyyy')}`
                                 : user.id.slice(0, 8) + '...'}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <p className="text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2 justify-between sm:justify-end">
+                          <p className="text-xs md:text-sm text-muted-foreground">
                             Leads: {leads.filter(l => l.created_by === user.id).length}
                           </p>
                           <Button 
@@ -358,10 +359,10 @@ export function CRMAdminPanel() {
                             size="sm"
                             onClick={() => handleReactivateUser(user.id)}
                             disabled={actionLoading === user.id}
-                            className="text-green-600 border-green-600 hover:bg-green-50"
+                            className="text-green-600 border-green-600 hover:bg-green-50 h-8 px-2 md:px-3"
                           >
-                            <UserCheck className="h-4 w-4 mr-1" />
-                            {actionLoading === user.id ? 'Processing...' : 'Reactivate'}
+                            <UserCheck className="h-4 w-4 md:mr-1" />
+                            <span className="hidden md:inline">{actionLoading === user.id ? 'Processing...' : 'Reactivate'}</span>
                           </Button>
                         </div>
                       </div>
