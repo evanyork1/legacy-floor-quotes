@@ -40,6 +40,7 @@ import Rentals from "./pages/Rentals";
 import Giveaway from "./pages/Giveaway";
 import GiveawayRaf from "./pages/GiveawayRaf";
 import GarageLandingForm from "./pages/GarageLandingForm";
+import GoogleGaragePage from "./pages/GoogleGaragePage";
 import GarageLandingInstant from "./pages/GarageLandingInstant";
 import GarageFloorsDallasFB from "./pages/GarageFloorsDallasFB";
 import FloorVisualizer from "./pages/FloorVisualizer";
@@ -88,6 +89,7 @@ function App() {
           <Route path="/garagelandingform" element={<GarageLandingForm />} />
           <Route path="/garagelandinginstant" element={<GarageLandingInstant />} />
           <Route path="/garagefloorsdallasfb" element={<GarageFloorsDallasFB />} />
+          <Route path="/googlegaragepage" element={<GoogleGaragePage />} />
           <Route path="/floor-visualizer" element={<FloorVisualizer />} />
               
               <Route path="/auth" element={<Auth />} />
