@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Phone, Star, Calendar } from "lucide-react";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { CTAButton } from "@/components/ui/cta-button";
-import { BeforeAfterSlider } from "@/components/visualizer/BeforeAfterSlider";
 import Footer from "@/components/Footer";
 
 const GoogleGaragePage = () => {
@@ -12,36 +11,27 @@ const GoogleGaragePage = () => {
   const testimonials = [
     {
       name: "Matthew S.",
+      location: "Prosper, TX",
       text: "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now.",
       rating: 5
     },
     {
       name: "Bharat A.",
+      location: "Frisco, TX",
       text: "Excellent experience from start to finish. The crew did an amazing job with the final result.",
       rating: 5
     },
     {
       name: "Scott C.",
+      location: "McKinney, TX",
       text: "Totally exceeded my expectations. Crew was experienced and professional. Finished floor is amazing.",
       rating: 5
     },
     {
       name: "Chris C.",
+      location: "Plano, TX",
       text: "Great company to work with. Competent, genuinely helpful staff. Would highly recommend!",
       rating: 5
-    }
-  ];
-
-  const beforeAfterPairs = [
-    {
-      before: "/demo-garage.jpg",
-      after: "/demo-garage-domino.jpg",
-      title: "Domino Flake"
-    },
-    {
-      before: "/demo-garage.jpg",
-      after: "/demo-garage-coyote.jpg",
-      title: "Coyote Flake"
     }
   ];
 
@@ -76,17 +66,22 @@ const GoogleGaragePage = () => {
           </div>
         </header>
 
-        {/* Split Hero Section */}
-        <section className="py-12 md:py-20 bg-gradient-to-br from-gray-50 to-white">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left - Content */}
-              <div className="text-center lg:text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+        {/* Hero Section - Full Width with Overlay */}
+        <section className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10" />
+          <img
+            src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png"
+            alt="Beautiful garage floor coating"
+            className="w-full h-[60vh] md:h-[70vh] object-cover"
+          />
+          <div className="absolute inset-0 z-20 flex items-center">
+            <div className="container mx-auto px-4">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
                   Garage Floor<br />
-                  <span className="text-blue-600">In One Day</span>
+                  <span className="text-blue-400">In One Day</span>
                 </h1>
-                <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+                <p className="text-lg md:text-xl text-gray-200 mb-6 md:mb-8 max-w-lg">
                   Premium polyurea coating with lifetime warranty. Professional installation by certified experts.
                 </p>
                 <CTAButton
@@ -99,24 +94,15 @@ const GoogleGaragePage = () => {
                   Book Estimate Now
                 </CTAButton>
               </div>
-
-              {/* Right - Hero Image */}
-              <div className="order-first lg:order-last">
-                <img
-                  src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png"
-                  alt="Beautiful garage floor coating with vehicles"
-                  className="w-full h-auto rounded-2xl shadow-2xl"
-                />
-              </div>
             </div>
           </div>
         </section>
 
         {/* Compact Testimonials Section */}
-        <section className="py-12 md:py-16 bg-white">
+        <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-10">
-              <div className="inline-flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-4">
+              <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-md border border-gray-100 mb-4">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -134,7 +120,7 @@ const GoogleGaragePage = () => {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
                 >
                   <div className="flex mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -145,35 +131,85 @@ const GoogleGaragePage = () => {
                     "{testimonial.text}"
                   </p>
                   <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
+                  <p className="text-gray-500 text-xs">{testimonial.location}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Before & After Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+        {/* Before & After Section - Same style as GarageLandingForm */}
+        <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                See The Transformation
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Real Garage <span className="text-blue-600">Transformations</span>
               </h2>
-              <p className="text-gray-600">Drag the slider to compare before and after</p>
+              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                See real results from homeowners across Dallas–Fort Worth.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {beforeAfterPairs.map((pair, index) => (
-                <div key={index} className="rounded-xl overflow-hidden shadow-lg">
-                  <BeforeAfterSlider
-                    beforeImage={pair.before}
-                    afterImage={pair.after}
-                    className="aspect-[4/3]"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <p className="font-semibold text-gray-900">{pair.title}</p>
+            <div className="grid gap-6 md:gap-8 max-w-5xl mx-auto">
+              {/* Transformation 1 */}
+              <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
+                      BEFORE
+                    </span>
                   </div>
                 </div>
-              ))}
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
+                      AFTER
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Transformation 2 */}
+              <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
+                      BEFORE
+                    </span>
+                  </div>
+                </div>
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor coating with premium finish" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
+                      AFTER
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Transformation 3 */}
+              <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage transformation" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
+                      BEFORE
+                    </span>
+                  </div>
+                </div>
+                <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                  <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage floor coating" className="w-full h-full object-cover" />
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
+                      AFTER
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
