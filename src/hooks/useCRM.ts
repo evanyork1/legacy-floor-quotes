@@ -173,22 +173,6 @@ export function useCRM() {
     return data as unknown as CRMLeadNote[];
   };
 
-  // Log appointment booked
-  const logAppointment = async (leadId: string): Promise<{ success: boolean; error?: string }> => {
-    if (!user) return { success: false, error: 'Not authenticated' };
-
-    const { error } = await supabase.from('crm_activity_log').insert({
-      user_id: user.id,
-      activity_type: 'appointment_booked',
-      related_lead_id: leadId
-    });
-
-    if (error) {
-      console.error('Failed to log appointment:', error);
-      return { success: false, error: error.message };
-    }
-    return { success: true };
-  };
 
   // Get leaderboard
   const getLeaderboard = async (period: 'week' | 'lifetime'): Promise<LeaderboardEntry[]> => {
@@ -359,6 +343,15 @@ export function useCRM() {
         user_id: user.id
       });
 
+    // If this is an appointment, also log to activity_log for leaderboard tracking
+    if (!error && followUp.type === 'appointment') {
+      await supabase.from('crm_activity_log').insert({
+        user_id: user.id,
+        activity_type: 'appointment_booked',
+        related_lead_id: followUp.lead_id || null
+      });
+    }
+
     return !error;
   };
 
@@ -403,7 +396,6 @@ export function useCRM() {
     deleteLead,
     addNote,
     getLeadNotes,
-    logAppointment,
     getLeaderboard,
     getSalesLeaderboard,
     getCurrentGoal,
