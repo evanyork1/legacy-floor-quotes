@@ -4,35 +4,26 @@ import { Phone, Star, Calendar, Shield, Clock } from "lucide-react";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { CTAButton } from "@/components/ui/cta-button";
 import Footer from "@/components/Footer";
-
 const GoogleGaragePage = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
-
-  const testimonials = [
-    {
-      name: "Matthew S.",
-      text: "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now.",
-      rating: 5,
-    },
-    {
-      name: "Bharat A.",
-      text: "Excellent experience from start to finish. The crew did an amazing job with the final result.",
-      rating: 5,
-    },
-    {
-      name: "Scott C.",
-      text: "Totally exceeded my expectations. Crew was experienced and professional. Finished floor is amazing.",
-      rating: 5,
-    },
-    {
-      name: "Chris C.",
-      text: "Great company to work with. Competent, genuinely helpful staff. Would highly recommend!",
-      rating: 5,
-    },
-  ];
-
-  return (
-    <>
+  const testimonials = [{
+    name: "Matthew S.",
+    text: "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now.",
+    rating: 5
+  }, {
+    name: "Bharat A.",
+    text: "Excellent experience from start to finish. The crew did an amazing job with the final result.",
+    rating: 5
+  }, {
+    name: "Scott C.",
+    text: "Totally exceeded my expectations. Crew was experienced and professional. Finished floor is amazing.",
+    rating: 5
+  }, {
+    name: "Chris C.",
+    text: "Great company to work with. Competent, genuinely helpful staff. Would highly recommend!",
+    rating: 5
+  }];
+  return <>
       <Helmet>
         <title>Garage Floor In One Day | Dallas-Fort Worth | Legacy Industrial</title>
         <meta name="description" content="Transform your garage floor in just one day. Professional polyurea coating with lifetime warranty. Book your free estimate today." />
@@ -43,15 +34,8 @@ const GoogleGaragePage = () => {
         {/* Simple Header */}
         <header className="bg-white shadow-sm sticky top-0 z-50">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-            <img 
-              src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" 
-              alt="Legacy Industrial Coatings" 
-              className="h-10 md:h-12"
-            />
-            <a 
-              href="tel:214-444-6269" 
-              className="flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
-            >
+            <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="Legacy Industrial Coatings" className="h-10 md:h-12" />
+            <a href="tel:214-444-6269" className="flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
               <Phone className="h-5 w-5" />
               <span className="hidden sm:inline">(214) 444-6269</span>
             </a>
@@ -61,11 +45,7 @@ const GoogleGaragePage = () => {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10" />
-          <img 
-            src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
-            alt="Beautiful garage floor coating" 
-            className="w-full h-[60vh] md:h-[70vh] object-cover"
-          />
+          <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="Beautiful garage floor coating" className="w-full h-[60vh] md:h-[70vh] object-cover" />
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="container mx-auto px-4">
               <div className="max-w-2xl">
@@ -76,13 +56,7 @@ const GoogleGaragePage = () => {
                 <p className="text-lg md:text-xl text-gray-200 mb-6 md:mb-8 max-w-lg">
                   Premium polyurea coating with lifetime warranty. Professional installation by certified experts.
                 </p>
-                <CTAButton
-                  onClick={() => setShowBookingModal(true)}
-                  variant="primary"
-                  size="lg"
-                  icon={<Calendar />}
-                  className="text-lg px-8 py-4"
-                >
+                <CTAButton onClick={() => setShowBookingModal(true)} variant="primary" size="lg" icon={<Calendar />} className="text-lg px-8 py-4">
                   Book Estimate Now
                 </CTAButton>
               </div>
@@ -91,24 +65,7 @@ const GoogleGaragePage = () => {
         </section>
 
         {/* Quick Features */}
-        <section className="bg-blue-600 py-4">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-white text-sm md:text-base">
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
-                <span>1-Day Install</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
-                <span>Lifetime Warranty</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Star className="h-5 w-5" />
-                <span>180+ 5-Star Reviews</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Compact Testimonials Section */}
         <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -129,22 +86,15 @@ const GoogleGaragePage = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
-                >
+              {testimonials.map((testimonial, index) => <div key={index} className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
                   <div className="flex mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />)}
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
                     "{testimonial.text}"
                   </p>
                   <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -158,13 +108,7 @@ const GoogleGaragePage = () => {
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
               Get a free, no-obligation estimate. Same-day appointments available.
             </p>
-            <CTAButton
-              onClick={() => setShowBookingModal(true)}
-              variant="outline"
-              size="lg"
-              icon={<Calendar />}
-              className="bg-white text-blue-600 hover:bg-gray-100 border-white"
-            >
+            <CTAButton onClick={() => setShowBookingModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
               Book Estimate Now
             </CTAButton>
           </div>
@@ -174,8 +118,6 @@ const GoogleGaragePage = () => {
       </div>
 
       <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
-    </>
-  );
+    </>;
 };
-
 export default GoogleGaragePage;
