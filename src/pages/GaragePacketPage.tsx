@@ -85,10 +85,10 @@ const GaragePacketPage = () => {
 
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
                   Your Dream Garage<br />
-                  <span className="text-blue-400">In One Day</span>
+                  <span className="text-blue-600">In One Day</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-200 mb-6 md:mb-8 max-w-lg">
-                  No in person visit needed. Create your garage floor report online, preview color options in your garage, review our system, and get pricing in about 60 seconds. Click below.
+                  <span className="font-bold">No in person visit needed.</span> Create your garage floor report online, preview color options in your garage, review our system, and get pricing in about 60 seconds. Click below.
                 </p>
                 <div className="flex flex-col items-start">
                   <CTAButton 
@@ -98,7 +98,7 @@ const GaragePacketPage = () => {
                     icon={<Calendar />} 
                     className="text-lg px-8 py-4"
                   >
-                    Book Estimate Now
+                    Get My Garage Price
                   </CTAButton>
                   <div className="flex flex-col items-center mt-3 ml-4">
                     <ArrowUp className="h-6 w-6 text-white animate-bounce" />
