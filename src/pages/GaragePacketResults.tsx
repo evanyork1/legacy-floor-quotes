@@ -167,51 +167,51 @@ const GaragePacketResults = () => {
         </div>
 
         {/* Personalized Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12 px-4">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 sm:py-12 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               {packet.name.split(' ')[0]}'s Garage Floor Report
             </h1>
-            <p className="text-blue-100 text-lg">
+            <p className="text-blue-100 text-sm sm:text-lg">
               Your personalized quote • Created {new Date(packet.created_at).toLocaleDateString()}
             </p>
           </div>
         </div>
 
         {/* Company Info */}
-        <section className="py-12 px-4 bg-gray-50">
+        <section className="py-8 sm:py-12 px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">Why Choose Legacy Industrial Coatings?</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-6 w-6 text-blue-600" />
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Why Choose Legacy Industrial Coatings?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">1-Day Installation</h3>
-                <p className="text-gray-600 text-sm">Your floor is done in a single day. Drive on it in 24 hours.</p>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">1-Day Installation</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">Your floor is done in a single day. Drive on it in 24 hours.</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="h-6 w-6 text-blue-600" />
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">Lifetime Warranty</h3>
-                <p className="text-gray-600 text-sm">We stand behind our work with a comprehensive lifetime warranty.</p>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Lifetime Warranty</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">We stand behind our work with a comprehensive lifetime warranty.</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="h-6 w-6 text-blue-600" />
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Award className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">3,000+ Garages Installed</h3>
-                <p className="text-gray-600 text-sm">Trusted by homeowners across Dallas-Fort Worth.</p>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">3,000+ Garages Installed</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">Trusted by homeowners across Dallas-Fort Worth.</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Selected Color Preview */}
-        <section className="py-12 px-4">
+        <section className="py-8 sm:py-12 px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">Your Selected Color</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Your Selected Color</h2>
             <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto">
               {packet.visualization_url ? (
                 <img 
@@ -304,35 +304,35 @@ const GaragePacketResults = () => {
         </section>
 
         {/* Our Process Section */}
-        <section className="py-12 px-4 bg-gray-50">
+        <section className="py-8 sm:py-12 px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">Our Process</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Our Process</h2>
             
-            <div className="grid md:grid-cols-5 gap-4">
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
-                <h4 className="font-semibold text-sm mb-1">Pre-Measure</h4>
-                <p className="text-gray-600 text-xs">Precise measurements ensure perfect material coverage</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">1</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Pre-Measure</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">Precise measurements ensure perfect material coverage</p>
               </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
-                <h4 className="font-semibold text-sm mb-1">Diamond Grinding</h4>
-                <p className="text-gray-600 text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
+              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">2</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Diamond Grinding</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
               </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
-                <h4 className="font-semibold text-sm mb-1">Crack Repair</h4>
-                <p className="text-gray-600 text-xs">All imperfections filled for a smooth, uniform base</p>
+              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">3</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Crack Repair</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">All imperfections filled for a smooth, uniform base</p>
               </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
-                <h4 className="font-semibold text-sm mb-1">Base + Flake</h4>
-                <p className="text-gray-600 text-xs">Polyurea base coat with your selected color flake</p>
+              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">4</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Base + Flake</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">Polyurea base coat with your selected color flake</p>
               </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">5</div>
-                <h4 className="font-semibold text-sm mb-1">Top Coat</h4>
-                <p className="text-gray-600 text-xs">High-gloss finish for chemical & abrasion resistance</p>
+              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm col-span-2 sm:col-span-1">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">5</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Top Coat</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">High-gloss finish for chemical & abrasion resistance</p>
               </div>
             </div>
           </div>
