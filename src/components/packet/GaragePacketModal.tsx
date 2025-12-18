@@ -448,17 +448,6 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                 </div>
               )}
 
-              {formData.garageType && pricingSettings && (
-                <div className="max-w-lg mx-auto bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 text-center">
-                  <p className="text-sm text-gray-600 mb-2">Your Estimated Price</p>
-                  <p className="text-4xl font-bold text-blue-600">
-                    ${calculatePrice().toLocaleString()}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-2">
-                    or ${Math.round(calculatePrice() / 24).toLocaleString()}/mo with 0% financing
-                  </p>
-                </div>
-              )}
 
               <div className="flex justify-end">
                 <Button
@@ -478,6 +467,17 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Report</h2>
                 <p className="text-gray-600">Enter your info to receive your personalized garage quote</p>
+              </div>
+
+              {/* Prominent Text Message Notice */}
+              <div className="max-w-md mx-auto bg-blue-50 border-2 border-blue-200 rounded-xl p-4 text-center">
+                <div className="flex items-center justify-center gap-2 text-blue-700">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <span className="font-semibold text-lg">We'll only text you about your quote</span>
+                </div>
+                <p className="text-blue-600 text-sm mt-1">No spam, no sales calls — just your personalized report</p>
               </div>
 
               <div className="max-w-md mx-auto space-y-4">
@@ -513,11 +513,10 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                     placeholder="(214) 555-1234"
                     className="text-lg"
                   />
-                  <p className="text-xs text-gray-500 mt-1">We'll only text you about your quote</p>
                 </div>
               </div>
 
-              {/* Summary */}
+              {/* Summary - without pricing */}
               <div className="max-w-md mx-auto bg-gray-50 rounded-xl p-4">
                 <h3 className="font-semibold mb-3">Your Quote Summary</h3>
                 <div className="space-y-2 text-sm">
@@ -532,10 +531,6 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                         ? `${formData.customSqft} sq ft`
                         : garageOptions.find(o => o.id === formData.garageType)?.label}
                     </span>
-                  </div>
-                  <div className="flex justify-between pt-2 border-t">
-                    <span className="text-gray-900 font-semibold">Estimated Price:</span>
-                    <span className="text-blue-600 font-bold">${calculatePrice().toLocaleString()}</span>
                   </div>
                 </div>
               </div>
