@@ -37,17 +37,15 @@ const GaragePacketPage = () => {
       </Helmet>
 
       <div className="min-h-screen bg-white">
-        {/* Blue Banner with Demo Link */}
+        {/* Blue Banner with Phone Number */}
         <div className="bg-blue-600 py-3">
           <a 
-            href="https://youtu.be/your-demo-link" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="tel:214-305-6516"
             className="flex items-center justify-center gap-2 text-white font-semibold hover:text-blue-100 transition-colors text-sm md:text-base"
           >
-            <span>👉</span>
-            <span>Watch 90 Second Demo of Our Product</span>
-            <span>👈</span>
+            <span>📞</span>
+            <span>Call Us: 214-305-6516</span>
+            <span>📞</span>
           </a>
         </div>
 
