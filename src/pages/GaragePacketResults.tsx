@@ -179,50 +179,8 @@ const GaragePacketResults = () => {
           </div>
         </section>
 
-        {/* Our Process Section */}
-        <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-4">Our Process</h2>
-            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
-              We specialize in high-performance garage floor systems built to last. Every project is handled by our in-house team using commercial-grade equipment and proven methods. The goal is simple: a floor that looks great on day one and still performs years later.
-            </p>
-            
-            <div className="grid md:grid-cols-5 gap-4">
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
-                <h4 className="font-semibold text-sm mb-1">Pre-Measure</h4>
-                <p className="text-gray-600 text-xs">Precise measurements ensure perfect material coverage</p>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
-                <h4 className="font-semibold text-sm mb-1">Diamond Grinding</h4>
-                <p className="text-gray-600 text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
-                <h4 className="font-semibold text-sm mb-1">Crack Repair</h4>
-                <p className="text-gray-600 text-xs">All imperfections filled for a smooth, uniform base</p>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
-                <h4 className="font-semibold text-sm mb-1">Base + Flake</h4>
-                <p className="text-gray-600 text-xs">Polyurea base coat with your selected color flake</p>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">5</div>
-                <h4 className="font-semibold text-sm mb-1">Top Coat</h4>
-                <p className="text-gray-600 text-xs">High-gloss finish for chemical & abrasion resistance</p>
-              </div>
-            </div>
-            
-            <p className="text-gray-600 text-center mt-6 text-sm">
-              The result is a floor that's durable, easy to clean, and built to outperform traditional epoxy.
-            </p>
-          </div>
-        </section>
-
         {/* Selected Color Preview */}
-        <section className="py-12 px-4 bg-gray-50">
+        <section className="py-12 px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">Your Selected Color</h2>
             <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto">
@@ -254,6 +212,48 @@ const GaragePacketResults = () => {
                 <p className="text-gray-600">Premium polyurea flake coating</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Our Process Section */}
+        <section className="py-12 px-4 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-4">Our Process</h2>
+            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+              We specialize in high-performance garage floor systems built to last. Every project is handled by our in-house team using commercial-grade equipment and proven methods. The goal is simple: a floor that looks great on day one and still performs years later.
+            </p>
+            
+            <div className="grid md:grid-cols-5 gap-4">
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
+                <h4 className="font-semibold text-sm mb-1">Pre-Measure</h4>
+                <p className="text-gray-600 text-xs">Precise measurements ensure perfect material coverage</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
+                <h4 className="font-semibold text-sm mb-1">Diamond Grinding</h4>
+                <p className="text-gray-600 text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
+                <h4 className="font-semibold text-sm mb-1">Crack Repair</h4>
+                <p className="text-gray-600 text-xs">All imperfections filled for a smooth, uniform base</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
+                <h4 className="font-semibold text-sm mb-1">Base + Flake</h4>
+                <p className="text-gray-600 text-xs">Polyurea base coat with your selected color flake</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">5</div>
+                <h4 className="font-semibold text-sm mb-1">Top Coat</h4>
+                <p className="text-gray-600 text-xs">High-gloss finish for chemical & abrasion resistance</p>
+              </div>
+            </div>
+            
+            <p className="text-gray-600 text-center mt-6 text-sm">
+              The result is a floor that's durable, easy to clean, and built to outperform traditional epoxy.
+            </p>
           </div>
         </section>
 
