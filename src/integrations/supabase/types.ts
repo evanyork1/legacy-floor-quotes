@@ -330,6 +330,54 @@ export type Database = {
         }
         Relationships: []
       }
+      floor_packets: {
+        Row: {
+          additional_spaces: Json | null
+          created_at: string
+          custom_sqft: number | null
+          email: string
+          estimated_price: number
+          garage_type: string
+          id: string
+          name: string
+          phone: string
+          ready_to_proceed: boolean
+          selected_color: string
+          updated_at: string
+          visualization_url: string | null
+        }
+        Insert: {
+          additional_spaces?: Json | null
+          created_at?: string
+          custom_sqft?: number | null
+          email: string
+          estimated_price: number
+          garage_type: string
+          id?: string
+          name: string
+          phone: string
+          ready_to_proceed?: boolean
+          selected_color: string
+          updated_at?: string
+          visualization_url?: string | null
+        }
+        Update: {
+          additional_spaces?: Json | null
+          created_at?: string
+          custom_sqft?: number | null
+          email?: string
+          estimated_price?: number
+          garage_type?: string
+          id?: string
+          name?: string
+          phone?: string
+          ready_to_proceed?: boolean
+          selected_color?: string
+          updated_at?: string
+          visualization_url?: string | null
+        }
+        Relationships: []
+      }
       gallery_photos: {
         Row: {
           category: string

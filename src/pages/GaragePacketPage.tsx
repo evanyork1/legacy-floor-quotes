@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { Phone, Star, Calendar, ArrowUp } from "lucide-react";
-import { BookingModal } from "@/components/landing/BookingModal";
+import { GaragePacketModal } from "@/components/packet/GaragePacketModal";
 import { CTAButton } from "@/components/ui/cta-button";
 import Footer from "@/components/Footer";
 import garageHero from "@/assets/garage-packet-hero.jpg";
 
 const GaragePacketPage = () => {
-  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
   const testimonials = [{
     name: "Matthew S.",
     location: "Prosper, TX",
@@ -90,7 +90,7 @@ const GaragePacketPage = () => {
                 </p>
                 <div className="flex flex-col items-start">
                   <CTAButton 
-                    onClick={() => setShowBookingModal(true)} 
+                    onClick={() => setShowQuoteModal(true)} 
                     variant="primary" 
                     size="lg" 
                     icon={<Calendar />} 
@@ -215,7 +215,7 @@ const GaragePacketPage = () => {
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
               Get a free, no-obligation estimate. Same-day appointments available.
             </p>
-            <CTAButton onClick={() => setShowBookingModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
+            <CTAButton onClick={() => setShowQuoteModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
               Book Estimate Now
             </CTAButton>
           </div>
@@ -224,7 +224,7 @@ const GaragePacketPage = () => {
         <Footer />
       </div>
 
-      <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
+      <GaragePacketModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} />
     </>;
 };
 
