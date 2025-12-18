@@ -4,10 +4,11 @@ import { Helmet } from 'react-helmet-async';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Star, Phone, CheckCircle, Loader2, Shield, Clock, Award } from 'lucide-react';
+import { Star, Phone, CheckCircle, Loader2, Shield, Clock, Award, Palette, X } from 'lucide-react';
 import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import Footer from '@/components/Footer';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 interface FloorPacket {
   id: string;
@@ -28,6 +29,9 @@ const GaragePacketResults = () => {
   const [packet, setPacket] = useState<FloorPacket | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isColorSheetOpen, setIsColorSheetOpen] = useState(false);
+  const [selectedNewColor, setSelectedNewColor] = useState<string | null>(null);
+  const [isSavingColor, setIsSavingColor] = useState(false);
 
   useEffect(() => {
     const fetchPacket = async () => {
@@ -83,6 +87,31 @@ const GaragePacketResults = () => {
       toast.error('Failed to submit. Please try again.');
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const handleSaveColor = async () => {
+    if (!packet || !selectedNewColor) return;
+    
+    setIsSavingColor(true);
+    
+    try {
+      const { error } = await supabase
+        .from('floor_packets')
+        .update({ selected_color: selectedNewColor })
+        .eq('id', packet.id);
+      
+      if (error) throw error;
+      
+      setPacket(prev => prev ? { ...prev, selected_color: selectedNewColor } : null);
+      setIsColorSheetOpen(false);
+      setSelectedNewColor(null);
+      toast.success('Color updated successfully!');
+    } catch (error) {
+      console.error('Error updating color:', error);
+      toast.error('Failed to update color. Please try again.');
+    } finally {
+      setIsSavingColor(false);
     }
   };
 
@@ -209,7 +238,66 @@ const GaragePacketResults = () => {
                 <h3 className="text-xl font-bold text-gray-900 capitalize">
                   {selectedColorOption?.name || packet.selected_color.replace('-', ' ')}
                 </h3>
-                <p className="text-gray-600">Premium polyurea flake coating</p>
+                <p className="text-gray-600 mb-4">Premium polyurea flake coating</p>
+                
+                <Sheet open={isColorSheetOpen} onOpenChange={setIsColorSheetOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" className="gap-2">
+                      <Palette className="h-4 w-4" />
+                      Change Color
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="bottom" className="h-auto max-h-[60vh]">
+                    <SheetHeader className="mb-4">
+                      <SheetTitle>Select a New Color</SheetTitle>
+                    </SheetHeader>
+                    <div className="grid grid-cols-4 md:grid-cols-8 gap-3 mb-6">
+                      {colorOptions.map((color) => (
+                        <button
+                          key={color.id}
+                          onClick={() => setSelectedNewColor(color.id)}
+                          className={`relative rounded-lg overflow-hidden aspect-square border-2 transition-all ${
+                            selectedNewColor === color.id 
+                              ? 'border-blue-600 ring-2 ring-blue-600 ring-offset-2' 
+                              : 'border-gray-200 hover:border-gray-400'
+                          }`}
+                        >
+                          <img 
+                            src={color.thumbnail} 
+                            alt={color.name} 
+                            className="w-full h-full object-cover"
+                          />
+                          {selectedNewColor === color.id && (
+                            <div className="absolute inset-0 bg-blue-600/20 flex items-center justify-center">
+                              <CheckCircle className="h-6 w-6 text-blue-600" />
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    {selectedNewColor && (
+                      <div className="flex items-center justify-between border-t pt-4">
+                        <p className="text-sm text-gray-600">
+                          Selected: <span className="font-semibold capitalize">{colorOptions.find(c => c.id === selectedNewColor)?.name}</span>
+                        </p>
+                        <Button 
+                          onClick={handleSaveColor}
+                          disabled={isSavingColor}
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          {isSavingColor ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Saving...
+                            </>
+                          ) : (
+                            'Save Color'
+                          )}
+                        </Button>
+                      </div>
+                    )}
+                  </SheetContent>
+                </Sheet>
               </div>
             </div>
           </div>
@@ -218,10 +306,7 @@ const GaragePacketResults = () => {
         {/* Our Process Section */}
         <section className="py-12 px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-4">Our Process</h2>
-            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
-              We specialize in high-performance garage floor systems built to last. Every project is handled by our in-house team using commercial-grade equipment and proven methods. The goal is simple: a floor that looks great on day one and still performs years later.
-            </p>
+            <h2 className="text-2xl font-bold text-center mb-8">Our Process</h2>
             
             <div className="grid md:grid-cols-5 gap-4">
               <div className="bg-white rounded-xl p-4 text-center shadow-sm">
@@ -250,10 +335,6 @@ const GaragePacketResults = () => {
                 <p className="text-gray-600 text-xs">High-gloss finish for chemical & abrasion resistance</p>
               </div>
             </div>
-            
-            <p className="text-gray-600 text-center mt-6 text-sm">
-              The result is a floor that's durable, easy to clean, and built to outperform traditional epoxy.
-            </p>
           </div>
         </section>
 
