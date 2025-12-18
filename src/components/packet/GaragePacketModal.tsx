@@ -333,6 +333,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                   <BeforeAfterSlider
                     beforeImage={uploadedImage}
                     afterImage={transformedImage}
+                    className="h-64 md:h-96"
                   />
                 ) : (
                   <div className="h-64 md:h-96 flex items-center justify-center">
