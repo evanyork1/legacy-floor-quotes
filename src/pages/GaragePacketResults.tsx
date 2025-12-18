@@ -149,10 +149,10 @@ const GaragePacketResults = () => {
           </div>
         </div>
 
-        {/* Company Info & Process */}
+        {/* Company Info */}
         <section className="py-12 px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">Why Choose Legacy Industrial?</h2>
+            <h2 className="text-2xl font-bold text-center mb-8">Why Choose Legacy Industrial Coatings?</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white rounded-xl p-6 shadow-sm text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -172,31 +172,52 @@ const GaragePacketResults = () => {
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Award className="h-6 w-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">180+ 5-Star Reviews</h3>
+                <h3 className="font-semibold mb-2">3,000+ Garages Installed</h3>
                 <p className="text-gray-600 text-sm">Trusted by homeowners across Dallas-Fort Worth.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Reviews Section */}
+        {/* Our Process Section */}
         <section className="py-12 px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">What Our Customers Say</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {testimonials.map((review, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
-                  <div className="flex mb-3">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 text-sm mb-4">"{review.text}"</p>
-                  <p className="font-semibold text-gray-900 text-sm">{review.name}</p>
-                  <p className="text-gray-500 text-xs">{review.location}</p>
-                </div>
-              ))}
+            <h2 className="text-2xl font-bold text-center mb-4">Our Process</h2>
+            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+              We specialize in high-performance garage floor systems built to last. Every project is handled by our in-house team using commercial-grade equipment and proven methods. The goal is simple: a floor that looks great on day one and still performs years later.
+            </p>
+            
+            <div className="grid md:grid-cols-5 gap-4">
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
+                <h4 className="font-semibold text-sm mb-1">Pre-Measure</h4>
+                <p className="text-gray-600 text-xs">Precise measurements ensure perfect material coverage</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
+                <h4 className="font-semibold text-sm mb-1">Diamond Grinding</h4>
+                <p className="text-gray-600 text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
+                <h4 className="font-semibold text-sm mb-1">Crack Repair</h4>
+                <p className="text-gray-600 text-xs">All imperfections filled for a smooth, uniform base</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
+                <h4 className="font-semibold text-sm mb-1">Base + Flake</h4>
+                <p className="text-gray-600 text-xs">Polyurea base coat with your selected color flake</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">5</div>
+                <h4 className="font-semibold text-sm mb-1">Top Coat</h4>
+                <p className="text-gray-600 text-xs">High-gloss finish for chemical & abrasion resistance</p>
+              </div>
             </div>
+            
+            <p className="text-gray-600 text-center mt-6 text-sm">
+              The result is a floor that's durable, easy to clean, and built to outperform traditional epoxy.
+            </p>
           </div>
         </section>
 
@@ -316,6 +337,27 @@ const GaragePacketResults = () => {
                 )}
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        {/* Reviews Section - Moved after price */}
+        <section className="py-12 px-4 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-8">What Our Customers Say</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((review, index) => (
+                <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+                  <div className="flex mb-3">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-600 text-sm mb-4">"{review.text}"</p>
+                  <p className="font-semibold text-gray-900 text-sm">{review.name}</p>
+                  <p className="text-gray-500 text-xs">{review.location}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
