@@ -42,6 +42,7 @@ import GiveawayRaf from "./pages/GiveawayRaf";
 import GarageLandingForm from "./pages/GarageLandingForm";
 import GoogleGaragePage from "./pages/GoogleGaragePage";
 import GaragePacketPage from "./pages/GaragePacketPage";
+import GaragePacketResults from "./pages/GaragePacketResults";
 import GarageLandingInstant from "./pages/GarageLandingInstant";
 import GarageFloorsDallasFB from "./pages/GarageFloorsDallasFB";
 import FloorVisualizer from "./pages/FloorVisualizer";
@@ -92,6 +93,7 @@ function App() {
           <Route path="/garagefloorsdallasfb" element={<GarageFloorsDallasFB />} />
           <Route path="/googlegaragepage" element={<GoogleGaragePage />} />
           <Route path="/garagepacketpage" element={<GaragePacketPage />} />
+          <Route path="/garage-packet-result/:id" element={<GaragePacketResults />} />
           <Route path="/floor-visualizer" element={<FloorVisualizer />} />
               
               <Route path="/auth" element={<Auth />} />
