@@ -883,6 +883,7 @@ export type Database = {
       webhook_settings: {
         Row: {
           dfw_webhook_url: string | null
+          floor_packet_webhook_url: string | null
           id: number
           lead_webhook_url: string | null
           updated_at: string | null
@@ -890,6 +891,7 @@ export type Database = {
         }
         Insert: {
           dfw_webhook_url?: string | null
+          floor_packet_webhook_url?: string | null
           id?: number
           lead_webhook_url?: string | null
           updated_at?: string | null
@@ -897,6 +899,7 @@ export type Database = {
         }
         Update: {
           dfw_webhook_url?: string | null
+          floor_packet_webhook_url?: string | null
           id?: number
           lead_webhook_url?: string | null
           updated_at?: string | null

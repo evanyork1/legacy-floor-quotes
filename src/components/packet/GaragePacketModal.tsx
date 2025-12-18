@@ -264,6 +264,27 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
       
       if (error) throw error;
       
+      // Trigger the floor packet webhook (non-blocking)
+      supabase.functions.invoke('send-floor-packet-webhook', {
+        body: {
+          id: data.id,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          garage_type: formData.garageType,
+          custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
+          selected_color: formData.selectedColor,
+          estimated_price: estimatedPrice,
+          visualization_url: formData.visualizationUrl,
+        }
+      }).then(({ error: webhookError }) => {
+        if (webhookError) {
+          console.error('Error triggering floor packet webhook:', webhookError);
+        } else {
+          console.log('Floor packet webhook triggered successfully');
+        }
+      });
+      
       toast.success('Your garage report is ready!');
       onClose();
       navigate(`/garage-packet-result/${data.id}`);

@@ -9,18 +9,22 @@ import { RefreshCw, Save } from "lucide-react";
 interface WebhooksTabProps {
   webhookUrl: string;
   leadWebhookUrl: string;
+  floorPacketWebhookUrl: string;
   savingWebhook: boolean;
   onWebhookUrlChange: (url: string) => void;
   onLeadWebhookUrlChange: (url: string) => void;
+  onFloorPacketWebhookUrlChange: (url: string) => void;
   onSaveWebhookUrl: () => void;
 }
 
 const WebhooksTab: React.FC<WebhooksTabProps> = ({
   webhookUrl,
   leadWebhookUrl,
+  floorPacketWebhookUrl,
   savingWebhook,
   onWebhookUrlChange,
   onLeadWebhookUrlChange,
+  onFloorPacketWebhookUrlChange,
   onSaveWebhookUrl
 }) => {
   return (
@@ -145,6 +149,61 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
     "questions_comments": "I'm interested in...",
     "privacy_policy_agreed": true,
     "source": "website_lead_form"
+  }
+}`}
+            </pre>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Floor Packet Webhooks */}
+      <Card className="bg-gray-800 border-gray-700">
+        <CardHeader>
+          <CardTitle className="text-white">Floor Packet Notifications via Zapier</CardTitle>
+          <p className="text-gray-400">Get notified when someone submits their info to see their garage report</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <Label className="text-gray-300">Floor Packet Zapier Webhook URL</Label>
+            <Input 
+              value={floorPacketWebhookUrl}
+              onChange={(e) => onFloorPacketWebhookUrlChange(e.target.value)}
+              placeholder="https://hooks.zapier.com/hooks/catch/..."
+              className="bg-gray-600 border-gray-500 text-white"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Paste your Zapier webhook URL here to receive floor packet notifications
+            </p>
+          </div>
+
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Floor Packet Setup Instructions:</h3>
+            <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+              <li>Go to Zapier and create a new Zap</li>
+              <li>Choose "Webhooks by Zapier" as the trigger</li>
+              <li>Select "Catch Hook" as the trigger event</li>
+              <li>Copy the webhook URL and paste it above</li>
+              <li>Set up your action (Gmail, SMS, Slack, etc.) to notify you</li>
+              <li>Test by completing the garage packet form on your website</li>
+            </ol>
+          </div>
+
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="text-white font-medium mb-2">Floor Packet Webhook Data Structure:</h3>
+            <pre className="text-gray-300 text-xs overflow-x-auto">
+{`{
+  "timestamp": "2024-01-01T12:00:00Z",
+  "event_type": "floor_packet_submitted",
+  "lead": {
+    "id": "abc123",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "555-123-4567",
+    "garage_type": "2-car",
+    "selected_color": "Domino",
+    "estimated_price": 3400,
+    "estimated_price_formatted": "$3,400",
+    "results_page_url": "https://yoursite.com/garage-packet-result/abc123"
   }
 }`}
             </pre>
