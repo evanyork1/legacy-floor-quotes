@@ -280,7 +280,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="max-w-4xl w-[95vw] max-h-[95vh] sm:max-h-[90vh] overflow-y-auto p-0">
         <DialogTitle className="sr-only">Get Your Garage Price</DialogTitle>
         
         {/* Header */}
@@ -309,13 +309,13 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
           </Button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Step 1: Color Visualizer */}
           {step === 1 && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose Your Floor Color</h2>
-                <p className="text-gray-600">Select a color to preview, or upload your own garage photo</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Choose Your Floor Color</h2>
+                <p className="text-sm sm:text-base text-gray-600">Select a color to preview, or upload your own garage photo</p>
               </div>
 
               {/* Before/After Slider */}
@@ -360,7 +360,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
               </div>
 
               {/* Color Grid */}
-              <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-1.5 sm:gap-2">
                 {colorOptions.map((color) => (
                   <button
                     key={color.id}
@@ -402,10 +402,10 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
 
           {/* Step 2: Size Selection */}
           {step === 2 && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">What size is your garage?</h2>
-                <p className="text-gray-600">Choose the option that best describes your space</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">What size is your garage?</h2>
+                <p className="text-sm sm:text-base text-gray-600">Choose the option that best describes your space</p>
               </div>
 
               <div className="grid gap-3 max-w-lg mx-auto">
