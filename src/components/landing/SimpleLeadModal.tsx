@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Phone } from "lucide-react";
@@ -16,6 +17,7 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
@@ -45,7 +47,7 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
           email: email,
           phone: phone,
           privacy_policy_agreed: true,
-          questions_comments: 'Facebook landing page - Same day estimate request'
+          questions_comments: notes ? `Same day estimate request | Notes: ${notes}` : 'Same day estimate request'
         });
 
       if (error) throw error;
@@ -64,6 +66,7 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
     setName("");
     setPhone("");
     setEmail("");
+    setNotes("");
     setShowSuccess(false);
     setShowIframe(false);
     onClose();
@@ -171,7 +174,19 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
             />
           </div>
 
-          <Button 
+          <div>
+            <Label htmlFor="notes">Additional Info / Notes</Label>
+            <Textarea
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Any details about your garage or project..."
+              className="resize-none"
+              rows={3}
+            />
+          </div>
+
+          <Button
             type="submit" 
             className="w-full bg-blue-600 hover:bg-blue-700"
             disabled={isSubmitting}
