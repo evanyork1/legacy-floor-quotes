@@ -158,10 +158,8 @@ const ProcessSection = () => {
         {/* CTA Section */}
         <div className="text-center mt-12 sm:mt-16 lg:mt-20">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            
-            
-            <CTAButton onClick={() => setIsBookingModalOpen(true)} variant="outline" size="lg" icon={<Calendar />} fullWidthMobile={true}>
-              Book An Estimate
+            <CTAButton onClick={() => setIsBookingModalOpen(true)} variant="primary" size="lg" fullWidthMobile={true}>
+              Get A Free Estimate
             </CTAButton>
           </div>
         </div>
