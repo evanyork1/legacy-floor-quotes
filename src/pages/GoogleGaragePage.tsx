@@ -93,20 +93,6 @@ const GoogleGaragePage = () => {
           <div className="absolute inset-0 z-20 flex items-center justify-center">
             <div className="container mx-auto px-4">
               <div className="max-w-2xl mx-auto text-center">
-                {/* Badges Row */}
-                <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
-                  {/* 0% Financing Badge */}
-                  <div className="inline-flex items-center gap-1.5 bg-green-500 text-white px-3 py-1.5 rounded-full shadow-lg text-sm font-bold">
-                    <span>0% Financing Available!</span>
-                  </div>
-
-                  {/* Voted #1 Badge */}
-                  <div className="inline-flex items-center gap-1.5 bg-yellow-500 text-gray-900 px-3 py-1.5 rounded-full shadow-lg text-sm font-bold">
-                    <Trophy className="h-4 w-4" />
-                    <span>Voted #1 Floor Company in Plano 2025</span>
-                  </div>
-                </div>
-
                 {/* Google Reviews Badge */}
                 <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 mb-6">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,6 +135,13 @@ const GoogleGaragePage = () => {
         {/* Testimonials Section - No header, reviews immediately visible */}
         <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
+            {/* Voted #1 Banner */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-yellow-500 text-gray-900 px-4 py-2 rounded-full shadow-lg text-sm md:text-base font-bold">
+                <Trophy className="h-5 w-5" />
+                <span>Voted #1 Floor Company in Plano 2025</span>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {testimonials.map((testimonial, index) => <div key={index} className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
                   <div className="flex mb-2">
