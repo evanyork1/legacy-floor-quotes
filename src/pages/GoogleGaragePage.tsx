@@ -103,20 +103,22 @@ const GoogleGaragePage = () => {
                   <span className="text-xs sm:text-sm font-semibold text-gray-800">180+ 5 Star Reviews</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
-                  Get Your Dream Garage<br />
-                  <span className="text-blue-400">In One Day</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 leading-tight tracking-wide">
+                  Get Your Dream Garage
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-5 sm:mb-6 md:mb-8 px-2">
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blue-400 mb-4 sm:mb-5 md:mb-6">
+                  In One Day
+                </p>
+                <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 px-2 tracking-wide">
                   Shockingly beautiful, lifetime warranty, installed in only one day.
                 </p>
                 
-                {/* Primary CTA - Made more visible */}
+                {/* Primary CTA */}
                 <button 
                   onClick={() => setShowLeadModal(true)} 
-                  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-lg sm:text-xl font-bold px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-all duration-200"
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg ring-2 ring-white/40 transition-all duration-200 hover:ring-white/60"
                 >
-                  Get A Free Estimate →
+                  Get A Free Estimate
                 </button>
 
                 {/* Arrow and Join text */}
@@ -168,9 +170,9 @@ const GoogleGaragePage = () => {
             <div className="flex justify-center mt-6 sm:mt-8">
               <button 
                 onClick={() => setShowLeadModal(true)} 
-                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-xl ring-2 ring-blue-300 transition-all duration-200 hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-md transition-colors"
               >
-                Get Your Free Quote Today
+                Get A Free Quote
               </button>
             </div>
           </div>
@@ -215,9 +217,9 @@ const GoogleGaragePage = () => {
             <div className="flex justify-center mt-6 sm:mt-8">
               <button 
                 onClick={() => setShowLeadModal(true)} 
-                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-lg shadow-xl ring-2 ring-blue-300 transition-all duration-200 hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-md transition-colors"
               >
-                Want This For Your Garage? Get A Free Quote →
+                Get A Free Quote
               </button>
             </div>
 
