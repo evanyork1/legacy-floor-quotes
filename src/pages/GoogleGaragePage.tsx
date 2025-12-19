@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { FloorVisualizer } from "@/components/visualizer/FloorVisualizer";
 
 // Import new luxury images
-import heroImage from "@/assets/google-hero-porsches.png";
+import heroImage from "@/assets/google-hero-green-porsche.jpg";
 import legacyLogo from "@/assets/legacy-logo.png";
 import luxuryGarage1 from "@/assets/luxury-garage-1.jpg";
 import luxuryGarage2 from "@/assets/luxury-garage-2.jpg";
@@ -113,13 +113,11 @@ const GoogleGaragePage = () => {
                 <span className="text-xs font-semibold text-gray-800">180+ Reviews</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 leading-tight">
-                Get Your Dream Garage
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2 leading-none">
+                <span className="block whitespace-nowrap">Your Dream Garage</span>
+                <span className="block text-blue-400 mt-1">In One Day</span>
               </h1>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-4">
-                In One Day
-              </p>
-              <p className="text-gray-300 mb-6 max-w-md text-sm sm:text-base">
+              <p className="text-gray-300 mb-6 max-w-md text-sm sm:text-base mt-4">
                 Shockingly beautiful. Lifetime warranty. Installed in only one day.
               </p>
               
@@ -163,16 +161,6 @@ const GoogleGaragePage = () => {
       {/* Reviews Section - Light gray bg, flat cards */}
       <section className="py-8 sm:py-10 bg-gray-100">
         <div className="container mx-auto px-4">
-          {/* Professional Voted #1 Badge */}
-          <div className="flex justify-center mb-6">
-            <div className="flex items-center gap-3 border-l-4 border-blue-600 bg-white pl-4 pr-6 py-2">
-              <div className="text-left">
-                <p className="text-xs text-gray-500 uppercase tracking-wider">Voted</p>
-                <p className="text-sm sm:text-base font-bold text-gray-900">#1 Floor Company in Plano 2025</p>
-              </div>
-            </div>
-          </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white p-4 border border-gray-200">
@@ -195,31 +183,47 @@ const GoogleGaragePage = () => {
               </div>
             ))}
           </div>
-
-          <div className="flex items-center justify-center gap-2 mt-4 text-gray-600">
-            <MapPin className="h-4 w-4 text-blue-600" />
-            <p className="text-xs sm:text-sm">Proudly serving the entire DFW Metroplex</p>
-          </div>
         </div>
       </section>
 
-      {/* Luxury Gallery Section */}
-      <section className="py-8 sm:py-10 bg-white">
+      {/* Why Legacy Stats Section */}
+      <section className="py-10 sm:py-12 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">
-            Premium <span className="text-blue-600">Results</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Why Choose <span className="text-blue-600">Legacy</span>?
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-w-4xl mx-auto">
-            <img src={luxuryGarage1} alt="Luxury coated garage" className="w-full h-40 sm:h-48 object-cover" />
-            <img src={luxuryGarage3} alt="BMW on coated floor" className="w-full h-40 sm:h-48 object-cover" />
-            <img src={luxuryGarage2} alt="Large warehouse floor" className="w-full h-40 sm:h-48 object-cover" />
-            <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="Finished garage" className="w-full h-40 sm:h-48 object-cover" />
-            <img src={flakeCloseup} alt="Flake detail" className="w-full h-40 sm:h-48 object-cover" />
-            <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="Beautiful garage floor" className="w-full h-40 sm:h-48 object-cover" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="flex items-start gap-4 p-4 border-l-4 border-blue-600 bg-gray-50">
+              <div>
+                <p className="text-3xl sm:text-4xl font-bold text-gray-900">3,000+</p>
+                <p className="text-gray-600 text-sm">Garages installed across North Texas</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 border-l-4 border-blue-600 bg-gray-50">
+              <div>
+                <p className="text-3xl sm:text-4xl font-bold text-gray-900">Millions</p>
+                <p className="text-gray-600 text-sm">Square feet of flooring installed</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 border-l-4 border-blue-600 bg-gray-50">
+              <div>
+                <p className="text-3xl sm:text-4xl font-bold text-gray-900">#1</p>
+                <p className="text-gray-600 text-sm">Voted #1 Concrete Coatings Company in Plano 2025</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 border-l-4 border-blue-600 bg-gray-50">
+              <div>
+                <p className="text-3xl sm:text-4xl font-bold text-gray-900">Easiest</p>
+                <p className="text-gray-600 text-sm">We're the easiest company to work with—no babysitting required</p>
+              </div>
+            </div>
           </div>
 
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-8">
             <button 
               onClick={() => setShowLeadModal(true)} 
               className="group border-2 border-blue-600 text-blue-600 text-sm font-semibold px-6 py-2.5 hover:bg-blue-600 hover:text-white transition-all duration-200 flex items-center gap-2"
