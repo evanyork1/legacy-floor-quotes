@@ -6,7 +6,6 @@ import { CTAButton } from "@/components/ui/cta-button";
 import Footer from "@/components/Footer";
 import garagePacketHero from "@/assets/garage-packet-hero.jpg";
 import ProcessSection from "@/components/sections/ProcessSection";
-import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 
 const GoogleGaragePage = () => {
   const [showLeadModal, setShowLeadModal] = useState(false);
@@ -73,29 +72,24 @@ const GoogleGaragePage = () => {
       </Helmet>
 
       <div className="min-h-screen bg-white">
-        {/* Blue Phone Banner */}
-        <div className="bg-blue-600 py-2">
+        {/* Sticky Phone Banner */}
+        <div className="bg-blue-600 py-2 sticky top-0 z-50">
           <a href="tel:214-444-6269" className="flex items-center justify-center gap-2 text-white font-semibold hover:text-blue-100 transition-colors">
             <Phone className="h-4 w-4" />
             <span>(214) 444-6269</span>
           </a>
         </div>
 
-        {/* Simple Header */}
-        <header className="bg-white shadow-sm sticky top-0 z-50">
-          
-        </header>
-
-        {/* Hero Section - Centered with new background */}
+        {/* Hero Section */}
         <section className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10" />
-          <img src={garagePacketHero} alt="Beautiful garage floor coating" className="w-full h-[70vh] md:h-[80vh] object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50 z-10" />
+          <img src={garagePacketHero} alt="Beautiful garage floor coating" className="w-full h-[85vh] sm:h-[75vh] md:h-[80vh] object-cover" />
           <div className="absolute inset-0 z-20 flex items-center justify-center">
             <div className="container mx-auto px-4">
               <div className="max-w-2xl mx-auto text-center">
                 {/* Google Reviews Badge */}
-                <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 mb-6">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg border border-gray-100 mb-4 sm:mb-6">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -103,27 +97,32 @@ const GoogleGaragePage = () => {
                   </svg>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold text-gray-800">180+ 5 Star Reviews</span>
+                  <span className="text-xs sm:text-sm font-semibold text-gray-800">180+ 5 Star Reviews</span>
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
                   Get Your Dream Garage<br />
                   <span className="text-blue-400">In One Day</span>
                 </h1>
-                <p className="text-lg md:text-xl text-gray-200 mb-6 md:mb-8">
+                <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-5 sm:mb-6 md:mb-8 px-2">
                   Shockingly beautiful, lifetime warranty, installed in only one day.
                 </p>
-                <CTAButton onClick={() => setShowLeadModal(true)} variant="primary" size="lg" className="text-lg px-8 py-4">
-                  Get A Free Estimate
-                </CTAButton>
+                
+                {/* Primary CTA - Made more visible */}
+                <button 
+                  onClick={() => setShowLeadModal(true)} 
+                  className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white text-lg sm:text-xl font-bold px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200 animate-pulse hover:animate-none"
+                >
+                  Get A Free Estimate →
+                </button>
 
                 {/* Arrow and Join text */}
                 <div className="mt-4 flex flex-col items-center">
-                  <ArrowUp className="h-6 w-6 text-white animate-bounce" />
-                  <p className="text-white text-sm md:text-base font-medium mt-1">
+                  <ArrowUp className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" />
+                  <p className="text-white text-xs sm:text-sm md:text-base font-medium mt-1">
                     Join over 3,000 homeowners in DFW
                   </p>
                 </div>
@@ -132,66 +131,112 @@ const GoogleGaragePage = () => {
           </div>
         </section>
 
-        {/* Testimonials Section - No header, reviews immediately visible */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+        {/* Testimonials Section */}
+        <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             {/* Voted #1 Banner */}
-            <div className="flex items-center justify-center mb-8">
-              <div className="inline-flex items-center gap-2 bg-yellow-500 text-gray-900 px-4 py-2 rounded-full shadow-lg text-sm md:text-base font-bold">
-                <Trophy className="h-5 w-5" />
+            <div className="flex items-center justify-center mb-6 sm:mb-8">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-yellow-500 text-gray-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg text-xs sm:text-sm md:text-base font-bold">
+                <Trophy className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>Voted #1 Floor Company in Plano 2025</span>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-              {testimonials.map((testimonial, index) => <div key={index} className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-6xl mx-auto">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="bg-white rounded-xl p-3 sm:p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
                   <div className="flex mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />)}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />)}
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 line-clamp-3">
                     "{testimonial.text}"
                   </p>
-                  <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                  <p className="text-gray-500 text-xs">{testimonial.location}</p>
-                </div>)}
+                  <p className="font-semibold text-gray-900 text-xs sm:text-sm">{testimonial.name}</p>
+                  <p className="text-gray-500 text-[10px] sm:text-xs">{testimonial.location}</p>
+                </div>
+              ))}
             </div>
 
             {/* Service Area Message */}
-            <div className="flex items-center justify-center gap-2 mt-8 text-gray-600">
-              <MapPin className="h-5 w-5 text-blue-600" />
-              <p className="text-base md:text-lg font-medium">
+            <div className="flex items-center justify-center gap-2 mt-6 sm:mt-8 text-gray-600">
+              <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+              <p className="text-sm sm:text-base md:text-lg font-medium">
                 Proudly serving the entire DFW Metroplex and beyond
               </p>
+            </div>
+
+            {/* CTA after testimonials */}
+            <div className="flex justify-center mt-6 sm:mt-8">
+              <button 
+                onClick={() => setShowLeadModal(true)} 
+                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg transition-all duration-200"
+              >
+                Get Your Free Quote Today
+              </button>
             </div>
           </div>
         </section>
 
         {/* Before & After Section */}
-        <section className="py-12 md:py-20 bg-white">
+        <section className="py-8 sm:py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-6 sm:mb-8 md:mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">
                 Real Garage <span className="text-blue-600">Transformations</span>
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
                 See real results from homeowners across Dallas–Fort Worth.
               </p>
             </div>
 
-            <div className="grid gap-6 md:gap-8 max-w-5xl mx-auto">
-              {transformations.map((transformation, index) => (
-                <div key={index} className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+              {transformations.slice(0, 3).map((transformation, index) => (
+                <div key={index} className="grid grid-cols-2 gap-1.5 sm:gap-2 h-40 sm:h-56 md:h-72 lg:h-80">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
                     <img src={transformation.before} alt={transformation.beforeAlt} className="w-full h-full object-cover" />
-                    <div className="absolute top-2 left-2 md:top-3 md:left-3">
-                      <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 md:top-3 md:left-3">
+                      <span className="bg-blue-600 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs font-semibold">
                         BEFORE
                       </span>
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
                     <img src={transformation.after} alt={transformation.afterAlt} className="w-full h-full object-cover" />
-                    <div className="absolute top-2 left-2 md:top-3 md:left-3">
-                      <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 md:top-3 md:left-3">
+                      <span className="bg-white text-blue-600 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs font-semibold border border-blue-600">
+                        AFTER
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA after first 3 transformations */}
+            <div className="flex justify-center mt-6 sm:mt-8">
+              <button 
+                onClick={() => setShowLeadModal(true)} 
+                className="bg-green-500 hover:bg-green-600 text-white text-base sm:text-lg font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-lg shadow-lg transition-all duration-200"
+              >
+                Want This For Your Garage? Get A Free Quote →
+              </button>
+            </div>
+
+            {/* More transformations */}
+            <div className="grid gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto mt-6 sm:mt-8">
+              {transformations.slice(3).map((transformation, index) => (
+                <div key={index} className="grid grid-cols-2 gap-1.5 sm:gap-2 h-40 sm:h-56 md:h-72 lg:h-80">
+                  <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                    <img src={transformation.before} alt={transformation.beforeAlt} className="w-full h-full object-cover" />
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 md:top-3 md:left-3">
+                      <span className="bg-blue-600 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs font-semibold">
+                        BEFORE
+                      </span>
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-lg md:rounded-xl">
+                    <img src={transformation.after} alt={transformation.afterAlt} className="w-full h-full object-cover" />
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 md:top-3 md:left-3">
+                      <span className="bg-white text-blue-600 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs font-semibold border border-blue-600">
                         AFTER
                       </span>
                     </div>
@@ -202,24 +247,24 @@ const GoogleGaragePage = () => {
           </div>
         </section>
 
-        {/* Epoxy vs Polyurea Section */}
-        <EpoxyVsPolyureaSection />
-
         {/* Process Section */}
         <ProcessSection />
 
-        {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
+        {/* Final CTA Section */}
+        <section className="py-10 sm:py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
               Ready to Transform Your Garage?
             </h2>
-            <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
+            <p className="text-blue-100 text-sm sm:text-base md:text-lg mb-5 sm:mb-6 max-w-xl mx-auto px-2">
               Get a free, no-obligation estimate. Same-day appointments available.
             </p>
-            <CTAButton onClick={() => setShowLeadModal(true)} variant="outline" size="lg" className="bg-white text-blue-600 hover:bg-gray-100 border-white">
-              Get A Free Estimate
-            </CTAButton>
+            <button 
+              onClick={() => setShowLeadModal(true)} 
+              className="w-full sm:w-auto bg-white hover:bg-gray-100 text-blue-600 text-lg sm:text-xl font-bold px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
+            >
+              Get A Free Estimate Now →
+            </button>
           </div>
         </section>
 
