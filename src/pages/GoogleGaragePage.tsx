@@ -114,7 +114,7 @@ const GoogleGaragePage = () => {
                 {/* Primary CTA - Made more visible */}
                 <button 
                   onClick={() => setShowLeadModal(true)} 
-                  className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white text-lg sm:text-xl font-bold px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200 animate-pulse hover:animate-none"
+                  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-lg sm:text-xl font-bold px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-all duration-200"
                 >
                   Get A Free Estimate →
                 </button>
@@ -168,7 +168,7 @@ const GoogleGaragePage = () => {
             <div className="flex justify-center mt-6 sm:mt-8">
               <button 
                 onClick={() => setShowLeadModal(true)} 
-                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg transition-all duration-200"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-xl ring-2 ring-blue-300 transition-all duration-200 hover:scale-105"
               >
                 Get Your Free Quote Today
               </button>
@@ -215,7 +215,7 @@ const GoogleGaragePage = () => {
             <div className="flex justify-center mt-6 sm:mt-8">
               <button 
                 onClick={() => setShowLeadModal(true)} 
-                className="bg-green-500 hover:bg-green-600 text-white text-base sm:text-lg font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-lg shadow-lg transition-all duration-200"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-lg shadow-xl ring-2 ring-blue-300 transition-all duration-200 hover:scale-105"
               >
                 Want This For Your Garage? Get A Free Quote →
               </button>
