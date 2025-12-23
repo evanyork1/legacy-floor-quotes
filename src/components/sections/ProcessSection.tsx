@@ -71,9 +71,7 @@ const ProcessSection = () => {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             Our Proven 5-Step Process
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-            Each step is carefully executed by our expert team to ensure your floor looks amazing and lasts for decades.
-          </p>
+          
         </div>
 
         {/* Process Steps Container */}
@@ -81,20 +79,13 @@ const ProcessSection = () => {
           {/* Desktop Progress Bar */}
           <div className="hidden lg:flex justify-center items-center mb-12 relative">
             {/* Render step buttons with connecting lines */}
-            {steps.map((step, index) => (
-              <div key={index} className="flex items-center">
-                <button 
-                  onClick={() => goToStep(index)} 
-                  className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${index <= activeStep ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'}`}
-                >
+            {steps.map((step, index) => <div key={index} className="flex items-center">
+                <button onClick={() => goToStep(index)} className={`relative z-10 w-12 h-12 rounded-full border-4 font-bold text-lg transition-all duration-300 transform hover:scale-110 ${index <= activeStep ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-white border-gray-300 text-gray-400 hover:border-blue-300'}`}>
                   {step.number}
                 </button>
                 {/* Connection line (except for last step) */}
-                {index < steps.length - 1 && (
-                  <div className={`w-24 h-1 ${index < activeStep ? 'bg-blue-600' : 'bg-gray-200'} transition-all duration-300`}></div>
-                )}
-              </div>
-            ))}
+                {index < steps.length - 1 && <div className={`w-24 h-1 ${index < activeStep ? 'bg-blue-600' : 'bg-gray-200'} transition-all duration-300`}></div>}
+              </div>)}
           </div>
 
           {/* Main Content Area */}
