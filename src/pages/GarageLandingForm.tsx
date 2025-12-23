@@ -8,12 +8,9 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { BookingModal } from "@/components/landing/BookingModal";
 import garageLandingHero from "@/assets/garage-landing-hero.jpg";
-
 const GarageLandingForm = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
-  
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Professional Garage Floor Coating | Legacy Industrial Coatings</title>
         <meta name="description" content="Transform your garage with premium polyurea flake floor coating. Lifetime warranty, professional installation, same-day estimates available in Dallas-Fort Worth." />
@@ -32,11 +29,7 @@ const GarageLandingForm = () => {
         <section className="relative min-h-[600px] md:min-h-[700px] flex items-center">
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img 
-              src={garageLandingHero} 
-              alt="Premium garage floor coating" 
-              className="w-full h-full object-cover"
-            />
+            <img src={garageLandingHero} alt="Premium garage floor coating" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
           </div>
           
@@ -50,9 +43,7 @@ const GarageLandingForm = () => {
                     <span className="text-blue-400">In One Day</span>
                   </h1>
                   
-                  <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed max-w-xl">
-                    Stunning finish floors installed by Dallas' #1 crews.
-                  </p>
+                  <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed max-w-xl">Stunning garage floors installed by Dallas' #1 crews.</p>
                   
                   {/* Google Reviews Badge */}
                   <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-lg border border-white/20 mb-6">
@@ -240,8 +231,6 @@ const GarageLandingForm = () => {
       </div>
       
       <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
-    </>
-  );
+    </>;
 };
-
 export default GarageLandingForm;
