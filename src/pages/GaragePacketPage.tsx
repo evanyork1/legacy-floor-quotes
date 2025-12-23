@@ -82,7 +82,7 @@ const GaragePacketPage = () => {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
-                  Your Dream Garage<br />
+                  <span className="whitespace-nowrap">Your Dream Garage</span><br />
                   <span className="text-blue-600">In One Day</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
