@@ -2,25 +2,25 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import GiveawayHeader from "@/components/GiveawayHeader";
 import Footer from "@/components/Footer";
-
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import { LeadForm } from "@/components/landing/LeadForm";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BookingModal } from "@/components/landing/BookingModal";
+import garageLandingHero from "@/assets/garage-landing-hero.jpg";
+
 const GarageLandingForm = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
-  return <>
+  
+  return (
+    <>
       <Helmet>
         <title>Professional Garage Floor Coating | Legacy Industrial Coatings</title>
         <meta name="description" content="Transform your garage with premium polyurea flake floor coating. Lifetime warranty, professional installation, same-day estimates available in Dallas-Fort Worth." />
         <meta name="keywords" content="garage floor coating, polyurea floors, garage renovation, Dallas Fort Worth" />
-        
         <meta property="og:title" content="Professional Garage Floor Coating | Legacy Industrial Coatings" />
         <meta property="og:description" content="Transform your garage with premium polyurea flake floor coating. Lifetime warranty and professional installation." />
         <meta property="og:image" content="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" />
-        
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagelandingform" />
       </Helmet>
@@ -28,39 +28,47 @@ const GarageLandingForm = () => {
       <div className="min-h-screen bg-white">
         <GiveawayHeader />
         
-        {/* Hero Section with Form */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8 md:py-12 lg:py-20">
-          <div className="container mx-auto px-4">
+        {/* Hero Section with Photo Background */}
+        <section className="relative min-h-[600px] md:min-h-[700px] flex items-center">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img 
+              src={garageLandingHero} 
+              alt="Premium garage floor coating" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Left Column - Content */}
-                <div className="text-center lg:text-left">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-5 lg:mb-6 leading-tight">
-                    Get your floor installed{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                      before Thanksgiving
-                    </span>
+                <div className="text-left">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    Get Your Dream Garage Floor{" "}
+                    <span className="text-blue-400">In One Day</span>
                   </h1>
                   
-                  <p className="text-lg sm:text-xl md:text-2xl lg:text-xl text-gray-600 mb-4 md:mb-5 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                    Limited spots are open this week. Premium polyurea floor system with lifetime warranty. One day install.
+                  <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed max-w-xl">
+                    Stunning finish floors installed by Dallas' #1 crews.
                   </p>
                   
-                  {/* Google Reviews Badge - Full Version */}
-                  <div className="inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-lg shadow-md mb-4 md:mb-5">
-                    <svg className="w-6 h-6 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Google Reviews Badge */}
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-lg border border-white/20 mb-6">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                     </svg>
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium text-gray-700">Google Reviews</span>
-                      <span className="text-xs text-gray-500">180+ five star reviews</span>
+                      <span className="text-sm font-medium text-white">Google Reviews</span>
+                      <span className="text-xs text-gray-300">180+ five star reviews</span>
                     </div>
                   </div>
                   
-                  <p className="text-base md:text-lg text-gray-600">
+                  <p className="text-lg text-gray-300">
                     Same-day estimates available • Serving Dallas-Fort Worth
                   </p>
                 </div>
@@ -74,7 +82,14 @@ const GarageLandingForm = () => {
           </div>
         </section>
         
-        {/* Before & After Showcase Section */}
+        {/* Section Order: Reviews → Epoxy vs Polyurea → Process → Transformations */}
+        <TestimonialsSection />
+        
+        <EpoxyVsPolyureaSection />
+        
+        <ProcessSection />
+        
+        {/* Real Garage Transformations Section */}
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
@@ -82,7 +97,7 @@ const GarageLandingForm = () => {
                 Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                See real results from homeowners across Dallas–Fort Worth who upgraded their garage just like you’re considering.
+                See real results from homeowners across Dallas–Fort Worth who upgraded their garage just like you're considering.
               </p>
             </div>
             
@@ -202,12 +217,6 @@ const GarageLandingForm = () => {
           </div>
         </section>
         
-        <TestimonialsSection />
-        
-        <EpoxyVsPolyureaSection />
-        
-        <ProcessSection />
-        
         {/* Mid-Page CTA Form */}
         <section className="py-10 md:py-12 lg:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
           <div className="container mx-auto px-4">
@@ -217,7 +226,7 @@ const GarageLandingForm = () => {
                   Ready to Transform Your Garage?
                 </h2>
                 <p className="text-base md:text-lg lg:text-xl text-blue-100 px-4">
-                  Don't miss out on our limited-time Thanksgiving special!
+                  Get your free estimate today!
                 </p>
               </div>
               <div className="max-w-2xl mx-auto">
@@ -231,6 +240,8 @@ const GarageLandingForm = () => {
       </div>
       
       <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
-    </>;
+    </>
+  );
 };
+
 export default GarageLandingForm;
