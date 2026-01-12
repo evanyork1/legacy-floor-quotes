@@ -51,7 +51,7 @@ interface CustomerPresentationProps {
   data: PresentationData;
   onUpdate: (updates: Partial<PresentationData>) => void;
   isShareable?: boolean;
-  onColorChange?: (color: string) => void;
+  onColorChange?: (color: string, entryId?: string) => void;
 }
 
 const PACKAGE_FEATURES = {
@@ -181,10 +181,10 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
 
   const selectedColor = colorOptions.find(c => c.id === currentColor.toLowerCase().replace(' ', '-')) || colorOptions[0];
 
-  const handleColorChange = (color: string) => {
+  const handleColorChange = (color: string, entryId?: string) => {
     setCurrentColor(color);
     if (onColorChange) {
-      onColorChange(color);
+      onColorChange(color, entryId);
     }
   };
 
@@ -231,6 +231,19 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
   const handleSubmit = async () => {
     if (!signature || !agreementAccepted || !selectedPackage) {
       toast.error('Please complete all required fields');
+      return;
+    }
+    
+    // Check if this is a live presentation (no valid ID) vs shareable link
+    if (!data.id) {
+      // Live presentation - just show success and update local state
+      // TODO: In future, this should create a quote in Jobber
+      setIsComplete(true);
+      toast.success('Quote approved! The sales rep will process your deposit.');
+      onUpdate({
+        selectedPackage,
+        status: 'signed',
+      });
       return;
     }
 
@@ -327,46 +340,124 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
         </div>
       </section>
 
-      {/* Color Selection & Preview */}
+      {/* Color Selection & Preview - Show one per floor entry */}
       <section className="py-12 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col items-center gap-4 mb-6">
-            <h2 className="text-2xl font-bold text-center text-gray-900">Selected Color</h2>
-            {!isShareable && onColorChange && (
-              <Select value={currentColor} onValueChange={handleColorChange}>
-                <SelectTrigger className="w-64 bg-white border-gray-300">
-                  <SelectValue placeholder="Select color" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200">
-                  {COLOR_OPTIONS.map((color) => (
-                    <SelectItem key={color} value={color} className="hover:bg-gray-100">
-                      {color}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-          </div>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            {selectedColor.preview ? (
-              <img 
-                src={selectedColor.preview} 
-                alt={selectedColor.name} 
-                className="w-full h-64 md:h-96 object-cover"
-              />
-            ) : selectedColor.demoImage ? (
-              <img 
-                src={selectedColor.demoImage} 
-                alt={selectedColor.name} 
-                className="w-full h-64 md:h-96 object-cover"
-              />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">Selected Colors</h2>
+          
+          {/* Grid for multiple floor colors */}
+          <div className={`grid gap-6 ${
+            data.floorEntries && data.floorEntries.length > 1 
+              ? 'md:grid-cols-2' 
+              : 'md:grid-cols-1 max-w-4xl mx-auto'
+          }`}>
+            {data.floorEntries && data.floorEntries.length > 0 ? (
+              data.floorEntries.map((entry, index) => {
+                const entryColor = entry.colorChoice || data.colorChoice;
+                const colorOption = colorOptions.find(c => c.id === entryColor.toLowerCase().replace(' ', '-')) || colorOptions[0];
+                
+                return (
+                  <div key={entry.id || index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                    {/* Floor label */}
+                    <div className="bg-[#1e3a5f] text-white px-4 py-2 flex items-center justify-between">
+                      <span className="font-medium">{FLOOR_TYPE_LABELS[entry.floorType] || entry.floorType}</span>
+                      <span className="text-sm text-blue-200">{entry.squareFootage} sq ft</span>
+                    </div>
+                    
+                    {/* Color dropdown for live presentation */}
+                    {!isShareable && onColorChange && (
+                      <div className="p-4 border-b border-gray-100">
+                        <Select 
+                          value={entryColor} 
+                          onValueChange={(color) => onColorChange(color, entry.id)}
+                        >
+                          <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
+                            <SelectValue placeholder="Select color" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border-gray-200">
+                            {COLOR_OPTIONS.map((color) => (
+                              <SelectItem key={color} value={color} className="text-gray-900 hover:bg-gray-100">
+                                {color}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                    
+                    {/* Color preview image */}
+                    {colorOption.preview ? (
+                      <img 
+                        src={colorOption.preview} 
+                        alt={colorOption.name} 
+                        className="w-full h-48 md:h-64 object-cover"
+                      />
+                    ) : colorOption.demoImage ? (
+                      <img 
+                        src={colorOption.demoImage} 
+                        alt={colorOption.name} 
+                        className="w-full h-48 md:h-64 object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-48 md:h-64 flex items-center justify-center bg-gray-100">
+                        <img 
+                          src={colorOption.thumbnail} 
+                          alt={colorOption.name} 
+                          className="h-32 w-32 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                    
+                    {/* Color name */}
+                    <div className="p-3 text-center bg-gray-50">
+                      <span className="font-medium text-gray-900">{colorOption.name}</span>
+                    </div>
+                  </div>
+                );
+              })
             ) : (
-              <div className="w-full h-64 md:h-96 flex items-center justify-center bg-gray-100">
-                <img 
-                  src={selectedColor.thumbnail} 
-                  alt={selectedColor.name} 
-                  className="h-48 w-48 object-cover rounded-lg"
-                />
+              // Fallback single color display
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                {!isShareable && onColorChange && (
+                  <div className="p-4 border-b border-gray-100">
+                    <Select value={currentColor} onValueChange={handleColorChange}>
+                      <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
+                        <SelectValue placeholder="Select color" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border-gray-200">
+                        {COLOR_OPTIONS.map((color) => (
+                          <SelectItem key={color} value={color} className="text-gray-900 hover:bg-gray-100">
+                            {color}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+                {selectedColor.preview ? (
+                  <img 
+                    src={selectedColor.preview} 
+                    alt={selectedColor.name} 
+                    className="w-full h-64 md:h-96 object-cover"
+                  />
+                ) : selectedColor.demoImage ? (
+                  <img 
+                    src={selectedColor.demoImage} 
+                    alt={selectedColor.name} 
+                    className="w-full h-64 md:h-96 object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-64 md:h-96 flex items-center justify-center bg-gray-100">
+                    <img 
+                      src={selectedColor.thumbnail} 
+                      alt={selectedColor.name} 
+                      className="h-48 w-48 object-cover rounded-lg"
+                    />
+                  </div>
+                )}
+                <div className="p-3 text-center bg-gray-50">
+                  <span className="font-medium text-gray-900">{selectedColor.name}</span>
+                </div>
               </div>
             )}
           </div>
