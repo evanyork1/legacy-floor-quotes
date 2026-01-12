@@ -340,8 +340,8 @@ serve(async (req: Request) => {
           });
         }
         
-        // Build input with optional required deposit
-        const quoteInput: Record<string, unknown> = {
+        // Build attributes for quote creation
+        const quoteAttributes: Record<string, unknown> = {
           clientId: data?.clientId,
           title: data?.title || 'Floor Coating Quote',
           lineItems: lineItems.map(item => ({
@@ -353,26 +353,17 @@ serve(async (req: Request) => {
           message: data?.notes || '',
         };
         
-        // Add required deposit if provided
-        if (data?.depositAmount && typeof data.depositAmount === 'number' && data.depositAmount > 0) {
-          quoteInput.requiredDeposit = {
-            amount: data.depositAmount,
-            depositType: 'AMOUNT',
-          };
-        }
-        
         query = `
-          mutation QuoteCreate($input: QuoteCreateInput!) {
-            quoteCreate(input: $input) {
+          mutation QuoteCreate($attributes: QuoteCreateAttributes!) {
+            quoteCreate(attributes: $attributes) {
               quote {
                 id
                 quoteNumber
-                total
-                status
-                clientHubUrl
-                requiredDeposit {
-                  amount
-                  depositType
+                quoteStatus
+                clientHubUri
+                amounts {
+                  total
+                  depositAmount
                 }
               }
               userErrors {
@@ -382,7 +373,7 @@ serve(async (req: Request) => {
             }
           }
         `;
-        variables = { input: quoteInput };
+        variables = { attributes: quoteAttributes };
         break;
       }
 
@@ -415,7 +406,7 @@ serve(async (req: Request) => {
             quoteStatusChange(quoteId: $quoteId, status: $status) {
               quote {
                 id
-                status
+                quoteStatus
               }
               userErrors {
                 message
