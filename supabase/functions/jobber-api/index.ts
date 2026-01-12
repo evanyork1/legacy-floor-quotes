@@ -10,7 +10,7 @@ const JOBBER_API_URL = 'https://api.getjobber.com/api/graphql';
 const JOBBER_TOKEN_URL = 'https://api.getjobber.com/api/oauth/token';
 
 interface JobberRequest {
-  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote' | 'checkStatus';
+  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote' | 'checkStatus' | 'getTodaysCalendar';
   data?: Record<string, unknown>;
 }
 
@@ -171,6 +171,79 @@ serve(async (req: Request) => {
     let variables: Record<string, unknown>;
 
     switch (action) {
+      case 'getTodaysCalendar': {
+        // Get today's date range in ISO format
+        const today = new Date();
+        const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        
+        // Query for quotes and jobs created/scheduled for today
+        query = `
+          query GetTodaysCalendar($startDate: ISO8601DateTime!, $endDate: ISO8601DateTime!) {
+            quotes(first: 20, filter: { createdAt: { gte: $startDate, lt: $endDate } }) {
+              nodes {
+                id
+                quoteNumber
+                title
+                createdAt
+                client {
+                  id
+                  name
+                  firstName
+                  lastName
+                  emails {
+                    address
+                    primary
+                  }
+                  phones {
+                    number
+                    primary
+                  }
+                  billingAddress {
+                    street1
+                    city
+                    postalCode
+                  }
+                }
+              }
+            }
+            jobs(first: 20) {
+              nodes {
+                id
+                jobNumber
+                title
+                createdAt
+                startAt
+                client {
+                  id
+                  name
+                  firstName
+                  lastName
+                  emails {
+                    address
+                    primary
+                  }
+                  phones {
+                    number
+                    primary
+                  }
+                  billingAddress {
+                    street1
+                    city
+                    postalCode
+                  }
+                }
+              }
+            }
+          }
+        `;
+        variables = {
+          startDate: startOfDay.toISOString(),
+          endDate: endOfDay.toISOString(),
+        };
+        break;
+      }
+
       case 'searchClients':
         query = `
           query SearchClients($searchTerm: String!) {
@@ -230,7 +303,25 @@ serve(async (req: Request) => {
         };
         break;
 
-      case 'createQuote':
+      case 'createQuote': {
+        // Build line items from the data
+        const lineItems = data?.lineItems as Array<{
+          name: string;
+          description?: string;
+          unitPrice: number;
+          quantity: number;
+        }> || [];
+        
+        // If old-style data is passed, build a single line item
+        if (!data?.lineItems && data?.productName) {
+          lineItems.push({
+            name: data.productName as string || 'Floor Coating',
+            description: data.description as string || '',
+            unitPrice: data.unitPrice as number,
+            quantity: data.squareFootage as number,
+          });
+        }
+        
         query = `
           mutation QuoteCreate($input: QuoteCreateInput!) {
             quoteCreate(input: $input) {
@@ -250,31 +341,18 @@ serve(async (req: Request) => {
         variables = {
           input: {
             clientId: data?.clientId,
-            title: data?.title || 'Garage Floor Coating Quote',
-            lineItems: [
-              {
-                name: data?.productName || 'Polyurea Garage Floor Coating',
-                description: data?.description || '',
-                unitPrice: data?.unitPrice,
-                quantity: data?.squareFootage,
-              },
-              ...(data?.gripAdditive ? [{
-                name: 'Grip Additive',
-                description: 'Anti-slip coating additive',
-                unitPrice: data?.gripPrice || 0.50,
-                quantity: data?.squareFootage,
-              }] : []),
-              ...(data?.vaporBarrier ? [{
-                name: 'Vapor Barrier',
-                description: 'Moisture protection layer',
-                unitPrice: data?.vaporPrice || 1.00,
-                quantity: data?.squareFootage,
-              }] : []),
-            ],
+            title: data?.title || 'Floor Coating Quote',
+            lineItems: lineItems.map(item => ({
+              name: item.name,
+              description: item.description || '',
+              unitPrice: item.unitPrice,
+              quantity: item.quantity,
+            })),
             message: data?.notes || '',
           },
         };
         break;
+      }
 
       case 'createNote':
         query = `

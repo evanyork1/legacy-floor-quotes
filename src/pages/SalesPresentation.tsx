@@ -6,6 +6,13 @@ import { IntakeForm } from '@/components/presentation/IntakeForm';
 import { ClosersCanvas } from '@/components/presentation/ClosersCanvas';
 import { JobberStatus } from '@/components/presentation/JobberStatus';
 
+export interface LineItem {
+  id: string;
+  name: string;
+  pricePerSqFt: number;
+  isCustom?: boolean;
+}
+
 export type PresentationData = {
   // Client info
   clientId?: string;
@@ -15,27 +22,43 @@ export type PresentationData = {
   clientAddress: string;
   
   // Project details
+  spaceType: string; // Garage, Patio, Porch
   squareFootage: number;
   moistureContent: number;
-  concreteSurfaceProfile: number;
   
-  // Product selection
-  baseCoatType: string;
-  flakeStyle: string;
-  topCoat: string;
+  // Package selection
+  packageLevel: 'silver' | 'gold' | 'platinum';
   
-  // Pricing
-  pricePerSqFt: number;
+  // Color
+  colorChoice: string;
+  customColorNote: string;
+  
+  // Line items
+  lineItems: LineItem[];
+  
+  // Notes
+  notes: string;
+  
+  // Pricing (calculated)
   totalPrice: number;
-  
-  // Options
-  gripAdditive: boolean;
-  vaporBarrier: boolean;
   
   // Media
   sitePhotos: File[];
   sitePhotoUrls: string[];
 };
+
+// Package pricing constants
+export const PACKAGE_PRICING = {
+  silver: 5.00,
+  gold: 7.10,
+  platinum: 9.50,
+};
+
+// Preset line items
+export const PRESET_LINE_ITEMS: LineItem[] = [
+  { id: 'custom-flake', name: 'Custom Flake', pricePerSqFt: 1.50 },
+  { id: 'grp-additive', name: 'GRP Additive', pricePerSqFt: 0.40 },
+];
 
 export default function SalesPresentation() {
   const navigate = useNavigate();
@@ -45,16 +68,15 @@ export default function SalesPresentation() {
     clientEmail: '',
     clientPhone: '',
     clientAddress: '',
+    spaceType: 'Garage',
     squareFootage: 400,
     moistureContent: 3,
-    concreteSurfaceProfile: 2,
-    baseCoatType: 'polyurea',
-    flakeStyle: 'domino',
-    topCoat: 'matte',
-    pricePerSqFt: 8.50,
-    totalPrice: 3400,
-    gripAdditive: false,
-    vaporBarrier: false,
+    packageLevel: 'gold',
+    colorChoice: 'Domino',
+    customColorNote: '',
+    lineItems: [],
+    notes: '',
+    totalPrice: 2840, // 400 * 7.10
     sitePhotos: [],
     sitePhotoUrls: [],
   });
