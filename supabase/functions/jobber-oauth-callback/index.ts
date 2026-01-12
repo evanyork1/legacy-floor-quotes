@@ -84,10 +84,26 @@ serve(async (req: Request) => {
     }
 
     const tokenData = await tokenResponse.json();
-    console.log('Token exchange successful');
+    
+    // Log token response for debugging
+    console.log('Token data received:', JSON.stringify({
+      has_access_token: !!tokenData.access_token,
+      has_refresh_token: !!tokenData.refresh_token,
+      expires_in: tokenData.expires_in,
+      expires_in_type: typeof tokenData.expires_in
+    }));
 
-    // Calculate expiration time
-    const expiresAt = new Date(Date.now() + tokenData.expires_in * 1000);
+    // Safe calculation with fallback (default 7 days if not provided or invalid)
+    const expiresInSeconds = parseInt(String(tokenData.expires_in || ''), 10) || (7 * 24 * 60 * 60);
+    let expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
+    
+    // Validate the date is valid
+    if (isNaN(expiresAt.getTime())) {
+      console.warn('Invalid expiration date, using 7 day fallback');
+      expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    }
+    
+    console.log('Token exchange successful, expires at:', expiresAt.toISOString());
 
     // Store tokens in Supabase
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
