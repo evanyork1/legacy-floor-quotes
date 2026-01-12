@@ -288,13 +288,11 @@ serve(async (req: Request) => {
                   city
                   postalCode
                 }
-                properties(first: 5) {
-                  nodes {
-                    id
-                    address {
-                      street1
-                      city
-                    }
+                defaultProperty {
+                  id
+                  address {
+                    street1
+                    city
                   }
                 }
               }
