@@ -12,6 +12,15 @@ export interface LineItem {
   pricePerSqFt: number;
   isCustom?: boolean;
   note?: string; // For disclaimers
+  category?: 'floor' | 'additive' | 'custom';
+}
+
+// Floor entry for multiple floor types (e.g., garage + patio)
+export interface FloorEntry {
+  id: string;
+  floorType: string;
+  squareFootage: number;
+  additives: string[]; // IDs of selected additives
 }
 
 export type PresentationData = {
@@ -23,9 +32,12 @@ export type PresentationData = {
   clientAddress: string;
   
   // Project details
-  spaceType: string; // Garage Floor, Patio Floor
-  squareFootage: number;
+  spaceType: string; // Legacy - primary space type
+  squareFootage: number; // Legacy - total sqft
   moistureContent: number;
+  
+  // Floor entries (new - supports multiple floors)
+  floorEntries: FloorEntry[];
   
   // Color
   colorChoice: string;
@@ -65,13 +77,26 @@ export const PACKAGE_PRICING = {
   platinum: 9.50,
 };
 
-// Preset line items
-export const PRESET_LINE_ITEMS: LineItem[] = [
-  { id: 'custom-flake', name: 'Custom Flake', pricePerSqFt: 1.50 },
-  { id: 'grp-additive', name: 'GRP Additive', pricePerSqFt: 0.40 },
+// Floor type options
+export const FLOOR_TYPES = [
+  { value: 'garage', label: 'Garage Floor' },
+  { value: 'patio', label: 'Patio Floor' },
+  { value: 'basement', label: 'Basement' },
+  { value: 'commercial', label: 'Commercial Space' },
 ];
 
-// Space type options (these become the primary line item types)
+// Additive options (can be added per floor)
+export const ADDITIVE_OPTIONS: LineItem[] = [
+  { id: 'custom-flake', name: 'Custom Flake', pricePerSqFt: 1.50, category: 'additive' },
+  { id: 'grp-additive', name: 'GRP Additive', pricePerSqFt: 0.40, category: 'additive' },
+  { id: 'crack-repair', name: 'Crack Repair', pricePerSqFt: 0.25, category: 'additive' },
+  { id: 'hot-tire-pickup', name: 'Hot Tire Pickup Protection', pricePerSqFt: 0.60, category: 'additive' },
+];
+
+// Legacy preset for backwards compatibility
+export const PRESET_LINE_ITEMS: LineItem[] = ADDITIVE_OPTIONS;
+
+// Space type options (legacy)
 export const SPACE_TYPE_OPTIONS = [
   { value: 'Garage Floor', label: 'Garage Floor' },
   { value: 'Patio Floor', label: 'Patio Floor' },
@@ -88,6 +113,9 @@ export default function SalesPresentation() {
     spaceType: 'Garage Floor',
     squareFootage: 400,
     moistureContent: 3,
+    floorEntries: [
+      { id: 'floor-1', floorType: 'garage', squareFootage: 400, additives: [] }
+    ],
     colorChoice: 'Domino',
     customColorNote: '',
     lineItems: [],
@@ -97,9 +125,9 @@ export default function SalesPresentation() {
     customDepositAmount: null,
     presentationNotes: '',
     notes: '',
-    silverTotal: 2000, // 400 * 5.00
-    goldTotal: 2840, // 400 * 7.10
-    platinumTotal: 3800, // 400 * 9.50
+    silverTotal: 2000,
+    goldTotal: 2840,
+    platinumTotal: 3800,
     sitePhotos: [],
     sitePhotoUrls: [],
   });

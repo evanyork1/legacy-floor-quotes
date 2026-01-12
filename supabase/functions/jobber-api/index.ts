@@ -89,13 +89,19 @@ async function getValidAccessToken(): Promise<{ token: string; expiresAt: string
   const expiresAt = new Date(tokenRecord.expires_at);
   const now = new Date();
   
-  // Check if token expires within next 5 minutes
-  const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60 * 1000);
+  console.log('Token expires at:', expiresAt.toISOString(), 'Now:', now.toISOString());
   
-  if (expiresAt > fiveMinutesFromNow) {
+  // Check if token expires within next 10 minutes (increased buffer)
+  const tenMinutesFromNow = new Date(now.getTime() + 10 * 60 * 1000);
+  
+  if (expiresAt > tenMinutesFromNow) {
     // Token is still valid
+    console.log('Token is still valid');
     return { token: tokenRecord.access_token, expiresAt: tokenRecord.expires_at };
   }
+  
+  // Always try to refresh if we're within the buffer
+  console.log('Token expired or expiring soon, will refresh');
 
   console.log('Token expired or expiring soon, refreshing...');
 
@@ -159,12 +165,14 @@ serve(async (req: Request) => {
     const tokenInfo = await getValidAccessToken();
     
     if (!tokenInfo) {
+      console.log('No valid token found, returning auth error');
       return new Response(
-        JSON.stringify({ error: 'Not connected to Jobber. Please authorize first.' }),
+        JSON.stringify({ error: 'Not connected to Jobber. Please authorize first.', connected: false }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('Using token that expires at:', tokenInfo.expiresAt);
     const accessToken = tokenInfo.token;
 
     let query: string;
@@ -172,15 +180,10 @@ serve(async (req: Request) => {
 
     switch (action) {
       case 'getTodaysCalendar': {
-        // Get today's date range in ISO format
-        const today = new Date();
-        const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-        
-        // Query for quotes and jobs created/scheduled for today
+        // Query for recent quotes and jobs (Jobber doesn't support date range filtering on quotes the same way)
         query = `
-          query GetTodaysCalendar($startDate: ISO8601DateTime!, $endDate: ISO8601DateTime!) {
-            quotes(first: 20, filter: { createdAt: { gte: $startDate, lt: $endDate } }) {
+          query GetTodaysCalendar {
+            quotes(first: 20, sortOrder: DESC) {
               nodes {
                 id
                 quoteNumber
@@ -237,10 +240,7 @@ serve(async (req: Request) => {
             }
           }
         `;
-        variables = {
-          startDate: startOfDay.toISOString(),
-          endDate: endOfDay.toISOString(),
-        };
+        variables = {};
         break;
       }
 
