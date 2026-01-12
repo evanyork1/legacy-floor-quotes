@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Search, Plus, Camera, ChevronRight, Loader2 } from 'lucide-react';
+import { Search, Plus, Camera, ChevronRight, Loader2, Trash2, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PresentationData } from '@/pages/SalesPresentation';
+import { Textarea } from '@/components/ui/textarea';
+import { PresentationData, PACKAGE_PRICING, PRESET_LINE_ITEMS, LineItem } from '@/pages/SalesPresentation';
+import { TodaysCalendar } from './TodaysCalendar';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
@@ -17,33 +18,22 @@ interface IntakeFormProps {
   onStartPresentation: () => void;
 }
 
-const BASE_COAT_OPTIONS = [
-  { value: 'polyurea', label: 'Polyurea (Premium)' },
-  { value: 'polyaspartic', label: 'Polyaspartic (Fast Cure)' },
-  { value: 'epoxy', label: 'Epoxy (Economy)' },
+const SPACE_TYPES = ['Garage', 'Patio', 'Porch'];
+
+const COLOR_OPTIONS = [
+  'Domino',
+  'Creek Bed',
+  'Wombat',
+  'Tidal Wave',
+  'Raven',
+  'Cabin Fever',
+  'Other',
 ];
 
-const FLAKE_STYLES = [
-  { value: 'domino', label: 'Domino (Black & White)' },
-  { value: 'granite', label: 'Granite (Multi-color)' },
-  { value: 'midnight', label: 'Midnight (Dark Blend)' },
-  { value: 'saddle-tan', label: 'Saddle Tan (Earth Tones)' },
-  { value: 'creekbed', label: 'Creek Bed (Natural)' },
-  { value: 'custom', label: 'Custom Blend' },
-];
-
-const TOP_COAT_OPTIONS = [
-  { value: 'matte', label: 'Matte Finish' },
-  { value: 'satin', label: 'Satin Finish' },
-  { value: 'gloss', label: 'High Gloss' },
-];
-
-const CSP_OPTIONS = [
-  { value: 1, label: 'CSP 1 - Acid Etched' },
-  { value: 2, label: 'CSP 2 - Light Grind' },
-  { value: 3, label: 'CSP 3 - Medium Grind' },
-  { value: 4, label: 'CSP 4 - Heavy Grind' },
-  { value: 5, label: 'CSP 5 - Shotblast' },
+const PACKAGE_OPTIONS = [
+  { value: 'silver', label: 'Silver Package', price: 5.00 },
+  { value: 'gold', label: 'Gold Package', price: 7.10 },
+  { value: 'platinum', label: 'Platinum Package', price: 9.50 },
 ];
 
 export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormProps) {
@@ -52,7 +42,23 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isCreatingClient, setIsCreatingClient] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [customLineItemName, setCustomLineItemName] = useState('');
+  const [customLineItemPrice, setCustomLineItemPrice] = useState('');
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Calculate total price whenever relevant data changes
+  useEffect(() => {
+    const basePrice = data.squareFootage * PACKAGE_PRICING[data.packageLevel];
+    const lineItemsTotal = data.lineItems.reduce(
+      (sum, item) => sum + (data.squareFootage * item.pricePerSqFt),
+      0
+    );
+    const total = basePrice + lineItemsTotal;
+    
+    if (total !== data.totalPrice) {
+      onChange({ ...data, totalPrice: total });
+    }
+  }, [data.squareFootage, data.packageLevel, data.lineItems]);
 
   const handleSearchClients = useCallback(async (term: string) => {
     if (!term.trim() || term.length < 2) {
@@ -114,6 +120,23 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     setSearchTerm('');
   };
 
+  const handleSelectFromCalendar = (client: {
+    id: string;
+    name: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+  }) => {
+    onChange({
+      ...data,
+      clientId: client.id,
+      clientName: client.name,
+      clientEmail: client.email || '',
+      clientPhone: client.phone || '',
+      clientAddress: client.address || '',
+    });
+  };
+
   const handleCreateNewClient = () => {
     setIsCreatingClient(true);
     onChange({
@@ -149,38 +172,74 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     });
   };
 
-  // Auto-calculate total price
+  const addLineItem = (item: LineItem) => {
+    // Check if already added
+    if (data.lineItems.some(li => li.id === item.id)) {
+      toast.error('This line item is already added');
+      return;
+    }
+    onChange({
+      ...data,
+      lineItems: [...data.lineItems, item],
+    });
+  };
+
+  const addCustomLineItem = () => {
+    if (!customLineItemName.trim() || !customLineItemPrice) {
+      toast.error('Please enter both name and price');
+      return;
+    }
+    
+    const price = parseFloat(customLineItemPrice);
+    if (isNaN(price) || price < 0) {
+      toast.error('Please enter a valid price');
+      return;
+    }
+    
+    const newItem: LineItem = {
+      id: `custom-${Date.now()}`,
+      name: customLineItemName.trim(),
+      pricePerSqFt: price,
+      isCustom: true,
+    };
+    
+    onChange({
+      ...data,
+      lineItems: [...data.lineItems, newItem],
+    });
+    
+    setCustomLineItemName('');
+    setCustomLineItemPrice('');
+    toast.success('Custom line item added');
+  };
+
+  const removeLineItem = (itemId: string) => {
+    onChange({
+      ...data,
+      lineItems: data.lineItems.filter(li => li.id !== itemId),
+    });
+  };
+
   const calculateTotal = () => {
-    let total = data.squareFootage * data.pricePerSqFt;
-    if (data.gripAdditive) total += data.squareFootage * 0.50;
-    if (data.vaporBarrier) total += data.squareFootage * 1.00;
-    return total;
-  };
-
-  const updatePricing = (field: 'squareFootage' | 'pricePerSqFt', value: number) => {
-    const newData = { ...data, [field]: value };
-    newData.totalPrice = newData.squareFootage * newData.pricePerSqFt + 
-      (newData.gripAdditive ? newData.squareFootage * 0.50 : 0) +
-      (newData.vaporBarrier ? newData.squareFootage * 1.00 : 0);
-    onChange(newData);
-  };
-
-  const toggleOption = (field: 'gripAdditive' | 'vaporBarrier') => {
-    const newData = { ...data, [field]: !data[field] };
-    newData.totalPrice = newData.squareFootage * newData.pricePerSqFt + 
-      (newData.gripAdditive ? newData.squareFootage * 0.50 : 0) +
-      (newData.vaporBarrier ? newData.squareFootage * 1.00 : 0);
-    onChange(newData);
+    const basePrice = data.squareFootage * PACKAGE_PRICING[data.packageLevel];
+    const lineItemsTotal = data.lineItems.reduce(
+      (sum, item) => sum + (data.squareFootage * item.pricePerSqFt),
+      0
+    );
+    return basePrice + lineItemsTotal;
   };
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 space-y-6">
+      {/* Today's Calendar Section */}
+      <TodaysCalendar onSelectClient={handleSelectFromCalendar} />
+
       {/* Client Section */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">1</span>
-            Client Information
+            Select Customer
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -202,12 +261,10 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 </div>
               </div>
               
-              {/* Show searching indicator */}
               {isSearching && (
                 <div className="text-sm text-slate-400 px-2">Searching...</div>
               )}
               
-              {/* Show no results message */}
               {hasSearched && !isSearching && searchResults.length === 0 && searchTerm.length >= 2 && (
                 <div className="text-sm text-slate-400 px-2">No clients found matching "{searchTerm}"</div>
               )}
@@ -274,9 +331,13 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
               </div>
               <Button 
                 variant="ghost" 
-                onClick={() => { onChange({ ...data, clientId: undefined, clientName: '', clientEmail: '', clientPhone: '', clientAddress: '' }); setIsCreatingClient(false); }}
+                onClick={() => { 
+                  onChange({ ...data, clientId: undefined, clientName: '', clientEmail: '', clientPhone: '', clientAddress: '' }); 
+                  setIsCreatingClient(false); 
+                }}
                 className="text-slate-400 hover:text-white"
               >
+                <X className="h-4 w-4 mr-2" />
                 Change Client
               </Button>
             </div>
@@ -284,191 +345,290 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Project Details */}
+      {/* Space Selection */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">2</span>
-            Project Details
+            Select Space
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Label className="text-slate-300">Space Type</Label>
+              <Select value={data.spaceType} onValueChange={(v) => onChange({ ...data, spaceType: v })}>
+                <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
+                  <SelectValue placeholder="Select space type" />
+                </SelectTrigger>
+                <SelectContent className="bg-slate-800 border-slate-700">
+                  {SPACE_TYPES.map((type) => (
+                    <SelectItem key={type} value={type} className="text-white hover:bg-slate-700">
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
             <div>
               <Label className="text-slate-300">Square Footage</Label>
               <Input
                 type="number"
                 value={data.squareFootage}
-                onChange={(e) => updatePricing('squareFootage', Number(e.target.value))}
+                onChange={(e) => onChange({ ...data, squareFootage: Number(e.target.value) })}
                 className="bg-slate-800 border-slate-700 text-white h-14 text-xl font-bold"
               />
             </div>
-            
-            <div>
-              <Label className="text-slate-300">Moisture Content: {data.moistureContent}%</Label>
-              <div className="pt-4">
-                <Slider
-                  value={[data.moistureContent]}
-                  onValueChange={(v) => onChange({ ...data, moistureContent: v[0] })}
-                  max={10}
-                  step={0.5}
-                  className="[&_[role=slider]]:h-6 [&_[role=slider]]:w-6"
-                />
-              </div>
-              <div className="flex justify-between text-xs text-slate-500 mt-1">
-                <span>0%</span>
-                <span className={data.moistureContent > 4 ? 'text-red-400' : 'text-green-400'}>
-                  {data.moistureContent > 4 ? 'High - Vapor Barrier Required' : 'Acceptable'}
-                </span>
-                <span>10%</span>
-              </div>
+          </div>
+          
+          <div>
+            <Label className="text-slate-300">Moisture Content: {data.moistureContent}%</Label>
+            <div className="pt-4">
+              <Slider
+                value={[data.moistureContent]}
+                onValueChange={(v) => onChange({ ...data, moistureContent: v[0] })}
+                max={10}
+                step={0.5}
+                className="[&_[role=slider]]:h-6 [&_[role=slider]]:w-6"
+              />
             </div>
-            
-            <div>
-              <Label className="text-slate-300">Concrete Surface Profile</Label>
-              <Select 
-                value={String(data.concreteSurfaceProfile)} 
-                onValueChange={(v) => onChange({ ...data, concreteSurfaceProfile: Number(v) })}
-              >
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  {CSP_OPTIONS.map((opt) => (
-                    <SelectItem key={opt.value} value={String(opt.value)} className="text-white">
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="flex justify-between text-xs text-slate-500 mt-1">
+              <span>0%</span>
+              <span className={data.moistureContent > 4 ? 'text-red-400' : 'text-green-400'}>
+                {data.moistureContent > 4 ? 'High - May Need Treatment' : 'Acceptable'}
+              </span>
+              <span>10%</span>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Product Selection */}
+      {/* Package Selection */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">3</span>
-            Product Selection
+            Select Package
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {PACKAGE_OPTIONS.map((pkg) => (
+              <button
+                key={pkg.value}
+                onClick={() => onChange({ ...data, packageLevel: pkg.value as 'silver' | 'gold' | 'platinum' })}
+                className={`p-6 rounded-xl border-2 transition-all ${
+                  data.packageLevel === pkg.value
+                    ? 'border-orange-500 bg-orange-500/10'
+                    : 'border-slate-700 bg-slate-800 hover:border-slate-600'
+                }`}
+              >
+                <div className={`text-xl font-bold ${
+                  data.packageLevel === pkg.value ? 'text-orange-400' : 'text-white'
+                }`}>
+                  {pkg.label}
+                </div>
+                <div className="text-2xl font-bold text-white mt-2">
+                  ${pkg.price.toFixed(2)}<span className="text-sm text-slate-400">/sq ft</span>
+                </div>
+                <div className="text-sm text-slate-400 mt-1">
+                  ${(data.squareFootage * pkg.price).toLocaleString('en-US', { minimumFractionDigits: 2 })} total
+                </div>
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Color Selection */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">4</span>
+            Select Color
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Select value={data.colorChoice} onValueChange={(v) => onChange({ ...data, colorChoice: v })}>
+            <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
+              <SelectValue placeholder="Select color" />
+            </SelectTrigger>
+            <SelectContent className="bg-slate-800 border-slate-700">
+              {COLOR_OPTIONS.map((color) => (
+                <SelectItem key={color} value={color} className="text-white hover:bg-slate-700">
+                  {color}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
+          {data.colorChoice === 'Other' && (
             <div>
-              <Label className="text-slate-300">Base Coat Type</Label>
-              <Select value={data.baseCoatType} onValueChange={(v) => onChange({ ...data, baseCoatType: v })}>
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  {BASE_COAT_OPTIONS.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value} className="text-white">
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label className="text-slate-300">Custom Color Description</Label>
+              <Input
+                placeholder="Describe the custom color..."
+                value={data.customColorNote}
+                onChange={(e) => onChange({ ...data, customColorNote: e.target.value })}
+                className="bg-slate-800 border-slate-700 text-white h-12"
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Line Items */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">5</span>
+            Line Items (Add-ons)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Preset Line Items */}
+          <div>
+            <Label className="text-slate-300 mb-3 block">Quick Add</Label>
+            <div className="flex flex-wrap gap-2">
+              {PRESET_LINE_ITEMS.map((item) => (
+                <Button
+                  key={item.id}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => addLineItem(item)}
+                  disabled={data.lineItems.some(li => li.id === item.id)}
+                  className={`border-slate-600 ${
+                    data.lineItems.some(li => li.id === item.id)
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:bg-slate-700'
+                  }`}
+                >
+                  <Plus className="h-4 w-4 mr-1" />
+                  {item.name} (${item.pricePerSqFt.toFixed(2)}/sqft)
+                </Button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Custom Line Item */}
+          <div className="border-t border-slate-700 pt-4">
+            <Label className="text-slate-300 mb-3 block">Add Custom Line Item</Label>
+            <div className="flex gap-2">
+              <Input
+                placeholder="Item name"
+                value={customLineItemName}
+                onChange={(e) => setCustomLineItemName(e.target.value)}
+                className="bg-slate-800 border-slate-700 text-white flex-1"
+              />
+              <div className="relative w-32">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="0.00"
+                  value={customLineItemPrice}
+                  onChange={(e) => setCustomLineItemPrice(e.target.value)}
+                  className="bg-slate-800 border-slate-700 text-white pl-7"
+                />
+              </div>
+              <Button
+                onClick={addCustomLineItem}
+                className="bg-orange-500 hover:bg-orange-600"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">Price per square foot</p>
+          </div>
+          
+          {/* Added Line Items */}
+          {data.lineItems.length > 0 && (
+            <div className="border-t border-slate-700 pt-4">
+              <Label className="text-slate-300 mb-3 block">Added Items</Label>
+              <div className="space-y-2">
+                {data.lineItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between bg-slate-800 p-3 rounded-lg"
+                  >
+                    <div>
+                      <span className="text-white">{item.name}</span>
+                      <span className="text-slate-400 ml-2">${item.pricePerSqFt.toFixed(2)}/sqft</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-orange-400 font-medium">
+                        +${(data.squareFootage * item.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeLineItem(item.id)}
+                        className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Pricing Summary */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">6</span>
+            Pricing Summary
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {/* Base Package */}
+            <div className="flex justify-between text-slate-300">
+              <span>{PACKAGE_OPTIONS.find(p => p.value === data.packageLevel)?.label} ({data.squareFootage} sqft × ${PACKAGE_PRICING[data.packageLevel].toFixed(2)})</span>
+              <span>${(data.squareFootage * PACKAGE_PRICING[data.packageLevel]).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
             
-            <div>
-              <Label className="text-slate-300">Flake Style / Color</Label>
-              <Select value={data.flakeStyle} onValueChange={(v) => onChange({ ...data, flakeStyle: v })}>
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  {FLAKE_STYLES.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value} className="text-white">
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            {/* Line Items */}
+            {data.lineItems.map((item) => (
+              <div key={item.id} className="flex justify-between text-slate-400">
+                <span>{item.name} ({data.squareFootage} sqft × ${item.pricePerSqFt.toFixed(2)})</span>
+                <span>+${(data.squareFootage * item.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+              </div>
+            ))}
             
-            <div>
-              <Label className="text-slate-300">Top Coat</Label>
-              <Select value={data.topCoat} onValueChange={(v) => onChange({ ...data, topCoat: v })}>
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  {TOP_COAT_OPTIONS.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value} className="text-white">
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            {/* Divider */}
+            <div className="border-t border-slate-700 pt-3">
+              <div className="flex justify-between items-center">
+                <span className="text-xl font-bold text-white">Total</span>
+                <span className="text-3xl font-bold text-orange-400">
+                  ${calculateTotal().toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                </span>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Pricing & Options */}
+      {/* Notes */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">4</span>
-            Pricing & Options
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">7</span>
+            Notes
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Label className="text-slate-300">Price per Sq Ft</Label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">$</span>
-                <Input
-                  type="number"
-                  step="0.25"
-                  value={data.pricePerSqFt}
-                  onChange={(e) => updatePricing('pricePerSqFt', Number(e.target.value))}
-                  className="bg-slate-800 border-slate-700 text-white h-14 text-xl font-bold pl-10"
-                />
-              </div>
-            </div>
-            
-            <div className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-lg p-4 border border-orange-500/30">
-              <Label className="text-slate-300">Total Price</Label>
-              <div className="text-4xl font-bold text-orange-400">
-                ${calculateTotal().toLocaleString('en-US', { minimumFractionDigits: 2 })}
-              </div>
-              <div className="text-sm text-slate-400 mt-1">
-                {data.squareFootage} sq ft × ${data.pricePerSqFt}/sq ft
-                {data.gripAdditive && ' + Grip'}
-                {data.vaporBarrier && ' + Vapor Barrier'}
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex flex-wrap gap-6">
-            <div className="flex items-center gap-3 bg-slate-800 rounded-lg p-4 min-w-[200px]">
-              <Switch
-                checked={data.gripAdditive}
-                onCheckedChange={() => toggleOption('gripAdditive')}
-                className="data-[state=checked]:bg-orange-500"
-              />
-              <div>
-                <div className="text-white font-medium">Grip Additive</div>
-                <div className="text-sm text-slate-400">+$0.50/sq ft</div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 bg-slate-800 rounded-lg p-4 min-w-[200px]">
-              <Switch
-                checked={data.vaporBarrier}
-                onCheckedChange={() => toggleOption('vaporBarrier')}
-                className="data-[state=checked]:bg-orange-500"
-              />
-              <div>
-                <div className="text-white font-medium">Vapor Barrier</div>
-                <div className="text-sm text-slate-400">+$1.00/sq ft</div>
-              </div>
-            </div>
-          </div>
+        <CardContent>
+          <Textarea
+            placeholder="Add notes for the client profile in Jobber..."
+            value={data.notes}
+            onChange={(e) => onChange({ ...data, notes: e.target.value })}
+            className="bg-slate-800 border-slate-700 text-white min-h-[120px]"
+          />
+          <p className="text-xs text-slate-500 mt-2">These notes will be added to the client's profile in Jobber.</p>
         </CardContent>
       </Card>
 
@@ -476,7 +636,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">5</span>
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">8</span>
             Pre-Job Site Photos
           </CardTitle>
         </CardHeader>

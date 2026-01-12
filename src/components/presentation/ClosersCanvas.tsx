@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
-import { ArrowLeft, Check, Shield, Clock, Sparkles, Award, ChevronDown, ChevronUp, Loader2, Download } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, Check, Shield, Clock, Sparkles, Award, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { PresentationData } from '@/pages/SalesPresentation';
+import { PresentationData, PACKAGE_PRICING } from '@/pages/SalesPresentation';
 import { SignaturePad } from './SignaturePad';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -34,6 +34,12 @@ const WARRANTY_FEATURES = [
   { icon: Award, title: 'BBB A+ Rated', subtitle: 'Trusted since 2015' },
 ];
 
+const PACKAGE_NAMES = {
+  silver: 'Silver Package',
+  gold: 'Gold Package',
+  platinum: 'Platinum Package',
+};
+
 export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps) {
   const [showFullBreakdown, setShowFullBreakdown] = useState(false);
   const [signature, setSignature] = useState<string | null>(null);
@@ -44,11 +50,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
     const issues: string[] = [];
     
     if (data.moistureContent > 4) {
-      issues.push(`With a moisture reading of ${data.moistureContent}%, your concrete is actively pushing moisture vapor upward. A vapor barrier is essential to prevent coating delamination.`);
-    }
-    
-    if (data.concreteSurfaceProfile < 2) {
-      issues.push(`Your floor requires diamond grinding to achieve proper surface profile for coating adhesion.`);
+      issues.push(`With a moisture reading of ${data.moistureContent}%, your concrete is actively pushing moisture vapor upward. Proper treatment is essential to prevent coating delamination.`);
     }
     
     if (issues.length === 0) {
@@ -68,7 +70,8 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
     
     try {
       // Create client in Jobber if new
-      if (!data.clientId) {
+      let clientId = data.clientId;
+      if (!clientId) {
         const nameParts = data.clientName.split(' ');
         const { data: clientResult, error: clientError } = await supabase.functions.invoke('jobber-api', {
           body: {
@@ -86,31 +89,55 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
         if (clientError) {
           console.error('Client creation error:', clientError);
         } else if (clientResult?.clientCreate?.client?.id) {
-          onDataChange({ ...data, clientId: clientResult.clientCreate.client.id });
+          clientId = clientResult.clientCreate.client.id;
+          onDataChange({ ...data, clientId });
         }
       }
       
+      // Add notes to client if provided
+      if (data.notes && clientId) {
+        await supabase.functions.invoke('jobber-api', {
+          body: {
+            action: 'createNote',
+            data: {
+              clientId,
+              message: data.notes,
+            },
+          },
+        });
+      }
+      
+      // Build line items for the quote
+      const lineItems = [
+        {
+          name: `${PACKAGE_NAMES[data.packageLevel]} - ${data.colorChoice}`,
+          description: `${data.spaceType} floor coating, ${data.squareFootage} sq ft`,
+          unitPrice: PACKAGE_PRICING[data.packageLevel],
+          quantity: data.squareFootage,
+        },
+        ...data.lineItems.map(item => ({
+          name: item.name,
+          description: `Add-on: ${item.pricePerSqFt.toFixed(2)}/sqft`,
+          unitPrice: item.pricePerSqFt,
+          quantity: data.squareFootage,
+        })),
+      ];
+      
       // Create quote in Jobber
-      const { data: quoteResult, error: quoteError } = await supabase.functions.invoke('jobber-api', {
+      const { error: quoteError } = await supabase.functions.invoke('jobber-api', {
         body: {
           action: 'createQuote',
           data: {
-            clientId: data.clientId,
-            title: `Garage Floor Coating - ${data.squareFootage} sq ft`,
-            productName: `${data.baseCoatType.charAt(0).toUpperCase() + data.baseCoatType.slice(1)} Floor Coating - ${data.flakeStyle}`,
-            description: `${data.squareFootage} sq ft, ${data.topCoat} finish`,
-            unitPrice: data.pricePerSqFt,
-            squareFootage: data.squareFootage,
-            gripAdditive: data.gripAdditive,
-            vaporBarrier: data.vaporBarrier,
-            notes: `Moisture: ${data.moistureContent}%, CSP: ${data.concreteSurfaceProfile}`,
+            clientId,
+            title: `${data.spaceType} Floor Coating - ${data.squareFootage} sq ft`,
+            lineItems,
+            notes: `Package: ${PACKAGE_NAMES[data.packageLevel]}\nColor: ${data.colorChoice}${data.customColorNote ? ` (${data.customColorNote})` : ''}\nMoisture: ${data.moistureContent}%`,
           },
         },
       });
       
       if (quoteError) {
         console.error('Quote creation error:', quoteError);
-        // Continue anyway for demo
       }
       
       setIsApproved(true);
@@ -172,7 +199,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
         
         <div className="relative z-10 text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Your Dream Garage<br />
+            Your Dream {data.spaceType}<br />
             <span className="text-orange-500">In One Day</span>
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -234,7 +261,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
       <section className="py-16 px-4 bg-slate-950">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-white mb-4">
-            Your Floor in {data.flakeStyle.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+            Your Floor in {data.colorChoice}
           </h2>
           <p className="text-center text-slate-400 mb-8">
             See how your new floor will transform your space
@@ -323,21 +350,15 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
               {showFullBreakdown && (
                 <div className="p-6 pt-0 space-y-3 border-t border-slate-700">
                   <div className="flex justify-between text-slate-300">
-                    <span>Floor Coating ({data.squareFootage} sq ft × ${data.pricePerSqFt})</span>
-                    <span>${(data.squareFootage * data.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                    <span>{PACKAGE_NAMES[data.packageLevel]} ({data.squareFootage} sq ft × ${PACKAGE_PRICING[data.packageLevel].toFixed(2)})</span>
+                    <span>${(data.squareFootage * PACKAGE_PRICING[data.packageLevel]).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                   </div>
-                  {data.gripAdditive && (
-                    <div className="flex justify-between text-slate-300">
-                      <span>Grip Additive ({data.squareFootage} sq ft × $0.50)</span>
-                      <span>${(data.squareFootage * 0.50).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                  {data.lineItems.map((item) => (
+                    <div key={item.id} className="flex justify-between text-slate-300">
+                      <span>{item.name} ({data.squareFootage} sq ft × ${item.pricePerSqFt.toFixed(2)})</span>
+                      <span>${(data.squareFootage * item.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                     </div>
-                  )}
-                  {data.vaporBarrier && (
-                    <div className="flex justify-between text-slate-300">
-                      <span>Vapor Barrier ({data.squareFootage} sq ft × $1.00)</span>
-                      <span>${(data.squareFootage * 1.00).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-                    </div>
-                  )}
+                  ))}
                   <div className="border-t border-slate-600 pt-3 flex justify-between text-white font-bold">
                     <span>Total</span>
                     <span>${data.totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
@@ -353,7 +374,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
       <section className="py-16 px-4 bg-slate-950">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-white mb-4">
-            Ready to Transform Your Garage?
+            Ready to Transform Your {data.spaceType}?
           </h2>
           <p className="text-center text-slate-400 mb-8">
             Sign below to approve this quote and we'll schedule your installation.
