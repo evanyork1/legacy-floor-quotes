@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.send-floor-packet-webhook]
 verify_jwt = false
+
+[functions.jobber-api]
+verify_jwt = false
