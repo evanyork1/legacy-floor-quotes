@@ -93,7 +93,7 @@ async function forceRefreshTokens(): Promise<{ token: string; expiresAt: string 
   console.log('Force refreshing token...');
   const newTokens = await refreshAccessToken(tokenRecord.refresh_token);
   
-  if (!newTokens) {
+  if (!newTokens || !newTokens.access_token) {
     // Refresh failed, delete invalid tokens
     console.error('Force refresh failed, deleting invalid tokens');
     await supabase.from('jobber_tokens').delete().eq('id', tokenRecord.id);
@@ -101,7 +101,9 @@ async function forceRefreshTokens(): Promise<{ token: string; expiresAt: string 
   }
 
   const now = new Date();
-  const newExpiresAt = new Date(now.getTime() + newTokens.expires_in * 1000);
+  // Default to 1 hour if expires_in is missing
+  const expiresInSeconds = newTokens.expires_in || 3600;
+  const newExpiresAt = new Date(now.getTime() + expiresInSeconds * 1000);
 
   // Update the database
   const { error: updateError } = await supabase
