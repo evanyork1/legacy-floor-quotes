@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Search, Plus, Camera, ChevronRight, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -51,14 +51,21 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isCreatingClient, setIsCreatingClient] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleSearchClients = async () => {
-    if (!searchTerm.trim()) return;
+  const handleSearchClients = useCallback(async (term: string) => {
+    if (!term.trim() || term.length < 2) {
+      setSearchResults([]);
+      setHasSearched(false);
+      return;
+    }
     
     setIsSearching(true);
+    setHasSearched(true);
     try {
       const { data: result, error } = await supabase.functions.invoke('jobber-api', {
-        body: { action: 'searchClients', data: { searchTerm } },
+        body: { action: 'searchClients', data: { searchTerm: term } },
       });
       
       if (error) throw error;
@@ -66,12 +73,33 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     } catch (error) {
       console.error('Search error:', error);
       toast.error('Could not search clients - check Jobber connection');
-      // For demo, show empty results
       setSearchResults([]);
     } finally {
       setIsSearching(false);
     }
-  };
+  }, []);
+
+  // Debounced auto-search as user types
+  useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    if (searchTerm.length >= 2) {
+      debounceRef.current = setTimeout(() => {
+        handleSearchClients(searchTerm);
+      }, 300);
+    } else {
+      setSearchResults([]);
+      setHasSearched(false);
+    }
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, [searchTerm, handleSearchClients]);
 
   const handleSelectClient = (client: any) => {
     onChange({
@@ -158,22 +186,31 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         <CardContent className="space-y-4">
           {!data.clientName && !isCreatingClient ? (
             <div className="space-y-3">
-              <div className="flex gap-2">
+              <div className="relative">
                 <Input
-                  placeholder="Search Jobber clients..."
+                  placeholder="Start typing to search Jobber clients..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearchClients()}
-                  className="bg-slate-800 border-slate-700 text-white text-lg h-14"
+                  className="bg-slate-800 border-slate-700 text-white text-lg h-14 pr-12"
                 />
-                <Button 
-                  onClick={handleSearchClients} 
-                  disabled={isSearching}
-                  className="bg-orange-500 hover:bg-orange-600 h-14 px-6"
-                >
-                  {isSearching ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
-                </Button>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                  {isSearching ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-orange-400" />
+                  ) : (
+                    <Search className="h-5 w-5 text-slate-400" />
+                  )}
+                </div>
               </div>
+              
+              {/* Show searching indicator */}
+              {isSearching && (
+                <div className="text-sm text-slate-400 px-2">Searching...</div>
+              )}
+              
+              {/* Show no results message */}
+              {hasSearched && !isSearching && searchResults.length === 0 && searchTerm.length >= 2 && (
+                <div className="text-sm text-slate-400 px-2">No clients found matching "{searchTerm}"</div>
+              )}
               
               {searchResults.length > 0 && (
                 <div className="bg-slate-800 rounded-lg border border-slate-700 divide-y divide-slate-700">
