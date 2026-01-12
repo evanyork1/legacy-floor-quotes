@@ -265,15 +265,25 @@ serve(async (req: Request) => {
 
     switch (action) {
       case 'getTodaysCalendar': {
-        // Query for recent quotes and jobs
+        // Query for assessments (scheduled appointments for requests)
         query = `
           query GetTodaysCalendar {
-            quotes(first: 20, sortOrder: DESC) {
+            assessments(first: 50) {
               nodes {
                 id
-                quoteNumber
                 title
-                createdAt
+                startAt
+                endAt
+                isComplete
+                instructions
+                assignedUsers {
+                  nodes {
+                    id
+                    name {
+                      full
+                    }
+                  }
+                }
                 client {
                   id
                   name
@@ -293,29 +303,8 @@ serve(async (req: Request) => {
                     postalCode
                   }
                 }
-              }
-            }
-            jobs(first: 20) {
-              nodes {
-                id
-                jobNumber
-                title
-                createdAt
-                startAt
-                client {
-                  id
-                  name
-                  firstName
-                  lastName
-                  emails {
-                    address
-                    primary
-                  }
-                  phones {
-                    number
-                    primary
-                  }
-                  billingAddress {
+                property {
+                  address {
                     street1
                     city
                     postalCode
