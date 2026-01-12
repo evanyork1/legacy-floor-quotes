@@ -47,6 +47,7 @@ import GarageLandingInstant from "./pages/GarageLandingInstant";
 import GarageFloorsDallasFB from "./pages/GarageFloorsDallasFB";
 import FloorVisualizer from "./pages/FloorVisualizer";
 import CRM from "./pages/CRM";
+import SalesPresentation from "./pages/SalesPresentation";
 
 
 const queryClient = new QueryClient();
@@ -99,6 +100,7 @@ function App() {
               <Route path="/auth" element={<Auth />} />
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
               <Route path="/crm" element={<CRM />} />
+              <Route path="/sales-presentation" element={<SalesPresentation />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>

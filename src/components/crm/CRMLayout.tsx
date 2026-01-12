@@ -1,4 +1,5 @@
-import { LayoutDashboard, Users, Settings, Shield, LogOut, Calendar } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, Shield, LogOut, Calendar, Presentation } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,6 +21,7 @@ const navItems = [
 export function CRMLayout({ children, activeTab, onTabChange }: CRMLayoutProps) {
   const { signOut, user } = useAuth();
   const { isAdmin } = useCRM();
+  const navigate = useNavigate();
 
   const allNavItems = isAdmin 
     ? [...navItems, { id: 'admin', label: 'Admin', icon: Shield }]
@@ -68,6 +70,15 @@ export function CRMLayout({ children, activeTab, onTabChange }: CRMLayoutProps) 
 
       {/* Side Navigation (Desktop) */}
       <nav className="hidden md:flex fixed left-0 top-[57px] bottom-0 w-56 bg-card border-r border-border flex-col p-4">
+        {/* Present Button */}
+        <button
+          onClick={() => navigate('/sales-presentation')}
+          className="flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors mb-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700"
+        >
+          <Presentation className="h-5 w-5" />
+          <span className="font-semibold">Present</span>
+        </button>
+        
         {allNavItems.map((item) => (
           <button
             key={item.id}
