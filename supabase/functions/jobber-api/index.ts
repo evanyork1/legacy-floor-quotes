@@ -324,7 +324,7 @@ serve(async (req: Request) => {
         throw new Error(`Unknown action: ${action}`);
     }
 
-    console.log(`Jobber API - Action: ${action}`);
+    console.log(`Jobber API - Action: ${action}, Variables:`, JSON.stringify(variables));
 
     // Make the GraphQL request to Jobber
     const response = await fetch(JOBBER_API_URL, {
@@ -337,7 +337,10 @@ serve(async (req: Request) => {
       body: JSON.stringify({ query, variables }),
     });
 
+    console.log('Jobber API response status:', response.status);
+    
     const result = await response.json();
+    console.log('Jobber API result:', JSON.stringify(result).substring(0, 500));
 
     if (result.errors) {
       console.error('Jobber API errors:', result.errors);
