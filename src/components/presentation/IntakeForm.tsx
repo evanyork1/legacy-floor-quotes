@@ -154,9 +154,13 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   }, [searchTerm, handleSearchClients]);
 
   const handleSelectClient = (client: any) => {
+    // Get the first property ID if available (needed for Jobber quotes)
+    const propertyId = client.properties?.nodes?.[0]?.id || null;
+    
     onChange({
       ...data,
       clientId: client.id,
+      propertyId: propertyId, // Store property ID for quote creation
       clientName: client.name || `${client.firstName} ${client.lastName}`,
       clientEmail: client.emails?.[0]?.address || '',
       clientPhone: client.phones?.[0]?.number || '',
@@ -258,6 +262,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     
     if (!user?.id) {
       toast.error('You must be logged in to create a shareable presentation. Please log in and try again.');
+      console.error('No user ID available for shareable presentation');
       return;
     }
 
@@ -266,6 +271,10 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     try {
       // Get primary color/warranty from first floor entry for legacy DB columns
       const primaryEntry = data.floorEntries?.[0];
+      
+      console.log('Creating shareable presentation...');
+      console.log('User ID:', user.id);
+      console.log('Client ID:', data.clientId);
       
       const insertData: any = {
         client_id: data.clientId || null,
@@ -291,7 +300,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         site_photos: data.sitePhotoUrls,
       };
 
-      console.log('Creating shareable presentation with data:', insertData);
+      console.log('Insert data:', JSON.stringify(insertData, null, 2));
 
       const { data: result, error } = await supabase
         .from('sales_presentations')
@@ -301,11 +310,21 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
 
       if (error) {
         console.error('Supabase insert error:', error);
-        toast.error(`Failed to create presentation: ${error.message}`);
+        console.error('Error code:', error.code);
+        console.error('Error details:', error.details);
+        console.error('Error hint:', error.hint);
+        toast.error(`Failed to create presentation: ${error.message} (Code: ${error.code || 'unknown'})`);
+        return;
+      }
+
+      if (!result?.id) {
+        console.error('No result ID returned from insert');
+        toast.error('Failed to create presentation: No ID returned');
         return;
       }
 
       const link = `${window.location.origin}/presentation/${result.id}`;
+      console.log('Shareable link created:', link);
       setShareableLink(link);
       toast.success('Shareable presentation created!');
     } catch (error: any) {
@@ -411,6 +430,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           action: 'createQuote',
           data: {
             clientId: data.clientId,
+            propertyId: data.propertyId, // Include property ID for quote creation
             title: `Floor Coating - ${data.clientName}`,
             lineItems,
             depositAmount,
@@ -418,6 +438,8 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           },
         },
       });
+
+      console.log('Jobber quote creation result:', result);
 
       if (error) {
         console.error('Error creating Jobber quote:', error);

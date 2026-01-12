@@ -30,6 +30,7 @@ export interface FloorEntry {
 export type PresentationData = {
   // Client info
   clientId?: string;
+  propertyId?: string; // Jobber property ID (needed for quotes)
   clientName: string;
   clientEmail: string;
   clientPhone: string;
