@@ -288,7 +288,7 @@ serve(async (req: Request) => {
                   city
                   postalCode
                 }
-                properties {
+                properties(first: 5) {
                   nodes {
                     id
                     address {
