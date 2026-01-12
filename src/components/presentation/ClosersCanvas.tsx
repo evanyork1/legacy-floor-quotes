@@ -49,6 +49,10 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
     status: 'pending',
     sitePhotos: data.sitePhotoUrls,
     floorEntries: data.floorEntries,
+    // Jobber quote tracking
+    jobberQuoteId: data.jobberQuoteId,
+    jobberQuoteNumber: data.jobberQuoteNumber,
+    jobberClientHubUrl: data.jobberClientHubUrl,
   };
 
   return (

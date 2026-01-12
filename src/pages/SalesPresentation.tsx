@@ -64,6 +64,11 @@ export type PresentationData = {
   // Media
   sitePhotos: File[];
   sitePhotoUrls: string[];
+  
+  // Jobber quote tracking
+  jobberQuoteId?: string;
+  jobberQuoteNumber?: string;
+  jobberClientHubUrl?: string;
 };
 
 // Package pricing constants (per sqft)

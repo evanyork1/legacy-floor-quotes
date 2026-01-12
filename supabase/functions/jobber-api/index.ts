@@ -340,6 +340,27 @@ serve(async (req: Request) => {
           });
         }
         
+        // Build input with optional required deposit
+        const quoteInput: Record<string, unknown> = {
+          clientId: data?.clientId,
+          title: data?.title || 'Floor Coating Quote',
+          lineItems: lineItems.map(item => ({
+            name: item.name,
+            description: item.description || '',
+            unitPrice: item.unitPrice,
+            quantity: item.quantity,
+          })),
+          message: data?.notes || '',
+        };
+        
+        // Add required deposit if provided
+        if (data?.depositAmount && typeof data.depositAmount === 'number' && data.depositAmount > 0) {
+          quoteInput.requiredDeposit = {
+            amount: data.depositAmount,
+            depositType: 'AMOUNT',
+          };
+        }
+        
         query = `
           mutation QuoteCreate($input: QuoteCreateInput!) {
             quoteCreate(input: $input) {
@@ -348,6 +369,11 @@ serve(async (req: Request) => {
                 quoteNumber
                 total
                 status
+                clientHubUrl
+                requiredDeposit {
+                  amount
+                  depositType
+                }
               }
               userErrors {
                 message
@@ -356,19 +382,7 @@ serve(async (req: Request) => {
             }
           }
         `;
-        variables = {
-          input: {
-            clientId: data?.clientId,
-            title: data?.title || 'Floor Coating Quote',
-            lineItems: lineItems.map(item => ({
-              name: item.name,
-              description: item.description || '',
-              unitPrice: item.unitPrice,
-              quantity: item.quantity,
-            })),
-            message: data?.notes || '',
-          },
-        };
+        variables = { input: quoteInput };
         break;
       }
 
