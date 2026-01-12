@@ -16,7 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 interface IntakeFormProps {
   data: PresentationData;
   onChange: (data: PresentationData) => void;
-  onStartPresentation: () => void;
+  onStartPresentation: (updatedData?: PresentationData) => void;
 }
 
 const COLOR_OPTIONS = [
@@ -257,7 +257,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     }
     
     if (!user?.id) {
-      toast.error('You must be logged in to create a shareable presentation');
+      toast.error('You must be logged in to create a shareable presentation. Please log in and try again.');
       return;
     }
 
@@ -287,9 +287,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         silver_total: data.silverTotal,
         gold_total: data.goldTotal,
         platinum_total: data.platinumTotal,
-        created_by: user?.id,
+        created_by: user.id,
         site_photos: data.sitePhotoUrls,
       };
+
+      console.log('Creating shareable presentation with data:', insertData);
 
       const { data: result, error } = await supabase
         .from('sales_presentations')
@@ -297,14 +299,18 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         .select('id')
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase insert error:', error);
+        toast.error(`Failed to create presentation: ${error.message}`);
+        return;
+      }
 
       const link = `${window.location.origin}/presentation/${result.id}`;
       setShareableLink(link);
       toast.success('Shareable presentation created!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating presentation:', error);
-      toast.error('Failed to create presentation');
+      toast.error(`Failed to create presentation: ${error?.message || 'Unknown error'}`);
     } finally {
       setIsCreatingPresentation(false);
     }
@@ -387,7 +393,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     // If no Jobber client selected, just start presentation without quote
     if (!data.clientId) {
       toast.info('Starting presentation without Jobber quote (no client selected)');
-      onStartPresentation();
+      onStartPresentation(data);
       return;
     }
 
@@ -416,7 +422,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       if (error) {
         console.error('Error creating Jobber quote:', error);
         toast.error('Could not create Jobber quote, proceeding without it');
-        onStartPresentation();
+        onStartPresentation(data);
         return;
       }
 
@@ -424,25 +430,33 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         const quote = result.quoteCreate.quote;
         console.log('Jobber quote created:', quote);
         
-        // Update presentation data with Jobber quote info (use clientHubUri from Jobber API)
-        onChange({
+        // Build updated data with Jobber quote info
+        const updatedData: PresentationData = {
           ...data,
           jobberQuoteId: quote.id,
           jobberQuoteNumber: quote.quoteNumber,
           jobberClientHubUrl: quote.clientHubUri,
-        });
+        };
 
+        // Also update parent state for consistency
+        onChange(updatedData);
+        
         toast.success(`Quote #${quote.quoteNumber} created in Jobber!`);
+        
+        // Pass updated data directly to avoid race condition
+        onStartPresentation(updatedData);
       } else if (result?.quoteCreate?.userErrors?.length > 0) {
         console.error('Jobber quote errors:', result.quoteCreate.userErrors);
         toast.error(`Jobber error: ${result.quoteCreate.userErrors[0].message}`);
+        onStartPresentation(data);
+      } else {
+        // No quote created but no errors either
+        onStartPresentation(data);
       }
-
-      onStartPresentation();
     } catch (error) {
       console.error('Error creating Jobber quote:', error);
       toast.error('Failed to create Jobber quote, proceeding without it');
-      onStartPresentation();
+      onStartPresentation(data);
     } finally {
       setIsCreatingJobberQuote(false);
     }
