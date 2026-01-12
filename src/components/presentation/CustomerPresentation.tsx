@@ -316,7 +316,7 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
   const handlePayLater = () => {
     setShowPaymentIframe(false);
     setIsComplete(true);
-    toast.info('Quote approved! We\'ll send you a payment link by email.');
+    toast.info('Quote approved! Your sales rep will contact you to collect the deposit.');
     onUpdate({
       selectedPackage,
       status: 'signed',
@@ -357,7 +357,7 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
           <p className="text-slate-400 mb-8">
             {paymentComplete 
               ? `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package is confirmed. We'll be in touch within 24 hours to schedule your installation.`
-              : `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package has been approved. We've sent a payment link to your email.`
+              : `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package has been approved. Your sales rep will contact you shortly to collect the deposit and finalize your installation date.`
             }
           </p>
         </div>

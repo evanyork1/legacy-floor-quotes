@@ -136,7 +136,11 @@ export default function SalesPresentation() {
     sitePhotoUrls: [],
   });
 
-  const handleStartPresentation = () => {
+  // Accept optional updated data to avoid race condition with async state updates
+  const handleStartPresentation = (updatedData?: PresentationData) => {
+    if (updatedData) {
+      setPresentationData(updatedData);
+    }
     setMode('present');
   };
 
