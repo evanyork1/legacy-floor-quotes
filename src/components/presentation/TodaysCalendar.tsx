@@ -13,9 +13,11 @@ interface CalendarEntry {
   clientEmail?: string;
   clientPhone?: string;
   clientAddress?: string;
+  propertyAddress?: string;
   startTime: string;
   endTime?: string;
-  type: 'quote' | 'job' | 'visit';
+  isComplete: boolean;
+  type: 'assessment';
 }
 
 interface TodaysCalendarProps {
@@ -59,39 +61,37 @@ export function TodaysCalendar({ onSelectClient }: TodaysCalendarProps) {
       // Transform the response into calendar entries
       const calendarEntries: CalendarEntry[] = [];
       
-      // Process quotes
-      if (data?.quotes?.nodes) {
-        data.quotes.nodes.forEach((quote: any) => {
-          if (quote.client) {
-            calendarEntries.push({
-              id: quote.id,
-              title: quote.title || `Quote #${quote.quoteNumber}`,
-              clientName: quote.client.name || `${quote.client.firstName} ${quote.client.lastName}`,
-              clientId: quote.client.id,
-              clientEmail: quote.client.emails?.[0]?.address,
-              clientPhone: quote.client.phones?.[0]?.number,
-              clientAddress: quote.client.billingAddress?.street1,
-              startTime: quote.createdAt,
-              type: 'quote',
-            });
-          }
-        });
-      }
+      // Get today's date for filtering
+      const today = new Date();
+      const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
       
-      // Process jobs/visits
-      if (data?.jobs?.nodes) {
-        data.jobs.nodes.forEach((job: any) => {
-          if (job.client) {
+      // Process assessments
+      if (data?.assessments?.nodes) {
+        data.assessments.nodes.forEach((assessment: any) => {
+          // Filter to only today's assessments
+          const startAt = new Date(assessment.startAt);
+          if (startAt >= todayStart && startAt < todayEnd) {
+            const client = assessment.client;
+            const property = assessment.property;
+            
             calendarEntries.push({
-              id: job.id,
-              title: job.title || `Job #${job.jobNumber}`,
-              clientName: job.client.name || `${job.client.firstName} ${job.client.lastName}`,
-              clientId: job.client.id,
-              clientEmail: job.client.emails?.[0]?.address,
-              clientPhone: job.client.phones?.[0]?.number,
-              clientAddress: job.client.billingAddress?.street1,
-              startTime: job.startAt || job.createdAt,
-              type: 'job',
+              id: assessment.id,
+              title: assessment.title || 'Assessment',
+              clientName: client?.name || `${client?.firstName || ''} ${client?.lastName || ''}`.trim() || 'Unknown Client',
+              clientId: client?.id || '',
+              clientEmail: client?.emails?.find((e: any) => e.primary)?.address || client?.emails?.[0]?.address,
+              clientPhone: client?.phones?.find((p: any) => p.primary)?.number || client?.phones?.[0]?.number,
+              clientAddress: client?.billingAddress?.street1 
+                ? `${client.billingAddress.street1}, ${client.billingAddress.city || ''}`
+                : undefined,
+              propertyAddress: property?.address?.street1
+                ? `${property.address.street1}, ${property.address.city || ''}`
+                : undefined,
+              startTime: assessment.startAt,
+              endTime: assessment.endAt,
+              isComplete: assessment.isComplete || false,
+              type: 'assessment',
             });
           }
         });
@@ -193,10 +193,10 @@ export function TodaysCalendar({ onSelectClient }: TodaysCalendarProps) {
                       <span className="font-medium text-white truncate">{entry.clientName}</span>
                     </div>
                     <div className="text-sm text-slate-400 mt-1">{entry.title}</div>
-                    {entry.clientAddress && (
+                    {(entry.propertyAddress || entry.clientAddress) && (
                       <div className="flex items-center gap-1 text-xs text-slate-500 mt-1">
                         <MapPin className="h-3 w-3" />
-                        <span className="truncate">{entry.clientAddress}</span>
+                        <span className="truncate">{entry.propertyAddress || entry.clientAddress}</span>
                       </div>
                     )}
                   </div>
@@ -207,11 +207,11 @@ export function TodaysCalendar({ onSelectClient }: TodaysCalendarProps) {
                 </div>
                 <div className="mt-2">
                   <span className={`text-xs px-2 py-0.5 rounded-full ${
-                    entry.type === 'quote' 
-                      ? 'bg-blue-500/20 text-blue-400' 
-                      : 'bg-green-500/20 text-green-400'
+                    entry.isComplete 
+                      ? 'bg-slate-500/20 text-slate-400' 
+                      : 'bg-orange-500/20 text-orange-400'
                   }`}>
-                    {entry.type === 'quote' ? 'Quote' : 'Job'}
+                    {entry.isComplete ? 'Complete' : 'Assessment'}
                   </span>
                 </div>
               </button>
