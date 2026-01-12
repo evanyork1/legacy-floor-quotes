@@ -10,7 +10,7 @@ const JOBBER_API_URL = 'https://api.getjobber.com/api/graphql';
 const JOBBER_TOKEN_URL = 'https://api.getjobber.com/api/oauth/token';
 
 interface JobberRequest {
-  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote' | 'checkStatus' | 'getTodaysCalendar';
+  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote' | 'checkStatus';
   data?: Record<string, unknown>;
 }
 
@@ -264,61 +264,6 @@ serve(async (req: Request) => {
     let variables: Record<string, unknown>;
 
     switch (action) {
-      case 'getTodaysCalendar': {
-        // Query for assessments (scheduled appointments for requests)
-        // Note: Jobber uses singular 'assessment' not 'assessments'
-        query = `
-          query GetTodaysCalendar {
-            assessment {
-              nodes {
-                id
-                title
-                startAt
-                endAt
-                isComplete
-                instructions
-                assignedUsers {
-                  nodes {
-                    id
-                    name {
-                      full
-                    }
-                  }
-                }
-                client {
-                  id
-                  name
-                  firstName
-                  lastName
-                  emails {
-                    address
-                    primary
-                  }
-                  phones {
-                    number
-                    primary
-                  }
-                  billingAddress {
-                    street1
-                    city
-                    postalCode
-                  }
-                }
-                property {
-                  address {
-                    street1
-                    city
-                    postalCode
-                  }
-                }
-              }
-            }
-          }
-        `;
-        variables = {};
-        break;
-      }
-
       case 'searchClients':
         query = `
           query SearchClients($searchTerm: String!) {
