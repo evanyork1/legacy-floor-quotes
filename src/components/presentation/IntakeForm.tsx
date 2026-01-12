@@ -53,6 +53,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   const [customLineItemPrice, setCustomLineItemPrice] = useState('');
   const [customLineItemNote, setCustomLineItemNote] = useState('');
   const [isCreatingPresentation, setIsCreatingPresentation] = useState(false);
+  const [isCreatingJobberQuote, setIsCreatingJobberQuote] = useState(false);
   const [shareableLink, setShareableLink] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -315,6 +316,135 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       setLinkCopied(true);
       toast.success('Link copied to clipboard!');
       setTimeout(() => setLinkCopied(false), 2000);
+    }
+  };
+
+  // Build line items for Jobber quote
+  const buildJobberLineItems = (packageType: 'silver' | 'gold' | 'platinum') => {
+    const packagePricing = { silver: 5.00, gold: 7.10, platinum: 9.50 };
+    const packageLabels = { silver: 'Silver Package', gold: 'Gold Package', platinum: 'Platinum Package' };
+    const lineItems: Array<{ name: string; description: string; unitPrice: number; quantity: number }> = [];
+    
+    // Add floor entries
+    (data.floorEntries || []).forEach((entry, index) => {
+      const floorLabel = entry.floorType === 'garage' ? 'Garage Floor' 
+        : entry.floorType === 'patio' ? 'Patio Floor'
+        : entry.floorType === 'basement' ? 'Basement'
+        : 'Floor Area';
+      
+      lineItems.push({
+        name: `${packageLabels[packageType]} - ${floorLabel}`,
+        description: `${entry.squareFootage} sq ft - ${entry.colorChoice || 'Domino'} color`,
+        unitPrice: packagePricing[packageType],
+        quantity: entry.squareFootage,
+      });
+      
+      // Add additives for this floor
+      entry.additives.forEach(additiveId => {
+        const additive = ADDITIVE_OPTIONS.find(a => a.id === additiveId);
+        if (additive) {
+          lineItems.push({
+            name: `${additive.name} - ${floorLabel}`,
+            description: `Applied to ${entry.squareFootage} sq ft`,
+            unitPrice: additive.pricePerSqFt,
+            quantity: entry.squareFootage,
+          });
+        }
+      });
+    });
+    
+    // Add custom line items
+    data.lineItems.forEach(item => {
+      lineItems.push({
+        name: item.name,
+        description: item.note || `${data.squareFootage} sq ft`,
+        unitPrice: item.pricePerSqFt,
+        quantity: data.squareFootage,
+      });
+    });
+    
+    return lineItems;
+  };
+
+  // Calculate deposit amount
+  const getDepositAmount = (total: number) => {
+    switch (data.depositType) {
+      case '10': return total * 0.1;
+      case '50': return total * 0.5;
+      case '100': return total;
+      case 'custom': return data.customDepositAmount || 0;
+      default: return total * 0.5;
+    }
+  };
+
+  // Create Jobber quote and start presentation
+  const handlePresentNow = async () => {
+    if (!data.clientName) {
+      toast.error('Please select a customer first');
+      return;
+    }
+
+    // If no Jobber client selected, just start presentation without quote
+    if (!data.clientId) {
+      toast.info('Starting presentation without Jobber quote (no client selected)');
+      onStartPresentation();
+      return;
+    }
+
+    setIsCreatingJobberQuote(true);
+
+    try {
+      // Use Gold package as default for quote creation
+      const lineItems = buildJobberLineItems('gold');
+      const depositAmount = getDepositAmount(data.goldTotal);
+
+      console.log('Creating Jobber quote with line items:', lineItems);
+
+      const { data: result, error } = await supabase.functions.invoke('jobber-api', {
+        body: {
+          action: 'createQuote',
+          data: {
+            clientId: data.clientId,
+            title: `Floor Coating - ${data.clientName}`,
+            lineItems,
+            depositAmount,
+            notes: data.presentationNotes || `Floor coating quote for ${data.squareFootage} sq ft`,
+          },
+        },
+      });
+
+      if (error) {
+        console.error('Error creating Jobber quote:', error);
+        toast.error('Could not create Jobber quote, proceeding without it');
+        onStartPresentation();
+        return;
+      }
+
+      if (result?.quoteCreate?.quote) {
+        const quote = result.quoteCreate.quote;
+        console.log('Jobber quote created:', quote);
+        
+        // Update presentation data with Jobber quote info
+        onChange({
+          ...data,
+          jobberQuoteId: quote.id,
+          jobberQuoteNumber: quote.quoteNumber,
+          jobberClientHubUrl: quote.clientHubUrl,
+        });
+
+        toast.success(`Quote #${quote.quoteNumber} created in Jobber!`);
+      } else if (result?.quoteCreate?.userErrors?.length > 0) {
+        console.error('Jobber quote errors:', result.quoteCreate.userErrors);
+        toast.error(`Jobber error: ${result.quoteCreate.userErrors[0].message}`);
+      }
+
+      onStartPresentation();
+    } catch (error) {
+      console.error('Error creating Jobber quote:', error);
+      toast.error('Failed to create Jobber quote, proceeding without it');
+      onStartPresentation();
+    } finally {
+      setIsCreatingJobberQuote(false);
     }
   };
 
@@ -975,12 +1105,21 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           </Button>
           
           <Button
-            onClick={onStartPresentation}
-            disabled={!data.clientName}
+            onClick={handlePresentNow}
+            disabled={!data.clientName || isCreatingJobberQuote}
             className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-[#1e3a5f] to-[#2a4a70] hover:from-[#2a4a70] hover:to-[#365b82] shadow-2xl shadow-[#1e3a5f]/30"
           >
-            Present Now
-            <ChevronRight className="h-6 w-6 ml-2" />
+            {isCreatingJobberQuote ? (
+              <>
+                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                Creating Quote...
+              </>
+            ) : (
+              <>
+                Present Now
+                <ChevronRight className="h-6 w-6 ml-2" />
+              </>
+            )}
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Shield, Clock, Award, Sparkles, ChevronDown, ChevronUp, Loader2, Star } from 'lucide-react';
+import { Check, Shield, Clock, Award, Sparkles, ChevronDown, ChevronUp, Loader2, Star, CreditCard, X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -45,6 +45,10 @@ interface PresentationData {
   status: string;
   sitePhotos: string[];
   floorEntries?: FloorEntry[];
+  // Jobber quote tracking
+  jobberQuoteId?: string;
+  jobberQuoteNumber?: string;
+  jobberClientHubUrl?: string;
 }
 
 interface CustomerPresentationProps {
@@ -178,6 +182,8 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
   const [isComplete, setIsComplete] = useState(data.status === 'signed');
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [currentColor, setCurrentColor] = useState(data.colorChoice);
+  const [showPaymentIframe, setShowPaymentIframe] = useState(false);
+  const [paymentComplete, setPaymentComplete] = useState(false);
 
   const selectedColor = colorOptions.find(c => c.id === currentColor.toLowerCase().replace(' ', '-')) || colorOptions[0];
 
@@ -234,22 +240,47 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
       return;
     }
     
-    // Check if this is a live presentation (no valid ID) vs shareable link
-    if (!data.id) {
-      // Live presentation - just show success and update local state
-      // TODO: In future, this should create a quote in Jobber
-      setIsComplete(true);
-      toast.success('Quote approved! The sales rep will process your deposit.');
-      onUpdate({
-        selectedPackage,
-        status: 'signed',
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
+      // If we have a Jobber quote, approve it first
+      if (data.jobberQuoteId) {
+        console.log('Approving Jobber quote:', data.jobberQuoteId);
+        const { error: approveError } = await supabase.functions.invoke('jobber-api', {
+          body: {
+            action: 'approveQuote',
+            data: { quoteId: data.jobberQuoteId }
+          }
+        });
+        
+        if (approveError) {
+          console.error('Error approving Jobber quote:', approveError);
+          // Continue anyway - we'll show the payment option
+        }
+      }
+
+      // If we have a Jobber Client Hub URL, show the payment iframe
+      if (data.jobberClientHubUrl) {
+        setShowAgreement(false);
+        setShowPaymentIframe(true);
+        toast.success('Quote approved! Please complete your deposit payment.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Check if this is a live presentation (no valid ID) vs shareable link
+      if (!data.id) {
+        // Live presentation without Jobber - just show success
+        setIsComplete(true);
+        toast.success('Quote approved! The sales rep will process your deposit.');
+        onUpdate({
+          selectedPackage,
+          status: 'signed',
+        });
+        return;
+      }
+
+      // Shareable link - update database
       const total = getPackageTotal(selectedPackage as 'silver' | 'gold' | 'platinum');
       const deposit = getDepositAmount(total);
 
@@ -282,17 +313,52 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
     }
   };
 
+  const handlePayLater = () => {
+    setShowPaymentIframe(false);
+    setIsComplete(true);
+    toast.info('Quote approved! We\'ll send you a payment link by email.');
+    onUpdate({
+      selectedPackage,
+      status: 'signed',
+    });
+  };
+
+  const handlePaymentComplete = () => {
+    setShowPaymentIframe(false);
+    setPaymentComplete(true);
+    setIsComplete(true);
+    toast.success('Payment submitted! Your installation is confirmed.');
+    onUpdate({
+      selectedPackage,
+      status: 'paid',
+    });
+  };
+
+  const openPaymentInNewTab = () => {
+    if (data.jobberClientHubUrl) {
+      window.open(data.jobberClientHubUrl, '_blank');
+    }
+  };
+
   if (isComplete) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
         <div className="text-center max-w-lg">
           <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Check className="h-12 w-12 text-white" />
+            {paymentComplete ? (
+              <CreditCard className="h-12 w-12 text-white" />
+            ) : (
+              <Check className="h-12 w-12 text-white" />
+            )}
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">Quote Approved!</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {paymentComplete ? 'Payment Complete!' : 'Quote Approved!'}
+          </h1>
           <p className="text-slate-400 mb-8">
-            Thank you, {data.clientName.split(' ')[0]}! Your {selectedPackage} package has been approved.
-            We'll be in touch within 24 hours to schedule your installation.
+            {paymentComplete 
+              ? `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package is confirmed. We'll be in touch within 24 hours to schedule your installation.`
+              : `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package has been approved. We've sent a payment link to your email.`
+            }
           </p>
         </div>
       </div>
@@ -683,6 +749,73 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Payment Iframe Modal */}
+      {showPaymentIframe && data.jobberClientHubUrl && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl">
+            {/* Header */}
+            <div className="p-4 border-b flex items-center justify-between bg-gray-50 rounded-t-xl">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-green-600" />
+                  Complete Your Deposit
+                </h2>
+                <p className="text-gray-600 text-sm">
+                  {selectedPackage} Package • ${getDepositAmount(getPackageTotal(selectedPackage as any)).toLocaleString()} deposit due
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={openPaymentInNewTab}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Open in New Tab
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handlePayLater}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+            
+            {/* Iframe */}
+            <div className="flex-1 relative bg-gray-100">
+              <iframe
+                src={data.jobberClientHubUrl}
+                className="absolute inset-0 w-full h-full border-0"
+                title="Jobber Payment"
+                allow="payment"
+              />
+            </div>
+            
+            {/* Footer */}
+            <div className="p-4 border-t bg-gray-50 rounded-b-xl flex items-center justify-between gap-4">
+              <Button 
+                variant="outline"
+                onClick={handlePayLater}
+                className="text-gray-600"
+              >
+                Pay Later
+              </Button>
+              <Button 
+                onClick={handlePaymentComplete}
+                className="bg-green-500 hover:bg-green-600 text-white px-8"
+              >
+                <Check className="h-4 w-4 mr-2" />
+                I've Completed Payment
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
