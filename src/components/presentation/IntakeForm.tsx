@@ -254,6 +254,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       toast.error('Please select a customer first');
       return;
     }
+    
+    if (!user?.id) {
+      toast.error('You must be logged in to create a shareable presentation');
+      return;
+    }
 
     setIsCreatingPresentation(true);
 
