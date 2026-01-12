@@ -424,12 +424,12 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         const quote = result.quoteCreate.quote;
         console.log('Jobber quote created:', quote);
         
-        // Update presentation data with Jobber quote info
+        // Update presentation data with Jobber quote info (use clientHubUri from Jobber API)
         onChange({
           ...data,
           jobberQuoteId: quote.id,
           jobberQuoteNumber: quote.quoteNumber,
-          jobberClientHubUrl: quote.clientHubUrl,
+          jobberClientHubUrl: quote.clientHubUri,
         });
 
         toast.success(`Quote #${quote.quoteNumber} created in Jobber!`);
