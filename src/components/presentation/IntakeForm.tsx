@@ -258,6 +258,9 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     setIsCreatingPresentation(true);
 
     try {
+      // Get primary color/warranty from first floor entry for legacy DB columns
+      const primaryEntry = data.floorEntries?.[0];
+      
       const insertData: any = {
         client_id: data.clientId || null,
         client_name: data.clientName,
@@ -267,11 +270,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         space_type: data.spaceType,
         square_footage: data.squareFootage,
         moisture_content: data.moistureContent,
-        color_choice: data.colorChoice,
-        custom_color_note: data.customColorNote || null,
+        color_choice: primaryEntry?.colorChoice || 'Domino',
+        custom_color_note: primaryEntry?.customColorNote || null,
         line_items: data.lineItems,
-        warranty_type: data.warrantyType,
-        custom_warranty_note: data.customWarrantyNote || null,
+        warranty_type: primaryEntry?.warrantyType || 'lifetime',
+        custom_warranty_note: primaryEntry?.customWarrantyNote || null,
         deposit_type: data.depositType,
         custom_deposit_amount: data.customDepositAmount,
         presentation_notes: data.presentationNotes || null,
@@ -527,6 +530,80 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                   })}
                 </div>
               </div>
+              
+              {/* Color Selection for this floor */}
+              <div>
+                <Label className="text-slate-300 text-sm">Color</Label>
+                <Select 
+                  value={entry.colorChoice} 
+                  onValueChange={(v) => {
+                    const newEntries = [...(data.floorEntries || [])];
+                    newEntries[index] = { ...entry, colorChoice: v };
+                    onChange({ ...data, floorEntries: newEntries });
+                  }}
+                >
+                  <SelectTrigger className="bg-slate-700 border-slate-600 text-white h-12 mt-1">
+                    <SelectValue placeholder="Select color" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-800 border-slate-700">
+                    {COLOR_OPTIONS.map((color) => (
+                      <SelectItem key={color} value={color} className="text-white hover:bg-slate-700">
+                        {color}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                {entry.colorChoice === 'Other' && (
+                  <Input
+                    placeholder="Describe the custom color..."
+                    value={entry.customColorNote}
+                    onChange={(e) => {
+                      const newEntries = [...(data.floorEntries || [])];
+                      newEntries[index] = { ...entry, customColorNote: e.target.value };
+                      onChange({ ...data, floorEntries: newEntries });
+                    }}
+                    className="bg-slate-700 border-slate-600 text-white h-10 mt-2"
+                  />
+                )}
+              </div>
+              
+              {/* Warranty Selection for this floor */}
+              <div>
+                <Label className="text-slate-300 text-sm">Warranty</Label>
+                <Select 
+                  value={entry.warrantyType} 
+                  onValueChange={(v) => {
+                    const newEntries = [...(data.floorEntries || [])];
+                    newEntries[index] = { ...entry, warrantyType: v as 'lifetime' | '15year' | 'custom' };
+                    onChange({ ...data, floorEntries: newEntries });
+                  }}
+                >
+                  <SelectTrigger className="bg-slate-700 border-slate-600 text-white h-12 mt-1">
+                    <SelectValue placeholder="Select warranty" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-800 border-slate-700">
+                    {WARRANTY_OPTIONS.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value} className="text-white hover:bg-slate-700">
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                {entry.warrantyType === 'custom' && (
+                  <Input
+                    placeholder="e.g., 10 Year Limited Warranty..."
+                    value={entry.customWarrantyNote}
+                    onChange={(e) => {
+                      const newEntries = [...(data.floorEntries || [])];
+                      newEntries[index] = { ...entry, customWarrantyNote: e.target.value };
+                      onChange({ ...data, floorEntries: newEntries });
+                    }}
+                    className="bg-slate-700 border-slate-600 text-white h-10 mt-2"
+                  />
+                )}
+              </div>
             </div>
           ))}
           
@@ -539,6 +616,10 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 floorType: 'patio',
                 squareFootage: 200,
                 additives: [],
+                colorChoice: 'Domino',
+                customColorNote: '',
+                warrantyType: 'lifetime',
+                customWarrantyNote: '',
               };
               onChange({ ...data, floorEntries: [...(data.floorEntries || []), newEntry] });
             }}
@@ -571,83 +652,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Color Selection */}
-      <Card className="bg-slate-900 border-slate-800">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">3</span>
-            Select Color
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Select value={data.colorChoice} onValueChange={(v) => onChange({ ...data, colorChoice: v })}>
-            <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-              <SelectValue placeholder="Select color" />
-            </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
-              {COLOR_OPTIONS.map((color) => (
-                <SelectItem key={color} value={color} className="text-white hover:bg-slate-700">
-                  {color}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          {data.colorChoice === 'Other' && (
-            <div>
-              <Label className="text-slate-300">Custom Color Description</Label>
-              <Input
-                placeholder="Describe the custom color..."
-                value={data.customColorNote}
-                onChange={(e) => onChange({ ...data, customColorNote: e.target.value })}
-                className="bg-slate-800 border-slate-700 text-white h-12"
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Warranty Selection */}
-      <Card className="bg-slate-900 border-slate-800">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">4</span>
-            Warranty
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Select value={data.warrantyType} onValueChange={(v) => onChange({ ...data, warrantyType: v as any })}>
-            <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
-              <SelectValue placeholder="Select warranty" />
-            </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
-              {WARRANTY_OPTIONS.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value} className="text-white hover:bg-slate-700">
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          {data.warrantyType === 'custom' && (
-            <div>
-              <Label className="text-slate-300">Custom Warranty Details</Label>
-              <Input
-                placeholder="e.g., 10 Year Limited Warranty..."
-                value={data.customWarrantyNote}
-                onChange={(e) => onChange({ ...data, customWarrantyNote: e.target.value })}
-                className="bg-slate-800 border-slate-700 text-white h-12"
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
       {/* Deposit Selection */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">5</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">3</span>
             Deposit Amount
           </CardTitle>
         </CardHeader>
@@ -689,7 +698,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">6</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">4</span>
             Custom Extras
           </CardTitle>
         </CardHeader>
@@ -774,7 +783,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">7</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">5</span>
             Presentation Notes / Disclaimers
           </CardTitle>
         </CardHeader>
@@ -793,7 +802,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">8</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">6</span>
             Jobber Notes
           </CardTitle>
         </CardHeader>
@@ -812,7 +821,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">9</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">7</span>
             Pre-Job Site Photos
           </CardTitle>
         </CardHeader>

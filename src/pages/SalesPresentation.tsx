@@ -21,6 +21,10 @@ export interface FloorEntry {
   floorType: string;
   squareFootage: number;
   additives: string[]; // IDs of selected additives
+  colorChoice: string;
+  customColorNote: string;
+  warrantyType: 'lifetime' | '15year' | 'custom';
+  customWarrantyNote: string;
 }
 
 export type PresentationData = {
@@ -36,19 +40,11 @@ export type PresentationData = {
   squareFootage: number; // Legacy - total sqft
   moistureContent: number;
   
-  // Floor entries (new - supports multiple floors)
+  // Floor entries (new - supports multiple floors with per-entry color/warranty)
   floorEntries: FloorEntry[];
-  
-  // Color
-  colorChoice: string;
-  customColorNote: string;
   
   // Line items (add-ons only, not package selection)
   lineItems: LineItem[];
-  
-  // Warranty selection
-  warrantyType: 'lifetime' | '15year' | 'custom';
-  customWarrantyNote: string;
   
   // Deposit selection
   depositType: '10' | '50' | '100' | 'custom';
@@ -112,13 +108,18 @@ export default function SalesPresentation() {
     squareFootage: 400,
     moistureContent: 3,
     floorEntries: [
-      { id: 'floor-1', floorType: 'garage', squareFootage: 400, additives: [] }
+      { 
+        id: 'floor-1', 
+        floorType: 'garage', 
+        squareFootage: 400, 
+        additives: [],
+        colorChoice: 'Domino',
+        customColorNote: '',
+        warrantyType: 'lifetime',
+        customWarrantyNote: '',
+      }
     ],
-    colorChoice: 'Domino',
-    customColorNote: '',
     lineItems: [],
-    warrantyType: 'lifetime',
-    customWarrantyNote: '',
     depositType: '50',
     customDepositAmount: null,
     presentationNotes: '',

@@ -15,6 +15,10 @@ interface FloorEntry {
   floorType: string;
   squareFootage: number;
   additives: string[];
+  colorChoice?: string;
+  customColorNote?: string;
+  warrantyType?: 'lifetime' | '15year' | 'custom';
+  customWarrantyNote?: string;
 }
 
 interface PresentationData {
@@ -302,8 +306,11 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
                 <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">
                   {FLOOR_TYPE_LABELS[entry.floorType] || entry.floorType}
                 </div>
-                <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold">
-                  {entry.squareFootage} sq ft
+                <div className="bg-white/10 rounded-lg px-6 py-3">
+                  <div className="text-xl font-bold">{entry.squareFootage} sq ft</div>
+                  <div className="text-xs text-blue-200 mt-1">
+                    {entry.colorChoice || data.colorChoice} • {WARRANTY_LABELS[entry.warrantyType || data.warrantyType] || 'Lifetime Warranty'}
+                  </div>
                 </div>
               </div>
             ))
