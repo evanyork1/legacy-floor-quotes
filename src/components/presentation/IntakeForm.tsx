@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Search, Plus, Camera, ChevronRight, Loader2, Trash2, X } from 'lucide-react';
+import { Search, Plus, Camera, ChevronRight, Loader2, Trash2, X, Send, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,18 +7,17 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { PresentationData, PACKAGE_PRICING, PRESET_LINE_ITEMS, LineItem } from '@/pages/SalesPresentation';
+import { PresentationData, PACKAGE_PRICING, PRESET_LINE_ITEMS, SPACE_TYPE_OPTIONS, LineItem } from '@/pages/SalesPresentation';
 import { TodaysCalendar } from './TodaysCalendar';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { useAuth } from '@/hooks/useAuth';
 
 interface IntakeFormProps {
   data: PresentationData;
   onChange: (data: PresentationData) => void;
   onStartPresentation: () => void;
 }
-
-const SPACE_TYPES = ['Garage', 'Patio', 'Porch'];
 
 const COLOR_OPTIONS = [
   'Domino',
@@ -30,13 +29,21 @@ const COLOR_OPTIONS = [
   'Other',
 ];
 
-const PACKAGE_OPTIONS = [
-  { value: 'silver', label: 'Silver Package', price: 5.00 },
-  { value: 'gold', label: 'Gold Package', price: 7.10 },
-  { value: 'platinum', label: 'Platinum Package', price: 9.50 },
+const WARRANTY_OPTIONS = [
+  { value: 'lifetime', label: 'Lifetime Warranty' },
+  { value: '15year', label: '15 Year Warranty' },
+  { value: 'custom', label: 'Custom Warranty' },
+];
+
+const DEPOSIT_OPTIONS = [
+  { value: '10', label: '10% Deposit' },
+  { value: '50', label: '50% Deposit' },
+  { value: '100', label: '100% Upfront' },
+  { value: 'custom', label: 'Custom Amount' },
 ];
 
 export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormProps) {
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -44,21 +51,27 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   const [hasSearched, setHasSearched] = useState(false);
   const [customLineItemName, setCustomLineItemName] = useState('');
   const [customLineItemPrice, setCustomLineItemPrice] = useState('');
+  const [customLineItemNote, setCustomLineItemNote] = useState('');
+  const [isCreatingPresentation, setIsCreatingPresentation] = useState(false);
+  const [shareableLink, setShareableLink] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Calculate total price whenever relevant data changes
+  // Calculate totals for all three packages whenever relevant data changes
   useEffect(() => {
-    const basePrice = data.squareFootage * PACKAGE_PRICING[data.packageLevel];
     const lineItemsTotal = data.lineItems.reduce(
       (sum, item) => sum + (data.squareFootage * item.pricePerSqFt),
       0
     );
-    const total = basePrice + lineItemsTotal;
     
-    if (total !== data.totalPrice) {
-      onChange({ ...data, totalPrice: total });
+    const silverTotal = (data.squareFootage * PACKAGE_PRICING.silver) + lineItemsTotal;
+    const goldTotal = (data.squareFootage * PACKAGE_PRICING.gold) + lineItemsTotal;
+    const platinumTotal = (data.squareFootage * PACKAGE_PRICING.platinum) + lineItemsTotal;
+    
+    if (silverTotal !== data.silverTotal || goldTotal !== data.goldTotal || platinumTotal !== data.platinumTotal) {
+      onChange({ ...data, silverTotal, goldTotal, platinumTotal });
     }
-  }, [data.squareFootage, data.packageLevel, data.lineItems]);
+  }, [data.squareFootage, data.lineItems]);
 
   const handleSearchClients = useCallback(async (term: string) => {
     if (!term.trim() || term.length < 2) {
@@ -173,7 +186,6 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   };
 
   const addLineItem = (item: LineItem) => {
-    // Check if already added
     if (data.lineItems.some(li => li.id === item.id)) {
       toast.error('This line item is already added');
       return;
@@ -201,6 +213,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       name: customLineItemName.trim(),
       pricePerSqFt: price,
       isCustom: true,
+      note: customLineItemNote.trim() || undefined,
     };
     
     onChange({
@@ -210,6 +223,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     
     setCustomLineItemName('');
     setCustomLineItemPrice('');
+    setCustomLineItemNote('');
     toast.success('Custom line item added');
   };
 
@@ -220,13 +234,65 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     });
   };
 
-  const calculateTotal = () => {
-    const basePrice = data.squareFootage * PACKAGE_PRICING[data.packageLevel];
-    const lineItemsTotal = data.lineItems.reduce(
-      (sum, item) => sum + (data.squareFootage * item.pricePerSqFt),
-      0
-    );
-    return basePrice + lineItemsTotal;
+  const createShareablePresentation = async () => {
+    if (!data.clientName) {
+      toast.error('Please select a customer first');
+      return;
+    }
+
+    setIsCreatingPresentation(true);
+
+    try {
+      const insertData: any = {
+        client_id: data.clientId || null,
+        client_name: data.clientName,
+        client_email: data.clientEmail || null,
+        client_phone: data.clientPhone || null,
+        client_address: data.clientAddress || null,
+        space_type: data.spaceType,
+        square_footage: data.squareFootage,
+        moisture_content: data.moistureContent,
+        color_choice: data.colorChoice,
+        custom_color_note: data.customColorNote || null,
+        line_items: data.lineItems,
+        warranty_type: data.warrantyType,
+        custom_warranty_note: data.customWarrantyNote || null,
+        deposit_type: data.depositType,
+        custom_deposit_amount: data.customDepositAmount,
+        presentation_notes: data.presentationNotes || null,
+        silver_total: data.silverTotal,
+        gold_total: data.goldTotal,
+        platinum_total: data.platinumTotal,
+        created_by: user?.id,
+        site_photos: data.sitePhotoUrls,
+      };
+
+      const { data: result, error } = await supabase
+        .from('sales_presentations')
+        .insert(insertData)
+        .select('id')
+        .single();
+
+      if (error) throw error;
+
+      const link = `${window.location.origin}/presentation/${result.id}`;
+      setShareableLink(link);
+      toast.success('Shareable presentation created!');
+    } catch (error) {
+      console.error('Error creating presentation:', error);
+      toast.error('Failed to create presentation');
+    } finally {
+      setIsCreatingPresentation(false);
+    }
+  };
+
+  const copyLink = () => {
+    if (shareableLink) {
+      navigator.clipboard.writeText(shareableLink);
+      setLinkCopied(true);
+      toast.success('Link copied to clipboard!');
+      setTimeout(() => setLinkCopied(false), 2000);
+    }
   };
 
   return (
@@ -362,9 +428,9 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                   <SelectValue placeholder="Select space type" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700">
-                  {SPACE_TYPES.map((type) => (
-                    <SelectItem key={type} value={type} className="text-white hover:bg-slate-700">
-                      {type}
+                  {SPACE_TYPE_OPTIONS.map((type) => (
+                    <SelectItem key={type.value} value={type.value} className="text-white hover:bg-slate-700">
+                      {type.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -404,48 +470,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Package Selection */}
-      <Card className="bg-slate-900 border-slate-800">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">3</span>
-            Select Package
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {PACKAGE_OPTIONS.map((pkg) => (
-              <button
-                key={pkg.value}
-                onClick={() => onChange({ ...data, packageLevel: pkg.value as 'silver' | 'gold' | 'platinum' })}
-                className={`p-6 rounded-xl border-2 transition-all ${
-                  data.packageLevel === pkg.value
-                    ? 'border-orange-500 bg-orange-500/10'
-                    : 'border-slate-700 bg-slate-800 hover:border-slate-600'
-                }`}
-              >
-                <div className={`text-xl font-bold ${
-                  data.packageLevel === pkg.value ? 'text-orange-400' : 'text-white'
-                }`}>
-                  {pkg.label}
-                </div>
-                <div className="text-2xl font-bold text-white mt-2">
-                  ${pkg.price.toFixed(2)}<span className="text-sm text-slate-400">/sq ft</span>
-                </div>
-                <div className="text-sm text-slate-400 mt-1">
-                  ${(data.squareFootage * pkg.price).toLocaleString('en-US', { minimumFractionDigits: 2 })} total
-                </div>
-              </button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Color Selection */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">4</span>
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">3</span>
             Select Color
           </CardTitle>
         </CardHeader>
@@ -477,11 +506,89 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Line Items */}
+      {/* Warranty Selection */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">4</span>
+            Warranty
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Select value={data.warrantyType} onValueChange={(v) => onChange({ ...data, warrantyType: v as any })}>
+            <SelectTrigger className="bg-slate-800 border-slate-700 text-white h-14">
+              <SelectValue placeholder="Select warranty" />
+            </SelectTrigger>
+            <SelectContent className="bg-slate-800 border-slate-700">
+              {WARRANTY_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value} className="text-white hover:bg-slate-700">
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
+          {data.warrantyType === 'custom' && (
+            <div>
+              <Label className="text-slate-300">Custom Warranty Details</Label>
+              <Input
+                placeholder="e.g., 10 Year Limited Warranty..."
+                value={data.customWarrantyNote}
+                onChange={(e) => onChange({ ...data, customWarrantyNote: e.target.value })}
+                className="bg-slate-800 border-slate-700 text-white h-12"
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Deposit Selection */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">5</span>
+            Deposit Amount
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {DEPOSIT_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => onChange({ ...data, depositType: opt.value as any })}
+                className={`p-4 rounded-xl border-2 transition-all ${
+                  data.depositType === opt.value
+                    ? 'border-orange-500 bg-orange-500/10'
+                    : 'border-slate-700 bg-slate-800 hover:border-slate-600'
+                }`}
+              >
+                <div className={`font-bold ${data.depositType === opt.value ? 'text-orange-400' : 'text-white'}`}>
+                  {opt.label}
+                </div>
+              </button>
+            ))}
+          </div>
+          
+          {data.depositType === 'custom' && (
+            <div>
+              <Label className="text-slate-300">Custom Deposit Amount ($)</Label>
+              <Input
+                type="number"
+                placeholder="Enter amount..."
+                value={data.customDepositAmount || ''}
+                onChange={(e) => onChange({ ...data, customDepositAmount: Number(e.target.value) || null })}
+                className="bg-slate-800 border-slate-700 text-white h-12"
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Line Items */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">6</span>
             Line Items (Add-ons)
           </CardTitle>
         </CardHeader>
@@ -513,32 +620,40 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           {/* Custom Line Item */}
           <div className="border-t border-slate-700 pt-4">
             <Label className="text-slate-300 mb-3 block">Add Custom Line Item</Label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Item name"
-                value={customLineItemName}
-                onChange={(e) => setCustomLineItemName(e.target.value)}
-                className="bg-slate-800 border-slate-700 text-white flex-1"
-              />
-              <div className="relative w-32">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+            <div className="space-y-2">
+              <div className="flex gap-2">
                 <Input
-                  type="number"
-                  step="0.01"
-                  placeholder="0.00"
-                  value={customLineItemPrice}
-                  onChange={(e) => setCustomLineItemPrice(e.target.value)}
-                  className="bg-slate-800 border-slate-700 text-white pl-7"
+                  placeholder="Item name"
+                  value={customLineItemName}
+                  onChange={(e) => setCustomLineItemName(e.target.value)}
+                  className="bg-slate-800 border-slate-700 text-white flex-1"
                 />
+                <div className="relative w-32">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+                  <Input
+                    type="number"
+                    step="0.01"
+                    placeholder="0.00"
+                    value={customLineItemPrice}
+                    onChange={(e) => setCustomLineItemPrice(e.target.value)}
+                    className="bg-slate-800 border-slate-700 text-white pl-7"
+                  />
+                </div>
+                <Button
+                  onClick={addCustomLineItem}
+                  className="bg-orange-500 hover:bg-orange-600"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
               </div>
-              <Button
-                onClick={addCustomLineItem}
-                className="bg-orange-500 hover:bg-orange-600"
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
+              <Input
+                placeholder="Note/Disclaimer (optional - will appear on presentation)"
+                value={customLineItemNote}
+                onChange={(e) => setCustomLineItemNote(e.target.value)}
+                className="bg-slate-800 border-slate-700 text-white"
+              />
             </div>
-            <p className="text-xs text-slate-500 mt-1">Price per square foot</p>
+            <p className="text-xs text-slate-500 mt-1">Price per square foot. Notes will display as disclaimers.</p>
           </div>
           
           {/* Added Line Items */}
@@ -554,6 +669,9 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                     <div>
                       <span className="text-white">{item.name}</span>
                       <span className="text-slate-400 ml-2">${item.pricePerSqFt.toFixed(2)}/sqft</span>
+                      {item.note && (
+                        <p className="text-xs text-amber-400 mt-1">Note: {item.note}</p>
+                      )}
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-orange-400 font-medium">
@@ -576,59 +694,41 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Pricing Summary */}
-      <Card className="bg-slate-900 border-slate-800">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">6</span>
-            Pricing Summary
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {/* Base Package */}
-            <div className="flex justify-between text-slate-300">
-              <span>{PACKAGE_OPTIONS.find(p => p.value === data.packageLevel)?.label} ({data.squareFootage} sqft × ${PACKAGE_PRICING[data.packageLevel].toFixed(2)})</span>
-              <span>${(data.squareFootage * PACKAGE_PRICING[data.packageLevel]).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-            </div>
-            
-            {/* Line Items */}
-            {data.lineItems.map((item) => (
-              <div key={item.id} className="flex justify-between text-slate-400">
-                <span>{item.name} ({data.squareFootage} sqft × ${item.pricePerSqFt.toFixed(2)})</span>
-                <span>+${(data.squareFootage * item.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-              </div>
-            ))}
-            
-            {/* Divider */}
-            <div className="border-t border-slate-700 pt-3">
-              <div className="flex justify-between items-center">
-                <span className="text-xl font-bold text-white">Total</span>
-                <span className="text-3xl font-bold text-orange-400">
-                  ${calculateTotal().toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                </span>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Notes */}
+      {/* Presentation Notes / Disclaimers */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">7</span>
-            Notes
+            Presentation Notes / Disclaimers
           </CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea
-            placeholder="Add notes for the client profile in Jobber..."
-            value={data.notes}
-            onChange={(e) => onChange({ ...data, notes: e.target.value })}
+            placeholder="Add notes that will appear on the customer presentation for them to sign (e.g., warranty changes, special conditions)..."
+            value={data.presentationNotes}
+            onChange={(e) => onChange({ ...data, presentationNotes: e.target.value })}
             className="bg-slate-800 border-slate-700 text-white min-h-[120px]"
           />
-          <p className="text-xs text-slate-500 mt-2">These notes will be added to the client's profile in Jobber.</p>
+          <p className="text-xs text-slate-500 mt-2">These notes will be displayed on the customer-facing presentation and must be acknowledged before signing.</p>
+        </CardContent>
+      </Card>
+
+      {/* Jobber Notes */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">8</span>
+            Jobber Notes
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Textarea
+            placeholder="Add internal notes for the Jobber client profile..."
+            value={data.notes}
+            onChange={(e) => onChange({ ...data, notes: e.target.value })}
+            className="bg-slate-800 border-slate-700 text-white min-h-[100px]"
+          />
+          <p className="text-xs text-slate-500 mt-2">These notes will be added to the client's profile in Jobber (not visible to customer).</p>
         </CardContent>
       </Card>
 
@@ -636,7 +736,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">8</span>
+            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">9</span>
             Pre-Job Site Photos
           </CardTitle>
         </CardHeader>
@@ -669,16 +769,100 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         </CardContent>
       </Card>
 
-      {/* Start Presentation Button */}
-      <div className="sticky bottom-4 md:bottom-6">
-        <Button
-          onClick={onStartPresentation}
-          disabled={!data.clientName}
-          className="w-full h-16 text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-2xl shadow-orange-500/30"
-        >
-          Start Presentation
-          <ChevronRight className="h-6 w-6 ml-2" />
-        </Button>
+      {/* Pricing Summary */}
+      <Card className="bg-slate-900 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-sm font-bold">$</span>
+            Package Pricing Summary
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-slate-800 p-4 rounded-xl text-center">
+              <div className="text-slate-400 text-sm uppercase">Silver</div>
+              <div className="text-2xl font-bold text-white mt-1">
+                ${data.silverTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              </div>
+              <div className="text-xs text-slate-500">$5.00/sqft base</div>
+            </div>
+            <div className="bg-amber-500/10 border-2 border-amber-500 p-4 rounded-xl text-center">
+              <div className="text-amber-400 text-sm uppercase font-bold">Gold (Popular)</div>
+              <div className="text-2xl font-bold text-white mt-1">
+                ${data.goldTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              </div>
+              <div className="text-xs text-slate-500">$7.10/sqft base</div>
+            </div>
+            <div className="bg-slate-800 p-4 rounded-xl text-center">
+              <div className="text-blue-400 text-sm uppercase">Platinum</div>
+              <div className="text-2xl font-bold text-white mt-1">
+                ${data.platinumTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              </div>
+              <div className="text-xs text-slate-500">$9.50/sqft base</div>
+            </div>
+          </div>
+          
+          {data.lineItems.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-slate-700">
+              <p className="text-slate-400 text-sm">
+                Add-ons included: {data.lineItems.map(li => li.name).join(', ')} 
+                (+${data.lineItems.reduce((sum, li) => sum + (data.squareFootage * li.pricePerSqFt), 0).toLocaleString('en-US', { minimumFractionDigits: 2 })})
+              </p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Shareable Link */}
+      {shareableLink && (
+        <Card className="bg-green-900/30 border-green-700">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="flex-1">
+                <Label className="text-green-300 mb-1 block">Shareable Presentation Link</Label>
+                <Input
+                  value={shareableLink}
+                  readOnly
+                  className="bg-green-900/50 border-green-600 text-white"
+                />
+              </div>
+              <Button
+                onClick={copyLink}
+                className={`${linkCopied ? 'bg-green-600' : 'bg-green-500'} hover:bg-green-600`}
+              >
+                {linkCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              </Button>
+            </div>
+            <p className="text-green-400 text-xs mt-2">Send this link to your customer so they can view and sign the presentation.</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Action Buttons */}
+      <div className="sticky bottom-4 md:bottom-6 space-y-3">
+        <div className="flex gap-3">
+          <Button
+            onClick={createShareablePresentation}
+            disabled={!data.clientName || isCreatingPresentation}
+            className="flex-1 h-14 text-lg font-bold bg-blue-600 hover:bg-blue-700"
+          >
+            {isCreatingPresentation ? (
+              <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+            ) : (
+              <Send className="h-5 w-5 mr-2" />
+            )}
+            Create Shareable Link
+          </Button>
+          
+          <Button
+            onClick={onStartPresentation}
+            disabled={!data.clientName}
+            className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-2xl shadow-orange-500/30"
+          >
+            Present Now
+            <ChevronRight className="h-6 w-6 ml-2" />
+          </Button>
+        </div>
       </div>
     </div>
   );
