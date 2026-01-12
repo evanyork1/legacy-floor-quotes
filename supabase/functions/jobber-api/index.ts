@@ -266,9 +266,10 @@ serve(async (req: Request) => {
     switch (action) {
       case 'getTodaysCalendar': {
         // Query for assessments (scheduled appointments for requests)
+        // Note: Jobber uses singular 'assessment' not 'assessments'
         query = `
           query GetTodaysCalendar {
-            assessments(first: 50) {
+            assessment {
               nodes {
                 id
                 title
