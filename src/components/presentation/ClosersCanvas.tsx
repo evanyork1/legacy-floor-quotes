@@ -12,9 +12,17 @@ interface ClosersCanvasProps {
 }
 
 export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps) {
-  const handleColorChange = (color: string) => {
-    onDataChange({ ...data, colorChoice: color });
+  const handleColorChange = (color: string, entryId?: string) => {
+    if (entryId && data.floorEntries) {
+      const newEntries = data.floorEntries.map(entry => 
+        entry.id === entryId ? { ...entry, colorChoice: color } : entry
+      );
+      onDataChange({ ...data, floorEntries: newEntries });
+    }
   };
+
+  // Get primary color/warranty from first floor entry for legacy fields
+  const primaryEntry = data.floorEntries?.[0];
 
   // Transform data for CustomerPresentation component
   const presentationData = {
@@ -26,11 +34,11 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
     spaceType: data.spaceType,
     squareFootage: data.squareFootage,
     moistureContent: data.moistureContent,
-    colorChoice: data.colorChoice,
-    customColorNote: data.customColorNote,
+    colorChoice: primaryEntry?.colorChoice || 'Domino',
+    customColorNote: primaryEntry?.customColorNote || '',
     lineItems: data.lineItems,
-    warrantyType: data.warrantyType,
-    customWarrantyNote: data.customWarrantyNote,
+    warrantyType: primaryEntry?.warrantyType || 'lifetime',
+    customWarrantyNote: primaryEntry?.customWarrantyNote || '',
     depositType: data.depositType,
     customDepositAmount: data.customDepositAmount,
     presentationNotes: data.presentationNotes,
