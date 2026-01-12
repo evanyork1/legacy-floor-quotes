@@ -332,7 +332,7 @@ serve(async (req: Request) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
-        'X-JOBBER-GRAPHQL-VERSION': '2024-12-16',
+        'X-JOBBER-GRAPHQL-VERSION': '2025-01-20',
       },
       body: JSON.stringify({ query, variables }),
     });
