@@ -66,9 +66,9 @@ export function TodaysCalendar({ onSelectClient }: TodaysCalendarProps) {
       const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
       const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
       
-      // Process assessments
-      if (data?.assessments?.nodes) {
-        data.assessments.nodes.forEach((assessment: any) => {
+      // Process assessments (Jobber uses singular 'assessment')
+      if (data?.assessment?.nodes) {
+        data.assessment.nodes.forEach((assessment: any) => {
           // Filter to only today's assessments
           const startAt = new Date(assessment.startAt);
           if (startAt >= todayStart && startAt < todayEnd) {
