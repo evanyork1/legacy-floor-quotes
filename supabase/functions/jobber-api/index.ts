@@ -288,6 +288,15 @@ serve(async (req: Request) => {
                   city
                   postalCode
                 }
+                properties {
+                  nodes {
+                    id
+                    address {
+                      street1
+                      city
+                    }
+                  }
+                }
               }
             }
           }
@@ -343,6 +352,7 @@ serve(async (req: Request) => {
         }
         
         // Build attributes for quote creation
+        // Note: saveToProductsAndServices is required for each line item
         const quoteAttributes: Record<string, unknown> = {
           clientId: data?.clientId,
           title: data?.title || 'Floor Coating Quote',
@@ -351,9 +361,17 @@ serve(async (req: Request) => {
             description: item.description || '',
             unitPrice: item.unitPrice,
             quantity: item.quantity,
+            saveToProductsAndServices: false, // Required field - don't save as product template
           })),
           message: data?.notes || '',
         };
+
+        // If propertyId is provided, include it
+        if (data?.propertyId) {
+          quoteAttributes.propertyId = data.propertyId;
+        }
+        
+        console.log('Quote attributes being sent:', JSON.stringify(quoteAttributes));
         
         query = `
           mutation QuoteCreate($attributes: QuoteCreateAttributes!) {

@@ -357,7 +357,7 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
           <p className="text-slate-400 mb-8">
             {paymentComplete 
               ? `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package is confirmed. We'll be in touch within 24 hours to schedule your installation.`
-              : `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package has been approved. Your sales rep will contact you shortly to collect the deposit and finalize your installation date.`
+              : `Thank you, ${data.clientName.split(' ')[0]}! Your ${selectedPackage} package has been approved. We'll be in touch within 24 hours to finalize your installation date.`
             }
           </p>
         </div>
