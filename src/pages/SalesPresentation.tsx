@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
-import { ArrowLeft, FileText, Presentation, Users } from 'lucide-react';
+import { ArrowLeft, FileText, Presentation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { IntakeForm } from '@/components/presentation/IntakeForm';
 import { ClosersCanvas } from '@/components/presentation/ClosersCanvas';
-import { cn } from '@/lib/utils';
 
 export type PresentationData = {
   // Client info
@@ -39,7 +37,6 @@ export type PresentationData = {
 };
 
 export default function SalesPresentation() {
-  const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [mode, setMode] = useState<'intake' | 'present'>('intake');
   const [presentationData, setPresentationData] = useState<PresentationData>({
@@ -60,19 +57,6 @@ export default function SalesPresentation() {
     sitePhotos: [],
     sitePhotoUrls: [],
   });
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    navigate('/auth?redirect=/sales-presentation');
-    return null;
-  }
 
   const handleStartPresentation = () => {
     setMode('present');
