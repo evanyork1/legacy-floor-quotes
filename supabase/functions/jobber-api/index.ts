@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -6,10 +7,127 @@ const corsHeaders = {
 };
 
 const JOBBER_API_URL = 'https://api.getjobber.com/api/graphql';
+const JOBBER_TOKEN_URL = 'https://api.getjobber.com/api/oauth/token';
 
 interface JobberRequest {
-  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote';
-  data: Record<string, unknown>;
+  action: 'createClient' | 'searchClients' | 'createQuote' | 'createNote' | 'approveQuote' | 'checkStatus';
+  data?: Record<string, unknown>;
+}
+
+interface TokenRecord {
+  id: string;
+  access_token: string;
+  refresh_token: string;
+  expires_at: string;
+}
+
+// Get Supabase client with service role
+function getSupabaseClient() {
+  const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+  const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+  return createClient(supabaseUrl, supabaseServiceKey);
+}
+
+// Refresh the access token using the refresh token
+async function refreshAccessToken(refreshToken: string): Promise<{
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+} | null> {
+  const clientId = Deno.env.get('JOBBER_CLIENT_ID');
+  const clientSecret = Deno.env.get('JOBBER_CLIENT_SECRET');
+
+  if (!clientId || !clientSecret) {
+    console.error('Missing Jobber credentials for refresh');
+    return null;
+  }
+
+  try {
+    const response = await fetch(JOBBER_TOKEN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Token refresh failed:', response.status, errorText);
+      return null;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error refreshing token:', error);
+    return null;
+  }
+}
+
+// Get valid access token (refresh if needed)
+async function getValidAccessToken(): Promise<{ token: string; expiresAt: string } | null> {
+  const supabase = getSupabaseClient();
+
+  // Fetch the current token
+  const { data: tokens, error } = await supabase
+    .from('jobber_tokens')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  if (error || !tokens || tokens.length === 0) {
+    console.log('No tokens found in database');
+    return null;
+  }
+
+  const tokenRecord = tokens[0] as TokenRecord;
+  const expiresAt = new Date(tokenRecord.expires_at);
+  const now = new Date();
+  
+  // Check if token expires within next 5 minutes
+  const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60 * 1000);
+  
+  if (expiresAt > fiveMinutesFromNow) {
+    // Token is still valid
+    return { token: tokenRecord.access_token, expiresAt: tokenRecord.expires_at };
+  }
+
+  console.log('Token expired or expiring soon, refreshing...');
+
+  // Refresh the token
+  const newTokens = await refreshAccessToken(tokenRecord.refresh_token);
+  
+  if (!newTokens) {
+    // Refresh failed, delete invalid tokens
+    await supabase.from('jobber_tokens').delete().eq('id', tokenRecord.id);
+    return null;
+  }
+
+  // Calculate new expiration
+  const newExpiresAt = new Date(now.getTime() + newTokens.expires_in * 1000);
+
+  // Update the database
+  const { error: updateError } = await supabase
+    .from('jobber_tokens')
+    .update({
+      access_token: newTokens.access_token,
+      refresh_token: newTokens.refresh_token,
+      expires_at: newExpiresAt.toISOString(),
+    })
+    .eq('id', tokenRecord.id);
+
+  if (updateError) {
+    console.error('Failed to update tokens:', updateError);
+    return null;
+  }
+
+  console.log('Token refreshed successfully');
+  return { token: newTokens.access_token, expiresAt: newExpiresAt.toISOString() };
 }
 
 serve(async (req: Request) => {
@@ -18,18 +136,36 @@ serve(async (req: Request) => {
   }
 
   try {
-    const JOBBER_CLIENT_ID = Deno.env.get('JOBBER_CLIENT_ID');
-    const JOBBER_CLIENT_SECRET = Deno.env.get('JOBBER_CLIENT_SECRET');
+    const { action, data } = await req.json() as JobberRequest;
 
-    if (!JOBBER_CLIENT_ID || !JOBBER_CLIENT_SECRET) {
-      throw new Error('Jobber credentials not configured');
+    // Handle status check action
+    if (action === 'checkStatus') {
+      const tokenInfo = await getValidAccessToken();
+      
+      if (tokenInfo) {
+        return new Response(
+          JSON.stringify({ connected: true, expiresAt: tokenInfo.expiresAt }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      } else {
+        return new Response(
+          JSON.stringify({ connected: false }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
-    const { action, data } = await req.json() as JobberRequest;
+    // Get valid access token for API calls
+    const tokenInfo = await getValidAccessToken();
     
-    // For now, we'll use a placeholder access token flow
-    // In production, you'd implement OAuth 2.0 flow with refresh tokens
-    const accessToken = Deno.env.get('JOBBER_ACCESS_TOKEN') || '';
+    if (!tokenInfo) {
+      return new Response(
+        JSON.stringify({ error: 'Not connected to Jobber. Please authorize first.' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const accessToken = tokenInfo.token;
 
     let query: string;
     let variables: Record<string, unknown>;
@@ -61,7 +197,7 @@ serve(async (req: Request) => {
             }
           }
         `;
-        variables = { searchTerm: data.searchTerm || '' };
+        variables = { searchTerm: data?.searchTerm || '' };
         break;
 
       case 'createClient':
@@ -81,14 +217,14 @@ serve(async (req: Request) => {
         `;
         variables = {
           input: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            emails: data.email ? [{ address: data.email, primary: true }] : [],
-            phones: data.phone ? [{ number: data.phone, primary: true }] : [],
-            billingAddress: data.address ? {
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            emails: data?.email ? [{ address: data.email, primary: true }] : [],
+            phones: data?.phone ? [{ number: data.phone, primary: true }] : [],
+            billingAddress: data?.address ? {
               street1: data.address,
-              city: data.city,
-              postalCode: data.postalCode,
+              city: data?.city,
+              postalCode: data?.postalCode,
             } : undefined,
           },
         };
@@ -113,29 +249,29 @@ serve(async (req: Request) => {
         `;
         variables = {
           input: {
-            clientId: data.clientId,
-            title: data.title || 'Garage Floor Coating Quote',
+            clientId: data?.clientId,
+            title: data?.title || 'Garage Floor Coating Quote',
             lineItems: [
               {
-                name: data.productName || 'Polyurea Garage Floor Coating',
-                description: data.description || '',
-                unitPrice: data.unitPrice,
-                quantity: data.squareFootage,
+                name: data?.productName || 'Polyurea Garage Floor Coating',
+                description: data?.description || '',
+                unitPrice: data?.unitPrice,
+                quantity: data?.squareFootage,
               },
-              ...(data.gripAdditive ? [{
+              ...(data?.gripAdditive ? [{
                 name: 'Grip Additive',
                 description: 'Anti-slip coating additive',
-                unitPrice: data.gripPrice || 0.50,
-                quantity: data.squareFootage,
+                unitPrice: data?.gripPrice || 0.50,
+                quantity: data?.squareFootage,
               }] : []),
-              ...(data.vaporBarrier ? [{
+              ...(data?.vaporBarrier ? [{
                 name: 'Vapor Barrier',
                 description: 'Moisture protection layer',
-                unitPrice: data.vaporPrice || 1.00,
-                quantity: data.squareFootage,
+                unitPrice: data?.vaporPrice || 1.00,
+                quantity: data?.squareFootage,
               }] : []),
             ],
-            message: data.notes || '',
+            message: data?.notes || '',
           },
         };
         break;
@@ -157,9 +293,8 @@ serve(async (req: Request) => {
         `;
         variables = {
           input: {
-            clientId: data.clientId,
-            message: data.message,
-            // noteAttachments would be added here for photos
+            clientId: data?.clientId,
+            message: data?.message,
           },
         };
         break;
@@ -180,7 +315,7 @@ serve(async (req: Request) => {
           }
         `;
         variables = {
-          quoteId: data.quoteId,
+          quoteId: data?.quoteId,
           status: 'APPROVED',
         };
         break;

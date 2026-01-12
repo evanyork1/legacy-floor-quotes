@@ -4,6 +4,7 @@ import { ArrowLeft, FileText, Presentation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { IntakeForm } from '@/components/presentation/IntakeForm';
 import { ClosersCanvas } from '@/components/presentation/ClosersCanvas';
+import { JobberStatus } from '@/components/presentation/JobberStatus';
 
 export type PresentationData = {
   // Client info
@@ -84,6 +85,8 @@ export default function SalesPresentation() {
               </Button>
               <div className="h-6 w-px bg-slate-700" />
               <h1 className="text-xl font-bold">Sales Presentation Tool</h1>
+              <div className="h-6 w-px bg-slate-700" />
+              <JobberStatus />
             </div>
             
             <div className="flex items-center gap-2">
