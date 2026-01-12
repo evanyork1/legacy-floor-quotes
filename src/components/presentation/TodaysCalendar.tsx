@@ -42,7 +42,19 @@ export function TodaysCalendar({ onSelectClient }: TodaysCalendarProps) {
         body: { action: 'getTodaysCalendar' },
       });
       
-      if (error) throw error;
+      // Check for auth/connection errors
+      if (error) {
+        console.error('Calendar fetch error:', error);
+        setError('Could not connect to Jobber - please check connection');
+        return;
+      }
+      
+      // Check if response indicates not connected
+      if (data?.connected === false || data?.error) {
+        console.error('Jobber not connected:', data?.error);
+        setError(data?.error || 'Jobber connection expired - please reconnect');
+        return;
+      }
       
       // Transform the response into calendar entries
       const calendarEntries: CalendarEntry[] = [];

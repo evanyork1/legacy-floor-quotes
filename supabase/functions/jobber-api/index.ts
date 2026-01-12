@@ -43,6 +43,7 @@ async function refreshAccessToken(refreshToken: string): Promise<{
   }
 
   try {
+    console.log('Attempting to refresh Jobber access token...');
     const response = await fetch(JOBBER_TOKEN_URL, {
       method: 'POST',
       headers: {
@@ -62,15 +63,67 @@ async function refreshAccessToken(refreshToken: string): Promise<{
       return null;
     }
 
-    return await response.json();
+    const tokens = await response.json();
+    console.log('Token refresh successful');
+    return tokens;
   } catch (error) {
     console.error('Error refreshing token:', error);
     return null;
   }
 }
 
-// Get valid access token (refresh if needed)
-async function getValidAccessToken(): Promise<{ token: string; expiresAt: string } | null> {
+// Force refresh and update tokens in database
+async function forceRefreshTokens(): Promise<{ token: string; expiresAt: string } | null> {
+  const supabase = getSupabaseClient();
+
+  // Fetch the current token
+  const { data: tokens, error } = await supabase
+    .from('jobber_tokens')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  if (error || !tokens || tokens.length === 0) {
+    console.log('No tokens found in database for refresh');
+    return null;
+  }
+
+  const tokenRecord = tokens[0] as TokenRecord;
+  
+  console.log('Force refreshing token...');
+  const newTokens = await refreshAccessToken(tokenRecord.refresh_token);
+  
+  if (!newTokens) {
+    // Refresh failed, delete invalid tokens
+    console.error('Force refresh failed, deleting invalid tokens');
+    await supabase.from('jobber_tokens').delete().eq('id', tokenRecord.id);
+    return null;
+  }
+
+  const now = new Date();
+  const newExpiresAt = new Date(now.getTime() + newTokens.expires_in * 1000);
+
+  // Update the database
+  const { error: updateError } = await supabase
+    .from('jobber_tokens')
+    .update({
+      access_token: newTokens.access_token,
+      refresh_token: newTokens.refresh_token,
+      expires_at: newExpiresAt.toISOString(),
+    })
+    .eq('id', tokenRecord.id);
+
+  if (updateError) {
+    console.error('Failed to update tokens after force refresh:', updateError);
+    return null;
+  }
+
+  console.log('Force refresh successful, new token expires at:', newExpiresAt.toISOString());
+  return { token: newTokens.access_token, expiresAt: newExpiresAt.toISOString() };
+}
+
+// Get valid access token (check expiration)
+async function getValidAccessToken(): Promise<{ token: string; expiresAt: string; refreshToken: string } | null> {
   const supabase = getSupabaseClient();
 
   // Fetch the current token
@@ -91,34 +144,31 @@ async function getValidAccessToken(): Promise<{ token: string; expiresAt: string
   
   console.log('Token expires at:', expiresAt.toISOString(), 'Now:', now.toISOString());
   
-  // Check if token expires within next 10 minutes (increased buffer)
+  // Check if token expires within next 10 minutes
   const tenMinutesFromNow = new Date(now.getTime() + 10 * 60 * 1000);
   
   if (expiresAt > tenMinutesFromNow) {
-    // Token is still valid
-    console.log('Token is still valid');
-    return { token: tokenRecord.access_token, expiresAt: tokenRecord.expires_at };
+    // Token appears valid based on timestamp
+    console.log('Token appears valid based on timestamp');
+    return { 
+      token: tokenRecord.access_token, 
+      expiresAt: tokenRecord.expires_at,
+      refreshToken: tokenRecord.refresh_token 
+    };
   }
   
-  // Always try to refresh if we're within the buffer
-  console.log('Token expired or expiring soon, will refresh');
-
-  console.log('Token expired or expiring soon, refreshing...');
-
-  // Refresh the token
+  // Token expired or expiring soon, proactively refresh
+  console.log('Token expired or expiring soon, refreshing proactively...');
   const newTokens = await refreshAccessToken(tokenRecord.refresh_token);
   
   if (!newTokens) {
-    // Refresh failed, delete invalid tokens
     await supabase.from('jobber_tokens').delete().eq('id', tokenRecord.id);
     return null;
   }
 
-  // Calculate new expiration
   const newExpiresAt = new Date(now.getTime() + newTokens.expires_in * 1000);
 
-  // Update the database
-  const { error: updateError } = await supabase
+  await supabase
     .from('jobber_tokens')
     .update({
       access_token: newTokens.access_token,
@@ -127,13 +177,49 @@ async function getValidAccessToken(): Promise<{ token: string; expiresAt: string
     })
     .eq('id', tokenRecord.id);
 
-  if (updateError) {
-    console.error('Failed to update tokens:', updateError);
-    return null;
+  console.log('Proactive token refresh successful');
+  return { 
+    token: newTokens.access_token, 
+    expiresAt: newExpiresAt.toISOString(),
+    refreshToken: newTokens.refresh_token 
+  };
+}
+
+// Make GraphQL request with automatic retry on 401
+async function callJobberGraphQL(
+  query: string, 
+  variables: Record<string, unknown>,
+  accessToken: string
+): Promise<{ data?: any; error?: string; status: number; needsRefresh?: boolean }> {
+  console.log('Making Jobber GraphQL request...');
+  
+  const response = await fetch(JOBBER_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+      'X-JOBBER-GRAPHQL-VERSION': '2025-01-20',
+    },
+    body: JSON.stringify({ query, variables }),
+  });
+
+  console.log('Jobber API response status:', response.status);
+  
+  const result = await response.json();
+  console.log('Jobber API result preview:', JSON.stringify(result).substring(0, 300));
+
+  // Check for 401 or token expired message
+  if (response.status === 401 || result?.message?.toLowerCase().includes('expired')) {
+    console.log('Token expired or 401 received - needs refresh');
+    return { status: 401, needsRefresh: true, error: 'Token expired' };
   }
 
-  console.log('Token refreshed successfully');
-  return { token: newTokens.access_token, expiresAt: newExpiresAt.toISOString() };
+  if (result.errors) {
+    console.error('Jobber GraphQL errors:', result.errors);
+    return { status: 400, error: result.errors[0]?.message || 'GraphQL error' };
+  }
+
+  return { status: 200, data: result.data };
 }
 
 serve(async (req: Request) => {
@@ -162,7 +248,7 @@ serve(async (req: Request) => {
     }
 
     // Get valid access token for API calls
-    const tokenInfo = await getValidAccessToken();
+    let tokenInfo = await getValidAccessToken();
     
     if (!tokenInfo) {
       console.log('No valid token found, returning auth error');
@@ -173,14 +259,13 @@ serve(async (req: Request) => {
     }
 
     console.log('Using token that expires at:', tokenInfo.expiresAt);
-    const accessToken = tokenInfo.token;
 
     let query: string;
     let variables: Record<string, unknown>;
 
     switch (action) {
       case 'getTodaysCalendar': {
-        // Query for recent quotes and jobs (Jobber doesn't support date range filtering on quotes the same way)
+        // Query for recent quotes and jobs
         query = `
           query GetTodaysCalendar {
             quotes(first: 20, sortOrder: DESC) {
@@ -304,7 +389,6 @@ serve(async (req: Request) => {
         break;
 
       case 'createQuote': {
-        // Build line items from the data
         const lineItems = data?.lineItems as Array<{
           name: string;
           description?: string;
@@ -312,7 +396,6 @@ serve(async (req: Request) => {
           quantity: number;
         }> || [];
         
-        // If old-style data is passed, build a single line item
         if (!data?.lineItems && data?.productName) {
           lineItems.push({
             name: data.productName as string || 'Floor Coating',
@@ -404,25 +487,35 @@ serve(async (req: Request) => {
 
     console.log(`Jobber API - Action: ${action}, Variables:`, JSON.stringify(variables));
 
-    // Make the GraphQL request to Jobber
-    const response = await fetch(JOBBER_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-        'X-JOBBER-GRAPHQL-VERSION': '2025-01-20',
-      },
-      body: JSON.stringify({ query, variables }),
-    });
+    // Make the GraphQL request
+    let result = await callJobberGraphQL(query, variables, tokenInfo.token);
 
-    console.log('Jobber API response status:', response.status);
-    
-    const result = await response.json();
-    console.log('Jobber API result:', JSON.stringify(result).substring(0, 500));
+    // If we get a 401, force refresh the token and retry once
+    if (result.needsRefresh) {
+      console.log('Got 401, forcing token refresh and retrying...');
+      const newTokenInfo = await forceRefreshTokens();
+      
+      if (!newTokenInfo) {
+        return new Response(
+          JSON.stringify({ error: 'Jobber session expired. Please reconnect to Jobber.', connected: false }),
+          { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+      
+      // Retry with new token
+      console.log('Retrying with refreshed token...');
+      result = await callJobberGraphQL(query, variables, newTokenInfo.token);
+      
+      if (result.needsRefresh || result.error) {
+        return new Response(
+          JSON.stringify({ error: result.error || 'Jobber API error after refresh', connected: false }),
+          { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
 
-    if (result.errors) {
-      console.error('Jobber API errors:', result.errors);
-      throw new Error(result.errors[0]?.message || 'Jobber API error');
+    if (result.error) {
+      throw new Error(result.error);
     }
 
     return new Response(JSON.stringify(result.data), {

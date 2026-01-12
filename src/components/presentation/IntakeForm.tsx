@@ -105,7 +105,22 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
         body: { action: 'searchClients', data: { searchTerm: term } },
       });
       
-      if (error) throw error;
+      // Check for connection errors
+      if (error) {
+        console.error('Search invoke error:', error);
+        toast.error('Could not connect to Jobber');
+        setSearchResults([]);
+        return;
+      }
+      
+      // Check if response indicates not connected or auth error
+      if (result?.connected === false || result?.error) {
+        console.error('Jobber connection issue:', result?.error);
+        toast.error(result?.error || 'Jobber connection expired - please reconnect');
+        setSearchResults([]);
+        return;
+      }
+      
       setSearchResults(result?.clients?.nodes || []);
     } catch (error) {
       console.error('Search error:', error);
