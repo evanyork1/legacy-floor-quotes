@@ -771,6 +771,113 @@ export type Database = {
         }
         Relationships: []
       }
+      sales_presentations: {
+        Row: {
+          agreement_accepted: boolean | null
+          client_address: string | null
+          client_email: string | null
+          client_id: string | null
+          client_name: string
+          client_phone: string | null
+          color_choice: string
+          created_at: string
+          created_by: string | null
+          custom_color_note: string | null
+          custom_deposit_amount: number | null
+          custom_warranty_note: string | null
+          deposit_type: string
+          gold_total: number
+          id: string
+          line_items: Json | null
+          moisture_content: number | null
+          platinum_total: number
+          presentation_notes: string | null
+          selected_deposit_amount: number | null
+          selected_package: string | null
+          signature_data: string | null
+          signed_at: string | null
+          silver_total: number
+          site_photos: string[] | null
+          space_type: string
+          square_footage: number
+          status: string
+          updated_at: string
+          warranty_type: string
+        }
+        Insert: {
+          agreement_accepted?: boolean | null
+          client_address?: string | null
+          client_email?: string | null
+          client_id?: string | null
+          client_name: string
+          client_phone?: string | null
+          color_choice: string
+          created_at?: string
+          created_by?: string | null
+          custom_color_note?: string | null
+          custom_deposit_amount?: number | null
+          custom_warranty_note?: string | null
+          deposit_type?: string
+          gold_total: number
+          id?: string
+          line_items?: Json | null
+          moisture_content?: number | null
+          platinum_total: number
+          presentation_notes?: string | null
+          selected_deposit_amount?: number | null
+          selected_package?: string | null
+          signature_data?: string | null
+          signed_at?: string | null
+          silver_total: number
+          site_photos?: string[] | null
+          space_type?: string
+          square_footage: number
+          status?: string
+          updated_at?: string
+          warranty_type?: string
+        }
+        Update: {
+          agreement_accepted?: boolean | null
+          client_address?: string | null
+          client_email?: string | null
+          client_id?: string | null
+          client_name?: string
+          client_phone?: string | null
+          color_choice?: string
+          created_at?: string
+          created_by?: string | null
+          custom_color_note?: string | null
+          custom_deposit_amount?: number | null
+          custom_warranty_note?: string | null
+          deposit_type?: string
+          gold_total?: number
+          id?: string
+          line_items?: Json | null
+          moisture_content?: number | null
+          platinum_total?: number
+          presentation_notes?: string | null
+          selected_deposit_amount?: number | null
+          selected_package?: string | null
+          signature_data?: string | null
+          signed_at?: string | null
+          silver_total?: number
+          site_photos?: string[] | null
+          space_type?: string
+          square_footage?: number
+          status?: string
+          updated_at?: string
+          warranty_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_presentations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sales_records: {
         Row: {
           amount: number

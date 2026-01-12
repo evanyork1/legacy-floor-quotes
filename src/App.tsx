@@ -48,6 +48,7 @@ import GarageFloorsDallasFB from "./pages/GarageFloorsDallasFB";
 import FloorVisualizer from "./pages/FloorVisualizer";
 import CRM from "./pages/CRM";
 import SalesPresentation from "./pages/SalesPresentation";
+import CustomerPresentationPage from "./pages/CustomerPresentationPage";
 
 
 const queryClient = new QueryClient();
@@ -101,6 +102,7 @@ function App() {
               <Route path="/sales-dashboard" element={<SalesDashboard />} />
               <Route path="/crm" element={<CRM />} />
               <Route path="/sales-presentation" element={<SalesPresentation />} />
+              <Route path="/presentation/:id" element={<CustomerPresentationPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>

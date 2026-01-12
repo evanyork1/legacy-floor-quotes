@@ -11,6 +11,7 @@ export interface LineItem {
   name: string;
   pricePerSqFt: number;
   isCustom?: boolean;
+  note?: string; // For disclaimers
 }
 
 export type PresentationData = {
@@ -22,32 +23,42 @@ export type PresentationData = {
   clientAddress: string;
   
   // Project details
-  spaceType: string; // Garage, Patio, Porch
+  spaceType: string; // Garage Floor, Patio Floor
   squareFootage: number;
   moistureContent: number;
-  
-  // Package selection
-  packageLevel: 'silver' | 'gold' | 'platinum';
   
   // Color
   colorChoice: string;
   customColorNote: string;
   
-  // Line items
+  // Line items (add-ons only, not package selection)
   lineItems: LineItem[];
   
-  // Notes
+  // Warranty selection
+  warrantyType: 'lifetime' | '15year' | 'custom';
+  customWarrantyNote: string;
+  
+  // Deposit selection
+  depositType: '10' | '50' | '100' | 'custom';
+  customDepositAmount: number | null;
+  
+  // Presentation notes (disclaimers for customer to sign)
+  presentationNotes: string;
+  
+  // Notes for Jobber client profile
   notes: string;
   
-  // Pricing (calculated)
-  totalPrice: number;
+  // Calculated pricing for each package tier
+  silverTotal: number;
+  goldTotal: number;
+  platinumTotal: number;
   
   // Media
   sitePhotos: File[];
   sitePhotoUrls: string[];
 };
 
-// Package pricing constants
+// Package pricing constants (per sqft)
 export const PACKAGE_PRICING = {
   silver: 5.00,
   gold: 7.10,
@@ -60,6 +71,12 @@ export const PRESET_LINE_ITEMS: LineItem[] = [
   { id: 'grp-additive', name: 'GRP Additive', pricePerSqFt: 0.40 },
 ];
 
+// Space type options (these become the primary line item types)
+export const SPACE_TYPE_OPTIONS = [
+  { value: 'Garage Floor', label: 'Garage Floor' },
+  { value: 'Patio Floor', label: 'Patio Floor' },
+];
+
 export default function SalesPresentation() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<'intake' | 'present'>('intake');
@@ -68,15 +85,21 @@ export default function SalesPresentation() {
     clientEmail: '',
     clientPhone: '',
     clientAddress: '',
-    spaceType: 'Garage',
+    spaceType: 'Garage Floor',
     squareFootage: 400,
     moistureContent: 3,
-    packageLevel: 'gold',
     colorChoice: 'Domino',
     customColorNote: '',
     lineItems: [],
+    warrantyType: 'lifetime',
+    customWarrantyNote: '',
+    depositType: '50',
+    customDepositAmount: null,
+    presentationNotes: '',
     notes: '',
-    totalPrice: 2840, // 400 * 7.10
+    silverTotal: 2000, // 400 * 5.00
+    goldTotal: 2840, // 400 * 7.10
+    platinumTotal: 3800, // 400 * 9.50
     sitePhotos: [],
     sitePhotoUrls: [],
   });
