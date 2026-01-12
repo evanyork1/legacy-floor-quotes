@@ -155,7 +155,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
 
   const handleSelectClient = (client: any) => {
     // Get the first property ID if available (needed for Jobber quotes)
-    const propertyId = client.properties?.nodes?.[0]?.id || null;
+    const propertyId = client.properties?.[0]?.id || null;
     
     onChange({
       ...data,

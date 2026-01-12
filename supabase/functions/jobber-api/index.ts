@@ -288,11 +288,12 @@ serve(async (req: Request) => {
                   city
                   postalCode
                 }
-                defaultProperty {
+                properties {
                   id
                   address {
                     street1
                     city
+                    postalCode
                   }
                 }
               }
