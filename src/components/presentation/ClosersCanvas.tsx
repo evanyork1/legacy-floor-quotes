@@ -12,6 +12,10 @@ interface ClosersCanvasProps {
 }
 
 export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps) {
+  const handleColorChange = (color: string) => {
+    onDataChange({ ...data, colorChoice: color });
+  };
+
   // Transform data for CustomerPresentation component
   const presentationData = {
     id: '', // Empty for live presentation
@@ -36,6 +40,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
     selectedPackage: null,
     status: 'pending',
     sitePhotos: data.sitePhotoUrls,
+    floorEntries: data.floorEntries,
   };
 
   return (
@@ -53,6 +58,7 @@ export function ClosersCanvas({ data, onBack, onDataChange }: ClosersCanvasProps
         data={presentationData}
         onUpdate={() => {}}
         isShareable={false}
+        onColorChange={handleColorChange}
       />
     </div>
   );

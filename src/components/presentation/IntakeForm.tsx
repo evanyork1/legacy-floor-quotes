@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { PresentationData, PACKAGE_PRICING, PRESET_LINE_ITEMS, SPACE_TYPE_OPTIONS, FLOOR_TYPES, ADDITIVE_OPTIONS, LineItem, FloorEntry } from '@/pages/SalesPresentation';
-import { TodaysCalendar } from './TodaysCalendar';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
@@ -166,23 +165,6 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     setSearchTerm('');
   };
 
-  const handleSelectFromCalendar = (client: {
-    id: string;
-    name: string;
-    email?: string;
-    phone?: string;
-    address?: string;
-  }) => {
-    onChange({
-      ...data,
-      clientId: client.id,
-      clientName: client.name,
-      clientEmail: client.email || '',
-      clientPhone: client.phone || '',
-      clientAddress: client.address || '',
-    });
-  };
-
   const handleCreateNewClient = () => {
     setIsCreatingClient(true);
     onChange({
@@ -330,14 +312,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 space-y-6">
-      {/* Today's Calendar Section */}
-      <TodaysCalendar onSelectClient={handleSelectFromCalendar} />
-
       {/* Client Section */}
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">1</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">1</span>
             Select Customer
           </CardTitle>
         </CardHeader>
@@ -353,7 +332,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 />
                 <div className="absolute right-4 top-1/2 -translate-y-1/2">
                   {isSearching ? (
-                    <Loader2 className="h-5 w-5 animate-spin text-orange-400" />
+                    <Loader2 className="h-5 w-5 animate-spin text-[#1e3a5f]" />
                   ) : (
                     <Search className="h-5 w-5 text-slate-400" />
                   )}
@@ -407,8 +386,8 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 <Input
                   type="email"
                   value={data.clientEmail}
-                  onChange={(e) => onChange({ ...data, clientEmail: e.target.value })}
-                  className="bg-slate-800 border-slate-700 text-white h-12"
+                  readOnly
+                  className="bg-slate-800 border-slate-700 text-slate-400 h-12 cursor-not-allowed"
                 />
               </div>
               <div>
@@ -416,16 +395,16 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 <Input
                   type="tel"
                   value={data.clientPhone}
-                  onChange={(e) => onChange({ ...data, clientPhone: e.target.value })}
-                  className="bg-slate-800 border-slate-700 text-white h-12"
+                  readOnly
+                  className="bg-slate-800 border-slate-700 text-slate-400 h-12 cursor-not-allowed"
                 />
               </div>
               <div>
                 <Label className="text-slate-300">Address</Label>
                 <Input
                   value={data.clientAddress}
-                  onChange={(e) => onChange({ ...data, clientAddress: e.target.value })}
-                  className="bg-slate-800 border-slate-700 text-white h-12"
+                  readOnly
+                  className="bg-slate-800 border-slate-700 text-slate-400 h-12 cursor-not-allowed"
                 />
               </div>
               <Button 
@@ -448,7 +427,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">2</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">2</span>
             Floor Areas
           </CardTitle>
         </CardHeader>
@@ -458,8 +437,8 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
             <div key={entry.id} className="bg-slate-800 rounded-xl p-4 space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-orange-400">#{index + 1}</span>
-                  <Select 
+                  <span className="text-lg font-bold text-[#1e3a5f]">#{index + 1}</span>
+                  <Select
                     value={entry.floorType} 
                     onValueChange={(v) => {
                       const newEntries = [...(data.floorEntries || [])];
@@ -530,13 +509,13 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                         }}
                         className={`p-3 rounded-lg border text-left transition-all ${
                           isSelected
-                            ? 'border-orange-500 bg-orange-500/10'
+                            ? 'border-[#1e3a5f] bg-[#1e3a5f]/10'
                             : 'border-slate-600 bg-slate-700/50 hover:border-slate-500'
                         }`}
                       >
                         <div className="flex items-center gap-2">
                           <Checkbox checked={isSelected} className="pointer-events-none" />
-                          <span className={`text-sm font-medium ${isSelected ? 'text-orange-400' : 'text-white'}`}>
+                          <span className={`text-sm font-medium ${isSelected ? 'text-[#1e3a5f]' : 'text-white'}`}>
                             {additive.name}
                           </span>
                         </div>
@@ -596,7 +575,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">3</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">3</span>
             Select Color
           </CardTitle>
         </CardHeader>
@@ -632,7 +611,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">4</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">4</span>
             Warranty
           </CardTitle>
         </CardHeader>
@@ -668,7 +647,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">5</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">5</span>
             Deposit Amount
           </CardTitle>
         </CardHeader>
@@ -680,11 +659,11 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                 onClick={() => onChange({ ...data, depositType: opt.value as any })}
                 className={`p-4 rounded-xl border-2 transition-all ${
                   data.depositType === opt.value
-                    ? 'border-orange-500 bg-orange-500/10'
+                    ? 'border-[#1e3a5f] bg-[#1e3a5f]/10'
                     : 'border-slate-700 bg-slate-800 hover:border-slate-600'
                 }`}
               >
-                <div className={`font-bold ${data.depositType === opt.value ? 'text-orange-400' : 'text-white'}`}>
+                <div className={`font-bold ${data.depositType === opt.value ? 'text-white' : 'text-white'}`}>
                   {opt.label}
                 </div>
               </button>
@@ -710,7 +689,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">6</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">6</span>
             Custom Extras
           </CardTitle>
         </CardHeader>
@@ -739,7 +718,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
               </div>
               <Button
                 onClick={addCustomLineItem}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-[#1e3a5f] hover:bg-[#2a4a70]"
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -771,7 +750,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                       )}
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-orange-400 font-medium">
+                      <span className="text-[#1e3a5f] font-medium">
                         +${(data.squareFootage * item.pricePerSqFt).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </span>
                       <Button
@@ -795,7 +774,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">7</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">7</span>
             Presentation Notes / Disclaimers
           </CardTitle>
         </CardHeader>
@@ -814,7 +793,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">8</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">8</span>
             Jobber Notes
           </CardTitle>
         </CardHeader>
@@ -833,7 +812,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-bold">9</span>
+            <span className="w-8 h-8 rounded-full bg-[#1e3a5f] flex items-center justify-center text-sm font-bold">9</span>
             Pre-Job Site Photos
           </CardTitle>
         </CardHeader>
@@ -851,7 +830,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
               </div>
             ))}
             
-            <label className="aspect-square rounded-lg border-2 border-dashed border-slate-600 flex flex-col items-center justify-center cursor-pointer hover:border-orange-500 hover:bg-slate-800/50 transition-colors">
+            <label className="aspect-square rounded-lg border-2 border-dashed border-slate-600 flex flex-col items-center justify-center cursor-pointer hover:border-[#1e3a5f] hover:bg-slate-800/50 transition-colors">
               <Camera className="h-8 w-8 text-slate-500 mb-2" />
               <span className="text-sm text-slate-500">Add Photo</span>
               <input
@@ -892,7 +871,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
                     <span className="text-slate-400">{entry.squareFootage} sqft</span>
                   </div>
                   {additiveNames.length > 0 && (
-                    <div className="text-xs text-orange-400 mt-1">
+                    <div className="text-xs text-[#1e3a5f] mt-1">
                       + {additiveNames.join(', ')} (+${additiveCost.toLocaleString()})
                     </div>
                   )}
@@ -984,7 +963,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           <Button
             onClick={onStartPresentation}
             disabled={!data.clientName}
-            className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-2xl shadow-orange-500/30"
+            className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-[#1e3a5f] to-[#2a4a70] hover:from-[#2a4a70] hover:to-[#365b82] shadow-2xl shadow-[#1e3a5f]/30"
           >
             Present Now
             <ChevronRight className="h-6 w-6 ml-2" />

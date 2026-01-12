@@ -4,10 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SignaturePad } from './SignaturePad';
 import { colorOptions } from '@/constants/colorOptions';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+
+interface FloorEntry {
+  id: string;
+  floorType: string;
+  squareFootage: number;
+  additives: string[];
+}
 
 interface PresentationData {
   id: string;
@@ -32,12 +40,14 @@ interface PresentationData {
   selectedPackage: string | null;
   status: string;
   sitePhotos: string[];
+  floorEntries?: FloorEntry[];
 }
 
 interface CustomerPresentationProps {
   data: PresentationData;
   onUpdate: (updates: Partial<PresentationData>) => void;
   isShareable?: boolean;
+  onColorChange?: (color: string) => void;
 }
 
 const PACKAGE_FEATURES = {
@@ -138,7 +148,23 @@ Legacy Industrial Coatings is NOT responsible for damages caused by premature us
 
 Customer agrees to saving a card on file. When job is complete we will contact you to confirm us charging the remaining balance.`;
 
-export function CustomerPresentation({ data, onUpdate, isShareable = false }: CustomerPresentationProps) {
+const COLOR_OPTIONS = [
+  'Domino',
+  'Creek Bed',
+  'Wombat',
+  'Tidal Wave',
+  'Raven',
+  'Cabin Fever',
+];
+
+const FLOOR_TYPE_LABELS: Record<string, string> = {
+  garage: 'Garage Floor',
+  patio: 'Patio Floor',
+  basement: 'Basement',
+  commercial: 'Commercial Space',
+};
+
+export function CustomerPresentation({ data, onUpdate, isShareable = false, onColorChange }: CustomerPresentationProps) {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(data.selectedPackage);
   const [showAgreement, setShowAgreement] = useState(false);
   const [agreementScrolled, setAgreementScrolled] = useState(false);
@@ -147,8 +173,16 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false }: Cu
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(data.status === 'signed');
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const [currentColor, setCurrentColor] = useState(data.colorChoice);
 
-  const selectedColor = colorOptions.find(c => c.id === data.colorChoice.toLowerCase().replace(' ', '-')) || colorOptions[0];
+  const selectedColor = colorOptions.find(c => c.id === currentColor.toLowerCase().replace(' ', '-')) || colorOptions[0];
+
+  const handleColorChange = (color: string) => {
+    setCurrentColor(color);
+    if (onColorChange) {
+      onColorChange(color);
+    }
+  };
 
   const getPackageTotal = (pkg: 'silver' | 'gold' | 'platinum') => {
     switch (pkg) {
@@ -260,26 +294,52 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false }: Cu
       <section className="bg-gradient-to-b from-[#1e3a5f] to-[#2a4a70] text-white py-12 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Flake Floor Options</h1>
         
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-8">
+        {/* Floor Entries */}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
+          {data.floorEntries && data.floorEntries.length > 0 ? (
+            data.floorEntries.map((entry, index) => (
+              <div key={entry.id || index} className="text-center">
+                <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">
+                  {FLOOR_TYPE_LABELS[entry.floorType] || entry.floorType}
+                </div>
+                <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold">
+                  {entry.squareFootage} sq ft
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-center">
+              <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">Square Footage</div>
+              <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold">{data.squareFootage} sq ft</div>
+            </div>
+          )}
           <div className="text-center">
-            <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">Square Footage</div>
+            <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">Total</div>
             <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold">{data.squareFootage} sq ft</div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">Color</div>
-            <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold capitalize">{data.colorChoice}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-blue-200 uppercase tracking-wide mb-1">Space Type</div>
-            <div className="bg-white/10 rounded-lg px-6 py-3 text-xl font-bold">{data.spaceType}</div>
           </div>
         </div>
       </section>
 
-      {/* Color Preview */}
+      {/* Color Selection & Preview */}
       <section className="py-12 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">Your Selected Color: {selectedColor.name}</h2>
+          <div className="flex flex-col items-center gap-4 mb-6">
+            <h2 className="text-2xl font-bold text-center text-gray-900">Selected Color</h2>
+            {!isShareable && onColorChange && (
+              <Select value={currentColor} onValueChange={handleColorChange}>
+                <SelectTrigger className="w-64 bg-white border-gray-300">
+                  <SelectValue placeholder="Select color" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border-gray-200">
+                  {COLOR_OPTIONS.map((color) => (
+                    <SelectItem key={color} value={color} className="hover:bg-gray-100">
+                      {color}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          </div>
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             {selectedColor.preview ? (
               <img 
@@ -422,8 +482,8 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false }: Cu
             </div>
             <div className="bg-amber-50 rounded-xl p-6 text-center">
               <Star className="h-10 w-10 text-amber-600 mx-auto mb-3" />
-              <h3 className="font-bold text-lg text-gray-900">BBB A+ Rated</h3>
-              <p className="text-sm text-gray-600 mt-2">Trusted since 2015</p>
+              <h3 className="font-bold text-lg text-gray-900">3,000+ Floors</h3>
+              <p className="text-sm text-gray-600 mt-2">Garage floors installed</p>
             </div>
           </div>
         </div>

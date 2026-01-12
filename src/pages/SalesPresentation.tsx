@@ -89,8 +89,6 @@ export const FLOOR_TYPES = [
 export const ADDITIVE_OPTIONS: LineItem[] = [
   { id: 'custom-flake', name: 'Custom Flake', pricePerSqFt: 1.50, category: 'additive' },
   { id: 'grp-additive', name: 'GRP Additive', pricePerSqFt: 0.40, category: 'additive' },
-  { id: 'crack-repair', name: 'Crack Repair', pricePerSqFt: 0.25, category: 'additive' },
-  { id: 'hot-tire-pickup', name: 'Hot Tire Pickup Protection', pricePerSqFt: 0.60, category: 'additive' },
 ];
 
 // Legacy preset for backwards compatibility
@@ -145,7 +143,7 @@ export default function SalesPresentation() {
       {mode === 'intake' ? (
         <>
           {/* Header */}
-          <header className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between sticky top-0 z-50">
+          <header className="bg-[#1e3a5f] border-b border-slate-700 px-4 py-3 flex items-center justify-between sticky top-0 z-50">
             <div className="flex items-center gap-4">
               <Button 
                 variant="ghost" 
@@ -167,7 +165,7 @@ export default function SalesPresentation() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setMode('intake')}
-                className="bg-orange-500 hover:bg-orange-600 text-white"
+                className="bg-[#1e3a5f] hover:bg-[#2a4a70] text-white border border-white/20"
               >
                 <FileText className="h-4 w-4 mr-2" />
                 Intake
