@@ -350,7 +350,7 @@ serve(async (req: Request) => {
           });
         }
         
-        // Build attributes for quote creation
+      // Build attributes for quote creation
         // Note: saveToProductsAndServices is required for each line item
         const quoteAttributes: Record<string, unknown> = {
           clientId: data?.clientId,
@@ -363,6 +363,11 @@ serve(async (req: Request) => {
             saveToProductsAndServices: false, // Required field - don't save as product template
           })),
           message: data?.notes || '',
+          // Add required deposit for payment collection
+          requiredDeposit: {
+            depositType: data?.depositType || 'PERCENTAGE',
+            value: data?.depositPercentage || 50,
+          },
         };
 
         // If propertyId is provided, include it
@@ -426,6 +431,7 @@ serve(async (req: Request) => {
               quote {
                 id
                 quoteStatus
+                clientHubUri
               }
               userErrors {
                 message
@@ -434,9 +440,11 @@ serve(async (req: Request) => {
             }
           }
         `;
+        // Use AWAITING_RESPONSE to send the quote to the customer for approval/payment
+        // Then customer can approve and pay through Client Hub
         variables = {
           quoteId: data?.quoteId,
-          status: 'APPROVED',
+          status: data?.targetStatus || 'AWAITING_RESPONSE',
         };
         break;
 

@@ -402,6 +402,22 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
     }
   };
 
+  // Calculate deposit percentage for Jobber
+  const getDepositPercentage = () => {
+    switch (data.depositType) {
+      case '10': return 10;
+      case '50': return 50;
+      case '100': return 100;
+      case 'custom': 
+        // Calculate percentage from custom amount
+        if (data.customDepositAmount && data.goldTotal > 0) {
+          return Math.round((data.customDepositAmount / data.goldTotal) * 100);
+        }
+        return 50;
+      default: return 50;
+    }
+  };
+
   // Create Jobber quote and start presentation
   const handlePresentNow = async () => {
     if (!data.clientName) {
@@ -433,8 +449,10 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
             propertyId: data.propertyId, // Include property ID for quote creation
             title: `Floor Coating - ${data.clientName}`,
             lineItems,
-            depositAmount,
             notes: data.presentationNotes || `Floor coating quote for ${data.squareFootage} sq ft`,
+            // Pass deposit info for required deposit on the quote
+            depositType: 'PERCENTAGE',
+            depositPercentage: getDepositPercentage(),
           },
         },
       });
