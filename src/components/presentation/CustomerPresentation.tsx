@@ -243,19 +243,25 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
     setIsSubmitting(true);
 
     try {
-      // If we have a Jobber quote, approve it first
+      // If we have a Jobber quote, send it to the customer (AWAITING_RESPONSE status)
+      // This allows them to view and pay through Client Hub
       if (data.jobberQuoteId) {
-        console.log('Approving Jobber quote:', data.jobberQuoteId);
-        const { error: approveError } = await supabase.functions.invoke('jobber-api', {
+        console.log('Sending Jobber quote to customer:', data.jobberQuoteId);
+        const { data: sendResult, error: sendError } = await supabase.functions.invoke('jobber-api', {
           body: {
             action: 'approveQuote',
-            data: { quoteId: data.jobberQuoteId }
+            data: { 
+              quoteId: data.jobberQuoteId,
+              targetStatus: 'AWAITING_RESPONSE' // Send to customer for approval/payment
+            }
           }
         });
         
-        if (approveError) {
-          console.error('Error approving Jobber quote:', approveError);
+        if (sendError) {
+          console.error('Error sending Jobber quote:', sendError);
           // Continue anyway - we'll show the payment option
+        } else {
+          console.log('Quote sent to customer, they can now approve and pay in Client Hub:', sendResult);
         }
       }
 
