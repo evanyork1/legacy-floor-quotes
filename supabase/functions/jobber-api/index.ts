@@ -363,11 +363,6 @@ serve(async (req: Request) => {
             saveToProductsAndServices: false, // Required field - don't save as product template
           })),
           message: data?.notes || '',
-          // Add required deposit for payment collection
-          requiredDeposit: {
-            depositType: data?.depositType || 'PERCENTAGE',
-            value: data?.depositPercentage || 50,
-          },
         };
 
         // If propertyId is provided, include it
