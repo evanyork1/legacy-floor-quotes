@@ -92,7 +92,7 @@ const AboutCommercial = () => {
               Ready to discuss your next project? Our estimators are standing by.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => navigate("/commercialfloors#contact")} className="px-8 py-4 bg-blue-600 text-white font-semibold text-sm uppercase tracking-[0.15em] hover:bg-blue-500 transition-colors">
+              <button onClick={() => navigate("/commercialfloors#contact")} className="px-8 py-4 bg-blue-600 text-white font-semibold text-sm uppercase tracking-[0.15em] hover:bg-blue-500 transition-colors inline-flex items-center justify-center">
                 Contact Us
               </button>
               <a href="tel:2143056516" className="px-8 py-4 border border-white/30 text-white font-semibold text-sm uppercase tracking-[0.15em] hover:border-blue-400 hover:text-blue-400 transition-colors inline-flex items-center justify-center gap-2">

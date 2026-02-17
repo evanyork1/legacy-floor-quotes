@@ -47,16 +47,13 @@ const reasons = [
   { icon: Wrench, title: "Full-Service Capability", description: "From surface prep and joint filling to final polish and densification — one team handles it all with zero handoff issues." },
 ];
 
-/* placeholder gallery — swap src values later */
+/* gallery images */
 const galleryImages = [
-  { id: 1, src: polishingImage, alt: "Commercial polishing project" },
-  { id: 2, src: datacenterImg, alt: "Data center floor" },
-  { id: 3, src: warehouseImg, alt: "Warehouse floor" },
-  { id: 4, src: retailImg, alt: "Retail floor" },
-  { id: 5, src: manufacturingImg, alt: "Manufacturing floor" },
-  { id: 6, src: heroImage, alt: "Commercial floor project" },
-  { id: 7, src: polishingImage, alt: "Polished concrete" },
-  { id: 8, src: datacenterImg, alt: "Commercial project" },
+  { id: 1, src: "/commercial/gallery-polished-warehouse.png", alt: "Polished warehouse floor" },
+  { id: 2, src: "/commercial/gallery-epoxy-room.jpeg", alt: "Epoxy coated room" },
+  { id: 3, src: "/commercial/gallery-polished-closeup.jpg", alt: "Polished concrete closeup" },
+  { id: 4, src: "/commercial/gallery-grinding-warehouse.jpg", alt: "Grinding in warehouse" },
+  { id: 5, src: "/commercial/aloe-vera-polished.png", alt: "Aloe Vera of America polished floor" },
 ];
 
 /* ──────────────── counter ──────────────── */
@@ -317,10 +314,10 @@ const CommercialFloors = () => {
         <div className="container mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <div className="w-12 h-[2px] bg-blue-500 mb-6" />
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4 font-medium">Case Study</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4 font-medium">Aloe Vera of America</p>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-[0.95]">
-              ALOE VERA<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">OF AMERICA</span>
+              CASE<br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">STUDY</span>
             </h2>
           </motion.div>
 
@@ -349,9 +346,8 @@ const CommercialFloors = () => {
                 </div>
               </div>
 
-              {/* Placeholder for case study photos */}
-              <div className="mt-8 aspect-video bg-[hsl(0,0%,12%)] border border-white/10 flex items-center justify-center">
-                <p className="text-white/30 text-sm uppercase tracking-widest">Photos Coming Soon</p>
+              <div className="mt-8 aspect-video overflow-hidden border border-white/10">
+                <img src="/commercial/aloe-vera-polished.png" alt="Aloe Vera of America — 50,000 sq ft polished concrete" className="w-full h-full object-cover" />
               </div>
             </motion.div>
 

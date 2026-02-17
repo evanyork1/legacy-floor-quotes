@@ -6,8 +6,7 @@ const SplashSelect = () => {
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-6 relative overflow-hidden select-none">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_45%,_rgba(37,99,235,0.06)_0%,_transparent_70%)] pointer-events-none" />
+      {/* Subtle ambient */}
 
       {/* Thin horizontal rule accent */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-600/30 to-transparent" />
@@ -17,7 +16,7 @@ const SplashSelect = () => {
         <img
           src={legacyLogo}
           alt="Legacy Industrial Coatings"
-          className="w-64 sm:w-80 md:w-96 mb-6 drop-shadow-[0_0_40px_rgba(37,99,235,0.12)]"
+          className="w-64 sm:w-80 md:w-96 mb-6"
         />
 
         {/* Divider */}
