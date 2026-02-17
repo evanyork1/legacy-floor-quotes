@@ -1,50 +1,60 @@
 import { useNavigate } from "react-router-dom";
+import legacyLogo from "@/assets/legacy-logo-white.png";
 
 const SplashSelect = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 relative overflow-hidden">
-      {/* Subtle radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(37,99,235,0.08)_0%,_transparent_70%)]" />
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-6 relative overflow-hidden select-none">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_45%,_rgba(37,99,235,0.06)_0%,_transparent_70%)] pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center animate-fade-in">
+      {/* Thin horizontal rule accent */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-600/30 to-transparent" />
+
+      <div className="relative z-10 flex flex-col items-center splash-entrance">
         {/* Logo */}
         <img
-          src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png"
+          src={legacyLogo}
           alt="Legacy Industrial Coatings"
-          className="h-20 sm:h-28 md:h-32 w-auto mb-8"
+          className="w-64 sm:w-80 md:w-96 mb-6 drop-shadow-[0_0_40px_rgba(37,99,235,0.12)]"
         />
 
+        {/* Divider */}
+        <div className="w-16 h-[1px] bg-blue-600/40 mb-6" />
+
         {/* Tagline */}
-        <p className="text-gray-400 text-sm sm:text-base tracking-[0.25em] uppercase mb-12 text-center">
-          Premium Floor Coatings
+        <p className="text-gray-500 text-xs sm:text-sm tracking-[0.35em] uppercase mb-16 text-center font-light">
+          Premium Floor Coatings and Polishing
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-md sm:max-w-lg">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full max-w-sm sm:max-w-md">
           <button
             onClick={() => navigate("/dfw")}
-            className="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-lg sm:text-xl font-semibold py-5 px-10 rounded-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] active:scale-[0.98]"
+            className="flex-1 border border-blue-500/60 bg-blue-600/10 backdrop-blur-sm text-white text-sm sm:text-base font-medium tracking-widest uppercase py-4 px-8 rounded transition-all duration-300 hover:bg-blue-600 hover:border-blue-500 hover:shadow-[0_0_30px_rgba(37,99,235,0.25)] active:scale-[0.97]"
           >
             Residential
           </button>
           <button
             onClick={() => navigate("/commercialfloors")}
-            className="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-lg sm:text-xl font-semibold py-5 px-10 rounded-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] active:scale-[0.98]"
+            className="flex-1 border border-blue-500/60 bg-blue-600/10 backdrop-blur-sm text-white text-sm sm:text-base font-medium tracking-widest uppercase py-4 px-8 rounded transition-all duration-300 hover:bg-blue-600 hover:border-blue-500 hover:shadow-[0_0_30px_rgba(37,99,235,0.25)] active:scale-[0.97]"
           >
             Commercial
           </button>
         </div>
       </div>
 
+      {/* Bottom accent line */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-600/20 to-transparent" />
+
       <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
+        @keyframes splash-up {
+          from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
+        .splash-entrance {
+          animation: splash-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
       `}</style>
     </div>
