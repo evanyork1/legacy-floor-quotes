@@ -24,7 +24,7 @@ const SplashSelect = () => {
         <div className="w-16 h-[1px] bg-blue-600/40 mb-6" />
 
         {/* Tagline */}
-        <p className="text-gray-500 text-xs sm:text-sm tracking-[0.35em] uppercase mb-16 text-center font-light">
+        <p className="text-gray-300 text-sm sm:text-base tracking-[0.3em] uppercase mb-14 sm:mb-16 text-center font-light">
           Premium Floor Coatings and Polishing
         </p>
 
