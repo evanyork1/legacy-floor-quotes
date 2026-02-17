@@ -51,6 +51,7 @@ import SalesPresentation from "./pages/SalesPresentation";
 import CustomerPresentationPage from "./pages/CustomerPresentationPage";
 import SplashSelect from "./pages/SplashSelect";
 import CommercialFloors from "./pages/CommercialFloors";
+import AboutCommercial from "./pages/AboutCommercial";
 
 
 const queryClient = new QueryClient();
@@ -82,6 +83,7 @@ function App() {
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
               <Route path="/commercialfloors" element={<CommercialFloors />} />
+              <Route path="/about-commercial" element={<AboutCommercial />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
