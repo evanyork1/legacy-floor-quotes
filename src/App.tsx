@@ -49,6 +49,8 @@ import FloorVisualizer from "./pages/FloorVisualizer";
 import CRM from "./pages/CRM";
 import SalesPresentation from "./pages/SalesPresentation";
 import CustomerPresentationPage from "./pages/CustomerPresentationPage";
+import SplashSelect from "./pages/SplashSelect";
+import CommercialFloors from "./pages/CommercialFloors";
 
 
 const queryClient = new QueryClient();
@@ -60,7 +62,7 @@ function App() {
         <AuthProvider>
           <Router>
             <Routes>
-              <Route path="/" element={<DFW />} />
+              <Route path="/" element={<SplashSelect />} />
               <Route path="/dfw" element={<DFW />} />
               <Route path="/phx" element={<PHX />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
@@ -79,6 +81,7 @@ function App() {
               <Route path="/prosper" element={<Prosper />} />
               <Route path="/industrial-epoxy" element={<IndustrialEpoxy />} />
               <Route path="/commercial" element={<Commercial />} />
+              <Route path="/commercialfloors" element={<CommercialFloors />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
