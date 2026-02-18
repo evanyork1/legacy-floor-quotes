@@ -63,7 +63,7 @@ function App() {
         <AuthProvider>
           <Router>
             <Routes>
-              <Route path="/" element={<SplashSelect />} />
+              <Route path="/" element={<DFW />} />
               <Route path="/dfw" element={<DFW />} />
               <Route path="/phx" element={<PHX />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
