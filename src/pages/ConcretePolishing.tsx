@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { ServiceAreasStrip } from "@/components/seo/ServiceAreasStrip";
+
 import polishingShowroom from "@/assets/polishing-gallery-showroom.jpg";
 import polishingWarehouse from "@/assets/polishing-gallery-warehouse.jpg";
 import polishingOffice from "@/assets/polishing-gallery-office.png";
@@ -360,7 +360,6 @@ const ConcretePolishing = () => {
           </div>
         </section>
 
-        <ServiceAreasStrip />
         </main>
 
         <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
