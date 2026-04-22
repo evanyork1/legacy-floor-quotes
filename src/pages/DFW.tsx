@@ -13,7 +13,7 @@ import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import { QuickFeaturesSection } from "@/components/sections/QuickFeaturesSection";
 import { FloatingEstimateCTA } from "@/components/ui/floating-estimate-cta";
 import { AboutUsSection } from "@/components/sections/AboutUsSection";
-import { ServiceAreasStrip } from "@/components/seo/ServiceAreasStrip";
+
 import { StructuredData } from "@/components/seo/StructuredData";
 
 const homepageFaqs = [
@@ -118,7 +118,6 @@ const DFW = () => {
           </section>
 
           <CTASection />
-          <ServiceAreasStrip />
         </main>
 
         <div id="footer">
