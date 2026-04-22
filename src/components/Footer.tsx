@@ -17,9 +17,22 @@ const Footer = () => {
       }
     }
   };
+  const services = [
+    { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
+    { href: "/concrete-polishing", label: "Polished Concrete Floors" },
+    { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
+    { href: "/commercialfloors", label: "Commercial Floor Coatings" },
+    { href: "/residential-patio", label: "Residential Patio Coatings" },
+    { href: "/flake-floors", label: "Polyurea Flake Floor Systems" },
+  ];
+  const cities = [
+    "Dallas", "Fort Worth", "Plano", "Frisco", "McKinney", "Allen",
+    "Richardson", "Carrollton", "Lewisville", "Prosper", "Celina",
+    "Sherman", "Anna", "Melissa", "Sanger", "The Colony", "Flower Mound"
+  ];
   return <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
           
           {/* Company Info & Logo */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-6">
@@ -82,12 +95,35 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Services */}
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">SERVICES</h3>
+            <ul className="space-y-2 sm:space-y-3">
+              {services.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Service Areas */}
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
-            <div className="text-gray-300 text-sm leading-relaxed space-y-2">
-              <p className="font-semibold">Dallas-Fort Worth Metroplex</p>
-              <p className="font-semibold">Phoenix Metroplex</p>
+            <div className="text-gray-300 text-sm leading-relaxed">
+              <p className="font-semibold mb-2">Dallas-Fort Worth Metroplex</p>
+              <ul className="space-y-1 mb-3">
+                {cities.map((c) => (
+                  <li key={c}>
+                    <a href="/service-areas" className="hover:text-blue-400 transition-colors">
+                      {c}, TX
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="font-semibold mt-3">Phoenix Metroplex</p>
             </div>
           </div>
 
