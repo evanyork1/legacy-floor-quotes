@@ -283,6 +283,61 @@ const ConcretePolishing = () => {
         {/* Process Section */}
         
 
+        {/* SEO Content — Polishing-only (no epoxy keywords) */}
+        <section className="py-20 bg-white" aria-labelledby="polish-content-heading">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 id="polish-content-heading" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 text-center">
+              Mechanical Polished Concrete in Dallas-Fort Worth
+            </h2>
+            <div className="prose prose-lg max-w-none text-gray-700 space-y-5 leading-relaxed">
+              <p>
+                Legacy Industrial Coatings is a specialist in <strong>mechanical concrete polishing</strong> for the Dallas-Fort Worth metroplex. Our crews refine raw concrete slabs into permanently hardened, light-reflective floors using progressively finer diamond tooling — the same process specified by national retailers, distribution centers, and Class-A office developers across North Texas.
+              </p>
+              <p>
+                Polished concrete is not a coating. It is the existing slab itself, transformed through grinding, honing, lithium-silicate <strong>densification</strong>, and burnishing. Because nothing is layered on top, there is nothing to peel, chip, or delaminate — making mechanically polished concrete the longest-lasting industrial floor available.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">The Polishing Process</h3>
+              <p>
+                Every job begins with diamond grinding to remove surface contamination and open the slab. We then apply a lithium-silicate densifier that chemically reacts with free calcium hydroxide to harden the concrete from the inside out. Successive passes with finer diamond resin pads bring out the chosen aggregate exposure — cream, salt-and-pepper, or medium-aggregate — followed by a final burnishing pass that locks in clarity and sheen.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">FF/FL Flatness for Warehouses</h3>
+              <p>
+                For DFW logistics, distribution, and manufacturing clients, we can grind to specified <strong>FF/FL flatness</strong> numbers, correcting high spots and joints to meet warehouse spec sheets. The result is a tighter, flatter slab that improves rack stability, reduces forklift wear, and extends the life of high-traffic aisles.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Where We Polish</h3>
+              <p>
+                Our polished concrete crews work throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, Sherman, Anna, Melissa, Sanger, The Colony, and Flower Mound</strong>. Typical projects include warehouses, distribution centers, retail stores, restaurants, breweries, showrooms, and Class-A commercial offices that need a durable, dust-free, low-maintenance floor.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Why DFW Facilities Choose Polished Concrete</h3>
+              <p>
+                A properly polished concrete slab reduces lifetime maintenance costs, improves indoor lighting through higher reflectivity, eliminates concrete dusting, and contributes to LEED credits through reused materials and low-VOC processes. Combined with our densification chemistry, the slab becomes harder, more abrasion-resistant, and significantly easier to clean than raw or sealed concrete.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Always-visible FAQ for AEO */}
+        <section className="py-20 bg-slate-50" aria-labelledby="polish-faq-heading">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-10">
+              <h2 id="polish-faq-heading" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+                Polished Concrete FAQ
+              </h2>
+              <p className="text-lg text-gray-600">
+                Common questions about our DFW polished concrete services.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {polishingFaqs.map((faq, i) => (
+                <article key={i} className="border-b border-gray-200 pb-6 last:border-0">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
@@ -304,6 +359,9 @@ const ConcretePolishing = () => {
             </div>
           </div>
         </section>
+
+        <ServiceAreasStrip />
+        </main>
 
         <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
 
