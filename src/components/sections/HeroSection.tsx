@@ -18,8 +18,8 @@ const HeroSection = () => {
   const isProsper = location.pathname === '/epoxy-flooring-prosper';
   const isFrisco = location.pathname === '/epoxy-flooring-frisco';
   
-  const title = isCommercial ? "DFW's Commercial Flooring" : (isPHX ? "Phoenix's Epoxy Flooring" : (isDFW ? "Premium Epoxy Flooring & Polished Concrete in Dallas-Fort Worth" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day"))));
-  const showExpertsSuffix = !isDFW;
+  const title = isCommercial ? "DFW's Commercial Flooring" : (isPHX ? "Phoenix's Epoxy Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day"))));
+  const showExpertsSuffix = true;
   const locationText = isPHX ? "Phoenix, AZ" : "Dallas - Fort Worth, TX";
   const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Residential & Commercial Floors That Last" : (isDFW ? "Residential & Commercial Floors That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
   
