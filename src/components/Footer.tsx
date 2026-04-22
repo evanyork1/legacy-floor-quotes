@@ -78,20 +78,6 @@ const Footer = () => {
                 </div>
               </div>
               
-              {/* Phoenix Office */}
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <h4 className="text-white font-semibold">Phoenix Office</h4>
-                  
-                </div>
-                <div className="text-gray-300 text-sm space-y-1">
-                  <p>7150 E Camelback Rd Ste. 444</p>
-                  <p>Scottsdale, AZ 85251</p>
-                  <a href="tel:602-560-0974" onClick={handlePhoneClickPHX} className="text-gray-300 hover:text-blue-400 transition-colors block">
-                    (602) 560-0974
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -123,7 +109,7 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-              <p className="font-semibold mt-3">Phoenix Metroplex</p>
+              
             </div>
           </div>
 
