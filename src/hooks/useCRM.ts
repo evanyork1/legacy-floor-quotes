@@ -88,8 +88,8 @@ export function useCRM() {
       .insert({
         ...lead,
         created_by: user.id,
-        assigned_to: lead.assigned_to || user.id
-      })
+        assigned_to: lead.assigned_to || user.id,
+      } as any)
       .select()
       .single();
 
@@ -108,9 +108,10 @@ export function useCRM() {
 
   // Update lead
   const updateLead = async (id: string, updates: Partial<CRMLead>): Promise<boolean> => {
+    const { created_by_profile, assigned_to_profile, ...dbUpdates } = updates;
     const { error } = await supabase
       .from('crm_leads')
-      .update(updates)
+      .update(dbUpdates as any)
       .eq('id', id);
 
     if (!error) {
@@ -357,9 +358,10 @@ export function useCRM() {
 
   // Update follow-up
   const updateFollowUp = async (id: string, updates: Partial<CRMFollowUp>): Promise<boolean> => {
+    const { lead, ...dbUpdates } = updates;
     const { error } = await supabase
       .from('crm_follow_ups')
-      .update(updates)
+      .update(dbUpdates as any)
       .eq('id', id);
 
     return !error;

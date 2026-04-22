@@ -43,10 +43,8 @@ const Financing = () => {
             last_name: formData.lastName,
             email: formData.email,
             phone: formData.phone,
-            comments: formData.message,
-            lead_source: 'Financing Page',
-            created_at: new Date().toISOString()
-          }
+            questions_comments: formData.message,
+          } as any
         ]);
 
       if (error) throw error;
