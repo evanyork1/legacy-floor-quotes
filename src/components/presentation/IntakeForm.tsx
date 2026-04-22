@@ -56,7 +56,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
   const [isCreatingJobberQuote, setIsCreatingJobberQuote] = useState(false);
   const [shareableLink, setShareableLink] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Calculate totals whenever relevant data changes
   useEffect(() => {

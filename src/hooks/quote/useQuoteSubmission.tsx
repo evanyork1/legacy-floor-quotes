@@ -92,8 +92,8 @@ export const useQuoteSubmission = () => {
       const tableName = leadSource === 'DFW' ? 'dfwquotes' : 'quotes';
 
       // Save quote to database
-      const { data: savedQuote, error: saveError } = await supabase
-        .from(tableName)
+      const { data: savedQuote, error: saveError } = await (supabase
+        .from(tableName) as any)
         .insert(quoteData)
         .select()
         .single();
