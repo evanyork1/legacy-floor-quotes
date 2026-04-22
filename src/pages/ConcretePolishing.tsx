@@ -7,9 +7,40 @@ import { ArrowRight, Building, Sparkles, Droplets, Recycle, CheckCircle, Calenda
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { ServiceAreasStrip } from "@/components/seo/ServiceAreasStrip";
 import polishingShowroom from "@/assets/polishing-gallery-showroom.jpg";
 import polishingWarehouse from "@/assets/polishing-gallery-warehouse.jpg";
 import polishingOffice from "@/assets/polishing-gallery-office.png";
+
+const polishingFaqs = [
+  {
+    question: "What is mechanical concrete polishing?",
+    answer: "Mechanical concrete polishing is a multi-step process that uses progressively finer diamond tooling to grind, hone, and burnish a concrete slab. Combined with lithium silicate densification, the result is a permanently hardened, dust-proof, light-reflective surface that improves over time."
+  },
+  {
+    question: "How is polished concrete different from a coated floor?",
+    answer: "Polished concrete is the existing slab itself, refined and densified — nothing is layered on top. There is no coating to peel, chip, or delaminate, which is why mechanically polished concrete is the preferred floor for warehouses, retail, and high-traffic facilities across DFW."
+  },
+  {
+    question: "What polish levels do you offer?",
+    answer: "We deliver Cream (Level 1), Salt-and-Pepper (Level 2), and Medium-Aggregate (Level 3) finishes, each with low, semi-gloss, or high-gloss sheen ratings. The right combination depends on your slab condition and aesthetic goals."
+  },
+  {
+    question: "Can you polish concrete in occupied buildings?",
+    answer: "Yes. Our densification chemistry is low-odor and our HEPA-filtered grinders run virtually dust-free, so we can polish concrete during off-hours in occupied retail, restaurant, and warehouse environments throughout Dallas-Fort Worth."
+  },
+  {
+    question: "What FF/FL flatness can you achieve?",
+    answer: "We can grind to specified FF/FL flatness numbers required by warehouse and distribution-center spec sheets, correcting high spots and improving floor flatness as part of the polishing process."
+  },
+  {
+    question: "Which DFW cities do you serve for polished concrete?",
+    answer: "We deliver mechanical concrete polishing across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, Sherman, Anna, Melissa, Sanger, The Colony, and Flower Mound."
+  }
+];
+
+
 const ConcretePolishing = () => {
   const navigate = useNavigate();
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -59,20 +90,28 @@ const ConcretePolishing = () => {
   const features = ["Dust-free surface", "Chemical and stain resistant", "Non-slip texture options", "Enhanced light reflectivity", "Low maintenance requirements", "Long-lasting durability", "Environmentally friendly", "Cost-effective solution"];
   return <>
       <Helmet>
-        <title>Concrete Polishing Services - Professional Polished Concrete Floors | Legacy Industrial Coatings</title>
-        <meta name="description" content="Professional concrete polishing for commercial spaces. Transform existing concrete into beautiful, durable polished floors. Serving warehouses, retail, restaurants, and more." />
-        <meta name="keywords" content="concrete polishing, polished concrete floors, commercial concrete polishing, warehouse polishing, retail floor polishing, restaurant flooring" />
-        
-        <meta property="og:title" content="Concrete Polishing Services - Professional Polished Concrete Floors | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Professional concrete polishing for commercial spaces. Transform existing concrete into beautiful, durable polished floors." />
+        <title>Polished Concrete Dallas-Fort Worth | Legacy Industrial Coatings</title>
+        <meta name="description" content="Mechanical polished concrete floors for DFW warehouses, retail, and manufacturing. Densified, dust-free, high-gloss finishes built to last. Free estimates." />
+        <meta name="keywords" content="polished concrete Dallas, polished concrete Fort Worth, mechanical concrete polishing, concrete densification, polished concrete warehouse, retail polished concrete DFW, FF FL flatness, salt and pepper polish" />
+
+        <meta property="og:title" content="Polished Concrete Dallas-Fort Worth | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Mechanical polished concrete floors for DFW warehouses, retail, and manufacturing. Densified, dust-free, high-gloss finishes." />
         <meta property="og:image" content="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" />
-        
+
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/concrete-polishing" />
       </Helmet>
-      
+
+      <StructuredData
+        services={[
+          { name: "Mechanical Polished Concrete", description: "Diamond-ground and densified polished concrete floors for DFW commercial, retail, and warehouse facilities.", url: "/concrete-polishing" },
+        ]}
+        faqs={polishingFaqs}
+      />
+
       <div className="min-h-screen bg-white">
         <HeaderGeneric />
+        <main>
         
         {/* Hero Section */}
         <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
