@@ -355,9 +355,9 @@ const AquaTotsFlooring = () => {
         {/* TESTIMONIAL */}
         <section className="py-16 lg:py-20 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="rounded-2xl bg-white border border-gray-200 p-8 lg:p-12 shadow-sm">
-              <QuoteIcon className="w-10 h-10 text-blue-200 mb-5" />
-              <p className="text-xl lg:text-2xl font-light text-gray-900 leading-snug mb-8 tracking-tight">
+            <div className="rounded-2xl bg-white border border-gray-200 p-6 sm:p-8 lg:p-12 shadow-sm">
+              <QuoteIcon className="w-8 h-8 sm:w-10 sm:h-10 text-blue-200 mb-4 sm:mb-5" />
+              <p className="text-lg sm:text-xl lg:text-2xl font-light text-gray-900 leading-snug mb-6 sm:mb-8 tracking-tight">
                 "Legacy has been our go-to flooring partner. They show up, do it right, and our owners don't have to worry about their floors ever again."
               </p>
               <div className="flex items-center gap-4 pt-5 border-t border-gray-100">
