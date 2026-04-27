@@ -31,8 +31,10 @@ import completed4 from "@/assets/aquatots-completed-4.jpg";
 import moldSpores from "@/assets/aquatots-mold-spores.png";
 import wetDebris from "@/assets/aquatots-wet-debris.png";
 import horrorCircled from "@/assets/aquatots-horror-circled.png";
-import moldRemoval from "@/assets/aquatots-mold-removal.jpg";
-import trappedDebris from "@/assets/aquatots-trapped-debris.jpg";
+import horror2 from "@/assets/aquatots-horror-2.jpg";
+import horror3 from "@/assets/aquatots-horror-3.jpg";
+import moldCornerBlue from "@/assets/aquatots-mold-corner-blue.png";
+import evanYork from "@/assets/evan-york.jpg";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -100,7 +102,7 @@ const AquaTotsFlooring = () => {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 tracking-tight leading-tight max-w-4xl mx-auto">
-                The flooring team Aqua-Tots owners trust nationwide.
+                The <span className="text-blue-700">flooring</span> team Aqua-Tots owners trust nationwide.
               </h1>
 
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -150,29 +152,41 @@ const AquaTotsFlooring = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5 mb-10 max-w-4xl">
+            <div className="grid md:grid-cols-3 gap-5 mb-10">
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
-                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="max-h-72 w-auto object-contain" />
+                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="max-h-64 w-auto object-contain" />
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Biohazard className="w-5 h-5 text-amber-600" />
-                    <h3 className="text-lg font-bold text-gray-900">Mold & Bacteria</h3>
+                    <h3 className="text-base font-bold text-gray-900">Mold & Bacteria</h3>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">Visible mold growth and microbial staining were present in every facility we serviced.</p>
                 </div>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
-                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="max-h-72 w-auto object-contain" />
+                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="max-h-64 w-auto object-contain" />
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Droplets className="w-5 h-5 text-blue-600" />
-                    <h3 className="text-lg font-bold text-gray-900">Trapped Moisture & Debris</h3>
+                    <h3 className="text-base font-bold text-gray-900">Trapped Moisture & Debris</h3>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">Rubberized VCT with seams and adhesive layers let water in — and gave it nowhere to evaporate.</p>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+                <div className="bg-gray-100 flex items-center justify-center p-4">
+                  <img src={moldCornerBlue} alt="Mold spores spreading at wall corner" className="max-h-64 w-auto object-contain" />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Biohazard className="w-5 h-5 text-amber-600" />
+                    <h3 className="text-base font-bold text-gray-900">Spreading At The Walls</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed">Wall transitions are where moisture migrates and mold colonies establish first — exactly where children play.</p>
                 </div>
               </div>
             </div>
@@ -203,8 +217,8 @@ const AquaTotsFlooring = () => {
             <div className="grid md:grid-cols-3 gap-5">
               {[
                 { img: horrorCircled, title: "They disappeared when problems started.", body: "A competitor installed flooring at an Aqua-Tots location, then became unreachable the moment issues surfaced. No warranty follow-through. No accountability." },
-                { img: trappedDebris, title: "Worn out in under a year.", body: "One location went with a low-cost vendor. The coating began degrading within 12 months — cheap products do not survive constant moisture." },
-                { img: moldRemoval, title: "Unqualified installers, serious consequences.", body: "Most flooring crews have no training for resinous coatings in aquatic environments. Improper prep means delamination, slip hazards, full reinstalls." },
+                { img: horror2, title: "Worn out in under a year.", body: "One location went with a low-cost vendor. The coating began degrading within 12 months — cheap products do not survive constant moisture." },
+                { img: horror3, title: "Unqualified installers, serious consequences.", body: "Most flooring crews have no training for resinous coatings in aquatic environments. Improper prep means delamination, slip hazards, full reinstalls." },
               ].map((s, i) => (
                 <div key={i} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-100">
@@ -231,25 +245,25 @@ const AquaTotsFlooring = () => {
               <p className="text-base text-gray-600">Where the floor meets the wall is where most aquatic facilities fail. We offer two approaches.</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
               <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+                <div className="aspect-[5/4] overflow-hidden bg-gray-100">
                   <img src={integratedCove} alt="Cove base baseboards" className="w-full h-full object-cover" />
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Option 1</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cove Base Baseboards</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Cove Base Baseboards</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">Traditional cove base trim installed at the wall-floor transition. Clean appearance, standard protection.</p>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+                <div className="aspect-[5/4] overflow-hidden bg-gray-100">
                   <img src={baseboardFlake} alt="Integrated cove base — seamless flake-coated baseboard" className="w-full h-full object-cover" />
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Option 2</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Integrated Cove Base</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Integrated Cove Base</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">Part of the seamless flooring system itself, creating a fully watertight seal at the wall — moisture cannot wick up behind the wall and into the sheetrock.</p>
                 </div>
               </div>
@@ -348,56 +362,50 @@ const AquaTotsFlooring = () => {
         {/* CONTACT */}
         <section id="contact" className="py-16 lg:py-20 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex items-center justify-center gap-6 mb-6">
-              <img src="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" alt="Legacy Industrial Coatings" className="h-9 w-auto" />
-              <div className="text-gray-300 text-xl font-thin">×</div>
-              <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-11 w-auto" />
+            <div className="flex items-center justify-center mb-6">
+              <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-12 w-auto" />
             </div>
 
-            <div className="text-center mb-10">
+            <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">Ready to protect your location?</h2>
               <p className="text-base text-gray-600">Talk to our team about your Aqua-Tots location.</p>
             </div>
 
-            <div className="grid lg:grid-cols-[1fr,1.2fr] gap-6">
+            <div className="grid lg:grid-cols-2 gap-8 items-start max-w-5xl mx-auto">
+              {/* Point of Contact */}
+              <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 lg:p-8 text-center">
+                <div className="text-xs uppercase tracking-widest text-blue-700 font-semibold mb-5">Your Point of Contact</div>
+                <div className="w-40 h-40 mx-auto mb-5 rounded-full overflow-hidden border-4 border-blue-50 shadow-sm">
+                  <img src={evanYork} alt="Evan York" className="w-full h-full object-cover" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900">Evan York</h3>
+                <p className="text-sm text-gray-600 mt-1">Legacy Industrial Coatings</p>
+              </div>
+
+              {/* Contact methods */}
               <div className="space-y-3">
                 <a href="tel:2143056516" className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition">
                   <div className="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center"><Phone className="w-5 h-5" /></div>
                   <div>
-                    <div className="text-xs uppercase tracking-wider text-gray-500">Call</div>
+                    <div className="text-xs uppercase tracking-wider text-gray-500">Office</div>
                     <div className="text-base font-semibold text-gray-900">214-305-6516</div>
                   </div>
                 </a>
-                <a href="mailto:Support@legacyindustrialcoatings.com" className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition">
+                <a href="tel:2147245279" className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition">
+                  <div className="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center"><Phone className="w-5 h-5" /></div>
+                  <div>
+                    <div className="text-xs uppercase tracking-wider text-gray-500">Contact Evan</div>
+                    <div className="text-base font-semibold text-gray-900">214-724-5279</div>
+                  </div>
+                </a>
+                <a href="mailto:evan@licoat.com" className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition">
                   <div className="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center"><Mail className="w-5 h-5" /></div>
                   <div>
                     <div className="text-xs uppercase tracking-wider text-gray-500">Email</div>
-                    <div className="text-sm font-semibold text-gray-900 break-all">Support@legacyindustrialcoatings.com</div>
-                  </div>
-                </a>
-                <a href="https://legacyindustrialcoatings.com" className="flex items-center gap-4 p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition">
-                  <div className="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center"><Globe className="w-5 h-5" /></div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wider text-gray-500">Web</div>
-                    <div className="text-base font-semibold text-gray-900">legacyindustrialcoatings.com</div>
+                    <div className="text-base font-semibold text-gray-900 break-all">evan@licoat.com</div>
                   </div>
                 </a>
               </div>
-
-              <form onSubmit={handleSubmit} className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 lg:p-8 space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" required />
-                  <input type="text" placeholder="Location / City" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" required />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <input type="tel" placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" required />
-                  <input type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition" required />
-                </div>
-                <textarea placeholder="Tell us about your location..." rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition resize-none" />
-                <button type="submit" disabled={submitting} className="w-full inline-flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-4 rounded-full font-semibold shadow-sm hover:shadow-md transition disabled:opacity-60">
-                  {submitting ? "Sending..." : <>Talk to Our Team <ArrowRight className="w-5 h-5" /></>}
-                </button>
-              </form>
             </div>
           </div>
         </section>
