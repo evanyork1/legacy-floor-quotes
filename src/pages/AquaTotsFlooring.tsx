@@ -303,16 +303,16 @@ const AquaTotsFlooring = () => {
               </h2>
             </div>
 
-            <div className="mb-10 rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-6 sm:p-10 flex flex-col lg:flex-row items-center gap-8">
+            <div className="mb-10 rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-5 sm:p-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
               <img
                 src={floorLayers}
                 alt="Polyurea floor system layers: topcoat, flakes, basecoat, concrete"
-                className="w-full max-w-md lg:max-w-sm h-auto"
+                className="w-2/3 max-w-xs sm:max-w-sm lg:max-w-sm h-auto"
               />
               <div className="flex-1">
                 <div className="text-xs uppercase tracking-widest text-blue-700 font-semibold mb-3">How It's Built</div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 tracking-tight">Four bonded layers. Zero seams.</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   A polyaspartic polyurea topcoat over a custom flake blend, locked into a polyurea basecoat that bonds directly to the prepared concrete. The result is a single, continuous, waterproof surface — not tiles sitting on top of moisture.
                 </p>
               </div>
