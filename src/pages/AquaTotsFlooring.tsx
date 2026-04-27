@@ -310,10 +310,12 @@ const AquaTotsFlooring = () => {
                 className="w-2/3 max-w-xs sm:max-w-sm lg:max-w-sm h-auto"
               />
               <div className="flex-1">
-                <div className="text-xs uppercase tracking-widest text-blue-700 font-semibold mb-3">How It's Built</div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 tracking-tight">Four bonded layers. Zero seams.</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 tracking-tight">Three bonded layers. Zero seams.</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  A polyaspartic polyurea topcoat over a custom flake blend, locked into a polyurea basecoat that bonds directly to the prepared concrete. The result is a single, continuous, waterproof surface — not tiles sitting on top of moisture.
+                  A polyaspartic topcoat over a custom flake blend, locked into a polyurea basecoat that bonds directly to the prepared concrete. The result is a single, continuous, waterproof surface — not tiles sitting on top of moisture.
+                </p>
+                <p className="text-sm sm:text-base text-gray-900 font-semibold leading-relaxed mt-4">
+                  If this is not done by an experienced commercial install team, it will fail.
                 </p>
               </div>
             </div>
