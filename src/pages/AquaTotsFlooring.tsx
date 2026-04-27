@@ -318,13 +318,13 @@ const AquaTotsFlooring = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <table className="w-full">
+            <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <table className="w-full min-w-[420px]">
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200">
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-gray-700 uppercase tracking-wider">Feature</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-blue-700 uppercase tracking-wider">Polyurea System</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">VCT or Other</th>
+                    <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider">Feature</th>
+                    <th className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-blue-700 uppercase tracking-wider">Polyurea</th>
+                    <th className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">VCT/Other</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -337,12 +337,12 @@ const AquaTotsFlooring = () => {
                     ["5-Year warranty", true, false],
                   ].map(([label, a, b], i) => (
                     <tr key={i}>
-                      <td className="px-6 py-4 text-gray-900 font-medium">{label as string}</td>
-                      <td className="px-6 py-4 text-center">{a ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> : <XCircle className="w-5 h-5 text-gray-300 mx-auto" />}</td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-900 font-medium">{label as string}</td>
+                      <td className="px-2 sm:px-6 py-3 sm:py-4 text-center">{a ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> : <XCircle className="w-5 h-5 text-gray-300 mx-auto" />}</td>
+                      <td className="px-2 sm:px-6 py-3 sm:py-4 text-center">
                         {b === true ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> :
                          b === false ? <XCircle className="w-5 h-5 text-red-400 mx-auto" /> :
-                         <span className="text-gray-500 text-sm italic">Varies</span>}
+                         <span className="text-gray-500 text-xs sm:text-sm italic">Varies</span>}
                       </td>
                     </tr>
                   ))}
