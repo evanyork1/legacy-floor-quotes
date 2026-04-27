@@ -303,28 +303,28 @@ const AquaTotsFlooring = () => {
               </h2>
             </div>
 
-            <div className="mb-10 rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-6 sm:p-10 flex flex-col lg:flex-row items-center gap-8">
+            <div className="mb-10 rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-5 sm:p-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
               <img
                 src={floorLayers}
                 alt="Polyurea floor system layers: topcoat, flakes, basecoat, concrete"
-                className="w-full max-w-md lg:max-w-sm h-auto"
+                className="w-2/3 max-w-xs sm:max-w-sm lg:max-w-sm h-auto"
               />
               <div className="flex-1">
                 <div className="text-xs uppercase tracking-widest text-blue-700 font-semibold mb-3">How It's Built</div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 tracking-tight">Four bonded layers. Zero seams.</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   A polyaspartic polyurea topcoat over a custom flake blend, locked into a polyurea basecoat that bonds directly to the prepared concrete. The result is a single, continuous, waterproof surface — not tiles sitting on top of moisture.
                 </p>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <table className="w-full">
+            <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <table className="w-full min-w-[420px]">
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200">
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-gray-700 uppercase tracking-wider">Feature</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-blue-700 uppercase tracking-wider">Polyurea System</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">VCT or Other</th>
+                    <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider">Feature</th>
+                    <th className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-blue-700 uppercase tracking-wider">Polyurea</th>
+                    <th className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">VCT/Other</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -337,12 +337,12 @@ const AquaTotsFlooring = () => {
                     ["5-Year warranty", true, false],
                   ].map(([label, a, b], i) => (
                     <tr key={i}>
-                      <td className="px-6 py-4 text-gray-900 font-medium">{label as string}</td>
-                      <td className="px-6 py-4 text-center">{a ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> : <XCircle className="w-5 h-5 text-gray-300 mx-auto" />}</td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-900 font-medium">{label as string}</td>
+                      <td className="px-2 sm:px-6 py-3 sm:py-4 text-center">{a ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> : <XCircle className="w-5 h-5 text-gray-300 mx-auto" />}</td>
+                      <td className="px-2 sm:px-6 py-3 sm:py-4 text-center">
                         {b === true ? <CheckCircle2 className="w-5 h-5 text-blue-600 mx-auto" /> :
                          b === false ? <XCircle className="w-5 h-5 text-red-400 mx-auto" /> :
-                         <span className="text-gray-500 text-sm italic">Varies</span>}
+                         <span className="text-gray-500 text-xs sm:text-sm italic">Varies</span>}
                       </td>
                     </tr>
                   ))}
@@ -355,9 +355,9 @@ const AquaTotsFlooring = () => {
         {/* TESTIMONIAL */}
         <section className="py-16 lg:py-20 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="rounded-2xl bg-white border border-gray-200 p-8 lg:p-12 shadow-sm">
-              <QuoteIcon className="w-10 h-10 text-blue-200 mb-5" />
-              <p className="text-xl lg:text-2xl font-light text-gray-900 leading-snug mb-8 tracking-tight">
+            <div className="rounded-2xl bg-white border border-gray-200 p-6 sm:p-8 lg:p-12 shadow-sm">
+              <QuoteIcon className="w-8 h-8 sm:w-10 sm:h-10 text-blue-200 mb-4 sm:mb-5" />
+              <p className="text-lg sm:text-xl lg:text-2xl font-light text-gray-900 leading-snug mb-6 sm:mb-8 tracking-tight">
                 "Legacy has been our go-to flooring partner. They show up, do it right, and our owners don't have to worry about their floors ever again."
               </p>
               <div className="flex items-center gap-4 pt-5 border-t border-gray-100">
