@@ -95,10 +95,8 @@ const AquaTotsFlooring = () => {
                 Partnership Showcase
               </div>
 
-              <div className="flex items-center justify-center gap-6 sm:gap-10 mb-10">
-                <img src="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" alt="Legacy Industrial Coatings" className="h-10 sm:h-12 w-auto" />
-                <div className="text-gray-300 text-2xl font-thin">×</div>
-                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-12 sm:h-16 w-auto" />
+              <div className="flex items-center justify-center mb-10">
+                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-16 sm:h-24 w-auto" />
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 tracking-tight leading-tight max-w-4xl mx-auto">
@@ -133,8 +131,6 @@ const AquaTotsFlooring = () => {
               ].map((p, i) => (
                 <div key={i} className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition">
                   <img src={p.src} alt={p.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-4 text-sm font-medium text-white">{p.caption}</div>
                 </div>
               ))}
             </div>
@@ -154,10 +150,10 @@ const AquaTotsFlooring = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5 mb-10">
+            <div className="grid md:grid-cols-2 gap-5 mb-10 max-w-4xl">
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="w-full h-full object-cover" />
+                <div className="bg-gray-100 flex items-center justify-center p-4">
+                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="max-h-72 w-auto object-contain" />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-2">
@@ -168,8 +164,8 @@ const AquaTotsFlooring = () => {
                 </div>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="w-full h-full object-cover" />
+                <div className="bg-gray-100 flex items-center justify-center p-4">
+                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="max-h-72 w-auto object-contain" />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-2">
