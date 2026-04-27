@@ -107,7 +107,7 @@ const AquaTotsFlooring = () => {
               </h1>
 
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Seven Aqua-Tots locations completed. A flooring system built specifically for the conditions inside a swim school — and a team that's done the work to prove it.
+                A flooring system built specifically for the conditions inside a swim school — and a team that's done the work to prove it.
               </p>
             </div>
           </div>
@@ -154,16 +154,21 @@ const AquaTotsFlooring = () => {
             </div>
 
             {/* Standard VCT — what every location starts with */}
-            <div className="mb-10 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+            <div className="mb-10 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm max-w-2xl mx-auto">
               <div className="relative">
-                <img src={standardVct} alt="Standard VCT flooring inside an Aqua-Tots location" className="w-full h-64 sm:h-80 lg:h-96 object-cover" />
+                <img
+                  src={standardVct}
+                  alt="Standard VCT flooring inside an Aqua-Tots location"
+                  className="w-full h-48 sm:h-56 object-cover"
+                  style={{ objectPosition: "center 70%" }}
+                />
                 <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-900 shadow-sm">
                   Standard VCT
                 </div>
               </div>
               <div className="p-5">
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  This is what every Aqua-Tots location starts with — standard VCT tile. It looks fine on the surface, but underneath is where the real problem develops.
+                  Most Aqua-Tots location starts with a standard VCT tile. It looks fine on the surface, but underneath is where the real problem develops.
                 </p>
               </div>
             </div>
@@ -208,14 +213,11 @@ const AquaTotsFlooring = () => {
             </div>
 
             {/* Health & Liability — smaller, no badge */}
-            <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-6 flex gap-4 items-start">
-              <Shield className="w-5 h-5 text-amber-700 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="text-base font-bold text-gray-900 mb-1">Health & Liability</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Children are more susceptible to airborne spores due to developing immune systems and frequent contact with floor surfaces. Trapped moisture by design creates ongoing biological risk and direct liability exposure for owners.
-                </p>
-              </div>
+            <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-6 max-w-2xl mx-auto">
+              <h3 className="text-base font-bold text-gray-900 mb-1">Health & Liability</h3>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                Children are more susceptible to airborne spores due to developing immune systems and frequent contact with floor surfaces. Trapped moisture by design creates ongoing biological risk and direct liability exposure for owners.
+              </p>
             </div>
           </div>
         </section>
@@ -258,7 +260,7 @@ const AquaTotsFlooring = () => {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
                 Baseboard options.
               </h2>
-              <p className="text-base text-gray-600">Where the floor meets the wall is where most aquatic facilities fail. We offer two approaches.</p>
+              <p className="text-base text-gray-600">Where the floor meets the wall. We offer two approaches.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
