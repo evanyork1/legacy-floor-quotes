@@ -34,6 +34,7 @@ import horrorCircled from "@/assets/aquatots-horror-circled.png";
 import horror2 from "@/assets/aquatots-horror-2.jpg";
 import horror3 from "@/assets/aquatots-horror-3.jpg";
 import moldCornerBlue from "@/assets/aquatots-mold-corner-blue.png";
+import standardVct from "@/assets/aquatots-standard-vct.jpg";
 import evanYork from "@/assets/evan-york.jpg";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -152,6 +153,21 @@ const AquaTotsFlooring = () => {
               </p>
             </div>
 
+            {/* Standard VCT — what every location starts with */}
+            <div className="mb-10 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+              <div className="relative">
+                <img src={standardVct} alt="Standard VCT flooring inside an Aqua-Tots location" className="w-full h-64 sm:h-80 lg:h-96 object-cover" />
+                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-900 shadow-sm">
+                  Standard VCT
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  This is what every Aqua-Tots location starts with — standard VCT tile. It looks fine on the surface, but underneath is where the real problem develops.
+                </p>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-3 gap-5 mb-10">
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
@@ -210,7 +226,7 @@ const AquaTotsFlooring = () => {
             <div className="max-w-3xl mb-10">
               <div className="text-xs uppercase tracking-widest text-red-700 font-semibold mb-3">Why Cheap Costs More</div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight">
-                The horror stories we keep getting called to fix.
+                Why choosing the wrong company is a bad idea.
               </h2>
             </div>
 
