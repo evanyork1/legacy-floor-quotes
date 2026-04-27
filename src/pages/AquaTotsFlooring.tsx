@@ -149,7 +149,10 @@ const AquaTotsFlooring = () => {
                 What's really under your floor.
               </h2>
               <p className="text-base text-gray-600 leading-relaxed">
-                During flooring removal at <strong className="text-gray-900">6 Aqua-Tots locations</strong>, our team discovered the same condition every single time: moisture from daily pool operations had migrated beneath the existing flooring and become trapped against the concrete slab — causing mold and bacteria growth. The floor above looked fine. The problem was invisible.
+                <strong className="text-gray-900">Every single one had mold under the floor.</strong>
+              </p>
+              <p className="text-base text-gray-600 leading-relaxed mt-4">
+                Not because the owners were negligent. Not because of a leak. Because the flooring they were sold was never designed for a swim school. Water gets in. It can't get out. And it just sits there — under a surface that looks completely fine.
               </p>
             </div>
 
