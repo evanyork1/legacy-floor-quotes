@@ -52,6 +52,7 @@ import CustomerPresentationPage from "./pages/CustomerPresentationPage";
 import SplashSelect from "./pages/SplashSelect";
 import CommercialFloors from "./pages/CommercialFloors";
 import AboutCommercial from "./pages/AboutCommercial";
+import AquaTotsFlooring from "./pages/AquaTotsFlooring";
 
 
 const queryClient = new QueryClient();
@@ -108,6 +109,7 @@ function App() {
               <Route path="/crm" element={<CRM />} />
               <Route path="/sales-presentation" element={<SalesPresentation />} />
               <Route path="/presentation/:id" element={<CustomerPresentationPage />} />
+              <Route path="/aquatotsflooring" element={<AquaTotsFlooring />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
