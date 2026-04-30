@@ -82,8 +82,8 @@ const DealershipFloors = () => {
   };
   return <>
       <Helmet>
-        <title>Car Dealership Flooring Solutions Dallas-Fort Worth | Epoxy, Polished Concrete & Traffic Coatings</title>
-        <meta name="description" content="Professional dealership flooring for showrooms, service lanes, and maintenance areas. Polished concrete, epoxy, and traffic coatings designed for Texas dealerships." />
+        <title>Auto Dealership Floor Coating DFW | Legacy Industrial Coatings</title>
+        <meta name="description" content="Premium epoxy and polyaspartic floor coatings for auto dealerships in Dallas-Fort Worth. Showroom-quality finishes that handle heavy traffic." />
         <meta name="keywords" content="dealership flooring Dallas, car dealership floors DFW, showroom flooring, service lane coatings, dealership epoxy, automotive flooring Texas" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/dealershipfloors" />
       </Helmet>

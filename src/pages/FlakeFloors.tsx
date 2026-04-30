@@ -49,12 +49,12 @@ const FlakeFloors = () => {
   return (
     <>
       <Helmet>
-        <title>Polyurea Flake Floors - Premium Garage Floor Coatings | Legacy Industrial Coatings</title>
-        <meta name="description" content="Transform your garage with our premium polyurea flake floors. Lifetime warranty, one-day installation, and endless customization options. The most durable garage floor coating available." />
+        <title>Flake Epoxy Floor Coating DFW | Legacy Industrial Coatings</title>
+        <meta name="description" content="Commercial and residential flake epoxy flooring in Dallas-Fort Worth. Durable, decorative floors for garages, shops, and commercial spaces." />
         <meta name="keywords" content="polyurea flake floors, garage floor coating, flake flooring, decorative concrete, garage renovation, floor coating Dallas, epoxy alternative" />
         
-        <meta property="og:title" content="Polyurea Flake Floors - Premium Garage Floor Coatings | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Transform your garage with our premium polyurea flake floors. Lifetime warranty, one-day installation, and endless customization options." />
+        <meta property="og:title" content="Flake Epoxy Floor Coating DFW | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Commercial and residential flake epoxy flooring in Dallas-Fort Worth. Durable, decorative floors for garages, shops, and commercial spaces." />
         <meta property="og:image" content="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" />
         
         <meta name="robots" content="index, follow" />

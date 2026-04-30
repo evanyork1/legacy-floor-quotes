@@ -88,8 +88,8 @@ const Commercial = () => {
   }];
   return <>
       <Helmet>
-        <title>Commercial Flooring Solutions Dallas-Fort Worth | Legacy Industrial Coatings</title>
-        <meta name="description" content="Professional commercial flooring solutions in Dallas-Fort Worth. Industrial epoxy, concrete polishing for warehouses, retail stores, restaurants, and more." />
+        <title>Commercial Epoxy Flooring DFW | Legacy Industrial Coatings</title>
+        <meta name="description" content="Large-scale commercial epoxy flooring in Dallas-Fort Worth. Warehouses, dealerships, industrial facilities. Heavy-duty floor systems built to last." />
         <meta name="keywords" content="commercial flooring Dallas, industrial epoxy DFW, concrete polishing Dallas, warehouse flooring, retail store flooring, restaurant flooring" />
         
         {/* Geo-location meta tags */}
@@ -100,8 +100,8 @@ const Commercial = () => {
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Commercial Flooring Solutions Dallas-Fort Worth | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Professional commercial flooring solutions in Dallas-Fort Worth. Industrial epoxy, concrete polishing for warehouses, retail stores, restaurants, and more." />
+        <meta property="og:title" content="Commercial Epoxy Flooring DFW | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Large-scale commercial epoxy flooring in Dallas-Fort Worth. Warehouses, dealerships, industrial facilities. Heavy-duty floor systems built to last." />
         <meta property="og:image" content="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" />
         
         {/* Additional SEO */}

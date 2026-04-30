@@ -90,12 +90,12 @@ const ConcretePolishing = () => {
   const features = ["Dust-free surface", "Chemical and stain resistant", "Non-slip texture options", "Enhanced light reflectivity", "Low maintenance requirements", "Long-lasting durability", "Environmentally friendly", "Cost-effective solution"];
   return <>
       <Helmet>
-        <title>Polished Concrete Dallas-Fort Worth | Legacy Industrial Coatings</title>
-        <meta name="description" content="Mechanical polished concrete floors for DFW warehouses, retail, and manufacturing. Densified, dust-free, high-gloss finishes built to last. Free estimates." />
+        <title>Concrete Polishing Dallas-Fort Worth | Legacy Industrial Coatings</title>
+        <meta name="description" content="Professional concrete polishing for commercial and industrial spaces across DFW. Durable, low-maintenance polished floors." />
         <meta name="keywords" content="polished concrete Dallas, polished concrete Fort Worth, mechanical concrete polishing, concrete densification, polished concrete warehouse, retail polished concrete DFW, FF FL flatness, salt and pepper polish" />
 
-        <meta property="og:title" content="Polished Concrete Dallas-Fort Worth | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Mechanical polished concrete floors for DFW warehouses, retail, and manufacturing. Densified, dust-free, high-gloss finishes." />
+        <meta property="og:title" content="Concrete Polishing Dallas-Fort Worth | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Professional concrete polishing for commercial and industrial spaces across DFW. Durable, low-maintenance polished floors." />
         <meta property="og:image" content="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" />
 
         <meta name="robots" content="index, follow" />
