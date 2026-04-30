@@ -92,7 +92,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
-              <Route path="/dealershipfloors" element={<DealershipFloors />} />
+              
               <Route path="/rentals" element={<Rentals />} />
           <Route path="/giveaway" element={<Giveaway />} />
           <Route path="/giveawayraf" element={<GiveawayRaf />} />
