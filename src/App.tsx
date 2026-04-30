@@ -54,6 +54,7 @@ import SplashSelect from "./pages/SplashSelect";
 import CommercialFloors from "./pages/CommercialFloors";
 import AboutCommercial from "./pages/AboutCommercial";
 import AquaTotsFlooring from "./pages/AquaTotsFlooring";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 const queryClient = new QueryClient();
