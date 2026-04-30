@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
@@ -6,20 +6,30 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { getSortedPosts } from "@/data/blogPosts";
+import { fetchSortedPosts, type BlogPost } from "@/data/blogPosts";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { FeaturedBlogPost } from "@/components/blog/FeaturedBlogPost";
 
 const Blog = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const { featuredPost, regularPosts } = useMemo(() => {
-    const sorted = getSortedPosts();
-    const featured = sorted.find((post) => post.featured) ?? sorted[0];
-    const regular = sorted.filter((post) => post.id !== featured?.id);
-    return { featuredPost: featured, regularPosts: regular };
+  useEffect(() => {
+    let active = true;
+    fetchSortedPosts().then((data) => {
+      if (!active) return;
+      setPosts(data);
+      setLoading(false);
+    });
+    return () => {
+      active = false;
+    };
   }, []);
+
+  const featuredPost = posts[0];
+  const regularPosts = posts.slice(1);
 
   const handleNavigateToContact = useCallback(() => navigate("/contact"), [navigate]);
   const handleShowBookingModal = useCallback(() => setShowBookingModal(true), []);
@@ -87,11 +97,17 @@ const Blog = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {regularPosts.map((post) => (
-                  <BlogPostCard key={post.id} post={post} />
-                ))}
-              </div>
+              {loading ? (
+                <p className="text-center text-gray-500">Loading posts…</p>
+              ) : regularPosts.length === 0 && !featuredPost ? (
+                <p className="text-center text-gray-500">No posts published yet.</p>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {regularPosts.map((post) => (
+                    <BlogPostCard key={post.id} post={post} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>

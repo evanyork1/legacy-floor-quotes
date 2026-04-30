@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { Calendar, MapPin, Phone, ArrowLeft } from "lucide-react";
@@ -5,21 +6,49 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getPostBySlug } from "@/data/blogPosts";
+import { fetchPostBySlug, type BlogPost } from "@/data/blogPosts";
 import NotFound from "./NotFound";
 
 const SITE_URL = "https://legacyindustrialcoatings.com";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
+    fetchPostBySlug(slug).then((data) => {
+      if (!active) return;
+      setPost(data);
+      setLoading(false);
+    });
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <HeaderGeneric />
+        <div className="container mx-auto px-4 py-24 text-center text-gray-500">
+          Loading article…
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!post) return <NotFound />;
 
   const canonical = `${SITE_URL}/blog/${post.slug}`;
-  const image = (post.featuredImage || post.image).startsWith("http")
-    ? post.featuredImage || post.image
-    : `${SITE_URL}${post.featuredImage || post.image}`;
+  const rawImage = post.featuredImage || post.image;
+  const image = rawImage.startsWith("http") ? rawImage : `${SITE_URL}${rawImage}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,10 +109,12 @@ const BlogPostPage = () => {
                   <Calendar className="h-4 w-4" />
                   <time dateTime={post.publishedDate}>{post.date}</time>
                 </div>
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <MapPin className="h-4 w-4" />
-                  {post.location}
-                </div>
+                {post.location && (
+                  <div className="flex items-center gap-2 text-gray-500 text-sm">
+                    <MapPin className="h-4 w-4" />
+                    {post.location}
+                  </div>
+                )}
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
