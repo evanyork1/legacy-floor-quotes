@@ -31,14 +31,18 @@ export const FeaturedBlogPost = React.memo(({ post }: FeaturedBlogPostProps) => 
               <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
               <time dateTime={post.publishedDate}>{post.date}</time>
             </div>
-            <div className="flex items-center gap-1">
-              <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
-              {post.readTime}
-            </div>
-            <div className="flex items-center gap-1">
-              <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
-              {post.location}
-            </div>
+            {post.readTime && (
+              <div className="flex items-center gap-1">
+                <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
+                {post.readTime}
+              </div>
+            )}
+            {post.location && (
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                {post.location}
+              </div>
+            )}
           </div>
           <Badge variant="outline" className="w-fit mb-4 text-xs sm:text-sm">{post.category}</Badge>
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
