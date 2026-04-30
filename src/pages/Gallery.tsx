@@ -55,6 +55,11 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Floor Coating Gallery — Garage, Commercial & Polished Concrete | Legacy Industrial Coatings"
+        description="Browse our portfolio of completed garage floor, polyurea flake, polished concrete, and commercial epoxy installations across Dallas-Fort Worth."
+        path="/gallery"
+      />
       <HeaderGeneric />
       
       {/* Hero Section */}
