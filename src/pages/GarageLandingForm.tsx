@@ -55,7 +55,7 @@ const GarageLandingForm = () => {
                     </svg>
                     <div className="flex flex-col">
                       <span className="text-sm font-medium text-white">Google Reviews</span>
-                      <span className="text-xs text-gray-300">180+ five star reviews</span>
+                      <span className="text-xs text-gray-300">190+ five star reviews</span>
                     </div>
                   </div>
                   
