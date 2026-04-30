@@ -85,7 +85,7 @@ const DealershipFloors = () => {
         <title>Car Dealership Flooring Solutions Dallas-Fort Worth | Epoxy, Polished Concrete & Traffic Coatings</title>
         <meta name="description" content="Professional dealership flooring for showrooms, service lanes, and maintenance areas. Polished concrete, epoxy, and traffic coatings designed for Texas dealerships." />
         <meta name="keywords" content="dealership flooring Dallas, car dealership floors DFW, showroom flooring, service lane coatings, dealership epoxy, automotive flooring Texas" />
-        <link rel="canonical" href="https://legacyepoxyfloors.com/dealershipfloors" />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/dealershipfloors" />
       </Helmet>
 
       <HeaderGeneric />
