@@ -78,7 +78,7 @@ const GaragePacketPage = () => {
                       <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <span className="text-xs sm:text-sm font-medium text-gray-700">180+ Google Reviews</span>
+                  <span className="text-xs sm:text-sm font-medium text-gray-700">190+ Google Reviews</span>
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">

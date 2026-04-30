@@ -110,7 +110,7 @@ const GoogleGaragePage = () => {
                     <Star key={i} className="h-3 w-3 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <span className="text-xs font-semibold text-gray-800">180+ Reviews</span>
+                <span className="text-xs font-semibold text-gray-800">190+ Reviews</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2 leading-none">
@@ -183,10 +183,26 @@ const GoogleGaragePage = () => {
               </div>
             ))}
           </div>
+
+          {/* CTAs under reviews */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 max-w-md sm:max-w-none mx-auto">
+            <a
+              href="tel:214-305-6516"
+              className="group bg-blue-600 text-white text-sm font-semibold px-6 py-3 hover:bg-blue-700 transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <Phone className="h-4 w-4" />
+              214-305-6516
+            </a>
+            <button
+              onClick={() => setShowLeadModal(true)}
+              className="group border-2 border-blue-600 text-blue-600 text-sm font-semibold px-6 py-3 hover:bg-blue-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              Book An Estimate
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
         </div>
       </section>
-
-      {/* Why Legacy Stats Section */}
       <section className="py-10 sm:py-12 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">

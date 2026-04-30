@@ -21,7 +21,7 @@ const Footer = () => {
     { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
     { href: "/concrete-polishing", label: "Polished Concrete Floors" },
     { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
-    { href: "/commercialfloors", label: "Commercial Floor Coatings" },
+    { href: "/commercial", label: "Commercial Floor Coatings" },
     { href: "/residential-patio", label: "Residential Patio Coatings" },
     { href: "/flake-floors", label: "Polyurea Flake Floor Systems" },
   ];

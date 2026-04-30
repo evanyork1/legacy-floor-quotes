@@ -1,6 +1,10 @@
-import { Building, Factory, Car, Home, Plane, Dog, Church, Store, School, Utensils } from "lucide-react";
+import { useState } from "react";
+import { Building, Factory, Car, Home, Plane, Dog, Church, Store, School, Utensils, Phone, Calendar } from "lucide-react";
+import { CTAButton } from "@/components/ui/cta-button";
+import { BookingModal } from "@/components/landing/BookingModal";
 
 const CommercialSpacesSection = () => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const applications = [
     {
       name: "Airplane Hangars",
@@ -100,7 +104,31 @@ const CommercialSpacesSection = () => {
             </div>
           </div>
         </div>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-12 max-w-md sm:max-w-none mx-auto">
+          <CTAButton
+            asChild
+            variant="primary"
+            size="lg"
+            icon={<Phone />}
+            fullWidthMobile
+          >
+            <a href="tel:214-305-6516">214-305-6516</a>
+          </CTAButton>
+          <CTAButton
+            onClick={() => setShowBookingModal(true)}
+            variant="outline"
+            size="lg"
+            icon={<Calendar />}
+            fullWidthMobile
+          >
+            Book An Estimate
+          </CTAButton>
+        </div>
       </div>
+
+      <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
     </section>
   );
 };

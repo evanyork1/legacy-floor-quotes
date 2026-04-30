@@ -68,7 +68,7 @@ const ResidentialGarageFloors = () => {
                     </div>
                     <div className="flex items-center ml-2">
                       <span className="text-yellow-400 text-sm">★★★★★</span>
-                      <span className="ml-1 text-gray-900 font-medium text-sm">180+</span>
+                      <span className="ml-1 text-gray-900 font-medium text-sm">190+</span>
                       <span className="ml-1 text-gray-600 text-sm">reviews</span>
                     </div>
                   </div>

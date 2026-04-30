@@ -143,7 +143,7 @@ const GarageFloorsDallasFB = () => {
                 Over 3,000+ Satisfied Customers
               </h2>
               <p className="text-lg text-gray-600">
-                Rated 5.0 Based on 180+ Google Reviews
+                Rated 5.0 Based on 190+ Google Reviews
               </p>
             </div>
 

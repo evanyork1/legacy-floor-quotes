@@ -87,7 +87,7 @@ const GarageLandingInstant = () => {
                     </svg>
                     <div className="flex flex-col">
                       <span className="text-sm font-medium text-gray-700">Google Reviews</span>
-                      <span className="text-xs text-gray-500">180+ five star reviews</span>
+                      <span className="text-xs text-gray-500">190+ five star reviews</span>
                     </div>
                   </div>
                   
