@@ -32,14 +32,18 @@ export const BlogPostCard = React.memo(({ post }: BlogPostCardProps) => {
             <Calendar className="h-3 w-3" />
             <time dateTime={post.publishedDate}>{post.date}</time>
           </div>
-          <div className="flex items-center gap-1">
-            <Clock className="h-3 w-3" />
-            {post.readTime}
-          </div>
-          <div className="flex items-center gap-1">
-            <MapPin className="h-3 w-3" />
-            {post.location}
-          </div>
+          {post.readTime && (
+            <div className="flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              {post.readTime}
+            </div>
+          )}
+          {post.location && (
+            <div className="flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              {post.location}
+            </div>
+          )}
         </div>
         <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
