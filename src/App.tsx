@@ -64,6 +64,7 @@ function App() {
       <HelmetProvider>
         <AuthProvider>
           <Router>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<DFW />} />
               <Route path="/dfw" element={<DFW />} />
