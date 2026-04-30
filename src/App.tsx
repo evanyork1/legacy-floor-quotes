@@ -35,7 +35,7 @@ import LandingVisual from "./pages/LandingVisual";
 import Auth from "./pages/Auth";
 import SalesDashboard from "./pages/SalesDashboard";
 import FlakeFloorTemplate from "./pages/FlakeFloorTemplate";
-import DealershipFloors from "./pages/DealershipFloors";
+
 import Rentals from "./pages/Rentals";
 import Giveaway from "./pages/Giveaway";
 import GiveawayRaf from "./pages/GiveawayRaf";
@@ -92,7 +92,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
-              <Route path="/dealershipfloors" element={<DealershipFloors />} />
+              
               <Route path="/rentals" element={<Rentals />} />
           <Route path="/giveaway" element={<Giveaway />} />
           <Route path="/giveawayraf" element={<GiveawayRaf />} />

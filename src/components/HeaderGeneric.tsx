@@ -41,8 +41,7 @@ const residentialItems = [
   const commercialItems = [
     { name: "Flake Floors", path: "/flake-floors" },
     { name: "Industrial Epoxy", path: "/industrial-epoxy" },
-    { name: "Concrete Polishing", path: "/concrete-polishing" },
-    { name: "Dealerships", path: "/dealershipfloors" }
+    { name: "Concrete Polishing", path: "/concrete-polishing" }
   ];
 
   return (
