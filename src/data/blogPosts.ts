@@ -55,8 +55,19 @@ interface BlogPostRow {
   published: boolean | null;
 }
 
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  "Garage Floors": "https://legacyindustrialcoatings.com/lovable-uploads/81d99e2b-0038-4ac2-8f7d-2f89d32a8560.png",
+  "Commercial Flooring": "https://legacyindustrialcoatings.com/lovable-uploads/fa247baa-ccf6-438b-b7b1-47d07ae07d74.png",
+  "Industrial Coatings": "https://legacyindustrialcoatings.com/lovable-uploads/d1b328fa-3e30-4126-8266-ae64a33edd79.png",
+  "Concrete Polishing": "https://legacyindustrialcoatings.com/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png",
+  "Maintenance & Care": "https://legacyindustrialcoatings.com/lovable-uploads/7a02cc67-38e9-4f07-9b6e-e051b18f52a2.png",
+  "Project Spotlights": "https://byvazfrvoanojfayvsaz.supabase.co/storage/v1/object/public/gallery-images/gallery/1750507958996-6.png",
+};
+
 const mapRow = (row: BlogPostRow): BlogPost => {
-  const image = row.featured_image || "/placeholder.svg";
+  const category = row.category ?? "Uncategorized";
+  const featured = row.featured_image && row.featured_image.trim() !== "" ? row.featured_image : null;
+  const image = featured || CATEGORY_FALLBACK_IMAGES[category] || "/placeholder.svg";
   const publishedDate = row.published_date ?? new Date().toISOString();
   return {
     id: row.id,
