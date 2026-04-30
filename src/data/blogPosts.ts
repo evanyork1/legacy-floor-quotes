@@ -75,7 +75,7 @@ const mapRow = (row: BlogPostRow): BlogPost => {
     title: row.title,
     excerpt: row.excerpt ?? "",
     content: row.content ?? "",
-    category: row.category ?? "Uncategorized",
+    category,
     featuredImage: image,
     image,
     author: row.author ?? "Legacy Industrial Coatings Team",
