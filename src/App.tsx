@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/hooks/useAuth";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import BlogPostPage from "./pages/BlogPostPage";
 import Commercial from "./pages/Commercial";
 import ConcretePolishing from "./pages/ConcretePolishing";
 import Contact from "./pages/Contact";
@@ -88,6 +89,7 @@ function App() {
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
