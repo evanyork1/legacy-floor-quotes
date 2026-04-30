@@ -68,12 +68,12 @@ const IndustrialEpoxy = () => {
   return (
     <>
       <Helmet>
-        <title>Industrial Epoxy Flooring Solutions - Heavy-Duty Commercial Floors | Legacy Industrial Coatings</title>
-        <meta name="description" content="Professional industrial epoxy flooring for manufacturing, warehouses, hangars, and food processing facilities. Heavy-duty, chemical-resistant systems built to last." />
+        <title>Industrial Epoxy Flooring Dallas-Fort Worth | Legacy Industrial Coatings</title>
+        <meta name="description" content="Heavy-duty industrial epoxy floor coatings for warehouses, manufacturing, and high-traffic facilities across DFW." />
         <meta name="keywords" content="industrial epoxy flooring, commercial floor coating, warehouse flooring, hangar flooring, manufacturing floor, food grade epoxy, chemical resistant flooring" />
         
-        <meta property="og:title" content="Industrial Epoxy Flooring Solutions - Heavy-Duty Commercial Floors | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Professional industrial epoxy flooring for manufacturing, warehouses, hangars, and food processing facilities. Heavy-duty, chemical-resistant systems built to last." />
+        <meta property="og:title" content="Industrial Epoxy Flooring Dallas-Fort Worth | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Heavy-duty industrial epoxy floor coatings for warehouses, manufacturing, and high-traffic facilities across DFW." />
         <meta property="og:image" content="/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png" />
         
         <meta name="robots" content="index, follow" />
