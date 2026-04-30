@@ -10,6 +10,7 @@ import warehouseImg from "@/assets/commercial-warehouse.jpg";
 import retailImg from "@/assets/commercial-retail.jpg";
 import manufacturingImg from "@/assets/commercial-manufacturing.jpg";
 import { CommercialContactModal } from "@/components/commercial/CommercialContactModal";
+import { Seo } from "@/components/seo/Seo";
 
 /* ──────────────── data ──────────────── */
 
@@ -106,6 +107,11 @@ const CommercialFloors = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(0,0%,5%)] text-white">
+      <Seo
+        title="Commercial Concrete Polishing & Industrial Flooring | Legacy Industrial Coatings"
+        description="Spec-grade commercial concrete polishing, polishable overlays, grind & seal, and industrial epoxy systems. Texas-based crews, ASCC/ACI/ICRI standards, night and weekend mobilization."
+        path="/commercialfloors"
+      />
       {/* ─── Navbar ─── */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">

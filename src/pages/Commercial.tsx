@@ -107,6 +107,7 @@ const Commercial = () => {
         {/* Additional SEO */}
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#2563eb" />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/commercial" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

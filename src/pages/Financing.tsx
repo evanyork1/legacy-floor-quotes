@@ -78,6 +78,7 @@ const Financing = () => {
       <Helmet>
         <title>Financing Options - Legacy Industrial Coatings</title>
         <meta name="description" content="Flexible financing options for your epoxy flooring project. 12 or 24 month same as cash with 0% interest financing available." />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/financing" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

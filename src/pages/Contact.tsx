@@ -8,6 +8,7 @@ const Contact = () => {
       <Helmet>
         <title>Contact Us - Legacy Industrial Coatings | Professional Epoxy Flooring</title>
         <meta name="description" content="Contact Legacy Industrial Coatings for your epoxy flooring needs. Serving Dallas-Fort Worth and Phoenix metro areas." />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/contact" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

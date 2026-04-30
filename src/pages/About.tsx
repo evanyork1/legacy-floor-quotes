@@ -32,6 +32,7 @@ const About = () => {
         <title>About Legacy Industrial Coatings - Professional Floor Coating Experts</title>
         <meta name="description" content="Learn about Legacy Industrial Coatings, a family-owned company that has grown to be a recognized leader in epoxy floor coatings. Discover our commitment to quality craftsmanship and treating every floor like our own." />
         <meta name="keywords" content="about legacy industrial coatings, family business, epoxy flooring, floor coating company, quality craftsmanship" />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/about" />
       </Helmet>
 
       <HeaderGeneric />

@@ -2,12 +2,18 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Award, Shield, MapPin, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import legacyLogo from "@/assets/legacy-logo-white.png";
+import { Seo } from "@/components/seo/Seo";
 
 const AboutCommercial = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-[hsl(0,0%,5%)] text-white">
+      <Seo
+        title="About Legacy Industrial Coatings — Commercial Concrete & Polishing Partner for GCs"
+        description="Tech consultants for general contractors. Millions of square feet of commercial concrete polishing and industrial coatings delivered to spec for ITBs across Texas."
+        path="/about-commercial"
+      />
       {/* ─── Navbar ─── */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">

@@ -2,6 +2,7 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 const ServiceAreas = () => {
   const serviceAreas = [
@@ -15,6 +16,11 @@ const ServiceAreas = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="DFW Service Areas — Garage & Commercial Floor Coatings | Legacy Industrial Coatings"
+        description="We serve Plano, Frisco, Dallas, McKinney, Prosper, Flower Mound, Celina and 30+ cities across the Dallas-Fort Worth metroplex with garage and commercial floor coatings."
+        path="/service-areas"
+      />
       <HeaderGeneric />
       
       <main className="pt-20 sm:pt-24 pb-12 sm:pb-16">

@@ -11,6 +11,7 @@ const Warranty = () => {
           name="description" 
           content="Legacy Industrial Coatings Limited Lifetime Warranty for garage floor coatings. Learn about our warranty coverage, terms, and conditions."
         />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/warranty" />
       </Helmet>
       
       <div className="min-h-screen bg-background py-8 sm:py-12">

@@ -1,3 +1,31 @@
+User-agent: *
+Allow: /
+
+# Disallow gated, internal, or duplicate-content routes
+Disallow: /crm
+Disallow: /auth
+Disallow: /sales-dashboard
+Disallow: /sales-presentation
+Disallow: /presentation/
+Disallow: /packagepresentation
+Disallow: /flakefloortemplate
+Disallow: /quote
+Disallow: /quotedfw
+Disallow: /quotephx
+Disallow: /giveaway
+Disallow: /giveawayraf
+Disallow: /garagelandingform
+Disallow: /garagelandinginstant
+Disallow: /garagepacketpage
+Disallow: /garage-packet-result/
+Disallow: /googlegaragepage
+Disallow: /garagefloorsdallasfb
+Disallow: /landingvisual
+Disallow: /dfw
+Disallow: /phx
+Disallow: /quotedfw
+
+# Major search and social bots — explicit allow
 User-agent: Googlebot
 Allow: /
 
@@ -10,7 +38,14 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+# AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 Sitemap: https://legacyindustrialcoatings.com/sitemap.xml

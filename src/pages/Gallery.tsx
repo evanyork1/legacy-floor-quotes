@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X, Image as ImageIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Seo } from "@/components/seo/Seo";
 
 interface GalleryPhoto {
   id: string;
@@ -54,6 +55,11 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Floor Coating Gallery — Garage, Commercial & Polished Concrete | Legacy Industrial Coatings"
+        description="Browse our portfolio of completed garage floor, polyurea flake, polished concrete, and commercial epoxy installations across Dallas-Fort Worth."
+        path="/gallery"
+      />
       <HeaderGeneric />
       
       {/* Hero Section */}
