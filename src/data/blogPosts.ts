@@ -64,10 +64,30 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   "Project Spotlights": "https://byvazfrvoanojfayvsaz.supabase.co/storage/v1/object/public/gallery-images/gallery/1750507958996-6.png",
 };
 
+const normalizeCategory = (value: string): string =>
+  value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+const NORMALIZED_FALLBACK_LOOKUP: Record<string, string> = Object.fromEntries(
+  Object.entries(CATEGORY_FALLBACK_IMAGES).map(([key, url]) => [normalizeCategory(key), url]),
+);
+
+const resolveFallbackImage = (category: string): string | null => {
+  const trimmed = category.trim();
+  if (CATEGORY_FALLBACK_IMAGES[trimmed]) return CATEGORY_FALLBACK_IMAGES[trimmed];
+  const normalized = normalizeCategory(trimmed);
+  if (NORMALIZED_FALLBACK_LOOKUP[normalized]) return NORMALIZED_FALLBACK_LOOKUP[normalized];
+  // Try prefix match against known categories (handles typos like "Maintenance & Carejso")
+  for (const [key, url] of Object.entries(NORMALIZED_FALLBACK_LOOKUP)) {
+    if (normalized.startsWith(key) || key.startsWith(normalized)) return url;
+  }
+  console.warn(`[blog] No fallback image for category "${category}"`);
+  return null;
+};
+
 const mapRow = (row: BlogPostRow): BlogPost => {
   const category = row.category ?? "Uncategorized";
   const featured = row.featured_image && row.featured_image.trim() !== "" ? row.featured_image : null;
-  const image = featured || CATEGORY_FALLBACK_IMAGES[category] || "/placeholder.svg";
+  const image = featured || resolveFallbackImage(category) || "/placeholder.svg";
   const publishedDate = row.published_date ?? new Date().toISOString();
   return {
     id: row.id,
