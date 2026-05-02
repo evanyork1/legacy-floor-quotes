@@ -1,0 +1,502 @@
+import { Helmet } from "react-helmet-async";
+import HeaderGeneric from "@/components/HeaderGeneric";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Shield, Droplets, Sparkles, CheckCircle, Calendar, Phone, UtensilsCrossed, Beer, Warehouse, ChefHat, Clock, RefreshCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BookingModal } from "@/components/landing/BookingModal";
+import { StructuredData } from "@/components/seo/StructuredData";
+
+import sealingHero from "@/assets/concrete-sealing-tasting-room.jpg";
+import sealingDetail from "@/assets/concrete-sealing-floor-detail.jpg";
+
+const sealingFaqs = [
+  {
+    question: "What is concrete sealing?",
+    answer: "Concrete sealing is the application of a penetrating or topical sealer to a concrete slab to block moisture, oils, food acids, and stains from absorbing into the porous surface. Unlike a coating, a sealer is thin and breathable — it preserves the natural look of concrete while making it dramatically easier to clean and far more resistant to staining."
+  },
+  {
+    question: "What's the difference between concrete sealing, concrete coating, and polished concrete?",
+    answer: "A concrete sealer is a low-build, often invisible barrier that soaks into or sits just on top of the slab. A concrete coating (epoxy, polyaspartic, urethane cement) is a thick film system that builds a new wear surface on the floor. Polished concrete is a mechanically refined and densified slab with no film at all. Sealing is the lightest, fastest, most cost-effective option for facilities that want stain protection without changing the look or shutting down for days."
+  },
+  {
+    question: "How often does commercial concrete need to be resealed?",
+    answer: "Most commercial floors need resealing every 2–5 years. Light-traffic offices and showrooms can stretch to 4–5 years; restaurants, breweries, commercial kitchens, and warehouses with daily wash-downs and forklift traffic typically need it every 2–3 years. Sealers wear off mechanically (foot and wheel traffic) and chemically (degreasers, food acids, sanitizers), and once they're gone the slab starts absorbing stains again."
+  },
+  {
+    question: "Why do I need to reseal concrete instead of doing it once?",
+    answer: "Sealers are sacrificial. Every mop, scrub, spill, and footstep removes a tiny amount of the protective layer. When the sealer thins out, water no longer beads, stains start to set, and the floor begins to look dull or blotchy. Resealing on a planned 2–5 year cycle is far cheaper than letting the slab absorb grease and dyes that require grinding to remove."
+  },
+  {
+    question: "How often should sealed concrete be deep cleaned in a restaurant or kitchen?",
+    answer: "Sealed concrete in restaurants, bars, and commercial kitchens should be professionally deep cleaned every quarter (every 3 months). Nightly mopping pushes greasy water into floor joints and around equipment — quarterly deep cleaning extracts what mops leave behind, restores slip resistance, and dramatically extends the life of the sealer."
+  },
+  {
+    question: "Will concrete sealing make my floor slippery?",
+    answer: "No — we use commercial-grade sealers with anti-slip additives where required, so wet sealed concrete in kitchens, breweries, and bar areas meets or exceeds slip-resistance standards. We match the sealer chemistry and texture to your environment."
+  },
+  {
+    question: "How long does concrete sealing take?",
+    answer: "Most commercial sealing projects are completed overnight or in a single day. Penetrating sealers are typically walkable within hours, and your facility can be back in full operation the next morning — unlike a full coating system that requires multiple days of downtime."
+  },
+  {
+    question: "Which DFW areas do you serve for concrete sealing?",
+    answer: "We seal concrete floors across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound — including restaurants, breweries, tasting rooms, commercial kitchens, warehouses, and food-processing facilities."
+  }
+];
+
+const ConcreteSealing = () => {
+  const navigate = useNavigate();
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
+  const industries = [
+    { icon: <UtensilsCrossed className="h-8 w-8 text-blue-600" />, title: "Restaurants", description: "Stain-proof dining rooms and back-of-house floors that wipe clean and pass health inspections." },
+    { icon: <Beer className="h-8 w-8 text-blue-600" />, title: "Breweries & Tasting Rooms", description: "Sealed slabs that resist hops, yeast, beer spills, and constant rinsing." },
+    { icon: <ChefHat className="h-8 w-8 text-blue-600" />, title: "Commercial Kitchens", description: "Grease, oil, and acid-resistant sealers built for daily wash-down environments." },
+    { icon: <Warehouse className="h-8 w-8 text-blue-600" />, title: "Warehouses & Distribution", description: "Dust-proof, easy-to-sweep floors that hold up to forklift and pallet jack traffic." }
+  ];
+
+  const benefits = [
+    { icon: <Shield className="h-6 w-6 text-blue-600" />, title: "Stain Resistance", description: "Blocks oil, grease, wine, beer, food acids, and sanitizers from absorbing into the slab." },
+    { icon: <Droplets className="h-6 w-6 text-blue-600" />, title: "Easy Cleaning", description: "Sealed concrete wipes and mops clean in a fraction of the time of raw concrete." },
+    { icon: <Sparkles className="h-6 w-6 text-blue-600" />, title: "Enhanced Appearance", description: "Brings out the natural color and depth of the slab with matte, satin, or wet-look finishes." },
+    { icon: <CheckCircle className="h-6 w-6 text-blue-600" />, title: "Durability", description: "Reduces dusting, abrasion, and freeze-thaw damage — extending the useful life of the slab." }
+  ];
+
+  const phoneNumber = "214-305-6516";
+
+  return (
+    <>
+      <Helmet>
+        <title>Commercial Concrete Sealing Dallas-Fort Worth | Restaurants, Breweries & Warehouses</title>
+        <meta name="description" content="Professional commercial concrete sealing across DFW. Stain-resistant, easy-clean sealed concrete floors for restaurants, breweries, commercial kitchens, and warehouses. Reseal every 2–5 years." />
+        <meta name="keywords" content="concrete sealing Dallas, concrete sealer Fort Worth, restaurant concrete sealing, brewery floor sealer, commercial kitchen concrete sealer, warehouse concrete sealing, reseal concrete DFW, food-safe concrete sealer" />
+        <meta property="og:title" content="Commercial Concrete Sealing DFW | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Stain-proof, easy-to-clean sealed concrete floors for DFW restaurants, breweries, commercial kitchens and warehouses." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/concrete-sealing" />
+      </Helmet>
+
+      <StructuredData
+        services={[
+          { name: "Commercial Concrete Sealing", description: "Penetrating and topical concrete sealing for DFW restaurants, breweries, commercial kitchens, and warehouses. Stain-resistant, easy-clean, slip-rated sealers with quarterly deep-clean and 2–5 year reseal programs.", url: "/concrete-sealing" },
+        ]}
+        faqs={sealingFaqs}
+      />
+
+      <div className="min-h-screen bg-white">
+        <HeaderGeneric />
+        <main>
+
+        {/* Hero */}
+        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                  Commercial <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Concrete Sealing</span> in Dallas-Fort Worth
+                </h1>
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  Stain-proof, easy-to-clean sealed concrete floors for restaurants, breweries, commercial kitchens, and warehouses across DFW. Installed overnight, recommended to reseal every 2–5 years.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <a href={`tel:${phoneNumber}`}>
+                      <Phone className="mr-2 h-5 w-5" />
+                      {phoneNumber}
+                    </a>
+                  </Button>
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book An Estimate
+                  </Button>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sealing vs Coating vs Polishing */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Sealing vs. Coating vs. Polished Concrete
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Three different ways to protect commercial concrete. Here's how they compare so you can pick the right one for your facility.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="border-2 border-blue-200 shadow-lg">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-blue-700 mb-3">Concrete Sealing</h3>
+                  <p className="text-gray-700 mb-4 text-sm leading-relaxed">A thin, often invisible barrier that penetrates or lays just on top of the slab to block stains and moisture.</p>
+                  <ul className="text-sm text-gray-600 space-y-2">
+                    <li><strong>Build:</strong> Thin / penetrating</li>
+                    <li><strong>Downtime:</strong> Overnight</li>
+                    <li><strong>Cost:</strong> Lowest of the three</li>
+                    <li><strong>Lifespan:</strong> Reseal every 2–5 years</li>
+                    <li><strong>Best for:</strong> Restaurants, breweries, kitchens, warehouses</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="border border-gray-200 shadow-md">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Concrete Coating</h3>
+                  <p className="text-gray-700 mb-4 text-sm leading-relaxed">A thick epoxy, polyaspartic, or urethane cement film that builds an entirely new wear surface on the slab.</p>
+                  <ul className="text-sm text-gray-600 space-y-2">
+                    <li><strong>Build:</strong> 20–250+ mils film</li>
+                    <li><strong>Downtime:</strong> 1–4 days</li>
+                    <li><strong>Cost:</strong> Highest</li>
+                    <li><strong>Lifespan:</strong> 10–20+ years</li>
+                    <li><strong>Best for:</strong> Heavy chemical, thermal, or impact environments</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="border border-gray-200 shadow-md">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Polished Concrete</h3>
+                  <p className="text-gray-700 mb-4 text-sm leading-relaxed">The existing slab refined with diamond tooling and lithium-silicate densifier. No film at all.</p>
+                  <ul className="text-sm text-gray-600 space-y-2">
+                    <li><strong>Build:</strong> None — slab itself</li>
+                    <li><strong>Downtime:</strong> Phased / off-hours</li>
+                    <li><strong>Cost:</strong> Mid-to-high</li>
+                    <li><strong>Lifespan:</strong> Permanent (burnish to maintain)</li>
+                    <li><strong>Best for:</strong> Warehouses, retail, showrooms</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* When you need it */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-96 object-cover rounded-2xl shadow-xl" />
+              </div>
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                  When Restaurants & Commercial Kitchens Need Concrete Sealing
+                </h2>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  Raw concrete is porous. In a restaurant or commercial kitchen, that means grease, food acids, wine, beer, sanitizers, and dropped sauces soak straight into the slab — creating permanent stains, odor traps, and surfaces that fail health inspections.
+                </p>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>New build-out before opening day — seal before traffic ever hits the floor.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Floor is dusting, looks blotchy, or no longer beads water when you splash it.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Stains setting in faster than your nightly mop crew can keep up with.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Health inspector flagged porous, stained, or hard-to-sanitize flooring.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Last sealer was applied 2+ years ago and the floor needs a refresh.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Benefits of Sealed Concrete
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Why operators across DFW choose sealing as their first line of defense.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {benefits.map((b, i) => (
+                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="p-6">
+                    <div className="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                      {b.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{b.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{b.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Industries */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Sealed concrete works wherever a porous slab meets daily abuse.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {industries.map((ind, i) => (
+                <Card key={i} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
+                  <CardContent className="p-6">
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {ind.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{ind.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{ind.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Reseal cycle */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                How Often Should You Reseal? <span className="text-blue-600">Every 2–5 Years.</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Sealers are sacrificial — they wear off mechanically (foot and wheel traffic) and chemically (degreasers, food acids, sanitizers). The right reseal interval depends on how hard your floor works.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <Card className="shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-3">
+                    <Clock className="h-6 w-6 text-blue-600 mr-2" />
+                    <h3 className="text-lg font-bold text-gray-900">Every 4–5 Years</h3>
+                  </div>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Light traffic:</strong> Offices, showrooms, retail back-of-house, low-volume tasting rooms.</p>
+                  <p className="text-sm text-gray-600">Foot traffic only, minimal chemical exposure, no daily wash-downs.</p>
+                </CardContent>
+              </Card>
+              <Card className="shadow-lg border-2 border-blue-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-3">
+                    <Clock className="h-6 w-6 text-blue-600 mr-2" />
+                    <h3 className="text-lg font-bold text-gray-900">Every 3 Years</h3>
+                  </div>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Medium traffic:</strong> Most restaurants, breweries, bars, tasting rooms with food service.</p>
+                  <p className="text-sm text-gray-600">Daily mopping, regular spills, mixed foot and cart traffic.</p>
+                </CardContent>
+              </Card>
+              <Card className="shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-3">
+                    <Clock className="h-6 w-6 text-blue-600 mr-2" />
+                    <h3 className="text-lg font-bold text-gray-900">Every 2 Years</h3>
+                  </div>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Heavy traffic:</strong> Commercial kitchens, food processing, warehouses with forklifts and pallet jacks.</p>
+                  <p className="text-sm text-gray-600">Daily wash-downs, hot grease, harsh sanitizers, wheeled loads.</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-xl p-6 max-w-4xl mx-auto">
+              <div className="flex items-start">
+                <RefreshCw className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1 mr-4" />
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Why You Have to Reapply</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Every mop pass, scrub, spill, and footstep removes a microscopic layer of sealer. Once it thins out, water stops beading, stains start to set, and the floor begins to look dull, blotchy, or hazy. Resealing on a planned cycle is dramatically cheaper than letting grease, dyes, and food acids absorb into the bare slab — once that happens, the only fix is mechanical grinding.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Maintenance & Cleaning */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Maintenance & Quarterly Deep Cleaning
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                The fastest way to wreck a sealed floor is to rely on the nightly mop bucket. Here's what actually keeps it looking new.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="shadow-lg">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Daily / Nightly Routine</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Sweep or dust mop to remove grit (the #1 cause of sealer wear).</span></li>
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Damp mop with a pH-neutral cleaner — never harsh acids or strong degreasers.</span></li>
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Change mop water frequently. Dirty water just smears grease and grit across the floor.</span></li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-lg border-2 border-blue-300">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Quarterly Professional Deep Clean</h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    In a restaurant, brewery, or commercial kitchen, sealed concrete needs a <strong>professional deep clean every 3 months</strong>. Mops only push greasy water around — they leave a film in joints, around equipment legs, and along baseboards that nightly cleaning never extracts.
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Hot-water extraction lifts embedded grease and biofilm.</span></li>
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Restores slip resistance and the sealer's natural sheen.</span></li>
+                    <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Doubles the life of the sealer between reseals.</span></li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Mid-page CTA */}
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Seal Your Floor?</h2>
+            <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
+              Free on-site assessment across DFW. Most jobs completed overnight — no shutdown required.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <a href={`tel:${phoneNumber}`}>
+                  <Phone className="mr-2 h-5 w-5" />
+                  {phoneNumber}
+                </a>
+              </Button>
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Case Studies (placeholders) */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Case Studies</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                A look at real DFW concrete sealing projects we've delivered.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { tag: "Restaurant & Bar", title: "Anonymized DFW Restaurant Group", body: "Placeholder — case study details coming soon." },
+                { tag: "Brewery / Tasting Room", title: "Anonymized Craft Brewery", body: "Placeholder — case study details coming soon." },
+                { tag: "Warehouse", title: "Anonymized Distribution Facility", body: "Placeholder — case study details coming soon." }
+              ].map((cs, i) => (
+                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-slate-200 flex items-center justify-center">
+                    <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Photo Coming Soon</span>
+                  </div>
+                  <CardContent className="p-6">
+                    <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">{cs.tag}</span>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{cs.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{cs.body}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SEO long-form content */}
+        <section className="py-20 bg-slate-50" aria-labelledby="sealing-content-heading">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 id="sealing-content-heading" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 text-center">
+              Commercial Concrete Sealing in Dallas-Fort Worth
+            </h2>
+            <div className="prose prose-lg max-w-none text-gray-700 space-y-5 leading-relaxed">
+              <p>
+                Legacy Industrial Coatings provides <strong>commercial concrete sealing</strong> across the Dallas-Fort Worth metroplex for restaurants, breweries, tasting rooms, commercial kitchens, food-processing facilities, and warehouses. A properly specified sealer is the fastest, lowest-cost way to protect a concrete slab from the staining and dusting that comes with daily commercial use.
+              </p>
+              <p>
+                Unlike a thick epoxy or polyaspartic coating, a sealer is a thin, often invisible barrier — penetrating sealers chemically react inside the slab to block moisture and oils, while topical sealers form a low-build film that beads water and resists food acids. Both options preserve the natural look of concrete and most installations are completed overnight, so your facility is back in operation by morning.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Food-Safe & Slip-Rated</h3>
+              <p>
+                For food and beverage environments, we specify sealers that are compatible with USDA, FDA, and local health-department requirements, and we add anti-slip aggregates wherever required by code. Wet kitchens, beer-line drips in tasting rooms, and walk-in cooler thresholds all need slip-rated chemistry — not a generic concrete sealer from a hardware store.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">2–5 Year Reseal Programs</h3>
+              <p>
+                Sealers are sacrificial. We build a planned reseal schedule into every commercial bid so you're never surprised by a stained, dusting floor. Most restaurants and breweries fall into a <strong>3-year reseal cycle</strong>; high-output kitchens and warehouses fall into a <strong>2-year cycle</strong>; light-use offices and showrooms can stretch to <strong>4–5 years</strong>.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Quarterly Deep Cleaning Extends Sealer Life</h3>
+              <p>
+                The single biggest factor in how long a sealer lasts is what happens between reseal jobs. Nightly mopping handles surface dirt, but it leaves grease, biofilm, and embedded grit in joints and around equipment. <strong>Quarterly professional deep cleaning</strong> with hot-water extraction pulls that residue out, restores slip resistance, and routinely doubles the useful life of the sealer.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Where We Seal Concrete</h3>
+              <p>
+                Our crews seal concrete floors throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound</strong> — including new restaurant build-outs, brewery and tasting room expansions, commercial kitchen remodels, food-processing plants, and distribution warehouses.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-20 bg-white" aria-labelledby="sealing-faq-heading">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-10">
+              <h2 id="sealing-faq-heading" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+                Concrete Sealing FAQ
+              </h2>
+              <p className="text-lg text-gray-600">
+                Common questions about commercial concrete sealing in DFW.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {sealingFaqs.map((faq, i) => (
+                <article key={i} className="border-b border-gray-200 pb-6 last:border-0">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Get Your Concrete Sealed</h2>
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+              Free on-site assessment, food-safe sealer specifications, and a planned reseal schedule for your facility.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <a href={`tel:${phoneNumber}`}>
+                  <Phone className="mr-2 h-5 w-5" />
+                  {phoneNumber}
+                </a>
+              </Button>
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        </main>
+
+        <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
+
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default ConcreteSealing;
