@@ -422,7 +422,7 @@ const ConcreteSealing = () => {
 
             <div className="max-w-3xl mx-auto">
               <button
-                onClick={() => navigate("/case-studies/fast-casual-restaurant-concrete-sealing")}
+                onClick={() => navigate("/commercial-case-studies/fast-casual-restaurant-concrete-sealing")}
                 className="text-left w-full group"
               >
                 <Card className="border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
