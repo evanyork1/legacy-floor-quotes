@@ -173,7 +173,7 @@ const ConcreteSealing = () => {
                     <li><strong>Build:</strong> None — slab itself</li>
                     <li><strong>Downtime:</strong> Phased / off-hours</li>
                     <li><strong>Cost:</strong> Mid-to-high</li>
-                    <li><strong>Lifespan:</strong> Permanent (burnish to maintain)</li>
+                    <li><strong>Lifespan:</strong> 3–10 years (varies with traffic; rebuff/redensify to refresh)</li>
                     <li><strong>Best for:</strong> Warehouses, retail, showrooms</li>
                   </ul>
                 </CardContent>
