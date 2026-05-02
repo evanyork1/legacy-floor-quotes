@@ -210,30 +210,7 @@ const CaseStudyDetail = () => {
           </div>
         </section>
 
-        {/* Key Takeaways */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Key Takeaways</h2>
-            <Card className="border border-slate-200 shadow-sm">
-              <CardContent className="p-6 md:p-8">
-                <ul className="space-y-4">
-                  {[
-                    "Concrete sealant wears down over time — restaurants should plan a 2–5 year reseal cycle, not a one-time install.",
-                    "Once a sealer fails, daily spills and grit go straight into the slab, creating staining that eventually requires grinding instead of resealing.",
-                    "A worn floor is a brand problem — customers read dull, stained concrete as an unsanitary, unprofessional restaurant.",
-                    "Most commercial sealing jobs can be completed overnight, with the floor back in service by the next morning.",
-                    "Quarterly professional deep cleaning between reseals can roughly double the useful life of a sealer.",
-                  ].map((point, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-blue-700 mt-0.5 shrink-0" />
-                      <span className="text-gray-700 leading-relaxed">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+        {/* Key Takeaways section removed — was restaurant-specific and didn't apply across studies */}
 
         {/* CTA */}
         <section className="py-16 bg-slate-900 text-white">
