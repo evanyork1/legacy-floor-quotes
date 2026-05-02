@@ -103,22 +103,22 @@ const ConcreteSealing = () => {
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Stain-proof, easy-to-clean sealed concrete floors for restaurants, breweries, commercial kitchens, and warehouses across DFW. Installed overnight, recommended to reseal every 2–5 years.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button asChild className="bg-blue-700 hover:bg-blue-800 text-white px-7 py-3 rounded-md shadow-sm">
                     <a href={`tel:${phoneNumber}`}>
                       <Phone className="mr-2 h-5 w-5" />
                       {phoneNumber}
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-700 text-blue-700 hover:bg-blue-50 px-7 py-3 rounded-md">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
                 </div>
+                <p className="mt-6 text-sm text-gray-500 uppercase tracking-wider">Nationwide capability on jobs over 10,000 sq ft</p>
               </div>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" />
               </div>
             </div>
           </div>
