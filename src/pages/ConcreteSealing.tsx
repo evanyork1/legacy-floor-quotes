@@ -467,7 +467,7 @@ const ConcreteSealing = () => {
               </p>
               <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Where We Seal Concrete</h3>
               <p>
-                Our crews seal concrete floors throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound</strong> — including new restaurant build-outs, brewery and tasting room expansions, commercial kitchen remodels, food-processing plants, and distribution warehouses.
+                Our crews seal concrete floors throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, Flower Mound, and more</strong> — including new restaurant build-outs, brewery and tasting room expansions, commercial kitchen remodels, food-processing plants, and distribution warehouses. For projects over <strong>10,000 sq ft</strong>, we also mobilize crews <strong>nationwide</strong>.
               </p>
             </div>
           </div>
