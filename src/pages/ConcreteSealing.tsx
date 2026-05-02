@@ -321,8 +321,33 @@ const ConcreteSealing = () => {
           </div>
         </section>
 
+        {/* Nationwide capability */}
+        <section className="py-20 bg-slate-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <img src={sealingWarehouse} alt="Large sealed concrete warehouse floor with overhead doors and mezzanine" className="w-full h-[26rem] object-cover rounded-md shadow-2xl" />
+              </div>
+              <div>
+                <p className="text-sm uppercase tracking-[0.2em] text-blue-300 mb-3">Large-format projects</p>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-5 tracking-tight">
+                  Nationwide capability for jobs over 10,000 sq ft
+                </h2>
+                <p className="text-lg text-slate-300 leading-relaxed mb-6">
+                  For warehouses, distribution centers, food-processing plants, and multi-site rollouts above 10,000 square feet, we mobilize crews and equipment outside the DFW metroplex. One point of contact, consistent specs, and a single accountable team across every location.
+                </p>
+                <ul className="space-y-2 text-slate-300">
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Single-source pricing for multi-location portfolios</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Phased night and weekend work to keep operations running</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Standardized sealer specs and reseal schedules across every site</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Maintenance & Cleaning */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
