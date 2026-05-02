@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Phone, MapPin, Wrench, Ruler, Clock, CheckCircle2 } from "lucide-react";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { StructuredData } from "@/components/seo/StructuredData";
 import { getCaseStudyBySlug } from "@/data/caseStudies";
 
 const CaseStudyDetail = () => {
@@ -20,6 +19,35 @@ const CaseStudyDetail = () => {
   if (!cs) return <Navigate to="/case-studies" replace />;
 
   const canonical = `https://legacyindustrialcoatings.com/case-studies/${cs.slug}`;
+  const heroImageAbs = `https://legacyindustrialcoatings.com${cs.heroImage}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: cs.title,
+    description: cs.metaDescription,
+    image: heroImageAbs,
+    author: { "@type": "Organization", name: "Legacy Industrial Coatings" },
+    publisher: {
+      "@type": "Organization",
+      name: "Legacy Industrial Coatings",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://legacyindustrialcoatings.com/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png",
+      },
+    },
+    mainEntityOfPage: canonical,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://legacyindustrialcoatings.com/" },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://legacyindustrialcoatings.com/case-studies" },
+      { "@type": "ListItem", position: 3, name: cs.title, item: canonical },
+    ],
+  };
 
   const PhotoGrid = ({
     title,
@@ -62,39 +90,12 @@ const CaseStudyDetail = () => {
         <link rel="canonical" href={canonical} />
         <meta property="og:title" content={cs.metaTitle} />
         <meta property="og:description" content={cs.metaDescription} />
-        <meta property="og:image" content={`https://legacyindustrialcoatings.com${cs.heroImage}`} />
+        <meta property="og:image" content={heroImageAbs} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonical} />
+        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
-
-      <StructuredData
-        type="Article"
-        data={{
-          headline: cs.title,
-          description: cs.metaDescription,
-          image: cs.heroImage,
-          author: { "@type": "Organization", name: "Legacy Industrial Coatings" },
-          publisher: {
-            "@type": "Organization",
-            name: "Legacy Industrial Coatings",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://legacyindustrialcoatings.com/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png",
-            },
-          },
-          mainEntityOfPage: canonical,
-        }}
-      />
-      <StructuredData
-        type="BreadcrumbList"
-        data={{
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://legacyindustrialcoatings.com/" },
-            { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://legacyindustrialcoatings.com/case-studies" },
-            { "@type": "ListItem", position: 3, name: cs.title, item: canonical },
-          ],
-        }}
-      />
 
       <HeaderGeneric />
 

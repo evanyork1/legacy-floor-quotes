@@ -7,8 +7,17 @@ import { ArrowRight, Calendar, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BookingModal } from "@/components/landing/BookingModal";
-import { StructuredData } from "@/components/seo/StructuredData";
 import { caseStudies } from "@/data/caseStudies";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://legacyindustrialcoatings.com/" },
+    { "@type": "ListItem", position: 2, name: "About", item: "https://legacyindustrialcoatings.com/about" },
+    { "@type": "ListItem", position: 3, name: "Case Studies", item: "https://legacyindustrialcoatings.com/case-studies" }
+  ]
+};
 
 const CaseStudies = () => {
   const navigate = useNavigate();
@@ -23,17 +32,8 @@ const CaseStudies = () => {
           content="Real commercial concrete sealing, polishing, and coating case studies from Legacy Industrial Coatings. See before-and-after results from restaurants, breweries, warehouses, and more across DFW."
         />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/case-studies" />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
-      <StructuredData
-        type="BreadcrumbList"
-        data={{
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://legacyindustrialcoatings.com/" },
-            { "@type": "ListItem", position: 2, name: "About", item: "https://legacyindustrialcoatings.com/about" },
-            { "@type": "ListItem", position: 3, name: "Case Studies", item: "https://legacyindustrialcoatings.com/case-studies" }
-          ]
-        }}
-      />
       <HeaderGeneric />
 
       <main className="pt-24">
