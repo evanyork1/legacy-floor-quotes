@@ -13,6 +13,7 @@ import sealingHero from "@/assets/concrete-sealing-tasting-room.jpg";
 import sealingDetail from "@/assets/concrete-sealing-floor-detail.jpg";
 import sealingCidery from "@/assets/concrete-sealing-cidery.webp";
 import sealingWarehouse from "@/assets/concrete-sealing-warehouse.jpg";
+import restaurantCaseStudyHero from "@/assets/case-studies/fast-casual-restaurant/after-2.jpg";
 
 const sealingFaqs = [
   {
@@ -428,7 +429,7 @@ const ConcreteSealing = () => {
                   <div className="md:grid md:grid-cols-2">
                     <div className="aspect-video md:aspect-auto md:h-full overflow-hidden bg-slate-100">
                       <img
-                        src="/src/assets/case-studies/fast-casual-restaurant/after-2.jpg"
+                        src={restaurantCaseStudyHero}
                         alt="Restored fast-casual restaurant concrete floor after Legacy Industrial Coatings sealing"
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
