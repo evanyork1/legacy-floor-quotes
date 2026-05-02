@@ -222,9 +222,9 @@ const ConcreteSealing = () => {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((b, i) => (
-                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <Card key={i} className="border border-slate-200 shadow-sm">
                   <CardContent className="p-6">
-                    <div className="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                    <div className="bg-slate-100 w-11 h-11 rounded-md flex items-center justify-center mb-4">
                       {b.icon}
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{b.title}</h3>
