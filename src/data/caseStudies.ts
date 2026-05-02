@@ -26,6 +26,7 @@ export interface CaseStudyPhoto {
 
 export interface CaseStudy {
   slug: string;
+  category: "commercial" | "residential";
   tag: string;
   title: string;
   summary: string;
@@ -52,6 +53,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "fast-casual-restaurant-concrete-sealing",
+    category: "commercial",
     tag: "Fast-Casual Restaurant",
     title: "Fast-Casual Restaurant — 8-Year-Old Sealant Restoration",
     summary:
@@ -63,22 +65,22 @@ export const caseStudies: CaseStudy[] = [
       "Fast-Casual Restaurant Concrete Sealing Case Study | Legacy Industrial Coatings",
     metaDescription:
       "8-year-old restaurant sealant had failed and the slab was absorbing stains. See the before, during, and after photos of how we restored and resealed the concrete floor in one overnight visit.",
-    location: "DFW Metroplex",
+    location: "Plano, TX",
     serviceType: "Concrete Deep Clean & Reseal",
     squareFootage: "Open dining room + service area",
     timeline: "Single overnight visit",
     challenge: [
-      "This fast-casual restaurant had its concrete floor sealed once — when the store first opened, eight years prior. Sealers are sacrificial, designed to wear off over time, and at the eight-year mark there was effectively no protective layer left on the slab.",
+      "This fast-casual restaurant had its concrete floor sealed once — when the store first opened, eight years prior. Sealers wear down over time under daily traffic and cleaning, and at the eight-year mark there was effectively no protective layer left on the slab.",
       "Without that barrier, daily foot traffic and routine spills had been driving food oils, sauce, drink residue, and grit directly into the porous concrete. The floor had taken on a dull, blotchy appearance, was holding moisture in low spots, and was visibly dusting around high-traffic lanes.",
       "Left untreated, this is the stage where stains become permanent and the slab itself starts to break down — turning a routine reseal into a much more expensive grind-and-restoration project. It's also where customer perception starts to shift: a dirty-looking floor reads as an unsanitary, unprofessional restaurant, even when the kitchen behind it is spotless.",
     ],
     solution: [
       "We mobilized after closing and worked overnight so the restaurant didn't lose a single service. The first phase was a full mechanical and chemical deep clean — hot-water extraction with commercial-grade alkaline degreasers to pull eight years of embedded grease, biofilm, and dye out of the open pores of the slab.",
       "Once the concrete was clean and fully dry, we addressed isolated stain areas with targeted spot treatment, then applied a commercial-grade penetrating sealer matched to the floor's exposure: high-traffic dining, food and drink spills, and routine wet mopping.",
-      "Anti-slip additives were specified throughout the wet zones and primary walking lanes to keep the surface within commercial slip-resistance standards. The sealer was applied in controlled coats with full cure time built into the overnight window.",
+      "The sealer was applied in controlled coats with full cure time built into the overnight window so the floor was ready for full service the following morning.",
     ],
     result: [
-      "By the time the morning crew arrived, the floor was back in service — only now it was sealed, slip-rated, and dramatically easier to clean. The dull, dirty appearance was gone. Spills now bead up on the surface instead of soaking in, and nightly mopping actually gets the floor clean instead of just moving grime around.",
+      "By the time the morning crew arrived, the floor was back in service — only now it was sealed, protected, and dramatically easier to clean. The dull, dirty appearance was gone. Spills now bead up on the surface instead of soaking in, and nightly mopping actually gets the floor clean instead of just moving grime around.",
       "We placed this restaurant on a planned 3-year reseal cycle with quarterly professional deep cleaning in between, so they'll never again be in the position of waiting until the sealant has fully failed before doing something about it.",
       "This is the exact pattern we see in restaurants across DFW: a single sealing job at opening, then years of silence, then a panic call when the floor starts looking unprofessional. A planned reseal program prevents that — and protects the slab itself, which is the most expensive thing to replace.",
     ],
@@ -110,3 +112,6 @@ export const caseStudies: CaseStudy[] = [
 
 export const getCaseStudyBySlug = (slug: string) =>
   caseStudies.find((cs) => cs.slug === slug);
+
+export const getCaseStudiesByCategory = (category: "commercial" | "residential") =>
+  caseStudies.filter((cs) => cs.category === category);

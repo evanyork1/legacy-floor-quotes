@@ -32,7 +32,6 @@ const HeaderPHX = () => {
 
 const aboutItems = [
   { name: "About Us", path: "/about" },
-  { name: "Case Studies", path: "/case-studies" },
   { name: "Blog", path: "/blog" },
   { name: "Additional Services", path: "/additional-services" },
   { name: "FAQ", path: "/faq" },
@@ -42,14 +41,16 @@ const aboutItems = [
 const residentialItems = [
   { name: "Garage Floors", path: "/garagefloors" },
   { name: "Patios", path: "/residential-patio" },
-  { name: "Additional Services", path: "/additional-services" }
+  { name: "Additional Services", path: "/additional-services" },
+  { name: "Case Studies", path: "/residential-case-studies" }
 ];
 
   const commercialItems = [
     { name: "Flake Floors", path: "/flake-floors" },
     { name: "Industrial Epoxy", path: "/industrial-epoxy" },
     { name: "Concrete Polishing", path: "/concrete-polishing" },
-    { name: "Concrete Sealing", path: "/concrete-sealing" }
+    { name: "Concrete Sealing", path: "/concrete-sealing" },
+    { name: "Case Studies", path: "/commercial-case-studies" }
   ];
 
   const handlePhoneClick = () => {
