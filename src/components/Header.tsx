@@ -30,9 +30,6 @@ const Header = () => {
     name: "About Us",
     path: "/about"
   }, {
-    name: "Case Studies",
-    path: "/case-studies"
-  }, {
     name: "Blog",
     path: "/blog"
   }, {
@@ -48,6 +45,9 @@ const Header = () => {
   }, {
     name: "Patios",
     path: "/residential-patio"
+  }, {
+    name: "Case Studies",
+    path: "/residential-case-studies"
   }];
   const commercialItems = [{
     name: "Flake Floors",
@@ -61,6 +61,9 @@ const Header = () => {
   }, {
     name: "Concrete Sealing",
     path: "/concrete-sealing"
+  }, {
+    name: "Case Studies",
+    path: "/commercial-case-studies"
   }];
   return <>
       <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
