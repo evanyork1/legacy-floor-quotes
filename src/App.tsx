@@ -98,8 +98,12 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/case-studies" element={<Navigate to="/commercial-case-studies" replace />} />
               <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+              <Route path="/commercial-case-studies" element={<CaseStudies category="commercial" />} />
+              <Route path="/commercial-case-studies/:slug" element={<CaseStudyDetail />} />
+              <Route path="/residential-case-studies" element={<CaseStudies category="residential" />} />
+              <Route path="/residential-case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               
