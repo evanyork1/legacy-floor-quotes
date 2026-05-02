@@ -20,6 +20,7 @@ const Footer = () => {
   const services = [
     { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
     { href: "/concrete-polishing", label: "Polished Concrete Floors" },
+    { href: "/concrete-sealing", label: "Concrete Sealing" },
     { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
     { href: "/commercial", label: "Commercial Floor Coatings" },
     { href: "/residential-patio", label: "Residential Patio Coatings" },
