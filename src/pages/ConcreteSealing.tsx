@@ -388,20 +388,20 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Mid-page CTA */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-16 bg-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Seal Your Floor?</h2>
             <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
               Free on-site assessment across DFW. Most jobs completed overnight — no shutdown required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-7 py-3 rounded-md shadow-sm">
                 <a href={`tel:${phoneNumber}`}>
                   <Phone className="mr-2 h-5 w-5" />
                   {phoneNumber}
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-7 py-3 rounded-md bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
@@ -496,20 +496,20 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Bottom CTA */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">Get Your Concrete Sealed</h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               Free on-site assessment, food-safe sealer specifications, and a planned reseal schedule for your facility.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-7 py-3 rounded-md shadow-sm">
                 <a href={`tel:${phoneNumber}`}>
                   <Phone className="mr-2 h-5 w-5" />
                   {phoneNumber}
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-7 py-3 rounded-md bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
                 <ArrowRight className="ml-2 h-5 w-5" />
