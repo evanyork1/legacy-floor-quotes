@@ -51,17 +51,14 @@ const CaseStudyDetail = () => {
 
   const PhotoGrid = ({
     title,
-    description,
     photos,
   }: {
     title: string;
-    description: string;
     photos: { src: string; alt: string }[];
   }) => (
     <div>
       <div className="mb-6">
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">{title}</h2>
-        <p className="text-gray-600 max-w-2xl">{description}</p>
+        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">{title}</h2>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {photos.map((p, i) => (
@@ -193,11 +190,7 @@ const CaseStudyDetail = () => {
         {/* Before */}
         <section className="py-16 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4 max-w-6xl">
-            <PhotoGrid
-              title="Before"
-              description="What the slab looked like when we walked in — eight years of wear with no protective sealant left."
-              photos={cs.beforePhotos}
-            />
+            <PhotoGrid title="Before" photos={cs.beforePhotos} />
           </div>
         </section>
 
@@ -205,11 +198,7 @@ const CaseStudyDetail = () => {
         {cs.duringPhotos.length > 0 && (
           <section className="py-16 bg-white">
             <div className="container mx-auto px-4 max-w-6xl">
-              <PhotoGrid
-                title="During the Restoration"
-                description="Overnight deep cleaning and surface preparation before the new sealer went down."
-                photos={cs.duringPhotos}
-              />
+              <PhotoGrid title="During" photos={cs.duringPhotos} />
             </div>
           </section>
         )}
@@ -217,11 +206,7 @@ const CaseStudyDetail = () => {
         {/* After */}
         <section className="py-16 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4 max-w-6xl">
-            <PhotoGrid
-              title="After"
-              description="Sealed, slip-rated, and back in service the next morning — placed on a planned 3-year reseal program."
-              photos={cs.afterPhotos}
-            />
+            <PhotoGrid title="After" photos={cs.afterPhotos} />
           </div>
         </section>
 
