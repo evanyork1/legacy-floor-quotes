@@ -9,6 +9,7 @@ import Blog from "./pages/Blog";
 import BlogPostPage from "./pages/BlogPostPage";
 import Commercial from "./pages/Commercial";
 import ConcretePolishing from "./pages/ConcretePolishing";
+import ConcreteSealing from "./pages/ConcreteSealing";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Financing from "./pages/Financing";
@@ -89,6 +90,7 @@ function App() {
               <Route path="/commercialfloors" element={<CommercialFloors />} />
               <Route path="/about-commercial" element={<AboutCommercial />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
+              <Route path="/concrete-sealing" element={<ConcreteSealing />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
