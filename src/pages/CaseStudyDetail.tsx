@@ -239,11 +239,10 @@ const CaseStudyDetail = () => {
         <section className="py-16 bg-slate-900 text-white">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Is your restaurant's sealant overdue?
+              Is your space in need of a new flooring solution?
             </h2>
             <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-              If your floor looks dull, dirty, or you can't remember the last time it was resealed — it's already
-              past due. We'll take a look and give you a clear plan.
+              Whatever your facility, surface, or timeline — we'll come take a look and put together a clear plan built for how your space actually gets used.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
