@@ -49,6 +49,21 @@ import dogDuring4 from "@/assets/case-studies/dog-facility-flake/during-4.jpg";
 import dogDuring5 from "@/assets/case-studies/dog-facility-flake/during-5.jpg";
 import dogDuring6 from "@/assets/case-studies/dog-facility-flake/during-6.jpg";
 
+// Swim school — multi-location flake floor over failing VCT
+import swimAfter1 from "@/assets/case-studies/swim-school-flake/after-1.jpg";
+import swimAfter2 from "@/assets/case-studies/swim-school-flake/after-2.jpg";
+import swimAfter3 from "@/assets/case-studies/swim-school-flake/after-3.jpg";
+import swimAfter4 from "@/assets/case-studies/swim-school-flake/after-4.jpg";
+import swimAfter5 from "@/assets/case-studies/swim-school-flake/after-5.jpg";
+import swimAfter6 from "@/assets/case-studies/swim-school-flake/after-6.jpg";
+import swimBefore1 from "@/assets/case-studies/swim-school-flake/before-1.jpg";
+import swimBefore2 from "@/assets/case-studies/swim-school-flake/before-2.jpg";
+import swimBefore3 from "@/assets/case-studies/swim-school-flake/before-3.jpg";
+import swimBefore4 from "@/assets/case-studies/swim-school-flake/before-4.jpg";
+import swimBefore5 from "@/assets/case-studies/swim-school-flake/before-5.jpg";
+import swimBefore6 from "@/assets/case-studies/swim-school-flake/before-6.jpg";
+import swimBefore7 from "@/assets/case-studies/swim-school-flake/before-7.jpg";
+
 export interface CaseStudyPhoto {
   src: string;
   alt: string;
