@@ -112,3 +112,6 @@ export const caseStudies: CaseStudy[] = [
 
 export const getCaseStudyBySlug = (slug: string) =>
   caseStudies.find((cs) => cs.slug === slug);
+
+export const getCaseStudiesByCategory = (category: "commercial" | "residential") =>
+  caseStudies.filter((cs) => cs.category === category);
