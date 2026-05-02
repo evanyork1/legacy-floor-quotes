@@ -74,7 +74,7 @@ const Rentals = () => {
                       src={lavinaGrinder} 
                       alt="Lavina 30G Elite Floor Grinder" 
                       className="w-full h-auto object-contain"
-                    / loading="eager" decoding="async" fetchpriority="high" >
+                    loading="eager" decoding="async" fetchpriority="high" />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-lg bg-white">
                     <img 

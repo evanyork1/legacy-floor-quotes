@@ -139,7 +139,7 @@ const Commercial = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" / loading="eager" decoding="async" fetchpriority="high" >
+                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchpriority="high" />
               </div>
             </div>
           </div>

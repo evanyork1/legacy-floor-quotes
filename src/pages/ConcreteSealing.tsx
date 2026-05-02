@@ -119,7 +119,7 @@ const ConcreteSealing = () => {
                 <p className="mt-6 text-sm text-gray-500 uppercase tracking-wider">Nationwide capability on jobs over 10,000 sq ft</p>
               </div>
               <div className="relative">
-                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" / loading="eager" decoding="async" fetchpriority="high" >
+                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" loading="eager" decoding="async" fetchpriority="high" />
               </div>
             </div>
           </div>

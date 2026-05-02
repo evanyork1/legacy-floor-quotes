@@ -117,7 +117,7 @@ const CommercialFloors = () => {
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">
           <div className="container mx-auto px-6 flex items-center justify-between h-16">
             <button onClick={() => navigate("/")} className="flex items-center gap-3 group">
-              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8" / loading="eager" decoding="async" fetchpriority="high" >
+              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8" loading="eager" decoding="async" fetchpriority="high" />
             </button>
 
             <nav className="hidden md:flex items-center gap-8">
