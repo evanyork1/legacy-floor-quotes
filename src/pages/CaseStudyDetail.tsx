@@ -100,6 +100,16 @@ const CaseStudyDetail = () => {
       <HeaderGeneric />
 
       <main className="pt-24">
+        {/* Back link above hero */}
+        <div className="container mx-auto px-4 max-w-6xl pt-6 pb-4">
+          <button
+            onClick={() => navigate(cs.category === "residential" ? "/residential-case-studies" : "/commercial-case-studies")}
+            className="inline-flex items-center text-gray-900 hover:text-blue-700 text-sm font-medium transition-colors"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" /> All Case Studies
+          </button>
+        </div>
+
         {/* Hero */}
         <section className="relative">
           <div className="relative h-[55vh] min-h-[420px] w-full overflow-hidden">
@@ -107,12 +117,6 @@ const CaseStudyDetail = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
             <div className="absolute inset-0 flex items-end">
               <div className="container mx-auto px-4 max-w-6xl pb-12">
-                <button
-                  onClick={() => navigate("/case-studies")}
-                  className="inline-flex items-center text-white/80 hover:text-white text-sm mb-4 transition-colors"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" /> All Case Studies
-                </button>
                 <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-md mb-4 uppercase tracking-wide">
                   {cs.tag}
                 </span>
@@ -227,7 +231,7 @@ const CaseStudyDetail = () => {
               <CardContent className="p-6 md:p-8">
                 <ul className="space-y-4">
                   {[
-                    "Concrete sealant is sacrificial — restaurants should plan a 2–5 year reseal cycle, not a one-time install.",
+                    "Concrete sealant wears down over time — restaurants should plan a 2–5 year reseal cycle, not a one-time install.",
                     "Once a sealer fails, daily spills and grit go straight into the slab, creating staining that eventually requires grinding instead of resealing.",
                     "A worn floor is a brand problem — customers read dull, stained concrete as an unsanitary, unprofessional restaurant.",
                     "Most commercial sealing jobs can be completed overnight, with the floor back in service by the next morning.",
@@ -266,7 +270,7 @@ const CaseStudyDetail = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white hover:text-slate-900"
+                  className="bg-white border-white text-slate-900 hover:bg-slate-100 hover:text-slate-900"
                 >
                   <Phone className="mr-2 h-5 w-5" /> 214-305-6516
                 </Button>
