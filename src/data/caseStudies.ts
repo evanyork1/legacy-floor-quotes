@@ -49,6 +49,21 @@ import dogDuring4 from "@/assets/case-studies/dog-facility-flake/during-4.jpg";
 import dogDuring5 from "@/assets/case-studies/dog-facility-flake/during-5.jpg";
 import dogDuring6 from "@/assets/case-studies/dog-facility-flake/during-6.jpg";
 
+// Swim school — multi-location flake floor over failing VCT
+import swimAfter1 from "@/assets/case-studies/swim-school-flake/after-1.jpg";
+import swimAfter2 from "@/assets/case-studies/swim-school-flake/after-2.jpg";
+import swimAfter3 from "@/assets/case-studies/swim-school-flake/after-3.jpg";
+import swimAfter4 from "@/assets/case-studies/swim-school-flake/after-4.jpg";
+import swimAfter5 from "@/assets/case-studies/swim-school-flake/after-5.jpg";
+import swimAfter6 from "@/assets/case-studies/swim-school-flake/after-6.jpg";
+import swimBefore1 from "@/assets/case-studies/swim-school-flake/before-1.jpg";
+import swimBefore2 from "@/assets/case-studies/swim-school-flake/before-2.jpg";
+import swimBefore3 from "@/assets/case-studies/swim-school-flake/before-3.jpg";
+import swimBefore4 from "@/assets/case-studies/swim-school-flake/before-4.jpg";
+import swimBefore5 from "@/assets/case-studies/swim-school-flake/before-5.jpg";
+import swimBefore6 from "@/assets/case-studies/swim-school-flake/before-6.jpg";
+import swimBefore7 from "@/assets/case-studies/swim-school-flake/before-7.jpg";
+
 export interface CaseStudyPhoto {
   src: string;
   alt: string;
@@ -241,6 +256,60 @@ export const caseStudies: CaseStudy[] = [
       { src: dogAfter3, alt: "Finished dog grooming facility floor with seamless polyurea polyaspartic flake coating built for accidents and spills" },
       { src: dogAfter4, alt: "Detail of broadcast color flake floor in dog boarding facility — non-porous, slip-resistant, and chemical-resistant" },
       { src: dogAfter5, alt: "Wide view of completed flake floor in dog training facility — continuous wall-to-wall sanitary surface ready for daily wash-down" },
+    ],
+  },
+  {
+    slug: "swim-school-flake-floor-multi-location",
+    category: "commercial",
+    tag: "Children's Swim School",
+    title: "Children's Swim School — Removing Mold-Trapping VCT, Installing a Sanitary Flake Floor",
+    summary:
+      "A national children's swim school partner we've now done six locations for. Every single site had VCT tile that water had been creeping under for years — and every single site, when we pulled it up, had active mold and bacteria growing underneath. We tear it all out, decontaminate the slab, and install a custom ombre flake floor with heavy grip additive built for wet feet and small children.",
+    heroImage: swimAfter1,
+    heroAlt:
+      "Finished custom ombre polyurea polyaspartic flake floor with anti-slip additive in a children's swim school lobby by Legacy Industrial Coatings",
+    metaTitle:
+      "Children's Swim School Flake Floor Case Study — VCT Removal & Mold Remediation | Legacy Industrial Coatings",
+    metaDescription:
+      "Six-location partnership with a national children's swim school. We remove failing VCT tile that traps water, mold, and bacteria, decontaminate the slab, and install a custom ombre polyurea polyaspartic flake floor with heavy slip-resistant additive built for wet feet and child safety.",
+    location: "DFW, TX (multi-location partnership — 6 sites completed)",
+    serviceType: "VCT Tear-Out + Mold Remediation + Polyurea Base / Custom Ombre Flake / Polyaspartic Topcoat with Heavy Grip Additive",
+    squareFootage: "Lobby, deck, locker, and changing areas across 6 locations",
+    timeline: "Phased per location — full tear-out and reinstall, room by room",
+    challenge: [
+      "We're the flooring partner for a national children's swim school brand and have completed the floor system at six of their locations to date. Every one of those locations was built or remodeled with VCT (vinyl composition tile) on the floor — a tile system that is fundamentally the wrong product for a building full of pools, wet feet, and constant mop water.",
+      "VCT goes down in individual squares with seams between every tile. In a swim school, water tracks off of children, lane decks, and cleaning crews onto that floor every hour the building is open. Over time — in some of these locations, more than ten years — that water finds its way through the seams, under the tile, and into the adhesive layer where it has nowhere to evaporate.",
+      "What that creates is exactly what you'd expect: a hidden, sealed, warm, wet environment growing mold and bacteria directly beneath the floor children are walking on barefoot. In every single location we've torn into, when the tile came up there was active mold growth and bacterial contamination on the slab and in the residual adhesive. There is no surface cleaning protocol that fixes this — the contamination is physically underneath a floor that can't be lifted without destroying it.",
+      "On top of the health concern, the surface itself is a liability problem. VCT gets slick the moment it's wet, and a swim school is wet by definition. Slip-and-fall risk with small children in swimsuits is not a risk the operator should be carrying.",
+    ],
+    solution: [
+      "Our process at every location is the same and it starts with full removal. We pull up 100% of the existing VCT tile across the affected areas, then mechanically scrape and grind off all of the residual adhesive down to clean concrete.",
+      "Once we can see the slab, we methodically clean and grind out every area of mold, bacteria, and biological residue that has been trapped under the floor — in some cases, more than a decade of buildup. The slab is profiled, cleaned, and treated until what remains is sound, sanitary concrete ready to bond to a real floor system.",
+      "From there we install our high-performance system: a polyurea base coat for deep penetration and an aggressive bond into the prepped slab, a custom-blended ombre and color flake broadcast designed to coordinate with each location's brand colors, and a polyaspartic topcoat. Critically, the topcoat is loaded with a heavy dose of grip additive — significantly more than a standard residential garage build — because every square foot of this floor is a wet zone with small children on it. Slip resistance isn't a nice-to-have here; it's the whole reason the topcoat exists.",
+      "The finished system is a single, seamless, fully bonded floor with no seams, no grout lines, no tile edges, and no pathway for water to get underneath. It cleans the way a swim school needs to clean — wet mop, hose-down, or auto-scrub — and stays sanitary because there is nowhere for moisture to hide.",
+    ],
+    result: [
+      "Each location now has a continuous, non-porous, slip-resistant floor that handles the actual conditions of a children's swim school: constant water, bare feet, kids running, daily disinfection, and zero tolerance for hidden contamination. The mold and bacteria that had been growing under the old VCT for years is gone, and there is no mechanism for it to come back.",
+      "Operationally, the floors clean faster, look better in photos and parent tours, and remove a significant liability exposure from the business. Visually, the custom ombre flake gives each lobby and deck a finished, branded look that VCT could never deliver — closer to a designed retail space than a utility floor.",
+      "We're now the standing flooring partner for this brand and continue to roll out new locations and remediate existing ones. If you operate a swim school, splash pad, indoor water facility, locker room, daycare wet area, or any space where water and small children meet a tile floor — this is the system, and we've done it at scale. The longer VCT sits in a wet environment, the worse the contamination underneath gets. We can scope a tear-out, remediation, and full reinstall on the same model.",
+    ],
+    beforePhotos: [
+      { src: swimBefore1, alt: "VCT tile floor in children's swim school showing seams and water tracking before Legacy Industrial Coatings tear-out and remediation" },
+      { src: swimBefore2, alt: "Failing VCT tile in swim school lobby with visible wear and water damage at the seams before flake floor installation" },
+      { src: swimBefore3, alt: "Old vinyl composition tile floor in swim school deck area before mold remediation and polyurea polyaspartic system install" },
+      { src: swimBefore4, alt: "Mold and bacterial buildup exposed underneath VCT tile after removal in children's swim school — years of trapped moisture" },
+      { src: swimBefore5, alt: "Existing tile floor in swim school changing area before tear-out, decontamination, and custom flake floor install" },
+      { src: swimBefore6, alt: "Wet, contaminated VCT seams in swim school before Legacy Industrial Coatings remediation and flake floor system" },
+      { src: swimBefore7, alt: "Pre-installation condition of children's swim school floor showing the VCT tile system being removed" },
+    ],
+    duringPhotos: [],
+    afterPhotos: [
+      { src: swimAfter1, alt: "Finished custom ombre flake floor with heavy slip-resistant additive in a children's swim school lobby — sanitary, seamless, and built for wet bare feet" },
+      { src: swimAfter4, alt: "Wide view of completed polyurea polyaspartic flake floor in swim school pool deck area with reflective gloss and broadcast color flake" },
+      { src: swimAfter5, alt: "Detail of custom blue-and-white broadcast flake floor in swim school changing room with heavy grip additive in the polyaspartic topcoat" },
+      { src: swimAfter2, alt: "Finished swim school flake floor showing seamless wall-to-wall coverage with no tile seams for water to penetrate" },
+      { src: swimAfter3, alt: "Completed swim school floor system — non-porous polyaspartic topcoat over polyurea base with custom flake blend matched to brand colors" },
+      { src: swimAfter6, alt: "Swim school flake floor close-up — slip-resistant, easy to clean, and engineered for daily wet operation with small children" },
     ],
   },
 ];
