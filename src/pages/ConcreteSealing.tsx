@@ -11,6 +11,8 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 import sealingHero from "@/assets/concrete-sealing-tasting-room.jpg";
 import sealingDetail from "@/assets/concrete-sealing-floor-detail.jpg";
+import sealingCidery from "@/assets/concrete-sealing-cidery.webp";
+import sealingWarehouse from "@/assets/concrete-sealing-warehouse.jpg";
 
 const sealingFaqs = [
   {
