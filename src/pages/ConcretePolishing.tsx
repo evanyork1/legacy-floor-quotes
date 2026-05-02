@@ -11,7 +11,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 import polishingShowroom from "@/assets/polishing-gallery-showroom.jpg";
 import polishingWarehouse from "@/assets/polishing-gallery-warehouse.jpg";
-import polishingOffice from "@/assets/polishing-gallery-office.png";
+import polishingOffice from "@/assets/polishing-gallery-office.webp";
 
 const polishingFaqs = [
   {

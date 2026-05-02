@@ -10,7 +10,7 @@ import heroImage from "@/assets/google-hero-green-porsche.jpg";
 import legacyLogo from "@/assets/legacy-logo.png";
 import luxuryGarage1 from "@/assets/luxury-garage-1.jpg";
 import luxuryGarage2 from "@/assets/luxury-garage-2.jpg";
-import luxuryGarage3 from "@/assets/luxury-garage-3.png";
+import luxuryGarage3 from "@/assets/luxury-garage-3.webp";
 import flakeCloseup from "@/assets/flake-closeup.jpg";
 
 const GoogleGaragePage = () => {
