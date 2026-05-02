@@ -45,7 +45,7 @@ const sealingFaqs = [
   },
   {
     question: "Which DFW areas do you serve for concrete sealing?",
-    answer: "We seal concrete floors across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound — including restaurants, breweries, tasting rooms, commercial kitchens, warehouses, and food-processing facilities."
+    answer: "We seal concrete floors across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, Flower Mound, and more — including restaurants, breweries, tasting rooms, commercial kitchens, warehouses, and food-processing facilities. For projects over 10,000 sq ft, we also mobilize crews nationwide."
   }
 ];
 
