@@ -40,7 +40,7 @@ const WhyChooseSection = () => {
                 src="/lovable-uploads/8d8cf4a3-4ed7-4f9b-8909-0cf80a149ecc.png"
                 alt="Beautiful garage floor with concrete coating"
                 className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] object-cover rounded-2xl shadow-2xl"
-              />
+              / loading="lazy" decoding="async" >
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
             </div>
           </div>

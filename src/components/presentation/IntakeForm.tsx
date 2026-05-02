@@ -1018,7 +1018,7 @@ export function IntakeForm({ data, onChange, onStartPresentation }: IntakeFormPr
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data.sitePhotoUrls.map((url, index) => (
               <div key={index} className="relative group aspect-square rounded-lg overflow-hidden bg-slate-800">
-                <img src={url} alt={`Site photo ${index + 1}`} className="w-full h-full object-cover" />
+                <img src={url} alt={`Site photo ${index + 1}`} className="w-full h-full object-cover" / loading="lazy" decoding="async" >
                 <button
                   onClick={() => removePhoto(index)}
                   className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"

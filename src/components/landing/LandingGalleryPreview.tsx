@@ -75,7 +75,7 @@ export const LandingGalleryPreview = () => {
                     src={image.src}
                     alt={image.alt}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
+                  / loading="lazy" decoding="async" >
                 </div>
               </CardContent>
             </Card>
@@ -110,7 +110,7 @@ export const LandingGalleryPreview = () => {
               src={selectedImage}
               alt="Expanded gallery image"
               className="max-w-full max-h-full object-contain rounded-lg"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) = loading="lazy" decoding="async" > e.stopPropagation()}
             />
           </div>
         </div>

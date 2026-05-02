@@ -103,7 +103,7 @@ const Prosper = () => {
                         src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" 
                         alt="Before: Concrete garage floor before coating installation in Prosper" 
                         className="w-full h-full object-cover" 
-                      />
+                      / loading="lazy" decoding="async" >
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                           BEFORE
@@ -116,7 +116,7 @@ const Prosper = () => {
                         src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" 
                         alt="After: Beautiful Prosper garage floor with polyurea flake coating" 
                         className="w-full h-full object-cover" 
-                      />
+                      / loading="lazy" decoding="async" >
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                           AFTER
@@ -198,7 +198,7 @@ const Prosper = () => {
                     src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" 
                     alt="Legacy Industrial Coatings team member preparing Prosper garage floor with hand grinder" 
                     className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-2xl" 
-                  />
+                  / loading="lazy" decoding="async" >
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ const Prosper = () => {
                       src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" 
                       alt="Before garage floor transformation in Prosper" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -246,7 +246,7 @@ const Prosper = () => {
                       src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" 
                       alt="After garage floor transformation with flake coating in Prosper" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -276,7 +276,7 @@ const Prosper = () => {
                       src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" 
                       alt="Before garage floor coating in Prosper" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -288,7 +288,7 @@ const Prosper = () => {
                       src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" 
                       alt="After garage floor with beautiful flake finish in Prosper" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -306,7 +306,7 @@ const Prosper = () => {
                       src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" 
                       alt="Before large garage space concrete floor" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -318,7 +318,7 @@ const Prosper = () => {
                       src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" 
                       alt="After large garage space with premium flake coating" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-3 left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -348,7 +348,7 @@ const Prosper = () => {
                       src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" 
                       alt="Before garage floor concrete surface" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-3 left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -360,7 +360,7 @@ const Prosper = () => {
                       src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" 
                       alt="After professional garage floor coating installation" 
                       className="w-full h-full object-cover" 
-                    />
+                    / loading="lazy" decoding="async" >
                     <div className="absolute top-3 left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER

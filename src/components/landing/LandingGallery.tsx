@@ -104,7 +104,7 @@ export const LandingGallery = () => {
               src={selectedImage}
               alt="Expanded gallery image"
               className="max-w-full max-h-full object-contain rounded-lg"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) = loading="lazy" decoding="async" > e.stopPropagation()}
             />
           </div>
         </div>

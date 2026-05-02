@@ -57,7 +57,7 @@ export const GalleryPreview = () => {
           {previewImages.map(image => <Card key={image.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => openImage(image.src)}>
               <CardContent className="p-0">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" / loading="lazy" decoding="async" >
                 </div>
               </CardContent>
             </Card>)}
@@ -76,7 +76,7 @@ export const GalleryPreview = () => {
             <button onClick={closeImage} className="absolute -top-4 -right-4 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors z-10">
               <X className="h-6 w-6 text-gray-600" />
             </button>
-            <img src={selectedImage} alt="Expanded gallery image" className="max-w-full max-h-full object-contain rounded-lg" onClick={e => e.stopPropagation()} />
+            <img src={selectedImage} alt="Expanded gallery image" className="max-w-full max-h-full object-contain rounded-lg" onClick={e = loading="lazy" decoding="async" > e.stopPropagation()} />
           </div>
         </div>}
     </section>;
