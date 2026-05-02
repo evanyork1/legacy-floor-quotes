@@ -100,7 +100,7 @@ const AquaTotsFlooring = () => {
               </div>
 
               <div className="flex items-center justify-center mb-10">
-                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-16 sm:h-24 w-auto" loading="eager" decoding="async" fetchpriority="high" />
+                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-16 sm:h-24 w-auto" loading="eager" decoding="async" fetchPriority="high" />
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 tracking-tight leading-tight max-w-4xl mx-auto">

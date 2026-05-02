@@ -218,7 +218,7 @@ const GaragePacketResults = () => {
                   src={packet.visualization_url} 
                   alt="Your visualized garage" 
                   className="w-full h-64 md:h-96 object-cover"
-                loading="eager" decoding="async" fetchpriority="high" />
+                loading="eager" decoding="async" fetchPriority="high" />
               ) : selectedColorOption?.preview ? (
                 <img 
                   src={selectedColorOption.preview} 

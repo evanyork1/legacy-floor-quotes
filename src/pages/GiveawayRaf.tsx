@@ -50,7 +50,7 @@ const GiveawayRaf = () => {
               <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
+                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE

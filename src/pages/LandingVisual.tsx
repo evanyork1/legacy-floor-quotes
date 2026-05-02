@@ -43,7 +43,7 @@ const LandingVisual = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-[4/3] relative">
-                    <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" loading="eager" decoding="async" fetchpriority="high" />
+                    <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" loading="eager" decoding="async" fetchPriority="high" />
                     {/* Before Banner */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-gray-800/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">

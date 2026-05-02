@@ -101,7 +101,7 @@ const Gallery = () => {
                         src={photo.image_url} 
                         alt={photo.title}
                         className="w-full h-full object-cover"
-                      loading="eager" decoding="async" fetchpriority="high" />
+                      loading="eager" decoding="async" fetchPriority="high" />
                       {photo.is_featured && (
                         <div className="absolute top-3 left-3 bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">
                           FEATURED

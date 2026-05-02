@@ -61,7 +61,7 @@ const GaragePacketPage = () => {
             src={garageHero} 
             alt="Beautiful garage floor coating" 
             className="w-full h-[60vh] md:h-[70vh] object-cover" 
-          loading="eager" decoding="async" fetchpriority="high" />
+          loading="eager" decoding="async" fetchPriority="high" />
           <div className="absolute inset-0 z-20 flex items-center justify-center">
             <div className="container mx-auto px-4">
               <div className="max-w-2xl mx-auto text-center">
