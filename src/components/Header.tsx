@@ -55,6 +55,9 @@ const Header = () => {
   }, {
     name: "Concrete Polishing",
     path: "/concrete-polishing"
+  }, {
+    name: "Concrete Sealing",
+    path: "/concrete-sealing"
   }];
   return <>
       <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
