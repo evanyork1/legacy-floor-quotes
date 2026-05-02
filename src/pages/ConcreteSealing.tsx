@@ -11,6 +11,8 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 import sealingHero from "@/assets/concrete-sealing-tasting-room.jpg";
 import sealingDetail from "@/assets/concrete-sealing-floor-detail.jpg";
+import sealingCidery from "@/assets/concrete-sealing-cidery.webp";
+import sealingWarehouse from "@/assets/concrete-sealing-warehouse.jpg";
 
 const sealingFaqs = [
   {
@@ -43,7 +45,7 @@ const sealingFaqs = [
   },
   {
     question: "Which DFW areas do you serve for concrete sealing?",
-    answer: "We seal concrete floors across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound — including restaurants, breweries, tasting rooms, commercial kitchens, warehouses, and food-processing facilities."
+    answer: "We seal concrete floors across Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, Flower Mound, and more — including restaurants, breweries, tasting rooms, commercial kitchens, warehouses, and food-processing facilities. For projects over 10,000 sq ft, we also mobilize crews nationwide."
   }
 ];
 
@@ -91,32 +93,32 @@ const ConcreteSealing = () => {
         <main>
 
         {/* Hero */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Commercial <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Concrete Sealing</span> in Dallas-Fort Worth
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+                  Commercial Concrete Sealing in <span className="text-blue-700">Dallas–Fort Worth</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Stain-proof, easy-to-clean sealed concrete floors for restaurants, breweries, commercial kitchens, and warehouses across DFW. Installed overnight, recommended to reseal every 2–5 years.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button asChild className="bg-blue-700 hover:bg-blue-800 text-white px-7 py-3 rounded-md shadow-sm">
                     <a href={`tel:${phoneNumber}`}>
                       <Phone className="mr-2 h-5 w-5" />
                       {phoneNumber}
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-700 text-blue-700 hover:bg-blue-50 px-7 py-3 rounded-md">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
                 </div>
+                <p className="mt-6 text-sm text-gray-500 uppercase tracking-wider">Nationwide capability on jobs over 10,000 sq ft</p>
               </div>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" />
               </div>
             </div>
           </div>
@@ -171,7 +173,7 @@ const ConcreteSealing = () => {
                     <li><strong>Build:</strong> None — slab itself</li>
                     <li><strong>Downtime:</strong> Phased / off-hours</li>
                     <li><strong>Cost:</strong> Mid-to-high</li>
-                    <li><strong>Lifespan:</strong> Permanent (burnish to maintain)</li>
+                    <li><strong>Lifespan:</strong> 3–10 years (varies with traffic; rebuff/redensify to refresh)</li>
                     <li><strong>Best for:</strong> Warehouses, retail, showrooms</li>
                   </ul>
                 </CardContent>
@@ -181,25 +183,26 @@ const ConcreteSealing = () => {
         </section>
 
         {/* When you need it */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
-                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-96 object-cover rounded-2xl shadow-xl" />
+                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-[26rem] object-cover rounded-md shadow-lg" />
               </div>
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  When Restaurants & Commercial Kitchens Need Concrete Sealing
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                  Signs Your Restaurant or Kitchen Needs Concrete Sealing
                 </h2>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Raw concrete is porous. In a restaurant or commercial kitchen, that means grease, food acids, wine, beer, sanitizers, and dropped sauces soak straight into the slab — creating permanent stains, odor traps, and surfaces that fail health inspections.
                 </p>
+                <p className="text-base font-semibold text-gray-900 mb-3">Consider sealing if any of these apply:</p>
                 <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>New build-out before opening day — seal before traffic ever hits the floor.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Floor is dusting, looks blotchy, or no longer beads water when you splash it.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Stains setting in faster than your nightly mop crew can keep up with.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Health inspector flagged porous, stained, or hard-to-sanitize flooring.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Last sealer was applied 2+ years ago and the floor needs a refresh.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>You're in a new build-out and want protection in place before opening day.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Your floor is dusting, looks blotchy, or no longer beads water when splashed.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Stains are setting in faster than your nightly mop crew can keep up with.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>A health inspector flagged porous, stained, or hard-to-sanitize flooring.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Your last sealer was applied two or more years ago and needs to be refreshed.</span></li>
                 </ul>
               </div>
             </div>
@@ -219,9 +222,9 @@ const ConcreteSealing = () => {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((b, i) => (
-                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <Card key={i} className="border border-slate-200 shadow-sm">
                   <CardContent className="p-6">
-                    <div className="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                    <div className="bg-slate-100 w-11 h-11 rounded-md flex items-center justify-center mb-4">
                       {b.icon}
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{b.title}</h3>
@@ -234,26 +237,27 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Industries */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Sealed concrete works wherever a porous slab meets daily abuse.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {industries.map((ind, i) => (
-                <Card key={i} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
-                  <CardContent className="p-6">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {ind.icon}
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Industries We Serve</h2>
+                <p className="text-lg text-gray-600 mb-6">
+                  Sealed concrete works wherever a porous slab meets daily abuse — from a 1,200 sq ft tasting room to a 50,000 sq ft distribution warehouse.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {industries.map((ind, i) => (
+                    <div key={i} className="bg-white border border-slate-200 rounded-md p-5">
+                      <div className="mb-3">{ind.icon}</div>
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">{ind.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{ind.description}</p>
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{ind.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{ind.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+                  ))}
+                </div>
+              </div>
+              <div>
+                <img src={sealingCidery} alt="Sealed concrete floor in a cidery tasting room with wood ceiling and dining tables" className="w-full h-[28rem] object-cover rounded-md shadow-lg" />
+              </div>
             </div>
           </div>
         </section>
@@ -317,8 +321,33 @@ const ConcreteSealing = () => {
           </div>
         </section>
 
+        {/* Nationwide capability */}
+        <section className="py-20 bg-slate-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <img src={sealingWarehouse} alt="Large sealed concrete warehouse floor with overhead doors and mezzanine" className="w-full h-[26rem] object-cover rounded-md shadow-2xl" />
+              </div>
+              <div>
+                <p className="text-sm uppercase tracking-[0.2em] text-blue-300 mb-3">Large-format projects</p>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-5 tracking-tight">
+                  Nationwide capability for jobs over 10,000 sq ft
+                </h2>
+                <p className="text-lg text-slate-300 leading-relaxed mb-6">
+                  For warehouses, distribution centers, food-processing plants, and multi-site rollouts above 10,000 square feet, we mobilize crews and equipment outside the DFW metroplex. One point of contact, consistent specs, and a single accountable team across every location.
+                </p>
+                <ul className="space-y-2 text-slate-300">
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Single-source pricing for multi-location portfolios</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Phased night and weekend work to keep operations running</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1 mr-3" /><span>Standardized sealer specs and reseal schedules across every site</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Maintenance & Cleaning */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -359,20 +388,20 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Mid-page CTA */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-16 bg-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Seal Your Floor?</h2>
             <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
               Free on-site assessment across DFW. Most jobs completed overnight — no shutdown required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-7 py-3 rounded-md shadow-sm">
                 <a href={`tel:${phoneNumber}`}>
                   <Phone className="mr-2 h-5 w-5" />
                   {phoneNumber}
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-7 py-3 rounded-md bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
@@ -438,7 +467,7 @@ const ConcreteSealing = () => {
               </p>
               <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-3">Where We Seal Concrete</h3>
               <p>
-                Our crews seal concrete floors throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, and Flower Mound</strong> — including new restaurant build-outs, brewery and tasting room expansions, commercial kitchen remodels, food-processing plants, and distribution warehouses.
+                Our crews seal concrete floors throughout <strong>Dallas, Fort Worth, Plano, Frisco, McKinney, Allen, Richardson, Carrollton, Lewisville, Prosper, Celina, The Colony, Flower Mound, and more</strong> — including new restaurant build-outs, brewery and tasting room expansions, commercial kitchen remodels, food-processing plants, and distribution warehouses. For projects over <strong>10,000 sq ft</strong>, we also mobilize crews <strong>nationwide</strong>.
               </p>
             </div>
           </div>
@@ -467,20 +496,20 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Bottom CTA */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">Get Your Concrete Sealed</h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               Free on-site assessment, food-safe sealer specifications, and a planned reseal schedule for your facility.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild variant="secondary" className="bg-white text-blue-700 hover:bg-gray-100 px-7 py-3 rounded-md shadow-sm">
                 <a href={`tel:${phoneNumber}`}>
                   <Phone className="mr-2 h-5 w-5" />
                   {phoneNumber}
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-white/10">
+              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-7 py-3 rounded-md bg-white/10">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
                 <ArrowRight className="ml-2 h-5 w-5" />
