@@ -93,7 +93,7 @@ const ConcreteSealing = () => {
         <main>
 
         {/* Hero */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
