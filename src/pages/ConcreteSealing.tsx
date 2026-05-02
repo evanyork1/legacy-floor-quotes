@@ -13,6 +13,7 @@ import sealingHero from "@/assets/concrete-sealing-tasting-room.jpg";
 import sealingDetail from "@/assets/concrete-sealing-floor-detail.jpg";
 import sealingCidery from "@/assets/concrete-sealing-cidery.webp";
 import sealingWarehouse from "@/assets/concrete-sealing-warehouse.jpg";
+import restaurantCaseStudyHero from "@/assets/case-studies/fast-casual-restaurant/after-2.jpg";
 
 const sealingFaqs = [
   {
@@ -409,33 +410,50 @@ const ConcreteSealing = () => {
           </div>
         </section>
 
-        {/* Case Studies (placeholders) */}
+        {/* Case Studies */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-6xl">
+          <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Case Studies</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Case Study</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                A look at real DFW concrete sealing projects we've delivered.
+                A real DFW concrete sealing project we recently delivered.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { tag: "Restaurant & Bar", title: "Anonymized DFW Restaurant Group", body: "Placeholder — case study details coming soon." },
-                { tag: "Brewery / Tasting Room", title: "Anonymized Craft Brewery", body: "Placeholder — case study details coming soon." },
-                { tag: "Warehouse", title: "Anonymized Distribution Facility", body: "Placeholder — case study details coming soon." }
-              ].map((cs, i) => (
-                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-slate-200 flex items-center justify-center">
-                    <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Photo Coming Soon</span>
+            <div className="max-w-3xl mx-auto">
+              <button
+                onClick={() => navigate("/case-studies/fast-casual-restaurant-concrete-sealing")}
+                className="text-left w-full group"
+              >
+                <Card className="border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  <div className="md:grid md:grid-cols-2">
+                    <div className="aspect-video md:aspect-auto md:h-full overflow-hidden bg-slate-100">
+                      <img
+                        src={restaurantCaseStudyHero}
+                        alt="Restored fast-casual restaurant concrete floor after Legacy Industrial Coatings sealing"
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                    <CardContent className="p-6 md:p-8 flex flex-col justify-center">
+                      <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-md mb-3 w-fit">
+                        Fast-Casual Restaurant
+                      </span>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        8-Year-Old Sealant Restoration
+                      </h3>
+                      <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                        A fast-casual restaurant whose concrete had been sealed once at opening and never again.
+                        See how we deep-cleaned, restored, and resealed the slab in a single overnight visit —
+                        with full before, during, and after photos.
+                      </p>
+                      <span className="inline-flex items-center text-sm font-semibold text-blue-700">
+                        View case study <ArrowRight className="ml-1 h-4 w-4" />
+                      </span>
+                    </CardContent>
                   </div>
-                  <CardContent className="p-6">
-                    <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">{cs.tag}</span>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{cs.title}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">{cs.body}</p>
-                  </CardContent>
                 </Card>
-              ))}
+              </button>
             </div>
           </div>
         </section>
