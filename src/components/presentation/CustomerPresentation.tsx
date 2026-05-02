@@ -375,7 +375,7 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-[#1e3a5f] text-white py-4 px-6 flex items-center justify-between">
-        <img src="/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png" alt="Legacy Industrial Coatings" className="h-12" />
+        <img src="/lovable-uploads/f8190725-62df-42e7-9d92-285d2f3f78e3.png" alt="Legacy Industrial Coatings" className="h-12"  loading="lazy" decoding="async" />
         <a href="tel:214-305-6516" className="text-lg font-semibold hover:text-blue-200">214-305-6516</a>
       </header>
 
@@ -463,20 +463,20 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
                         src={colorOption.preview} 
                         alt={colorOption.name} 
                         className="w-full h-48 md:h-64 object-cover"
-                      />
+                       loading="lazy" decoding="async" />
                     ) : colorOption.demoImage ? (
                       <img 
                         src={colorOption.demoImage} 
                         alt={colorOption.name} 
                         className="w-full h-48 md:h-64 object-cover"
-                      />
+                       loading="lazy" decoding="async" />
                     ) : (
                       <div className="w-full h-48 md:h-64 flex items-center justify-center bg-gray-100">
                         <img 
                           src={colorOption.thumbnail} 
                           alt={colorOption.name} 
                           className="h-32 w-32 object-cover rounded-lg"
-                        />
+                         loading="lazy" decoding="async" />
                       </div>
                     )}
                     
@@ -511,20 +511,20 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
                     src={selectedColor.preview} 
                     alt={selectedColor.name} 
                     className="w-full h-64 md:h-96 object-cover"
-                  />
+                   loading="lazy" decoding="async" />
                 ) : selectedColor.demoImage ? (
                   <img 
                     src={selectedColor.demoImage} 
                     alt={selectedColor.name} 
                     className="w-full h-64 md:h-96 object-cover"
-                  />
+                   loading="lazy" decoding="async" />
                 ) : (
                   <div className="w-full h-64 md:h-96 flex items-center justify-center bg-gray-100">
                     <img 
                       src={selectedColor.thumbnail} 
                       alt={selectedColor.name} 
                       className="h-48 w-48 object-cover rounded-lg"
-                    />
+                     loading="lazy" decoding="async" />
                   </div>
                 )}
                 <div className="p-3 text-center bg-gray-50">

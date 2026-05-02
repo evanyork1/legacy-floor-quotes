@@ -19,7 +19,7 @@ const AboutCommercial = () => {
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">
           <div className="container mx-auto px-6 flex items-center justify-between h-16">
             <button onClick={() => navigate("/commercialfloors")} className="flex items-center gap-3 group">
-              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8" />
+              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8" loading="eager" decoding="async" fetchPriority="high" />
             </button>
             <button onClick={() => navigate("/commercialfloors")} className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-xs uppercase tracking-[0.2em] font-medium transition-colors">
               <ArrowLeft size={14} /> Back
@@ -114,7 +114,7 @@ const AboutCommercial = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2" />
+              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2"  loading="lazy" decoding="async" />
               <p className="text-white/40 text-sm">Dallas-Fort Worth, TX — Serving Texas & Beyond</p>
             </div>
             <button onClick={() => navigate("/commercialfloors")} className="text-xs uppercase tracking-[0.2em] text-white/50 hover:text-blue-400 transition-colors flex items-center gap-1">

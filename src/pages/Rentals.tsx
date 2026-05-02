@@ -74,14 +74,14 @@ const Rentals = () => {
                       src={lavinaGrinder} 
                       alt="Lavina 30G Elite Floor Grinder" 
                       className="w-full h-auto object-contain"
-                    />
+                    loading="eager" decoding="async" fetchPriority="high" />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-lg bg-white">
                     <img 
                       src={vacuumRental} 
                       alt="Industrial Vacuum for Dust Collection" 
                       className="w-full h-auto object-contain"
-                    />
+                     loading="lazy" decoding="async" />
                   </div>
                 </div>
 
@@ -217,7 +217,7 @@ const Rentals = () => {
                           src={promasterVan} 
                           alt="Ram ProMaster 2500 Cargo Van" 
                           className="w-full h-48 sm:h-64 object-cover"
-                        />
+                         loading="lazy" decoding="async" />
                       </div>
                       <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                         $400<span className="text-base sm:text-lg text-muted-foreground">/day</span>
@@ -241,7 +241,7 @@ const Rentals = () => {
                           src={fordTrailer} 
                           alt="Ford F-250 with Enclosed Trailer" 
                           className="w-full h-48 sm:h-64 object-cover"
-                        />
+                         loading="lazy" decoding="async" />
                       </div>
                       <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                         $500<span className="text-base sm:text-lg text-muted-foreground">/day</span>

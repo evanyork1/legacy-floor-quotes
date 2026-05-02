@@ -102,7 +102,7 @@ const Financing = () => {
                     src="/lovable-uploads/994be15a-0952-4194-b601-0968880b1dda.png" 
                     alt="Wisetack Financing" 
                     className="h-12 sm:h-16 mx-auto mb-4 sm:mb-6"
-                  />
+                  loading="eager" decoding="async" fetchPriority="high" />
                   <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">
                     12 or 24 Month Same as Cash
                   </h2>

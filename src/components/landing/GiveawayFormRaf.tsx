@@ -61,7 +61,7 @@ export const GiveawayFormRaf = () => {
               <div className="grid grid-cols-2 h-full gap-1">
                 {/* Before Image */}
                 <div className="relative overflow-hidden">
-                  <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                       BEFORE
@@ -70,7 +70,7 @@ export const GiveawayFormRaf = () => {
                 </div>
                 {/* After Image */}
                 <div className="relative overflow-hidden">
-                  <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful residential garage floor with polyurea flake coating" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful residential garage floor with polyurea flake coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                     <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border border-blue-600">
                       AFTER

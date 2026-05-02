@@ -72,7 +72,7 @@ const ResidentialPatio = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png" alt="Beautiful polyurea flake patio installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src="/lovable-uploads/7b59a18f-94c1-45aa-88f1-9bc7c3277305.png" alt="Beautiful polyurea flake patio installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ const ResidentialPatio = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/527e9b8a-a124-4c0a-9735-37c08cb429b2.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg" />
+                <img src="/lovable-uploads/527e9b8a-a124-4c0a-9735-37c08cb429b2.png" alt="Close-up of polyurea flake patio floor texture" className="w-full h-80 object-cover rounded-xl shadow-lg"  loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

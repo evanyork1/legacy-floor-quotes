@@ -36,7 +36,7 @@ export const LandingHeader = ({ isJAK = false }: LandingHeaderProps) => {
               src={logoSrc}
               alt={logoAlt}
               className="h-10 sm:h-11 md:h-13 lg:h-14 w-auto" 
-            />
+             loading="lazy" decoding="async" />
           </div>
           <div className="flex items-center gap-4">
             <a 

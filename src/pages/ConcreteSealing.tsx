@@ -119,7 +119,7 @@ const ConcreteSealing = () => {
                 <p className="mt-6 text-sm text-gray-500 uppercase tracking-wider">Nationwide capability on jobs over 10,000 sq ft</p>
               </div>
               <div className="relative">
-                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" />
+                <img src={sealingHero} alt="Sealed concrete floor in a brewery tasting room with bar seating and wine barrels" className="relative w-full h-[28rem] object-cover rounded-md shadow-xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@ const ConcreteSealing = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
-                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-[26rem] object-cover rounded-md shadow-lg" />
+                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-[26rem] object-cover rounded-md shadow-lg"  loading="lazy" decoding="async" />
               </div>
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -257,7 +257,7 @@ const ConcreteSealing = () => {
                 </div>
               </div>
               <div>
-                <img src={sealingCidery} alt="Sealed concrete floor in a cidery tasting room with wood ceiling and dining tables" className="w-full h-[28rem] object-cover rounded-md shadow-lg" />
+                <img src={sealingCidery} alt="Sealed concrete floor in a cidery tasting room with wood ceiling and dining tables" className="w-full h-[28rem] object-cover rounded-md shadow-lg"  loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -327,7 +327,7 @@ const ConcreteSealing = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <img src={sealingWarehouse} alt="Large sealed concrete warehouse floor with overhead doors and mezzanine" className="w-full h-[26rem] object-cover rounded-md shadow-2xl" />
+                <img src={sealingWarehouse} alt="Large sealed concrete warehouse floor with overhead doors and mezzanine" className="w-full h-[26rem] object-cover rounded-md shadow-2xl"  loading="lazy" decoding="async" />
               </div>
               <div>
                 <p className="text-sm uppercase tracking-[0.2em] text-blue-300 mb-3">Large-format projects</p>

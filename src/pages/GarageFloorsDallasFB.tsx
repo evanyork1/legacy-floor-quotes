@@ -189,7 +189,7 @@ const GarageFloorsDallasFB = () => {
                           src={project.beforeImage} 
                           alt="Before garage floor transformation"
                           className="w-full h-48 object-cover"
-                        />
+                        loading="eager" decoding="async" fetchPriority="high" />
                         <div className="absolute top-2 left-2">
                           <span className="bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
                             BEFORE
@@ -201,7 +201,7 @@ const GarageFloorsDallasFB = () => {
                           src={project.afterImage} 
                           alt="After garage floor transformation"
                           className="w-full h-48 object-cover"
-                        />
+                         loading="lazy" decoding="async" />
                         <div className="absolute top-2 left-2">
                           <span className="bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold shadow">
                             AFTER
@@ -316,7 +316,7 @@ const GarageFloorsDallasFB = () => {
                     src="/lovable-uploads/garage-floor-white-sports-car.png" 
                     alt="Premium garage floor coating with luxury sports car"
                     className="w-full h-64 sm:h-80 md:h-96 lg:h-full object-cover rounded-lg shadow-xl"
-                  />
+                   loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>

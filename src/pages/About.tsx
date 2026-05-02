@@ -62,7 +62,7 @@ const About = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png" alt="Legacy Industrial Coatings professional truck and equipment ready for service" className="rounded-2xl shadow-2xl w-full h-auto" />
+                <img src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png" alt="Legacy Industrial Coatings professional truck and equipment ready for service" className="rounded-2xl shadow-2xl w-full h-auto" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -110,19 +110,19 @@ const About = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <img src="/lovable-uploads/f51e2674-703e-41e2-af60-3230aa51f8fe.png" alt="Legacy craftsman carefully preparing garage floor surface with professional equipment" className="rounded-lg shadow-lg w-full h-64 object-cover" />
+                <img src="/lovable-uploads/f51e2674-703e-41e2-af60-3230aa51f8fe.png" alt="Legacy craftsman carefully preparing garage floor surface with professional equipment" className="rounded-lg shadow-lg w-full h-64 object-cover"  loading="lazy" decoding="async" />
                 <h3 className="text-xl font-semibold text-gray-900">Meticulous Preparation</h3>
                 <p className="text-gray-600">Every surface gets the attention it deserves. We take time to properly prepare each floor for the best possible result.</p>
               </div>
 
               <div className="space-y-4">
-                <img src="/lovable-uploads/0fd4e444-b540-4c31-b624-49d7b2cb00a6.png" alt="Legacy professional applying premium floor coating with precision and care" className="rounded-lg shadow-lg w-full h-64 object-cover" />
+                <img src="/lovable-uploads/0fd4e444-b540-4c31-b624-49d7b2cb00a6.png" alt="Legacy professional applying premium floor coating with precision and care" className="rounded-lg shadow-lg w-full h-64 object-cover"  loading="lazy" decoding="async" />
                 <h3 className="text-xl font-semibold text-gray-900">Precision Application</h3>
                 <p className="text-gray-600">Our skilled team applies every coating with care and precision, ensuring an even, beautiful finish that lasts.</p>
               </div>
 
               <div className="space-y-4">
-                <img src="/lovable-uploads/7d71c2b1-b5e5-4bd4-9e4d-427a3d20283f.png" alt="Legacy team member working in residential garage with professional floor coating equipment" className="rounded-lg shadow-lg w-full h-64 object-cover" />
+                <img src="/lovable-uploads/7d71c2b1-b5e5-4bd4-9e4d-427a3d20283f.png" alt="Legacy team member working in residential garage with professional floor coating equipment" className="rounded-lg shadow-lg w-full h-64 object-cover"  loading="lazy" decoding="async" />
                 <h3 className="text-xl font-semibold text-gray-900">Attention to Detail</h3>
                 <p className="text-gray-600">Whether residential or commercial, every project gets the same level of care and professional attention.</p>
               </div>
@@ -160,8 +160,8 @@ const About = () => {
                 </div>
               </div>
               <div className="space-y-6">
-                <img src="/lovable-uploads/998d8e69-d5c2-455a-9074-40a5cd13c2a0.png" alt="Legacy team working on large commercial floor coating project with professional results" className="rounded-lg shadow-lg w-full h-auto" />
-                <img src="/lovable-uploads/5818f249-f4d8-4a09-b3cf-0434ccff0e29.png" alt="Commercial installation showcasing Legacy's professional capabilities and attention to detail" className="rounded-lg shadow-lg w-full h-auto" />
+                <img src="/lovable-uploads/998d8e69-d5c2-455a-9074-40a5cd13c2a0.png" alt="Legacy team working on large commercial floor coating project with professional results" className="rounded-lg shadow-lg w-full h-auto"  loading="lazy" decoding="async" />
+                <img src="/lovable-uploads/5818f249-f4d8-4a09-b3cf-0434ccff0e29.png" alt="Commercial installation showcasing Legacy's professional capabilities and attention to detail" className="rounded-lg shadow-lg w-full h-auto"  loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

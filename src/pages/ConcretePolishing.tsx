@@ -11,7 +11,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 import polishingShowroom from "@/assets/polishing-gallery-showroom.jpg";
 import polishingWarehouse from "@/assets/polishing-gallery-warehouse.jpg";
-import polishingOffice from "@/assets/polishing-gallery-office.png";
+import polishingOffice from "@/assets/polishing-gallery-office.webp";
 
 const polishingFaqs = [
   {
@@ -137,7 +137,7 @@ const ConcretePolishing = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" alt="Beautiful polished concrete floor" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" />
+                <img src="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" alt="Beautiful polished concrete floor" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ const ConcretePolishing = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/fee5b01c-b997-4a5e-994f-83f57fe35fbd.png" alt="Polished concrete floor in modern commercial space with reflective finish" className="w-full h-80 object-cover rounded-xl shadow-lg" />
+                <img src="/lovable-uploads/fee5b01c-b997-4a5e-994f-83f57fe35fbd.png" alt="Polished concrete floor in modern commercial space with reflective finish" className="w-full h-80 object-cover rounded-xl shadow-lg"  loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -246,21 +246,21 @@ const ConcretePolishing = () => {
             
             <div className="grid md:grid-cols-3 gap-8">
               <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                <img src={polishingShowroom} alt="High-end automotive showroom with polished concrete floors showcasing luxury vehicles" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={polishingShowroom} alt="High-end automotive showroom with polished concrete floors showcasing luxury vehicles" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"  loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <p className="text-white p-6 font-semibold">Luxury Automotive Showroom</p>
                 </div>
               </div>
               
               <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                <img src={polishingWarehouse} alt="Industrial warehouse polished concrete with yellow safety markings" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={polishingWarehouse} alt="Industrial warehouse polished concrete with yellow safety markings" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"  loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <p className="text-white p-6 font-semibold">Industrial Warehouse</p>
                 </div>
               </div>
               
               <div className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                <img src={polishingOffice} alt="Modern dealership office space with polished concrete flooring" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={polishingOffice} alt="Modern dealership office space with polished concrete flooring" className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"  loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <p className="text-white p-6 font-semibold">Modern Dealership Office</p>
                 </div>

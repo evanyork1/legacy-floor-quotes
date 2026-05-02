@@ -10,7 +10,7 @@ export const LandingCommercialHeader = () => {
             src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
             alt="Legacy Industrial Coatings Logo" 
             className="h-12 w-auto sm:h-16 md:h-19 lg:h-22" 
-          />
+           loading="lazy" decoding="async" />
         </div>
         
         <div className="flex items-center space-x-4">
