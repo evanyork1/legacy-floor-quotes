@@ -36,7 +36,7 @@ export const ColorOption = ({ color, isSelected, onSelect, onPreview }: ColorOpt
               'w-full h-full object-cover transition-opacity duration-300',
               isThumbnailLoading ? 'opacity-0' : 'opacity-100'
             )}
-            onLoad={() = loading="lazy" decoding="async" > setIsThumbnailLoading(false)}
+            onLoad={() => setIsThumbnailLoading(false)}
             loading="lazy"
           />
         </div>

@@ -70,7 +70,7 @@ export const Step5ColorChoice = ({ formData, updateFormData, colorOptions }: Ste
                     "w-full h-auto rounded-lg transition-opacity duration-300",
                     isPreviewLoading ? "opacity-0" : "opacity-100"
                 )}
-                onLoad={() = loading="lazy" decoding="async" > setIsPreviewLoading(false)}
+                onLoad={() => setIsPreviewLoading(false)}
                 loading="lazy"
               />
             )}

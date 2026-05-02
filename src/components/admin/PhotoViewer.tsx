@@ -56,7 +56,7 @@ const PhotoViewer = ({ exteriorPhotos, damagePhotos }: PhotoViewerProps) => {
                       src={photo} 
                       alt={`Exterior ${index + 1}`}
                       className="w-full h-32 object-cover"
-                      onError={(e) = loading="lazy" decoding="async" > {
+                      onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = "/placeholder.svg";
                       }}
@@ -81,7 +81,7 @@ const PhotoViewer = ({ exteriorPhotos, damagePhotos }: PhotoViewerProps) => {
                       src={photo} 
                       alt={`Damage ${index + 1}`}
                       className="w-full h-32 object-cover"
-                      onError={(e) = loading="lazy" decoding="async" > {
+                      onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = "/placeholder.svg";
                       }}
@@ -103,7 +103,7 @@ const PhotoViewer = ({ exteriorPhotos, damagePhotos }: PhotoViewerProps) => {
                     src={selectedImage} 
                     alt="Full size preview"
                     className="max-w-full max-h-[70vh] object-contain"
-                    onError={(e) = loading="lazy" decoding="async" > {
+                    onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = "/placeholder.svg";
                     }}

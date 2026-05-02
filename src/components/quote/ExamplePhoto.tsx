@@ -23,7 +23,7 @@ export const ExamplePhoto = ({ src, alt }: ExamplePhotoProps) => {
           "w-full h-full object-cover rounded-xl transition-opacity duration-300",
           isLoading ? "opacity-0" : "opacity-100"
         )}
-        onLoad={() = loading="lazy" decoding="async" > setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
         loading="lazy"
       />
     </div>
