@@ -170,7 +170,7 @@ const CommercialFloors = () => {
       {/* ─── Hero ─── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Polished commercial concrete floor" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+          <img src={heroImage} alt="Polished commercial concrete floor" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(0,0%,5%)]/70 via-[hsl(0,0%,5%)]/40 to-transparent" />
         </div>
 
@@ -236,7 +236,7 @@ const CommercialFloors = () => {
                 From new construction to full restoration, we deliver specification-grade results that exceed industry standards.
               </p>
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={polishingImage} alt="Concrete polishing in action" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" / loading="lazy" decoding="async" >
+                <img src={polishingImage} alt="Concrete polishing in action" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"  loading="lazy" decoding="async" />
               </div>
             </motion.div>
 
@@ -278,7 +278,7 @@ const CommercialFloors = () => {
                 src={img.src}
                 alt={img.alt}
                 className="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
-              / loading="lazy" decoding="async" >
+               loading="lazy" decoding="async" />
             </div>
           ))}
         </div>
@@ -300,7 +300,7 @@ const CommercialFloors = () => {
           <div className="grid md:grid-cols-2 gap-1">
             {industries.map((industry, i) => (
               <motion.div key={industry.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.15 }} className="group relative aspect-[4/3] overflow-hidden cursor-pointer">
-                <img src={industry.image} alt={industry.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" / loading="lazy" decoding="async" >
+                <img src={industry.image} alt={industry.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"  loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[hsl(0,0%,5%)]/90 via-[hsl(0,0%,5%)]/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight">{industry.title}</h3>
@@ -353,7 +353,7 @@ const CommercialFloors = () => {
               </div>
 
               <div className="mt-8 aspect-video overflow-hidden border border-white/10">
-                <img src="/commercial/aloe-vera-polished.png" alt="Aloe Vera of America — 50,000 sq ft polished concrete" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                <img src="/commercial/aloe-vera-polished.png" alt="Aloe Vera of America — 50,000 sq ft polished concrete" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
               </div>
             </motion.div>
 
@@ -475,7 +475,7 @@ const CommercialFloors = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2" / loading="lazy" decoding="async" >
+              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2"  loading="lazy" decoding="async" />
               <p className="text-white/40 text-sm">Dallas-Fort Worth, TX — Serving Texas & Beyond</p>
             </div>
             <div className="flex items-center gap-8 text-xs uppercase tracking-[0.2em] text-white/50">

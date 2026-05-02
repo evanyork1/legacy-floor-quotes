@@ -52,7 +52,7 @@ const LandingVisual = () => {
                     </div>
                   </div>
                   <div className="aspect-[4/3] relative">
-                    <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png" / loading="lazy" decoding="async" >
+                    <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png"  loading="lazy" decoding="async" />
                     {/* After Banner */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-blue-600/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">

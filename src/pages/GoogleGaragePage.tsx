@@ -93,7 +93,7 @@ const GoogleGaragePage = () => {
       {/* Hero Section */}
       <section className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 z-10" />
-        <img src={heroImage} alt="Luxury garage with coated floor" className="w-full h-[70vh] sm:h-[65vh] object-cover" / loading="lazy" decoding="async" >
+        <img src={heroImage} alt="Luxury garage with coated floor" className="w-full h-[70vh] sm:h-[65vh] object-cover"  loading="lazy" decoding="async" />
         <div className="absolute inset-0 z-20 flex items-center">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl">
@@ -262,7 +262,7 @@ const GoogleGaragePage = () => {
             {processSteps.map((item, index) => (
               <div key={index} className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-stretch mb-2`}>
                 <div className="w-1/2 relative">
-                  <img src={item.image} alt={item.title} className="w-full h-32 sm:h-40 object-cover" / loading="lazy" decoding="async" >
+                  <img src={item.image} alt={item.title} className="w-full h-32 sm:h-40 object-cover"  loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-black/30" />
                 </div>
                 <div className={`w-1/2 bg-gray-800 flex items-center ${index % 2 === 0 ? 'pl-4 sm:pl-6' : 'pr-4 sm:pr-6 justify-end text-right'}`}>

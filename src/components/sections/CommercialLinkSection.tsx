@@ -10,7 +10,7 @@ const CommercialLinkSection = () => {
           <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
             <CardContent className="p-12 text-center">
               <div className="mb-8">
-                <img src="/lovable-uploads/fa247baa-ccf6-438b-b7b1-47d07ae07d74.png" alt="Commercial floor solution" className="w-3/4 h-56 object-cover rounded-lg shadow-lg mb-6 mx-auto" / loading="lazy" decoding="async" >
+                <img src="/lovable-uploads/fa247baa-ccf6-438b-b7b1-47d07ae07d74.png" alt="Commercial floor solution" className="w-3/4 h-56 object-cover rounded-lg shadow-lg mb-6 mx-auto"  loading="lazy" decoding="async" />
               </div>
               <div className="text-blue-600 mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
                 <Building className="h-16 w-16" />

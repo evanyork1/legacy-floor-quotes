@@ -224,14 +224,14 @@ const GaragePacketResults = () => {
                   src={selectedColorOption.preview} 
                   alt={selectedColorOption.name} 
                   className="w-full h-64 md:h-96 object-cover"
-                / loading="lazy" decoding="async" >
+                 loading="lazy" decoding="async" />
               ) : selectedColorOption?.thumbnail ? (
                 <div className="flex items-center justify-center h-64 bg-gray-100">
                   <img 
                     src={selectedColorOption.thumbnail} 
                     alt={selectedColorOption.name} 
                     className="h-48 w-48 object-cover rounded-lg"
-                  / loading="lazy" decoding="async" >
+                   loading="lazy" decoding="async" />
                 </div>
               ) : null}
               <div className="p-6 text-center">
@@ -266,7 +266,7 @@ const GaragePacketResults = () => {
                             src={color.thumbnail} 
                             alt={color.name} 
                             className="w-full h-full object-cover"
-                          / loading="lazy" decoding="async" >
+                           loading="lazy" decoding="async" />
                           {selectedNewColor === color.id && (
                             <div className="absolute inset-0 bg-blue-600/20 flex items-center justify-center">
                               <CheckCircle className="h-6 w-6 text-blue-600" />

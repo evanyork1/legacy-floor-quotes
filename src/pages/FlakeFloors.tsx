@@ -136,7 +136,7 @@ const FlakeFloors = () => {
                   src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" 
                   alt="Close-up of polyurea flake floor texture" 
                   className="w-full h-80 object-cover rounded-xl shadow-lg"
-                / loading="lazy" decoding="async" >
+                 loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

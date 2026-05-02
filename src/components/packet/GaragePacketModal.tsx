@@ -396,7 +396,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                       src={color.thumbnail}
                       alt={color.name}
                       className="w-full aspect-square object-cover"
-                    / loading="lazy" decoding="async" >
+                     loading="lazy" decoding="async" />
                     <div className="absolute inset-x-0 bottom-0 bg-black/60 px-1 py-0.5">
                       <p className="text-white text-[10px] font-medium truncate text-center">{color.name}</p>
                     </div>

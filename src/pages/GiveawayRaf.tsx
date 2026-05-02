@@ -58,7 +58,7 @@ const GiveawayRaf = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -84,7 +84,7 @@ const GiveawayRaf = () => {
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -92,7 +92,7 @@ const GiveawayRaf = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor with beautiful flake finish" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor with beautiful flake finish" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -106,7 +106,7 @@ const GiveawayRaf = () => {
               <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage space concrete floor" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage space concrete floor" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -114,7 +114,7 @@ const GiveawayRaf = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage space with premium flake coating" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage space with premium flake coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-3 left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER
@@ -140,7 +140,7 @@ const GiveawayRaf = () => {
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-64 sm:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before garage floor concrete surface" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before garage floor concrete surface" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         BEFORE
@@ -148,7 +148,7 @@ const GiveawayRaf = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-xl">
-                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating installation" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating installation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-xs font-semibold border border-blue-600">
                         AFTER

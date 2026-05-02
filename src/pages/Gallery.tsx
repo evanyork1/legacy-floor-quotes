@@ -144,7 +144,7 @@ const Gallery = () => {
                   src={selectedImage.image_url} 
                   alt={selectedImage.title}
                   className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
-                / loading="lazy" decoding="async" >
+                 loading="lazy" decoding="async" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 rounded-b-lg">
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {selectedImage.title}

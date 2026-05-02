@@ -114,7 +114,7 @@ const AboutCommercial = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2" / loading="lazy" decoding="async" >
+              <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 mb-2"  loading="lazy" decoding="async" />
               <p className="text-white/40 text-sm">Dallas-Fort Worth, TX — Serving Texas & Beyond</p>
             </div>
             <button onClick={() => navigate("/commercialfloors")} className="text-xs uppercase tracking-[0.2em] text-white/50 hover:text-blue-400 transition-colors flex items-center gap-1">
