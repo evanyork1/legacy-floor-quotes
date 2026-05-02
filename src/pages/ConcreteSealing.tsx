@@ -97,8 +97,8 @@ const ConcreteSealing = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Commercial <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Concrete Sealing</span> in Dallas-Fort Worth
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+                  Commercial Concrete Sealing in <span className="text-blue-700">Dallas–Fort Worth</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Stain-proof, easy-to-clean sealed concrete floors for restaurants, breweries, commercial kitchens, and warehouses across DFW. Installed overnight, recommended to reseal every 2–5 years.
