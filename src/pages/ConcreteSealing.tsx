@@ -237,26 +237,27 @@ const ConcreteSealing = () => {
         </section>
 
         {/* Industries */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Sealed concrete works wherever a porous slab meets daily abuse.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {industries.map((ind, i) => (
-                <Card key={i} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
-                  <CardContent className="p-6">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {ind.icon}
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Industries We Serve</h2>
+                <p className="text-lg text-gray-600 mb-6">
+                  Sealed concrete works wherever a porous slab meets daily abuse — from a 1,200 sq ft tasting room to a 50,000 sq ft distribution warehouse.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {industries.map((ind, i) => (
+                    <div key={i} className="bg-white border border-slate-200 rounded-md p-5">
+                      <div className="mb-3">{ind.icon}</div>
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">{ind.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{ind.description}</p>
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{ind.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{ind.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+                  ))}
+                </div>
+              </div>
+              <div>
+                <img src={sealingCidery} alt="Sealed concrete floor in a cidery tasting room with wood ceiling and dining tables" className="w-full h-[28rem] object-cover rounded-md shadow-lg" />
+              </div>
             </div>
           </div>
         </section>
