@@ -88,7 +88,7 @@ const CaseStudies = ({ category }: CaseStudiesProps) => {
                         <img
                           src={cs.heroImage}
                           alt={cs.heroAlt}
-                          loading="lazy"
+                          loading="eager"
                           className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                         />
                       </div>

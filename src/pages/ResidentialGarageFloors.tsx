@@ -99,7 +99,7 @@ const ResidentialGarageFloors = () => {
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
                     <div className="relative overflow-hidden">
-                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" / loading="lazy" decoding="async" >
+                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" / loading="eager" decoding="async" fetchpriority="high" >
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                           BEFORE

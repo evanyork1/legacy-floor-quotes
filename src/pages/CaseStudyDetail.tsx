@@ -73,7 +73,7 @@ const CaseStudyDetail = () => {
             <img
               src={p.src}
               alt={p.alt}
-              loading="lazy"
+              loading="eager"
               className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
             />
           </button>

@@ -82,7 +82,7 @@ const GoogleGaragePage = () => {
       {/* Black Header with Logo */}
       <header className="bg-black py-3 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 sm:h-10" / loading="lazy" decoding="async" >
+          <img src={legacyLogo} alt="Legacy Industrial Coatings" className="h-8 sm:h-10" / loading="eager" decoding="async" fetchpriority="high" >
           <a href="tel:214-444-6269" className="flex items-center gap-2 text-blue-400 font-semibold hover:text-blue-300 transition-colors">
             <Phone className="h-4 w-4" />
             <span className="text-sm sm:text-base">(214) 444-6269</span>

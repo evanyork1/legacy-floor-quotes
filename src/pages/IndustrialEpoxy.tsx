@@ -119,7 +119,7 @@ const IndustrialEpoxy = () => {
                   src="/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png" 
                   alt="Industrial epoxy flooring in commercial facility" 
                   className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
-                / loading="lazy" decoding="async" >
+                / loading="eager" decoding="async" fetchpriority="high" >
               </div>
             </div>
           </div>

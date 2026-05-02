@@ -92,7 +92,7 @@ const FlakeFloorTemplate = () => {
                 src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" 
                 alt="Legacy Industrial Coatings" 
                 className="h-24 w-auto print:h-12" 
-              / loading="lazy" decoding="async" >
+              / loading="eager" decoding="async" fetchpriority="high" >
             </div>
           </div>
         </div>
