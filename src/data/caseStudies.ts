@@ -33,6 +33,22 @@ import pharmBefore4 from "@/assets/case-studies/pharmaceutical-polished-concrete
 import pharmBefore5 from "@/assets/case-studies/pharmaceutical-polished-concrete/before-5.jpg";
 import pharmBefore6 from "@/assets/case-studies/pharmaceutical-polished-concrete/before-6.jpg";
 
+// Dog training & grooming facility — flake floor over polyurea
+import dogAfter1 from "@/assets/case-studies/dog-facility-flake/after-1.jpg";
+import dogAfter2 from "@/assets/case-studies/dog-facility-flake/after-2.jpg";
+import dogAfter3 from "@/assets/case-studies/dog-facility-flake/after-3.jpg";
+import dogAfter4 from "@/assets/case-studies/dog-facility-flake/after-4.jpg";
+import dogAfter5 from "@/assets/case-studies/dog-facility-flake/after-5.jpg";
+import dogBefore1 from "@/assets/case-studies/dog-facility-flake/before-1.jpg";
+import dogBefore2 from "@/assets/case-studies/dog-facility-flake/before-2.jpg";
+import dogBefore3 from "@/assets/case-studies/dog-facility-flake/before-3.jpg";
+import dogDuring1 from "@/assets/case-studies/dog-facility-flake/during-1.jpg";
+import dogDuring2 from "@/assets/case-studies/dog-facility-flake/during-2.jpg";
+import dogDuring3 from "@/assets/case-studies/dog-facility-flake/during-3.jpg";
+import dogDuring4 from "@/assets/case-studies/dog-facility-flake/during-4.jpg";
+import dogDuring5 from "@/assets/case-studies/dog-facility-flake/during-5.jpg";
+import dogDuring6 from "@/assets/case-studies/dog-facility-flake/during-6.jpg";
+
 export interface CaseStudyPhoto {
   src: string;
   alt: string;
@@ -171,6 +187,60 @@ export const caseStudies: CaseStudy[] = [
       { src: pharmAfter6, alt: "Finished polished concrete in pharmaceutical plant — high-gloss, low-maintenance, ready for production" },
       { src: pharmAfter4, alt: "Close-up of polished concrete surface in pharmaceutical plant showing densified, mirror-grade 800-grit finish" },
       { src: pharmAfter3, alt: "Polyurea crack filler integrated into the finished polished concrete slab — repairs grind flush with the surrounding floor" },
+    ],
+  },
+  {
+    slug: "dog-training-grooming-facility-flake-floor",
+    category: "commercial",
+    tag: "Dog Training & Grooming Facility",
+    title: "Dog Training & Grooming Facility — Full Tear-Out & Polyurea Flake Floor",
+    summary:
+      "A failing 1.5\" concrete overlay poured over old tile, topped with a paint-grade epoxy that was peeling everywhere. We removed the entire overlay, chipped out the original tile down to the slab, ground and repaired the concrete, then installed a polyurea base, full broadcast polymer flake, and a polyaspartic topcoat — a fully sanitary, drainable floor built for dogs.",
+    heroImage: dogAfter2,
+    heroAlt:
+      "Finished polyurea polyaspartic flake floor in a Plano, TX dog training and grooming facility by Legacy Industrial Coatings",
+    metaTitle:
+      "Dog Boarding & Grooming Facility Flake Floor Case Study — Plano, TX | Legacy Industrial Coatings",
+    metaDescription:
+      "How Legacy Industrial Coatings tore out a failed concrete overlay and old tile in a Plano, TX dog training and grooming facility, then installed a polyurea polyaspartic flake floor built for spills, accidents, and daily wash-down cleaning.",
+    location: "Plano, TX",
+    serviceType: "Polyurea Base + Polymer Flake Broadcast + Polyaspartic Topcoat",
+    squareFootage: "Full kennel and grooming area",
+    timeline: "Multi-day install with full tear-out",
+    challenge: [
+      "This Plano, TX dog training and grooming facility had a floor system that was failing in two layers at once. At some point in the building's history, someone had poured roughly an inch and a half of concrete overlay on top of the original tile floor, then coated that overlay with a low-grade epoxy — essentially a paint, applied with no mechanical prep underneath.",
+      "By the time we got there, the epoxy was chipping and peeling in sheets across the kennel and grooming areas, and the overlay itself was breaking up underneath. With dogs constantly on the floor, debris from a failing coating is a real safety problem — paint chips and concrete fragments end up in paws, in food bowls, and in mouths.",
+      "The other issue was hygiene. A broken, porous floor in a dog facility absorbs everything: urine, feces, cleaning chemicals, hair, dander. Once it's in there, no amount of mopping pulls it back out. The space already had a floor drain — exactly what you want in a kennel — but the floor itself couldn't be cleaned the way the room was designed to be cleaned.",
+    ],
+    solution: [
+      "We did a full tear-out, not a recoat. The failing epoxy and the entire 1.5\" concrete overlay were removed across the space, then we chipping-hammered out all of the original tile underneath until we were down to the original structural slab.",
+      "From there we ground the exposed slab to a clean profile and addressed every crack, divot, and bond-line transition with polyurea repair material. Once the substrate was sound, flat, and properly profiled, we installed our high-performance system: a polyurea base coat for deep penetration and aggressive bond into the concrete, a full broadcast of polymer color flake into the wet base for texture and visual depth, and a polyaspartic topcoat to lock everything in.",
+      "Polyaspartic is the right topcoat for an animal facility. It cures fast (so the room comes back online quickly), it's chemically resistant to urine, vomit, kennel disinfectants, and bleach-based cleaners, it doesn't yellow under UV, and the broadcast flake gives the surface natural slip resistance even when it's wet.",
+    ],
+    result: [
+      "The facility now has one continuous, fully bonded floor system from wall to wall — no tile underneath, no failing overlay in between, no chipping paint on top. The surface is non-porous, so spills and accidents stay on the surface where they belong instead of soaking in.",
+      "Because the room has a floor drain, the staff can do exactly what the space was designed for: at the end of the night, hose the floor down, push everything to the drain, and walk out with a sanitary, fully-cleaned room. No mop bucket pushing contaminated water around. No deep-set odors building up in cracked grout lines. The floor cleans the way a kennel should clean.",
+      "This is the right system for any animal-facing business — boarding, grooming, training, daycare, veterinary — where the floor takes constant biological load and has to be wash-down clean every single day. If you're operating on a coating that's already failing, the longer it goes the more substrate damage you accumulate underneath, and the bigger the eventual fix gets. We can scope a tear-out and rebuild like this one, or a fresh install on a new build.",
+    ],
+    beforePhotos: [
+      { src: dogBefore1, alt: "Failing low-grade epoxy paint coating peeling off concrete overlay in Plano TX dog training and grooming facility before Legacy Industrial Coatings tear-out" },
+      { src: dogBefore2, alt: "Chipping concrete overlay and worn-out epoxy floor in dog boarding facility kennel area before flake floor installation" },
+      { src: dogBefore3, alt: "Damaged dog facility floor showing failed coating and broken overlay before polyurea polyaspartic system install" },
+    ],
+    duringPhotos: [
+      { src: dogDuring1, alt: "Removing 1.5 inch concrete overlay and original tile down to the structural slab in Plano TX dog facility" },
+      { src: dogDuring2, alt: "Chipping hammer demolition of old tile underneath failed overlay in dog grooming facility floor" },
+      { src: dogDuring3, alt: "Exposed original concrete slab after full tear-out, prior to grinding and polyurea repairs" },
+      { src: dogDuring4, alt: "Concrete grinding and surface profiling for polyurea base coat in dog training facility" },
+      { src: dogDuring5, alt: "Slab repair and prep work in progress before flake floor broadcast installation" },
+      { src: dogDuring6, alt: "Polyurea base coat and polymer flake broadcast in process inside dog boarding facility" },
+    ],
+    afterPhotos: [
+      { src: dogAfter2, alt: "Finished polyurea polyaspartic flake floor in Plano TX dog training and grooming facility — sanitary, drainable, and easy to wash down" },
+      { src: dogAfter1, alt: "Completed flake floor system in dog kennel area with broadcast polymer flake and polyaspartic topcoat" },
+      { src: dogAfter3, alt: "Finished dog grooming facility floor with seamless polyurea polyaspartic flake coating built for accidents and spills" },
+      { src: dogAfter4, alt: "Detail of broadcast color flake floor in dog boarding facility — non-porous, slip-resistant, and chemical-resistant" },
+      { src: dogAfter5, alt: "Wide view of completed flake floor in dog training facility — continuous wall-to-wall sanitary surface ready for daily wash-down" },
     ],
   },
 ];
