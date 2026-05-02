@@ -183,25 +183,26 @@ const ConcreteSealing = () => {
         </section>
 
         {/* When you need it */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
-                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-96 object-cover rounded-2xl shadow-xl" />
+                <img src={sealingDetail} alt="Close-up of sealed concrete floor in a commercial tasting room with metal chairs" className="w-full h-[26rem] object-cover rounded-md shadow-lg" />
               </div>
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  When Restaurants & Commercial Kitchens Need Concrete Sealing
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                  Signs Your Restaurant or Kitchen Needs Concrete Sealing
                 </h2>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Raw concrete is porous. In a restaurant or commercial kitchen, that means grease, food acids, wine, beer, sanitizers, and dropped sauces soak straight into the slab — creating permanent stains, odor traps, and surfaces that fail health inspections.
                 </p>
+                <p className="text-base font-semibold text-gray-900 mb-3">Consider sealing if any of these apply:</p>
                 <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>New build-out before opening day — seal before traffic ever hits the floor.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Floor is dusting, looks blotchy, or no longer beads water when you splash it.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Stains setting in faster than your nightly mop crew can keep up with.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Health inspector flagged porous, stained, or hard-to-sanitize flooring.</span></li>
-                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1 mr-3" /><span>Last sealer was applied 2+ years ago and the floor needs a refresh.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>You're in a new build-out and want protection in place before opening day.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Your floor is dusting, looks blotchy, or no longer beads water when splashed.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Stains are setting in faster than your nightly mop crew can keep up with.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>A health inspector flagged porous, stained, or hard-to-sanitize flooring.</span></li>
+                  <li className="flex items-start"><CheckCircle className="h-5 w-5 text-blue-700 flex-shrink-0 mt-1 mr-3" /><span>Your last sealer was applied two or more years ago and needs to be refreshed.</span></li>
                 </ul>
               </div>
             </div>
