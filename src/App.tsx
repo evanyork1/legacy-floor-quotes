@@ -55,6 +55,8 @@ import SplashSelect from "./pages/SplashSelect";
 import CommercialFloors from "./pages/CommercialFloors";
 import AboutCommercial from "./pages/AboutCommercial";
 import AquaTotsFlooring from "./pages/AquaTotsFlooring";
+import CaseStudies from "./pages/CaseStudies";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -96,6 +98,8 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
               

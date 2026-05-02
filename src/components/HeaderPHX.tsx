@@ -32,6 +32,7 @@ const HeaderPHX = () => {
 
 const aboutItems = [
   { name: "About Us", path: "/about" },
+  { name: "Case Studies", path: "/case-studies" },
   { name: "Blog", path: "/blog" },
   { name: "Additional Services", path: "/additional-services" },
   { name: "FAQ", path: "/faq" },
