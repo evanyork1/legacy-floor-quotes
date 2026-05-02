@@ -129,19 +129,19 @@ export const caseStudies: CaseStudy[] = [
     title: "Pharmaceutical Manufacturing Plant — 21,000 sq ft Polished Concrete",
     summary:
       "A 40-year-old pharmaceutical facility with badly cracked, undulating concrete needed a true high-gloss polish across 21,000 square feet — and zero production downtime. We worked overnight for four nights, filled every crack and divot with polyurea, and delivered an 800-grit polished slab the day shift never saw being built.",
-    heroImage: pharmAfter1,
+    heroImage: pharmAfter5,
     heroAlt:
       "21,000 square foot pharmaceutical manufacturing plant with high-gloss 800-grit polished concrete floor by Legacy Industrial Coatings",
     metaTitle:
       "21,000 Sq Ft Pharmaceutical Plant Polished Concrete Case Study | Legacy Industrial Coatings",
     metaDescription:
-      "How Legacy Industrial Coatings polished 21,000 sq ft of 40-year-old cracked concrete in a working pharmaceutical plant to an 800-grit high-gloss finish — overnight, with zero production downtime. Crack repair, polyurea fill, and FF/FL flatness capability.",
-    location: "Plano, TX",
+      "How Legacy Industrial Coatings polished 21,000 sq ft of 40-year-old cracked concrete in a working pharmaceutical plant in Dallas, TX to an 800-grit high-gloss finish — overnight, with zero production downtime. Crack repair, polyurea fill, and FF/FL flatness capability.",
+    location: "Dallas, TX",
     serviceType: "High-Gloss Polished Concrete (800 grit) + Polyurea Crack & Divot Repair",
     squareFootage: "21,000 sq ft",
     timeline: "3–4 overnight shifts (9 PM – early morning), zero production downtime",
     challenge: [
-      "This was a fully operational pharmaceutical manufacturing plant inside a 40-year-old building. The slab had four decades of forklift traffic, equipment moves, and thermal cycling on it — and it showed. Wide structural cracks ran through high-traffic lanes, surface divots and pop-outs were everywhere, and the slab had visible undulation across the 21,000 square foot footprint.",
+      "This was a fully operational pharmaceutical manufacturing plant in Dallas, TX, inside a 40-year-old building. The slab had four decades of forklift traffic, equipment moves, and thermal cycling on it — and it showed. Wide structural cracks ran through high-traffic lanes, surface divots and pop-outs were everywhere, and the slab had visible undulation across the 21,000 square foot footprint.",
       "Pharmaceutical environments are unforgiving floors. Dust generation has to be controlled, the surface has to clean easily, every joint and crack is a place for contamination to collect, and the floor has to handle constant pallet jack and forklift traffic without breaking down again. A bandage approach — a thin coating poured over the existing damage — would have failed within months and locked all that contamination in.",
       "The other constraint was operational. The facility runs production around the clock, and downtime in a pharma plant is measured in five and six figures per hour. We could not stop the line. Every square foot of work had to happen overnight, after the day shift left, and the floor had to be back in service before morning operations restarted.",
     ],
@@ -156,22 +156,21 @@ export const caseStudies: CaseStudy[] = [
       "If you operate a pharmaceutical, food, manufacturing, or distribution facility on an aging slab and the thought of shutting down production has been the thing stopping you from fixing the floor — that's the exact problem we solve. Overnight execution, full crack and divot repair, true mechanical polish, and ASTM E1155 flatness documentation when the spec requires it.",
     ],
     beforePhotos: [
-      { src: pharmBefore1, alt: "21,000 square foot pharmaceutical manufacturing plant interior before polished concrete work — 40-year-old slab with cracking and surface wear" },
+      { src: pharmBefore1, alt: "21,000 square foot pharmaceutical manufacturing plant interior in Dallas, TX before polished concrete work — 40-year-old slab with cracking and surface wear" },
       { src: pharmBefore2, alt: "Aging concrete slab in pharmaceutical facility showing surface divots and pop-outs before polishing" },
       { src: pharmBefore3, alt: "Wide structural crack running through pharmaceutical plant concrete floor before polyurea repair" },
       { src: pharmBefore4, alt: "Damaged 40-year-old concrete in pharmaceutical manufacturing space prior to grinding and polishing" },
       { src: pharmBefore5, alt: "Cracked and worn warehouse-style concrete in pharma plant before mechanical polishing" },
       { src: pharmBefore6, alt: "Existing pharmaceutical plant concrete showing undulation and surface damage before Legacy Industrial Coatings polishing" },
     ],
-    duringPhotos: [
-      { src: pharmAfter3, alt: "Polyurea crack filler installed in pharmaceutical plant concrete prior to final polishing passes" },
-    ],
+    duringPhotos: [],
     afterPhotos: [
-      { src: pharmAfter1, alt: "21,000 sq ft pharmaceutical manufacturing plant with finished high-gloss polished concrete reflecting overhead lights" },
+      { src: pharmAfter5, alt: "Reflective 21,000 sq ft polished concrete floor in Dallas, TX pharmaceutical manufacturing plant after Legacy Industrial Coatings overnight polishing project" },
+      { src: pharmAfter1, alt: "Pharmaceutical plant corridor with finished high-gloss polished concrete reflecting overhead lights" },
       { src: pharmAfter2, alt: "Wide view of finished 800-grit polished concrete in pharmaceutical facility — uniform shine across the entire floor" },
+      { src: pharmAfter6, alt: "Finished polished concrete in pharmaceutical plant — high-gloss, low-maintenance, ready for production" },
       { src: pharmAfter4, alt: "Close-up of polished concrete surface in pharmaceutical plant showing densified, mirror-grade 800-grit finish" },
-      { src: pharmAfter5, alt: "Reflective polished concrete floor in pharma manufacturing space after Legacy Industrial Coatings overnight polishing project" },
-      { src: pharmAfter6, alt: "Finished polished concrete in pharmaceutical plant corridor — high-gloss, low-maintenance, ready for production" },
+      { src: pharmAfter3, alt: "Polyurea crack filler integrated into the finished polished concrete slab — repairs grind flush with the surrounding floor" },
     ],
   },
 ];

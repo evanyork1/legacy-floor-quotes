@@ -202,15 +202,17 @@ const CaseStudyDetail = () => {
         </section>
 
         {/* During */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <PhotoGrid
-              title="During the Restoration"
-              description="Overnight deep cleaning and surface preparation before the new sealer went down."
-              photos={cs.duringPhotos}
-            />
-          </div>
-        </section>
+        {cs.duringPhotos.length > 0 && (
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <PhotoGrid
+                title="During the Restoration"
+                description="Overnight deep cleaning and surface preparation before the new sealer went down."
+                photos={cs.duringPhotos}
+              />
+            </div>
+          </section>
+        )}
 
         {/* After */}
         <section className="py-16 bg-slate-50 border-y border-slate-200">
