@@ -57,6 +57,7 @@ import AboutCommercial from "./pages/AboutCommercial";
 import AquaTotsFlooring from "./pages/AquaTotsFlooring";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
+import CaseStudiesHub from "./pages/CaseStudiesHub";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -98,7 +99,7 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/financing" element={<Financing />} />
               <Route path="/about" element={<About />} />
-              <Route path="/case-studies" element={<Navigate to="/commercial-case-studies" replace />} />
+              <Route path="/case-studies" element={<CaseStudiesHub />} />
               <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/commercial-case-studies" element={<CaseStudies category="commercial" />} />
               <Route path="/commercial-case-studies/:slug" element={<CaseStudyDetail />} />
