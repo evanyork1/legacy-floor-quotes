@@ -21,7 +21,7 @@ Disallow: /garage-packet-result/
 Disallow: /googlegaragepage
 Disallow: /garagefloorsdallasfb
 Disallow: /landingvisual
-Allow: /dfw
+Disallow: /landingvisual
 Disallow: /phx
 Disallow: /quotedfw
 
