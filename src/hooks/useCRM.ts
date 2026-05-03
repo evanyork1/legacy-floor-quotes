@@ -18,20 +18,14 @@ export function useCRM() {
     }
 
     const checkAdmin = async () => {
-      // Check by email first
-      if (user.email === 'evan@licoat.com') {
-        setIsAdmin(true);
-        return;
-      }
-      
-      // Check by role
+      // Check by role only — never trust client-side email comparisons
       const { data } = await supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', user.id)
         .eq('role', 'admin')
-        .single();
-      
+        .maybeSingle();
+
       setIsAdmin(!!data);
     };
 
