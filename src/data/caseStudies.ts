@@ -381,6 +381,7 @@ export const caseStudies: CaseStudy[] = [
       { src: pumpAfter3, alt: "Detail of integrated cove base in restaurant back-of-house — radiused floor-to-wall transition coated in epoxy with no seam" },
       { src: pumpAfter4, alt: "Sealed pump room floor and integrated cove base in restaurant kitchen ready to pass health inspection" },
       { src: pumpAfter5, alt: "Completed restaurant pump room floor system with integrated epoxy cove base built for daily wash-down cleaning" },
+    ],
   },
   {
     slug: "argyle-luxury-home-metallic-floor-tear-out-redo",
