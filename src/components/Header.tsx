@@ -15,7 +15,7 @@ const Header = () => {
 
   // Always use DFW paths
   const quotePath = '/quotedfw';
-  const homePath = '/dfw';
+  const homePath = '/';
   const navItems = [{
     name: "Home",
     path: homePath
