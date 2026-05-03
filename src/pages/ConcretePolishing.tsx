@@ -107,6 +107,7 @@ const ConcretePolishing = () => {
           { name: "Mechanical Polished Concrete", description: "Diamond-ground and densified polished concrete floors for DFW commercial, retail, and warehouse facilities.", url: "/concrete-polishing" },
         ]}
         faqs={polishingFaqs}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Concrete Polishing", url: "/concrete-polishing" }]}
       />
 
       <div className="min-h-screen bg-white">
