@@ -72,10 +72,10 @@ const CaseStudiesHub = () => {
               Case Studies
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
-              The Floors. The Story. The Receipts.
+              Case Studies
             </h1>
             <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-              Pick the side that fits you — every project is a real job we ran, documented from the failure that brought us in to the floor we left behind.
+              View a few of our featured projects from commercial or residential spaces.
             </p>
           </div>
         </section>
