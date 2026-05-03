@@ -141,22 +141,29 @@ const BlogPostPage = () => {
                   Ready to transform your floors?
                 </h2>
                 <p className="text-lg opacity-90 mb-6">
-                  Get a free estimate at{" "}
-                  <a href="tel:214-305-6516" className="underline font-semibold">
-                    214-305-6516
-                  </a>
-                  .
+                  Talk to our team and get a clear plan for your space.
                 </p>
-                <Button
-                  asChild
-                  variant="secondary"
-                  className="bg-white text-blue-700 hover:bg-gray-100 rounded-full px-8 py-3"
-                >
-                  <a href="tel:214-305-6516">
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call 214-305-6516
-                  </a>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button
+                    onClick={() => setShowBookingModal(true)}
+                    size="lg"
+                    className="bg-white text-blue-700 hover:bg-gray-100 rounded-full px-8 py-3"
+                  >
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book An Estimate
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="bg-transparent border-white text-white hover:bg-white hover:text-blue-700 rounded-full px-8 py-3"
+                  >
+                    <a href="tel:2143056516">
+                      <Phone className="mr-2 h-5 w-5" />
+                      Call 214-305-6516
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
