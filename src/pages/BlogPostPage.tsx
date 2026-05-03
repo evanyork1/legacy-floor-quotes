@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Calendar, MapPin, Phone, ArrowLeft } from "lucide-react";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
+import { BookingModal } from "@/components/landing/BookingModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { fetchPostBySlug, type BlogPost } from "@/data/blogPosts";
