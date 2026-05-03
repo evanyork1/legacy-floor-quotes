@@ -1,75 +1,58 @@
-## Goals
+## Security Hardening Plan
 
-1. Make `/` the single primary homepage; permanently redirect `/dfw` → `/`.
-2. Replace the static `public/sitemap.xml` with a dynamic sitemap that always reflects all current pages plus every published blog post (read-only query against the existing `blog_posts` table — no schema changes).
-3. Add LocalBusiness JSON-LD on the homepage and BreadcrumbList JSON-LD on all key pages.
+Lock down PII, prevent unauthorized writes, and disable open signup. No data is deleted; only RLS policies and a few frontend files change.
 
-**No database migrations. No new tables. No edits to any existing data.** The sitemap function only does a read-only `SELECT` against the blog table that already exists.
+### 1. Database RLS migration (schema-only changes to policies)
 
----
+**`Lead Form Subissions`** — Currently `SELECT USING (true)` exposes every lead's name/email/phone publicly.
+- Drop "Admins can view all leads" (misnamed, it's actually public)
+- Add: `SELECT` restricted to `has_role(auth.uid(), 'admin')`
+- Keep public `INSERT` (needed for the form)
 
-## 1. Canonicalize `/` and 301 `/dfw` → `/`
+**`quotes`** and **`dfwquotes`** — Same problem (public SELECT exposes customer PII).
+- Drop the public-read SELECT policies
+- Keep authenticated/admin SELECT and public INSERT
 
-- `src/App.tsx`: change `<Route path="/dfw" element={<DFW />} />` to `<Route path="/dfw" element={<Navigate to="/" replace />} />`.
-- `src/components/Header.tsx`: change `homePath = '/dfw'` to `homePath = '/'`.
-- Sweep `rg "/dfw"` and update any other internal links to `/` (skipping `/quotedfw`, which is a different route).
-- `public/_redirects`: add `/dfw  /  301!` so crawlers see a true 301 on hosts that honor the file.
-- `public/robots.txt`: remove the `/dfw` allow line.
+**`floor_packets`** — Public SELECT + public UPDATE exposes customer contact info and lets anyone tamper.
+- Drop "Anyone can read floor packets" and "Anyone can update ready_to_proceed"
+- Keep public INSERT (form submission)
+- Keep authenticated SELECT for admins
+- Add a narrow public UPDATE policy *only* for `ready_to_proceed` if needed by the public results page (will verify usage in `PacketResultsPage` before deciding; otherwise route the update through an edge function)
 
----
+**`gallery_photos`** — Public INSERT/UPDATE/DELETE allows vandalism.
+- Drop "Allow public gallery photo uploads/updates/deletes"
+- Keep public SELECT (gallery is meant to be visible)
+- Keep "Allow admin access to manage gallery photos" (authenticated only)
 
-## 2. Dynamic sitemap (reads existing blog_posts table only)
+**`sales_presentations`** — `UPDATE USING (true)` lets anyone overwrite signed contracts.
+- Replace "Anyone can sign presentations" with a tighter policy: only allow updating signature fields (`signature_data`, `signed_at`, `agreement_accepted`, `status`) on rows where `signed_at IS NULL`. Implement via a `BEFORE UPDATE` trigger that rejects edits to other columns when the caller is anonymous.
+- Keep "Anyone can view presentations by ID" (needed for shared links)
 
-**New edge function: `supabase/functions/sitemap/index.ts`**
-- Public (no JWT). Returns `Content-Type: application/xml`, `Cache-Control: public, max-age=900`.
-- Hard-coded URL list covering every public page in `App.tsx`:
-  - `/` (priority 1.0)
-  - Residential: `/garagefloors`, `/residential-patio`, `/residential-case-studies` (+ existing case study slugs from `src/data/caseStudies.ts`)
-  - Commercial: `/commercial`, `/commercialfloors`, `/flake-floors`, `/industrial-epoxy`, `/concrete-polishing`, `/concrete-sealing`, `/commercial-case-studies` (+ slugs), `/about-commercial`
-  - About dropdown: `/about`, `/gallery`, `/blog`, `/faq`, `/financing`
-  - `/case-studies` (hub), `/contact`, `/service-areas`, `/flower-mound`, `/prosper`, `/floor-visualizer`, `/warranty`, `/privacy`, `/terms`
-- Dynamic blog: `SELECT slug, published_date FROM blog_posts WHERE published = true` — appends `<url>` for each at `/blog/{slug}` with `lastmod = published_date`. **Read-only.**
-- New blog rows show up automatically on the next request (within 15 min cache).
+**`commercial_submissions`**, **`giveaway`**, **`visualizer_analytics`**, **`webhook_settings`**, **`location_pricing`**, **`pricing_settings`** — already restrict SELECT to `authenticated`. Tighten further to `has_role(... ,'admin')` where appropriate (webhook_settings, pricing tables) so non-admin reps can't read webhook URLs or change pricing.
 
-**Routing `/sitemap.xml` to the function**
-- Delete `public/sitemap.xml` (otherwise the static file shadows the function).
-- Add to `public/_redirects`:
-  ```
-  /sitemap.xml  https://byvazfrvoanojfayvsaz.supabase.co/functions/v1/sitemap  200
-  /dfw          /                                                              301!
-  /*            /index.html                                                    200
-  ```
+### 2. Frontend changes
 
----
+**`src/pages/Auth.tsx`**
+- Remove the "Sign Up" tab entirely. New reps must be added via `pending_invites` (admin-only), then they sign in.
+- Remove the hardcoded `evan@licoat.com` admin check. Replace with a `has_role` query against `user_roles` after sign-in.
 
-## 3. Structured data: LocalBusiness + BreadcrumbList
+**`src/pages/SalesDashboard.tsx`**
+- Remove hardcoded admin email check. Use `user_roles` lookup (same `useUserRole` hook pattern already used elsewhere) to gate admin UI.
 
-**LocalBusiness (homepage)**
-- `src/components/seo/StructuredData.tsx` already emits a strong LocalBusiness schema and `DFW.tsx` (which renders at `/`) already includes it. I'll tighten the description and add an explicit `serviceType` array: "Epoxy flooring, concrete polishing, industrial coatings, garage floor coatings, commercial flooring." Phone, Plano TX address, and URL already match.
+### 3. Manual steps for the user (Supabase Dashboard)
 
-**BreadcrumbList (all key pages)**
-- Extend `StructuredData.tsx` with an optional `breadcrumbs?: Array<{ name: string; url: string }>` prop. When provided, append a `BreadcrumbList` JSON-LD block.
-- Add `breadcrumbs` to existing `<StructuredData />` usages on these pages (and add the component where missing):
-  - `/about`, `/blog`, `/blog/:slug`, `/contact`, `/gallery`, `/faq`, `/financing`, `/warranty`
-  - `/garagefloors`, `/residential-patio`, `/residential-case-studies`, `/residential-case-studies/:slug`
-  - `/commercial`, `/commercialfloors`, `/flake-floors`, `/industrial-epoxy`, `/concrete-polishing`, `/concrete-sealing`, `/commercial-case-studies`, `/commercial-case-studies/:slug`, `/about-commercial`
-  - `/case-studies`, `/case-studies/:slug`
-- Each chain: `Home → {Section} → {Page}` (2–3 levels).
+I'll provide direct links after the migration runs:
+- Shorten OTP expiry to ≤ 1 hour
+- Enable "Leaked password protection"
+- Confirm email auto-confirm setting matches your invite flow
 
----
+### Files to be edited
+- New SQL migration (RLS policy updates + sales_presentations trigger)
+- `src/pages/Auth.tsx`
+- `src/pages/SalesDashboard.tsx`
 
-## Files
-
-**New**
-- `supabase/functions/sitemap/index.ts`
-
-**Edit**
-- `src/App.tsx` — `/dfw` → `<Navigate>`
-- `src/components/Header.tsx` — `homePath = '/'`
-- `src/components/seo/StructuredData.tsx` — add breadcrumbs + tighten LocalBusiness
-- `public/_redirects` — sitemap proxy + `/dfw` 301
-- `public/robots.txt` — drop `/dfw` allow
-- ~20 page files — pass `breadcrumbs` into `<StructuredData />`
-
-**Delete**
-- `public/sitemap.xml` (replaced by edge function)
+### What will NOT change
+- No tables dropped, no columns removed, no data deleted
+- No changes to `auth.*`, `storage.*`, or other reserved schemas
+- Public-facing forms (lead, quote, DFW quote, floor packet, commercial, giveaway) continue to accept submissions anonymously
+- Public gallery viewing, public presentation viewing by link, and public pricing reads continue to work
