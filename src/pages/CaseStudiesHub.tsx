@@ -8,9 +8,6 @@ import { caseStudies } from "@/data/caseStudies";
 const CaseStudiesHub = () => {
   const navigate = useNavigate();
 
-  const commercialCount = caseStudies.filter((c) => c.category === "commercial").length;
-  const residentialCount = caseStudies.filter((c) => c.category === "residential").length;
-
   const commercialHero = caseStudies.find((c) => c.category === "commercial")?.heroImage;
   const residentialHero = caseStudies.find((c) => c.category === "residential")?.heroImage;
 
@@ -28,23 +25,19 @@ const CaseStudiesHub = () => {
     {
       key: "commercial",
       title: "Commercial Case Studies",
-      eyebrow: "For Operators, GCs & Facility Managers",
       description:
         "Restaurants, manufacturing plants, kennels, swim schools, and back-of-house spaces — real projects with real before, during, and after photos.",
       image: commercialHero,
       icon: Building2,
-      count: commercialCount,
       path: "/commercial-case-studies",
     },
     {
       key: "residential",
       title: "Residential Case Studies",
-      eyebrow: "For Homeowners",
       description:
         "High-end garages, patios, and home flooring projects — including tear-outs of failed cheap installs and full rebuilds done the right way.",
       image: residentialHero,
       icon: Home,
-      count: residentialCount,
       path: "/residential-case-studies",
     },
   ];
