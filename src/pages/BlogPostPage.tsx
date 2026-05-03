@@ -92,6 +92,8 @@ const BlogPostPage = () => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Blog", url: "/blog" }, { name: post.title, url: `/blog/${post.slug}` }]} />
+
       <div className="min-h-screen bg-white">
         <HeaderGeneric />
 
