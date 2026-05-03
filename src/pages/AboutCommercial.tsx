@@ -3,6 +3,7 @@ import { ArrowLeft, Award, Shield, MapPin, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import legacyLogo from "@/assets/legacy-logo-white.png";
 import { Seo } from "@/components/seo/Seo";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 
 const AboutCommercial = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const AboutCommercial = () => {
         description="Tech consultants for general contractors. Millions of square feet of commercial concrete polishing and industrial coatings delivered to spec for ITBs across Texas."
         path="/about-commercial"
       />
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercialfloors" }, { name: "About", url: "/about-commercial" }]} />
       {/* ─── Navbar ─── */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">

@@ -87,6 +87,7 @@ const ConcreteSealing = () => {
           { name: "Commercial Concrete Sealing", description: "Penetrating and topical concrete sealing for DFW restaurants, breweries, commercial kitchens, and warehouses. Stain-resistant, easy-clean, slip-rated sealers with quarterly deep-clean and 2–5 year reseal programs.", url: "/concrete-sealing" },
         ]}
         faqs={sealingFaqs}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Concrete Sealing", url: "/concrete-sealing" }]}
       />
 
       <div className="min-h-screen bg-white">

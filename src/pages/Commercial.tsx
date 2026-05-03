@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import HeaderGeneric from "@/components/HeaderGeneric";
@@ -109,7 +110,9 @@ const Commercial = () => {
         <meta name="theme-color" content="#2563eb" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/commercial" />
       </Helmet>
-      
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }]} />
+
       <div className="min-h-screen bg-white">
         <HeaderGeneric />
         

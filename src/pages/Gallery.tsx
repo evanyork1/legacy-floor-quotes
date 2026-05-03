@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X, Image as ImageIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Seo } from "@/components/seo/Seo";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 
 interface GalleryPhoto {
   id: string;
@@ -60,6 +61,7 @@ const Gallery = () => {
         description="Browse our portfolio of completed garage floor, polyurea flake, polished concrete, and commercial epoxy installations across Dallas-Fort Worth."
         path="/gallery"
       />
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }, { name: "Gallery", url: "/gallery" }]} />
       <HeaderGeneric />
       
       {/* Hero Section */}

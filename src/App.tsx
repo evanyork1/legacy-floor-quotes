@@ -72,7 +72,7 @@ function App() {
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<DFW />} />
-              <Route path="/dfw" element={<DFW />} />
+              <Route path="/dfw" element={<Navigate to="/" replace />} />
               <Route path="/phx" element={<PHX />} />
               <Route path="/quotedfw" element={<QuoteDFW />} />
               <Route path="/quotephx" element={<QuotePHX />} />

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,9 @@ const ResidentialGarageFloors = () => {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagefloors" />
       </Helmet>
-      
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Residential", url: "/garagefloors" }, { name: "Garage Floors", url: "/garagefloors" }]} />
+
       <div className="min-h-screen bg-white">
         <Header />
         

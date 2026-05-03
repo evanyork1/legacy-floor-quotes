@@ -11,6 +11,7 @@ import retailImg from "@/assets/commercial-retail.jpg";
 import manufacturingImg from "@/assets/commercial-manufacturing.jpg";
 import { CommercialContactModal } from "@/components/commercial/CommercialContactModal";
 import { Seo } from "@/components/seo/Seo";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 
 /* ──────────────── data ──────────────── */
 
@@ -112,6 +113,7 @@ const CommercialFloors = () => {
         description="Spec-grade commercial concrete polishing, polishable overlays, grind & seal, and industrial epoxy systems. Texas-based crews, ASCC/ACI/ICRI standards, night and weekend mobilization."
         path="/commercialfloors"
       />
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial Floors", url: "/commercialfloors" }]} />
       {/* ─── Navbar ─── */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="bg-[hsl(0,0%,5%)]/80 backdrop-blur-md border-b border-white/10">
