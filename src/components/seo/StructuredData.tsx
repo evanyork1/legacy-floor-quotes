@@ -6,11 +6,17 @@ interface FAQItem {
   answer: string;
 }
 
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
 interface StructuredDataProps {
   includeLocalBusiness?: boolean;
   includeOrganization?: boolean;
   services?: Array<{ name: string; description: string; url?: string }>;
   faqs?: FAQItem[];
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const SITE_URL = "https://legacyindustrialcoatings.com";
@@ -20,6 +26,7 @@ export const StructuredData = ({
   includeOrganization = true,
   services,
   faqs,
+  breadcrumbs,
 }: StructuredDataProps) => {
   const schemas: Record<string, unknown>[] = [];
 
@@ -44,6 +51,8 @@ export const StructuredData = ({
       "@type": "LocalBusiness",
       "@id": `${SITE_URL}#localbusiness`,
       name: "Legacy Industrial Coatings",
+      description:
+        "Premium epoxy flooring, polyurea garage coatings, mechanical polished concrete, and industrial floor coatings serving the Dallas-Fort Worth Metroplex.",
       image: `${SITE_URL}/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png`,
       url: SITE_URL,
       telephone: "+1-214-305-6516",
@@ -61,9 +70,22 @@ export const StructuredData = ({
         latitude: 33.0198,
         longitude: -96.6989,
       },
-      areaServed: DFW_CITIES.map((city) => ({
-        "@type": "City",
-        name: `${city}, TX`,
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Dallas-Fort Worth Metroplex" },
+        ...DFW_CITIES.map((city) => ({
+          "@type": "City",
+          name: `${city}, TX`,
+        })),
+      ],
+      makesOffer: [
+        "Epoxy flooring",
+        "Concrete polishing",
+        "Industrial coatings",
+        "Garage floor coatings",
+        "Commercial flooring",
+      ].map((name) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name },
       })),
       openingHoursSpecification: [
         {
@@ -123,6 +145,19 @@ export const StructuredData = ({
           "@type": "Answer",
           text: f.answer,
         },
+      })),
+    });
+  }
+
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: b.name,
+        item: b.url.startsWith("http") ? b.url : `${SITE_URL}${b.url}`,
       })),
     });
   }
