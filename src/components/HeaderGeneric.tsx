@@ -19,8 +19,8 @@ const HeaderGeneric = () => {
     name: "Home",
     path: homePath
   }, {
-    name: "Gallery",
-    path: "/gallery"
+    name: "Case Studies",
+    path: "/case-studies"
   }, {
     name: "Contact",
     path: "/contact"
@@ -28,6 +28,7 @@ const HeaderGeneric = () => {
 
 const aboutItems = [
   { name: "About Us", path: "/about" },
+  { name: "Gallery", path: "/gallery" },
   { name: "Blog", path: "/blog" },
   { name: "FAQ", path: "/faq" },
   { name: "Financing", path: "/financing" }
