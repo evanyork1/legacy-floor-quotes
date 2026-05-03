@@ -30,10 +30,8 @@ export default function SalesDashboard() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (user) {
-        // Fallback for evan@licoat.com until user_roles is updated
         const isAdminByRole = await hasRole('admin');
-        const isAdminByEmail = user.email === 'evan@licoat.com';
-        setIsAdmin(isAdminByRole || isAdminByEmail);
+        setIsAdmin(isAdminByRole);
       }
     };
     checkAdminStatus();
