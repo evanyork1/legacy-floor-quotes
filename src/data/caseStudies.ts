@@ -381,6 +381,59 @@ export const caseStudies: CaseStudy[] = [
       { src: pumpAfter3, alt: "Detail of integrated cove base in restaurant back-of-house — radiused floor-to-wall transition coated in epoxy with no seam" },
       { src: pumpAfter4, alt: "Sealed pump room floor and integrated cove base in restaurant kitchen ready to pass health inspection" },
       { src: pumpAfter5, alt: "Completed restaurant pump room floor system with integrated epoxy cove base built for daily wash-down cleaning" },
+  },
+  {
+    slug: "argyle-luxury-home-metallic-floor-tear-out-redo",
+    category: "residential",
+    tag: "Luxury Home Garage — Argyle, TX",
+    title: "Argyle Luxury Home — Failed Metallic Garage Floor Tear-Out & Proper Reinstall",
+    summary:
+      "A high-end Argyle, TX homeowner hired a low-bid installer to put a metallic epoxy floor in his garage. It bubbled, peeled, and came up in sheets because it was never prepped or installed correctly. We tore it all out, did a full diamond grind, and rebuilt the floor the right way — the textbook example of why cheap residential coatings always cost more in the end.",
+    heroImage: argyleAfter1,
+    heroAlt:
+      "Finished metallic epoxy garage floor in a luxury Argyle, TX home after Legacy Industrial Coatings tear-out and reinstall",
+    metaTitle:
+      "Argyle TX Luxury Home Metallic Garage Floor Redo Case Study | Legacy Industrial Coatings",
+    metaDescription:
+      "Failed cheap metallic epoxy floor in an Argyle, TX luxury home — tearing out a peeling, bubbling DIY-grade install and rebuilding it correctly with full diamond grind, proper epoxy, and a high-performance topcoat.",
+    location: "Argyle, TX",
+    serviceType: "Failed Coating Tear-Out + Diamond Grind + Metallic Epoxy Reinstall + High-Performance Topcoat",
+    squareFootage: "Residential garage — luxury home",
+    timeline: "Multi-day full tear-out and rebuild",
+    challenge: [
+      "This was a high-end luxury home in Argyle, TX. The homeowner wanted a metallic epoxy floor in his garage — one of the most visually impressive coatings you can install, and also one of the hardest. A real metallic floor depends on flawless substrate prep, the right base coat chemistry, controlled application of the metallic pigments, and a topcoat that locks the entire system in. There is essentially no margin for error.",
+      "He went with the lowest bid in the market. The installer prepped the concrete incorrectly — no proper diamond grind, no real surface profile — used the wrong materials for a metallic build, and applied the system in a way it was never designed to be applied. The result was a floor that started failing almost immediately.",
+      "By the time we were called in, the floor was bubbling across multiple areas, the topcoat was flaking and coming off in patches, and the coating had no real bond to the slab underneath. When we started the tear-out, full sheets of the floor lifted off the concrete in our hands — proof that the substrate was never opened up, never profiled, and never given anything for the coating to bite into. It was a paint job sitting on a sealed slab, not a bonded floor system.",
+      "This is the textbook 'buy cheap, buy twice' scenario in residential coatings. By the time the homeowner called us, he had already paid for the original install, was looking at the cost of full removal, and then the cost of a proper rebuild from scratch — three times what the right install would have cost on day one.",
+    ],
+    solution: [
+      "We did this floor the way it should have been done the first time, in four disciplined phases.",
+      "First — full removal. We mechanically stripped 100% of the failing metallic system off the slab. Because the original prep was so poor, large sections lifted off in sheets, which actually made the demo faster but confirmed everything we suspected about the bond underneath.",
+      "Second — proper substrate prep. We ran a full diamond grind across the entire garage to open the concrete pores, profile the surface to a true CSP (concrete surface profile) appropriate for a high-build coating, and remove every trace of the previous failed coating, contamination, and adhesive residue. This is the step the original installer skipped, and it is the single most important step in any coatings project. Without it, nothing else matters.",
+      "Third — correct material system. We installed a proper epoxy base coat engineered for metallic builds, applied at the right thickness, with the right working time, and at the right ambient and slab conditions. The metallic pigments were placed and worked into the wet base correctly so the final visual depth and movement actually develop the way a metallic floor is supposed to look.",
+      "Fourth — protective topcoat. We finished the system with a high-performance topcoat designed to seal the metallic layer, resist hot tire pickup, chemical spills, UV exposure through the garage door, and the daily wear of a residential garage. The topcoat is the layer that protects the investment underneath — and it is the layer the original installer treated as optional.",
+    ],
+    result: [
+      "The homeowner now has the floor he originally paid for — a true high-end metallic garage floor that's actually bonded to the slab, sealed, protected, and built to last for the long-term life of the coating system. No bubbling, no peeling, no sheets lifting up, no chips coming loose under tire traffic.",
+      "The hard lesson — and the reason this case study exists — is the cost. By the time he was done, this homeowner paid roughly three times what it would have cost to hire the right contractor on day one. He paid for the failed install, paid us to demo and remove it, and then paid for the correct rebuild from a clean slab. That is the actual price of 'cheap' in residential coatings.",
+      "Residential floor coatings are not a category where price-shopping works. The materials look similar in marketing photos, the install looks similar from the outside, but the prep work, the chemistry, and the application discipline are what determine whether the floor lasts ten-plus years or starts failing inside the first year. There is no such thing as a cheap residential floor that holds up — there is only a floor you pay for once or a floor you pay for twice. If you're considering a metallic, flake, or epoxy floor for your home, this is the case study to reference before you make the call.",
+    ],
+    beforePhotos: [
+      { src: argyleBefore1, alt: "Failed cheap metallic epoxy garage floor in Argyle TX luxury home before Legacy Industrial Coatings tear-out — coating bubbling and peeling off the slab" },
+      { src: argyleBefore2, alt: "Bubbling and lifting metallic floor in Argyle TX residential garage from improper substrate prep by a low-bid installer" },
+      { src: argyleBefore3, alt: "Peeling topcoat on a botched metallic epoxy floor in a luxury home garage before full removal" },
+      { src: argyleBefore4, alt: "Failed metallic garage floor coming up in sheets due to no diamond grind and wrong materials used during original install" },
+      { src: argyleBefore5, alt: "Cheap residential epoxy floor failure showing delamination from concrete slab in Argyle TX home garage" },
+      { src: argyleBefore6, alt: "Sections of failed metallic coating lifting off the concrete in a luxury home garage prior to Legacy Industrial Coatings rebuild" },
+      { src: argyleBefore7, alt: "Pre-tear-out condition of botched metallic floor in Argyle TX luxury home — buy cheap buy twice example in residential coatings" },
+    ],
+    duringPhotos: [],
+    afterPhotos: [
+      { src: argyleAfter1, alt: "Finished high-end metallic epoxy garage floor in Argyle TX luxury home installed correctly by Legacy Industrial Coatings — fully bonded with high-performance topcoat" },
+      { src: argyleAfter2, alt: "Reinstalled metallic garage floor in luxury Argyle TX home with proper diamond grind, correct epoxy base, and protective topcoat" },
+      { src: argyleAfter3, alt: "Detail of properly installed metallic epoxy showing depth and movement after correct substrate prep and material system" },
+      { src: argyleAfter4, alt: "Wide view of finished metallic garage floor in Argyle TX luxury home — the floor the homeowner originally paid for, finally done right" },
+      { src: argyleAfter5, alt: "Completed luxury home garage with sealed, bonded, high-performance metallic epoxy floor by Legacy Industrial Coatings" },
     ],
   },
 ];
