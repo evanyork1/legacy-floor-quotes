@@ -105,18 +105,13 @@ const CaseStudiesHub = () => {
                       <div className="absolute top-5 left-5">
                         <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
                           <Icon className="h-3.5 w-3.5" />
-                          {card.eyebrow}
+                          {card.key === "commercial" ? "Commercial" : "Residential"}
                         </span>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                        <div className="flex items-end justify-between gap-4 mb-2">
-                          <h2 className="text-2xl md:text-3xl font-bold leading-tight">
-                            {card.title}
-                          </h2>
-                          <span className="shrink-0 text-xs font-semibold bg-blue-600 text-white px-2.5 py-1 rounded-md">
-                            {card.count} {card.count === 1 ? "project" : "projects"}
-                          </span>
-                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+                          {card.title}
+                        </h2>
                       </div>
                     </div>
                     <div className="p-6 md:p-8">
