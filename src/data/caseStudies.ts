@@ -74,6 +74,20 @@ import pumpBefore1 from "@/assets/case-studies/restaurant-pump-room-cove-base/be
 import pumpBefore2 from "@/assets/case-studies/restaurant-pump-room-cove-base/before-2.jpg";
 import pumpBefore3 from "@/assets/case-studies/restaurant-pump-room-cove-base/before-3.jpg";
 
+// Argyle luxury home — failed metallic floor tear-out & reinstall
+import argyleAfter1 from "@/assets/case-studies/argyle-metallic-redo/after-1.jpg";
+import argyleAfter2 from "@/assets/case-studies/argyle-metallic-redo/after-2.jpg";
+import argyleAfter3 from "@/assets/case-studies/argyle-metallic-redo/after-3.jpg";
+import argyleAfter4 from "@/assets/case-studies/argyle-metallic-redo/after-4.jpg";
+import argyleAfter5 from "@/assets/case-studies/argyle-metallic-redo/after-5.jpg";
+import argyleBefore1 from "@/assets/case-studies/argyle-metallic-redo/before-1.jpg";
+import argyleBefore2 from "@/assets/case-studies/argyle-metallic-redo/before-2.jpg";
+import argyleBefore3 from "@/assets/case-studies/argyle-metallic-redo/before-3.jpg";
+import argyleBefore4 from "@/assets/case-studies/argyle-metallic-redo/before-4.jpg";
+import argyleBefore5 from "@/assets/case-studies/argyle-metallic-redo/before-5.jpg";
+import argyleBefore6 from "@/assets/case-studies/argyle-metallic-redo/before-6.jpg";
+import argyleBefore7 from "@/assets/case-studies/argyle-metallic-redo/before-7.jpg";
+
 export interface CaseStudyPhoto {
   src: string;
   alt: string;
