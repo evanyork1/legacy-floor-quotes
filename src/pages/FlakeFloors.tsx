@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -60,7 +61,9 @@ const FlakeFloors = () => {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/flake-floors" />
       </Helmet>
-      
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Flake Floors", url: "/flake-floors" }]} />
+
       <div className="min-h-screen bg-white">
         <HeaderGeneric />
         

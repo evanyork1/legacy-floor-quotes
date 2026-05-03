@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
 import Footer from "@/components/Footer";
 
@@ -13,7 +14,9 @@ const Warranty = () => {
         />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/warranty" />
       </Helmet>
-      
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Warranty", url: "/warranty" }]} />
+
       <div className="min-h-screen bg-background py-8 sm:py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <Card>

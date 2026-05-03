@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import { Link, useParams } from "react-router-dom";
 import { Calendar, MapPin, Phone, ArrowLeft } from "lucide-react";
 import HeaderGeneric from "@/components/HeaderGeneric";
