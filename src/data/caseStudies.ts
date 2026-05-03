@@ -322,6 +322,53 @@ export const caseStudies: CaseStudy[] = [
       { src: swimAfter6, alt: "Swim school flake floor close-up — slip-resistant, easy to clean, and engineered for daily wet operation with small children" },
     ],
   },
+  {
+    slug: "restaurant-pump-room-integrated-cove-base",
+    category: "commercial",
+    tag: "Restaurant Pump Room",
+    title: "Restaurant Pump Room — Health Inspection Failure to Integrated Cove Base Build",
+    summary:
+      "A local restaurant failed its health inspection because the pump room behind the kitchen had no integrated cove base — the floor met the wall in an open seam, letting wash water run straight into the sheetrock. We tore out the failing floor, built a true integrated cove base up the wall, and coated the entire room — floor and cove — in a single seamless epoxy system that passes inspection and stays watertight.",
+    heroImage: pumpAfter1,
+    heroAlt:
+      "Restaurant pump room with integrated epoxy cove base and seamless floor coating by Legacy Industrial Coatings",
+    metaTitle:
+      "Restaurant Pump Room Integrated Cove Base Case Study | Legacy Industrial Coatings",
+    metaDescription:
+      "How Legacy Industrial Coatings fixed a failed health inspection in a local restaurant pump room by installing a true integrated epoxy cove base — a watertight seal between the floor and the wall built for constantly cleaned commercial kitchens.",
+    location: "DFW, TX",
+    serviceType: "Integrated Epoxy Cove Base + Seamless Floor Coating",
+    squareFootage: "Pump room (back-of-house, behind the kitchen)",
+    timeline: "Multi-day install scheduled around restaurant operations",
+    challenge: [
+      "This local restaurant called us in after failing a health inspection. The point of failure was the pump room behind the kitchen — a high-cleaning, high-moisture, back-of-house space where the floor met the wall in nothing more than a caulked or open seam at the base of the sheetrock.",
+      "In a commercial kitchen environment, that seam is the whole problem. Pump rooms, dish areas, prep lines, and walk-in pads get hosed and mopped constantly. Every cleaning cycle drives water straight at the wall-to-floor joint. Without a true integrated cove base, that water wicks into the bottom of the sheetrock, sits there, and over time produces exactly what the inspector was flagging: water damage, swelling drywall, hidden mold growth, and a non-cleanable corner that can never actually be sanitized.",
+      "This is one of the most common health-code failures we see in commercial kitchens, and it almost always traces back to the same root cause — the original build either skipped the integrated cove or used a stick-on vinyl base that lifted within the first year of wash-down cleaning.",
+    ],
+    solution: [
+      "Integrated cove base is something we specialize in, and it's exactly the right fix for a room like this. Unlike a vinyl wall base that's glued on after the floor is finished, an integrated cove is physically built up out of the same coating material that's going on the floor — a continuous, monolithic radius that runs from the floor surface up the wall four to six inches with no seam, no joint, and no place for water to enter.",
+      "We started by prepping the existing floor down to a sound, profiled substrate and prepping the bottom of the wall to bond. From there we hand-built the cove itself: a structural cove material troweled into a smooth, radiused transition where the floor meets the wall, then allowed to cure as part of the floor system rather than as an afterthought stuck on top of it.",
+      "Once the cove was in place, we coated the entire room — floor and cove together — with our commercial epoxy system. Because the epoxy goes on top of the cove base, the wall-to-floor transition becomes one continuous, fully sealed surface. Water hitting the wall during cleaning runs down the cove and onto the floor with nowhere to penetrate, and the bottom of the sheetrock is fully protected behind a coated, waterproof barrier.",
+    ],
+    result: [
+      "The pump room now passes inspection on the exact point that failed it. The wall-to-floor joint is gone — replaced by a single, continuous, coated surface that the staff can hose, mop, and disinfect without driving water into the building structure.",
+      "More importantly, the underlying cause of the failure is solved. There is no longer a path for cleaning water to reach the sheetrock, which means no more hidden water damage building up behind the wall, no more biological growth in an unreachable corner, and no more recurring health-code findings on the same area.",
+      "If you operate a commercial kitchen, brewery, dish room, walk-in cooler pad, food processing space, or any back-of-house area that gets cleaned with water on a daily basis — and your floor meets the wall in anything other than a true integrated cove base — you have this problem. We build integrated cove base as part of our standard commercial kitchen floor system and we can scope it as a remediation on an existing room or as part of a new build out.",
+    ],
+    beforePhotos: [
+      { src: pumpBefore1, alt: "Restaurant pump room before integrated cove base install — open wall-to-floor seam letting wash water reach the sheetrock" },
+      { src: pumpBefore2, alt: "Failed wall-to-floor joint in commercial kitchen pump room flagged on a health inspection before Legacy Industrial Coatings remediation" },
+      { src: pumpBefore3, alt: "Existing pump room floor and base in restaurant before epoxy floor and integrated cove base install" },
+    ],
+    duringPhotos: [],
+    afterPhotos: [
+      { src: pumpAfter1, alt: "Finished restaurant pump room with integrated epoxy cove base — seamless transition from floor up the wall, fully watertight" },
+      { src: pumpAfter2, alt: "Commercial kitchen pump room after Legacy Industrial Coatings install showing continuous epoxy floor and coved wall base" },
+      { src: pumpAfter3, alt: "Detail of integrated cove base in restaurant back-of-house — radiused floor-to-wall transition coated in epoxy with no seam" },
+      { src: pumpAfter4, alt: "Sealed pump room floor and integrated cove base in restaurant kitchen ready to pass health inspection" },
+      { src: pumpAfter5, alt: "Completed restaurant pump room floor system with integrated epoxy cove base built for daily wash-down cleaning" },
+    ],
+  },
 ];
 
 export const getCaseStudyBySlug = (slug: string) =>
