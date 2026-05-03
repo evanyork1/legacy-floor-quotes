@@ -16,6 +16,7 @@ const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   useEffect(() => {
     let active = true;
