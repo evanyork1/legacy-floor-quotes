@@ -8,9 +8,6 @@ import { caseStudies } from "@/data/caseStudies";
 const CaseStudiesHub = () => {
   const navigate = useNavigate();
 
-  const commercialCount = caseStudies.filter((c) => c.category === "commercial").length;
-  const residentialCount = caseStudies.filter((c) => c.category === "residential").length;
-
   const commercialHero = caseStudies.find((c) => c.category === "commercial")?.heroImage;
   const residentialHero = caseStudies.find((c) => c.category === "residential")?.heroImage;
 
@@ -28,23 +25,19 @@ const CaseStudiesHub = () => {
     {
       key: "commercial",
       title: "Commercial Case Studies",
-      eyebrow: "For Operators, GCs & Facility Managers",
       description:
         "Restaurants, manufacturing plants, kennels, swim schools, and back-of-house spaces — real projects with real before, during, and after photos.",
       image: commercialHero,
       icon: Building2,
-      count: commercialCount,
       path: "/commercial-case-studies",
     },
     {
       key: "residential",
       title: "Residential Case Studies",
-      eyebrow: "For Homeowners",
       description:
         "High-end garages, patios, and home flooring projects — including tear-outs of failed cheap installs and full rebuilds done the right way.",
       image: residentialHero,
       icon: Home,
-      count: residentialCount,
       path: "/residential-case-studies",
     },
   ];
@@ -79,10 +72,10 @@ const CaseStudiesHub = () => {
               Case Studies
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
-              The Floors. The Story. The Receipts.
+              Case Studies
             </h1>
             <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-              Pick the side that fits you — every project is a real job we ran, documented from the failure that brought us in to the floor we left behind.
+              View a few of our featured projects from commercial or residential spaces.
             </p>
           </div>
         </section>
@@ -112,18 +105,13 @@ const CaseStudiesHub = () => {
                       <div className="absolute top-5 left-5">
                         <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
                           <Icon className="h-3.5 w-3.5" />
-                          {card.eyebrow}
+                          {card.key === "commercial" ? "Commercial" : "Residential"}
                         </span>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                        <div className="flex items-end justify-between gap-4 mb-2">
-                          <h2 className="text-2xl md:text-3xl font-bold leading-tight">
-                            {card.title}
-                          </h2>
-                          <span className="shrink-0 text-xs font-semibold bg-blue-600 text-white px-2.5 py-1 rounded-md">
-                            {card.count} {card.count === 1 ? "project" : "projects"}
-                          </span>
-                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+                          {card.title}
+                        </h2>
                       </div>
                     </div>
                     <div className="p-6 md:p-8">
