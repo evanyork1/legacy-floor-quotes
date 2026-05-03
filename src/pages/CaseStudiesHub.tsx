@@ -68,9 +68,6 @@ const CaseStudiesHub = () => {
             }}
           />
           <div className="relative container mx-auto px-4 py-20 md:py-28 max-w-5xl text-center">
-            <span className="inline-block bg-blue-500/10 border border-blue-400/30 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full mb-5 uppercase tracking-[0.15em]">
-              Case Studies
-            </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
               Case Studies
             </h1>
