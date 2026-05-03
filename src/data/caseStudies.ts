@@ -64,6 +64,16 @@ import swimBefore5 from "@/assets/case-studies/swim-school-flake/before-5.jpg";
 import swimBefore6 from "@/assets/case-studies/swim-school-flake/before-6.jpg";
 import swimBefore7 from "@/assets/case-studies/swim-school-flake/before-7.jpg";
 
+// Restaurant pump room — integrated cove base epoxy
+import pumpAfter1 from "@/assets/case-studies/restaurant-pump-room-cove-base/after-1.jpg";
+import pumpAfter2 from "@/assets/case-studies/restaurant-pump-room-cove-base/after-2.jpg";
+import pumpAfter3 from "@/assets/case-studies/restaurant-pump-room-cove-base/after-3.jpg";
+import pumpAfter4 from "@/assets/case-studies/restaurant-pump-room-cove-base/after-4.jpg";
+import pumpAfter5 from "@/assets/case-studies/restaurant-pump-room-cove-base/after-5.jpg";
+import pumpBefore1 from "@/assets/case-studies/restaurant-pump-room-cove-base/before-1.jpg";
+import pumpBefore2 from "@/assets/case-studies/restaurant-pump-room-cove-base/before-2.jpg";
+import pumpBefore3 from "@/assets/case-studies/restaurant-pump-room-cove-base/before-3.jpg";
+
 export interface CaseStudyPhoto {
   src: string;
   alt: string;
