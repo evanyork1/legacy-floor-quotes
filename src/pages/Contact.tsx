@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { LeadForm } from "@/components/landing/LeadForm";
@@ -10,7 +11,9 @@ const Contact = () => {
         <meta name="description" content="Contact Legacy Industrial Coatings for your epoxy flooring needs. Serving Dallas-Fort Worth and Phoenix metro areas." />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/contact" />
       </Helmet>
-      
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />
+
       <div className="min-h-screen bg-white">
         <HeaderGeneric />
         

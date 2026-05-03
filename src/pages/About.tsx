@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Users, Award, Heart, Star, ArrowRight, Calendar } from "lucide-react";
@@ -34,6 +35,8 @@ const About = () => {
         <meta name="keywords" content="about legacy industrial coatings, family business, epoxy flooring, floor coating company, quality craftsmanship" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/about" />
       </Helmet>
+
+      <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }]} />
 
       <HeaderGeneric />
       
