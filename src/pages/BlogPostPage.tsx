@@ -172,6 +172,7 @@ const BlogPostPage = () => {
         </article>
 
         <Footer />
+        <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
       </div>
     </>
   );
