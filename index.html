@@ -95,6 +95,38 @@
 
     <!-- Jivosite Chat Widget -->
     <script src="//code.jivosite.com/widget/RGa5hF3anX" async></script>
+
+    <!-- Jivosite "Book an Estimate" button hijack -> Jobber booking page -->
+    <script>
+      (function() {
+        var bookingUrl = "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=chatbot";
+
+        function hijackBookingButton() {
+          var jivoWidget = document.querySelector('#jvlabelWrap, #jivo_custom_widget, jdiv');
+          if (!jivoWidget) return;
+
+          var buttons = jivoWidget.querySelectorAll('button, j-button, [class*="button"]');
+          buttons.forEach(function(btn) {
+            if (btn.innerText.trim().toLowerCase() === 'book an estimate' && !btn.dataset.hijacked) {
+              btn.dataset.hijacked = 'true';
+              btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                window.open(bookingUrl, '_blank');
+              }, true);
+            }
+          });
+        }
+
+        var observer = new MutationObserver(function() {
+          hijackBookingButton();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        document.addEventListener('DOMContentLoaded', hijackBookingButton);
+        setTimeout(hijackBookingButton, 3000);
+      })();
+    </script>
     
     <title>Legacy Industrial Coatings | Epoxy & Polished Concrete DFW</title>
     <meta name="description" content="Premium epoxy flooring & polished concrete across Dallas-Fort Worth. We are a full-service installation contractor, not a material supplier. 190+ reviews." />
