@@ -100,31 +100,57 @@
     <script>
       (function() {
         var bookingUrl = "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=chatbot";
+        var TARGET = 'book an estimate';
 
-        function hijackBookingButton() {
-          var jivoWidget = document.querySelector('#jvlabelWrap, #jivo_custom_widget, jdiv');
-          if (!jivoWidget) return;
+        function matches(el) {
+          if (!el || el.nodeType !== 1) return false;
+          var txt = (el.innerText || el.textContent || '').trim().toLowerCase();
+          return txt === TARGET;
+        }
 
-          var buttons = jivoWidget.querySelectorAll('button, j-button, [class*="button"]');
-          buttons.forEach(function(btn) {
-            if (btn.innerText.trim().toLowerCase() === 'book an estimate' && !btn.dataset.hijacked) {
-              btn.dataset.hijacked = 'true';
-              btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                window.open(bookingUrl, '_blank');
-              }, true);
-            }
+        // Recursively walk light + shadow DOM
+        function walk(root, hits) {
+          var nodes;
+          try { nodes = root.querySelectorAll('*'); } catch (e) { return; }
+          for (var i = 0; i < nodes.length; i++) {
+            var el = nodes[i];
+            if (matches(el) && !el.dataset.hijacked) hits.push(el);
+            if (el.shadowRoot) walk(el.shadowRoot, hits);
+          }
+        }
+
+        function attach() {
+          var hits = [];
+          walk(document, hits);
+          hits.forEach(function(btn) {
+            btn.dataset.hijacked = 'true';
+            btn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              e.preventDefault();
+              window.open(bookingUrl, '_blank');
+            }, true);
           });
         }
 
-        var observer = new MutationObserver(function() {
-          hijackBookingButton();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
+        // Capture-phase delegation as a backup — works even when target is inside shadow DOM
+        document.addEventListener('click', function(e) {
+          var path = (typeof e.composedPath === 'function') ? e.composedPath() : [];
+          for (var i = 0; i < path.length; i++) {
+            if (matches(path[i])) {
+              e.stopPropagation();
+              e.preventDefault();
+              window.open(bookingUrl, '_blank');
+              return;
+            }
+          }
+        }, true);
 
-        document.addEventListener('DOMContentLoaded', hijackBookingButton);
-        setTimeout(hijackBookingButton, 3000);
+        var observer = new MutationObserver(attach);
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+
+        document.addEventListener('DOMContentLoaded', attach);
+        setTimeout(attach, 2000);
+        setTimeout(attach, 5000);
       })();
     </script>
     
