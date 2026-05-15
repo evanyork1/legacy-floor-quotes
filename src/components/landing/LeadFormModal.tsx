@@ -36,8 +36,11 @@ export const LeadFormModal = ({ isOpen, onClose }: LeadFormModalProps) => {
               </a>
             </Button>
             
-            <Button 
-              onClick={() => setShowIframe(true)}
+            <Button
+              onClick={() => {
+                window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+                onClose();
+              }}
               variant="outline"
               className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
             >
