@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
@@ -8,23 +7,10 @@ interface LeadFormModalProps {
   onClose: () => void;
 }
 
+const BOOKING_URL =
+  "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=website";
+
 export const LeadFormModal = ({ isOpen, onClose }: LeadFormModalProps) => {
-  const [showIframe, setShowIframe] = useState(false);
-
-  if (showIframe) {
-    return (
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-4xl max-h-[80vh] p-0">
-          <iframe
-            src="https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=website"
-            className="w-full h-[70vh] border-0"
-            title="Schedule Your Estimate"
-          />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">

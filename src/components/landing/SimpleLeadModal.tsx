@@ -20,7 +20,9 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showIframe, setShowIframe] = useState(false);
+
+  const BOOKING_URL =
+    "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=website";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
