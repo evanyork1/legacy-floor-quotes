@@ -1,58 +1,50 @@
-## Security Hardening Plan
+## Problem
 
-Lock down PII, prevent unauthorized writes, and disable open signup. No data is deleted; only RLS policies and a few frontend files change.
+JivoChat renders its widget inside **Shadow DOM** (the `<jdiv>` host element attaches a shadow root). The current script in `index.html` uses `document.querySelector(...)` and `jivoWidget.querySelectorAll(...)`, which cannot see elements inside a shadow root. That's why clicking "Book an estimate" does nothing — the listener is never attached.
 
-### 1. Database RLS migration (schema-only changes to policies)
+The session replay confirms the button is in fact rendering ("Text 'Book an estimate' appeared in chat interface"), but our selector never finds it.
 
-**`Lead Form Subissions`** — Currently `SELECT USING (true)` exposes every lead's name/email/phone publicly.
-- Drop "Admins can view all leads" (misnamed, it's actually public)
-- Add: `SELECT` restricted to `has_role(auth.uid(), 'admin')`
-- Keep public `INSERT` (needed for the form)
+## Fix
 
-**`quotes`** and **`dfwquotes`** — Same problem (public SELECT exposes customer PII).
-- Drop the public-read SELECT policies
-- Keep authenticated/admin SELECT and public INSERT
+Replace the hijack script in `index.html` with one that:
 
-**`floor_packets`** — Public SELECT + public UPDATE exposes customer contact info and lets anyone tamper.
-- Drop "Anyone can read floor packets" and "Anyone can update ready_to_proceed"
-- Keep public INSERT (form submission)
-- Keep authenticated SELECT for admins
-- Add a narrow public UPDATE policy *only* for `ready_to_proceed` if needed by the public results page (will verify usage in `PacketResultsPage` before deciding; otherwise route the update through an edge function)
+1. **Recursively walks all shadow roots** on the page to find every element, not just light-DOM ones.
+2. Matches any element whose trimmed text equals `book an estimate` (case-insensitive) — covers `<button>`, `<a>`, `<div role="button">`, etc., since Jivo's exact tag isn't guaranteed.
+3. Uses **event delegation on `document`** in the capture phase as a backup, so even buttons inside shadow DOM that bubble events through the host get intercepted (`event.composedPath()` reveals the real target inside shadow DOM).
+4. Keeps the `MutationObserver` + interval fallback so dynamically-rendered chat steps are caught.
+5. Opens the booking URL in a new tab via `window.open(url, '_blank')` (preserves the chat session — a same-tab redirect would close the conversation).
 
-**`gallery_photos`** — Public INSERT/UPDATE/DELETE allows vandalism.
-- Drop "Allow public gallery photo uploads/updates/deletes"
-- Keep public SELECT (gallery is meant to be visible)
-- Keep "Allow admin access to manage gallery photos" (authenticated only)
+### Technical sketch
 
-**`sales_presentations`** — `UPDATE USING (true)` lets anyone overwrite signed contracts.
-- Replace "Anyone can sign presentations" with a tighter policy: only allow updating signature fields (`signature_data`, `signed_at`, `agreement_accepted`, `status`) on rows where `signed_at IS NULL`. Implement via a `BEFORE UPDATE` trigger that rejects edits to other columns when the caller is anonymous.
-- Keep "Anyone can view presentations by ID" (needed for shared links)
+```js
+function findInShadows(root, predicate, hits = []) {
+  const all = root.querySelectorAll('*');
+  for (const el of all) {
+    if (predicate(el)) hits.push(el);
+    if (el.shadowRoot) findInShadows(el.shadowRoot, predicate, hits);
+  }
+  return hits;
+}
 
-**`commercial_submissions`**, **`giveaway`**, **`visualizer_analytics`**, **`webhook_settings`**, **`location_pricing`**, **`pricing_settings`** — already restrict SELECT to `authenticated`. Tighten further to `has_role(... ,'admin')` where appropriate (webhook_settings, pricing tables) so non-admin reps can't read webhook URLs or change pricing.
+// Backup: capture-phase delegation using composedPath()
+document.addEventListener('click', (e) => {
+  const target = e.composedPath().find(
+    (n) => n.nodeType === 1 &&
+           n.innerText &&
+           n.innerText.trim().toLowerCase() === 'book an estimate'
+  );
+  if (target) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(bookingUrl, '_blank');
+  }
+}, true);
+```
 
-### 2. Frontend changes
+## File to change
 
-**`src/pages/Auth.tsx`**
-- Remove the "Sign Up" tab entirely. New reps must be added via `pending_invites` (admin-only), then they sign in.
-- Remove the hardcoded `evan@licoat.com` admin check. Replace with a `has_role` query against `user_roles` after sign-in.
+- `index.html` — replace the existing hijack `<script>` block (added in the prior turn) with the shadow-DOM-aware version above. No other files touched.
 
-**`src/pages/SalesDashboard.tsx`**
-- Remove hardcoded admin email check. Use `user_roles` lookup (same `useUserRole` hook pattern already used elsewhere) to gate admin UI.
+## Verification
 
-### 3. Manual steps for the user (Supabase Dashboard)
-
-I'll provide direct links after the migration runs:
-- Shorten OTP expiry to ≤ 1 hour
-- Enable "Leaked password protection"
-- Confirm email auto-confirm setting matches your invite flow
-
-### Files to be edited
-- New SQL migration (RLS policy updates + sales_presentations trigger)
-- `src/pages/Auth.tsx`
-- `src/pages/SalesDashboard.tsx`
-
-### What will NOT change
-- No tables dropped, no columns removed, no data deleted
-- No changes to `auth.*`, `storage.*`, or other reserved schemas
-- Public-facing forms (lead, quote, DFW quote, floor packet, commercial, giveaway) continue to accept submissions anonymously
-- Public gallery viewing, public presentation viewing by link, and public pricing reads continue to work
+After the change, open the preview, trigger the chat, click **Book an estimate**, and confirm the Jobber booking page opens in a new tab.
