@@ -2,8 +2,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { createRequire } from "module";
+import { existsSync } from "fs";
 import { componentTagger } from "lovable-tagger";
 import prerender from "@prerenderer/rollup-plugin";
+
+const requireCjs = createRequire(import.meta.url);
 
 // Best-effort detection of a usable Chromium binary. If puppeteer's
 // browser isn't installed (e.g. on a host where `npx puppeteer browsers
@@ -11,11 +15,9 @@ import prerender from "@prerenderer/rollup-plugin";
 // build. The site will still build as a normal SPA in that case.
 function hasChromium(): boolean {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const puppeteer = require("puppeteer");
+    const puppeteer = requireCjs("puppeteer");
     const p = puppeteer.executablePath();
-    // executablePath() returns a string in CJS contexts; truthy means a path was resolved.
-    return typeof p === "string" && p.length > 0 && require("fs").existsSync(p);
+    return typeof p === "string" && p.length > 0 && existsSync(p);
   } catch {
     return false;
   }
