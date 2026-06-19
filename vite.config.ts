@@ -63,11 +63,12 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-    // Prerender only on production builds. The plugin runs after Vite/Rollup
-    // produce dist/, spins up headless Chrome against the built bundle, waits
-    // for the `render-event` dispatched from src/main.tsx, and writes a fully
+    // Prerender only on production builds, and only when Chromium is
+    // actually available. The plugin runs after Vite/Rollup produce dist/,
+    // spins up headless Chrome against the built bundle, waits for the
+    // `render-event` dispatched from src/main.tsx, and writes a fully
     // populated index.html into dist/<route>/.
-    mode !== 'development' && prerender({
+    mode !== 'development' && hasChromium() && prerender({
       routes: PRERENDER_ROUTES,
       renderer: '@prerenderer/renderer-puppeteer',
       rendererOptions: {
