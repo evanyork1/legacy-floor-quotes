@@ -5,6 +5,22 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import prerender from "@prerenderer/rollup-plugin";
 
+// Best-effort detection of a usable Chromium binary. If puppeteer's
+// browser isn't installed (e.g. on a host where `npx puppeteer browsers
+// install chrome` failed), we skip prerendering rather than break the
+// build. The site will still build as a normal SPA in that case.
+function hasChromium(): boolean {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const puppeteer = require("puppeteer");
+    const p = puppeteer.executablePath();
+    // executablePath() returns a string in CJS contexts; truthy means a path was resolved.
+    return typeof p === "string" && p.length > 0 && require("fs").existsSync(p);
+  } catch {
+    return false;
+  }
+}
+
 // Public, indexable marketing routes that should ship as fully-rendered
 // HTML for crawlers and AI scrapers. Anything gated/app-like is omitted
 // (see public/robots.txt for the matching Disallow list).
