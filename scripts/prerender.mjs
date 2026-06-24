@@ -76,23 +76,35 @@ async function waitForServer(url, timeoutMs = 30000) {
 async function renderRoute(browser, route) {
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 900 });
-  const url = BASE + route;
-  await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
-  // Wait until React has hydrated and Helmet has injected meta tags.
-  await page.waitForFunction(
-    () => {
-      const root = document.getElementById("root");
-      const hasContent = !!root && root.children.length > 0;
-      const canonical = document.querySelector('link[rel="canonical"]');
-      return hasContent && !!canonical;
-    },
-    { timeout: 30000 }
-  );
-  // Small settle for any final async paints.
-  await new Promise((r) => setTimeout(r, 500));
-  const html = await page.evaluate(() => "<!DOCTYPE html>" + document.documentElement.outerHTML);
-  await page.close();
-  return html;
+  await page.setRequestInterception(true);
+  page.on("request", (request) => {
+    const type = request.resourceType();
+    if (["image", "media", "font"].includes(type)) {
+      request.abort();
+    } else {
+      request.continue();
+    }
+  });
+
+  try {
+    const url = BASE + route;
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    // Wait until React has hydrated and Helmet has injected meta tags.
+    await page.waitForFunction(
+      () => {
+        const root = document.getElementById("root");
+        const hasContent = !!root && root.children.length > 0;
+        const canonical = document.querySelector('link[rel="canonical"]');
+        return hasContent && !!canonical;
+      },
+      { timeout: 30000 }
+    );
+    // Small settle for any final async paints.
+    await new Promise((r) => setTimeout(r, 300));
+    return await page.evaluate(() => "<!DOCTYPE html>" + document.documentElement.outerHTML);
+  } finally {
+    await page.close().catch(() => {});
+  }
 }
 
 function writeRouteHtml(route, html) {
