@@ -1,0 +1,17 @@
+[build]
+  command = "npx puppeteer browsers install chrome && npm run build && node scripts/verify-prerender.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PUPPETEER_SKIP_DOWNLOAD = "false"
+  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
+
+# Cache the Puppeteer Chromium download between builds so we don't
+# re-download ~150 MB every deploy. Requires the netlify-plugin-cache
+# plugin (auto-installed by Netlify from this config).
+[[plugins]]
+  package = "netlify-plugin-cache"
+
+  [plugins.inputs]
+    paths = [".cache/puppeteer"]
