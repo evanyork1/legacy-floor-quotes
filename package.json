@@ -43,15 +43,12 @@
     ],
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
     "skipThirdPartyRequests": true,
+    "concurrency": 1,
     "inlineCss": false,
     "removeStyleTags": false,
     "removeScriptTags": false,
-    "waitFor": 5000,
-    "puppeteer": {
-      "cache": false,
-      "headless": true
-    },
-    "puppeteerExecutablePath": ""
+    "fixWebpackChunksIssue": false,
+    "waitFor": 4000
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
