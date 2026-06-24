@@ -1,65 +1,34 @@
-# Fix: Raw HTML returns only `<head>` (AI tools + Google indexability)
+## Fix: Make prerendering actually run on Netlify
 
-## Root cause
+The site ships an empty SPA shell because the prerender plugin in `vite.config.ts` silently skips itself when Puppeteer's Chromium isn't found — which is exactly what happens on Netlify's default build image. Fix it at the build config level so Netlify installs Chromium, runs the prerender, and refuses to deploy if the output is empty.
 
-The site is a Vite + React SPA. `index.html` ships an empty `<div id="root"></div>`; React Router renders everything client-side. Any fetcher that doesn't execute JavaScript (ChatGPT/Perplexity browse, LinkedIn/Slack/Facebook preview crawlers, basic `curl`, AI training scrapers) sees only the head tags. AI assistants fall back to **cached Wix-era content** because that's the last version of the URL they could actually read.
+### 1. Add `netlify.toml` at repo root
+- Set `PUPPETEER_SKIP_DOWNLOAD = "false"` and a stable `PUPPETEER_CACHE_DIR` (e.g. `./.cache/puppeteer`) so Chromium lands somewhere predictable.
+- Build command: `npx puppeteer browsers install chrome && npm run build && node scripts/verify-prerender.mjs`
+- Publish directory: `dist`
+- Node version: `20`
+- Add `netlify-plugin-cache` pointed at `.cache/puppeteer` so Chromium (~150 MB) is reused between builds instead of redownloaded every time.
 
-Google's renderer does eventually execute JS, but with this many routes it deprioritizes JS-only pages and often collapses them under the homepage's metadata — which matches what you're seeing.
+### 2. Make `hasChromium()` honest in `vite.config.ts`
+- Keep the existing detection, but in production builds throw a clear error when Chromium is missing — unless `SKIP_PRERENDER=1` is set for the rare intentional skip.
+- Result: a misconfigured Netlify build fails red instead of silently shipping an empty SPA.
 
-## Fix: build-time prerendering
+### 3. Add `scripts/verify-prerender.mjs` (the post-build verifier)
+- After `vite build`, this script reads a handful of critical files in `dist/` (`index.html`, `commercial/index.html`, `garagefloors/index.html`, `industrial-epoxy/index.html`).
+- For each, greps for a known phrase from that page's real copy (e.g. "epoxy", "garage", "commercial").
+- If any file is missing the phrase, `process.exit(1)` with a clear message naming the offending route.
+- This is the safety net: even if prerender silently regresses again later, the deploy turns red instead of going live broken.
 
-Generate a static `.html` snapshot for every public marketing route at `vite build` time. At runtime the site is still a SPA — React hydrates the prerendered HTML and behaves identically. No backend, no SSR server, no infra change. Lovable's static hosting serves the prerendered file when crawlers request `/garagefloors`, `/commercialfloors`, `/concrete-polishing`, etc.
+### 4. Verify after first green Netlify deploy
+- `curl -s https://legacyindustrialcoatings.com/ | grep -ic epoxy` → non-zero
+- `curl -s https://legacyindustrialcoatings.com/commercial/ | grep -ic epoxy` → non-zero
+- Submit `/` and `/commercial/` for re-indexing in Google Search Console.
 
-### Tool
+### What is NOT changing
+- No React/page/component code.
+- No routes added or removed from `PRERENDER_ROUTES`.
+- No DNS, redirect, or Netlify-site changes — just config files inside the repo.
 
-Use **`vite-plugin-prerender`** (or `vite-prerender-plugin`) — a Puppeteer-driven plugin that:
-1. After Vite's normal build, spins up a headless Chrome
-2. Visits each listed route against the built bundle
-3. Waits for React + Helmet to finish rendering
-4. Writes the final HTML to `dist/<route>/index.html`
-
-Routes to prerender (public, indexable, no auth):
-
-```
-/                          /phx                       /gallery
-/garagefloors              /flake-floors              /residential-patio
-/commercial                /commercialfloors          /about-commercial
-/concrete-polishing        /concrete-sealing          /industrial-epoxy
-/service-areas             /flower-mound              /prosper
-/faq                       /financing                 /warranty
-/contact                   /terms                     /privacy
-/blog                      (+ each /blog/:slug from src/data/blogPosts.ts)
-                           (+ each /case-studies/:slug)
-```
-
-Excluded from prerendering: `/auth`, `/crm`, `/sales-dashboard`, admin routes, quote flows with dynamic state, `/garage-packet-results/*` — these are app-like or user-specific and don't need crawler HTML.
-
-### Files to change
-
-1. **`package.json`** — add `vite-plugin-prerender` (or `vite-prerender-plugin`) + `puppeteer` as devDependencies.
-2. **`vite.config.ts`** — register the prerender plugin with the route list above and a `renderAfterDocumentEvent: 'render-event'` trigger.
-3. **`src/main.tsx`** — after `ReactDOM` mounts, dispatch `document.dispatchEvent(new Event('render-event'))` so the prerenderer knows the page is ready (and Helmet has flushed).
-4. **`src/components/seo/Seo.tsx`** — already correct, no change. Helmet output gets baked into each prerendered file.
-5. **`public/robots.txt`** — verify `Sitemap:` line points at `https://legacyindustrialcoatings.com/sitemap.xml` so Google rediscovers all the now-crawlable routes.
-
-### Verification
-
-After deploying:
-1. `curl -s https://legacyindustrialcoatings.com/ | grep -i "premium epoxy"` — should return matching body copy, not just meta tags.
-2. `curl -s https://legacyindustrialcoatings.com/commercialfloors | grep -i "Aloe Vera"` — confirms per-route prerendering worked.
-3. Run the URL through Google's Rich Results Test and the Facebook Sharing Debugger — both should now see full content and the correct per-page title/description.
-4. Ask ChatGPT to "summarize https://legacyindustrialcoatings.com/garagefloors" — should return current Legacy content, not Wix data.
-5. Google Search Console → URL Inspection → request re-indexing on 3–4 key routes to accelerate the refresh.
-
-## What this does NOT fix
-
-- **Existing AI training data** that already memorized the Wix site. Models won't forget until they retrain. But any *live* browse/scrape from now on will hit real HTML.
-- **Social preview caches** (LinkedIn, Facebook) — you'll need to force-refresh each platform's debugger once after deploy.
-- **Google's existing index** — re-crawl takes days to weeks. The Search Console re-index requests above speed it up for top pages.
-
-## Technical notes
-
-- Build time will increase (~30–60s) because Puppeteer renders ~25–40 routes.
-- Bundle size and runtime behavior are unchanged.
-- If `vite-plugin-prerender` has compatibility issues with Vite 5, fall back to `vite-prerender-plugin` (actively maintained fork). Both have the same API shape.
-- Helmet's per-route `<title>`, `<meta description>`, canonical, and og:* tags get baked into each file's `<head>` — so each prerendered page has correct, unique metadata in raw HTML (which also solves the duplicate-homepage-metadata indexing issue).
+### Technical notes
+- First Netlify build with this change will be ~3–5 min slower (Chromium download). Subsequent builds are normal speed thanks to `netlify-plugin-cache`.
+- `netlify.toml` is only read by Netlify when the site is built from a connected Git repo. If Netlify is still deploying via drag-and-drop, none of this applies — that has to be switched to Git-connected first.
