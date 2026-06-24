@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node -e \"try{require('child_process').execSync('npx --yes puppeteer browsers install chrome',{stdio:'inherit'})}catch(e){console.warn('[prebuild] Chromium install failed; prerender will be skipped:',e.message)}\"",
-    "build": "vite build",
+    "build": "vite build && node scripts/inject-static-fallbacks.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
