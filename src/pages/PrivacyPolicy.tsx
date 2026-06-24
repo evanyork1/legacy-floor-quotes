@@ -11,6 +11,8 @@ const PrivacyPolicy = () => {
           name="description" 
           content="Legacy Industrial Coatings Privacy Policy. Learn how we collect, use, and safeguard your information."
         />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/privacy" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/privacy" />
       </Helmet>
       
       <div className="min-h-screen bg-background py-8 sm:py-12">
