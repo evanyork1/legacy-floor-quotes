@@ -20,6 +20,7 @@ const GarageLandingForm = () => {
         <meta property="og:image" content="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagelandingform" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/garagelandingform" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

@@ -12,20 +12,29 @@ import { resolve, join, relative } from "node:path";
 
 const DIST = resolve(process.cwd(), "dist");
 
-// route file -> a phrase that must appear in the rendered HTML body
+// route file -> phrases that must all appear in the rendered HTML body.
+// These are tied to copy that actually ships on each page; if the prerender
+// silently produces an empty React shell, none of these strings will be there
+// and the build aborts.
 const CHECKS = [
-  ["index.html", "epoxy"],
-  ["commercial/index.html", "commercial"],
-  ["garagefloors/index.html", "garage"],
-  ["industrial-epoxy/index.html", "epoxy"],
-  ["about/index.html", "about"],
-  ["contact/index.html", "contact"],
+  ["index.html", ["warranty", "polyurea"]],
+  ["commercial/index.html", ["warehouse", "polished concrete"]],
+  ["commercialfloors/index.html", ["industrial", "polishing"]],
+  ["garagefloors/index.html", ["polyurea", "garage"]],
+  ["industrial-epoxy/index.html", ["industrial", "epoxy"]],
+  ["about/index.html", ["legacy"]],
+  ["contact/index.html", ["contact"]],
 ];
+
+// Minimum body size (post-<head>) for any prerendered route. A near-empty
+// React shell weighs ~1 KB; real marketing pages are 20–80 KB. 5 KB is a
+// generous floor that still catches blank/half-rendered snapshots.
+const MIN_BODY_BYTES = 5 * 1024;
 
 const failures = [];
 
-// 1) Content checks for critical routes ------------------------------
-for (const [file, needle] of CHECKS) {
+// 1) Content + size checks for critical routes ----------------------
+for (const [file, needles] of CHECKS) {
   const full = resolve(DIST, file);
   if (!existsSync(full)) {
     failures.push(`MISSING  ${file}`);
@@ -33,8 +42,18 @@ for (const [file, needle] of CHECKS) {
   }
   const html = readFileSync(full, "utf8");
   const body = html.split("</head>")[1] ?? html;
-  if (!body.toLowerCase().includes(needle.toLowerCase())) {
-    failures.push(`EMPTY    ${file} (expected "${needle}" in body)`);
+  const bodyBytes = Buffer.byteLength(body, "utf8");
+  if (bodyBytes < MIN_BODY_BYTES) {
+    failures.push(
+      `TOO SMALL ${file} (body ${bodyBytes} bytes < ${MIN_BODY_BYTES} floor — prerender likely shipped an empty shell)`
+    );
+    continue;
+  }
+  const lower = body.toLowerCase();
+  for (const needle of needles) {
+    if (!lower.includes(needle.toLowerCase())) {
+      failures.push(`EMPTY    ${file} (expected "${needle}" in body)`);
+    }
   }
 }
 

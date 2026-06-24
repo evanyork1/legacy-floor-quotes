@@ -11,6 +11,8 @@ const TermsAndConditions = () => {
           name="description" 
           content="Legacy Industrial Coatings Terms & Conditions. Read our terms for deposits, cancellations, installation, and warranties."
         />
+        <link rel="canonical" href="https://legacyindustrialcoatings.com/terms" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/terms" />
       </Helmet>
       
       <div className="min-h-screen bg-background py-8 sm:py-12">

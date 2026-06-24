@@ -89,6 +89,7 @@ const GarageFloorsDallasFB = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagefloorsdallasfb" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/garagefloorsdallasfb" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

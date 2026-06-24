@@ -86,6 +86,7 @@ const AquaTotsFlooring = () => {
         <title>Legacy x Aqua-Tots — Nationwide Flooring Partner</title>
         <meta name="description" content="The flooring partner Aqua-Tots trusts nationwide. 7 locations completed. Polyurea systems engineered for swim school environments." />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/aquatotsflooring" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/aquatotsflooring" />
       </Helmet>
 
       <Header />

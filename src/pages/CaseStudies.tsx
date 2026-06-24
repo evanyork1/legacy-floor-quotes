@@ -50,6 +50,7 @@ const CaseStudies = ({ category }: CaseStudiesProps) => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
+        <meta property="og:url" content={canonical} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
       <HeaderGeneric />

@@ -91,7 +91,7 @@ export default defineConfig(({ mode }) => ({
       rendererOptions: {
         renderAfterDocumentEvent: 'render-event',
         maxConcurrentRoutes: 4,
-        timeout: 60000,
+        timeout: 90000,
         launchOptions: {
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
         },
