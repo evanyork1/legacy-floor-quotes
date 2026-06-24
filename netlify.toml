@@ -1,17 +1,20 @@
 [build]
-  command = "npx puppeteer browsers install chrome && npm run build && node scripts/verify-prerender.mjs"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  # react-snap brings its own puppeteer (^1.x) which auto-downloads
+  # a bundled Chromium during `npm install`. Keep that download enabled.
   PUPPETEER_SKIP_DOWNLOAD = "false"
-  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
 
-# Cache the Puppeteer Chromium download between builds so we don't
-# re-download ~150 MB every deploy. Requires the netlify-plugin-cache
-# plugin (auto-installed by Netlify from this config).
+# Cache the Chromium download between builds so we don't re-download
+# ~150 MB every deploy.
 [[plugins]]
   package = "netlify-plugin-cache"
 
   [plugins.inputs]
-    paths = [".cache/puppeteer"]
+    paths = [
+      "node_modules/puppeteer/.local-chromium",
+      "node_modules/react-snap/node_modules/puppeteer/.local-chromium"
+    ]
