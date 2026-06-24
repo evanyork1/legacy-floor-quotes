@@ -79,6 +79,7 @@ const IndustrialEpoxy = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/industrial-epoxy" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/industrial-epoxy" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Industrial Epoxy", url: "/industrial-epoxy" }]} />

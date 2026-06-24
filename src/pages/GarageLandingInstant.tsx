@@ -56,6 +56,7 @@ const GarageLandingInstant = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagelandinginstant" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/garagelandinginstant" />
       </Helmet>
       
       <div className="min-h-screen bg-white">

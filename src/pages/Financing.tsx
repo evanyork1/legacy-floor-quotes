@@ -80,6 +80,7 @@ const Financing = () => {
         <title>Financing Options - Legacy Industrial Coatings</title>
         <meta name="description" content="Flexible financing options for your epoxy flooring project. 12 or 24 month same as cash with 0% interest financing available." />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/financing" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/financing" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }, { name: "Financing", url: "/financing" }]} />

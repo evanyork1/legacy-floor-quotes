@@ -51,6 +51,7 @@ const Blog = () => {
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/blog" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/blog" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Blog", url: "/blog" }]} />

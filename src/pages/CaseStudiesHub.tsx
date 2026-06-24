@@ -51,6 +51,7 @@ const CaseStudiesHub = () => {
           content="Explore real commercial and residential concrete floor case studies from Legacy Industrial Coatings — before, during, and after photos from projects across DFW."
         />
         <link rel="canonical" href={canonical} />
+        <meta property="og:url" content={canonical} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 

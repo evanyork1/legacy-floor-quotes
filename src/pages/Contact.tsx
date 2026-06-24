@@ -10,6 +10,7 @@ const Contact = () => {
         <title>Contact Us - Legacy Industrial Coatings | Professional Epoxy Flooring</title>
         <meta name="description" content="Contact Legacy Industrial Coatings for your epoxy flooring needs. Serving Dallas-Fort Worth and Phoenix metro areas." />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/contact" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/contact" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />

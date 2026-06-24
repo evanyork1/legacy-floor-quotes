@@ -100,6 +100,7 @@ const ConcretePolishing = () => {
 
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/concrete-polishing" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/concrete-polishing" />
       </Helmet>
 
       <StructuredData

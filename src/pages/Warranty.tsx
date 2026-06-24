@@ -13,6 +13,7 @@ const Warranty = () => {
           content="Legacy Industrial Coatings Limited Lifetime Warranty for garage floor coatings. Learn about our warranty coverage, terms, and conditions."
         />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/warranty" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/warranty" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Warranty", url: "/warranty" }]} />

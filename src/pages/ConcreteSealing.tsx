@@ -80,6 +80,7 @@ const ConcreteSealing = () => {
         <meta property="og:description" content="Stain-proof, easy-to-clean sealed concrete floors for DFW restaurants, breweries, commercial kitchens and warehouses." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/concrete-sealing" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/concrete-sealing" />
       </Helmet>
 
       <StructuredData

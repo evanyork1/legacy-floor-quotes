@@ -111,6 +111,7 @@ const FAQ = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/faq" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/faq" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }, { name: "FAQ", url: "/faq" }]} />

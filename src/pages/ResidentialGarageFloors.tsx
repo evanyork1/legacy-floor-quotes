@@ -46,6 +46,7 @@ const ResidentialGarageFloors = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/garagefloors" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/garagefloors" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Residential", url: "/garagefloors" }, { name: "Garage Floors", url: "/garagefloors" }]} />

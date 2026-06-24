@@ -60,6 +60,7 @@ const FlakeFloors = () => {
         
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/flake-floors" />
+        <meta property="og:url" content="https://legacyindustrialcoatings.com/flake-floors" />
       </Helmet>
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Flake Floors", url: "/flake-floors" }]} />
