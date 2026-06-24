@@ -152,8 +152,11 @@ for (const file of walk(DIST)) {
     continue;
   }
   const rel = relative(DIST, file);
+  // 200.html is react-snap's SPA fallback (same content as index.html). Skip.
+  if (rel === "200.html") continue;
   if (!titleToFiles.has(title)) titleToFiles.set(title, []);
   titleToFiles.get(title).push(rel);
+
 }
 
 for (const [title, files] of titleToFiles) {
