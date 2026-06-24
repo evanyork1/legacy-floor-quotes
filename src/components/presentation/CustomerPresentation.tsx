@@ -286,21 +286,19 @@ export function CustomerPresentation({ data, onUpdate, isShareable = false, onCo
         return;
       }
 
-      // Shareable link - update database
+      // Shareable link - update database via secured edge function
       const total = getPackageTotal(selectedPackage as 'silver' | 'gold' | 'platinum');
       const deposit = getDepositAmount(total);
 
-      const { error } = await supabase
-        .from('sales_presentations')
-        .update({
+      const { error } = await supabase.functions.invoke('public-sales-presentation', {
+        body: {
+          action: 'sign',
+          id: data.id,
           selected_package: selectedPackage,
           selected_deposit_amount: deposit,
           signature_data: signature,
-          signed_at: new Date().toISOString(),
-          agreement_accepted: true,
-          status: 'signed',
-        })
-        .eq('id', data.id);
+        },
+      });
 
       if (error) throw error;
 
