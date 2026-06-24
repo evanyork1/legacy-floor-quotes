@@ -53,8 +53,6 @@ const staticUrls: UrlEntry[] = [
 
   // Service area / regional
   { loc: "/service-areas", changefreq: "monthly", priority: "0.7", lastmod: today },
-  { loc: "/flower-mound", changefreq: "monthly", priority: "0.7", lastmod: today },
-  { loc: "/prosper", changefreq: "monthly", priority: "0.7", lastmod: today },
 
   // Tools / utility
   { loc: "/floor-visualizer", changefreq: "monthly", priority: "0.7", lastmod: today },

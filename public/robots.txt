@@ -11,9 +11,6 @@ Disallow: /packagepresentation
 Disallow: /flakefloortemplate
 Disallow: /quote
 Disallow: /quotedfw
-Disallow: /quotephx
-Disallow: /giveaway
-Disallow: /giveawayraf
 Disallow: /garagelandingform
 Disallow: /garagelandinginstant
 Disallow: /garagepacketpage
@@ -21,8 +18,6 @@ Disallow: /garage-packet-result/
 Disallow: /googlegaragepage
 Disallow: /garagefloorsdallasfb
 Disallow: /landingvisual
-Disallow: /phx
-Disallow: /quotedfw
 
 # Major search and social bots — explicit allow
 User-agent: Googlebot
