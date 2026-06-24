@@ -46,24 +46,23 @@ export default function CustomerPresentationPage() {
       }
 
       try {
-        const { data, error: fetchError } = await supabase
-          .from('sales_presentations')
-          .select('*')
-          .eq('id', id)
-          .single();
+        const { data: resp, error: fetchError } = await supabase.functions.invoke(
+          'public-sales-presentation',
+          { body: { action: 'get', id } }
+        );
 
-        if (fetchError) {
+        if (fetchError || !resp?.data) {
           console.error('Error fetching presentation:', fetchError);
           setError('Presentation not found');
         } else {
+          const data = resp.data;
           setPresentation(data);
-          
+
           // Mark as viewed if pending
           if (data.status === 'pending') {
-            await supabase
-              .from('sales_presentations')
-              .update({ status: 'viewed' })
-              .eq('id', id);
+            await supabase.functions.invoke('public-sales-presentation', {
+              body: { action: 'mark_viewed', id },
+            });
           }
         }
       } catch (err) {

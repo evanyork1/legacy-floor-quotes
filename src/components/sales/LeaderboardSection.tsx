@@ -32,26 +32,32 @@ export function LeaderboardSection() {
     setLoading(true);
 
     try {
-      // Fetch prospecting leaderboard
-      const { data: prospectingData, error: prospectingError } = await supabase
-        .rpc('get_prospecting_leaderboard', {
-          week_start: format(weekStart, 'yyyy-MM-dd'),
-          week_end: format(weekEnd, 'yyyy-MM-dd'),
+      // Fetch prospecting leaderboard via secured edge function
+      const { data: prospectingResp, error: prospectingError } = await supabase
+        .functions.invoke('crm-rpc', {
+          body: {
+            action: 'get_prospecting_leaderboard',
+            week_start: format(weekStart, 'yyyy-MM-dd'),
+            week_end: format(weekEnd, 'yyyy-MM-dd'),
+          },
         });
 
       if (prospectingError) throw prospectingError;
 
-      // Fetch sales leaderboard
-      const { data: salesData, error: salesError } = await supabase
-        .rpc('get_sales_leaderboard', {
-          month_start: format(monthStart, 'yyyy-MM-dd'),
-          month_end: format(monthEnd, 'yyyy-MM-dd'),
+      // Fetch sales leaderboard via secured edge function
+      const { data: salesResp, error: salesError } = await supabase
+        .functions.invoke('crm-rpc', {
+          body: {
+            action: 'get_sales_leaderboard',
+            month_start: format(monthStart, 'yyyy-MM-dd'),
+            month_end: format(monthEnd, 'yyyy-MM-dd'),
+          },
         });
 
       if (salesError) throw salesError;
 
-      setProspectingLeaderboard(prospectingData || []);
-      setSalesLeaderboard(salesData || []);
+      setProspectingLeaderboard(prospectingResp?.data || []);
+      setSalesLeaderboard(salesResp?.data || []);
     } catch (error) {
       console.error('Error fetching leaderboards:', error);
     } finally {

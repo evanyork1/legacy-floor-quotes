@@ -58,13 +58,11 @@ export function useCRM() {
 
   // Check for duplicate lead
   const checkDuplicate = async (phone: string | null, email: string | null): Promise<DuplicateLead | null> => {
-    const { data, error } = await supabase.rpc('check_duplicate_lead', {
-      check_phone: phone || '',
-      check_email: email || ''
+    const { data: resp, error } = await supabase.functions.invoke('crm-rpc', {
+      body: { action: 'check_duplicate_lead', check_phone: phone || '', check_email: email || '' },
     });
-
-    if (error || !data || data.length === 0) return null;
-    return data[0] as DuplicateLead;
+    if (error || !resp?.data || resp.data.length === 0) return null;
+    return resp.data[0] as DuplicateLead;
   };
 
   // Add lead
@@ -183,13 +181,12 @@ export function useCRM() {
       endDate = format(now, 'yyyy-MM-dd');
     }
 
-    const { data, error } = await supabase.rpc('get_crm_leaderboard', {
-      start_date: startDate,
-      end_date: endDate
+    const { data: resp, error } = await supabase.functions.invoke('crm-rpc', {
+      body: { action: 'get_crm_leaderboard', start_date: startDate, end_date: endDate },
     });
 
-    if (error || !data) return [];
-    return data as LeaderboardEntry[];
+    if (error || !resp?.data) return [];
+    return resp.data as LeaderboardEntry[];
   };
 
   // Get sales leaderboard
@@ -206,13 +203,12 @@ export function useCRM() {
       endDate = format(now, 'yyyy-MM-dd');
     }
 
-    const { data, error } = await supabase.rpc('get_sales_leaderboard', {
-      month_start: startDate,
-      month_end: endDate
+    const { data: resp, error } = await supabase.functions.invoke('crm-rpc', {
+      body: { action: 'get_sales_leaderboard', month_start: startDate, month_end: endDate },
     });
 
-    if (error || !data) return [];
-    return data as SalesLeaderboardEntry[];
+    if (error || !resp?.data) return [];
+    return resp.data as SalesLeaderboardEntry[];
   };
 
   // Get current month sales goal

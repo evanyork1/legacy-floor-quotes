@@ -36,41 +36,40 @@ const GaragePacketResults = () => {
   useEffect(() => {
     const fetchPacket = async () => {
       if (!id) return;
-      
-      const { data, error } = await supabase
-        .from('floor_packets')
-        .select('*')
-        .eq('id', id)
-        .single();
-      
-      if (error) {
+
+      const { data, error } = await supabase.functions.invoke(
+        'public-floor-packet',
+        { body: { action: 'get', id } }
+      );
+
+      if (error || !data?.data) {
         console.error('Error fetching packet:', error);
         toast.error('Could not load your report');
       } else {
-        setPacket(data);
+        setPacket(data.data);
       }
       setIsLoading(false);
     };
-    
+
     fetchPacket();
   }, [id]);
 
   const handleReadyToProceed = async () => {
     if (!packet) return;
-    
+
     setIsUpdating(true);
-    
+
     try {
-      const { error } = await supabase
-        .from('floor_packets')
-        .update({ ready_to_proceed: true })
-        .eq('id', packet.id);
-      
+      const { error } = await supabase.functions.invoke(
+        'public-floor-packet',
+        { body: { action: 'confirm_ready', id: packet.id } }
+      );
+
       if (error) throw error;
-      
+
       setPacket(prev => prev ? { ...prev, ready_to_proceed: true } : null);
       toast.success("We'll call you within 60 minutes!");
-      
+
       // Trigger webhook notification (using existing webhook infrastructure)
       await supabase.functions.invoke('send-lead-webhook', {
         body: {
@@ -92,17 +91,17 @@ const GaragePacketResults = () => {
 
   const handleSaveColor = async () => {
     if (!packet || !selectedNewColor) return;
-    
+
     setIsSavingColor(true);
-    
+
     try {
-      const { error } = await supabase
-        .from('floor_packets')
-        .update({ selected_color: selectedNewColor })
-        .eq('id', packet.id);
-      
+      const { error } = await supabase.functions.invoke(
+        'public-floor-packet',
+        { body: { action: 'update_color', id: packet.id, selected_color: selectedNewColor } }
+      );
+
       if (error) throw error;
-      
+
       setPacket(prev => prev ? { ...prev, selected_color: selectedNewColor } : null);
       setIsColorSheetOpen(false);
       setSelectedNewColor(null);
