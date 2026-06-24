@@ -40,3 +40,6 @@ verify_jwt = false
 
 [functions.public-sales-presentation]
 verify_jwt = false
+
+[functions.crm-rpc]
+verify_jwt = false
