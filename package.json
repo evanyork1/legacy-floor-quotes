@@ -46,7 +46,11 @@
     "inlineCss": false,
     "removeStyleTags": false,
     "removeScriptTags": false,
-    "waitFor": 2000,
+    "waitFor": 5000,
+    "puppeteer": {
+      "cache": false,
+      "headless": true
+    },
     "puppeteerExecutablePath": ""
   },
   "dependencies": {
