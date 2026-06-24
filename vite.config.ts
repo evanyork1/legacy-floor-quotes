@@ -85,7 +85,7 @@ export default defineConfig(({ mode }) => ({
     // spins up headless Chrome against the built bundle, waits for the
     // `render-event` dispatched from src/main.tsx, and writes a fully
     // populated index.html into dist/<route>/.
-    mode !== 'development' && hasChromium() && prerender({
+    mode !== 'development' && shouldPrerender(mode) && prerender({
       routes: PRERENDER_ROUTES,
       renderer: '@prerenderer/renderer-puppeteer',
       rendererOptions: {
