@@ -14,6 +14,7 @@ import { TrainingSection } from '@/components/sales/TrainingSection';
 import { TrainingManagement } from '@/components/admin/TrainingManagement';
 import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
 import AnalyticsTab from '@/components/admin/AnalyticsTab';
+import { Seo } from '@/components/seo/Seo';
 
 export default function SalesDashboard() {
   const { user, loading, signOut, hasRole } = useAuth();
@@ -51,6 +52,7 @@ export default function SalesDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      <Seo title="Sales Dashboard | Legacy Industrial Coatings" description="Internal sales dashboard for Legacy Industrial Coatings." path="/sales-dashboard" noindex />
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold">Sales Dashboard</h1>

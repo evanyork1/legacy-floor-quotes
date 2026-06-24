@@ -2,12 +2,13 @@
 /**
  * Post-build verifier. Confirms that the prerender plugin actually
  * baked real HTML into dist/<route>/index.html for critical marketing
- * routes. If any of these files is missing or still looks like the
- * empty SPA shell, exit non-zero so Netlify aborts the deploy instead
- * of shipping a blank page to crawlers.
+ * routes AND that every prerendered route ships a unique <title>.
+ *
+ * Either kind of failure exits non-zero so Netlify aborts the deploy
+ * instead of shipping bad SEO to crawlers.
  */
-import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { resolve, join, relative } from "node:path";
 
 const DIST = resolve(process.cwd(), "dist");
 
@@ -23,6 +24,7 @@ const CHECKS = [
 
 const failures = [];
 
+// 1) Content checks for critical routes ------------------------------
 for (const [file, needle] of CHECKS) {
   const full = resolve(DIST, file);
   if (!existsSync(full)) {
@@ -30,22 +32,62 @@ for (const [file, needle] of CHECKS) {
     continue;
   }
   const html = readFileSync(full, "utf8");
-  // Strip the <head> so we're checking actual rendered body content,
-  // not just meta tags injected by Helmet.
   const body = html.split("</head>")[1] ?? html;
   if (!body.toLowerCase().includes(needle.toLowerCase())) {
     failures.push(`EMPTY    ${file} (expected "${needle}" in body)`);
   }
 }
 
+// 2) Duplicate-title check across every prerendered HTML file --------
+function walk(dir) {
+  const out = [];
+  if (!existsSync(dir)) return out;
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    const s = statSync(full);
+    if (s.isDirectory()) out.push(...walk(full));
+    else if (entry.endsWith(".html")) out.push(full);
+  }
+  return out;
+}
+
+const titleToFiles = new Map();
+for (const file of walk(DIST)) {
+  const html = readFileSync(file, "utf8");
+  const m = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+  if (!m) continue;
+  const title = m[1].trim();
+  if (!title) continue;
+  // Skip pages explicitly marked noindex — duplicates there don't hurt SEO.
+  const head = html.split("</head>")[0] ?? html;
+  if (/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(head)) {
+    continue;
+  }
+  const rel = relative(DIST, file);
+  if (!titleToFiles.has(title)) titleToFiles.set(title, []);
+  titleToFiles.get(title).push(rel);
+}
+
+for (const [title, files] of titleToFiles) {
+  if (files.length > 1) {
+    failures.push(
+      `DUPLICATE TITLE  "${title}" appears in ${files.length} indexable routes: ${files.join(", ")}`
+    );
+  }
+}
+
+// ---------------------------------------------------------------------
 if (failures.length > 0) {
-  console.error("\n[verify-prerender] FAILED — prerender did not produce real HTML:");
+  console.error("\n[verify-prerender] FAILED:");
   for (const f of failures) console.error("  " + f);
   console.error(
-    "\nThe build will be aborted so a blank SPA shell is not deployed.\n" +
-      "Check that Chromium installed correctly and that the prerender plugin ran.\n"
+    "\nBuild aborted. Fix the issues above (missing prerender output or " +
+      "duplicate <title> tags) before redeploying.\n"
   );
   process.exit(1);
 }
 
-console.log(`[verify-prerender] OK — ${CHECKS.length} routes contain real rendered HTML.`);
+console.log(
+  `[verify-prerender] OK — ${CHECKS.length} content checks passed, ` +
+    `${titleToFiles.size} unique indexable titles.`
+);

@@ -6,6 +6,7 @@ import { QuoteProgress } from "@/components/quote/QuoteProgress";
 import { QuoteStepRenderer } from "@/components/quote/QuoteStepRenderer";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
+import { Seo } from "@/components/seo/Seo";
 
 const Quote = () => {
   const {
@@ -30,6 +31,7 @@ const Quote = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <Seo title="Get Your Garage Floor Quote | Legacy Industrial Coatings" description="Step-by-step garage floor coating quote tool." path="/quote" noindex />
       <QuoteOnlyHeader phone="214-305-6516" onPhoneClick={handlePhoneClick} showCallButton={true} />
       
       <div className="container mx-auto px-4 py-6 sm:py-8">

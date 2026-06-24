@@ -8,6 +8,7 @@ import { useQuoteFormPHX } from "@/hooks/useQuoteFormPHX";
 import { QuoteOnlyFooterPHX } from "@/components/quote/QuoteOnlyFooterPHX";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 const QuotePHX = () => {
   const {
@@ -68,6 +69,7 @@ const QuotePHX = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+      <Seo title="Phoenix Garage Floor Quote | Legacy Industrial Coatings" description="Get a fast Phoenix-area garage floor coating quote." path="/quotephx" noindex />
       <QuoteOnlyHeader 
         phone="602-560-0974"
         onPhoneClick={handlePhoneClick}
