@@ -1,92 +1,66 @@
-## The three issues — root causes
+## Plan: ship real prerendered HTML via react-snap
 
-### Issue 3: og:url points to homepage on most pages
+The current setup (event-based prerender + fallback body injection) is unreliable. Replace it with `react-snap`, which writes fully rendered HTML to disk after `vite build`.
 
-Audit shows only 4 pages set their own `og:url`. Every other page uses a direct `<Helmet>` block with title/description but no `og:url`, so crawlers inherit `<meta property="og:url" content="https://legacyindustrialcoatings.com" />` from the static `index.html`. Helmet only overrides what you explicitly re-declare.
+Base domain for all canonical and og:url values: **https://legacyindustrialcoatings.com**
 
-### Issues 1 + 2: /commercial blank, homepage body not in snapshot
+## Changes
 
-The prerender plugin signals completion via a `render-event` dispatched in `src/main.tsx`:
+1. **Remove the fallback body injection**
+   - Delete `scripts/inject-static-fallbacks.mjs` and its `package.json` postbuild step.
+   - Stop relying on hand-injected body content. Crawlers must see real rendered React output.
 
-```ts
-requestAnimationFrame(() => setTimeout(() => document.dispatchEvent(new Event('render-event')), 0));
-```
+2. **Remove the existing `@prerenderer/rollup-plugin` flow**
+   - Drop the plugin from `vite.config.ts` and remove its devDependencies.
+   - Remove the `render-event`/`MutationObserver` settle logic in `src/main.tsx`. Replace with a normal `createRoot().render()` plus a `hydrateRoot` path when `react-snap` has prerendered the page.
 
-That fires ~1 frame after React's first commit — before async work finishes:
-- Lazy-loaded images / fonts that gate above-the-fold layout
-- Sections that fetch from Supabase before rendering content (gallery, testimonials)
-- Animation libraries that mount content inside effects
+3. **Adopt `react-snap` as the postbuild prerenderer**
+   - Add `react-snap` as a devDependency.
+   - Add a `postbuild` script in `package.json` so the build flow becomes:
 
-Result: Puppeteer snapshots an HTML shell with `<head>` populated by Helmet but a near-empty body for slower pages like `/commercial` and the heavy homepage.
+     ```text
+     vite build
+     react-snap
+     node scripts/verify-prerender.mjs
+     ```
 
-## Fix
+   - Add a `reactSnap` config block in `package.json` with:
+     - `source: "dist"`
+     - explicit `include` list of public marketing routes (`/`, `/commercial`, `/commercialfloors`, `/garagefloors`, `/industrial-epoxy`, `/concrete-polishing`, `/concrete-sealing`, `/flake-floors`, `/residential-patio`, `/gallery`, `/service-areas`, `/about`, `/about-commercial`, `/contact`, `/financing`, `/faq`, `/blog`, `/warranty`, `/terms`, `/privacy`, `/case-studies`, `/commercial-case-studies`, `/residential-case-studies`, `/floor-visualizer`)
+     - `crawl: false` to keep app-like/auth/customer pages (CRM, auth, sales dashboards, garage packet results, presentation detail, quote forms) out of the prerender
+     - `puppeteerArgs: ["--no-sandbox", "--disable-setuid-sandbox"]`
+     - `inlineCss: false` and `removeStyleTags: false` to keep the build deterministic
+     - `skipThirdPartyRequests: true` so prerendering does not wait on GTM, Hotjar, Meta Pixel, Jivosite
+     - `waitFor` set high enough for Helmet/React content to render
 
-### 1. Strengthen the render-event signal (`src/main.tsx`)
+4. **Switch `src/main.tsx` to hydrate when prerendered HTML is present**
+   - If `#root` already has children (the react-snap output), call `hydrateRoot`. Otherwise `createRoot().render()`.
+   - This is the standard react-snap integration and is what makes the postbuild HTML correct.
 
-Replace the single-rAF dispatch with a settle-based signal: dispatch only after React commits, fonts are ready, and the DOM is stable for 800 ms. Pseudocode:
+5. **Force canonical and og:url to https://legacyindustrialcoatings.com**
+   - Update `index.html` static head to use `https://legacyindustrialcoatings.com/` for canonical and og:url.
+   - Update the centralized SEO component and every page-level `<Helmet>` block (Commercial, Home/DFW, About, Contact, Warranty, Terms, Privacy, FAQ, Financing, Blog, Gallery, Concrete Polishing, Concrete Sealing, Industrial Epoxy, Residential Garage Floors, Residential Patio, Flake Floors, Flake Floor Template, AquaTots, Case Studies, Case Studies Hub, Commercial Floors, About Commercial, DFW Res Landing, Garage Landing Form, Garage Landing Instant, Garage Floors Dallas FB, Floor Visualizer) so each route's canonical and og:url self-reference `https://legacyindustrialcoatings.com<route>`.
+   - Remove any remaining references to the `legacy-floor-quotes.lovable.app` preview domain in head metadata, sitemap, and structured data.
 
-```ts
-async function signalPrerenderReady() {
-  await new Promise(r => requestAnimationFrame(r));
-  try { await (document as any).fonts?.ready; } catch {}
-  // Wait for the page to actually stop mutating
-  await new Promise<void>(resolve => {
-    let timer = setTimeout(resolve, 800);
-    const obs = new MutationObserver(() => {
-      clearTimeout(timer);
-      timer = setTimeout(() => { obs.disconnect(); resolve(); }, 800);
-    });
-    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
-  });
-  document.dispatchEvent(new Event('render-event'));
-}
-queueMicrotask(signalPrerenderReady);
-```
+6. **Strengthen the postbuild verifier**
+   - Keep `scripts/verify-prerender.mjs` and tighten it:
+     - Every included route must produce `dist/<route>/index.html` (or `dist/index.html` for `/`).
+     - Each file's body (post `</head>`) must be ≥ 5 KB.
+     - Each file's `#root` must contain rendered children (no `<div id="root"></div>` empty shell).
+     - Route-specific keyword checks remain (`/` requires "polyurea" + "warranty"; `/commercial` requires "warehouse" + "polished concrete"; etc.).
+     - Canonical/og:url must start with `https://legacyindustrialcoatings.com`.
+   - Any failure aborts the Netlify build before deploy.
 
-Plus bump the puppeteer `timeout` in `vite.config.ts` from 60 s to 90 s to give the settle logic room. This single change fixes both the homepage body gap and `/commercial` going blank — same root cause.
-
-### 2. Add per-route `og:url` (and canonical) to every page that uses direct `<Helmet>`
-
-For each page in `src/pages/` that ships a direct `<Helmet>` block without `og:url`, add:
-
-```tsx
-<meta property="og:url" content="https://legacyindustrialcoatings.com<ROUTE>" />
-<link rel="canonical" href="https://legacyindustrialcoatings.com<ROUTE>" />
-```
-
-…matching the page's actual route. Pages that already use the central `<Seo>` component are already correct (it sets canonical + og:url from `path`). Pages affected (audited just now): `DFW.tsx` already self-references but `DFWResLanding.tsx` incorrectly points at the homepage; `Commercial.tsx`, `Contact.tsx`, `Warranty.tsx`, `TermsAndConditions.tsx`, `PrivacyPolicy.tsx`, `FAQ.tsx`, `Financing.tsx`, `About.tsx`, `Blog.tsx`, `Gallery.tsx`, `ConcretePolishing.tsx`, `ConcreteSealing.tsx`, `IndustrialEpoxy.tsx`, `ResidentialGarageFloors.tsx`, `ResidentialPatio.tsx`, `FlakeFloors.tsx`, `FlakeFloorTemplate.tsx`, `AquaTotsFlooring.tsx`, `CaseStudies.tsx`, `CaseStudiesHub.tsx`, and the remaining `<Helmet>` pages.
-
-For unindexed internal/landing pages (giveaway-style, Google Ads landers, internal tools) we still set the correct self-referencing og:url — wrong og:url is wrong even if noindex.
-
-### 3. Tighten `scripts/verify-prerender.mjs`
-
-Add two checks on top of the existing keyword checks so future regressions fail the Netlify build red:
-
-- **Body length floor**: each route's HTML body (after stripping `<head>`) must be ≥ 5 KB. A near-empty React shell is ~1 KB; real pages are 20–80 KB.
-- **Route-specific markers** tied to actual on-page copy:
-  - `/` → "warranty" + "polyurea"
-  - `/commercial/index.html` → "warehouse" + "polished concrete"
-  - `/commercialfloors/index.html` → "industrial" + "polishing"
-  - `/garagefloors/index.html` → "polyurea" + "garage"
-  - `/industrial-epoxy/index.html` → "industrial" + "epoxy"
-  - `/about/index.html`, `/contact/index.html` → existing phrases retained
-
-If any check fails, Netlify aborts the deploy instead of shipping a half-empty page.
-
-## After it ships
-
-Verify with curl:
-
-```bash
-curl -s https://legacyindustrialcoatings.com/ | grep -ic 'warranty\|polyurea'
-curl -s https://legacyindustrialcoatings.com/commercial/ | grep -ic 'warehouse\|polished concrete'
-curl -s https://legacyindustrialcoatings.com/commercial/ | grep -i 'og:url'   # should show /commercial, not the homepage
-```
-
-Then re-fetch `/` and `/commercial` in Google Search Console's URL Inspection and click "Request indexing."
+7. **Verification after build**
+   - Inspect `dist/index.html` and `dist/commercial/index.html`:
+     - Body contains real rendered sections, not an empty `#root`.
+     - Canonical = `https://legacyindustrialcoatings.com/` (homepage) and `https://legacyindustrialcoatings.com/commercial` (commercial).
+     - og:url matches canonical on each.
+   - After the next successful Netlify deploy, request re-indexing for `/` and `/commercial` in Google Search Console.
 
 ## What is NOT changing
 
-- No new routes, no removed pages, no page-body copy changes.
-- No changes to redirects, sitemap, or robots.txt.
-- No changes to `netlify.toml` (the cache plugin install is already done).
+- No new public routes, removed pages, or copy edits.
+- No router change — `BrowserRouter` stays.
+- No SSR runtime — this remains a fully static build.
+- No changes to robots.txt, sitemap entries, edge functions, or Supabase.
