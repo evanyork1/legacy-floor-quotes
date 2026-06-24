@@ -94,23 +94,30 @@ for (const [file, needles] of KEYWORD_CHECKS) {
 }
 
 // 3) Canonical + og:url must use the production domain -----------------
-function extractFirst(html, regex) {
-  const m = html.match(regex);
-  return m ? m[1].trim() : null;
+function extractCanonical(html) {
+  const tags = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi) || [];
+  for (const tag of tags) {
+    const m = tag.match(/href=["']([^"']+)["']/i);
+    if (m) return m[1].trim();
+  }
+  return null;
+}
+
+function extractOgUrl(html) {
+  const tags = html.match(/<meta\b[^>]*property=["']og:url["'][^>]*>/gi) || [];
+  for (const tag of tags) {
+    const m = tag.match(/content=["']([^"']+)["']/i);
+    if (m) return m[1].trim();
+  }
+  return null;
 }
 
 for (const file of REQUIRED_FILES) {
   const full = resolve(DIST, file);
   if (!existsSync(full)) continue;
   const html = readFileSync(full, "utf8");
-  const canonical = extractFirst(
-    html,
-    /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i
-  );
-  const ogUrl = extractFirst(
-    html,
-    /<meta[^>]+property=["']og:url["'][^>]+content=["']([^"']+)["']/i
-  );
+  const canonical = extractCanonical(html);
+  const ogUrl = extractOgUrl(html);
   if (!canonical || !canonical.startsWith(REQUIRED_BASE)) {
     failures.push(`BAD CANONICAL   ${file} (canonical="${canonical ?? "<missing>"}" must start with ${REQUIRED_BASE})`);
   }
@@ -118,6 +125,7 @@ for (const file of REQUIRED_FILES) {
     failures.push(`BAD OG:URL      ${file} (og:url="${ogUrl ?? "<missing>"}" must start with ${REQUIRED_BASE})`);
   }
 }
+
 
 // 4) Duplicate <title> check across every prerendered HTML -------------
 function walk(dir) {
