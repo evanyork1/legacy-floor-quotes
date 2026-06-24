@@ -77,7 +77,7 @@ const TermsAndConditions = () => {
                 </p>
                 
                 <p>
-                  <strong>13. SMS TERMS OF SERVICE</strong> By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from Legacy Industrial Coatings. This includes SMS messages for conversations (external). Message frequency varies. Message and data rates may apply. See privacy policy at https://preview--legacy-floor-quotes.lovable.app/privacy. Message HELP for help. Reply STOP to any message to opt out.
+                  <strong>13. SMS TERMS OF SERVICE</strong> By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from Legacy Industrial Coatings. This includes SMS messages for conversations (external). Message frequency varies. Message and data rates may apply. See privacy policy at https://legacyindustrialcoatings.com/privacy. Message HELP for help. Reply STOP to any message to opt out.
                 </p>
                 
                 <p className="text-right italic">
