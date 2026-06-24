@@ -18,8 +18,8 @@ if (typeof window !== 'undefined') {
 
     // Wait for webfonts so above-the-fold text is in the snapshot.
     try {
-      // @ts-expect-error – FontFaceSet types vary by lib.dom version
-      if (document.fonts?.ready) await document.fonts.ready;
+      const f = (document as unknown as { fonts?: { ready?: Promise<unknown> } }).fonts;
+      if (f?.ready) await f.ready;
     } catch {
       /* noop */
     }
