@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Phone, ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
+import { Seo } from "@/components/seo/Seo";
 
 const LandingVisual = () => {
   const sections = ['hero', 'value-props', 'cleaning', 'reviews', 'gallery', 'quote-section'];
@@ -20,6 +21,7 @@ const LandingVisual = () => {
   };
 
   return <div className="min-h-screen bg-white">
+      <Seo title="Floor Visual Landing | Legacy Industrial Coatings" description="Interactive landing for visualizing premium garage floor coatings." path="/landingvisual" noindex />
       <LandingHeader />
       <ScrollArrows sections={sections} />
 

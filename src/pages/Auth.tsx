@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 import { Loader2, UserPlus, Mail, Trash2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { Seo } from '@/components/seo/Seo';
 
 interface PendingInvite {
   id: string;
@@ -212,6 +213,7 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
+      <Seo title="Sign In | Legacy Industrial Coatings" description="Sign in to the Legacy Industrial Coatings team portal." path="/auth" noindex />
       <div className="w-full max-w-4xl space-y-6">
         {user && (
           <div className="flex items-center justify-between bg-background/95 backdrop-blur rounded-lg p-4 border">

@@ -8,6 +8,7 @@ import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { useQuoteFormDFW } from "@/hooks/useQuoteFormDFW";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 const QuoteDFW = () => {
   const {
@@ -59,6 +60,7 @@ const QuoteDFW = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <Seo title="DFW Garage Floor Quote | Legacy Industrial Coatings" description="Get a fast Dallas-Fort Worth garage floor coating quote." path="/quotedfw" noindex />
       <QuoteOnlyHeader phone="214-305-6516" onPhoneClick={handlePhoneClick} />
       
       <div className="container mx-auto px-4 py-6 sm:py-8">

@@ -9,14 +9,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const GiveawayRaf = () => {
   return <>
       <Helmet>
-        <title>Free Garage Floor Giveaway - Win Premium Coating | Legacy Industrial Coatings</title>
-        <meta name="description" content="Enter to win a FREE garage floor coating valued up to $4,000! Premium polyurea flake floor with lifetime warranty. Referral bonus - earn extra entries!" />
-        <meta name="keywords" content="garage floor giveaway, free garage floor, floor coating contest, win garage renovation" />
-        
-        <meta property="og:title" content="Free Garage Floor Giveaway | Legacy Industrial Coatings" />
-        <meta property="og:description" content="Enter to win a FREE garage floor coating valued up to $4,000! Premium polyurea flake floor with lifetime warranty." />
+        <title>Refer Friends, Win a Free Garage Floor | Legacy Industrial Coatings</title>
+        <meta name="description" content="Refer friends and earn extra entries to win a FREE premium polyurea garage floor coating (up to $4,000 value). Lifetime warranty included." />
+        <meta name="keywords" content="garage floor giveaway referral, refer a friend giveaway, free garage floor, floor coating contest" />
+
+        <meta property="og:title" content="Refer Friends, Win a Free Garage Floor | Legacy Industrial Coatings" />
+        <meta property="og:description" content="Refer friends and earn extra entries to win a FREE polyurea garage floor coating with lifetime warranty." />
         <meta property="og:image" content="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" />
-        
+
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://legacyindustrialcoatings.com/giveawayraf" />
       </Helmet>

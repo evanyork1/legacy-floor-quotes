@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import legacyLogo from "@/assets/legacy-logo-white.png";
+import { Seo } from "@/components/seo/Seo";
 
 const SplashSelect = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-6 relative overflow-hidden select-none">
+      <Seo title="Choose Your Region | Legacy Industrial Coatings" description="Select DFW or Phoenix to continue to Legacy Industrial Coatings." path="/splash" noindex />
       {/* Subtle ambient */}
 
       {/* Thin horizontal rule accent */}

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { IntakeForm } from '@/components/presentation/IntakeForm';
 import { ClosersCanvas } from '@/components/presentation/ClosersCanvas';
 import { JobberStatus } from '@/components/presentation/JobberStatus';
+import { Seo } from '@/components/seo/Seo';
 
 export interface LineItem {
   id: string;
@@ -151,6 +152,7 @@ export default function SalesPresentation() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <Seo title="Sales Presentation Builder | Legacy Industrial Coatings" description="Internal sales presentation builder." path="/sales-presentation" noindex />
       {mode === 'intake' ? (
         <>
           {/* Header */}

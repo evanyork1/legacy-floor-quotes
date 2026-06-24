@@ -8,6 +8,7 @@ import { CRMCalendarView } from '@/components/crm/CRMCalendarView';
 import { CRMSettings } from '@/components/crm/CRMSettings';
 import { CRMAdminPanel } from '@/components/crm/CRMAdminPanel';
 import { useCRM } from '@/hooks/useCRM';
+import { Seo } from '@/components/seo/Seo';
 
 export default function CRM() {
   const { user, loading: authLoading } = useAuth();
@@ -51,8 +52,11 @@ export default function CRM() {
   };
 
   return (
-    <CRMLayout activeTab={activeTab} onTabChange={setActiveTab}>
-      {renderContent()}
-    </CRMLayout>
+    <>
+      <Seo title="CRM | Legacy Industrial Coatings" description="Internal CRM for Legacy Industrial Coatings." path="/crm" noindex />
+      <CRMLayout activeTab={activeTab} onTabChange={setActiveTab}>
+        {renderContent()}
+      </CRMLayout>
+    </>
   );
 }
