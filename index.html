@@ -165,12 +165,11 @@
     <meta name="geo.position" content="32.7767;-96.7970" />
     <meta name="ICBM" content="32.7767, -96.7970" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook (sitewide fallback — per-route og:title/og:description/og:url are set via react-helmet-async) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Legacy Industrial Coatings | Epoxy & Polished Concrete DFW" />
     <meta property="og:description" content="Premium epoxy flooring & polished concrete across Dallas-Fort Worth. We are a full-service installation contractor, not a material supplier. 190+ five-star reviews." />
     <meta property="og:image" content="/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png" />
-    <meta property="og:url" content="https://legacyindustrialcoatings.com" />
     <meta property="og:site_name" content="Legacy Industrial Coatings" />
 
     <!-- Twitter -->
@@ -182,7 +181,12 @@
     <!-- Additional SEO and mobile optimization -->
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#2563eb" />
-    <link rel="canonical" href="https://legacyindustrialcoatings.com" />
+    <!--
+      Per-route <link rel="canonical"> and <meta property="og:url"> are owned by
+      each page's <Helmet> block. They are intentionally absent from the static
+      head so they self-reference each route correctly.
+    -->
+
   </head>
 
   <body>
