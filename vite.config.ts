@@ -9,10 +9,9 @@ import prerender from "@prerenderer/rollup-plugin";
 
 const requireCjs = createRequire(import.meta.url);
 
-// Best-effort detection of a usable Chromium binary. If puppeteer's
-// browser isn't installed (e.g. on a host where `npx puppeteer browsers
-// install chrome` failed), we skip prerendering rather than break the
-// build. The site will still build as a normal SPA in that case.
+// Detect a usable Chromium binary. In production builds we want a
+// LOUD failure rather than silently shipping an empty SPA shell to
+// crawlers. Set SKIP_PRERENDER=1 to intentionally bypass prerendering.
 function hasChromium(): boolean {
   try {
     const puppeteer = requireCjs("puppeteer");
@@ -21,6 +20,22 @@ function hasChromium(): boolean {
   } catch {
     return false;
   }
+}
+
+function shouldPrerender(mode: string): boolean {
+  if (mode === "development") return false;
+  if (process.env.SKIP_PRERENDER === "1") {
+    console.warn("[vite] SKIP_PRERENDER=1 — skipping prerender plugin.");
+    return false;
+  }
+  if (!hasChromium()) {
+    throw new Error(
+      "[vite] Prerender requires Chromium but none was found.\n" +
+        "Run `npx puppeteer browsers install chrome` before `npm run build`,\n" +
+        "or set SKIP_PRERENDER=1 to intentionally skip prerendering."
+    );
+  }
+  return true;
 }
 
 // Public, indexable marketing routes that should ship as fully-rendered
@@ -70,7 +85,7 @@ export default defineConfig(({ mode }) => ({
     // spins up headless Chrome against the built bundle, waits for the
     // `render-event` dispatched from src/main.tsx, and writes a fully
     // populated index.html into dist/<route>/.
-    mode !== 'development' && hasChromium() && prerender({
+    mode !== 'development' && shouldPrerender(mode) && prerender({
       routes: PRERENDER_ROUTES,
       renderer: '@prerenderer/renderer-puppeteer',
       rendererOptions: {
