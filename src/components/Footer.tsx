@@ -18,14 +18,15 @@ const Footer = () => {
     }
   };
   const services = [
-    { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
+    { href: "/commercial", label: "Commercial Floor Coatings" },
+    { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
     { href: "/concrete-polishing", label: "Polished Concrete Floors" },
     { href: "/concrete-sealing", label: "Concrete Sealing" },
-    { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
-    { href: "/commercial", label: "Commercial Floor Coatings" },
-    { href: "/residential-patio", label: "Residential Patio Coatings" },
+    { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
     { href: "/flake-floors", label: "Polyurea Flake Floor Systems" },
+    { href: "/residential-patio", label: "Residential Patio Coatings" },
   ];
+
   const cities = [
     "Dallas", "Fort Worth", "Plano", "Frisco", "McKinney", "Allen",
     "Richardson", "Carrollton", "Lewisville", "Prosper", "Celina",
