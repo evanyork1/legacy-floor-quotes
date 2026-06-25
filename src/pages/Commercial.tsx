@@ -6,7 +6,7 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { LeadForm } from "@/components/landing/LeadForm";
+
 import { BookingModal } from "@/components/landing/BookingModal";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
 const Commercial = () => {
