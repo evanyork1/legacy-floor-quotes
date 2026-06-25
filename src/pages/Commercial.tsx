@@ -6,7 +6,7 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { LeadForm } from "@/components/landing/LeadForm";
+
 import { BookingModal } from "@/components/landing/BookingModal";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
 const Commercial = () => {
@@ -131,15 +131,18 @@ const Commercial = () => {
                   warehouses, retail stores, restaurants, and commercial facilities across Dallas-Fort Worth.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                    Call Us Now
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <a href="tel:214-305-6516">
+                      <Phone className="mr-2 h-5 w-5" />
+                      Call Us Now
+                    </a>
                   </Button>
                   <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
                 </div>
+
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
@@ -220,31 +223,49 @@ const Commercial = () => {
                   </div>
                 </div>)}
             </div>
+
+            {/* Mid-page CTA */}
+            <div className="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <a href="tel:214-305-6516">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Call Us Now
+                </a>
+              </Button>
+              <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                <Calendar className="mr-2 h-5 w-5" />
+                Book An Estimate
+              </Button>
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        
-
-        {/* Contact Form Section */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        {/* Final CTA Section */}
+        <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
-                  Get Your Commercial Quote
-                </h2>
-                <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                  Ready to transform your commercial space? Fill out the form below and we'll get back to you with a detailed quote.
-                </p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <LeadForm />
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+                Ready to Transform Your Commercial Space?
+              </h2>
+              <p className="text-lg text-blue-100 mb-8 leading-relaxed">
+                Talk to our team today. Call us now for an immediate quote, or book a free on-site estimate at a time that works for you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 px-8 py-3 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <a href="tel:214-305-6516">
+                    <Phone className="mr-2 h-5 w-5" />
+                    Call 214-305-6516
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-transparent">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Book An Estimate
+                </Button>
               </div>
             </div>
           </div>
         </section>
+
 
         <Footer />
         
