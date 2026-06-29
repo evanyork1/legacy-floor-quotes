@@ -2,17 +2,12 @@ import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Seo } from "@/components/seo/Seo";
+import { SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 
 const ServiceAreas = () => {
-  const serviceAreas = [
-    "Plano", "Frisco", "Dallas", "Celina", "Little Elm", "McKinney", 
-    "Allen", "Prosper", "The Colony", "Aubrey", "Lewisville", "Carrollton", 
-    "Richardson", "Garland", "Anna", "Melissa", "Fairview", "Parker", 
-    "Princeton", "Sachse", "Wylie", "Murphy", "Farmers Branch", "North Dallas", 
-    "Addison", "Hebron", "Highland Village", "Flower Mound", "Coppell",
-    "Van Alstyne", "Sherman", "Denison", "Gunter", "Howe", "Blue Ridge"
-  ];
+  const serviceAreas = SERVICE_AREA_CITIES;
 
   return (
     <div className="min-h-screen bg-background">
