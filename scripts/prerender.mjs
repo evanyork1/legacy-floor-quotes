@@ -9,8 +9,9 @@ import { mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { resolve, join } from "node:path";
 import puppeteer from "puppeteer";
 import { preview as vitePreview } from "vite";
+import { CITY_SLUGS } from "../src/data/serviceAreaCities.ts";
 
-const ROUTES = [
+const STATIC_ROUTES = [
   "/",
   "/gallery",
   "/service-areas",
@@ -36,6 +37,10 @@ const ROUTES = [
   "/residential-case-studies",
   "/floor-visualizer",
 ];
+
+const CITY_ROUTES = CITY_SLUGS.map((slug) => `/epoxy-flooring/${slug}`);
+
+const ROUTES = [...STATIC_ROUTES, ...CITY_ROUTES];
 
 const DIST = resolve(process.cwd(), "dist");
 const PORT = 4321;
