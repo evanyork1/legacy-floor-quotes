@@ -27,6 +27,7 @@ import QuoteDFW from "./pages/QuoteDFW";
 import ResidentialGarageFloors from "./pages/ResidentialGarageFloors";
 import ResidentialPatio from "./pages/ResidentialPatio";
 import ServiceAreas from "./pages/ServiceAreas";
+import EpoxyFlooringCity from "./pages/EpoxyFlooringCity";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
 import DFW from "./pages/DFW";
@@ -74,6 +75,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />
               <Route path="/service-areas" element={<ServiceAreas />} />
+              <Route path="/epoxy-flooring/:city" element={<EpoxyFlooringCity />} />
               <Route path="/warranty" element={<Warranty />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
