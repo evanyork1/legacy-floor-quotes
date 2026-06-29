@@ -75,6 +75,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/landingvisual" element={<LandingVisual />} />
               <Route path="/service-areas" element={<ServiceAreas />} />
+              <Route path="/epoxy-flooring/:city" element={<EpoxyFlooringCity />} />
               <Route path="/warranty" element={<Warranty />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
