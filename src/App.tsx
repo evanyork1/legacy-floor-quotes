@@ -27,6 +27,7 @@ import QuoteDFW from "./pages/QuoteDFW";
 import ResidentialGarageFloors from "./pages/ResidentialGarageFloors";
 import ResidentialPatio from "./pages/ResidentialPatio";
 import ServiceAreas from "./pages/ServiceAreas";
+import EpoxyFlooringCity from "./pages/EpoxyFlooringCity";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
 import DFW from "./pages/DFW";
