@@ -41,13 +41,14 @@ const ServiceAreas = () => {
             </CardHeader>
             <CardContent className="p-4 sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
-                {serviceAreas.map((area, index) => (
-                  <div
-                    key={index}
+                {serviceAreas.map((area) => (
+                  <Link
+                    key={area.slug}
+                    to={`/epoxy-flooring/${area.slug}`}
                     className="p-3 sm:p-4 bg-muted/50 rounded-lg text-center hover:bg-muted/80 transition-colors"
                   >
-                    <span className="text-foreground font-medium text-sm sm:text-base">{area}</span>
-                  </div>
+                    <span className="text-foreground font-medium text-sm sm:text-base">{area.name}</span>
+                  </Link>
                 ))}
               </div>
             </CardContent>
