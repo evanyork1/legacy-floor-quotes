@@ -5,11 +5,20 @@
  * writes the fully rendered HTML to `dist/<route>/index.html` so crawlers
  * receive real content instead of an empty SPA shell.
  */
-import { mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from "node:fs";
 import { resolve, join } from "node:path";
 import puppeteer from "puppeteer";
 import { preview as vitePreview } from "vite";
-import { CITY_SLUGS } from "../src/data/serviceAreaCities.ts";
+
+// Parse city slugs out of src/data/serviceAreaCities.ts without needing a
+// TS loader. We only need each entry's `slug: "..."` value.
+const cityFileSrc = readFileSync(
+  resolve(process.cwd(), "src/data/serviceAreaCities.ts"),
+  "utf8",
+);
+const CITY_SLUGS = Array.from(
+  cityFileSrc.matchAll(/^\s*slug:\s*"([a-z0-9-]+)"/gm),
+).map((m) => m[1]);
 
 const STATIC_ROUTES = [
   "/",
