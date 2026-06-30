@@ -68,6 +68,7 @@ function App() {
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<DFW />} />
+              <Route path="/gpt" element={<GPT />} />
               <Route path="/dfw" element={<Navigate to="/" replace />} />
               
               <Route path="/quotedfw" element={<QuoteDFW />} />
