@@ -1,20 +1,20 @@
 import { useEffect } from "react";
+import { useBookingUrl } from "@/contexts/BookingUrlContext";
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const BOOKING_URL =
-  "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=website";
-
 export const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
+  const url = useBookingUrl();
+
   useEffect(() => {
     if (isOpen) {
-      window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+      window.open(url, "_blank", "noopener,noreferrer");
       onClose();
     }
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, url]);
 
   return null;
 };

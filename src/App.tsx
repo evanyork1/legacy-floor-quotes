@@ -31,6 +31,7 @@ import EpoxyFlooringCity from "./pages/EpoxyFlooringCity";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
 import DFW from "./pages/DFW";
+import GPT from "./pages/GPT";
 import DFWResLanding from "./pages/DFWResLanding";
 import LandingVisual from "./pages/LandingVisual";
 import Auth from "./pages/Auth";
@@ -68,6 +69,7 @@ function App() {
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<DFW />} />
+              <Route path="/gpt" element={<GPT />} />
               <Route path="/dfw" element={<Navigate to="/" replace />} />
               
               <Route path="/quotedfw" element={<QuoteDFW />} />
