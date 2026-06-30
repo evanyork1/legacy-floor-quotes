@@ -101,9 +101,9 @@ const Footer = () => {
               <p className="font-semibold mb-2">Dallas-Fort Worth Metroplex</p>
               <ul className="space-y-1 mb-3">
                 {cities.map((c) => (
-                  <li key={c}>
-                    <a href="/service-areas" className="hover:text-blue-400 transition-colors">
-                      {c}, TX
+                  <li key={c.slug}>
+                    <a href={`/epoxy-flooring/${c.slug}`} className="hover:text-blue-400 transition-colors">
+                      {c.name}, TX
                     </a>
                   </li>
                 ))}
