@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node scripts/prerender.mjs && node scripts/verify-prerender.mjs",
+    "postbuild": "node scripts/ensure-chrome.mjs && node scripts/prerender.mjs && node scripts/verify-prerender.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

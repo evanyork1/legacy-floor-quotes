@@ -4,9 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # react-snap brings its own puppeteer (^1.x) which auto-downloads
-  # a bundled Chromium during `npm install`. Keep that download enabled.
   PUPPETEER_SKIP_DOWNLOAD = "false"
+  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
 
 # Cache the Chromium download between builds so we don't re-download
 # ~150 MB every deploy.
@@ -15,6 +14,5 @@
 
   [plugins.inputs]
     paths = [
-      "node_modules/puppeteer/.local-chromium",
-      "node_modules/react-snap/node_modules/puppeteer/.local-chromium"
+      ".cache/puppeteer"
     ]
