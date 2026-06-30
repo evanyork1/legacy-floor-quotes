@@ -305,6 +305,19 @@ const EpoxyFlooringCity = () => {
               </Card>
             ))}
           </div>
+
+          <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {RESIDENTIAL_PHOTOS.map((p) => (
+              <img
+                key={p.src}
+                src={p.src}
+                alt={`${p.alt} — ${city.name}, TX`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
+              />
+            ))}
+          </div>
         </section>
 
         {/* FAQs */}
