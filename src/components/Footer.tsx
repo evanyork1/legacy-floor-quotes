@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, Instagram, Facebook, MapIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 const Footer = () => {
   const location = useLocation();
   const handlePhoneClick = () => {
@@ -27,11 +28,7 @@ const Footer = () => {
     { href: "/residential-patio", label: "Residential Patio Coatings" },
   ];
 
-  const cities = [
-    "Dallas", "Fort Worth", "Plano", "Frisco", "McKinney", "Allen",
-    "Richardson", "Carrollton", "Lewisville", "Prosper", "Celina",
-    "Sherman", "Anna", "Melissa", "Sanger", "The Colony", "Flower Mound"
-  ];
+  const cities = SERVICE_AREA_CITIES;
   return <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
@@ -104,9 +101,9 @@ const Footer = () => {
               <p className="font-semibold mb-2">Dallas-Fort Worth Metroplex</p>
               <ul className="space-y-1 mb-3">
                 {cities.map((c) => (
-                  <li key={c}>
-                    <a href="/service-areas" className="hover:text-blue-400 transition-colors">
-                      {c}, TX
+                  <li key={c.slug}>
+                    <a href={`/epoxy-flooring/${c.slug}`} className="hover:text-blue-400 transition-colors">
+                      {c.name}, TX
                     </a>
                   </li>
                 ))}
