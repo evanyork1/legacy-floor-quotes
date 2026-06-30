@@ -28,11 +28,7 @@ const Footer = () => {
     { href: "/residential-patio", label: "Residential Patio Coatings" },
   ];
 
-  const cities = [
-    "Dallas", "Fort Worth", "Plano", "Frisco", "McKinney", "Allen",
-    "Richardson", "Carrollton", "Lewisville", "Prosper", "Celina",
-    "Sherman", "Anna", "Melissa", "Sanger", "The Colony", "Flower Mound"
-  ];
+  const cities = SERVICE_AREA_CITIES;
   return <footer className="bg-slate-800 text-white pt-16 sm:pt-20 lg:pt-24 pb-2">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
