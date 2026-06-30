@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
-import { DFW_CITIES } from "@/constants/serviceAreas";
+import { SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 
 export const ServiceAreasStrip = () => {
   return (
