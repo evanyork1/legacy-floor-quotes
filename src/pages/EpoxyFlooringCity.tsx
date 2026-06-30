@@ -221,6 +221,19 @@ const EpoxyFlooringCity = () => {
           <div className="text-center mt-8 sm:mt-10">
             <CTAButtons city={city.name} />
           </div>
+
+          <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {COMMERCIAL_PHOTOS.map((p) => (
+              <img
+                key={p.src}
+                src={p.src}
+                alt={`${p.alt} — ${city.name}, TX`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
+              />
+            ))}
+          </div>
         </section>
 
         {/* Why commercial buyers in city pick us */}
