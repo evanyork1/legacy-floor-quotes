@@ -12,7 +12,7 @@ const HeroSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Determine quote path and content based on current location
-  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/gpt';
   const isPHX = location.pathname === '/phx';
   const isCommercial = location.pathname === '/dfwcommercial';
   const isProsper = location.pathname === '/epoxy-flooring-prosper';

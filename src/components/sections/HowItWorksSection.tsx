@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 const HowItWorksSection = () => {
   const location = useLocation();
   const isCommercial = location.pathname === '/dfwcommercial';
-  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding';
+  const isDFW = location.pathname === '/' || location.pathname === '/dfw' || location.pathname === '/dfwreslanding' || location.pathname === '/gpt';
   const steps = isCommercial ? [{
     step: "1",
     title: "Site Assessment & Consultation",
