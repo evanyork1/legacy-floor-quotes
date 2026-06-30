@@ -29,13 +29,13 @@ export const ServiceAreasStrip = () => {
             metroplex and surrounding North Texas communities.
           </p>
           <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {DFW_CITIES.map((city) => (
-              <li key={city}>
+            {SERVICE_AREA_CITIES.map((city) => (
+              <li key={city.slug}>
                 <Link
-                  to="/service-areas"
+                  to={`/epoxy-flooring/${city.slug}`}
                   className="inline-block px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
                 >
-                  {city}, TX
+                  {city.name}, TX
                 </Link>
               </li>
             ))}
