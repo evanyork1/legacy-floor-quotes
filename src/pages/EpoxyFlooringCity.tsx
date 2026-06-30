@@ -19,12 +19,26 @@ import {
 } from "lucide-react";
 import { getCityBySlug, SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 
-const PHONE_DISPLAY = "(469) 919-9474";
-const PHONE_HREF = "tel:+14699199474";
+const PHONE_DISPLAY = "214-305-6516";
+const PHONE_HREF = "tel:+12143056516";
 const BOOK_URL =
-  "https://clienthub.getjobber.com/client_hubs/4d6d59c4-3b09-4d5c-9a3e-a83c0a31a8c2/public/work_request/new?utm_source=website";
+  "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/2372073/new?utm_source=website";
 
 const openBooking = () => window.open(BOOK_URL, "_blank", "noopener,noreferrer");
+
+const COMMERCIAL_PHOTOS = [
+  { src: "/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png", alt: "Commercial epoxy floor installation in DFW warehouse" },
+  { src: "/lovable-uploads/4a97932b-03f2-42ab-9e2f-2a90852befc0.png", alt: "Industrial urethane cement floor coating" },
+  { src: "/lovable-uploads/b5e6bdc4-80f9-44ea-a580-29d22662f7d4.png", alt: "Commercial polished concrete floor" },
+  { src: "/lovable-uploads/85530262-ab7f-4339-af86-ed63ee721679.png", alt: "Warehouse floor coating with line striping" },
+];
+
+const RESIDENTIAL_PHOTOS = [
+  { src: "/lovable-uploads/008e4edb-0e9b-4952-8a51-b7d92f110955.png", alt: "Residential garage with speckled polyurea flake floor" },
+  { src: "/lovable-uploads/e57c7675-310f-4345-ba29-137d7f5b6fc2.png", alt: "Large residential garage with premium epoxy coating" },
+  { src: "/lovable-uploads/afa49718-8e01-4090-bf6e-4e50dd95630c.png", alt: "BMW on premium speckled garage floor" },
+  { src: "/lovable-uploads/624693af-bec7-4554-be4d-134ef392147c.png", alt: "Sports cars on high-end residential garage floor" },
+];
 
 const CTAButtons = ({ city, variant = "default" }: { city: string; variant?: "default" | "light" }) => (
   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -71,7 +85,7 @@ const EpoxyFlooringCity = () => {
     name: `Legacy Industrial Coatings — ${city.name}`,
     image: "https://legacyindustrialcoatings.com/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png",
     url: `https://legacyindustrialcoatings.com/epoxy-flooring/${city.slug}`,
-    telephone: "+1-469-919-9474",
+    telephone: "+1-214-305-6516",
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
@@ -207,6 +221,19 @@ const EpoxyFlooringCity = () => {
           <div className="text-center mt-8 sm:mt-10">
             <CTAButtons city={city.name} />
           </div>
+
+          <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {COMMERCIAL_PHOTOS.map((p) => (
+              <img
+                key={p.src}
+                src={p.src}
+                alt={`${p.alt} — ${city.name}, TX`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
+              />
+            ))}
+          </div>
         </section>
 
         {/* Why commercial buyers in city pick us */}
@@ -276,6 +303,19 @@ const EpoxyFlooringCity = () => {
                   {item.copy}
                 </CardContent>
               </Card>
+            ))}
+          </div>
+
+          <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {RESIDENTIAL_PHOTOS.map((p) => (
+              <img
+                key={p.src}
+                src={p.src}
+                alt={`${p.alt} — ${city.name}, TX`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
+              />
             ))}
           </div>
         </section>
