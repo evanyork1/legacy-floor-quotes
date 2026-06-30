@@ -85,7 +85,7 @@ const EpoxyFlooringCity = () => {
     name: `Legacy Industrial Coatings — ${city.name}`,
     image: "https://legacyindustrialcoatings.com/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png",
     url: `https://legacyindustrialcoatings.com/epoxy-flooring/${city.slug}`,
-    telephone: "+1-469-919-9474",
+    telephone: "+1-214-305-6516",
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
