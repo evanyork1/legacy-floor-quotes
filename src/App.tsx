@@ -31,6 +31,7 @@ import EpoxyFlooringCity from "./pages/EpoxyFlooringCity";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Warranty from "./pages/Warranty";
 import DFW from "./pages/DFW";
+import GPT from "./pages/GPT";
 import DFWResLanding from "./pages/DFWResLanding";
 import LandingVisual from "./pages/LandingVisual";
 import Auth from "./pages/Auth";
