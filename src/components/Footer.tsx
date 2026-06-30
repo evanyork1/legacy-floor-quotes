@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, Instagram, Facebook, MapIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 const Footer = () => {
   const location = useLocation();
   const handlePhoneClick = () => {
