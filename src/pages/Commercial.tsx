@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { BookingModal } from "@/components/landing/BookingModal";
+import { LeadForm } from "@/components/landing/LeadForm";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
 const Commercial = () => {
   const navigate = useNavigate();
