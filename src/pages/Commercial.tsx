@@ -267,6 +267,26 @@ const Commercial = () => {
           </div>
         </section>
 
+        {/* Commercial Quote Form */}
+        <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Get Your Commercial Quote
+                </h2>
+                <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                  Tell us about your project and our team will follow up with pricing and next steps.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                <LeadForm />
+              </div>
+            </div>
+          </div>
+        </section>
+
+
 
         <Footer />
         
