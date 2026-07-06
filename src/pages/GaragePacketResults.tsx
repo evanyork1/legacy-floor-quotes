@@ -177,178 +177,18 @@ const GaragePacketResults = () => {
           </div>
         </div>
 
-        {/* Company Info */}
-        <section className="py-8 sm:py-12 px-4 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Why Choose Legacy Industrial Coatings?</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-                </div>
-                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">1-Day Installation</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">Your floor is done in a single day. Drive on it in 24 hours.</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-                </div>
-                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Lifetime Warranty</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">We stand behind our work with a comprehensive lifetime warranty.</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <Award className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-                </div>
-                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">3,000+ Garages Installed</h3>
-                <p className="text-gray-600 text-xs sm:text-sm">Trusted by homeowners across Dallas-Fort Worth.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Selected Color Preview */}
-        <section className="py-8 sm:py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Your Selected Color</h2>
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto">
-              {packet.visualization_url ? (
-                <img 
-                  src={packet.visualization_url} 
-                  alt="Your visualized garage" 
-                  className="w-full h-64 md:h-96 object-cover"
-                loading="eager" decoding="async" fetchPriority="high" />
-              ) : selectedColorOption?.preview ? (
-                <img 
-                  src={selectedColorOption.preview} 
-                  alt={selectedColorOption.name} 
-                  className="w-full h-64 md:h-96 object-cover"
-                 loading="lazy" decoding="async" />
-              ) : selectedColorOption?.thumbnail ? (
-                <div className="flex items-center justify-center h-64 bg-gray-100">
-                  <img 
-                    src={selectedColorOption.thumbnail} 
-                    alt={selectedColorOption.name} 
-                    className="h-48 w-48 object-cover rounded-lg"
-                   loading="lazy" decoding="async" />
-                </div>
-              ) : null}
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-gray-900 capitalize">
-                  {selectedColorOption?.name || packet.selected_color.replace('-', ' ')}
-                </h3>
-                <p className="text-gray-600 mb-4">Premium polyurea flake coating</p>
-                
-                <Sheet open={isColorSheetOpen} onOpenChange={setIsColorSheetOpen}>
-                  <SheetTrigger asChild>
-                    <Button variant="outline" className="gap-2">
-                      <Palette className="h-4 w-4" />
-                      Change Color
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="bottom" className="h-auto max-h-[60vh]">
-                    <SheetHeader className="mb-4">
-                      <SheetTitle>Select a New Color</SheetTitle>
-                    </SheetHeader>
-                    <div className="grid grid-cols-4 md:grid-cols-8 gap-3 mb-6">
-                      {colorOptions.map((color) => (
-                        <button
-                          key={color.id}
-                          onClick={() => setSelectedNewColor(color.id)}
-                          className={`relative rounded-lg overflow-hidden aspect-square border-2 transition-all ${
-                            selectedNewColor === color.id 
-                              ? 'border-blue-600 ring-2 ring-blue-600 ring-offset-2' 
-                              : 'border-gray-200 hover:border-gray-400'
-                          }`}
-                        >
-                          <img 
-                            src={color.thumbnail} 
-                            alt={color.name} 
-                            className="w-full h-full object-cover"
-                           loading="lazy" decoding="async" />
-                          {selectedNewColor === color.id && (
-                            <div className="absolute inset-0 bg-blue-600/20 flex items-center justify-center">
-                              <CheckCircle className="h-6 w-6 text-blue-600" />
-                            </div>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                    {selectedNewColor && (
-                      <div className="flex items-center justify-between border-t pt-4">
-                        <p className="text-sm text-gray-600">
-                          Selected: <span className="font-semibold capitalize">{colorOptions.find(c => c.id === selectedNewColor)?.name}</span>
-                        </p>
-                        <Button 
-                          onClick={handleSaveColor}
-                          disabled={isSavingColor}
-                          className="bg-blue-600 hover:bg-blue-700"
-                        >
-                          {isSavingColor ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Saving...
-                            </>
-                          ) : (
-                            'Save Color'
-                          )}
-                        </Button>
-                      </div>
-                    )}
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Process Section */}
-        <section className="py-8 sm:py-12 px-4 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Our Process</h2>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">1</div>
-                <h4 className="font-semibold text-xs sm:text-sm mb-1">Pre-Measure</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs">Precise measurements ensure perfect material coverage</p>
-              </div>
-              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">2</div>
-                <h4 className="font-semibold text-xs sm:text-sm mb-1">Diamond Grinding</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
-              </div>
-              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">3</div>
-                <h4 className="font-semibold text-xs sm:text-sm mb-1">Crack Repair</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs">All imperfections filled for a smooth, uniform base</p>
-              </div>
-              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">4</div>
-                <h4 className="font-semibold text-xs sm:text-sm mb-1">Base + Flake</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs">Polyurea base coat with your selected color flake</p>
-              </div>
-              <div className="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm col-span-2 sm:col-span-1">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">5</div>
-                <h4 className="font-semibold text-xs sm:text-sm mb-1">Top Coat</h4>
-                <p className="text-gray-600 text-[10px] sm:text-xs">High-gloss finish for chemical & abrasion resistance</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Price Quote Card */}
+        {/* 1) Price Quote Card */}
         <section className="py-12 px-4">
           <div className="max-w-2xl mx-auto">
             <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 shadow-xl">
               <CardContent className="p-8 md:p-12 text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Price Quote</h2>
-                
+
                 <div className="text-5xl font-bold text-blue-600 mb-4">
                   ${packet.estimated_price.toLocaleString()}
                 </div>
                 <p className="text-xl text-gray-700 mb-6">Estimated Total Investment</p>
-                
+
                 <div className="bg-blue-100 border border-blue-200 rounded-lg p-6 mb-6">
                   <p className="text-blue-800 font-medium text-lg mb-2">
                     Monthly Payment with Financing
@@ -358,15 +198,15 @@ const GaragePacketResults = () => {
                     ${monthlyPayment.toLocaleString()}/mo
                   </div>
                 </div>
-                
+
                 <div className="bg-white rounded-lg p-6 mb-6 text-left">
                   <h3 className="font-semibold text-lg mb-4 text-center">Quote Details</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Garage Size:</span>
                       <span className="font-medium">
-                        {packet.garage_type === "custom" 
-                          ? `${packet.custom_sqft} sq ft` 
+                        {packet.garage_type === "custom"
+                          ? `${packet.custom_sqft} sq ft`
                           : `${packet.garage_type.split('-')[0]}-Car Garage`}
                       </span>
                     </div>
@@ -420,7 +260,7 @@ const GaragePacketResults = () => {
           </div>
         </section>
 
-        {/* Reviews Section - Moved after price */}
+        {/* 2) Reviews Section */}
         <section className="py-12 px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">What Our Customers Say</h2>
@@ -440,6 +280,167 @@ const GaragePacketResults = () => {
             </div>
           </div>
         </section>
+
+        {/* 3) Selected Color Preview */}
+        <section className="py-8 sm:py-12 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Your Selected Color</h2>
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-2xl mx-auto">
+              {packet.visualization_url ? (
+                <img
+                  src={packet.visualization_url}
+                  alt="Your visualized garage"
+                  className="w-full h-64 md:h-96 object-cover"
+                loading="eager" decoding="async" fetchPriority="high" />
+              ) : selectedColorOption?.preview ? (
+                <img
+                  src={selectedColorOption.preview}
+                  alt={selectedColorOption.name}
+                  className="w-full h-64 md:h-96 object-cover"
+                 loading="lazy" decoding="async" />
+              ) : selectedColorOption?.thumbnail ? (
+                <div className="flex items-center justify-center h-64 bg-gray-100">
+                  <img
+                    src={selectedColorOption.thumbnail}
+                    alt={selectedColorOption.name}
+                    className="h-48 w-48 object-cover rounded-lg"
+                   loading="lazy" decoding="async" />
+                </div>
+              ) : null}
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold text-gray-900 capitalize">
+                  {selectedColorOption?.name || packet.selected_color.replace('-', ' ')}
+                </h3>
+                <p className="text-gray-600 mb-4">Premium polyurea flake coating</p>
+
+                <Sheet open={isColorSheetOpen} onOpenChange={setIsColorSheetOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" className="gap-2">
+                      <Palette className="h-4 w-4" />
+                      Change Color
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="bottom" className="h-auto max-h-[60vh]">
+                    <SheetHeader className="mb-4">
+                      <SheetTitle>Select a New Color</SheetTitle>
+                    </SheetHeader>
+                    <div className="grid grid-cols-4 md:grid-cols-8 gap-3 mb-6">
+                      {colorOptions.map((color) => (
+                        <button
+                          key={color.id}
+                          onClick={() => setSelectedNewColor(color.id)}
+                          className={`relative rounded-lg overflow-hidden aspect-square border-2 transition-all ${
+                            selectedNewColor === color.id
+                              ? 'border-blue-600 ring-2 ring-blue-600 ring-offset-2'
+                              : 'border-gray-200 hover:border-gray-400'
+                          }`}
+                        >
+                          <img
+                            src={color.thumbnail}
+                            alt={color.name}
+                            className="w-full h-full object-cover"
+                           loading="eager" decoding="async" fetchPriority="high" />
+                          {selectedNewColor === color.id && (
+                            <div className="absolute inset-0 bg-blue-600/20 flex items-center justify-center">
+                              <CheckCircle className="h-6 w-6 text-blue-600" />
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    {selectedNewColor && (
+                      <div className="flex items-center justify-between border-t pt-4">
+                        <p className="text-sm text-gray-600">
+                          Selected: <span className="font-semibold capitalize">{colorOptions.find(c => c.id === selectedNewColor)?.name}</span>
+                        </p>
+                        <Button
+                          onClick={handleSaveColor}
+                          disabled={isSavingColor}
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          {isSavingColor ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Saving...
+                            </>
+                          ) : (
+                            'Save Color'
+                          )}
+                        </Button>
+                      </div>
+                    )}
+                  </SheetContent>
+                </Sheet>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4) Why Choose */}
+        <section className="py-8 sm:py-12 px-4 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Why Choose Legacy Industrial Coatings?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">1-Day Installation</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">Your floor is done in a single day. Drive on it in 24 hours.</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Lifetime Warranty</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">We stand behind our work with a comprehensive lifetime warranty.</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Award className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">3,000+ Garages Installed</h3>
+                <p className="text-gray-600 text-xs sm:text-sm">Trusted by homeowners across Dallas-Fort Worth.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5) Our Process */}
+        <section className="py-8 sm:py-12 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Our Process</h2>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">1</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Pre-Measure</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">Precise measurements ensure perfect material coverage</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">2</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Diamond Grinding</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">700-lb grinder profiles concrete for ideal adhesion</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">3</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Crack Repair</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">All imperfections filled for a smooth, uniform base</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 text-center shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">4</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Base + Flake</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">Polyurea base coat with your selected color flake</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 text-center shadow-sm col-span-2 sm:col-span-1">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 font-bold text-sm sm:text-base">5</div>
+                <h4 className="font-semibold text-xs sm:text-sm mb-1">Top Coat</h4>
+                <p className="text-gray-600 text-[10px] sm:text-xs">High-gloss finish for chemical & abrasion resistance</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         {/* Call CTA */}
         <section className="py-12 px-4 bg-gradient-to-r from-blue-600 to-blue-800">
