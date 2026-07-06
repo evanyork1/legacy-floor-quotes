@@ -34,6 +34,45 @@ Deno.serve(async (req) => {
     }
 
     const action = String(body.action || "");
+
+    if (action === "create") {
+      const name = String(body.name || "").trim();
+      const email = String(body.email || "").trim();
+      const phone = String(body.phone || "").trim();
+      const garage_type = String(body.garage_type || "").trim();
+      if (!name || !email || !phone || !garage_type) {
+        return json({ error: "Missing required fields" }, 400);
+      }
+      if (name.length > 200 || email.length > 200 || phone.length > 50 || garage_type.length > 50) {
+        return json({ error: "Field too long" }, 400);
+      }
+      const selected_color = body.selected_color ? String(body.selected_color).slice(0, 100) : null;
+      const visualization_url = body.visualization_url ? String(body.visualization_url).slice(0, 2000) : null;
+      const custom_sqft = body.custom_sqft != null && body.custom_sqft !== ""
+        ? Number(body.custom_sqft) : null;
+      const estimated_price = body.estimated_price != null ? Number(body.estimated_price) : null;
+
+      const { data, error } = await supabase
+        .from("floor_packets")
+        .insert({
+          name,
+          email,
+          phone,
+          garage_type,
+          custom_sqft: Number.isFinite(custom_sqft as number) ? custom_sqft : null,
+          selected_color,
+          visualization_url,
+          estimated_price: Number.isFinite(estimated_price as number) ? estimated_price : null,
+        })
+        .select("id")
+        .single();
+      if (error) {
+        console.error("create floor_packet error", error);
+        return json({ error: "Create failed" }, 500);
+      }
+      return json({ id: data.id });
+    }
+
     const id = String(body.id || "");
     if (!UUID_RE.test(id)) {
       return json({ error: "Invalid id" }, 400);

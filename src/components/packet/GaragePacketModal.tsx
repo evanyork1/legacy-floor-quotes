@@ -247,9 +247,9 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
     try {
       const estimatedPrice = calculatePrice();
       
-      const { data, error } = await supabase
-        .from('floor_packets')
-        .insert({
+      const { data, error } = await supabase.functions.invoke('public-floor-packet', {
+        body: {
+          action: 'create',
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -258,12 +258,12 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
           selected_color: formData.selectedColor,
           visualization_url: formData.visualizationUrl,
           estimated_price: estimatedPrice,
-        })
-        .select()
-        .single();
-      
+        },
+      });
+
       if (error) throw error;
-      
+      if (!data?.id) throw new Error('No id returned');
+
       // Trigger the floor packet webhook (non-blocking)
       supabase.functions.invoke('send-floor-packet-webhook', {
         body: {
@@ -284,7 +284,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
           console.log('Floor packet webhook triggered successfully');
         }
       });
-      
+
       toast.success('Your garage report is ready!');
       onClose();
       navigate(`/garage-packet-result/${data.id}`);
