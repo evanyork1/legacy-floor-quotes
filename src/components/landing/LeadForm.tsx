@@ -102,7 +102,7 @@ export const LeadForm = () => {
             }))} required className="bg-gray-100 border-0 placeholder:text-gray-500 text-sm md:text-base" />
             </div>
             
-            <Textarea placeholder="I want an estimate for a 2 car garage." value={formData.questionsComments} onChange={e => setFormData(prev => ({
+            <Textarea placeholder="we need an epoxy estimate for a 100,000 sq ft manufacturing facility" value={formData.questionsComments} onChange={e => setFormData(prev => ({
             ...prev,
             questionsComments: e.target.value
           }))} className="bg-gray-100 border-0 placeholder:text-gray-500 min-h-[80px] md:min-h-[100px] text-sm md:text-base" />
