@@ -166,92 +166,88 @@ const GaragePacketResults = () => {
         </div>
 
         {/* Personalized Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 sm:py-12 px-4">
+        <div className="bg-gradient-to-r from-neutral-950 via-neutral-900 to-black text-white py-5 sm:py-7 px-4 border-b border-white/10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight mb-1">
               {packet.name.split(' ')[0]}'s Garage Floor Report
             </h1>
-            <p className="text-blue-100 text-sm sm:text-lg">
-              Your personalized quote • Created {new Date(packet.created_at).toLocaleDateString()}
+            <p className="text-neutral-400 text-xs sm:text-sm">
+              Personalized quote · {new Date(packet.created_at).toLocaleDateString()}
             </p>
           </div>
         </div>
 
         {/* 1) Price Quote Card */}
-        <section className="py-12 px-4">
-          <div className="max-w-2xl mx-auto">
-            <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 shadow-xl">
-              <CardContent className="p-8 md:p-12 text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Price Quote</h2>
-
-                <div className="text-5xl font-bold text-blue-600 mb-4">
-                  ${packet.estimated_price.toLocaleString()}
+        <section className="py-8 sm:py-10 px-4">
+          <div className="max-w-xl mx-auto">
+            <Card className="border border-gray-200 bg-white shadow-sm">
+              <CardContent className="p-6 sm:p-8">
+                <div className="text-center border-b border-gray-100 pb-5 mb-5">
+                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">Your Price Quote</p>
+                  <div className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">
+                    ${packet.estimated_price.toLocaleString()}
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">Estimated total investment</p>
                 </div>
-                <p className="text-xl text-gray-700 mb-6">Estimated Total Investment</p>
 
-                <div className="bg-blue-100 border border-blue-200 rounded-lg p-6 mb-6">
-                  <p className="text-blue-800 font-medium text-lg mb-2">
-                    Monthly Payment with Financing
-                  </p>
-                  <p className="text-blue-600 mb-2">24 months • 0% interest</p>
-                  <div className="text-3xl font-bold text-blue-700">
-                    ${monthlyPayment.toLocaleString()}/mo
+                <div className="flex items-center justify-between bg-gray-50 border border-gray-100 rounded-md px-4 py-3 mb-5">
+                  <div>
+                    <p className="text-xs text-gray-500">24 months · 0% interest</p>
+                    <p className="text-sm font-medium text-gray-900">Monthly financing</p>
+                  </div>
+                  <div className="text-xl font-semibold text-gray-900">
+                    ${monthlyPayment.toLocaleString()}<span className="text-sm font-normal text-gray-500">/mo</span>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-lg p-6 mb-6 text-left">
-                  <h3 className="font-semibold text-lg mb-4 text-center">Quote Details</h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Garage Size:</span>
-                      <span className="font-medium">
-                        {packet.garage_type === "custom"
-                          ? `${packet.custom_sqft} sq ft`
-                          : `${packet.garage_type.split('-')[0]}-Car Garage`}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Color:</span>
-                      <span className="font-medium capitalize">{packet.selected_color.replace('-', ' ')}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Coating Type:</span>
-                      <span className="font-medium">Premium Polyurea</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Warranty:</span>
-                      <span className="font-medium">Lifetime</span>
-                    </div>
+                <dl className="text-sm divide-y divide-gray-100 mb-6">
+                  <div className="flex justify-between py-2">
+                    <dt className="text-gray-500">Garage Size</dt>
+                    <dd className="font-medium text-gray-900">
+                      {packet.garage_type === "custom"
+                        ? `${packet.custom_sqft} sq ft`
+                        : `${packet.garage_type.split('-')[0]}-Car Garage`}
+                    </dd>
                   </div>
-                </div>
+                  <div className="flex justify-between py-2">
+                    <dt className="text-gray-500">Color</dt>
+                    <dd className="font-medium text-gray-900 capitalize">{packet.selected_color.replace('-', ' ')}</dd>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <dt className="text-gray-500">Coating</dt>
+                    <dd className="font-medium text-gray-900">Premium Polyurea</dd>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <dt className="text-gray-500">Warranty</dt>
+                    <dd className="font-medium text-gray-900">Lifetime</dd>
+                  </div>
+                </dl>
 
                 {/* CTA Button */}
                 {packet.ready_to_proceed ? (
-                  <div className="bg-green-100 border-2 border-green-300 rounded-lg p-6">
-                    <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-3" />
-                    <h3 className="text-green-900 font-bold text-xl mb-2">You're All Set!</h3>
-                    <p className="text-green-800">
-                      We'll call you within 60 minutes to schedule your installation.
-                    </p>
+                  <div className="bg-green-50 border border-green-200 rounded-md p-4 text-center">
+                    <CheckCircle className="h-6 w-6 text-green-600 mx-auto mb-2" />
+                    <h3 className="text-green-900 font-semibold text-sm mb-0.5">You're All Set</h3>
+                    <p className="text-green-800 text-xs">We'll call you within 60 minutes to schedule.</p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     <Button
                       onClick={handleReadyToProceed}
                       disabled={isUpdating}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-xl font-bold"
+                      className="w-full bg-neutral-900 hover:bg-black text-white py-5 text-sm font-semibold tracking-wide"
                     >
                       {isUpdating ? (
                         <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                           Submitting...
                         </>
                       ) : (
                         <>Ready to Move Forward</>
                       )}
                     </Button>
-                    <p className="text-sm text-gray-600">
-                      Click above and we'll call you within 60 minutes to schedule your installation
+                    <p className="text-xs text-center text-gray-500">
+                      We'll call within 60 minutes to schedule your installation.
                     </p>
                   </div>
                 )}
@@ -259,6 +255,7 @@ const GaragePacketResults = () => {
             </Card>
           </div>
         </section>
+
 
         {/* 2) Reviews Section */}
         <section className="py-12 px-4 bg-gray-50">
