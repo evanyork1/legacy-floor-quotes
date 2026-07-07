@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, ArrowRight, Check, Loader2, Upload, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Loader2, X } from 'lucide-react';
 import { colorOptions } from '@/constants/colorOptions';
 import { BeforeAfterSlider } from '@/components/visualizer/BeforeAfterSlider';
 import { supabase } from '@/integrations/supabase/client';
