@@ -11,6 +11,7 @@ export const useAdminData = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [leadWebhookUrl, setLeadWebhookUrl] = useState("");
   const [floorPacketWebhookUrl, setFloorPacketWebhookUrl] = useState("");
+  const [depositWebhookUrl, setDepositWebhookUrl] = useState("");
   const [savingWebhook, setSavingWebhook] = useState(false);
   const { toast } = useToast();
 
@@ -217,7 +218,7 @@ export const useAdminData = () => {
     try {
       const { data, error } = await supabase
         .from('webhook_settings')
-        .select('zapier_webhook_url, lead_webhook_url, floor_packet_webhook_url')
+        .select('zapier_webhook_url, lead_webhook_url, floor_packet_webhook_url, deposit_webhook_url')
         .eq('id', 1)
         .single();
 
@@ -235,6 +236,9 @@ export const useAdminData = () => {
       if (data?.floor_packet_webhook_url) {
         setFloorPacketWebhookUrl(data.floor_packet_webhook_url);
       }
+      if (data?.deposit_webhook_url) {
+        setDepositWebhookUrl(data.deposit_webhook_url);
+      }
     } catch (error) {
       console.error('Error fetching webhook settings:', error);
     }
@@ -245,11 +249,12 @@ export const useAdminData = () => {
     try {
       const { error } = await supabase
         .from('webhook_settings')
-        .upsert({ 
-          id: 1, 
+        .upsert({
+          id: 1,
           zapier_webhook_url: webhookUrl || null,
           lead_webhook_url: leadWebhookUrl || null,
           floor_packet_webhook_url: floorPacketWebhookUrl || null,
+          deposit_webhook_url: depositWebhookUrl || null,
           updated_at: new Date().toISOString()
         });
 
@@ -294,6 +299,8 @@ export const useAdminData = () => {
     setLeadWebhookUrl,
     floorPacketWebhookUrl,
     setFloorPacketWebhookUrl,
+    depositWebhookUrl,
+    setDepositWebhookUrl,
     savingWebhook,
     pricingTiers,
     setPricingTiers,
