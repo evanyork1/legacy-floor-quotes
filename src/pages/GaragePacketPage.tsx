@@ -86,7 +86,7 @@ const GaragePacketPage = () => {
                   <span className="text-blue-600">In One Day</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
-                  <span className="font-bold">No in person visit needed.</span> Create your garage floor report online, preview color options in your garage, review our system, and get pricing in about 60 seconds. Click below.
+                  <span className="font-bold">No in person visit needed.</span> Preview color options in your own garage, see pricing, and reserve your install in 60 seconds.
                 </p>
                 <div className="flex flex-col items-center">
                   <CTAButton 
@@ -135,7 +135,7 @@ const GaragePacketPage = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="text-blue-600">Transformations</span>
+                We've Installed Over <span className="text-blue-600">4,000 Garage Floors</span> in Your Town
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
                 See real results from homeowners across Dallas–Fort Worth.
@@ -146,7 +146,7 @@ const GaragePacketPage = () => {
               {/* Transformation 1 */}
               <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                       BEFORE
@@ -154,7 +154,7 @@ const GaragePacketPage = () => {
                   </div>
                 </div>
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                       AFTER
@@ -166,7 +166,7 @@ const GaragePacketPage = () => {
               {/* Transformation 2 */}
               <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                       BEFORE
@@ -174,7 +174,7 @@ const GaragePacketPage = () => {
                   </div>
                 </div>
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor coating with premium finish" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor coating with premium finish" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                       AFTER
@@ -186,7 +186,7 @@ const GaragePacketPage = () => {
               {/* Transformation 3 */}
               <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80">
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage transformation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage transformation" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                       BEFORE
@@ -194,7 +194,7 @@ const GaragePacketPage = () => {
                   </div>
                 </div>
                 <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                  <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage floor coating" className="w-full h-full object-cover"  loading="eager" decoding="async" fetchPriority="high" />
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
                     <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                       AFTER
@@ -213,10 +213,10 @@ const GaragePacketPage = () => {
               Ready to Transform Your Garage?
             </h2>
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Get a free, no-obligation estimate. Same-day appointments available.
+              Get a free, no-obligation estimate.
             </p>
             <CTAButton onClick={() => setShowQuoteModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
-              Book Estimate Now
+              Get My Garage Price
             </CTAButton>
           </div>
         </section>
