@@ -121,6 +121,65 @@ Deno.serve(async (req) => {
       return json({ ok: true });
     }
 
+    if (action === "request_deposit") {
+      const address = String(body.address || "").trim();
+      if (!address || address.length > 500) {
+        return json({ error: "Invalid address" }, 400);
+      }
+      const name = body.name != null ? String(body.name).trim().slice(0, 200) : null;
+      const email = body.email != null ? String(body.email).trim().slice(0, 200) : null;
+      const phone = body.phone != null ? String(body.phone).trim().slice(0, 50) : null;
+
+      const { data: existing, error: readErr } = await supabase
+        .from("floor_packets")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+      if (readErr || !existing) return json({ error: "Not found" }, 404);
+
+      const nowIso = new Date().toISOString();
+      const updatePayload: Record<string, unknown> = {
+        address,
+        deposit_requested: true,
+        deposit_requested_at: nowIso,
+      };
+      if (name) updatePayload.name = name;
+      if (email) updatePayload.email = email;
+      if (phone) updatePayload.phone = phone;
+
+      const { error: updateErr } = await supabase
+        .from("floor_packets")
+        .update(updatePayload)
+        .eq("id", id);
+      if (updateErr) {
+        console.error("request_deposit update error", updateErr);
+        return json({ error: "Update failed" }, 500);
+      }
+
+      // Fire the deposit webhook (non-blocking to the caller if it fails)
+      try {
+        await supabase.functions.invoke("send-deposit-webhook", {
+          body: {
+            id,
+            name: name ?? existing.name,
+            email: email ?? existing.email,
+            phone: phone ?? existing.phone,
+            address,
+            garage_type: existing.garage_type,
+            custom_sqft: existing.custom_sqft,
+            selected_color: existing.selected_color,
+            estimated_price: existing.estimated_price,
+            visualization_url: existing.visualization_url,
+            deposit_requested_at: nowIso,
+          },
+        });
+      } catch (whErr) {
+        console.error("send-deposit-webhook invoke failed", whErr);
+      }
+
+      return json({ ok: true });
+    }
+
     return json({ error: "Unknown action" }, 400);
   } catch (e) {
     console.error("public-floor-packet error", e);
