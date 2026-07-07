@@ -10,10 +10,12 @@ interface WebhooksTabProps {
   webhookUrl: string;
   leadWebhookUrl: string;
   floorPacketWebhookUrl: string;
+  depositWebhookUrl?: string;
   savingWebhook: boolean;
   onWebhookUrlChange: (url: string) => void;
   onLeadWebhookUrlChange: (url: string) => void;
   onFloorPacketWebhookUrlChange: (url: string) => void;
+  onDepositWebhookUrlChange?: (url: string) => void;
   onSaveWebhookUrl: () => void;
 }
 
@@ -21,10 +23,12 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
   webhookUrl,
   leadWebhookUrl,
   floorPacketWebhookUrl,
+  depositWebhookUrl = "",
   savingWebhook,
   onWebhookUrlChange,
   onLeadWebhookUrlChange,
   onFloorPacketWebhookUrlChange,
+  onDepositWebhookUrlChange,
   onSaveWebhookUrl
 }) => {
   return (
@@ -207,6 +211,27 @@ const WebhooksTab: React.FC<WebhooksTabProps> = ({
   }
 }`}
             </pre>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Deposit Webhook */}
+      <Card className="bg-gray-800 border-gray-700">
+        <CardHeader>
+          <CardTitle className="text-white">$100 Deposit Requested → Jobber Quote</CardTitle>
+          <p className="text-gray-400">Fires when a customer clicks "Make a $100 Deposit to Get Started" and submits their address. Send this to the Zap that creates a Jobber quote.</p>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label className="text-gray-300">Deposit Zapier Webhook URL</Label>
+            <Input
+              value={depositWebhookUrl}
+              onChange={(e) => onDepositWebhookUrlChange?.(e.target.value)}
+              placeholder="https://hooks.zapier.com/hooks/catch/..."
+              className="bg-gray-600 border-gray-500 text-white"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Payload includes name, email, phone, address, garage_type, selected_color, estimated_price, and results_page_url.
+            </p>
           </div>
         </CardContent>
       </Card>

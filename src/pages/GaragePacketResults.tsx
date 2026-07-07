@@ -9,6 +9,7 @@ import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import Footer from '@/components/Footer';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { DepositModal } from '@/components/packet/DepositModal';
 
 interface FloorPacket {
   id: string;
@@ -28,10 +29,11 @@ const GaragePacketResults = () => {
   const { id } = useParams<{ id: string }>();
   const [packet, setPacket] = useState<FloorPacket | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isColorSheetOpen, setIsColorSheetOpen] = useState(false);
   const [selectedNewColor, setSelectedNewColor] = useState<string | null>(null);
   const [isSavingColor, setIsSavingColor] = useState(false);
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const [depositRequested, setDepositRequested] = useState(false);
 
   useEffect(() => {
     const fetchPacket = async () => {
@@ -54,40 +56,8 @@ const GaragePacketResults = () => {
     fetchPacket();
   }, [id]);
 
-  const handleReadyToProceed = async () => {
-    if (!packet) return;
+  // Deposit submission is handled inside DepositModal; results page just tracks confirmation state.
 
-    setIsUpdating(true);
-
-    try {
-      const { error } = await supabase.functions.invoke(
-        'public-floor-packet',
-        { body: { action: 'confirm_ready', id: packet.id } }
-      );
-
-      if (error) throw error;
-
-      setPacket(prev => prev ? { ...prev, ready_to_proceed: true } : null);
-      toast.success("We'll call you within 60 minutes!");
-
-      // Trigger webhook notification (using existing webhook infrastructure)
-      await supabase.functions.invoke('send-lead-webhook', {
-        body: {
-          first_name: packet.name.split(' ')[0],
-          last_name: packet.name.split(' ').slice(1).join(' ') || '',
-          email: packet.email,
-          phone: packet.phone,
-          questions_comments: `HOT LEAD - Ready to proceed! ${packet.garage_type} garage, ${packet.selected_color} color, $${packet.estimated_price}`,
-          privacy_policy_agreed: true
-        }
-      });
-    } catch (error) {
-      console.error('Error updating:', error);
-      toast.error('Failed to submit. Please try again.');
-    } finally {
-      setIsUpdating(false);
-    }
-  };
 
   const handleSaveColor = async () => {
     if (!packet || !selectedNewColor) return;
@@ -187,7 +157,7 @@ const GaragePacketResults = () => {
                   <div className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">
                     ${packet.estimated_price.toLocaleString()}
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">Estimated total investment</p>
+                  <p className="text-sm text-gray-500 mt-1">Final measurements on day of install</p>
                 </div>
 
                 <div className="flex items-center justify-between bg-gray-50 border border-gray-100 rounded-md px-4 py-3 mb-5">
@@ -224,30 +194,24 @@ const GaragePacketResults = () => {
                 </dl>
 
                 {/* CTA Button */}
-                {packet.ready_to_proceed ? (
+                {depositRequested || packet.ready_to_proceed ? (
                   <div className="bg-green-50 border border-green-200 rounded-md p-4 text-center">
                     <CheckCircle className="h-6 w-6 text-green-600 mx-auto mb-2" />
-                    <h3 className="text-green-900 font-semibold text-sm mb-0.5">You're All Set</h3>
-                    <p className="text-green-800 text-xs">We'll call you within 60 minutes to schedule.</p>
+                    <h3 className="text-green-900 font-semibold text-sm mb-1">You're All Set</h3>
+                    <p className="text-green-800 text-xs">
+                      You will receive a text shortly with a link to make your $100 deposit.
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <Button
-                      onClick={handleReadyToProceed}
-                      disabled={isUpdating}
+                      onClick={() => setIsDepositModalOpen(true)}
                       className="w-full bg-neutral-900 hover:bg-black text-white py-5 text-sm font-semibold tracking-wide"
                     >
-                      {isUpdating ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>Ready to Move Forward</>
-                      )}
+                      Make a $100 Deposit to Get Started
                     </Button>
                     <p className="text-xs text-center text-gray-500">
-                      We'll call within 60 minutes to schedule your installation.
+                      Fully refundable. Once the deposit is made, we'll reach out to you to answer questions and schedule your installation.
                     </p>
                   </div>
                 )}
@@ -460,6 +424,18 @@ const GaragePacketResults = () => {
 
         <Footer />
       </div>
+
+      {packet && (
+        <DepositModal
+          isOpen={isDepositModalOpen}
+          onClose={() => setIsDepositModalOpen(false)}
+          packetId={packet.id}
+          defaultName={packet.name}
+          defaultEmail={packet.email}
+          defaultPhone={packet.phone}
+          onSuccess={() => setDepositRequested(true)}
+        />
+      )}
     </>
   );
 };

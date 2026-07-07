@@ -372,8 +372,11 @@ export type Database = {
       floor_packets: {
         Row: {
           additional_spaces: Json | null
+          address: string | null
           created_at: string
           custom_sqft: number | null
+          deposit_requested: boolean
+          deposit_requested_at: string | null
           email: string
           estimated_price: number
           garage_type: string
@@ -387,8 +390,11 @@ export type Database = {
         }
         Insert: {
           additional_spaces?: Json | null
+          address?: string | null
           created_at?: string
           custom_sqft?: number | null
+          deposit_requested?: boolean
+          deposit_requested_at?: string | null
           email: string
           estimated_price: number
           garage_type: string
@@ -402,8 +408,11 @@ export type Database = {
         }
         Update: {
           additional_spaces?: Json | null
+          address?: string | null
           created_at?: string
           custom_sqft?: number | null
+          deposit_requested?: boolean
+          deposit_requested_at?: string | null
           email?: string
           estimated_price?: number
           garage_type?: string
@@ -1055,6 +1064,7 @@ export type Database = {
       }
       webhook_settings: {
         Row: {
+          deposit_webhook_url: string | null
           dfw_webhook_url: string | null
           floor_packet_webhook_url: string | null
           id: number
@@ -1063,6 +1073,7 @@ export type Database = {
           zapier_webhook_url: string | null
         }
         Insert: {
+          deposit_webhook_url?: string | null
           dfw_webhook_url?: string | null
           floor_packet_webhook_url?: string | null
           id?: number
@@ -1071,6 +1082,7 @@ export type Database = {
           zapier_webhook_url?: string | null
         }
         Update: {
+          deposit_webhook_url?: string | null
           dfw_webhook_url?: string | null
           floor_packet_webhook_url?: string | null
           id?: number
