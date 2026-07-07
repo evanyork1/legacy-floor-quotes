@@ -157,7 +157,7 @@ const GaragePacketResults = () => {
                   <div className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">
                     ${packet.estimated_price.toLocaleString()}
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">Estimated total investment</p>
+                  <p className="text-sm text-gray-500 mt-1">Final measurements on day of install</p>
                 </div>
 
                 <div className="flex items-center justify-between bg-gray-50 border border-gray-100 rounded-md px-4 py-3 mb-5">
