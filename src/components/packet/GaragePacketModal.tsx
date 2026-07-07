@@ -336,7 +336,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
             <div className="space-y-4 sm:space-y-6">
               <div className="text-center">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Choose Your Floor Color</h2>
-                <p className="text-sm sm:text-base text-gray-600">Select a color to preview, or upload your own garage photo</p>
+                <p className="text-sm sm:text-base text-gray-600">Select a color to preview</p>
               </div>
 
               {/* Before/After Slider */}
