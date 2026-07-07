@@ -424,6 +424,18 @@ const GaragePacketResults = () => {
 
         <Footer />
       </div>
+
+      {packet && (
+        <DepositModal
+          isOpen={isDepositModalOpen}
+          onClose={() => setIsDepositModalOpen(false)}
+          packetId={packet.id}
+          defaultName={packet.name}
+          defaultEmail={packet.email}
+          defaultPhone={packet.phone}
+          onSuccess={() => setDepositRequested(true)}
+        />
+      )}
     </>
   );
 };
