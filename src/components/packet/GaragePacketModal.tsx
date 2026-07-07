@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, ArrowRight, Check, Loader2, Upload, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Loader2, X } from 'lucide-react';
 import { colorOptions } from '@/constants/colorOptions';
 import { BeforeAfterSlider } from '@/components/visualizer/BeforeAfterSlider';
 import { supabase } from '@/integrations/supabase/client';
@@ -336,7 +336,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
             <div className="space-y-4 sm:space-y-6">
               <div className="text-center">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Choose Your Floor Color</h2>
-                <p className="text-sm sm:text-base text-gray-600">Select a color to preview, or upload your own garage photo</p>
+                <p className="text-sm sm:text-base text-gray-600">Select a color to preview</p>
               </div>
 
               {/* Before/After Slider */}
@@ -361,23 +361,6 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                     <p className="text-gray-500">Loading preview...</p>
                   </div>
                 )}
-              </div>
-
-              {/* Upload Button */}
-              <div className="flex justify-center">
-                <label className="cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    disabled={isProcessing}
-                  />
-                  <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all">
-                    <Upload className="h-5 w-5" />
-                    <span className="font-medium">Upload Your Own Garage Photo</span>
-                  </div>
-                </label>
               </div>
 
               {/* Color Grid */}
