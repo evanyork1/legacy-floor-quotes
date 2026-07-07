@@ -9,6 +9,7 @@ import { colorOptions } from '@/constants/colorOptions';
 import { toast } from 'sonner';
 import Footer from '@/components/Footer';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { DepositModal } from '@/components/packet/DepositModal';
 
 interface FloorPacket {
   id: string;
@@ -28,10 +29,11 @@ const GaragePacketResults = () => {
   const { id } = useParams<{ id: string }>();
   const [packet, setPacket] = useState<FloorPacket | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isColorSheetOpen, setIsColorSheetOpen] = useState(false);
   const [selectedNewColor, setSelectedNewColor] = useState<string | null>(null);
   const [isSavingColor, setIsSavingColor] = useState(false);
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const [depositRequested, setDepositRequested] = useState(false);
 
   useEffect(() => {
     const fetchPacket = async () => {
@@ -54,40 +56,8 @@ const GaragePacketResults = () => {
     fetchPacket();
   }, [id]);
 
-  const handleReadyToProceed = async () => {
-    if (!packet) return;
+  // Deposit submission is handled inside DepositModal; results page just tracks confirmation state.
 
-    setIsUpdating(true);
-
-    try {
-      const { error } = await supabase.functions.invoke(
-        'public-floor-packet',
-        { body: { action: 'confirm_ready', id: packet.id } }
-      );
-
-      if (error) throw error;
-
-      setPacket(prev => prev ? { ...prev, ready_to_proceed: true } : null);
-      toast.success("We'll call you within 60 minutes!");
-
-      // Trigger webhook notification (using existing webhook infrastructure)
-      await supabase.functions.invoke('send-lead-webhook', {
-        body: {
-          first_name: packet.name.split(' ')[0],
-          last_name: packet.name.split(' ').slice(1).join(' ') || '',
-          email: packet.email,
-          phone: packet.phone,
-          questions_comments: `HOT LEAD - Ready to proceed! ${packet.garage_type} garage, ${packet.selected_color} color, $${packet.estimated_price}`,
-          privacy_policy_agreed: true
-        }
-      });
-    } catch (error) {
-      console.error('Error updating:', error);
-      toast.error('Failed to submit. Please try again.');
-    } finally {
-      setIsUpdating(false);
-    }
-  };
 
   const handleSaveColor = async () => {
     if (!packet || !selectedNewColor) return;
