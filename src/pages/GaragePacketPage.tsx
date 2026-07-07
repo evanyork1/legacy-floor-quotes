@@ -86,7 +86,7 @@ const GaragePacketPage = () => {
                   <span className="text-blue-600">In One Day</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
-                  <span className="font-bold">No in person visit needed.</span> Create your garage floor report online, preview color options in your garage, review our system, and get pricing in about 60 seconds. Click below.
+                  <span className="font-bold">No in person visit needed.</span> Preview color options in your own garage, see pricing, and reserve your install in 60 seconds.
                 </p>
                 <div className="flex flex-col items-center">
                   <CTAButton 
@@ -135,7 +135,7 @@ const GaragePacketPage = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="text-blue-600">Transformations</span>
+                We've Installed Over <span className="text-blue-600">4,000 Garage Floors</span> in Your Town
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
                 See real results from homeowners across Dallas–Fort Worth.
@@ -213,10 +213,10 @@ const GaragePacketPage = () => {
               Ready to Transform Your Garage?
             </h2>
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Get a free, no-obligation estimate. Same-day appointments available.
+              Get a free, no-obligation estimate.
             </p>
             <CTAButton onClick={() => setShowQuoteModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
-              Book Estimate Now
+              Get My Garage Price
             </CTAButton>
           </div>
         </section>
