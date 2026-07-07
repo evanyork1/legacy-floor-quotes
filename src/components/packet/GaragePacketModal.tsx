@@ -363,23 +363,6 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
                 )}
               </div>
 
-              {/* Upload Button */}
-              <div className="flex justify-center">
-                <label className="cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    disabled={isProcessing}
-                  />
-                  <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all">
-                    <Upload className="h-5 w-5" />
-                    <span className="font-medium">Upload Your Own Garage Photo</span>
-                  </div>
-                </label>
-              </div>
-
               {/* Color Grid */}
               <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-1.5 sm:gap-2">
                 {colorOptions.map((color) => (
