@@ -204,18 +204,13 @@ const GaragePacketPage = () => {
               Ready to Transform Your Garage?
             </h2>
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Get a free, no-obligation estimate.
+              Scroll up to get your free instant quote in 60 seconds.
             </p>
-            <CTAButton onClick={() => setShowQuoteModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
-              Get My Garage Price
-            </CTAButton>
           </div>
         </section>
 
         <Footer />
       </div>
-
-      <GaragePacketModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} />
     </>;
 };
 
