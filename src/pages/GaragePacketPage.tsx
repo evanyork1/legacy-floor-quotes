@@ -145,7 +145,7 @@ const GaragePacketPage = () => {
               <div className="mt-6 md:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                 {[
                   { label: "190+", sub: "Five Star Reviews" },
-                  { label: "4,000+", sub: "Trusted Homeowners" },
+                  { label: "4,000+", sub: "Trusted by Over 4,000 Homeowners Across DFW" },
                   { label: "Lifetime", sub: "Warranty" },
                   { label: "One Day", sub: "Installation" },
                 ].map((stat) => (
