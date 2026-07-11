@@ -76,6 +76,12 @@ export const InlineGaragePacket = () => {
       toast.error('Please fill in all contact fields');
       return;
     }
+
+    // Meta Pixel Lead event
+    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+      (window as any).fbq('track', 'Lead');
+    }
+
     setIsSubmitting(true);
     try {
       const estimatedPrice = calculatePrice();
