@@ -79,9 +79,9 @@ const GaragePacketPage = () => {
                   <span className="text-xs sm:text-sm font-medium text-gray-700">190+ Google Reviews</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
-                  DFW's Top Rated<br />
-                  <span className="text-blue-600">Garage Floor Company</span>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
+                  See What Your Garage Floor<br className="hidden sm:block" />
+                  {" "}Would Cost in <span className="text-blue-600">60 Seconds</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
                   Preview color options, see pricing, and reserve your install in 60 seconds.
@@ -96,6 +96,23 @@ const GaragePacketPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <InlineGaragePacket />
+
+              {/* Trust bullets */}
+              <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
+                {[
+                  "Lifetime Warranty",
+                  "Installed in One Day",
+                  "Instant Online Pricing",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm"
+                  >
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-xs font-bold">✓</span>
+                    <span className="text-sm sm:text-base font-semibold text-gray-800">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

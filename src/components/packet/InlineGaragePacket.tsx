@@ -316,7 +316,7 @@ export const InlineGaragePacket = () => {
                     Creating Your Report...
                   </>
                 ) : (
-                  <>Get instant price</>
+                  <>See My Garage Price</>
                 )}
               </Button>
             </div>
