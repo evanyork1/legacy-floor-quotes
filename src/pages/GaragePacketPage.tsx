@@ -6,27 +6,6 @@ import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import garageHero from "@/assets/garage-packet-hero.webp";
 
 const GaragePacketPage = () => {
-  const testimonials = [{
-    name: "Matthew S.",
-    location: "Prosper, TX",
-    text: "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now.",
-    rating: 5
-  }, {
-    name: "Bharat A.",
-    location: "Frisco, TX",
-    text: "Excellent experience from start to finish. The crew did an amazing job with the final result.",
-    rating: 5
-  }, {
-    name: "Scott C.",
-    location: "McKinney, TX",
-    text: "Totally exceeded my expectations. Crew was experienced and professional. Finished floor is amazing.",
-    rating: 5
-  }, {
-    name: "Chris C.",
-    location: "Plano, TX",
-    text: "Great company to work with. Competent, genuinely helpful staff. Would highly recommend!",
-    rating: 5
-  }];
   return <>
       <Helmet>
         <title>Garage Floor In One Day | Dallas-Fort Worth | Legacy Industrial</title>
