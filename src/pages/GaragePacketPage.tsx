@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Star } from "lucide-react";
 import { InlineGaragePacket } from "@/components/packet/InlineGaragePacket";
 import Footer from "@/components/Footer";
+import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import garageHero from "@/assets/garage-packet-hero.webp";
 
 const GaragePacketPage = () => {
@@ -79,8 +80,8 @@ const GaragePacketPage = () => {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
-                  <span className="whitespace-nowrap">Your Dream Garage</span><br />
-                  <span className="text-blue-600">In One Day</span>
+                  DFW's Top Rated<br />
+                  <span className="text-blue-600">Garage Floor Company</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
                   Preview color options, see pricing, and reserve your install in 60 seconds.
@@ -208,6 +209,8 @@ const GaragePacketPage = () => {
             </p>
           </div>
         </section>
+
+        <HomepageFAQ />
 
         <Footer />
       </div>
