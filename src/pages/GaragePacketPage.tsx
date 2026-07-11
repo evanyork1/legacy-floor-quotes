@@ -1,13 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
-import { Phone, Star, Calendar, ArrowUp } from "lucide-react";
-import { GaragePacketModal } from "@/components/packet/GaragePacketModal";
-import { CTAButton } from "@/components/ui/cta-button";
+import { Star } from "lucide-react";
+import { InlineGaragePacket } from "@/components/packet/InlineGaragePacket";
 import Footer from "@/components/Footer";
 import garageHero from "@/assets/garage-packet-hero.webp";
 
 const GaragePacketPage = () => {
-  const [showQuoteModal, setShowQuoteModal] = useState(false);
   const testimonials = [{
     name: "Matthew S.",
     location: "Prosper, TX",
@@ -88,22 +85,16 @@ const GaragePacketPage = () => {
                 <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
                   Preview color options, see pricing, and reserve your install in 60 seconds.
                 </p>
-                <div className="flex flex-col items-center">
-                  <CTAButton 
-                    onClick={() => setShowQuoteModal(true)} 
-                    variant="primary" 
-                    size="lg" 
-                    icon={<Calendar />} 
-                    className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
-                  >
-                    Get My Garage Price
-                  </CTAButton>
-                  <div className="flex flex-col items-center mt-3">
-                    <ArrowUp className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" />
-                    <span className="text-white text-xs sm:text-sm font-medium mt-1">Get a quote in 60 seconds</span>
-                  </div>
-                </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Inline 3-Step Quote — replaces modal, always loaded */}
+        <section className="py-8 md:py-12 bg-gradient-to-b from-gray-100 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <InlineGaragePacket />
             </div>
           </div>
         </section>
@@ -213,18 +204,13 @@ const GaragePacketPage = () => {
               Ready to Transform Your Garage?
             </h2>
             <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Get a free, no-obligation estimate.
+              Scroll up to get your free instant quote in 60 seconds.
             </p>
-            <CTAButton onClick={() => setShowQuoteModal(true)} variant="outline" size="lg" icon={<Calendar />} className="bg-white text-blue-600 hover:bg-gray-100 border-white">
-              Get My Garage Price
-            </CTAButton>
           </div>
         </section>
 
         <Footer />
       </div>
-
-      <GaragePacketModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} />
     </>;
 };
 
