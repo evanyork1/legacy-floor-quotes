@@ -221,14 +221,23 @@ const GaragePacketPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-              Ready to Transform Your Garage?
+        <section className="py-14 md:py-20 bg-[#0f1f3d] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a5f] via-[#0f1f3d] to-black opacity-90" />
+          <div className="container mx-auto px-4 text-center relative">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+              Ready to see your price?
             </h2>
-            <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Scroll up to get your free instant quote in 60 seconds.
+            <p className="text-blue-100/80 text-base md:text-lg mb-6 max-w-xl mx-auto">
+              Scroll up and build your instant quote — no calls, no pressure.
             </p>
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="inline-flex items-center gap-2 bg-white text-[#1e3a5f] font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              Get My Instant Price
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
           </div>
         </section>
 
