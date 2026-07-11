@@ -12,7 +12,7 @@ const HomepageFAQ = () => {
     },
     {
       question: "How much does a garage floor coating cost in Dallas-Fort Worth?",
-      answer: "For a typical 3-car garage in DFW using a premium polyurea flake floor system, pricing usually ranges from $3,600–$5,000. Cheaper epoxy garage floor jobs are available for less, but they often fail within a year. We provide free in-home estimates anywhere in Dallas, Plano, Frisco, McKinney, Allen, Prosper, and the surrounding North Texas area."
+      answer: "For a typical 3-car garage in DFW using a premium polyurea flake floor system, pricing usually ranges from $3,600–$5,000. Cheaper epoxy garage floor jobs are available for less, but they often fail within a year. Use the instant quote builder above to get your exact price in 60 seconds — no appointment needed."
     },
     {
       question: "Will the coating peel, chip, or discolor?",
