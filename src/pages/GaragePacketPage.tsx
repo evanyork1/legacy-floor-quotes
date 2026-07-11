@@ -35,15 +35,15 @@ const GaragePacketPage = () => {
       </Helmet>
 
       <div className="min-h-screen bg-white">
-        {/* Blue Banner with Phone Number */}
-        <div className="bg-blue-600 py-3">
-          <a 
+        {/* Slim Phone Banner */}
+        <div className="bg-[#1e3a5f] py-2.5">
+          <a
             href="tel:214-305-6516"
-            className="flex items-center justify-center gap-2 text-white font-semibold hover:text-blue-100 transition-colors text-sm md:text-base"
+            className="flex items-center justify-center gap-2 text-white text-sm md:text-[15px] tracking-wide hover:text-blue-100 transition-colors"
           >
-            <span>📞</span>
-            <span>Call Us: 214-305-6516</span>
-            <span>📞</span>
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span className="font-medium">Call or text</span>
+            <span className="font-semibold tracking-tight">214-305-6516</span>
           </a>
         </div>
 
@@ -52,20 +52,23 @@ const GaragePacketPage = () => {
           
         </header>
 
-        {/* Hero Section - Full Width with Overlay */}
+        {/* Hero Section */}
         <section className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10" />
-          <img 
-            src={garageHero} 
-            alt="Beautiful garage floor coating" 
-            className="w-full h-[60vh] md:h-[70vh] object-cover" 
-          loading="eager" decoding="async" fetchPriority="high" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/70 z-10" />
+          <img
+            src={garageHero}
+            alt="Premium polyurea garage floor coating in Dallas–Fort Worth"
+            className="w-full h-[58vh] min-h-[440px] md:h-[68vh] object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
           <div className="absolute inset-0 z-20 flex items-center justify-center">
             <div className="container mx-auto px-4">
-              <div className="max-w-2xl mx-auto text-center">
+              <div className="max-w-3xl mx-auto text-center">
                 {/* Google Reviews Badge */}
-                <div className="inline-flex items-center gap-2 bg-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md border border-gray-100 mb-4 sm:mb-6">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full shadow-sm border border-white/40 mb-5 sm:mb-6">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -73,32 +76,32 @@ const GaragePacketPage = () => {
                   </svg>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-3.5 w-3.5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <span className="text-xs sm:text-sm font-medium text-gray-700">190+ Google Reviews</span>
+                  <span className="text-xs sm:text-sm font-medium text-gray-800">4.9 · 190+ Google Reviews</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
-                  See What Your Garage Floor<br className="hidden sm:block" />
-                  {" "}Would Cost in <span className="text-blue-600">60 Seconds</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-5 leading-[1.05] tracking-tight">
+                  Get Your Instant<br className="hidden sm:block" />
+                  {" "}Garage Floor Price
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-lg mx-auto px-2">
-                  Preview color options, see pricing, and reserve your install in 60 seconds.
+                <p className="text-base sm:text-lg md:text-xl text-gray-200/90 max-w-xl mx-auto leading-relaxed">
+                  Choose your color, see pricing, and reserve your spot in 60 seconds. No appointment required.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Inline 3-Step Quote — replaces modal, always loaded */}
-        <section className="py-8 md:py-12 bg-gradient-to-b from-gray-100 to-white">
+        {/* Inline 3-Step Quote */}
+        <section className="py-10 md:py-14 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <InlineGaragePacket />
 
-              {/* Trust bullets */}
-              <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
+              {/* Trust row */}
+              <div className="mt-5 md:mt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
                 {[
                   "Lifetime Warranty",
                   "Installed in One Day",
@@ -106,16 +109,18 @@ const GaragePacketPage = () => {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm"
+                    className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-gray-200 rounded-lg px-2 py-2.5 sm:px-4 sm:py-3"
                   >
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-xs font-bold">✓</span>
-                    <span className="text-sm sm:text-base font-semibold text-gray-800">{item}</span>
+                    <svg className="w-4 h-4 text-blue-600 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clipRule="evenodd"/></svg>
+                    <span className="text-[11px] sm:text-sm font-semibold text-gray-800 leading-tight">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </section>
+
+
 
         {/* Testimonials Section - Compact, No Title */}
         <section className="py-8 md:py-10 bg-gradient-to-b from-gray-50 to-white">
@@ -216,14 +221,23 @@ const GaragePacketPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-              Ready to Transform Your Garage?
+        <section className="py-14 md:py-20 bg-[#0f1f3d] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a5f] via-[#0f1f3d] to-black opacity-90" />
+          <div className="container mx-auto px-4 text-center relative">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+              Ready to see your price?
             </h2>
-            <p className="text-blue-100 text-lg mb-6 max-w-xl mx-auto">
-              Scroll up to get your free instant quote in 60 seconds.
+            <p className="text-blue-100/80 text-base md:text-lg mb-6 max-w-xl mx-auto">
+              Scroll up and build your instant quote — no calls, no pressure.
             </p>
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="inline-flex items-center gap-2 bg-white text-[#1e3a5f] font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              Get My Instant Price
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
           </div>
         </section>
 
