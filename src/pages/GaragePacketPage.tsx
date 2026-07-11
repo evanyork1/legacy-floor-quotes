@@ -79,23 +79,6 @@ const GaragePacketPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <InlineGaragePacket />
-
-              {/* Trust row */}
-              <div className="mt-5 md:mt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
-                {[
-                  "Lifetime Warranty",
-                  "Installed in One Day",
-                  "Instant Online Pricing",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-gray-200 rounded-lg px-2 py-2.5 sm:px-4 sm:py-3"
-                  >
-                    <svg className="w-4 h-4 text-blue-600 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clipRule="evenodd"/></svg>
-                    <span className="text-[11px] sm:text-sm font-semibold text-gray-800 leading-tight">{item}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
