@@ -1,13 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
-import { Phone, Star, Calendar, ArrowUp } from "lucide-react";
-import { GaragePacketModal } from "@/components/packet/GaragePacketModal";
-import { CTAButton } from "@/components/ui/cta-button";
+import { Star } from "lucide-react";
+import { InlineGaragePacket } from "@/components/packet/InlineGaragePacket";
 import Footer from "@/components/Footer";
 import garageHero from "@/assets/garage-packet-hero.webp";
 
 const GaragePacketPage = () => {
-  const [showQuoteModal, setShowQuoteModal] = useState(false);
   const testimonials = [{
     name: "Matthew S.",
     location: "Prosper, TX",
