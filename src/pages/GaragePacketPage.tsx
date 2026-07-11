@@ -6,27 +6,6 @@ import HomepageFAQ from "@/components/sections/HomepageFAQ";
 import garageHero from "@/assets/garage-packet-hero.webp";
 
 const GaragePacketPage = () => {
-  const testimonials = [{
-    name: "Matthew S.",
-    location: "Prosper, TX",
-    text: "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now.",
-    rating: 5
-  }, {
-    name: "Bharat A.",
-    location: "Frisco, TX",
-    text: "Excellent experience from start to finish. The crew did an amazing job with the final result.",
-    rating: 5
-  }, {
-    name: "Scott C.",
-    location: "McKinney, TX",
-    text: "Totally exceeded my expectations. Crew was experienced and professional. Finished floor is amazing.",
-    rating: 5
-  }, {
-    name: "Chris C.",
-    location: "Plano, TX",
-    text: "Great company to work with. Competent, genuinely helpful staff. Would highly recommend!",
-    rating: 5
-  }];
   return <>
       <Helmet>
         <title>Garage Floor In One Day | Dallas-Fort Worth | Legacy Industrial</title>
@@ -87,7 +66,8 @@ const GaragePacketPage = () => {
                   {" "}Garage Floor Price
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-200/90 max-w-xl mx-auto leading-relaxed">
-                  Choose your color, see pricing, and reserve your spot in 60 seconds. No appointment required.
+                  Customize your floor, compare colors, and get your exact price instantly.
+                  <br className="hidden sm:block" /> No sales visit. No waiting. No obligation.
                 </p>
               </div>
             </div>
@@ -122,24 +102,41 @@ const GaragePacketPage = () => {
 
 
 
-        {/* Testimonials Section - Compact, No Title */}
-        <section className="py-8 md:py-10 bg-gradient-to-b from-gray-50 to-white">
+        {/* Testimonials Section - One Massive Review + Stats */}
+        <section className="py-10 md:py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="bg-white rounded-xl p-5 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-                  <div className="flex mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    "{testimonial.text}"
-                  </p>
-                  <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                  <p className="text-gray-500 text-xs">{testimonial.location}</p>
+            <div className="max-w-3xl mx-auto">
+              {/* Featured Review */}
+              <div className="bg-white rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg border border-gray-100 text-center">
+                <div className="flex justify-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 fill-current" />
+                  ))}
                 </div>
-              ))}
+                <blockquote className="text-lg sm:text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-6">
+                  "Incredible how much better these floors make your garage look and feel. My wife said it made the garage feel like an extension of the house now."
+                </blockquote>
+                <p className="font-semibold text-gray-900 text-base sm:text-lg">Matthew S.</p>
+                <p className="text-gray-500 text-sm">Prosper, TX</p>
+              </div>
+
+              {/* Trust Stats */}
+              <div className="mt-6 md:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                {[
+                  { label: "190+", sub: "Five Star Reviews" },
+                  { label: "4,000+", sub: "Trusted by Over 4,000 Homeowners Across DFW" },
+                  { label: "Lifetime", sub: "Warranty" },
+                  { label: "One Day", sub: "Installation" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-white border border-gray-200 rounded-xl px-3 py-4 sm:py-5 text-center shadow-sm"
+                  >
+                    <p className="text-lg sm:text-xl font-bold text-blue-600">{stat.label}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">{stat.sub}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -228,7 +225,7 @@ const GaragePacketPage = () => {
               Ready to see your price?
             </h2>
             <p className="text-blue-100/80 text-base md:text-lg mb-6 max-w-xl mx-auto">
-              Scroll up and build your instant quote — no calls, no pressure.
+              Choose your color and get your price in 60 seconds. No appointment needed.
             </p>
             <a
               href="#top"
