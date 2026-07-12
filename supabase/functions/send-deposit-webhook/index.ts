@@ -1,9 +1,7 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0'
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+};
 
 interface DepositWebhookData {
   id: string;
@@ -25,42 +23,24 @@ Deno.serve(async (req) => {
   }
 
   try {
-    console.log('Deposit webhook function called');
-
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
-
-    const depositData: DepositWebhookData = await req.json();
-    console.log('Received deposit data:', depositData);
-
-    const { data: webhookSettings, error: settingsError } = await supabase
-      .from('webhook_settings')
-      .select('deposit_webhook_url')
-      .eq('id', 1)
-      .single();
-
-    if (settingsError) {
-      console.error('Error fetching webhook settings:', settingsError);
+    const webhookUrl = Deno.env.get('DEPOSIT_WEBHOOK_URL');
+    if (!webhookUrl) {
+      console.error('DEPOSIT_WEBHOOK_URL secret is not set');
       return new Response(
-        JSON.stringify({ error: 'Failed to fetch webhook settings' }),
+        JSON.stringify({ error: 'DEPOSIT_WEBHOOK_URL not configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    if (!webhookSettings?.deposit_webhook_url) {
-      console.log('No deposit webhook URL configured, skipping webhook call');
-      return new Response(
-        JSON.stringify({ message: 'No deposit webhook URL configured' }),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    const depositData: DepositWebhookData = await req.json();
+    console.log('Deposit webhook received for id:', depositData.id);
 
-    const baseUrl = req.headers.get('origin') || 'https://legacy-floor-quotes.lovable.app';
-    const resultsPageUrl = `${baseUrl}/garage-packet-result/${depositData.id}`;
+    const origin = req.headers.get('origin') || '';
+    const resultsPageUrl = origin
+      ? `${origin}/garage-packet-result/${depositData.id}`
+      : `/garage-packet-result/${depositData.id}`;
 
-    const webhookPayload = {
+    const payload = {
       timestamp: new Date().toISOString(),
       event_type: 'deposit_requested',
       lead: {
@@ -77,38 +57,31 @@ Deno.serve(async (req) => {
         visualization_url: depositData.visualization_url ?? null,
         deposit_requested_at: depositData.deposit_requested_at ?? new Date().toISOString(),
         results_page_url: resultsPageUrl,
-      }
+      },
     };
 
-    console.log('Sending deposit webhook to:', webhookSettings.deposit_webhook_url);
-    console.log('Deposit webhook payload:', webhookPayload);
-
-    const webhookResponse = await fetch(webhookSettings.deposit_webhook_url, {
+    console.log('Posting deposit webhook to Zapier');
+    const zapRes = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(webhookPayload),
+      body: JSON.stringify(payload),
     });
+    const zapText = await zapRes.text();
+    console.log('Zapier response', zapRes.status, zapText);
 
-    if (!webhookResponse.ok) {
-      const errorText = await webhookResponse.text();
-      console.error('Deposit webhook failed:', webhookResponse.status, errorText);
+    if (!zapRes.ok) {
       return new Response(
-        JSON.stringify({
-          error: 'Webhook failed',
-          status: webhookResponse.status,
-          response: errorText,
-        }),
+        JSON.stringify({ error: 'Zapier webhook failed', status: zapRes.status, response: zapText }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    console.log('Deposit webhook sent successfully');
     return new Response(
       JSON.stringify({ message: 'Webhook sent successfully' }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error in deposit webhook function:', error);
+    console.error('send-deposit-webhook error:', error);
     return new Response(
       JSON.stringify({ error: 'Internal server error', details: (error as Error).message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

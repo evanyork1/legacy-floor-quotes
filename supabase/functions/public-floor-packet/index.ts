@@ -158,7 +158,9 @@ Deno.serve(async (req) => {
 
       // Fire the deposit webhook (non-blocking to the caller if it fails)
       try {
+        const callerOrigin = req.headers.get("origin") || "";
         await supabase.functions.invoke("send-deposit-webhook", {
+          headers: callerOrigin ? { origin: callerOrigin } : undefined,
           body: {
             id,
             name: name ?? existing.name,
