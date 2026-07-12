@@ -1,9 +1,7 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0'
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+};
 
 interface FloorPacketWebhookData {
   id: string;
@@ -11,60 +9,36 @@ interface FloorPacketWebhookData {
   email: string;
   phone: string;
   garage_type: string;
-  custom_sqft?: number;
+  custom_sqft?: number | null;
   selected_color: string;
   estimated_price: number;
-  visualization_url?: string;
+  visualization_url?: string | null;
 }
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    console.log('Floor packet webhook function called');
-
-    // Initialize Supabase client
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
-
-    // Get the floor packet data from the request
-    const packetData: FloorPacketWebhookData = await req.json();
-    console.log('Received floor packet data:', packetData);
-
-    // Get the webhook URL from settings
-    const { data: webhookSettings, error: settingsError } = await supabase
-      .from('webhook_settings')
-      .select('floor_packet_webhook_url')
-      .eq('id', 1)
-      .single();
-
-    if (settingsError) {
-      console.error('Error fetching webhook settings:', settingsError);
+    const webhookUrl = Deno.env.get('FLOOR_PACKET_WEBHOOK_URL');
+    if (!webhookUrl) {
+      console.error('FLOOR_PACKET_WEBHOOK_URL secret is not set');
       return new Response(
-        JSON.stringify({ error: 'Failed to fetch webhook settings' }),
+        JSON.stringify({ error: 'FLOOR_PACKET_WEBHOOK_URL not configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    if (!webhookSettings?.floor_packet_webhook_url) {
-      console.log('No floor packet webhook URL configured, skipping webhook call');
-      return new Response(
-        JSON.stringify({ message: 'No floor packet webhook URL configured' }),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    const packetData: FloorPacketWebhookData = await req.json();
+    console.log('Floor packet webhook received for id:', packetData.id);
 
-    // Build the results page URL
-    const baseUrl = req.headers.get('origin') || 'https://yoursite.com';
-    const resultsPageUrl = `${baseUrl}/garage-packet-result/${packetData.id}`;
+    const origin = req.headers.get('origin') || '';
+    const resultsPageUrl = origin
+      ? `${origin}/garage-packet-result/${packetData.id}`
+      : `/garage-packet-result/${packetData.id}`;
 
-    // Format the data for Zapier
-    const webhookPayload = {
+    const payload = {
       timestamp: new Date().toISOString(),
       event_type: 'floor_packet_submitted',
       lead: {
@@ -73,52 +47,39 @@ Deno.serve(async (req) => {
         email: packetData.email,
         phone: packetData.phone,
         garage_type: packetData.garage_type,
-        custom_sqft: packetData.custom_sqft || null,
+        custom_sqft: packetData.custom_sqft ?? null,
         selected_color: packetData.selected_color,
         estimated_price: packetData.estimated_price,
-        estimated_price_formatted: `$${packetData.estimated_price.toLocaleString()}`,
-        visualization_url: packetData.visualization_url || null,
+        estimated_price_formatted: `$${(packetData.estimated_price ?? 0).toLocaleString()}`,
+        visualization_url: packetData.visualization_url ?? null,
         results_page_url: resultsPageUrl,
-      }
+      },
     };
 
-    console.log('Sending webhook to:', webhookSettings.floor_packet_webhook_url);
-    console.log('Webhook payload:', webhookPayload);
-
-    // Send the webhook to Zapier
-    const webhookResponse = await fetch(webhookSettings.floor_packet_webhook_url, {
+    console.log('Posting floor packet webhook to Zapier');
+    const zapRes = await fetch(webhookUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(webhookPayload),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
+    const zapText = await zapRes.text();
+    console.log('Zapier response', zapRes.status, zapText);
 
-    if (!webhookResponse.ok) {
-      console.error('Webhook failed with status:', webhookResponse.status);
-      const errorText = await webhookResponse.text();
-      console.error('Webhook error response:', errorText);
-      
+    if (!zapRes.ok) {
       return new Response(
-        JSON.stringify({ 
-          error: 'Webhook failed', 
-          status: webhookResponse.status,
-          response: errorText 
-        }),
+        JSON.stringify({ error: 'Zapier webhook failed', status: zapRes.status, response: zapText }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    console.log('Floor packet webhook sent successfully');
     return new Response(
       JSON.stringify({ message: 'Webhook sent successfully' }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
-
   } catch (error) {
-    console.error('Error in floor packet webhook function:', error);
+    console.error('send-floor-packet-webhook error:', error);
     return new Response(
-      JSON.stringify({ error: 'Internal server error', details: error.message }),
+      JSON.stringify({ error: 'Internal server error', details: (error as Error).message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
