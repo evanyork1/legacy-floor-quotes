@@ -489,10 +489,41 @@ Deno.serve(async (req) => {
         ],
       };
 
-      let depositError: unknown = null;
-      let depositApplied = false;
-      let depositStrategy: string | null = null;
-      let quoteData: any = null;
+      // Build ordered transition-to-send candidates. Jobber's QuoteCreateAttributes
+      // exposes `transitionQuoteTo` which — when set to an "awaiting response" /
+      // "sent" enum value — triggers the same automated email + SMS delivery as
+      // the desktop "Send by email / text" dialog, using the client's contact
+      // preferences on file.
+      const preferredSendOrder = [
+        "AWAITING_RESPONSE",
+        "AWAITING_RESPONSE_EMAIL",
+        "SEND",
+        "SENT",
+        "SEND_TO_CLIENT",
+        "DELIVER",
+      ];
+      const orderedTransitionValues = [
+        ...preferredSendOrder.filter((v) => quoteTransitionValues.includes(v)),
+        ...quoteTransitionValues.filter((v) => !preferredSendOrder.includes(v)),
+      ];
+      const transitionCandidates: Array<{ label: string; value: string }> = orderedTransitionValues
+        .map((v) => ({ label: v, value: v }));
+
+      // If Jobber supports per-quote channel toggles inside clientViewOptions, opt
+      // both channels in — no-op when the field isn't present.
+      const clientViewOptions: Record<string, unknown> = {};
+      const cvoHas = (n: string) => hasField(clientViewOptionsFields, n);
+      if (cvoHas("emailEnabled")) clientViewOptions.emailEnabled = true;
+      if (cvoHas("smsEnabled")) clientViewOptions.smsEnabled = true;
+      if (cvoHas("textMessageEnabled")) clientViewOptions.textMessageEnabled = true;
+      if (cvoHas("sendEmail")) clientViewOptions.sendEmail = true;
+      if (cvoHas("sendText")) clientViewOptions.sendText = true;
+      if (cvoHas("sendSms")) clientViewOptions.sendSms = true;
+      const includeClientViewOptions = hasField(quoteCreateFields, "clientViewOptions") && Object.keys(clientViewOptions).length > 0;
+      if (includeClientViewOptions) {
+        baseAttributes.clientViewOptions = clientViewOptions;
+        console.log("Including clientViewOptions on quoteCreate:", clientViewOptions);
+      }
       let quoteId: string | undefined;
       let clientHubUri: string | undefined;
 
