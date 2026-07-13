@@ -435,19 +435,21 @@ Deno.serve(async (req) => {
         .eq("id", packetId);
 
       // 2. Create quote + required $100 deposit using the live Jobber schema.
-      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues] = await Promise.all([
+      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues, quoteTransitionValues, clientViewOptionsFields] = await Promise.all([
         introspectInputFields("QuoteCreateAttributes"),
         introspectInputFields("QuoteEditAttributes"),
         introspectInputFields("CostModifierAttributes"),
         introspectObjectFields("Quote"),
         introspectQuoteMutationNames(),
         introspectEnumValues("CostModifierTypeEnum"),
+        introspectEnumValues("QuoteTransitionOnCreate"),
+        introspectInputFields("QuoteClientViewOptionsInput"),
       ]);
       const quoteAmountsFields = hasField(quoteFields, "amounts")
         ? await introspectObjectFields("QuoteAmounts")
         : [];
 
-      const quoteScalarSelection = ["id", "quoteNumber", "clientHubUri", "quoteStatus", "previewUrl", "jobberWebUri"]
+      const quoteScalarSelection = ["id", "quoteNumber", "clientHubUri", "quoteStatus", "previewUrl", "jobberWebUri", "sentAt"]
         .filter((field) => hasField(quoteFields, field));
       const amountSelection = ["subtotal", "total", "depositAmount", "depositAmountUnallocated", "outstanding"]
         .filter((field) => hasField(quoteAmountsFields, field));
@@ -487,25 +489,108 @@ Deno.serve(async (req) => {
         ],
       };
 
+      // Build ordered transition-to-send candidates. Jobber's QuoteCreateAttributes
+      // exposes `transitionQuoteTo` which — when set to an "awaiting response" /
+      // "sent" enum value — triggers the same automated email + SMS delivery as
+      // the desktop "Send by email / text" dialog, using the client's contact
+      // preferences on file.
+      const preferredSendOrder = [
+        "AWAITING_RESPONSE",
+        "AWAITING_RESPONSE_EMAIL",
+        "SEND",
+        "SENT",
+        "SEND_TO_CLIENT",
+        "DELIVER",
+      ];
+      const orderedTransitionValues = [
+        ...preferredSendOrder.filter((v) => quoteTransitionValues.includes(v)),
+        ...quoteTransitionValues.filter((v) => !preferredSendOrder.includes(v)),
+      ];
+      const transitionCandidates: Array<{ label: string; value: string }> = orderedTransitionValues
+        .map((v) => ({ label: v, value: v }));
+
+      // If Jobber supports per-quote channel toggles inside clientViewOptions, opt
+      // both channels in — no-op when the field isn't present.
+      const clientViewOptions: Record<string, unknown> = {};
+      const cvoHas = (n: string) => hasField(clientViewOptionsFields, n);
+      if (cvoHas("emailEnabled")) clientViewOptions.emailEnabled = true;
+      if (cvoHas("smsEnabled")) clientViewOptions.smsEnabled = true;
+      if (cvoHas("textMessageEnabled")) clientViewOptions.textMessageEnabled = true;
+      if (cvoHas("sendEmail")) clientViewOptions.sendEmail = true;
+      if (cvoHas("sendText")) clientViewOptions.sendText = true;
+      if (cvoHas("sendSms")) clientViewOptions.sendSms = true;
+      const includeClientViewOptions = hasField(quoteCreateFields, "clientViewOptions") && Object.keys(clientViewOptions).length > 0;
+      if (includeClientViewOptions) {
+        baseAttributes.clientViewOptions = clientViewOptions;
+        console.log("Including clientViewOptions on quoteCreate:", clientViewOptions);
+      }
+
+      // Attach transitionQuoteTo to trigger Jobber's automated send-on-create.
+      const supportsTransition = hasField(quoteCreateFields, "transitionQuoteTo") && transitionCandidates.length > 0;
+      const chosenTransition: string | null = supportsTransition ? transitionCandidates[0].value : null;
+      if (chosenTransition) {
+        baseAttributes.transitionQuoteTo = chosenTransition;
+        console.log("Including transitionQuoteTo on quoteCreate:", chosenTransition, {
+          availableTransitions: quoteTransitionValues,
+        });
+      } else {
+        console.log("Jobber schema does not expose transitionQuoteTo or has no send values", {
+          hasField: hasField(quoteCreateFields, "transitionQuoteTo"),
+          quoteTransitionValues,
+        });
+      }
+
       let depositError: unknown = null;
       let depositApplied = false;
       let depositStrategy: string | null = null;
       let quoteData: any = null;
       let quoteId: string | undefined;
       let clientHubUri: string | undefined;
+      let sendStrategy: string | null = chosenTransition ? `transitionQuoteTo:${chosenTransition}` : null;
+      let sendError: unknown = null;
+      let sentAt: string | null = null;
+
+
+      // Helper: strip transitionQuoteTo from attrs (used when Jobber rejects the
+      // transition — e.g. missing client email/phone or draft-only account).
+      const stripTransition = (attrs: Record<string, unknown>) => {
+        const copy = { ...attrs };
+        delete copy.transitionQuoteTo;
+        return copy;
+      };
+      const errorMentionsTransition = (errs: any) => {
+        try {
+          const s = JSON.stringify(errs || "").toLowerCase();
+          return s.includes("transition") || s.includes("awaiting") || s.includes("send") || s.includes("email") || s.includes("phone") || s.includes("sms");
+        } catch { return false; }
+      };
 
       if (hasField(quoteCreateFields, "deposit") && depositCandidates.length) {
         for (const cand of depositCandidates) {
-          const quoteRes = await jobberCall(quoteMutation, {
-            attributes: { ...baseAttributes, deposit: cand.value },
-          });
-          const currentQuoteData = quoteRes.data?.quoteCreate;
-          const uErrs = currentQuoteData?.userErrors ?? [];
-          const gqlErrs = (quoteRes as any).details;
+          let attempt = { ...baseAttributes, deposit: cand.value };
+          let quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+          let currentQuoteData = quoteRes.data?.quoteCreate;
+          let uErrs = currentQuoteData?.userErrors ?? [];
+          let gqlErrs = (quoteRes as any).details;
+          const failed = !quoteRes.ok || uErrs.length > 0 || !currentQuoteData?.quote?.id;
+
+          // If failure looks transition-related and we included one, retry without it.
+          if (failed && chosenTransition && attempt.transitionQuoteTo && errorMentionsTransition(uErrs.length ? uErrs : gqlErrs)) {
+            console.log(`quoteCreate transition [${chosenTransition}] rejected for deposit [${cand.label}]; retrying without transition`);
+            attempt = stripTransition(attempt);
+            quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+            currentQuoteData = quoteRes.data?.quoteCreate;
+            uErrs = currentQuoteData?.userErrors ?? [];
+            gqlErrs = (quoteRes as any).details;
+            sendStrategy = null;
+            sendError = uErrs.length ? uErrs : gqlErrs;
+          }
+
           console.log(`quoteCreate deposit attempt [${cand.label}]:`, JSON.stringify({
             ok: quoteRes.ok,
             userErrors: uErrs,
             graphqlErrors: gqlErrs,
+            transitionIncluded: !!attempt.transitionQuoteTo,
             quote: currentQuoteData?.quote,
           }));
 
@@ -515,12 +600,17 @@ Deno.serve(async (req) => {
             clientHubUri = currentQuoteData.quote.clientHubUri ?? currentQuoteData.quote.previewUrl ?? currentQuoteData.quote.jobberWebUri;
             depositApplied = true;
             depositStrategy = `quoteCreate.deposit.${cand.label}`;
+            if (attempt.transitionQuoteTo) {
+              sentAt = currentQuoteData.quote.sentAt ?? null;
+            }
             console.log("Jobber quoteCreate with deposit succeeded:", {
               clientId,
               propertyId,
               quoteId,
               clientHubUri,
               depositStrategy,
+              sendStrategy,
+              sentAt,
               quote: currentQuoteData.quote,
             });
             break;
@@ -534,20 +624,33 @@ Deno.serve(async (req) => {
         if (depositError) {
           console.error("quoteCreate deposit attempts failed; creating quote without deposit before quoteEdit fallback:", JSON.stringify(depositError));
         }
-        const quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
+        let attempt: Record<string, unknown> = { ...baseAttributes };
+        let quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
         quoteData = quoteRes.data?.quoteCreate;
+        let uErrs = quoteData?.userErrors ?? [];
 
-        if (!quoteRes.ok || quoteData?.userErrors?.length) {
-          console.error("quoteCreate failed", quoteData?.userErrors ?? quoteRes);
-          return json({ error: "quoteCreate failed", details: quoteData?.userErrors ?? quoteRes }, 502);
+        if ((!quoteRes.ok || uErrs.length) && chosenTransition && attempt.transitionQuoteTo && errorMentionsTransition(uErrs.length ? uErrs : (quoteRes as any).details)) {
+          console.log("quoteCreate (no deposit) rejected transition; retrying without transitionQuoteTo");
+          attempt = stripTransition(attempt);
+          quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+          quoteData = quoteRes.data?.quoteCreate;
+          uErrs = quoteData?.userErrors ?? [];
+          sendStrategy = null;
+          sendError = uErrs.length ? uErrs : (quoteRes as any).details;
+        }
+
+        if (!quoteRes.ok || uErrs.length) {
+          console.error("quoteCreate failed", uErrs.length ? uErrs : quoteRes);
+          return json({ error: "quoteCreate failed", details: uErrs.length ? uErrs : quoteRes }, 502);
         }
 
         quoteId = quoteData?.quote?.id;
         clientHubUri = quoteData?.quote?.clientHubUri ?? quoteData?.quote?.previewUrl ?? quoteData?.quote?.jobberWebUri;
+        if (attempt.transitionQuoteTo) sentAt = quoteData?.quote?.sentAt ?? null;
       }
 
       if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
-      console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri });
+      console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri, sendStrategy, sentAt });
 
       // If Jobber did not accept deposit during quoteCreate, fall back to quoteEdit.
       if (!depositApplied && hasField(quoteEditFields, "deposit") && depositCandidates.length) {
@@ -597,12 +700,70 @@ Deno.serve(async (req) => {
         })
         .eq("id", packetId);
 
-      // 3. The prior quoteStatusChange mutation is not in this Jobber schema.
-      // Do not call a non-existent mutation; surface the available quote mutations
-      // for follow-up if Jobber exposes a send/mark-awaiting endpoint later.
-      const statusWarning = quoteMutationNames.includes("quoteStatusChange")
-        ? null
-        : "Jobber schema does not expose quoteStatusChange; quote may remain Draft unless Jobber exposes a send/awaiting-response mutation for this account/version.";
+      // 3. If we didn't already trigger send via transitionQuoteTo on create,
+      // look for any post-create send mutation Jobber exposes for this account
+      // and try it. Names vary by API version; we only call ones that exist.
+      const sendMutationCandidates = quoteMutationNames.filter((n) => {
+        const l = n.toLowerCase();
+        if (l.includes("lineitem") || l.includes("note")) return false;
+        if (l === "quotecreate" || l === "quoteedit") return false;
+        return l.includes("send") || l.includes("deliver") || l.includes("email") || l.includes("text") || l.includes("sms");
+      });
+
+      if (!sentAt && sendMutationCandidates.length > 0) {
+        console.log("Attempting post-create send via available quote mutations:", sendMutationCandidates);
+        for (const mutName of sendMutationCandidates) {
+          // Introspect the mutation's args to build a minimal, valid input.
+          const argQuery = `
+            query IntrospectMutationArgs {
+              __schema { mutationType { fields { name args { name type { name kind ofType { name kind ofType { name kind } } } } } } }
+            }
+          `;
+          const argRes = await jobberCall(argQuery, {});
+          const allFields = argRes.data?.__schema?.mutationType?.fields ?? [];
+          const target = allFields.find((f: any) => f.name === mutName);
+          if (!target) continue;
+          const args = (target.args ?? []) as Array<{ name: string; type: any }>;
+          // Build variables — set quoteId; leave optional args unset.
+          const vars: Record<string, unknown> = {};
+          const varDefs: string[] = [];
+          const argUses: string[] = [];
+          for (const a of args) {
+            const typeName = unwrapTypeName(a.type);
+            const isRequired = a.type?.kind === "NON_NULL";
+            if (a.name === "quoteId" || (typeName === "EncodedId" && /quote/i.test(a.name))) {
+              vars[a.name] = quoteId;
+              varDefs.push(`$${a.name}: EncodedId!`);
+              argUses.push(`${a.name}: $${a.name}`);
+            } else if (isRequired) {
+              // Required and not quoteId — skip this mutation, it needs input we don't have.
+              varDefs.length = 0;
+              break;
+            }
+          }
+          if (!varDefs.length) continue;
+          const sendMutation = `mutation Send(${varDefs.join(", ")}) { ${mutName}(${argUses.join(", ")}) { userErrors { message path } } }`;
+          try {
+            const sRes = await jobberCall(sendMutation, vars);
+            const uErrs = sRes.data?.[mutName]?.userErrors ?? [];
+            console.log(`Post-create send [${mutName}]:`, JSON.stringify({ ok: sRes.ok, userErrors: uErrs, gql: (sRes as any).details }));
+            if (sRes.ok && uErrs.length === 0) {
+              sendStrategy = `post-create:${mutName}`;
+              sentAt = new Date().toISOString();
+              sendError = null;
+              break;
+            }
+            sendError = uErrs.length ? uErrs : (sRes as any).details ?? sRes;
+          } catch (e) {
+            console.error(`Post-create send [${mutName}] threw:`, e);
+            sendError = (e as Error).message;
+          }
+        }
+      }
+
+      const statusWarning = !sentAt
+        ? `Quote was not auto-sent. transitionQuoteTo values available: ${JSON.stringify(quoteTransitionValues)}. Send-like mutations: ${JSON.stringify(sendMutationCandidates)}. Enable an automation in Jobber (Settings → Automations → "When quote is created → send to client") to send by email + text automatically.`
+        : null;
       if (statusWarning) console.error(statusWarning, { quoteMutationNames });
 
       return json({
@@ -613,6 +774,11 @@ Deno.serve(async (req) => {
         depositApplied,
         depositStrategy,
         depositError,
+        sendStrategy,
+        sentAt,
+        sendError,
+        availableTransitions: quoteTransitionValues,
+        sendMutationCandidates,
         statusWarning,
         quoteMutationNames,
       });
