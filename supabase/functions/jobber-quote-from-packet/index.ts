@@ -293,7 +293,7 @@ Deno.serve(async (req) => {
             }
           }
         `;
-        const propertyInput = { address: buildJobberAddress(zip) };
+        const propertyInput = { properties: [{ address: buildJobberAddress(zip) }] };
         const pRes = await jobberCall(propCreateMutation, {
           clientId,
           input: propertyInput,
