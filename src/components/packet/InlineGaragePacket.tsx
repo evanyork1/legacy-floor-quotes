@@ -295,6 +295,13 @@ export const InlineGaragePacket = () => {
                   onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                   placeholder="(214) 555-1234" className="text-lg" />
               </div>
+              <div>
+                <Label htmlFor="zip" className="font-medium mb-2 block">ZIP Code</Label>
+                <Input id="zip" type="text" inputMode="numeric" maxLength={5} value={formData.zip}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, zip: e.target.value.replace(/\D/g, '').slice(0, 5) }))}
+                  placeholder="75201" className="text-lg" />
+                <p className="mt-1 text-xs text-gray-500">We collect this for drive time estimations.</p>
+              </div>
             </div>
 
             <div className="max-w-md mx-auto bg-gray-50 rounded-xl p-4">
@@ -318,7 +325,7 @@ export const InlineGaragePacket = () => {
             <div className="flex justify-center">
               <Button
                 onClick={handleSubmit}
-                disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
+                disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || formData.zip.length !== 5}
                 className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg"
               >
                 {isSubmitting ? (
