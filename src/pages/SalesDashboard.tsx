@@ -58,6 +58,7 @@ export default function SalesDashboard() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold">Sales Dashboard</h1>
           <div className="flex items-center gap-4">
+            <JobberStatus />
             {isAdmin && (
               <Badge variant="default" className="flex items-center gap-1">
                 <Shield className="h-3 w-3" />
