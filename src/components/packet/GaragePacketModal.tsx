@@ -246,6 +246,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
     
     try {
       const estimatedPrice = calculatePrice();
+      const custom_sqft = formData.garageType === 'custom' ? parseInt(formData.customSqft) : null;
       
       const { data, error } = await supabase.functions.invoke('public-floor-packet', {
         body: {
@@ -254,7 +255,7 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
           email: formData.email,
           phone: formData.phone,
           garage_type: formData.garageType,
-          custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
+          custom_sqft,
           selected_color: formData.selectedColor,
           visualization_url: formData.visualizationUrl,
           estimated_price: estimatedPrice,
@@ -265,6 +266,24 @@ export const GaragePacketModal = ({ isOpen, onClose }: GaragePacketModalProps) =
       if (!data?.id) throw new Error('No id returned');
 
       // Webhook to Zapier is fired server-side by public-floor-packet.
+      // Fire-and-forget Jobber sync — never block the user
+      supabase.functions
+        .invoke('jobber-quote-from-packet', {
+          body: {
+            action: 'create',
+            packet_id: data.id,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            garage_type: formData.garageType,
+            custom_sqft,
+            selected_color: formData.selectedColor,
+            estimated_price: estimatedPrice,
+          },
+        })
+        .then(({ error: jErr }) => {
+          if (jErr) console.error('Jobber sync failed:', jErr);
+        });
 
       toast.success('Your garage report is ready!');
       onClose();
