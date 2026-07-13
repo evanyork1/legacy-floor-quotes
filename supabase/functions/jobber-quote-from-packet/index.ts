@@ -162,6 +162,113 @@ function buildJobberAddress(zip?: string): Record<string, unknown> {
   return address;
 }
 
+type SchemaField = {
+  name: string;
+  type?: {
+    name?: string | null;
+    kind?: string | null;
+    ofType?: SchemaField["type"] | null;
+  } | null;
+};
+
+function unwrapTypeName(type: SchemaField["type"]): string {
+  let current = type;
+  while (current?.ofType) current = current.ofType;
+  return current?.name ?? current?.kind ?? "unknown";
+}
+
+function summarizeFields(fields: SchemaField[]) {
+  return fields.map((f) => ({ name: f.name, type: unwrapTypeName(f.type) }));
+}
+
+async function introspectInputFields(typeName: string): Promise<SchemaField[]> {
+  const query = `
+    query IntrospectInput($name: String!) {
+      __type(name: $name) {
+        inputFields { name type { name kind ofType { name kind ofType { name kind } } } }
+      }
+    }
+  `;
+  const res = await jobberCall(query, { name: typeName });
+  if (!res.ok) {
+    console.error(`Jobber introspection failed for ${typeName}`, res);
+    return [];
+  }
+  const fields: SchemaField[] = res.data?.__type?.inputFields ?? [];
+  console.log(`${typeName} inputFields:`, JSON.stringify(summarizeFields(fields)));
+  return fields;
+}
+
+async function introspectObjectFields(typeName: string): Promise<SchemaField[]> {
+  const query = `
+    query IntrospectObject($name: String!) {
+      __type(name: $name) {
+        fields { name type { name kind ofType { name kind ofType { name kind } } } }
+      }
+    }
+  `;
+  const res = await jobberCall(query, { name: typeName });
+  if (!res.ok) {
+    console.error(`Jobber object introspection failed for ${typeName}`, res);
+    return [];
+  }
+  const fields: SchemaField[] = res.data?.__type?.fields ?? [];
+  console.log(`${typeName} fields:`, JSON.stringify(summarizeFields(fields)));
+  return fields;
+}
+
+async function introspectQuoteMutationNames(): Promise<string[]> {
+  const query = `
+    query IntrospectMutations {
+      __schema { mutationType { fields { name } } }
+    }
+  `;
+  const res = await jobberCall(query, {});
+  if (!res.ok) {
+    console.error("Jobber mutation introspection failed", res);
+    return [];
+  }
+  const names = (res.data?.__schema?.mutationType?.fields ?? [])
+    .map((field: { name?: string }) => field.name)
+    .filter((name: string | undefined): name is string => Boolean(name))
+    .filter((name: string) => name.toLowerCase().includes("quote"));
+  console.log("Jobber quote mutation names:", JSON.stringify(names));
+  return names;
+}
+
+function hasField(fields: SchemaField[], name: string): boolean {
+  return fields.some((field) => field.name === name);
+}
+
+function buildDepositCandidates(costModifierFields: SchemaField[]) {
+  const has = (name: string) => hasField(costModifierFields, name);
+  const candidates: Array<{ label: string; value: Record<string, unknown> }> = [];
+
+  // Jobber uses CostModifierAttributes for quote deposits and discounts. The live
+  // schema decides the exact field names; these candidates only use fields that
+  // introspection confirms, so GraphQL variable validation can execute the edit.
+  if (has("amount")) candidates.push({ label: "amount", value: { amount: 100 } });
+  if (has("value")) candidates.push({ label: "value", value: { value: 100 } });
+  if (has("fixedAmount")) candidates.push({ label: "fixedAmount", value: { fixedAmount: 100 } });
+  if (has("unitAmount")) candidates.push({ label: "unitAmount", value: { unitAmount: 100 } });
+  if (has("rate")) candidates.push({ label: "rate", value: { rate: 100 } });
+
+  if (has("amount") && has("type")) {
+    candidates.push({ label: "amount+type:FIXED", value: { amount: 100, type: "FIXED" } });
+    candidates.push({ label: "amount+type:AMOUNT", value: { amount: 100, type: "AMOUNT" } });
+  }
+  if (has("amount") && has("modifierType")) {
+    candidates.push({ label: "amount+modifierType:FIXED", value: { amount: 100, modifierType: "FIXED" } });
+    candidates.push({ label: "amount+modifierType:AMOUNT", value: { amount: 100, modifierType: "AMOUNT" } });
+  }
+  if (has("value") && has("type")) {
+    candidates.push({ label: "value+type:FIXED", value: { value: 100, type: "FIXED" } });
+    candidates.push({ label: "value+type:AMOUNT", value: { value: 100, type: "AMOUNT" } });
+  }
+
+  return candidates;
+}
+
 function json(payload: unknown, status = 200) {
   return new Response(JSON.stringify(payload), {
     status,
