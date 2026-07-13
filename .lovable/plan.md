@@ -1,58 +1,32 @@
 
-## Goal
-When a user clicks "See My Garage Price" on step 3 of `InlineGaragePacket` (the `/garage-packet-page` flow):
-1. Create a Jobber client with contact info + **ZIP only**
-2. Create a Jobber quote for that client with color/size/price and a **$100 required deposit**
-3. Auto-send the quote (`AWAITING_RESPONSE`) so Jobber emails the client the Client Hub link
+## Problem
+Jobber logs show `clientCreate` succeeded (client `146133578` was created) but `quoteCreate` failed with:
+> `propertyId (Expected value to not be null)`
 
-Later, when the user clicks the deposit button on the packet results page and enters their full street address, we update the Jobber client's billing address / property with the full info.
+Even though we ask for `properties { id }` in the `clientCreate` response, Jobber returned it empty — the auto-property isn't available inline on the create response. That's why no quote was made.
 
-Existing `public-floor-packet` DB save + navigation to results page stays unchanged. Jobber sync runs in parallel and never blocks the user.
+## Fix (in `supabase/functions/jobber-quote-from-packet/index.ts`)
 
-## Changes
+1. After `clientCreate` succeeds, if `properties[0].id` is missing, run a follow-up query against the client to fetch its property:
+   ```graphql
+   query ClientProperties($id: EncodedId!) {
+     client(id: $id) { id properties { id } }
+   }
+   ```
+   Use the first property ID returned.
 
-### 1. `src/components/packet/InlineGaragePacket.tsx`
-- Add `zip` field to `FormData` and step 3 (below Phone Number, labeled "ZIP Code").
-- Small gray helper text below it: **"We collect this for drive time estimations."**
-- ZIP is required (5 digits) to submit.
-- After the existing `public-floor-packet` invoke succeeds, fire-and-forget invoke of a new `jobber-quote-from-packet` edge function. Do NOT await — user navigates immediately.
+2. If that still returns no property (rare — happens if ZIP-only billingAddress didn't auto-create one), call `propertyCreate` explicitly with the client ID + ZIP so Jobber gives us a property to attach the quote to.
 
-### 2. New edge function `supabase/functions/jobber-quote-from-packet/index.ts`
-Reuses token logic from existing `jobber-api` (auto-refresh on 401). Steps:
-1. Split `name` into firstName / lastName.
-2. `clientCreate` with email, phone, and `billingAddress { postalCode }` (ZIP only — Jobber accepts this; a property is auto-created).
-3. Read the created client's `properties.nodes[0].id`.
-4. `quoteCreate`:
-   - `clientId`, `propertyId`
-   - `title`: "Garage Floor Coating — {color} — {size}"
-   - `message`: color, sqft, estimated price summary
-   - `lineItems`: one item, "Polyurea Garage Floor Coating", quantity 1, `unitPrice = estimated_price`, `saveToProductsAndServices: false`
-   - `depositAmount: 100`
-5. If Jobber rejects `depositAmount` on create, retry create without it then `quoteEdit` to set `depositAmount: 100`.
-6. `quoteStatusChange` → `AWAITING_RESPONSE` so Jobber emails the client.
-7. Update `floor_packets` row with `jobber_client_id`, `jobber_property_id`, `jobber_quote_id`, `jobber_quote_url`.
+3. Then proceed with `quoteCreate` using that `propertyId` (which is required — the earlier attempt worked without it in the mutation input for some accounts, but this account requires it).
 
-### 3. Existing deposit flow (`DepositModal.tsx` + `send-deposit-webhook`)
-When the customer submits their full address in the deposit modal on the results page, additionally invoke a small update path (added to the same `jobber-quote-from-packet` function with `action: "updateAddress"`, or a lightweight new function) that:
-- Reads `jobber_client_id` from the `floor_packets` row.
-- Runs a `clientEdit` mutation with the full `billingAddress { street1, city, province, postalCode }`.
-- Runs a `propertyEdit` on the stored `jobber_property_id` with the same address so the quote's property reflects it.
+4. Also: the earlier retry log showed `depositAmount` isn't a field on `QuoteCreateAttributes` for this API version. Drop `depositAmount` from the create call entirely and always set it via `quoteEdit` after create (matches the existing fallback path).
 
-If either ID is missing (Jobber sync never happened), skip silently.
-
-### 4. Migration
-Add nullable columns to `floor_packets`:
-- `jobber_client_id text`
-- `jobber_property_id text`
-- `jobber_quote_id text`
-- `jobber_quote_url text`
+5. Keep the rest of the flow the same: persist IDs to `floor_packets`, `quoteEdit` for the $100 deposit, then `quoteStatusChange` → `AWAITING_RESPONSE` to send the quote.
 
 ## Non-goals
-- No changes to older Houston/DFW quote form.
-- No retry UI. Jobber failures are logged (edge function logs) — push manually if needed.
-- Jobber must already be connected via OAuth. If disconnected, the function logs and exits silently.
+- No schema changes.
+- No frontend changes.
+- The Jobber client that was just created (`146133578`) will remain orphaned in Jobber — you can delete it manually, or submit another test lead once this is deployed and it'll work end-to-end.
 
-## Technical notes
-- `JOBBER_CLIENT_ID` / `JOBBER_CLIENT_SECRET` already configured.
-- GraphQL API version `2025-01-20`, matching the existing `jobber-api` function.
-- New edge function inherits `verify_jwt = false` default (public, no auth — called from the browser like `public-floor-packet`).
+## Verify
+Submit a new test lead → check Jobber for a new client **and** a quote in "Awaiting Response" with $100 deposit. If it still fails, edge function logs will show the exact GraphQL error at the property-fetch step.
