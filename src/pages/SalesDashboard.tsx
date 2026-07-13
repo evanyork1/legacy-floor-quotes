@@ -15,6 +15,7 @@ import { TrainingManagement } from '@/components/admin/TrainingManagement';
 import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
 import AnalyticsTab from '@/components/admin/AnalyticsTab';
 import { Seo } from '@/components/seo/Seo';
+import { JobberStatus } from '@/components/presentation/JobberStatus';
 
 export default function SalesDashboard() {
   const { user, loading, signOut, hasRole } = useAuth();
