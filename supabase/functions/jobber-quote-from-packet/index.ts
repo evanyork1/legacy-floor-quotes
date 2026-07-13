@@ -435,13 +435,15 @@ Deno.serve(async (req) => {
         .eq("id", packetId);
 
       // 2. Create quote + required $100 deposit using the live Jobber schema.
-      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues] = await Promise.all([
+      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues, quoteTransitionValues, clientViewOptionsFields] = await Promise.all([
         introspectInputFields("QuoteCreateAttributes"),
         introspectInputFields("QuoteEditAttributes"),
         introspectInputFields("CostModifierAttributes"),
         introspectObjectFields("Quote"),
         introspectQuoteMutationNames(),
         introspectEnumValues("CostModifierTypeEnum"),
+        introspectEnumValues("QuoteTransitionOnCreate"),
+        introspectInputFields("QuoteClientViewOptionsInput"),
       ]);
       const quoteAmountsFields = hasField(quoteFields, "amounts")
         ? await introspectObjectFields("QuoteAmounts")
