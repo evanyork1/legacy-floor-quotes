@@ -424,7 +424,7 @@ Deno.serve(async (req) => {
         });
       }
 
-      return json({ ok: true, clientId, quoteId, clientHubUri });
+      return json({ ok: true, clientId, quoteId, clientHubUri, depositApplied, depositError });
     }
 
     if (action === "updateAddress") {
