@@ -381,6 +381,10 @@ export type Database = {
           estimated_price: number
           garage_type: string
           id: string
+          jobber_client_id: string | null
+          jobber_property_id: string | null
+          jobber_quote_id: string | null
+          jobber_quote_url: string | null
           name: string
           phone: string
           ready_to_proceed: boolean
@@ -399,6 +403,10 @@ export type Database = {
           estimated_price: number
           garage_type: string
           id?: string
+          jobber_client_id?: string | null
+          jobber_property_id?: string | null
+          jobber_quote_id?: string | null
+          jobber_quote_url?: string | null
           name: string
           phone: string
           ready_to_proceed?: boolean
@@ -417,6 +425,10 @@ export type Database = {
           estimated_price?: number
           garage_type?: string
           id?: string
+          jobber_client_id?: string | null
+          jobber_property_id?: string | null
+          jobber_quote_id?: string | null
+          jobber_quote_url?: string | null
           name?: string
           phone?: string
           ready_to_proceed?: boolean
