@@ -53,6 +53,20 @@ export const DepositModal = ({
 
       if (error) throw error;
 
+      // Fire-and-forget: push full address into Jobber client + property
+      supabase.functions
+        .invoke('jobber-quote-from-packet', {
+          body: {
+            action: 'updateAddress',
+            packet_id: packetId,
+            address: address.trim(),
+          },
+        })
+        .then(({ error: jErr }) => {
+          if (jErr) console.error('Jobber address update failed:', jErr);
+        });
+
+
       toast.success("You'll receive a text shortly with your deposit link.");
       onSuccess();
       onClose();
