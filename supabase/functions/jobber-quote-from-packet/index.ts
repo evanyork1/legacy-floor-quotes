@@ -700,12 +700,69 @@ Deno.serve(async (req) => {
         })
         .eq("id", packetId);
 
-      // 3. The prior quoteStatusChange mutation is not in this Jobber schema.
-      // Do not call a non-existent mutation; surface the available quote mutations
-      // for follow-up if Jobber exposes a send/mark-awaiting endpoint later.
-      const statusWarning = quoteMutationNames.includes("quoteStatusChange")
-        ? null
-        : "Jobber schema does not expose quoteStatusChange; quote may remain Draft unless Jobber exposes a send/awaiting-response mutation for this account/version.";
+      // 3. If we didn't already trigger send via transitionQuoteTo on create,
+      // look for any post-create send mutation Jobber exposes for this account
+      // and try it. Names vary by API version; we only call ones that exist.
+      const sendMutationCandidates = quoteMutationNames.filter((n) => {
+        const l = n.toLowerCase();
+        return (l.includes("send") || l.includes("deliver") || l.includes("email") || l.includes("text") || l.includes("sms"))
+          && !l.includes("createnote") && !l.includes("editnote");
+      });
+
+      if (!sentAt && sendMutationCandidates.length > 0) {
+        console.log("Attempting post-create send via available quote mutations:", sendMutationCandidates);
+        for (const mutName of sendMutationCandidates) {
+          // Introspect the mutation's args to build a minimal, valid input.
+          const argQuery = `
+            query IntrospectMutationArgs($name: String!) {
+              __schema { mutationType { fields { name args { name type { name kind ofType { name kind ofType { name kind } } } } } } }
+            }
+          `;
+          const argRes = await jobberCall(argQuery, { name: mutName });
+          const allFields = argRes.data?.__schema?.mutationType?.fields ?? [];
+          const target = allFields.find((f: any) => f.name === mutName);
+          if (!target) continue;
+          const args = (target.args ?? []) as Array<{ name: string; type: any }>;
+          // Build variables — set quoteId; leave optional args unset.
+          const vars: Record<string, unknown> = {};
+          const varDefs: string[] = [];
+          const argUses: string[] = [];
+          for (const a of args) {
+            const typeName = unwrapTypeName(a.type);
+            const isRequired = a.type?.kind === "NON_NULL";
+            if (a.name === "quoteId" || (typeName === "EncodedId" && /quote/i.test(a.name))) {
+              vars[a.name] = quoteId;
+              varDefs.push(`$${a.name}: EncodedId!`);
+              argUses.push(`${a.name}: $${a.name}`);
+            } else if (isRequired) {
+              // Required and not quoteId — skip this mutation, it needs input we don't have.
+              varDefs.length = 0;
+              break;
+            }
+          }
+          if (!varDefs.length) continue;
+          const sendMutation = `mutation Send(${varDefs.join(", ")}) { ${mutName}(${argUses.join(", ")}) { userErrors { message path } } }`;
+          try {
+            const sRes = await jobberCall(sendMutation, vars);
+            const uErrs = sRes.data?.[mutName]?.userErrors ?? [];
+            console.log(`Post-create send [${mutName}]:`, JSON.stringify({ ok: sRes.ok, userErrors: uErrs, gql: (sRes as any).details }));
+            if (sRes.ok && uErrs.length === 0) {
+              sendStrategy = `post-create:${mutName}`;
+              sentAt = new Date().toISOString();
+              sendError = null;
+              break;
+            }
+            sendError = uErrs.length ? uErrs : (sRes as any).details ?? sRes;
+          } catch (e) {
+            console.error(`Post-create send [${mutName}] threw:`, e);
+            sendError = (e as Error).message;
+          }
+        }
+      }
+
+      const statusWarning = !sentAt
+        ? `Quote was not auto-sent. transitionQuoteTo values available: ${JSON.stringify(quoteTransitionValues)}. Send-like mutations: ${JSON.stringify(sendMutationCandidates)}. Enable an automation in Jobber (Settings → Automations → "When quote is created → send to client") to send by email + text automatically.`
+        : null;
       if (statusWarning) console.error(statusWarning, { quoteMutationNames });
 
       return json({
@@ -716,6 +773,11 @@ Deno.serve(async (req) => {
         depositApplied,
         depositStrategy,
         depositError,
+        sendStrategy,
+        sentAt,
+        sendError,
+        availableTransitions: quoteTransitionValues,
+        sendMutationCandidates,
         statusWarning,
         quoteMutationNames,
       });
