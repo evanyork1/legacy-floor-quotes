@@ -89,7 +89,7 @@ export function JobberStatus() {
       variant="outline"
       size="sm"
       onClick={handleConnect}
-      className="border-orange-500 text-orange-500 hover:bg-orange-500/10"
+      className="border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f]/10"
     >
       <ExternalLink className="h-4 w-4 mr-2" />
       Connect to Jobber
