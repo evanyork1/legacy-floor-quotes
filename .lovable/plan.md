@@ -1,32 +1,72 @@
+## What is going on
 
-## Problem
-Jobber logs show `clientCreate` succeeded (client `146133578` was created) but `quoteCreate` failed with:
-> `propertyId (Expected value to not be null)`
+The latest Jobber logs show the lead/client is being created, but the flow dies before quote creation:
 
-Even though we ask for `properties { id }` in the `clientCreate` response, Jobber returned it empty — the auto-property isn't available inline on the create response. That's why no quote was made.
+```text
+Fetched propertyId after clientCreate: undefined
+propertyCreate failed:
+- Field 'propertyCreate' is missing required arguments: clientId
+- Field 'property' doesn't exist on type 'PropertyCreatePayload' (Did you mean `properties`?)
+```
 
-## Fix (in `supabase/functions/jobber-quote-from-packet/index.ts`)
+So the missing piece is not the quote itself yet. The function cannot get/create a Jobber property, and this Jobber account requires `propertyId` before a quote can be created.
 
-1. After `clientCreate` succeeds, if `properties[0].id` is missing, run a follow-up query against the client to fetch its property:
-   ```graphql
-   query ClientProperties($id: EncodedId!) {
-     client(id: $id) { id properties { id } }
-   }
-   ```
-   Use the first property ID returned.
+## Root cause
 
-2. If that still returns no property (rare — happens if ZIP-only billingAddress didn't auto-create one), call `propertyCreate` explicitly with the client ID + ZIP so Jobber gives us a property to attach the quote to.
+The current fallback mutation is shaped like this conceptually:
 
-3. Then proceed with `quoteCreate` using that `propertyId` (which is required — the earlier attempt worked without it in the mutation input for some accounts, but this account requires it).
+```graphql
+propertyCreate(input: { clientId, address }) {
+  property { id }
+}
+```
 
-4. Also: the earlier retry log showed `depositAmount` isn't a field on `QuoteCreateAttributes` for this API version. Drop `depositAmount` from the create call entirely and always set it via `quoteEdit` after create (matches the existing fallback path).
+But Jobber is telling us that for this API/version:
 
-5. Keep the rest of the flow the same: persist IDs to `floor_packets`, `quoteEdit` for the $100 deposit, then `quoteStatusChange` → `AWAITING_RESPONSE` to send the quote.
+```graphql
+propertyCreate(clientId: ..., attributes: ...) {
+  properties { id }
+}
+```
+
+Meaning:
+- `clientId` must be a top-level mutation argument, not inside `input`.
+- The payload returns `properties`, not `property`.
+- The client lookup is also likely querying the wrong field name: Jobber docs show `clientProperties` as the connection/list for a client's properties, while the code is trying `properties`.
+
+There is a second issue in the frontend path:
+- `InlineGaragePacket` sends `zip` to Jobber.
+- `GaragePacketModal` creates the packet but does not call Jobber at all.
+- `floor_packets` has an `address` column but no `zip` column, so relying only on packet DB data would not provide ZIP unless we pass it or parse it from address later.
+
+## Implementation plan
+
+1. Update `supabase/functions/jobber-quote-from-packet/index.ts` property resolution:
+   - Query `clientProperties` first using the created `clientId`.
+   - Support both possible response shapes defensively: `clientProperties.nodes[0].id`, `properties[0].id`, and similar fallbacks.
+
+2. Fix explicit property creation:
+   - Change `propertyCreate` to pass `clientId` as a top-level argument.
+   - Pass address data as the mutation's property/attributes argument using the field shape Jobber expects.
+   - Read the returned ID from `properties[0].id` first, with safe fallbacks.
+
+3. Make the quote step more resilient:
+   - Only call `quoteCreate` after `propertyId` is confirmed.
+   - Keep `propertyId`, `saveToProductsAndServices: false`, then `quoteEdit` for the $100 deposit, then `quoteStatusChange` to `AWAITING_RESPONSE`.
+   - Add clear logs for: client ID, property ID source, quote ID, deposit edit result, and status change result.
+
+4. Fix the incomplete frontend path:
+   - Add the same Jobber fire-and-forget call to `GaragePacketModal` that `InlineGaragePacket` already has, so both packet submission UIs can create Jobber clients/quotes.
+   - Do not block the customer if Jobber fails.
+
+5. Verify after implementation:
+   - Deploy/test the edge function.
+   - Submit or invoke a controlled test lead.
+   - Check `floor_packets` for `jobber_client_id`, `jobber_property_id`, and `jobber_quote_id`.
+   - Check edge logs to confirm the flow reaches `quoteCreate` instead of stopping at `propertyCreate`.
 
 ## Non-goals
-- No schema changes.
-- No frontend changes.
-- The Jobber client that was just created (`146133578`) will remain orphaned in Jobber — you can delete it manually, or submit another test lead once this is deployed and it'll work end-to-end.
 
-## Verify
-Submit a new test lead → check Jobber for a new client **and** a quote in "Awaiting Response" with $100 deposit. If it still fails, edge function logs will show the exact GraphQL error at the property-fetch step.
+- No database schema changes.
+- No new admin site requirement.
+- No changes to Jobber OAuth/secrets unless logs show auth failure, which they currently do not.
