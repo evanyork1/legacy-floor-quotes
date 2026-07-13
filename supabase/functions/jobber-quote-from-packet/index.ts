@@ -236,34 +236,74 @@ async function introspectQuoteMutationNames(): Promise<string[]> {
   return names;
 }
 
+async function introspectEnumValues(typeName: string): Promise<string[]> {
+  const query = `
+    query IntrospectEnum($name: String!) {
+      __type(name: $name) {
+        enumValues { name }
+      }
+    }
+  `;
+  const res = await jobberCall(query, { name: typeName });
+  if (!res.ok) {
+    console.error(`Jobber enum introspection failed for ${typeName}`, res);
+    return [];
+  }
+  const values = (res.data?.__type?.enumValues ?? [])
+    .map((value: { name?: string }) => value.name)
+    .filter((name: string | undefined): name is string => Boolean(name));
+  console.log(`${typeName} enumValues:`, JSON.stringify(values));
+  return values;
+}
+
 function hasField(fields: SchemaField[], name: string): boolean {
   return fields.some((field) => field.name === name);
 }
 
-function buildDepositCandidates(costModifierFields: SchemaField[]) {
+function buildDepositCandidates(costModifierFields: SchemaField[], costModifierTypeValues: string[]) {
   const has = (name: string) => hasField(costModifierFields, name);
   const candidates: Array<{ label: string; value: Record<string, unknown> }> = [];
+  const fixedTypeValues = costModifierTypeValues.filter((value) => {
+    const normalized = value.toLowerCase();
+    return ["fixed", "amount", "unit", "flat", "dollar"].some((term) => normalized.includes(term))
+      && !["percent", "percentage"].some((term) => normalized.includes(term));
+  });
+  const percentTypeValues = costModifierTypeValues.filter((value) => value.toLowerCase().includes("percent"));
+  const otherTypeValues = costModifierTypeValues.filter((value) =>
+    !fixedTypeValues.includes(value) && !percentTypeValues.includes(value)
+  );
+  const orderedTypeValues = [...fixedTypeValues, ...otherTypeValues];
 
   // Jobber uses CostModifierAttributes for quote deposits and discounts. The live
   // schema decides the exact field names; these candidates only use fields that
   // introspection confirms, so GraphQL variable validation can execute the edit.
-  if (has("amount")) candidates.push({ label: "amount", value: { amount: 100 } });
-  if (has("value")) candidates.push({ label: "value", value: { value: 100 } });
-  if (has("fixedAmount")) candidates.push({ label: "fixedAmount", value: { fixedAmount: 100 } });
-  if (has("unitAmount")) candidates.push({ label: "unitAmount", value: { unitAmount: 100 } });
-  if (has("rate")) candidates.push({ label: "rate", value: { rate: 100 } });
-
-  if (has("amount") && has("type")) {
-    candidates.push({ label: "amount+type:FIXED", value: { amount: 100, type: "FIXED" } });
-    candidates.push({ label: "amount+type:AMOUNT", value: { amount: 100, type: "AMOUNT" } });
+  if (has("rate") && has("type")) {
+    for (const type of orderedTypeValues) {
+      candidates.push({ label: `rate+type:${type}`, value: { rate: 100, type } });
+    }
   }
+  if (has("amount") && has("type")) {
+    for (const type of orderedTypeValues) {
+      candidates.push({ label: `amount+type:${type}`, value: { amount: 100, type } });
+    }
+  }
+  if (has("value") && has("type")) {
+    for (const type of orderedTypeValues) {
+      candidates.push({ label: `value+type:${type}`, value: { value: 100, type } });
+    }
+  }
+
+  if (!has("type")) {
+    if (has("amount")) candidates.push({ label: "amount", value: { amount: 100 } });
+    if (has("value")) candidates.push({ label: "value", value: { value: 100 } });
+    if (has("fixedAmount")) candidates.push({ label: "fixedAmount", value: { fixedAmount: 100 } });
+    if (has("unitAmount")) candidates.push({ label: "unitAmount", value: { unitAmount: 100 } });
+    if (has("rate")) candidates.push({ label: "rate", value: { rate: 100 } });
+  }
+
   if (has("amount") && has("modifierType")) {
     candidates.push({ label: "amount+modifierType:FIXED", value: { amount: 100, modifierType: "FIXED" } });
     candidates.push({ label: "amount+modifierType:AMOUNT", value: { amount: 100, modifierType: "AMOUNT" } });
-  }
-  if (has("value") && has("type")) {
-    candidates.push({ label: "value+type:FIXED", value: { value: 100, type: "FIXED" } });
-    candidates.push({ label: "value+type:AMOUNT", value: { value: 100, type: "AMOUNT" } });
   }
 
   return candidates;
@@ -395,12 +435,13 @@ Deno.serve(async (req) => {
         .eq("id", packetId);
 
       // 2. Create quote + required $100 deposit using the live Jobber schema.
-      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames] = await Promise.all([
+      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues] = await Promise.all([
         introspectInputFields("QuoteCreateAttributes"),
         introspectInputFields("QuoteEditAttributes"),
         introspectInputFields("CostModifierAttributes"),
         introspectObjectFields("Quote"),
         introspectQuoteMutationNames(),
+        introspectEnumValues("CostModifierTypeEnum"),
       ]);
       const quoteAmountsFields = hasField(quoteFields, "amounts")
         ? await introspectObjectFields("QuoteAmounts")
@@ -415,7 +456,7 @@ Deno.serve(async (req) => {
         amountSelection.length ? `amounts { ${amountSelection.join(" ")} }` : "",
       ].filter(Boolean).join("\n");
 
-      const depositCandidates = buildDepositCandidates(costModifierFields);
+      const depositCandidates = buildDepositCandidates(costModifierFields, costModifierTypeValues);
       if (!depositCandidates.length) {
         console.error("No schema-valid CostModifierAttributes candidates found for Jobber quote deposit");
       }
