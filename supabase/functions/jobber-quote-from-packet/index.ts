@@ -435,12 +435,13 @@ Deno.serve(async (req) => {
         .eq("id", packetId);
 
       // 2. Create quote + required $100 deposit using the live Jobber schema.
-      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames] = await Promise.all([
+      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames, costModifierTypeValues] = await Promise.all([
         introspectInputFields("QuoteCreateAttributes"),
         introspectInputFields("QuoteEditAttributes"),
         introspectInputFields("CostModifierAttributes"),
         introspectObjectFields("Quote"),
         introspectQuoteMutationNames(),
+        introspectEnumValues("CostModifierTypeEnum"),
       ]);
       const quoteAmountsFields = hasField(quoteFields, "amounts")
         ? await introspectObjectFields("QuoteAmounts")
@@ -455,7 +456,7 @@ Deno.serve(async (req) => {
         amountSelection.length ? `amounts { ${amountSelection.join(" ")} }` : "",
       ].filter(Boolean).join("\n");
 
-      const depositCandidates = buildDepositCandidates(costModifierFields);
+      const depositCandidates = buildDepositCandidates(costModifierFields, costModifierTypeValues);
       if (!depositCandidates.length) {
         console.error("No schema-valid CostModifierAttributes candidates found for Jobber quote deposit");
       }
