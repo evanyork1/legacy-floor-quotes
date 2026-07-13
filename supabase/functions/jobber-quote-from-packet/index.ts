@@ -148,6 +148,20 @@ function labelForGarage(garageType: string, customSqft?: number | null): string 
   return garageType || "Garage";
 }
 
+function firstPropertyId(source: any): string | undefined {
+  return source?.clientProperties?.nodes?.[0]?.id
+    ?? source?.clientProperties?.[0]?.id
+    ?? source?.properties?.nodes?.[0]?.id
+    ?? source?.properties?.[0]?.id
+    ?? source?.property?.id;
+}
+
+function buildJobberAddress(zip?: string): Record<string, unknown> {
+  const address: Record<string, unknown> = { street1: "Address TBD" };
+  if (zip) address.postalCode = zip;
+  return address;
+}
+
 function json(payload: unknown, status = 200) {
   return new Response(JSON.stringify(payload), {
     status,
@@ -189,7 +203,7 @@ Deno.serve(async (req) => {
           clientCreate(input: $input) {
             client {
               id
-              properties { id }
+              clientProperties(first: 1) { nodes { id } }
             }
             userErrors { message path }
           }
@@ -216,39 +230,70 @@ Deno.serve(async (req) => {
         return json({ error: "clientCreate userErrors", details: clientData.userErrors }, 502);
       }
       const clientId: string | undefined = clientData?.client?.id;
-      let propertyId: string | undefined = clientData?.client?.properties?.[0]?.id;
+      let propertyId: string | undefined = firstPropertyId(clientData?.client);
       if (!clientId) return json({ error: "Missing clientId from Jobber" }, 502);
+      console.log("Jobber clientCreate succeeded:", { clientId, propertyId });
 
       // If clientCreate didn't return a property inline, fetch it
       if (!propertyId) {
         const clientQuery = `
           query ClientProperties($id: EncodedId!) {
-            client(id: $id) { id properties { id } }
+            client(id: $id) {
+              id
+              clientProperties(first: 1) { nodes { id } }
+            }
           }
         `;
         const cRes = await jobberCall(clientQuery, { id: clientId });
-        propertyId = cRes.data?.client?.properties?.[0]?.id;
-        console.log("Fetched propertyId after clientCreate:", propertyId);
+        if (cRes.ok) {
+          propertyId = firstPropertyId(cRes.data?.client);
+        } else {
+          console.error("clientProperties fetch failed", cRes);
+        }
+        console.log("Fetched propertyId after clientCreate:", { propertyId });
       }
 
       // If still no property, create one explicitly
       if (!propertyId) {
         const propCreateMutation = `
-          mutation PropertyCreate($input: PropertyCreateInput!) {
-            propertyCreate(input: $input) {
-              property { id }
+          mutation PropertyCreate($clientId: EncodedId!, $attributes: PropertyAttributes!) {
+            propertyCreate(clientId: $clientId, attributes: $attributes) {
+              properties { id }
               userErrors { message path }
             }
           }
         `;
-        const propInput: Record<string, unknown> = { clientId };
-        if (zip) propInput.address = { postalCode: zip };
-        const pRes = await jobberCall(propCreateMutation, { input: propInput });
-        propertyId = pRes.data?.propertyCreate?.property?.id;
+        const propertyAttributes = { address: buildJobberAddress(zip) };
+        let pRes = await jobberCall(propCreateMutation, {
+          clientId,
+          attributes: propertyAttributes,
+        });
+
+        propertyId = firstPropertyId(pRes.data?.propertyCreate);
+
+        // Some Jobber schema variants name this argument `property` instead of `attributes`.
+        if (!propertyId && !pRes.ok) {
+          const propCreatePropertyArgMutation = `
+            mutation PropertyCreate($clientId: EncodedId!, $property: PropertyAttributes!) {
+              propertyCreate(clientId: $clientId, property: $property) {
+                properties { id }
+                userErrors { message path }
+              }
+            }
+          `;
+          const retryRes = await jobberCall(propCreatePropertyArgMutation, {
+            clientId,
+            property: propertyAttributes,
+          });
+          propertyId = firstPropertyId(retryRes.data?.propertyCreate);
+          pRes = retryRes;
+        }
+
         if (!propertyId) {
           console.error("propertyCreate failed", pRes);
           return json({ error: "Could not obtain propertyId", details: pRes }, 502);
         }
+        console.log("Jobber propertyCreate succeeded:", { clientId, propertyId });
       }
 
       // Persist client + property IDs immediately
@@ -301,6 +346,7 @@ Deno.serve(async (req) => {
       const quoteId: string | undefined = quoteData?.quote?.id;
       const clientHubUri: string | undefined = quoteData?.quote?.clientHubUri;
       if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
+      console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri });
 
       // Optional deposit edit
       if (depositNeedsEdit) {
@@ -318,6 +364,8 @@ Deno.serve(async (req) => {
         });
         if (!editRes.ok || editRes.data?.quoteEdit?.userErrors?.length) {
           console.error("quoteEdit (deposit) failed", editRes);
+        } else {
+          console.log("Jobber quoteEdit deposit succeeded:", { quoteId });
         }
       }
 
@@ -345,6 +393,11 @@ Deno.serve(async (req) => {
       });
       if (!statusRes.ok || statusRes.data?.quoteStatusChange?.userErrors?.length) {
         console.error("quoteStatusChange failed", statusRes);
+      } else {
+        console.log("Jobber quoteStatusChange succeeded:", {
+          quoteId,
+          status: statusRes.data?.quoteStatusChange?.quote?.quoteStatus,
+        });
       }
 
       return json({ ok: true, clientId, quoteId, clientHubUri });
