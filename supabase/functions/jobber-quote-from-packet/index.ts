@@ -715,11 +715,11 @@ Deno.serve(async (req) => {
         for (const mutName of sendMutationCandidates) {
           // Introspect the mutation's args to build a minimal, valid input.
           const argQuery = `
-            query IntrospectMutationArgs($name: String!) {
+            query IntrospectMutationArgs {
               __schema { mutationType { fields { name args { name type { name kind ofType { name kind ofType { name kind } } } } } } }
             }
           `;
-          const argRes = await jobberCall(argQuery, { name: mutName });
+          const argRes = await jobberCall(argQuery, {});
           const allFields = argRes.data?.__schema?.mutationType?.fields ?? [];
           const target = allFields.find((f: any) => f.name === mutName);
           if (!target) continue;
