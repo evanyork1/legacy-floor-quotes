@@ -216,7 +216,7 @@ Deno.serve(async (req) => {
         return json({ error: "clientCreate userErrors", details: clientData.userErrors }, 502);
       }
       const clientId: string | undefined = clientData?.client?.id;
-      const propertyId: string | undefined = clientData?.client?.properties?.nodes?.[0]?.id;
+      const propertyId: string | undefined = clientData?.client?.properties?.[0]?.id;
       if (!clientId) return json({ error: "Missing clientId from Jobber" }, 502);
 
       // Persist client + property IDs immediately
