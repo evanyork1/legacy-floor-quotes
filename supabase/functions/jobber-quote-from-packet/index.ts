@@ -705,8 +705,9 @@ Deno.serve(async (req) => {
       // and try it. Names vary by API version; we only call ones that exist.
       const sendMutationCandidates = quoteMutationNames.filter((n) => {
         const l = n.toLowerCase();
-        return (l.includes("send") || l.includes("deliver") || l.includes("email") || l.includes("text") || l.includes("sms"))
-          && !l.includes("createnote") && !l.includes("editnote");
+        if (l.includes("lineitem") || l.includes("note")) return false;
+        if (l === "quotecreate" || l === "quoteedit") return false;
+        return l.includes("send") || l.includes("deliver") || l.includes("email") || l.includes("text") || l.includes("sms");
       });
 
       if (!sentAt && sendMutationCandidates.length > 0) {
