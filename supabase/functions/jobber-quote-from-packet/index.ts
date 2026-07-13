@@ -551,18 +551,46 @@ Deno.serve(async (req) => {
       let sentAt: string | null = null;
 
 
+      // Helper: strip transitionQuoteTo from attrs (used when Jobber rejects the
+      // transition — e.g. missing client email/phone or draft-only account).
+      const stripTransition = (attrs: Record<string, unknown>) => {
+        const copy = { ...attrs };
+        delete copy.transitionQuoteTo;
+        return copy;
+      };
+      const errorMentionsTransition = (errs: any) => {
+        try {
+          const s = JSON.stringify(errs || "").toLowerCase();
+          return s.includes("transition") || s.includes("awaiting") || s.includes("send") || s.includes("email") || s.includes("phone") || s.includes("sms");
+        } catch { return false; }
+      };
+
       if (hasField(quoteCreateFields, "deposit") && depositCandidates.length) {
         for (const cand of depositCandidates) {
-          const quoteRes = await jobberCall(quoteMutation, {
-            attributes: { ...baseAttributes, deposit: cand.value },
-          });
-          const currentQuoteData = quoteRes.data?.quoteCreate;
-          const uErrs = currentQuoteData?.userErrors ?? [];
-          const gqlErrs = (quoteRes as any).details;
+          let attempt = { ...baseAttributes, deposit: cand.value };
+          let quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+          let currentQuoteData = quoteRes.data?.quoteCreate;
+          let uErrs = currentQuoteData?.userErrors ?? [];
+          let gqlErrs = (quoteRes as any).details;
+          const failed = !quoteRes.ok || uErrs.length > 0 || !currentQuoteData?.quote?.id;
+
+          // If failure looks transition-related and we included one, retry without it.
+          if (failed && chosenTransition && attempt.transitionQuoteTo && errorMentionsTransition(uErrs.length ? uErrs : gqlErrs)) {
+            console.log(`quoteCreate transition [${chosenTransition}] rejected for deposit [${cand.label}]; retrying without transition`);
+            attempt = stripTransition(attempt);
+            quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+            currentQuoteData = quoteRes.data?.quoteCreate;
+            uErrs = currentQuoteData?.userErrors ?? [];
+            gqlErrs = (quoteRes as any).details;
+            sendStrategy = null;
+            sendError = uErrs.length ? uErrs : gqlErrs;
+          }
+
           console.log(`quoteCreate deposit attempt [${cand.label}]:`, JSON.stringify({
             ok: quoteRes.ok,
             userErrors: uErrs,
             graphqlErrors: gqlErrs,
+            transitionIncluded: !!attempt.transitionQuoteTo,
             quote: currentQuoteData?.quote,
           }));
 
@@ -572,12 +600,17 @@ Deno.serve(async (req) => {
             clientHubUri = currentQuoteData.quote.clientHubUri ?? currentQuoteData.quote.previewUrl ?? currentQuoteData.quote.jobberWebUri;
             depositApplied = true;
             depositStrategy = `quoteCreate.deposit.${cand.label}`;
+            if (attempt.transitionQuoteTo) {
+              sentAt = currentQuoteData.quote.sentAt ?? null;
+            }
             console.log("Jobber quoteCreate with deposit succeeded:", {
               clientId,
               propertyId,
               quoteId,
               clientHubUri,
               depositStrategy,
+              sendStrategy,
+              sentAt,
               quote: currentQuoteData.quote,
             });
             break;
@@ -591,20 +624,33 @@ Deno.serve(async (req) => {
         if (depositError) {
           console.error("quoteCreate deposit attempts failed; creating quote without deposit before quoteEdit fallback:", JSON.stringify(depositError));
         }
-        const quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
+        let attempt: Record<string, unknown> = { ...baseAttributes };
+        let quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
         quoteData = quoteRes.data?.quoteCreate;
+        let uErrs = quoteData?.userErrors ?? [];
 
-        if (!quoteRes.ok || quoteData?.userErrors?.length) {
-          console.error("quoteCreate failed", quoteData?.userErrors ?? quoteRes);
-          return json({ error: "quoteCreate failed", details: quoteData?.userErrors ?? quoteRes }, 502);
+        if ((!quoteRes.ok || uErrs.length) && chosenTransition && attempt.transitionQuoteTo && errorMentionsTransition(uErrs.length ? uErrs : (quoteRes as any).details)) {
+          console.log("quoteCreate (no deposit) rejected transition; retrying without transitionQuoteTo");
+          attempt = stripTransition(attempt);
+          quoteRes = await jobberCall(quoteMutation, { attributes: attempt });
+          quoteData = quoteRes.data?.quoteCreate;
+          uErrs = quoteData?.userErrors ?? [];
+          sendStrategy = null;
+          sendError = uErrs.length ? uErrs : (quoteRes as any).details;
+        }
+
+        if (!quoteRes.ok || uErrs.length) {
+          console.error("quoteCreate failed", uErrs.length ? uErrs : quoteRes);
+          return json({ error: "quoteCreate failed", details: uErrs.length ? uErrs : quoteRes }, 502);
         }
 
         quoteId = quoteData?.quote?.id;
         clientHubUri = quoteData?.quote?.clientHubUri ?? quoteData?.quote?.previewUrl ?? quoteData?.quote?.jobberWebUri;
+        if (attempt.transitionQuoteTo) sentAt = quoteData?.quote?.sentAt ?? null;
       }
 
       if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
-      console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri });
+      console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri, sendStrategy, sentAt });
 
       // If Jobber did not accept deposit during quoteCreate, fall back to quoteEdit.
       if (!depositApplied && hasField(quoteEditFields, "deposit") && depositCandidates.length) {
