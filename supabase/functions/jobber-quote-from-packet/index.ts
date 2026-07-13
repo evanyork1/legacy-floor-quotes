@@ -256,38 +256,20 @@ Deno.serve(async (req) => {
       // If still no property, create one explicitly
       if (!propertyId) {
         const propCreateMutation = `
-          mutation PropertyCreate($clientId: EncodedId!, $attributes: PropertyAttributes!) {
-            propertyCreate(clientId: $clientId, attributes: $attributes) {
+          mutation PropertyCreate($clientId: EncodedId!, $input: PropertyCreateInput!) {
+            propertyCreate(clientId: $clientId, input: $input) {
               properties { id }
               userErrors { message path }
             }
           }
         `;
-        const propertyAttributes = { address: buildJobberAddress(zip) };
-        let pRes = await jobberCall(propCreateMutation, {
+        const propertyInput = { address: buildJobberAddress(zip) };
+        const pRes = await jobberCall(propCreateMutation, {
           clientId,
-          attributes: propertyAttributes,
+          input: propertyInput,
         });
 
         propertyId = firstPropertyId(pRes.data?.propertyCreate);
-
-        // Some Jobber schema variants name this argument `property` instead of `attributes`.
-        if (!propertyId && !pRes.ok) {
-          const propCreatePropertyArgMutation = `
-            mutation PropertyCreate($clientId: EncodedId!, $property: PropertyAttributes!) {
-              propertyCreate(clientId: $clientId, property: $property) {
-                properties { id }
-                userErrors { message path }
-              }
-            }
-          `;
-          const retryRes = await jobberCall(propCreatePropertyArgMutation, {
-            clientId,
-            property: propertyAttributes,
-          });
-          propertyId = firstPropertyId(retryRes.data?.propertyCreate);
-          pRes = retryRes;
-        }
 
         if (!propertyId) {
           console.error("propertyCreate failed", pRes);
