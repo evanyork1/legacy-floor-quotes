@@ -189,7 +189,7 @@ Deno.serve(async (req) => {
           clientCreate(input: $input) {
             client {
               id
-              properties(first: 1) { nodes { id } }
+              properties { id }
             }
             userErrors { message path }
           }
