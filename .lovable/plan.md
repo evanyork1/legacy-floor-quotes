@@ -1,47 +1,50 @@
-## Goal
-Fix the two Supabase edge functions so both Zapier webhooks actually fire. No triggers, no DB webhooks — the frontend calls the edge functions (as it already does), and the edge functions POST to Zapier.
+## What's actually happening (plain English)
 
-## Root cause of current failure
-- `send-floor-packet-webhook` reads `webhook_settings.floor_packet_webhook_url` from the DB. That column is `NULL`, so the function logs "No floor packet webhook URL configured" and returns 200 without ever calling Zapier.
-- `send-deposit-webhook` happens to work only because `deposit_webhook_url` is populated in the same table. Same fragile pattern.
+The browser has to call **something** on Supabase to save the lead and to make Zapier fire — it can't just talk to Postgres directly for anonymous public users. So there are two edge functions doing two different jobs:
 
-## Fix
-1. **Store Zapier URLs as Supabase secrets** (single source of truth, no DB row that can silently be NULL):
-   - `FLOOR_PACKET_WEBHOOK_URL` — new-lead Zap (user pastes)
-   - `DEPOSIT_WEBHOOK_URL` — deposit Zap (user confirms reuse or pastes)
+- **`public-floor-packet`** — the "database gate." When a visitor fills out the form or clicks the $100 deposit button, the browser calls this one function. It writes the row (or updates the deposit column) in the `floor_packets` table on your behalf. This exists because the table is locked down (RLS) — the browser cannot write to it directly.
+- **`send-floor-packet-webhook`** — the "Zapier caller" for new leads. It POSTs to your `FLOOR_PACKET_WEBHOOK_URL` Zap.
+- **`send-deposit-webhook`** — the "Zapier caller" for the deposit click. It POSTs to your `DEPOSIT_WEBHOOK_URL` Zap.
 
-2. **Rewrite `supabase/functions/send-floor-packet-webhook/index.ts`:**
-   - Delete the `webhook_settings` lookup.
-   - Read `Deno.env.get('FLOOR_PACKET_WEBHOOK_URL')`.
-   - Build the same payload it builds today (id, name, email, phone, garage_type, custom_sqft, selected_color, estimated_price, visualization_url, results_page_url, event_type `floor_packet_submitted`, timestamp).
-   - POST to Zapier. Return 200 with the Zapier response status.
-   - Use production domain (user-provided) for `results_page_url`.
+So you're right that the current setup is messy: the **browser** is calling both `public-floor-packet` AND `send-floor-packet-webhook` on submit. That's why you're seeing weird double-fire behavior. The browser should only ever call ONE thing, and Supabase should handle the rest internally.
 
-3. **Rewrite `supabase/functions/send-deposit-webhook/index.ts`:**
-   - Delete the `webhook_settings` lookup.
-   - Read `Deno.env.get('DEPOSIT_WEBHOOK_URL')`.
-   - Same payload shape as today (adds address + `deposit_requested_at`, event_type `deposit_requested`).
-   - POST to Zapier. Return 200 with the Zapier response status.
-   - Use production domain for `results_page_url`.
+## What I want to change
 
-4. **Leave the frontend alone.** It already invokes:
-   - `send-floor-packet-webhook` from `InlineGaragePacket.tsx` after the packet is created.
-   - `send-deposit-webhook` from `public-floor-packet` when `request_deposit` marks the column true.
-   Nothing changes there.
+Make the front end dumb. It calls exactly one edge function per user action, and that edge function handles both the DB write and the Zapier call server-side.
 
-5. **Leave `webhook_settings` table and Admin > Webhooks tab as-is.** They still power other legacy webhooks (lead, DFW). Out of scope for this fix.
+### Front-end (browser) calls — after this change
 
-## Verification after deploy
-- Submit a test packet on the live domain → check Zapier "new lead" Zap history for a fired run.
-- Click "$100 deposit" on the results page → check Zapier "deposit" Zap history for a fired run.
-- If either fails, pull edge function logs (I'll link them) to see the exact response from Zapier.
+| User action | Browser calls | That's it |
+|---|---|---|
+| Submits "Get My Garage Price" | `public-floor-packet` (action: `create`) | ✅ |
+| Clicks "$100 Deposit" | `public-floor-packet` (action: `request_deposit`) | ✅ |
 
-## What I need from you before build mode
-1. **New-lead Zapier Catch Hook URL** (Zap → Trigger step → copy the custom webhook URL).
-2. **Deposit URL** — reuse `https://hooks.zapier.com/hooks/catch/18144828/4u13zqg/` or provide a new one?
-3. **Production domain** for `results_page_url` (e.g. `https://yourdomain.com`).
+No more `send-floor-packet-webhook` or `send-deposit-webhook` calls from the browser. Ever.
 
-## Technical notes
-- Both edge functions already have `verify_jwt = false` in `supabase/config.toml` — no config change needed.
-- Edge functions auto-deploy to your connected Supabase project when I save the files. No manual step.
-- Secrets are added via a secure form; you paste values once, they're available as `Deno.env.get(...)` in the functions.
+### Server-side (inside `public-floor-packet`)
+
+- On `create`: insert row → invoke `send-floor-packet-webhook` in the background → return the new ID to the browser immediately.
+- On `request_deposit`: update the row → invoke `send-deposit-webhook` in the background → return success.
+
+The two webhook functions stay exactly as they are (they're already correct and read the right secrets). We just stop calling them from the browser.
+
+### Files touched
+
+1. `src/components/packet/InlineGaragePacket.tsx` — remove the `send-floor-packet-webhook` call. Only call `public-floor-packet`.
+2. `src/components/packet/GaragePacketModal.tsx` — same cleanup (also calls the webhook directly today).
+3. `src/components/packet/DepositModal.tsx` — already only calls `public-floor-packet`, no change needed.
+4. `supabase/functions/public-floor-packet/index.ts` — on `create`, fire `send-floor-packet-webhook` server-side using `EdgeRuntime.waitUntil(...)` so it doesn't slow down the response. Deposit branch already does this — leave it alone.
+
+### About the "blank then full" webhook you saw
+
+That was almost certainly the browser firing `send-floor-packet-webhook` twice (once from `InlineGaragePacket`, once from `GaragePacketModal` on some paths, or React strict-mode double-invocation in dev). Once the browser stops calling webhooks directly, this goes away.
+
+### About the wrong-Zap-fired issue
+
+Still worth checking that `FLOOR_PACKET_WEBHOOK_URL` and `DEPOSIT_WEBHOOK_URL` are not swapped in Supabase secrets. That's a 30-second visual check in the dashboard, no code change needed. I'll flag it after the code cleanup so we can test end-to-end and see which Zap actually receives which event.
+
+### Verification after the change
+
+1. Submit the packet form → confirm ONE row appears in `floor_packets`, ONE hit to the lead Zap, zero hits to the deposit Zap.
+2. Click $100 deposit → confirm the row updates, ONE hit to the deposit Zap, zero hits to the lead Zap.
+3. If the wrong Zap fires for an event, the secrets are swapped — fix in the Supabase dashboard.
