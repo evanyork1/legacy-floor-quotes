@@ -330,24 +330,66 @@ Deno.serve(async (req) => {
       if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
       console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri });
 
-      // Optional deposit edit
+      // Deposit: introspect QuoteEditAttributes once and try candidate field shapes
+      let depositError: unknown = null;
+      let depositApplied = false;
       if (depositNeedsEdit) {
+        // Introspect input type to see what field(s) exist for deposit
+        const introspectQuery = `
+          query { __type(name: "QuoteEditAttributes") { inputFields { name type { name kind ofType { name kind } } } } }
+        `;
+        const introspectRes = await jobberCall(introspectQuery, {});
+        const inputFields: Array<{ name: string; type: any }> =
+          introspectRes.data?.__type?.inputFields ?? [];
+        console.log(
+          "QuoteEditAttributes inputFields:",
+          JSON.stringify(inputFields.map((f) => ({ name: f.name, type: f.type?.name ?? f.type?.ofType?.name ?? f.type?.kind }))),
+        );
+
         const editMutation = `
           mutation QuoteEdit($quoteId: EncodedId!, $attributes: QuoteEditAttributes!) {
             quoteEdit(quoteId: $quoteId, attributes: $attributes) {
-              quote { id }
+              quote { id depositAmount requiredDepositAmount }
               userErrors { message path }
             }
           }
         `;
-        const editRes = await jobberCall(editMutation, {
-          quoteId,
-          attributes: { depositAmount: 100 },
-        });
-        if (!editRes.ok || editRes.data?.quoteEdit?.userErrors?.length) {
-          console.error("quoteEdit (deposit) failed", editRes);
-        } else {
-          console.log("Jobber quoteEdit deposit succeeded:", { quoteId });
+
+        // Candidate attribute payloads, ordered by likelihood based on Jobber schema
+        const candidates: Array<{ label: string; attrs: Record<string, unknown> }> = [];
+        const has = (n: string) => inputFields.some((f) => f.name === n);
+        if (has("requiredDepositAmount")) candidates.push({ label: "requiredDepositAmount", attrs: { requiredDepositAmount: 100 } });
+        if (has("depositAmount")) candidates.push({ label: "depositAmount", attrs: { depositAmount: 100 } });
+        if (has("requiredDeposit")) candidates.push({ label: "requiredDeposit.amount", attrs: { requiredDeposit: { amount: 100 } } });
+        if (has("deposit")) candidates.push({ label: "deposit.amount", attrs: { deposit: { amount: 100, required: true } } });
+        // Fallback: always try requiredDepositAmount even if introspection came back empty
+        if (candidates.length === 0) {
+          candidates.push({ label: "fallback:requiredDepositAmount", attrs: { requiredDepositAmount: 100 } });
+          candidates.push({ label: "fallback:depositAmount", attrs: { depositAmount: 100 } });
+        }
+
+        for (const cand of candidates) {
+          const editRes = await jobberCall(editMutation, { quoteId, attributes: cand.attrs });
+          const uErrs = editRes.data?.quoteEdit?.userErrors ?? [];
+          const gqlErrs = (editRes as any).details;
+          const returnedQuote = editRes.data?.quoteEdit?.quote;
+          console.log(`quoteEdit deposit attempt [${cand.label}]:`, JSON.stringify({
+            ok: editRes.ok,
+            userErrors: uErrs,
+            graphqlErrors: gqlErrs,
+            quote: returnedQuote,
+          }));
+          if (editRes.ok && uErrs.length === 0) {
+            depositApplied = true;
+            console.log(`Jobber deposit applied via ${cand.label}:`, { quoteId, quote: returnedQuote });
+            break;
+          } else {
+            depositError = uErrs.length ? uErrs : gqlErrs ?? editRes;
+          }
+        }
+
+        if (!depositApplied) {
+          console.error("All quoteEdit deposit attempts failed:", JSON.stringify(depositError));
         }
       }
 
