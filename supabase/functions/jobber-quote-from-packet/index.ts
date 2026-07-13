@@ -449,7 +449,7 @@ Deno.serve(async (req) => {
         ? await introspectObjectFields("QuoteAmounts")
         : [];
 
-      const quoteScalarSelection = ["id", "quoteNumber", "clientHubUri", "quoteStatus", "previewUrl", "jobberWebUri"]
+      const quoteScalarSelection = ["id", "quoteNumber", "clientHubUri", "quoteStatus", "previewUrl", "jobberWebUri", "sentAt"]
         .filter((field) => hasField(quoteFields, field));
       const amountSelection = ["subtotal", "total", "depositAmount", "depositAmountUnallocated", "outstanding"]
         .filter((field) => hasField(quoteAmountsFields, field));
