@@ -17,6 +17,7 @@ interface FormData {
   name: string;
   email: string;
   phone: string;
+  zip: string;
   visualizationUrl: string | null;
 }
 
@@ -34,6 +35,7 @@ export const InlineGaragePacket = () => {
     name: '',
     email: '',
     phone: '',
+    zip: '',
     visualizationUrl: null,
   });
 
@@ -72,15 +74,20 @@ export const InlineGaragePacket = () => {
   const afterImage = selectedColorOption?.demoImage || '/demo-garage-domino.jpg';
 
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email || !formData.phone) {
-      toast.error('Please fill in all contact fields');
+    if (!formData.name || !formData.email || !formData.phone || !formData.zip) {
+      toast.error('Please fill in all fields');
       return;
     }
-
+    const zipDigits = formData.zip.replace(/\D/g, '');
+    if (zipDigits.length !== 5) {
+      toast.error('Please enter a valid 5-digit ZIP code');
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       const estimatedPrice = calculatePrice();
+      const custom_sqft = formData.garageType === 'custom' ? parseInt(formData.customSqft) : null;
       const { data, error } = await supabase.functions.invoke('public-floor-packet', {
         body: {
           action: 'create',
@@ -88,7 +95,7 @@ export const InlineGaragePacket = () => {
           email: formData.email,
           phone: formData.phone,
           garage_type: formData.garageType,
-          custom_sqft: formData.garageType === 'custom' ? parseInt(formData.customSqft) : null,
+          custom_sqft,
           selected_color: formData.selectedColor,
           visualization_url: formData.visualizationUrl,
           estimated_price: estimatedPrice,
@@ -96,6 +103,26 @@ export const InlineGaragePacket = () => {
       });
       if (error) throw error;
       if (!data?.id) throw new Error('No id returned');
+
+      // Fire-and-forget Jobber sync — never block the user
+      supabase.functions
+        .invoke('jobber-quote-from-packet', {
+          body: {
+            action: 'create',
+            packet_id: data.id,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            zip: zipDigits,
+            garage_type: formData.garageType,
+            custom_sqft,
+            selected_color: formData.selectedColor,
+            estimated_price: estimatedPrice,
+          },
+        })
+        .then(({ error: jErr }) => {
+          if (jErr) console.error('Jobber sync failed:', jErr);
+        });
 
       toast.success('Your garage report is ready!');
       navigate(`/garage-packet-result/${data.id}`);
@@ -268,6 +295,13 @@ export const InlineGaragePacket = () => {
                   onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                   placeholder="(214) 555-1234" className="text-lg" />
               </div>
+              <div>
+                <Label htmlFor="zip" className="font-medium mb-2 block">ZIP Code</Label>
+                <Input id="zip" type="text" inputMode="numeric" maxLength={5} value={formData.zip}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, zip: e.target.value.replace(/\D/g, '').slice(0, 5) }))}
+                  placeholder="75201" className="text-lg" />
+                <p className="mt-1 text-xs text-gray-500">We collect this for drive time estimations.</p>
+              </div>
             </div>
 
             <div className="max-w-md mx-auto bg-gray-50 rounded-xl p-4">
@@ -291,7 +325,7 @@ export const InlineGaragePacket = () => {
             <div className="flex justify-center">
               <Button
                 onClick={handleSubmit}
-                disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
+                disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || formData.zip.length !== 5}
                 className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg"
               >
                 {isSubmitting ? (
