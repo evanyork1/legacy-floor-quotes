@@ -179,6 +179,36 @@ Deno.serve(async (req) => {
     const action = String(body.action || "create");
     const supabase = getSupabase();
 
+    if (action === "debugPropertySchema") {
+      const schemaQuery = `
+        query PropertySchema {
+          mutationType: __type(name: "Mutation") {
+            fields {
+              name
+              args {
+                name
+                type { kind name ofType { kind name ofType { kind name } } }
+              }
+            }
+          }
+          propertyCreateInput: __type(name: "PropertyCreateInput") {
+            inputFields { name type { kind name ofType { kind name ofType { kind name } } } }
+          }
+          propertyAttributes: __type(name: "PropertyAttributes") {
+            inputFields { name type { kind name ofType { kind name ofType { kind name } } } }
+          }
+        }
+      `;
+      const schemaRes = await jobberCall(schemaQuery, {});
+      if (!schemaRes.ok) return json({ error: "schema introspection failed", details: schemaRes }, 502);
+      const propertyCreate = schemaRes.data?.mutationType?.fields?.find((field: any) => field.name === "propertyCreate");
+      return json({
+        propertyCreate,
+        propertyCreateInput: schemaRes.data?.propertyCreateInput,
+        propertyAttributes: schemaRes.data?.propertyAttributes,
+      });
+    }
+
     if (action === "create") {
       const packetId = String(body.packet_id || "").trim();
       const name = String(body.name || "").trim();
