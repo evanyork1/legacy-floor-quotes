@@ -98,11 +98,6 @@ Deno.serve(async (req) => {
       }
 
       return json({ id: data.id });
-      if (error) {
-        console.error("create floor_packet error", error);
-        return json({ error: "Create failed" }, 500);
-      }
-      return json({ id: data.id });
     }
 
     const id = String(body.id || "");
