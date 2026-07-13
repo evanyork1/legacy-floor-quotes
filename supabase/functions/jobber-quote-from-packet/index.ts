@@ -216,8 +216,40 @@ Deno.serve(async (req) => {
         return json({ error: "clientCreate userErrors", details: clientData.userErrors }, 502);
       }
       const clientId: string | undefined = clientData?.client?.id;
-      const propertyId: string | undefined = clientData?.client?.properties?.[0]?.id;
+      let propertyId: string | undefined = clientData?.client?.properties?.[0]?.id;
       if (!clientId) return json({ error: "Missing clientId from Jobber" }, 502);
+
+      // If clientCreate didn't return a property inline, fetch it
+      if (!propertyId) {
+        const clientQuery = `
+          query ClientProperties($id: EncodedId!) {
+            client(id: $id) { id properties { id } }
+          }
+        `;
+        const cRes = await jobberCall(clientQuery, { id: clientId });
+        propertyId = cRes.data?.client?.properties?.[0]?.id;
+        console.log("Fetched propertyId after clientCreate:", propertyId);
+      }
+
+      // If still no property, create one explicitly
+      if (!propertyId) {
+        const propCreateMutation = `
+          mutation PropertyCreate($input: PropertyCreateInput!) {
+            propertyCreate(input: $input) {
+              property { id }
+              userErrors { message path }
+            }
+          }
+        `;
+        const propInput: Record<string, unknown> = { clientId };
+        if (zip) propInput.address = { postalCode: zip };
+        const pRes = await jobberCall(propCreateMutation, { input: propInput });
+        propertyId = pRes.data?.propertyCreate?.property?.id;
+        if (!propertyId) {
+          console.error("propertyCreate failed", pRes);
+          return json({ error: "Could not obtain propertyId", details: pRes }, 502);
+        }
+      }
 
       // Persist client + property IDs immediately
       await supabase
@@ -228,7 +260,7 @@ Deno.serve(async (req) => {
         })
         .eq("id", packetId);
 
-      // 2. Create quote with $100 required deposit
+      // 2. Create quote (deposit added via quoteEdit after create)
       const quoteMutation = `
         mutation QuoteCreate($attributes: QuoteCreateAttributes!) {
           quoteCreate(attributes: $attributes) {
@@ -243,6 +275,7 @@ Deno.serve(async (req) => {
       `;
       const baseAttributes: Record<string, unknown> = {
         clientId,
+        propertyId,
         title: `Garage Floor Coating — ${selected_color || "Color TBD"} — ${sizeLabel}`,
         message: `Instant quote submitted from website.\nColor: ${selected_color}\nSize: ${sizeLabel}\nEstimated: $${estimated_price.toLocaleString()}`,
         lineItems: [
@@ -255,26 +288,10 @@ Deno.serve(async (req) => {
           },
         ],
       };
-      if (propertyId) baseAttributes.propertyId = propertyId;
 
-      // Attempt 1: include depositAmount directly
-      let quoteRes = await jobberCall(quoteMutation, {
-        attributes: { ...baseAttributes, depositAmount: 100 },
-      });
-
-      let quoteData = quoteRes.data?.quoteCreate;
-      let depositNeedsEdit = false;
-
-      const hasFieldError = !quoteRes.ok || (quoteData?.userErrors ?? []).some((e: any) =>
-        typeof e?.message === "string" && /deposit/i.test(e.message)
-      );
-
-      if (hasFieldError) {
-        console.log("Retrying quoteCreate without depositAmount");
-        quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
-        quoteData = quoteRes.data?.quoteCreate;
-        depositNeedsEdit = true;
-      }
+      const quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
+      const quoteData = quoteRes.data?.quoteCreate;
+      const depositNeedsEdit = true;
 
       if (!quoteRes.ok || quoteData?.userErrors?.length) {
         console.error("quoteCreate failed", quoteData?.userErrors ?? quoteRes);
