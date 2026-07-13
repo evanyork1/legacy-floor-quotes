@@ -524,8 +524,32 @@ Deno.serve(async (req) => {
         baseAttributes.clientViewOptions = clientViewOptions;
         console.log("Including clientViewOptions on quoteCreate:", clientViewOptions);
       }
+
+      // Attach transitionQuoteTo to trigger Jobber's automated send-on-create.
+      const supportsTransition = hasField(quoteCreateFields, "transitionQuoteTo") && transitionCandidates.length > 0;
+      const chosenTransition: string | null = supportsTransition ? transitionCandidates[0].value : null;
+      if (chosenTransition) {
+        baseAttributes.transitionQuoteTo = chosenTransition;
+        console.log("Including transitionQuoteTo on quoteCreate:", chosenTransition, {
+          availableTransitions: quoteTransitionValues,
+        });
+      } else {
+        console.log("Jobber schema does not expose transitionQuoteTo or has no send values", {
+          hasField: hasField(quoteCreateFields, "transitionQuoteTo"),
+          quoteTransitionValues,
+        });
+      }
+
+      let depositError: unknown = null;
+      let depositApplied = false;
+      let depositStrategy: string | null = null;
+      let quoteData: any = null;
       let quoteId: string | undefined;
       let clientHubUri: string | undefined;
+      let sendStrategy: string | null = chosenTransition ? `transitionQuoteTo:${chosenTransition}` : null;
+      let sendError: unknown = null;
+      let sentAt: string | null = null;
+
 
       if (hasField(quoteCreateFields, "deposit") && depositCandidates.length) {
         for (const cand of depositCandidates) {
