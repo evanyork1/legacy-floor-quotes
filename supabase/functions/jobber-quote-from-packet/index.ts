@@ -394,14 +394,37 @@ Deno.serve(async (req) => {
         })
         .eq("id", packetId);
 
-      // 2. Create quote (deposit added via quoteEdit after create)
+      // 2. Create quote + required $100 deposit using the live Jobber schema.
+      const [quoteCreateFields, quoteEditFields, costModifierFields, quoteFields, quoteMutationNames] = await Promise.all([
+        introspectInputFields("QuoteCreateAttributes"),
+        introspectInputFields("QuoteEditAttributes"),
+        introspectInputFields("CostModifierAttributes"),
+        introspectObjectFields("Quote"),
+        introspectQuoteMutationNames(),
+      ]);
+      const quoteAmountsFields = hasField(quoteFields, "amounts")
+        ? await introspectObjectFields("QuoteAmounts")
+        : [];
+
+      const quoteScalarSelection = ["id", "quoteNumber", "clientHubUri", "quoteStatus", "previewUrl", "jobberWebUri"]
+        .filter((field) => hasField(quoteFields, field));
+      const amountSelection = ["subtotal", "total", "depositAmount", "depositAmountUnallocated", "outstanding"]
+        .filter((field) => hasField(quoteAmountsFields, field));
+      const quoteSelection = [
+        ...(quoteScalarSelection.length ? quoteScalarSelection : ["id"]),
+        amountSelection.length ? `amounts { ${amountSelection.join(" ")} }` : "",
+      ].filter(Boolean).join("\n");
+
+      const depositCandidates = buildDepositCandidates(costModifierFields);
+      if (!depositCandidates.length) {
+        console.error("No schema-valid CostModifierAttributes candidates found for Jobber quote deposit");
+      }
+
       const quoteMutation = `
         mutation QuoteCreate($attributes: QuoteCreateAttributes!) {
           quoteCreate(attributes: $attributes) {
             quote {
-              id
-              quoteNumber
-              clientHubUri
+              ${quoteSelection}
             }
             userErrors { message path }
           }
@@ -423,60 +446,83 @@ Deno.serve(async (req) => {
         ],
       };
 
-      const quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
-      const quoteData = quoteRes.data?.quoteCreate;
-      const depositNeedsEdit = true;
+      let depositError: unknown = null;
+      let depositApplied = false;
+      let depositStrategy: string | null = null;
+      let quoteData: any = null;
+      let quoteId: string | undefined;
+      let clientHubUri: string | undefined;
 
-      if (!quoteRes.ok || quoteData?.userErrors?.length) {
-        console.error("quoteCreate failed", quoteData?.userErrors ?? quoteRes);
-        return json({ error: "quoteCreate failed", details: quoteData?.userErrors ?? quoteRes }, 502);
+      if (hasField(quoteCreateFields, "deposit") && depositCandidates.length) {
+        for (const cand of depositCandidates) {
+          const quoteRes = await jobberCall(quoteMutation, {
+            attributes: { ...baseAttributes, deposit: cand.value },
+          });
+          const currentQuoteData = quoteRes.data?.quoteCreate;
+          const uErrs = currentQuoteData?.userErrors ?? [];
+          const gqlErrs = (quoteRes as any).details;
+          console.log(`quoteCreate deposit attempt [${cand.label}]:`, JSON.stringify({
+            ok: quoteRes.ok,
+            userErrors: uErrs,
+            graphqlErrors: gqlErrs,
+            quote: currentQuoteData?.quote,
+          }));
+
+          if (quoteRes.ok && uErrs.length === 0 && currentQuoteData?.quote?.id) {
+            quoteData = currentQuoteData;
+            quoteId = currentQuoteData.quote.id;
+            clientHubUri = currentQuoteData.quote.clientHubUri ?? currentQuoteData.quote.previewUrl ?? currentQuoteData.quote.jobberWebUri;
+            depositApplied = true;
+            depositStrategy = `quoteCreate.deposit.${cand.label}`;
+            console.log("Jobber quoteCreate with deposit succeeded:", {
+              clientId,
+              propertyId,
+              quoteId,
+              clientHubUri,
+              depositStrategy,
+              quote: currentQuoteData.quote,
+            });
+            break;
+          }
+
+          depositError = uErrs.length ? uErrs : gqlErrs ?? quoteRes;
+        }
       }
 
-      const quoteId: string | undefined = quoteData?.quote?.id;
-      const clientHubUri: string | undefined = quoteData?.quote?.clientHubUri;
+      if (!quoteId) {
+        if (depositError) {
+          console.error("quoteCreate deposit attempts failed; creating quote without deposit before quoteEdit fallback:", JSON.stringify(depositError));
+        }
+        const quoteRes = await jobberCall(quoteMutation, { attributes: baseAttributes });
+        quoteData = quoteRes.data?.quoteCreate;
+
+        if (!quoteRes.ok || quoteData?.userErrors?.length) {
+          console.error("quoteCreate failed", quoteData?.userErrors ?? quoteRes);
+          return json({ error: "quoteCreate failed", details: quoteData?.userErrors ?? quoteRes }, 502);
+        }
+
+        quoteId = quoteData?.quote?.id;
+        clientHubUri = quoteData?.quote?.clientHubUri ?? quoteData?.quote?.previewUrl ?? quoteData?.quote?.jobberWebUri;
+      }
+
       if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
       console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri });
 
-      // Deposit: introspect QuoteEditAttributes once and try candidate field shapes
-      let depositError: unknown = null;
-      let depositApplied = false;
-      if (depositNeedsEdit) {
-        // Introspect input type to see what field(s) exist for deposit
-        const introspectQuery = `
-          query { __type(name: "QuoteEditAttributes") { inputFields { name type { name kind ofType { name kind } } } } }
-        `;
-        const introspectRes = await jobberCall(introspectQuery, {});
-        const inputFields: Array<{ name: string; type: any }> =
-          introspectRes.data?.__type?.inputFields ?? [];
-        console.log(
-          "QuoteEditAttributes inputFields:",
-          JSON.stringify(inputFields.map((f) => ({ name: f.name, type: f.type?.name ?? f.type?.ofType?.name ?? f.type?.kind }))),
-        );
-
+      // If Jobber did not accept deposit during quoteCreate, fall back to quoteEdit.
+      if (!depositApplied && hasField(quoteEditFields, "deposit") && depositCandidates.length) {
         const editMutation = `
           mutation QuoteEdit($quoteId: EncodedId!, $attributes: QuoteEditAttributes!) {
             quoteEdit(quoteId: $quoteId, attributes: $attributes) {
-              quote { id depositAmount requiredDepositAmount }
+              quote {
+                ${quoteSelection}
+              }
               userErrors { message path }
             }
           }
         `;
 
-        // Candidate attribute payloads, ordered by likelihood based on Jobber schema
-        const candidates: Array<{ label: string; attrs: Record<string, unknown> }> = [];
-        const has = (n: string) => inputFields.some((f) => f.name === n);
-        if (has("requiredDepositAmount")) candidates.push({ label: "requiredDepositAmount", attrs: { requiredDepositAmount: 100 } });
-        if (has("depositAmount")) candidates.push({ label: "depositAmount", attrs: { depositAmount: 100 } });
-        if (has("requiredDeposit")) candidates.push({ label: "requiredDeposit.amount", attrs: { requiredDeposit: { amount: 100 } } });
-        if (has("deposit")) candidates.push({ label: "deposit.amount", attrs: { deposit: { amount: 100, required: true } } });
-        // Fallback: always try requiredDepositAmount even if introspection came back empty
-        if (candidates.length === 0) {
-          candidates.push({ label: "fallback:requiredDepositAmount", attrs: { requiredDepositAmount: 100 } });
-          candidates.push({ label: "fallback:depositAmount", attrs: { depositAmount: 100 } });
-        }
-
-        for (const cand of candidates) {
-          const editRes = await jobberCall(editMutation, { quoteId, attributes: cand.attrs });
+        for (const cand of depositCandidates) {
+          const editRes = await jobberCall(editMutation, { quoteId, attributes: { deposit: cand.value } });
           const uErrs = editRes.data?.quoteEdit?.userErrors ?? [];
           const gqlErrs = (editRes as any).details;
           const returnedQuote = editRes.data?.quoteEdit?.quote;
@@ -488,7 +534,8 @@ Deno.serve(async (req) => {
           }));
           if (editRes.ok && uErrs.length === 0) {
             depositApplied = true;
-            console.log(`Jobber deposit applied via ${cand.label}:`, { quoteId, quote: returnedQuote });
+            depositStrategy = `quoteEdit.deposit.${cand.label}`;
+            console.log(`Jobber deposit applied via ${depositStrategy}:`, { quoteId, quote: returnedQuote });
             break;
           } else {
             depositError = uErrs.length ? uErrs : gqlErrs ?? editRes;
@@ -509,29 +556,25 @@ Deno.serve(async (req) => {
         })
         .eq("id", packetId);
 
-      // 3. Send quote (AWAITING_RESPONSE)
-      const statusMutation = `
-        mutation QuoteStatusChange($quoteId: EncodedId!, $status: QuoteStatus!) {
-          quoteStatusChange(quoteId: $quoteId, status: $status) {
-            quote { id quoteStatus clientHubUri }
-            userErrors { message path }
-          }
-        }
-      `;
-      const statusRes = await jobberCall(statusMutation, {
-        quoteId,
-        status: "AWAITING_RESPONSE",
-      });
-      if (!statusRes.ok || statusRes.data?.quoteStatusChange?.userErrors?.length) {
-        console.error("quoteStatusChange failed", statusRes);
-      } else {
-        console.log("Jobber quoteStatusChange succeeded:", {
-          quoteId,
-          status: statusRes.data?.quoteStatusChange?.quote?.quoteStatus,
-        });
-      }
+      // 3. The prior quoteStatusChange mutation is not in this Jobber schema.
+      // Do not call a non-existent mutation; surface the available quote mutations
+      // for follow-up if Jobber exposes a send/mark-awaiting endpoint later.
+      const statusWarning = quoteMutationNames.includes("quoteStatusChange")
+        ? null
+        : "Jobber schema does not expose quoteStatusChange; quote may remain Draft unless Jobber exposes a send/awaiting-response mutation for this account/version.";
+      if (statusWarning) console.error(statusWarning, { quoteMutationNames });
 
-      return json({ ok: true, clientId, quoteId, clientHubUri, depositApplied, depositError });
+      return json({
+        ok: true,
+        clientId,
+        quoteId,
+        clientHubUri,
+        depositApplied,
+        depositStrategy,
+        depositError,
+        statusWarning,
+        quoteMutationNames,
+      });
     }
 
     if (action === "updateAddress") {
