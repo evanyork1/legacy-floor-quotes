@@ -70,6 +70,38 @@ Deno.serve(async (req) => {
         console.error("create floor_packet error", error);
         return json({ error: "Create failed" }, 500);
       }
+
+      // Fire the new-lead Zapier webhook server-side, in the background.
+      const callerOrigin = req.headers.get("origin") || "";
+      const webhookInvocation = supabase.functions
+        .invoke("send-floor-packet-webhook", {
+          headers: callerOrigin ? { origin: callerOrigin } : undefined,
+          body: {
+            id: data.id,
+            name,
+            email,
+            phone,
+            garage_type,
+            custom_sqft: Number.isFinite(custom_sqft as number) ? custom_sqft : null,
+            selected_color,
+            estimated_price: Number.isFinite(estimated_price as number) ? estimated_price : null,
+            visualization_url,
+          },
+        })
+        .then(({ error: whErr }) => {
+          if (whErr) console.error("send-floor-packet-webhook invoke failed", whErr);
+        });
+      // @ts-ignore EdgeRuntime is available at runtime on Supabase edge
+      if (typeof EdgeRuntime !== "undefined" && EdgeRuntime?.waitUntil) {
+        // @ts-ignore
+        EdgeRuntime.waitUntil(webhookInvocation);
+      }
+
+      return json({ id: data.id });
+      if (error) {
+        console.error("create floor_packet error", error);
+        return json({ error: "Create failed" }, 500);
+      }
       return json({ id: data.id });
     }
 
