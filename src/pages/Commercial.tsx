@@ -1,15 +1,39 @@
 import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
+import StructuredData from "@/components/seo/StructuredData";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { BookingModal } from "@/components/landing/BookingModal";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
+
+const COMMERCIAL_FAQS = [
+  {
+    question: "How does your bid process work for GCs and facility managers?",
+    answer:
+      "We walk the site within 3–5 business days of your RFP or ITB request, then return a full commercial-ready bid inside 7–10 business days — scope of work, system spec, mockup options, phasing plan, and schedule aligned to your critical path. Rush turnarounds are available when the RFP window is tight. We work directly with national and regional GCs on tenant improvement, ground-up, and re-coat projects across DFW.",
+  },
+  {
+    question: "Are you OSHA-compliant and fully insured for commercial work?",
+    answer:
+      "Yes. We carry full general liability and workers' comp, submit OSHA-compliant safety plans with every bid, and our crews are trained on containment, ventilation, silica exposure, and fall protection. Certificates of insurance are provided directly to the GC or property manager on request, and we participate in owner/GC-controlled insurance programs (OCIP/CCIP) when required.",
+  },
+  {
+    question: "Can you install nights or weekends to keep operations running?",
+    answer:
+      "Almost all of our commercial work is phased around occupied buildings — nights, weekends, and holiday shutdowns. We stage materials off-site, run low-odor systems where required, and coordinate directly with facility managers on containment, egress, and hand-off. Multi-phase pours in retail, warehouse, food-service, and medical environments are our normal mode of work.",
+  },
+  {
+    question: "What's the warranty on commercial vs residential coatings?",
+    answer:
+      "Residential polyurea flake garages carry our lifetime warranty against peeling, chipping, and UV yellowing. Commercial and industrial systems are warrantied against manufacturing defect and delamination for the design life of the specified system — typically 5 to 15 years depending on the assembly (high-build epoxy, urethane cement, polished concrete). Full written warranty terms and manufacturer backing are included with every commercial bid.",
+  },
+];
 const Commercial = () => {
   const navigate = useNavigate();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -112,6 +136,21 @@ const Commercial = () => {
         <link rel="canonical" href="https://legacyindustrialcoatings.com/commercial" />
         <meta property="og:url" content="https://legacyindustrialcoatings.com/commercial" />
       </Helmet>
+
+      <StructuredData
+        includeLocalBusiness={false}
+        includeOrganization={false}
+        services={[
+          { name: "Concrete Polishing", description: "Mechanically polished concrete for commercial showrooms, retail, restaurants, and industrial facilities across Dallas-Fort Worth.", url: "/concrete-polishing" },
+          { name: "Industrial Epoxy", description: "Heavy-duty epoxy and urethane cement systems for warehouses, manufacturing plants, and industrial facilities in DFW.", url: "/industrial-epoxy" },
+          { name: "Flake Floors", description: "Decorative flake broadcast flooring for commercial retail, showrooms, kennels, and food-service back-of-house.", url: "/flake-floors" },
+        ]}
+        faqs={COMMERCIAL_FAQS.map((f) => ({ question: f.question, answer: f.answer }))}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Commercial", url: "/commercial" },
+        ]}
+      />
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }]} />
 
@@ -286,7 +325,35 @@ const Commercial = () => {
           </div>
         </section>
 
-
+        {/* FAQ Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Commercial Flooring FAQs
+                </h2>
+                <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                  What GCs, facility managers, and property owners ask us most about commercial and industrial floor coatings.
+                </p>
+              </div>
+              <div className="space-y-4">
+                {COMMERCIAL_FAQS.map((faq) => (
+                  <Card key={faq.question} className="bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-md">
+                    <CardHeader className="p-5 sm:p-6">
+                      <CardTitle className="text-base sm:text-lg text-gray-900">
+                        {faq.question}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-5 sm:p-6 pt-0 text-sm sm:text-base text-gray-700 leading-relaxed">
+                      {faq.answer}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         <Footer />
         
