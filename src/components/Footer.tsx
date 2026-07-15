@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Instagram, Facebook, MapIcon } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, MapIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
 const Footer = () => {
@@ -121,8 +121,11 @@ const Footer = () => {
               <a href="https://www.instagram.com/legacyindustrialcoatings/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <Instagram className="h-5 w-5 text-white" />
               </a>
-              <a href="https://www.facebook.com/legacyindustrialcoatings" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+              <a href="https://www.facebook.com/legacyindustrialcoatings" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <Facebook className="h-5 w-5 text-white" />
+              </a>
+              <a href="https://www.linkedin.com/company/legacy-industrial-coatings1" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
+                <Linkedin className="h-5 w-5 text-white" />
               </a>
               <a href="https://maps.app.goo.gl/2idbg4BFnZVKvLNK9" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition-colors">
                 <MapIcon className="h-5 w-5 text-white" />
