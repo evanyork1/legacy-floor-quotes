@@ -16,58 +16,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Google tag (gtag.js) - Original -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-410786005"></script>
-    <!-- Google tag (gtag.js) - New -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NX25CBGD"></script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-THSCWPZW');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Compatibility shim: forward legacy gtag() calls into GTM dataLayer -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-410786005');
-      gtag('config', 'G-Q7NX25CBGD');
-      
-      // New phone conversion config
-      gtag('config', 'AW-16455875438/h_ICCLSv278ZEO724qY9', {
-        'phone_conversion_number': '214-305-6516'
-      });
+      window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+      window.gtag_report_conversion = window.gtag_report_conversion || function(url){
+        dataLayer.push({event: 'click_to_call', url: url});
+        if (typeof url !== 'undefined') window.location = url;
+        return false;
+      };
+      window.gtag_report_conversion_new = window.gtag_report_conversion_new || function(url){
+        dataLayer.push({event: 'click_to_call_new', url: url});
+        if (typeof url !== 'undefined') window.location = url;
+        return false;
+      };
     </script>
 
-    <!-- Event snippet for Click to call conversion page -->
-    <script>
-      function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
-        gtag('event', 'conversion', {
-            'send_to': 'AW-410786005/RWaBCIC37d0aENWx8MMB',
-            'value': 1.0,
-            'currency': 'USD',
-            'event_callback': callback
-        });
-        return false;
-      }
-      
-      // New phone conversion tracking function
-      function gtag_report_conversion_new(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
-        gtag('event', 'conversion', {
-            'send_to': 'AW-16455875438/h_ICCLSv278ZEO724qY9',
-            'value': 1.0,
-            'currency': 'USD',
-            'event_callback': callback
-        });
-        return false;
-      }
-    </script>
     
     <!-- Hotjar Tracking Code for Site 6463772 (name missing) -->
     <script>
@@ -196,6 +169,12 @@
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THSCWPZW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
     <!-- Meta Pixel noscript -->
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1811071886529220&ev=PageView&noscript=1"
