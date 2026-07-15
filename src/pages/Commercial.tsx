@@ -137,6 +137,21 @@ const Commercial = () => {
         <meta property="og:url" content="https://legacyindustrialcoatings.com/commercial" />
       </Helmet>
 
+      <StructuredData
+        includeLocalBusiness={false}
+        includeOrganization={false}
+        services={[
+          { name: "Concrete Polishing", description: "Mechanically polished concrete for commercial showrooms, retail, restaurants, and industrial facilities across Dallas-Fort Worth.", url: "/concrete-polishing" },
+          { name: "Industrial Epoxy", description: "Heavy-duty epoxy and urethane cement systems for warehouses, manufacturing plants, and industrial facilities in DFW.", url: "/industrial-epoxy" },
+          { name: "Flake Floors", description: "Decorative flake broadcast flooring for commercial retail, showrooms, kennels, and food-service back-of-house.", url: "/flake-floors" },
+        ]}
+        faqs={COMMERCIAL_FAQS.map((f) => ({ question: f.question, answer: f.answer }))}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Commercial", url: "/commercial" },
+        ]}
+      />
+
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }]} />
 
       <div className="min-h-screen bg-white">
