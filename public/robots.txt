@@ -18,6 +18,8 @@ Disallow: /garage-packet-result/
 Disallow: /googlegaragepage
 Disallow: /garagefloorsdallasfb
 Disallow: /landingvisual
+Disallow: /floor-visualizer
+Disallow: /gpt
 
 # Major search and social bots — explicit allow
 User-agent: Googlebot

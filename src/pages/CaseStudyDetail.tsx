@@ -18,7 +18,8 @@ const CaseStudyDetail = () => {
   const cs = slug ? getCaseStudyBySlug(slug) : undefined;
   if (!cs) return <Navigate to="/case-studies" replace />;
 
-  const canonical = `https://legacyindustrialcoatings.com/case-studies/${cs.slug}`;
+  const caseStudyPath = cs.category === "residential" ? "residential-case-studies" : "commercial-case-studies";
+  const canonical = `https://legacyindustrialcoatings.com/${caseStudyPath}/${cs.slug}`;
   const heroImageAbs = `https://legacyindustrialcoatings.com${cs.heroImage}`;
 
   const articleSchema = {
