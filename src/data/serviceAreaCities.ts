@@ -34,10 +34,22 @@ const FAQ_RES_TIMING = (city: string): CityFaq => ({
   a: `Most ${city} residential garages are diamond-ground, repaired, and coated in a single day using our polyurea / polyaspartic system. Vehicles are typically back on the floor in 24–48 hours.`,
 });
 
+const FAQ_COMMERCIAL_LEAD_TIME = (city: string): CityFaq => ({
+  q: `What's the lead time for a commercial bid in ${city}?`,
+  a: `For most ${city} commercial and industrial projects we can walk the site within 3–5 business days and return a full ITB-ready bid — with scope, mockup options, and phasing plan — inside 7–10 business days. Rush turnarounds for active GC bids are available when the RFP window is tight; just flag the due date.`,
+});
+
+const FAQ_POLISHED_CONCRETE_RETAIL = (city: string): CityFaq => ({
+  q: `Do you offer polished concrete for ${city} retail and restaurant buildouts?`,
+  a: `Yes — mechanical polished concrete is one of our core commercial systems in ${city}. We handle new slabs and existing floors for retail, restaurant, showroom, and hospitality TI work, including FF/FL flatness on new pours, integrally colored/dyed finishes, joint filling, and densification. We coordinate with the GC on tenant-improvement schedules and phased night pours.`,
+});
+
 const baseFaqs = (city: string): CityFaq[] => [
   FAQ_COMMERCIAL_AFTER_HOURS(city),
   FAQ_OSHA(city),
   FAQ_RES_TIMING(city),
+  FAQ_COMMERCIAL_LEAD_TIME(city),
+  FAQ_POLISHED_CONCRETE_RETAIL(city),
 ];
 
 export const SERVICE_AREA_CITIES: ServiceAreaCity[] = [

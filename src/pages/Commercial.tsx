@@ -1,15 +1,39 @@
 import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
+import StructuredData from "@/components/seo/StructuredData";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { BookingModal } from "@/components/landing/BookingModal";
 import { LeadForm } from "@/components/landing/LeadForm";
 import { Building, Factory, Car, Plane, Dog, Church, Store, School, Utensils, ArrowRight, Phone, Calendar } from "lucide-react";
+
+const COMMERCIAL_FAQS = [
+  {
+    question: "How does your bid process work for GCs and facility managers?",
+    answer:
+      "We walk the site within 3–5 business days of your RFP or ITB request, then return a full commercial-ready bid inside 7–10 business days — scope of work, system spec, mockup options, phasing plan, and schedule aligned to your critical path. Rush turnarounds are available when the RFP window is tight. We work directly with national and regional GCs on tenant improvement, ground-up, and re-coat projects across DFW.",
+  },
+  {
+    question: "Are you OSHA-compliant and fully insured for commercial work?",
+    answer:
+      "Yes. We carry full general liability and workers' comp, submit OSHA-compliant safety plans with every bid, and our crews are trained on containment, ventilation, silica exposure, and fall protection. Certificates of insurance are provided directly to the GC or property manager on request, and we participate in owner/GC-controlled insurance programs (OCIP/CCIP) when required.",
+  },
+  {
+    question: "Can you install nights or weekends to keep operations running?",
+    answer:
+      "Almost all of our commercial work is phased around occupied buildings — nights, weekends, and holiday shutdowns. We stage materials off-site, run low-odor systems where required, and coordinate directly with facility managers on containment, egress, and hand-off. Multi-phase pours in retail, warehouse, food-service, and medical environments are our normal mode of work.",
+  },
+  {
+    question: "What's the warranty on commercial vs residential coatings?",
+    answer:
+      "Residential polyurea flake garages carry our lifetime warranty against peeling, chipping, and UV yellowing. Commercial and industrial systems are warrantied against manufacturing defect and delamination for the design life of the specified system — typically 5 to 15 years depending on the assembly (high-build epoxy, urethane cement, polished concrete). Full written warranty terms and manufacturer backing are included with every commercial bid.",
+  },
+];
 const Commercial = () => {
   const navigate = useNavigate();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
