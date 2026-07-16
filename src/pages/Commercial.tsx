@@ -160,12 +160,12 @@ const Commercial = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Professional <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Commercial Flooring</span> Solutions
+                  Professional <span className="text-blue-900">Commercial Flooring</span> Solutions
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Transform your commercial space with our professional flooring systems. 
@@ -173,13 +173,13 @@ const Commercial = () => {
                   warehouses, retail stores, restaurants, and commercial facilities across Dallas-Fort Worth.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                     <a href="tel:214-305-6516">
                       <Phone className="mr-2 h-5 w-5" />
                       Call Us Now
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                  <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
@@ -187,8 +187,7 @@ const Commercial = () => {
 
               </div>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchPriority="high" />
+                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
