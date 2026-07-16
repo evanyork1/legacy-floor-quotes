@@ -58,28 +58,43 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          landing_page: string | null
           name: string
           phone: string
           project_description: string
+          referrer: string | null
           status: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
+          landing_page?: string | null
           name: string
           phone: string
           project_description: string
+          referrer?: string | null
           status?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
+          landing_page?: string | null
           name?: string
           phone?: string
           project_description?: string
+          referrer?: string | null
           status?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }
