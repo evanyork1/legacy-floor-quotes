@@ -58,6 +58,9 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage, orig
       }
 
       // Insert to Lead Form Subissions table
+      const { captureUtmsFromLocation: cap1, readStoredUtms: read1 } = await import("@/contexts/BookingUrlContext");
+      cap1();
+      const utms1 = read1();
       await supabase
         .from('Lead Form Subissions')
         .insert({
@@ -69,7 +72,12 @@ export const ShareModal = ({ isOpen, onClose, onDownload, transformedImage, orig
           privacy_policy_agreed: true,
           original_photo_url: originalPhotoUrl,
           rendered_photo_url: renderedPhotoUrl,
-          selected_color: selectedColorName || null
+          selected_color: selectedColorName || null,
+          utm_source: utms1.utm_source ?? null,
+          utm_medium: utms1.utm_medium ?? null,
+          utm_campaign: utms1.utm_campaign ?? null,
+          landing_page: typeof window !== "undefined" ? window.location.href : null,
+          referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
         });
 
       // Track analytics
