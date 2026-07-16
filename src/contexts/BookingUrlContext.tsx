@@ -10,7 +10,7 @@ const STORAGE_KEY = "lic_utms";
 
 type UtmMap = Partial<Record<(typeof UTM_KEYS)[number], string>>;
 
-const readStoredUtms = (): UtmMap => {
+export const readStoredUtms = (): UtmMap => {
   if (typeof window === "undefined") return {};
   try {
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
