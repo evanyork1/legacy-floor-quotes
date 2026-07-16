@@ -55,6 +55,10 @@ export const CommercialContactModal = ({ open, onOpenChange }: CommercialContact
     setIsSubmitting(true);
     
     try {
+      const { readStoredUtms, captureUtmsFromLocation } = await import("@/contexts/BookingUrlContext");
+      captureUtmsFromLocation();
+      const utms = readStoredUtms();
+
       const { error } = await supabase
         .from('commercial_submissions')
         .insert({
@@ -62,6 +66,11 @@ export const CommercialContactModal = ({ open, onOpenChange }: CommercialContact
           phone: data.phone,
           email: data.email,
           project_description: data.project_description,
+          utm_source: utms.utm_source ?? null,
+          utm_medium: utms.utm_medium ?? null,
+          utm_campaign: utms.utm_campaign ?? null,
+          landing_page: typeof window !== "undefined" ? window.location.href : null,
+          referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
         });
 
       if (error) throw error;

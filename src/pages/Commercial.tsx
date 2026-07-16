@@ -2,7 +2,8 @@ import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 import StructuredData from "@/components/seo/StructuredData";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { captureUtmsFromLocation } from "@/contexts/BookingUrlContext";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,7 @@ const COMMERCIAL_FAQS = [
 const Commercial = () => {
   const navigate = useNavigate();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  useEffect(() => { captureUtmsFromLocation(); }, []);
   const services = [{
     title: "Concrete Polishing",
     description: "Transform your concrete floors with our professional polishing services. Achieve a high-gloss, durable finish that's perfect for retail spaces, showrooms, and high-traffic commercial areas."
