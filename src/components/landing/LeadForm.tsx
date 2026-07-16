@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { LeadFormModal } from "./LeadFormModal";
+import { captureUtmsFromLocation, readStoredUtms } from "@/contexts/BookingUrlContext";
 export const LeadForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
