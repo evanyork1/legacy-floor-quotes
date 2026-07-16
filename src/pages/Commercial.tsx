@@ -232,11 +232,10 @@ const Commercial = () => {
         </section>
 
         {/* Commercial Spaces */}
-        <section className="py-20 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-blue-800/3"></div>
+        <section className="py-20 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4 relative">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
                 Commercial Spaces We Install
               </h2>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -246,8 +245,8 @@ const Commercial = () => {
 
             {/* Applications Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16">
-              {applications.map((app, index) => <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-200/50 hover:bg-white/90 transition-all duration-300 group shadow-lg hover:shadow-xl hover:-translate-y-1">
-                  <div className="text-blue-600 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
+              {applications.map((app, index) => <div key={index} className="bg-white rounded-xl p-6 text-center border border-slate-200 hover:border-blue-900/30 transition-all duration-300 group shadow-sm hover:shadow-md">
+                  <div className="text-blue-900 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
                     {app.icon}
                   </div>
                   <p className="text-gray-800 text-sm font-medium">{app.name}</p>
@@ -257,8 +256,7 @@ const Commercial = () => {
             {/* Commercial Images Gallery */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {commercialImages.map((image, index) => <div key={index} className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
-                  <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="relative bg-white rounded-xl aspect-[3/2] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
                     <img src={image.src} alt={image.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"  loading="lazy" decoding="async" />
                   </div>
                 </div>)}
@@ -266,13 +264,13 @@ const Commercial = () => {
 
             {/* Mid-page CTA */}
             <div className="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                 <a href="tel:214-305-6516">
                   <Phone className="mr-2 h-5 w-5" />
                   Call Us Now
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+              <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
