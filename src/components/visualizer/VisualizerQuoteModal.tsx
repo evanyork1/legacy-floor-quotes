@@ -57,6 +57,9 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess, originalPhoto
       }
 
       // Insert to Lead Form Subissions table
+      const { captureUtmsFromLocation, readStoredUtms } = await import("@/contexts/BookingUrlContext");
+      captureUtmsFromLocation();
+      const utms = readStoredUtms();
       const { error: insertError } = await supabase
         .from('Lead Form Subissions')
         .insert({
@@ -68,7 +71,12 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess, originalPhoto
           privacy_policy_agreed: true,
           original_photo_url: originalPhotoUrl,
           rendered_photo_url: renderedPhotoUrl,
-          selected_color: selectedColorName || null
+          selected_color: selectedColorName || null,
+          utm_source: utms.utm_source ?? null,
+          utm_medium: utms.utm_medium ?? null,
+          utm_campaign: utms.utm_campaign ?? null,
+          landing_page: typeof window !== "undefined" ? window.location.href : null,
+          referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
         });
 
       if (insertError) throw insertError;

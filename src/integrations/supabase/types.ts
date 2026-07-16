@@ -587,42 +587,57 @@ export type Database = {
           email: string
           first_name: string
           id: string
+          landing_page: string | null
           last_name: string
           original_photo_url: string | null
           phone: string
           privacy_policy_agreed: boolean
           questions_comments: string | null
+          referrer: string | null
           rendered_photo_url: string | null
           selected_color: string | null
           updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
         }
         Insert: {
           created_at?: string
           email: string
           first_name: string
           id?: string
+          landing_page?: string | null
           last_name: string
           original_photo_url?: string | null
           phone: string
           privacy_policy_agreed?: boolean
           questions_comments?: string | null
+          referrer?: string | null
           rendered_photo_url?: string | null
           selected_color?: string | null
           updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Update: {
           created_at?: string
           email?: string
           first_name?: string
           id?: string
+          landing_page?: string | null
           last_name?: string
           original_photo_url?: string | null
           phone?: string
           privacy_policy_agreed?: boolean
           questions_comments?: string | null
+          referrer?: string | null
           rendered_photo_url?: string | null
           selected_color?: string | null
           updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }

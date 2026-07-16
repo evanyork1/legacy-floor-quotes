@@ -41,6 +41,9 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
       const lastName = nameParts.slice(1).join(' ') || '';
 
       // Submit to Supabase
+      const { captureUtmsFromLocation, readStoredUtms } = await import("@/contexts/BookingUrlContext");
+      captureUtmsFromLocation();
+      const utms = readStoredUtms();
       const { error } = await supabase
         .from('Lead Form Subissions')
         .insert({
@@ -49,7 +52,12 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
           email: email,
           phone: phone,
           privacy_policy_agreed: true,
-          questions_comments: notes ? `Same day estimate request | Notes: ${notes}` : 'Same day estimate request'
+          questions_comments: notes ? `Same day estimate request | Notes: ${notes}` : 'Same day estimate request',
+          utm_source: utms.utm_source ?? null,
+          utm_medium: utms.utm_medium ?? null,
+          utm_campaign: utms.utm_campaign ?? null,
+          landing_page: typeof window !== "undefined" ? window.location.href : null,
+          referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
         });
 
       if (error) throw error;

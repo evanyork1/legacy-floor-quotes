@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { LeadFormModal } from "./LeadFormModal";
+import { captureUtmsFromLocation, readStoredUtms } from "@/contexts/BookingUrlContext";
 export const LeadForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -26,6 +27,8 @@ export const LeadForm = () => {
     }
     setIsSubmitting(true);
     try {
+      captureUtmsFromLocation();
+      const utms = readStoredUtms();
       const {
         error
       } = await supabase.from('Lead Form Subissions').insert({
@@ -34,7 +37,12 @@ export const LeadForm = () => {
         email: formData.email,
         phone: formData.phone,
         questions_comments: formData.questionsComments,
-        privacy_policy_agreed: formData.privacyPolicyAgreed
+        privacy_policy_agreed: formData.privacyPolicyAgreed,
+        utm_source: utms.utm_source ?? null,
+        utm_medium: utms.utm_medium ?? null,
+        utm_campaign: utms.utm_campaign ?? null,
+        landing_page: typeof window !== "undefined" ? window.location.href : null,
+        referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
       });
       if (error) {
         throw error;
