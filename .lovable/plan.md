@@ -1,62 +1,37 @@
-## Goal
-Track the traffic source (Google Ads, Facebook, etc.) for every submission of the commercial contact form on `/commercial`, so you know which channel drove each lead.
+## Fix: attach UTM tracking to the actual commercial-form table (`Lead Form Subissions`)
 
-## How attribution will flow
+You're right — the Commercial page's contact form (`src/components/landing/LeadForm.tsx`, embedded in `Commercial.tsx`) inserts into the `Lead Form Subissions` table, not `commercial_submissions`. The tracking I added to `CommercialContactModal.tsx` never fires on `/commercial` because that modal isn't used there. Multiple other surfaces (`SimpleLeadModal`, `LeadForm`, `Financing`, visualizer modals) also write to `Lead Form Subissions`, so adding tracking here catches every lead form in one shot.
 
-```
-Visitor lands on /commercial?utm_source=google-ads&utm_medium=cpc&utm_campaign=spring
-        │
-        │  UTM params captured to sessionStorage on page load
-        │  (reusing the same `lic_utms` store already used for Jobber booking)
-        ▼
-Visitor fills out the Commercial Project Request form
-        │
-        │  On submit, we read stored UTMs + page/referrer and include them
-        ▼
-Row inserted into `commercial_submissions` with utm_source, utm_medium,
-utm_campaign, landing_page, referrer
-        │
-        ▼
-(Optional) Zapier watches new rows → pushes to Jobber with UTM fields
-mapped into custom fields / notes so you see the source inside Jobber.
-```
-
-The tracking itself lives in your database — you do **not** need Zapier for the tracking to work. Zapier only matters if you want the UTM values to appear inside the Jobber lead record.
-
-## Changes
-
-### 1. Database (migration)
-Add 5 nullable columns to `commercial_submissions`:
+### 1. Migration — add UTM columns to `Lead Form Subissions`
+Add 5 nullable columns (won't affect existing rows or RLS):
 - `utm_source text`
 - `utm_medium text`
 - `utm_campaign text`
-- `landing_page text` (first page they hit)
-- `referrer text` (document.referrer, e.g. google.com, facebook.com — catches organic/social when no UTMs)
+- `landing_page text`
+- `referrer text`
 
-Existing rows stay valid (all nullable). RLS/grants unchanged.
-
-### 2. `src/components/commercial/CommercialContactModal.tsx`
-- Import the existing UTM helper from `BookingUrlContext` (add a small exported `readStoredUtms()` there, or duplicate the sessionStorage read).
-- On submit, read stored UTMs + `window.location.href` + `document.referrer` and include them in the `.insert(...)` payload.
-- Fallback: if no stored UTMs and no referrer, `utm_source` stays null (direct traffic).
+### 2. `src/components/landing/LeadForm.tsx` (primary — this is the Commercial form)
+On submit, read stored UTMs via the existing `readStoredUtms()` + `captureUtmsFromLocation()` from `BookingUrlContext`, and include the 5 fields in the `.insert(...)` payload.
 
 ### 3. `src/pages/Commercial.tsx`
-- On mount, call `captureUtmsFromLocation()` so a visitor who lands directly on `/commercial?utm_source=...` gets their UTMs captured even if they never touch the booking flow. (The provider already does this on other pages; Commercial needs it too.)
+Keep the existing `useEffect(() => captureUtmsFromLocation(), [])` (already added) so `/commercial?utm_source=...` captures on landing.
 
-### 4. Admin view (`src/components/admin/LeadsTab.tsx` or wherever commercial submissions are listed)
-Show the new columns in the admin table so you can see the source at a glance. Small, additive column — no layout overhaul.
+### 4. Other `Lead Form Subissions` writers — apply the same UTM append
+Same pattern (import helpers, append 5 fields to `.insert`), so no lead source is lost regardless of entry point:
+- `src/components/landing/SimpleLeadModal.tsx`
+- `src/pages/Financing.tsx`
+- `src/components/visualizer/VisualizerQuoteModal.tsx`
+- `src/components/visualizer/ShareModal.tsx`
 
-### 5. Zapier → Jobber (setup instructions, no code)
-After the code ships, in your existing Zap that pushes commercial submissions to Jobber:
-- Add the new fields (`utm_source`, `utm_medium`, `utm_campaign`, `landing_page`, `referrer`) from the Supabase trigger step.
-- Map them into a Jobber custom field (e.g. "Lead Source") or append them to the client note so they show up on the Jobber lead.
+### 5. Leave `commercial_submissions` tracking in place
+It's already wired and harmless. If you want, I can also revert the earlier `CommercialContactModal.tsx` / `commercial_submissions` changes — say the word and I'll strip them; otherwise I'll leave them for future use.
 
-I'll give you the exact Zap mapping steps once the code is deployed.
+### Verification
+- Visit `/commercial?utm_source=google-ads&utm_medium=cpc&utm_campaign=test`, submit the commercial form, confirm the new row in `Lead Form Subissions` has those values plus `landing_page` and `referrer`.
+- Visit `/commercial` directly (no params), submit — `referrer` populated (e.g. `https://www.google.com/`), UTMs null.
+- Existing form UI, thank-you flow, and Jobber booking URL unchanged.
 
-## Verification
-- Visit `/commercial?utm_source=google-ads&utm_medium=cpc&utm_campaign=test`, submit the form, confirm the new row in `commercial_submissions` has those three values plus `landing_page` and `referrer` populated.
-- Visit `/commercial` directly (no params) from a Google search result, submit, confirm `referrer` = `https://www.google.com/` and UTMs are null.
-- Existing form UX (fields, thank-you message, styling) is unchanged.
+### Zapier → Jobber
+No code needed. In your existing Zap that watches `Lead Form Subissions`, add the 5 new fields and map them into a Jobber custom field ("Lead Source") or append to the client note.
 
-## Answer to your question
-Zapier is **not** required to track the source — the attribution is stored in your own database the moment the form is submitted. Zapier is only used if you also want those UTM values to appear inside the Jobber lead record, which is a simple field-mapping step in your existing Zap.
+**Question before I build:** do you want me to also revert the earlier `commercial_submissions` migration + `CommercialContactModal` edits since that table isn't in use, or leave them?
