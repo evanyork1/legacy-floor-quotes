@@ -25,7 +25,7 @@ const Contact = () => {
                 <div className="text-center mb-12">
                   <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
                     Contact{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                    <span className="text-blue-900">
                       Legacy Industrial Coatings
                     </span>
                   </h1>

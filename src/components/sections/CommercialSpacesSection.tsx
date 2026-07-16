@@ -58,7 +58,7 @@ const CommercialSpacesSection = () => {
 
   return (
     <section id="commercial-spaces" className="py-20 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-blue-800/3"></div>
+      <div className="absolute inset-0 bg-blue-900/3"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
@@ -84,21 +84,21 @@ const CommercialSpacesSection = () => {
         {/* Commercial Images Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           <div className="relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
+            <div className="absolute -inset-2 bg-blue-900 rounded-xl blur opacity-15"></div>
             <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
               <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Commercial restaurant with polished concrete floors" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
             </div>
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
+            <div className="absolute -inset-2 bg-blue-900 rounded-xl blur opacity-15"></div>
             <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
               <img src="/lovable-uploads/4a97932b-03f2-42ab-9e2f-2a90852befc0.png" alt="Commercial restroom with epoxy flooring" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
             </div>
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
+            <div className="absolute -inset-2 bg-blue-900 rounded-xl blur opacity-15"></div>
             <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg">
               <img src="/lovable-uploads/b5e6bdc4-80f9-44ea-a580-29d22662f7d4.png" alt="Industrial floor coating detail" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
             </div>

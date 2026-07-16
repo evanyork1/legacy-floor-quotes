@@ -48,7 +48,7 @@ const TrustedBrandSection = () => {
   return <section className="bg-gradient-to-br from-white to-slate-50 py-6 sm:py-8 lg:py-[31px]">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 text-blue-900">
             {sectionTitle}
           </h2>
         </div>
@@ -56,7 +56,7 @@ const TrustedBrandSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Left side - Image */}
           <div className="relative order-2 lg:order-1">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+            <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
             <img 
               alt={imageAlt} 
               className="relative w-full h-auto rounded-xl shadow-2xl" 
@@ -71,7 +71,7 @@ const TrustedBrandSection = () => {
           <div className="space-y-6 sm:space-y-8 order-1 lg:order-2">
             {services.map((service, index) => <div key={index} className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100">
                 <div className="flex items-start space-x-3 sm:space-x-4 lg:space-x-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                  <div className="bg-blue-900 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                     {service.icon}
                   </div>
                   <div>

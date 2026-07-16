@@ -100,7 +100,7 @@ const FlakeFloorTemplate = () => {
         <div className="max-w-7xl mx-auto px-6 py-12 print:py-3 print:px-4">
           {/* Project Details Input Section */}
           <div className="mb-24 print:mb-6">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-navy-900 to-blue-800 bg-clip-text text-transparent text-center mb-4 print:text-2xl print:text-navy-900 print:mb-2">
+            <h1 className="text-5xl font-bold text-blue-900 text-center mb-4 print:text-2xl print:text-navy-900 print:mb-2">
               Flake Floor Packages
             </h1>
             <p className="text-lg text-slate-600 text-center mb-12 print:mb-4 font-medium print:text-sm">
@@ -159,7 +159,7 @@ const FlakeFloorTemplate = () => {
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-50 print:-top-2">
-                    <Badge className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 text-sm font-bold shadow-xl border-0 print:bg-blue-600 whitespace-nowrap print:text-xs print:px-3 print:py-1">
+                    <Badge className="bg-blue-900 text-white px-6 py-2 text-sm font-bold shadow-xl border-0 print:bg-blue-600 whitespace-nowrap print:text-xs print:px-3 print:py-1">
                       ⭐ MOST POPULAR
                     </Badge>
                   </div>
@@ -241,11 +241,11 @@ const FlakeFloorTemplate = () => {
                 All prices include materials, labor, and warranty. Contact us for custom solutions.
               </p>
               <div className="flex items-center justify-center gap-2">
-                <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full print:hidden"></div>
-                <p className="text-2xl font-bold bg-gradient-to-r from-navy-900 to-blue-800 bg-clip-text text-transparent print:text-sm print:text-navy-900">
+                <div className="h-1 w-12 bg-blue-900 rounded-full print:hidden"></div>
+                <p className="text-2xl font-bold text-blue-900 print:text-sm print:text-navy-900">
                   Legacy Industrial Coatings
                 </p>
-                <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full print:hidden"></div>
+                <div className="h-1 w-12 bg-blue-900 rounded-full print:hidden"></div>
               </div>
               <p className="text-slate-600 font-medium italic print:text-xs">Professional Floor Solutions That Last a Lifetime</p>
             </div>

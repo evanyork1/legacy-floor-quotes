@@ -68,7 +68,7 @@ const ProcessSection = () => {
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 text-blue-900">
             Our Proven 5-Step Process
           </h2>
           
@@ -104,7 +104,7 @@ const ProcessSection = () => {
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-[400px] sm:min-h-[500px]">
               {/* Left Side - Image */}
               <div className="relative order-2 lg:order-1">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20 animate-pulse"></div>
+                <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20 animate-pulse"></div>
                 <div className="relative overflow-hidden">
                   <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
                     <img src={steps[activeStep].image} alt={steps[activeStep].title} className="w-full h-full object-cover"  loading="lazy" decoding="async" />
@@ -116,7 +116,7 @@ const ProcessSection = () => {
               <div className="order-1 lg:order-2 px-4 lg:px-0">
                 <div className="space-y-4 sm:space-y-6">
                   <div className="flex items-center space-x-3 sm:space-x-4">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900 rounded-full flex items-center justify-center flex-shrink-0">
                       <span className="text-lg sm:text-2xl font-bold text-white">{steps[activeStep].number}</span>
                     </div>
                     <div>

@@ -606,7 +606,7 @@ export const FloorVisualizer = () => {
               {/* Get My Quote Button */}
               { (transformedPreviewUrl || transformedImage) && <div className="px-6 pb-6">
                   <div className="max-w-md mx-auto space-y-3">
-                    <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-6 text-lg font-semibold">
+                    <Button size="lg" onClick={() => setShowQuoteModal(true)} className="w-full bg-blue-900 hover:bg-blue-950 text-white py-6 text-lg font-semibold">
                       Get My Quote
                     </Button>
                     <Button 

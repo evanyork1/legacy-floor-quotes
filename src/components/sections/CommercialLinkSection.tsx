@@ -22,7 +22,7 @@ const CommercialLinkSection = () => {
                 Transform your commercial space with our professional flooring systems. From warehouses to retail stores, 
                 we have the perfect solution for your business needs.
               </p>
-              <Button onClick={() => navigate('/commercial')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              <Button onClick={() => navigate('/commercial')} className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                 <span className="hidden sm:inline text-lg">Learn More</span>
                 <span className="sm:hidden text-base">Learn More</span>
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />

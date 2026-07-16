@@ -354,7 +354,7 @@ const GoogleGaragePage = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-8 sm:py-10 bg-gradient-to-r from-blue-700 to-blue-800">
+      <section className="py-8 sm:py-10 bg-blue-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
             Ready to Transform Your Garage?

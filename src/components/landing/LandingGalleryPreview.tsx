@@ -54,7 +54,7 @@ export const LandingGalleryPreview = () => {
     <section className="py-20 bg-gradient-to-br from-white to-slate-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 text-blue-900">
             See Our Latest Work
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -85,7 +85,7 @@ export const LandingGalleryPreview = () => {
         <div className="text-center">
           <Button 
             onClick={() => navigate('/quotedfw')}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+            className="bg-blue-900 hover:bg-blue-950 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
           >
             Get Quote
             <ArrowRight className="ml-2 h-5 w-5" />

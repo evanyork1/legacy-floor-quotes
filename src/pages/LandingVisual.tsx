@@ -27,7 +27,7 @@ const LandingVisual = () => {
 
       {/* Hero Section with Before/After Photos */}
       <section id="hero" className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-16 lg:py-24">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
+        <div className="absolute inset-0 bg-blue-900/5"></div>
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-6xl mx-auto">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-tight">
@@ -42,7 +42,7 @@ const LandingVisual = () => {
             {/* Hero Before/After Images Side by Side - Made Taller */}
             <div className="max-w-5xl mx-auto mb-8">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-[4/3] relative">
                     <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" loading="eager" decoding="async" fetchPriority="high" />
@@ -100,7 +100,7 @@ const LandingVisual = () => {
           <div className="text-center mt-12">
             <Button 
               onClick={scrollToQuote}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              className="bg-blue-900 hover:bg-blue-950 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
               Get Quote
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -226,7 +226,7 @@ const LandingVisual = () => {
           <div className="text-center mt-12">
             <Button 
               onClick={scrollToQuote}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              className="bg-blue-900 hover:bg-blue-950 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
               Get Quote
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -264,7 +264,7 @@ const LandingVisual = () => {
               </a>
               <Button 
                 onClick={scrollToQuote}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                className="bg-blue-900 hover:bg-blue-950 text-white text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
               >
                 Get Quote
                 <ArrowRight className="ml-2 h-5 w-5" />

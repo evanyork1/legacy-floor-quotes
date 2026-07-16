@@ -34,9 +34,9 @@ export const CTAButton = React.forwardRef<HTMLButtonElement, CTAButtonProps>(
     };
     
     const variantClasses = {
-      primary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white",
+      primary: "bg-blue-900 hover:bg-blue-950 text-white",
       outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white bg-transparent",
-      commercial: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+      commercial: "bg-blue-900 hover:bg-blue-950 text-white"
     };
     
     const iconClasses = {

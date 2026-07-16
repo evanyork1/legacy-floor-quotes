@@ -86,7 +86,7 @@ const GarageLandingForm = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
+                Real Garage <span className="text-blue-900">Transformations</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 See real results from homeowners across Dallas–Fort Worth who upgraded their garage just like you're considering.
@@ -210,7 +210,7 @@ const GarageLandingForm = () => {
         </section>
         
         {/* Mid-Page CTA Form */}
-        <section className="py-10 md:py-12 lg:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
+        <section className="py-10 md:py-12 lg:py-16 bg-blue-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-6 md:mb-8">

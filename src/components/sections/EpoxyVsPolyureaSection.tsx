@@ -10,7 +10,7 @@ const EpoxyVsPolyureaSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Epoxy vs. <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Polyurea</span>: Why Legacy Floors Last
+            Epoxy vs. <span className="text-blue-900">Polyurea</span>: Why Legacy Floors Last
           </h2>
           
         </div>
@@ -69,7 +69,7 @@ const EpoxyVsPolyureaSection = () => {
         <div className="bg-white rounded-2xl border border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-500 max-w-2xl mx-auto">
           <div className="p-8">
             <div className="flex items-start space-x-4">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-full p-3 flex-shrink-0">
+              <div className="bg-blue-900 rounded-full p-3 flex-shrink-0">
                 <span className="text-white text-lg">💡</span>
               </div>
               <div>

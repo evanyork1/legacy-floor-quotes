@@ -192,7 +192,7 @@ export const CommercialContactModal = ({ open, onOpenChange }: CommercialContact
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  className="w-full bg-blue-900 hover:bg-blue-950"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Request"}
                 </Button>

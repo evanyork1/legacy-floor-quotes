@@ -49,7 +49,7 @@ const About = () => {
               <div>
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
                   From Family Business to
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"> Industry Leader</span>
+                  <span className="text-blue-900"> Industry Leader</span>
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Legacy Industrial Coatings started as a family company and has grown to be a recognized brand nationwide. We've built our reputation on one simple principle: treating every floor like it's our own.
@@ -203,7 +203,7 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
+        <section className="py-20 bg-blue-900">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
               Experience the Legacy Difference
