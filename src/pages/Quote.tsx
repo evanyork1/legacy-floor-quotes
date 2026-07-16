@@ -30,7 +30,7 @@ const Quote = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-slate-50">
       <Seo title="Get Your Garage Floor Quote | Legacy Industrial Coatings" description="Step-by-step garage floor coating quote tool." path="/quote" noindex />
       <QuoteOnlyHeader phone="214-305-6516" onPhoneClick={handlePhoneClick} showCallButton={true} />
       

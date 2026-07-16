@@ -26,7 +26,7 @@ const LandingVisual = () => {
       <ScrollArrows sections={sections} />
 
       {/* Hero Section with Before/After Photos */}
-      <section id="hero" className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-16 lg:py-24">
+      <section id="hero" className="relative bg-slate-50 py-16 lg:py-24">
         <div className="absolute inset-0 bg-blue-900/5"></div>
         <div className="container mx-auto px-6 lg:px-8 relative">
           <div className="text-center max-w-6xl mx-auto">

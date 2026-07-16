@@ -59,7 +59,7 @@ const QuoteDFW = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-slate-50">
       <Seo title="DFW Garage Floor Quote | Legacy Industrial Coatings" description="Get a fast Dallas-Fort Worth garage floor coating quote." path="/quotedfw" noindex />
       <QuoteOnlyHeader phone="214-305-6516" onPhoneClick={handlePhoneClick} />
       

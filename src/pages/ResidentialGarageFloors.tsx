@@ -55,7 +55,7 @@ const ResidentialGarageFloors = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-slate-50 flex items-center">
           <div className="container mx-auto px-4 w-full">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="text-center lg:text-left">
@@ -129,7 +129,7 @@ const ResidentialGarageFloors = () => {
         <QuickFeaturesSection />
         
         {/* Legacy Service Experience Section */}
-        <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
+        <section className="py-12 md:py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
@@ -397,7 +397,7 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section className="py-8 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <section className="py-8 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-xl shadow-lg p-4">

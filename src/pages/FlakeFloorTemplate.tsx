@@ -83,7 +83,7 @@ const FlakeFloorTemplate = () => {
         <title>Flake Floor Template - Legacy Industrial Coatings</title>
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 print:bg-white print:min-h-0 font-inter">
+      <div className="min-h-screen bg-slate-50 print:bg-white print:min-h-0 font-inter">
         {/* Header with Logo */}
         <div className="bg-white shadow-sm border-b border-slate-200 print:border-b print:border-gray-400 print:shadow-none">
           <div className="max-w-7xl mx-auto px-6 py-8 print:py-2 print:px-4">

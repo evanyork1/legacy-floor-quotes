@@ -52,7 +52,7 @@ const ResidentialPatio = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -113,7 +113,7 @@ const ResidentialPatio = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -125,7 +125,7 @@ const ResidentialPatio = () => {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
+              {benefits.map((benefit, index) => <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-white">
                   <CardContent className="p-6">
                     <div className="bg-blue-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       {benefit.icon}

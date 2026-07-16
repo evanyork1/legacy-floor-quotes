@@ -43,7 +43,7 @@ const About = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-gray-50 to-blue-50 py-20 lg:py-32">
+        <section className="relative bg-slate-50 py-20 lg:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
@@ -101,7 +101,7 @@ const About = () => {
         </section>
 
         {/* Craftsmanship Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
@@ -172,7 +172,7 @@ const About = () => {
         </section>
 
         {/* What Makes Us Different */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">

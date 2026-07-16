@@ -120,7 +120,7 @@ const FAQ = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
               Frequently Asked <span className="text-blue-900">Questions</span>
@@ -162,7 +162,7 @@ const FAQ = () => {
         </section>
 
         {/* Commercial FAQ Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-12 sm:py-16 lg:py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-12">

@@ -16,7 +16,7 @@ export const GiveawayFormRaf = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-slate-50 flex items-center">
       <div className="container mx-auto px-4 w-full">
         <div className="max-w-2xl mx-auto mb-12">
           <Card className="shadow-2xl border-0">
