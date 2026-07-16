@@ -36,6 +36,9 @@ const Financing = () => {
     setIsSubmitting(true);
 
     try {
+      const { captureUtmsFromLocation, readStoredUtms } = await import("@/contexts/BookingUrlContext");
+      captureUtmsFromLocation();
+      const utms = readStoredUtms();
       const { error } = await supabase
         .from('Lead Form Subissions')
         .insert([
@@ -45,6 +48,11 @@ const Financing = () => {
             email: formData.email,
             phone: formData.phone,
             questions_comments: formData.message,
+            utm_source: utms.utm_source ?? null,
+            utm_medium: utms.utm_medium ?? null,
+            utm_campaign: utms.utm_campaign ?? null,
+            landing_page: typeof window !== "undefined" ? window.location.href : null,
+            referrer: typeof document !== "undefined" ? (document.referrer || null) : null,
           } as any
         ]);
 
