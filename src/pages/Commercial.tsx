@@ -160,12 +160,12 @@ const Commercial = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50 border-b border-slate-200">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Professional <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Commercial Flooring</span> Solutions
+                  Professional <span className="text-blue-900">Commercial Flooring</span> Solutions
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Transform your commercial space with our professional flooring systems. 
@@ -173,13 +173,13 @@ const Commercial = () => {
                   warehouses, retail stores, restaurants, and commercial facilities across Dallas-Fort Worth.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                     <a href="tel:214-305-6516">
                       <Phone className="mr-2 h-5 w-5" />
                       Call Us Now
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                  <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                     <Calendar className="mr-2 h-5 w-5" />
                     Book An Estimate
                   </Button>
@@ -187,18 +187,17 @@ const Commercial = () => {
 
               </div>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchPriority="high" />
+                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
         </section>
 
         {/* Commercial Floor Solutions */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
                 Our Commercial Solutions
               </h2>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -208,15 +207,15 @@ const Commercial = () => {
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
-                {services.map((service, index) => <Card key={index} className="bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                {services.map((service, index) => <Card key={index} className="bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
                     <CardContent className="p-8">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-900 transition-colors">
                         {service.title}
                       </h3>
                       <p className="text-gray-700 leading-relaxed mb-6">
                         {service.description}
                       </p>
-                      <Button variant="outline" onClick={() => navigate(service.title === "Concrete Polishing" ? "/concrete-polishing" : service.title === "Industrial Epoxy" ? "/industrial-epoxy" : "/flake-floors")} className="group-hover:bg-blue-50 border-blue-200 hover:border-blue-400">
+                      <Button variant="outline" onClick={() => navigate(service.title === "Concrete Polishing" ? "/concrete-polishing" : service.title === "Industrial Epoxy" ? "/industrial-epoxy" : "/flake-floors")} className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white">
                         Learn More <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </CardContent>
@@ -224,8 +223,7 @@ const Commercial = () => {
               </div>
               
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
-                <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl aspect-[3/2]">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-xl aspect-[3/2]">
                   <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Commercial flooring installation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
                 </div>
               </div>
@@ -234,11 +232,10 @@ const Commercial = () => {
         </section>
 
         {/* Commercial Spaces */}
-        <section className="py-20 bg-gradient-to-br from-slate-100 via-white to-blue-50/40 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/3 to-blue-800/3"></div>
+        <section className="py-20 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4 relative">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
                 Commercial Spaces We Install
               </h2>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -248,8 +245,8 @@ const Commercial = () => {
 
             {/* Applications Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16">
-              {applications.map((app, index) => <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-200/50 hover:bg-white/90 transition-all duration-300 group shadow-lg hover:shadow-xl hover:-translate-y-1">
-                  <div className="text-blue-600 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
+              {applications.map((app, index) => <div key={index} className="bg-white rounded-xl p-6 text-center border border-slate-200 hover:border-blue-900/30 transition-all duration-300 group shadow-sm hover:shadow-md">
+                  <div className="text-blue-900 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
                     {app.icon}
                   </div>
                   <p className="text-gray-800 text-sm font-medium">{app.name}</p>
@@ -259,8 +256,7 @@ const Commercial = () => {
             {/* Commercial Images Gallery */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {commercialImages.map((image, index) => <div key={index} className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl blur opacity-15"></div>
-                  <div className="relative bg-white/90 rounded-xl aspect-[3/2] overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="relative bg-white rounded-xl aspect-[3/2] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
                     <img src={image.src} alt={image.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"  loading="lazy" decoding="async" />
                   </div>
                 </div>)}
@@ -268,13 +264,13 @@ const Commercial = () => {
 
             {/* Mid-page CTA */}
             <div className="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
                 <a href="tel:214-305-6516">
                   <Phone className="mr-2 h-5 w-5" />
                   Call Us Now
                 </a>
               </Button>
-              <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+              <Button variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book An Estimate
               </Button>
@@ -283,7 +279,7 @@ const Commercial = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-950 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">
@@ -293,13 +289,13 @@ const Commercial = () => {
                 Talk to our team today. Call us now for an immediate quote, or book a free on-site estimate at a time that works for you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 px-8 py-3 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button asChild size="lg" className="bg-white text-blue-950 hover:bg-slate-100 px-8 py-3 rounded-full shadow-md transition-all duration-300">
                   <a href="tel:214-305-6516">
                     <Phone className="mr-2 h-5 w-5" />
                     Call 214-305-6516
                   </a>
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-transparent">
+                <Button size="lg" variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-white text-white hover:bg-white hover:text-blue-950 px-8 py-3 rounded-full transition-all duration-300 bg-transparent">
                   <Calendar className="mr-2 h-5 w-5" />
                   Book An Estimate
                 </Button>
@@ -309,18 +305,18 @@ const Commercial = () => {
         </section>
 
         {/* Commercial Quote Form */}
-        <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
                   Get Your Commercial Quote
                 </h2>
                 <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                   Tell us about your project and our team will follow up with pricing and next steps.
                 </p>
               </div>
-              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <div className="bg-white rounded-xl shadow-md border border-slate-200 p-4 sm:p-6">
                 <LeadForm />
               </div>
             </div>
@@ -332,7 +328,7 @@ const Commercial = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
                   Commercial Flooring FAQs
                 </h2>
                 <p className="text-lg text-gray-700 max-w-2xl mx-auto">
