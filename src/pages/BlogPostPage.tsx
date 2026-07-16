@@ -141,7 +141,7 @@ const BlogPostPage = () => {
               />
 
               {/* Bottom CTA */}
-              <div className="mt-14 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 sm:p-10 text-center shadow-xl">
+              <div className="mt-14 rounded-2xl bg-blue-900 text-white p-8 sm:p-10 text-center shadow-xl">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4">
                   Ready to transform your floors?
                 </h2>

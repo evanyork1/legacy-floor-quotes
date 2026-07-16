@@ -404,7 +404,7 @@ const GaragePacketResults = () => {
 
 
         {/* Call CTA */}
-        <section className="py-12 px-4 bg-gradient-to-r from-blue-600 to-blue-800">
+        <section className="py-12 px-4 bg-blue-900">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Have Questions?

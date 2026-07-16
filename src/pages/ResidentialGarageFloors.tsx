@@ -55,7 +55,7 @@ const ResidentialGarageFloors = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+        <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-slate-50 flex items-center">
           <div className="container mx-auto px-4 w-full">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="text-center lg:text-left">
@@ -79,13 +79,13 @@ const ResidentialGarageFloors = () => {
                 </div>
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
                   Premium<br />
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Garage Floors</span> <span className="text-gray-900">in One Day</span>
+                  <span className="text-blue-900">Garage Floors</span> <span className="text-gray-900">in One Day</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
                   Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-6 sm:px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
                     <a href="tel:214-305-6516">
                       <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                       214-305-6516
@@ -98,7 +98,7 @@ const ResidentialGarageFloors = () => {
                 </div>
               </div>
               <div className="relative mt-8 lg:mt-0">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
                 <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-2xl">
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
@@ -129,16 +129,16 @@ const ResidentialGarageFloors = () => {
         <QuickFeaturesSection />
         
         {/* Legacy Service Experience Section */}
-        <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 via-white to-slate-50">
+        <section className="py-12 md:py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl shadow-xl mb-6">
+                <div className="inline-flex items-center bg-blue-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl shadow-xl mb-6">
                   <div className="text-xl sm:text-2xl font-bold mr-2 sm:mr-3">80%</div>
                   <div className="text-xs sm:text-sm">Reviews mention our service</div>
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
-                  The <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Legacy Service</span> Experience
+                  The <span className="text-blue-900">Legacy Service</span> Experience
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
@@ -147,7 +147,7 @@ const ResidentialGarageFloors = () => {
                 </div>
               </div>
               <div className="order-1 lg:order-2 relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
                 <div className="relative">
                   <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-2xl"  loading="lazy" decoding="async" />
                 </div>
@@ -167,7 +167,7 @@ const ResidentialGarageFloors = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
+                Real Garage <span className="text-blue-900">Transformations</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
@@ -373,7 +373,7 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Ready to Transform Your Garage?
@@ -397,7 +397,7 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section className="py-8 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <section className="py-8 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-xl shadow-lg p-4">

@@ -29,7 +29,7 @@ const StandaloneQuoteFormContent = () => {
   } = useQuoteForm();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4">
+    <div className="min-h-screen bg-slate-50 p-4">
       <div className="container mx-auto py-6 sm:py-8">
         <div className="max-w-3xl mx-auto">
           <QuoteProgress currentStep={currentStep} totalSteps={totalSteps} />

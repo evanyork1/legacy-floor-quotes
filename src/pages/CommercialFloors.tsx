@@ -188,7 +188,7 @@ const CommercialFloors = () => {
             <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight">
               PRECISION
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">COMMERCIAL</span>
+              <span className="text-blue-900">COMMERCIAL</span>
               <br />
               FLOORS.
             </motion.h1>
@@ -232,7 +232,7 @@ const CommercialFloors = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="w-12 h-[2px] bg-blue-500 mb-6" />
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                OUR<br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">SERVICES</span>
+                OUR<br /><span className="text-blue-900">SERVICES</span>
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-md">
                 From new construction to full restoration, we deliver specification-grade results that exceed industry standards.
@@ -265,7 +265,7 @@ const CommercialFloors = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <div className="w-12 h-[2px] bg-blue-500 mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              OUR <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">WORK</span>
+              OUR <span className="text-blue-900">WORK</span>
             </h2>
           </motion.div>
         </div>
@@ -292,7 +292,7 @@ const CommercialFloors = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
             <div className="w-12 h-[2px] bg-blue-500 mx-auto mb-6" />
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              INDUSTRIES <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">WE SERVE</span>
+              INDUSTRIES <span className="text-blue-900">WE SERVE</span>
             </h2>
             <p className="mt-4 text-white/60 text-lg max-w-2xl mx-auto">
               From mission-critical data centers to high-traffic retail — we deliver the right specification for every environment.
@@ -325,7 +325,7 @@ const CommercialFloors = () => {
             <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4 font-medium">Aloe Vera of America</p>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-[0.95]">
               CASE<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">STUDY</span>
+              <span className="text-blue-900">STUDY</span>
             </h2>
           </motion.div>
 
@@ -398,7 +398,7 @@ const CommercialFloors = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
             <div className="w-12 h-[2px] bg-blue-500 mx-auto mb-6" />
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              WHY <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">LEGACY</span>
+              WHY <span className="text-blue-900">LEGACY</span>
             </h2>
             <p className="mt-4 text-white/60 text-lg max-w-2xl mx-auto">
               When it has to be right the first time — you call us.
@@ -424,7 +424,7 @@ const CommercialFloors = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="w-12 h-[2px] bg-blue-500 mb-6" />
               <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-[0.95]">
-                READY TO<br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">START?</span>
+                READY TO<br /><span className="text-blue-900">START?</span>
               </h2>
               <p className="mt-6 text-white/60 text-lg leading-relaxed max-w-md">
                 Need to submit an Invitation to Bid or need to speak with one of our estimators? Submit the form here and you will be contacted within one business day. You may also call us at the number below.

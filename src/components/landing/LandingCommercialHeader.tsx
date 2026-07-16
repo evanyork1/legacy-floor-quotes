@@ -32,7 +32,7 @@ export const LandingCommercialHeader = () => {
           {/* Call Now Button */}
           <Button 
             asChild 
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            className="bg-blue-900 hover:bg-blue-950 text-white shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <a 
               href="tel:214-305-6516" 

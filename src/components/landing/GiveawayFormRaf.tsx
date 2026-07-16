@@ -16,17 +16,17 @@ export const GiveawayFormRaf = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-gradient-to-br from-blue-50 to-slate-100 flex items-center">
+    <section className="min-h-screen pt-24 pb-8 md:pb-16 bg-slate-50 flex items-center">
       <div className="container mx-auto px-4 w-full">
         <div className="max-w-2xl mx-auto mb-12">
           <Card className="shadow-2xl border-0">
             <CardContent className="p-6 md:p-8">
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-900 rounded-full mb-4">
                   <Trophy className="h-8 w-8 text-white" />
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                  Garage Floor <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Giveaway!</span>
+                  Garage Floor <span className="text-blue-900">Giveaway!</span>
                 </h1>
                 <p className="text-lg text-gray-600 mb-6">
                   Enter to win a FREE garage floor coating (up to <span className="text-green-600 font-bold">$4,000 value</span>)
@@ -56,7 +56,7 @@ export const GiveawayFormRaf = () => {
         {/* Before/After Images Below Form */}
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+            <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
             <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-2xl">
               <div className="grid grid-cols-2 h-full gap-1">
                 {/* Before Image */}

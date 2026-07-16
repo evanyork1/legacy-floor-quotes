@@ -15,14 +15,14 @@ const CommercialLinkSection = () => {
               <div className="text-blue-600 mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
                 <Building className="h-16 w-16" />
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-blue-900">
                 Commercial Floor Solutions
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
                 Transform your commercial space with our professional flooring systems. From warehouses to retail stores, 
                 we have the perfect solution for your business needs.
               </p>
-              <Button onClick={() => navigate('/commercial')} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              <Button onClick={() => navigate('/commercial')} className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                 <span className="hidden sm:inline text-lg">Learn More</span>
                 <span className="sm:hidden text-base">Learn More</span>
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />

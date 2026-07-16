@@ -18,8 +18,8 @@ const CTASection = () => {
   const quotePath = '/contact';
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-800/90"></div>
+    <section className="py-12 sm:py-16 lg:py-20 bg-blue-900 relative overflow-hidden">
+      <div className="absolute inset-0 bg-blue-900/90"></div>
       <div className="container mx-auto px-4 sm:px-6 text-center relative">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 sm:mb-6">
           {isCommercial ? "Ready for your commercial flooring project?" : (isProsper ? "Ready To Transform Your Floor in Prosper?" : (isFrisco ? "Ready To Transform Your Floor in Frisco?" : "Ready to discover your new floor?"))}

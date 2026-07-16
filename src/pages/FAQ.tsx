@@ -120,10 +120,10 @@ const FAQ = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-              Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Questions</span>
+              Frequently Asked <span className="text-blue-900">Questions</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
                Find answers to the most common questions about our garage floor coatings, installation process, and maintenance. 
@@ -162,7 +162,7 @@ const FAQ = () => {
         </section>
 
         {/* Commercial FAQ Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-12 sm:py-16 lg:py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-12">
@@ -191,7 +191,7 @@ const FAQ = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
               Still Have Questions?

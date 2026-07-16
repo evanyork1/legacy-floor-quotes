@@ -55,7 +55,7 @@ export const FeaturedBlogPost = React.memo(({ post }: FeaturedBlogPostProps) => 
           </p>
           <Button
             asChild
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 w-fit"
+            className="bg-blue-900 hover:bg-blue-950 w-fit"
           >
             <Link to={`/blog/${post.slug}`}>
               Read Article

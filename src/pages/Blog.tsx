@@ -60,11 +60,11 @@ const Blog = () => {
         <HeaderGeneric />
 
         {/* Hero */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Expert{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <span className="text-blue-900">
                 Insights
               </span>{" "}
               & Tips
@@ -91,7 +91,7 @@ const Blog = () => {
         )}
 
         {/* Grid */}
-        <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-16 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
@@ -117,7 +117,7 @@ const Blog = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Transform Your Space?</h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">

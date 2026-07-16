@@ -28,7 +28,7 @@ export const LeadFormModal = ({ isOpen, onClose }: LeadFormModalProps) => {
           <div className="space-y-3">
             <Button 
               asChild 
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+              className="w-full bg-blue-900 hover:bg-blue-950 text-white"
             >
               <a href="tel:214-305-6516">
                 <Phone className="mr-2 h-4 w-4" />

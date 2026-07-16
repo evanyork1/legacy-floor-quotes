@@ -38,7 +38,7 @@ const AboutCommercial = () => {
             <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-6 font-medium">About Us</p>
             <h1 className="text-5xl md:text-7xl font-bold leading-[0.95] tracking-tight">
               MILLIONS OF<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">SQUARE FEET.</span>
+              <span className="text-blue-900">SQUARE FEET.</span>
               <br />
               ONE STANDARD.
             </h1>
@@ -53,7 +53,7 @@ const AboutCommercial = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="w-12 h-[2px] bg-blue-500 mb-6" />
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
-                OUR <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">APPROACH</span>
+                OUR <span className="text-blue-900">APPROACH</span>
               </h2>
             </motion.div>
 
@@ -94,7 +94,7 @@ const AboutCommercial = () => {
         <div className="container mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-              LET'S <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">BUILD</span> TOGETHER
+              LET'S <span className="text-blue-900">BUILD</span> TOGETHER
             </h2>
             <p className="text-white/60 text-lg max-w-xl mx-auto mb-10">
               Ready to discuss your next project? Our estimators are standing by.

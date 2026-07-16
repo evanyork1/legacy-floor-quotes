@@ -88,12 +88,12 @@ const IndustrialEpoxy = () => {
         <HeaderGeneric />
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-slate-100">
+        <section className="pt-24 pb-16 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Heavy-Duty <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Industrial Epoxy</span> Flooring
+                  Heavy-Duty <span className="text-blue-900">Industrial Epoxy</span> Flooring
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Cutting-edge epoxy materials engineered for the most demanding industrial environments. 
@@ -102,7 +102,7 @@ const IndustrialEpoxy = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     onClick={() => navigate('/contact')}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
                     Call Us Now
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -118,7 +118,7 @@ const IndustrialEpoxy = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-20"></div>
+                <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
                 <img 
                   src="/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png" 
                   alt="Industrial epoxy flooring in commercial facility" 
@@ -143,9 +143,9 @@ const IndustrialEpoxy = () => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {applications.map((application, index) => (
-                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/50">
+                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group hover:-translate-y-2 bg-white">
                   <CardContent className="p-6">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <div className="bg-blue-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       {application.icon}
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">{application.title}</h3>
@@ -158,7 +158,7 @@ const IndustrialEpoxy = () => {
         </section>
 
         {/* Features & Benefits Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -234,7 +234,7 @@ const IndustrialEpoxy = () => {
                   applications: ["Electronics assembly", "Clean rooms", "Explosive environments"]
                 }
               ].map((system, index) => (
-                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-blue-50/50">
+                <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">{system.title}</h3>
                     <p className="text-gray-600 mb-6 leading-relaxed">{system.description}</p>
@@ -257,7 +257,7 @@ const IndustrialEpoxy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Ready for Industrial-Grade Performance?

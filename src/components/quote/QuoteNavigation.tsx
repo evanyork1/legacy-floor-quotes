@@ -38,7 +38,7 @@ export const QuoteNavigation = ({
         <Button 
           onClick={onNext} 
           disabled={!canProceed} 
-          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm order-1 sm:order-2"
+          className="bg-blue-900 hover:bg-blue-950 flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm order-1 sm:order-2"
         >
           Next Step
           <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5 sm:ml-2" />

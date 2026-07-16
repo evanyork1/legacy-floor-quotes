@@ -162,7 +162,7 @@ export const VisualizerQuoteModal = ({ isOpen, onClose, onSuccess, originalPhoto
 
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+            className="w-full bg-blue-900 hover:bg-blue-950"
             disabled={isSubmitting}
           >
             {isSubmitting ? (

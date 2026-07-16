@@ -126,7 +126,7 @@ const HeroSection = () => {
                     {showExpertsSuffix && (
                       <>
                         {" "}
-                        <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
+                        <span className="text-blue-900">
                           Experts
                         </span>
                       </>
@@ -200,7 +200,7 @@ const HeroSection = () => {
                 {showExpertsSuffix && (
                   <>
                     {" "}
-                    <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
+                    <span className="text-blue-900">
                       Experts
                     </span>
                   </>
@@ -268,7 +268,7 @@ const HeroSection = () => {
   // Original design for other pages
   return (
     <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white py-12 sm:py-16 lg:py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-800/5"></div>
+      <div className="absolute inset-0 bg-blue-900/5"></div>
       <div className="container mx-auto px-6 lg:px-8 relative w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="max-w-2xl space-y-8 sm:space-y-10">
@@ -276,7 +276,7 @@ const HeroSection = () => {
               {isCommercial ? (
                 <>
                   DFW's{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  <span className="text-blue-900">
                     Commercial
                   </span>
                   {" "}Flooring Experts
@@ -285,7 +285,7 @@ const HeroSection = () => {
                 title.split(" ").map((word, index) => {
                   if (word === "One" || word === "Day") {
                     return (
-                      <span key={index} className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                      <span key={index} className="whitespace-nowrap text-blue-900">
                         {word}{" "}
                       </span>
                     );
@@ -304,7 +304,7 @@ const HeroSection = () => {
             ) : (
               <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-600 leading-relaxed">
                 {subtext} in{" "}
-                <span className="block sm:inline bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">{locationText}</span>
+                <span className="block sm:inline text-blue-900">{locationText}</span>
               </p>
             )}
             

@@ -63,7 +63,7 @@ const GarageLandingInstant = () => {
         <GiveawayHeader />
         
         {/* Hero Section with Quote Form */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8 md:py-12 lg:py-20">
+        <section className="relative bg-blue-50 py-8 md:py-12 lg:py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
@@ -71,7 +71,7 @@ const GarageLandingInstant = () => {
                 <div className="text-center lg:text-left">
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-5 lg:mb-6 leading-tight">
                     Get your floor installed{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">in one day.      </span>
+                    <span className="text-blue-900">in one day.      </span>
                   </h1>
                   
                   <p className="text-lg sm:text-xl md:text-2xl lg:text-xl text-gray-600 mb-4 md:mb-5 leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -128,7 +128,7 @@ const GarageLandingInstant = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-6 md:mb-12 lg:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-                Real Garage <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Transformations</span>
+                Real Garage <span className="text-blue-900">Transformations</span>
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 See real results from homeowners across Dallas–Fort Worth who upgraded their garage just like you're considering.
@@ -258,7 +258,7 @@ const GarageLandingInstant = () => {
         <ProcessSection />
         
         {/* Mid-Page CTA Quote Form */}
-        <section className="py-10 md:py-12 lg:py-16 bg-gradient-to-br from-blue-600 to-blue-800">
+        <section className="py-10 md:py-12 lg:py-16 bg-blue-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-6 md:mb-8">

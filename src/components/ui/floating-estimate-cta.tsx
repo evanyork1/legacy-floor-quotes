@@ -22,7 +22,7 @@ export const FloatingEstimateCTA = () => {
   return (
     <>
       {/* Fixed bottom CTA block - Mobile only */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl rounded-t-3xl md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-blue-900 text-white shadow-2xl rounded-t-3xl md:hidden">
         <div className="container mx-auto px-4 py-3">
           <div 
             className="text-center cursor-pointer group transition-all duration-200 hover:scale-105" 
