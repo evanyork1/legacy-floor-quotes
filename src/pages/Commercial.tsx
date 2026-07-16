@@ -279,7 +279,7 @@ const Commercial = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <section className="py-20 bg-blue-950 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">
@@ -289,13 +289,13 @@ const Commercial = () => {
                 Talk to our team today. Call us now for an immediate quote, or book a free on-site estimate at a time that works for you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 px-8 py-3 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button asChild size="lg" className="bg-white text-blue-950 hover:bg-slate-100 px-8 py-3 rounded-full shadow-md transition-all duration-300">
                   <a href="tel:214-305-6516">
                     <Phone className="mr-2 h-5 w-5" />
                     Call 214-305-6516
                   </a>
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-white text-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-full transition-all duration-300 bg-transparent">
+                <Button size="lg" variant="outline" onClick={() => setIsBookingModalOpen(true)} className="border-white text-white hover:bg-white hover:text-blue-950 px-8 py-3 rounded-full transition-all duration-300 bg-transparent">
                   <Calendar className="mr-2 h-5 w-5" />
                   Book An Estimate
                 </Button>
@@ -305,18 +305,18 @@ const Commercial = () => {
         </section>
 
         {/* Commercial Quote Form */}
-        <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
                   Get Your Commercial Quote
                 </h2>
                 <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                   Tell us about your project and our team will follow up with pricing and next steps.
                 </p>
               </div>
-              <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <div className="bg-white rounded-xl shadow-md border border-slate-200 p-4 sm:p-6">
                 <LeadForm />
               </div>
             </div>
