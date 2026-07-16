@@ -15,7 +15,7 @@ const CommercialLinkSection = () => {
               <div className="text-blue-600 mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
                 <Building className="h-16 w-16" />
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-blue-900">
                 Commercial Floor Solutions
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
