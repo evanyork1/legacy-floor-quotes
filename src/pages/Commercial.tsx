@@ -38,6 +38,7 @@ const COMMERCIAL_FAQS = [
 const Commercial = () => {
   const navigate = useNavigate();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  useEffect(() => { captureUtmsFromLocation(); }, []);
   const services = [{
     title: "Concrete Polishing",
     description: "Transform your concrete floors with our professional polishing services. Achieve a high-gloss, durable finish that's perfect for retail spaces, showrooms, and high-traffic commercial areas."
