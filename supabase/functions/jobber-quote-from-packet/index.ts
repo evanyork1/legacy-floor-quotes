@@ -387,13 +387,16 @@ Deno.serve(async (req) => {
       const clientRes = await jobberCall(clientMutation, { input: clientInput });
       if (!clientRes.ok) {
         console.error("clientCreate failed", clientRes);
+        await logSyncFailure(supabase, packetId, "clientCreate failed", { clientRes });
         return json({ error: "clientCreate failed", details: clientRes }, 502);
       }
       const clientData = clientRes.data?.clientCreate;
       if (clientData?.userErrors?.length) {
         console.error("clientCreate userErrors", clientData.userErrors);
+        await logSyncFailure(supabase, packetId, "clientCreate userErrors", { userErrors: clientData.userErrors });
         return json({ error: "clientCreate userErrors", details: clientData.userErrors }, 502);
       }
+
       const clientId: string | undefined = clientData?.client?.id;
       let propertyId: string | undefined = firstPropertyId(clientData?.client);
       if (!clientId) return json({ error: "Missing clientId from Jobber" }, 502);
