@@ -662,6 +662,7 @@ Deno.serve(async (req) => {
 
         if (!quoteRes.ok || uErrs.length) {
           console.error("quoteCreate failed", uErrs.length ? uErrs : quoteRes);
+          await logSyncFailure(supabase, packetId, "quoteCreate failed", { details: uErrs.length ? uErrs : quoteRes });
           return json({ error: "quoteCreate failed", details: uErrs.length ? uErrs : quoteRes }, 502);
         }
 
@@ -670,7 +671,11 @@ Deno.serve(async (req) => {
         if (attempt.transitionQuoteTo) sentAt = quoteData?.quote?.sentAt ?? null;
       }
 
-      if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
+      if (!quoteId) {
+        await logSyncFailure(supabase, packetId, "Missing quoteId from Jobber");
+        return json({ error: "Missing quoteId from Jobber" }, 502);
+      }
+
       console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri, sendStrategy, sentAt });
 
       // If Jobber did not accept deposit during quoteCreate, fall back to quoteEdit.
