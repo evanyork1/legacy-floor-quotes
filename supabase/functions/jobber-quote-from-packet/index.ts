@@ -316,6 +316,24 @@ function json(payload: unknown, status = 200) {
   });
 }
 
+async function logSyncFailure(
+  supabase: ReturnType<typeof getSupabase>,
+  packetId: string | null,
+  error: string,
+  context: Record<string, unknown> = {},
+) {
+  try {
+    await supabase.from("jobber_sync_failures").insert({
+      packet_id: packetId || null,
+      error: error.slice(0, 2000),
+      context,
+    });
+  } catch (e) {
+    console.error("Failed to log sync failure:", e);
+  }
+}
+
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
