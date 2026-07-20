@@ -316,6 +316,24 @@ function json(payload: unknown, status = 200) {
   });
 }
 
+async function logSyncFailure(
+  supabase: ReturnType<typeof getSupabase>,
+  packetId: string | null,
+  error: string,
+  context: Record<string, unknown> = {},
+) {
+  try {
+    await supabase.from("jobber_sync_failures").insert({
+      packet_id: packetId || null,
+      error: error.slice(0, 2000),
+      context,
+    });
+  } catch (e) {
+    console.error("Failed to log sync failure:", e);
+  }
+}
+
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -326,7 +344,31 @@ Deno.serve(async (req) => {
     const action = String(body.action || "create");
     const supabase = getSupabase();
 
-    if (action === "create") {
+    // "retry" pulls a packet row from DB and re-invokes create with its data
+    if (action === "retry") {
+      const packetId = String(body.packet_id || "").trim();
+      if (!packetId) return json({ error: "Missing packet_id" }, 400);
+      const { data: packet, error: pErr } = await supabase
+        .from("floor_packets")
+        .select("*")
+        .eq("id", packetId)
+        .maybeSingle();
+      if (pErr || !packet) return json({ error: "Packet not found" }, 404);
+      body.action = "create";
+      body.packet_id = packet.id;
+      body.name = packet.name;
+      body.email = packet.email;
+      body.phone = packet.phone;
+      body.zip = (packet as any).zip || "";
+      body.garage_type = packet.garage_type;
+      body.custom_sqft = packet.custom_sqft;
+      body.selected_color = packet.selected_color;
+      body.estimated_price = packet.estimated_price;
+      // Fall through to create branch
+    }
+
+    if (action === "create" || body.action === "create") {
+
       const packetId = String(body.packet_id || "").trim();
       const name = String(body.name || "").trim();
       const email = String(body.email || "").trim();
@@ -369,13 +411,16 @@ Deno.serve(async (req) => {
       const clientRes = await jobberCall(clientMutation, { input: clientInput });
       if (!clientRes.ok) {
         console.error("clientCreate failed", clientRes);
+        await logSyncFailure(supabase, packetId, "clientCreate failed", { clientRes });
         return json({ error: "clientCreate failed", details: clientRes }, 502);
       }
       const clientData = clientRes.data?.clientCreate;
       if (clientData?.userErrors?.length) {
         console.error("clientCreate userErrors", clientData.userErrors);
+        await logSyncFailure(supabase, packetId, "clientCreate userErrors", { userErrors: clientData.userErrors });
         return json({ error: "clientCreate userErrors", details: clientData.userErrors }, 502);
       }
+
       const clientId: string | undefined = clientData?.client?.id;
       let propertyId: string | undefined = firstPropertyId(clientData?.client);
       if (!clientId) return json({ error: "Missing clientId from Jobber" }, 502);
@@ -641,6 +686,7 @@ Deno.serve(async (req) => {
 
         if (!quoteRes.ok || uErrs.length) {
           console.error("quoteCreate failed", uErrs.length ? uErrs : quoteRes);
+          await logSyncFailure(supabase, packetId, "quoteCreate failed", { details: uErrs.length ? uErrs : quoteRes });
           return json({ error: "quoteCreate failed", details: uErrs.length ? uErrs : quoteRes }, 502);
         }
 
@@ -649,7 +695,11 @@ Deno.serve(async (req) => {
         if (attempt.transitionQuoteTo) sentAt = quoteData?.quote?.sentAt ?? null;
       }
 
-      if (!quoteId) return json({ error: "Missing quoteId from Jobber" }, 502);
+      if (!quoteId) {
+        await logSyncFailure(supabase, packetId, "Missing quoteId from Jobber");
+        return json({ error: "Missing quoteId from Jobber" }, 502);
+      }
+
       console.log("Jobber quoteCreate succeeded:", { clientId, propertyId, quoteId, clientHubUri, sendStrategy, sentAt });
 
       // If Jobber did not accept deposit during quoteCreate, fall back to quoteEdit.
@@ -848,6 +898,11 @@ Deno.serve(async (req) => {
     return json({ error: "Unknown action" }, 400);
   } catch (e) {
     console.error("jobber-quote-from-packet error", e);
+    try {
+      const supabase = getSupabase();
+      await logSyncFailure(supabase, null, `Server error: ${(e as Error).message}`);
+    } catch (_) { /* ignore */ }
     return json({ error: "Server error", details: (e as Error).message }, 500);
   }
 });
+

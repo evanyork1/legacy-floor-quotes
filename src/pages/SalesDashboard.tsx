@@ -16,6 +16,8 @@ import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
 import AnalyticsTab from '@/components/admin/AnalyticsTab';
 import { Seo } from '@/components/seo/Seo';
 import { JobberStatus } from '@/components/presentation/JobberStatus';
+import { JobberSyncFailuresBanner } from '@/components/presentation/JobberSyncFailuresBanner';
+
 
 export default function SalesDashboard() {
   const { user, loading, signOut, hasRole } = useAuth();
@@ -94,7 +96,9 @@ export default function SalesDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-6">
+        {isAdmin && <JobberSyncFailuresBanner />}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="prospecting" className="flex items-center gap-2">
               <Target className="h-4 w-4" />
