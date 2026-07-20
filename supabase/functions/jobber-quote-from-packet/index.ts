@@ -344,7 +344,31 @@ Deno.serve(async (req) => {
     const action = String(body.action || "create");
     const supabase = getSupabase();
 
-    if (action === "create") {
+    // "retry" pulls a packet row from DB and re-invokes create with its data
+    if (action === "retry") {
+      const packetId = String(body.packet_id || "").trim();
+      if (!packetId) return json({ error: "Missing packet_id" }, 400);
+      const { data: packet, error: pErr } = await supabase
+        .from("floor_packets")
+        .select("*")
+        .eq("id", packetId)
+        .maybeSingle();
+      if (pErr || !packet) return json({ error: "Packet not found" }, 404);
+      body.action = "create";
+      body.packet_id = packet.id;
+      body.name = packet.name;
+      body.email = packet.email;
+      body.phone = packet.phone;
+      body.zip = (packet as any).zip || "";
+      body.garage_type = packet.garage_type;
+      body.custom_sqft = packet.custom_sqft;
+      body.selected_color = packet.selected_color;
+      body.estimated_price = packet.estimated_price;
+      // Fall through to create branch
+    }
+
+    if (action === "create" || body.action === "create") {
+
       const packetId = String(body.packet_id || "").trim();
       const name = String(body.name || "").trim();
       const email = String(body.email || "").trim();
