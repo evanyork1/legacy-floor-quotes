@@ -64,7 +64,7 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
         src={afterImage} 
         alt="After transformation" 
         className="absolute inset-0 w-full h-full object-cover"
-       loading="lazy" decoding="async" />
+       loading="eager" decoding="async" />
       
       {/* Before Image (Clipped) */}
       <div 
@@ -75,7 +75,7 @@ export const BeforeAfterSlider = ({ beforeImage, afterImage, className }: Before
           src={beforeImage} 
           alt="Before transformation" 
           className="absolute inset-0 w-full h-full object-cover"
-         loading="lazy" decoding="async" />
+         loading="eager" decoding="async" />
       </div>
 
       {/* Slider Line */}

@@ -24,7 +24,7 @@ export const ExamplePhoto = ({ src, alt }: ExamplePhotoProps) => {
           isLoading ? "opacity-0" : "opacity-100"
         )}
         onLoad={() => setIsLoading(false)}
-        loading="lazy"
+        loading="eager"
       />
     </div>
   );

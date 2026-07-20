@@ -30,7 +30,7 @@ const GarageLandingForm = () => {
         <section className="relative min-h-[600px] md:min-h-[700px] flex items-center">
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img src={garageLandingHero} alt="Premium garage floor coating" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
+            <img src={garageLandingHero} alt="Premium garage floor coating" className="w-full h-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
           </div>
           
@@ -56,7 +56,7 @@ const GarageLandingForm = () => {
                     </svg>
                     <div className="flex flex-col">
                       <span className="text-sm font-medium text-white">Google Reviews</span>
-                      <span className="text-xs text-gray-300">190+ five star reviews</span>
+                      <span className="text-xs text-gray-300">200+ five star reviews</span>
                     </div>
                   </div>
                   
@@ -98,7 +98,7 @@ const GarageLandingForm = () => {
               <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/64f61c96-ce73-4ef1-adb6-6e3d1644de30.png" alt="Before garage floor transformation" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                         BEFORE
@@ -106,7 +106,7 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/303d5679-dcda-4e82-b1da-4e309d1fb5dd.png" alt="After garage floor transformation with flake coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                         AFTER
@@ -132,7 +132,7 @@ const GarageLandingForm = () => {
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/f57a3511-7157-4235-ba23-509e1df21d59.png" alt="Before garage floor coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                         BEFORE
@@ -140,7 +140,7 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor coating with premium finish" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/002da108-5855-41da-aaea-3e1d1a9de98e.png" alt="After garage floor coating with premium finish" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                         AFTER
@@ -154,7 +154,7 @@ const GarageLandingForm = () => {
               <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center">
                 <div className="grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage transformation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/c499e5d5-764f-4feb-b2be-635e5b67ea69.png" alt="Before large garage transformation" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                         BEFORE
@@ -162,7 +162,7 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/e98aa310-42f2-46db-ac00-8502f2d71097.png" alt="After large garage floor coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                         AFTER
@@ -188,7 +188,7 @@ const GarageLandingForm = () => {
                 </div>
                 <div className="order-1 lg:order-2 grid grid-cols-2 gap-2 h-48 sm:h-64 md:h-80 lg:h-96">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before professional garage coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/1e76caef-6851-4869-9f2e-df3b59bf64ef.png" alt="Before professional garage coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-blue-600 text-white px-2 py-1 rounded text-[10px] md:text-xs font-semibold">
                         BEFORE
@@ -196,7 +196,7 @@ const GarageLandingForm = () => {
                     </div>
                   </div>
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
-                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src="/lovable-uploads/ef50769f-f8f0-4bd8-9f4c-5238689c933b.png" alt="After professional garage floor coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                     <div className="absolute top-2 left-2 md:top-3 md:left-3">
                       <span className="bg-white text-blue-600 px-2 py-1 rounded text-[10px] md:text-xs font-semibold border border-blue-600">
                         AFTER

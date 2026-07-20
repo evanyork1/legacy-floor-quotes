@@ -76,7 +76,7 @@ export const LeadForm = () => {
         <CardContent className="p-4 sm:p-5 md:p-6">
           {/* Logo */}
           <div className="flex justify-center mb-4 md:mb-6">
-            <img src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" alt="Legacy Industrial Coatings" className="h-10 sm:h-12 w-auto"  loading="lazy" decoding="async" />
+            <img src="/lovable-uploads/a18e3648-17a6-4222-808b-0a78d3ea50b9.png" alt="Legacy Industrial Coatings" className="h-10 sm:h-12 w-auto"  loading="eager" decoding="async" />
           </div>
           
           <div className="text-center mb-4 md:mb-6">

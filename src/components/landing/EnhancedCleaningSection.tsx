@@ -45,7 +45,7 @@ export const EnhancedCleaningSection = () => {
                 alt="Professionally cleaned and polished concrete floor showing pristine, reflective finish in modern commercial space" 
                 src="/lovable-uploads/5d93ae56-1cab-4795-a9d4-0389c901bd35.png" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
-               loading="lazy" decoding="async" />
+               loading="eager" decoding="async" />
             </div>
           </CardContent>
         </Card>

@@ -148,10 +148,6 @@ const Commercial = () => {
           { name: "Flake Floors", description: "Decorative flake broadcast flooring for commercial retail, showrooms, kennels, and food-service back-of-house.", url: "/flake-floors" },
         ]}
         faqs={COMMERCIAL_FAQS.map((f) => ({ question: f.question, answer: f.answer }))}
-        breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Commercial", url: "/commercial" },
-        ]}
       />
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }]} />
@@ -187,7 +183,7 @@ const Commercial = () => {
 
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchPriority="high" />
+                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchpriority="high" />
               </div>
             </div>
           </div>
@@ -224,7 +220,7 @@ const Commercial = () => {
               
               <div className="relative">
                 <div className="relative bg-white rounded-xl overflow-hidden shadow-xl aspect-[3/2]">
-                  <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Commercial flooring installation" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Commercial flooring installation" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                 </div>
               </div>
             </div>
@@ -257,7 +253,7 @@ const Commercial = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {commercialImages.map((image, index) => <div key={index} className="relative">
                   <div className="relative bg-white rounded-xl aspect-[3/2] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                    <img src={image.src} alt={image.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"  loading="lazy" decoding="async" />
+                    <img src={image.src} alt={image.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"  loading="eager" decoding="async" />
                   </div>
                 </div>)}
             </div>

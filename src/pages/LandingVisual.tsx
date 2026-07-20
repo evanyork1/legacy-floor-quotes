@@ -45,7 +45,7 @@ const LandingVisual = () => {
                 <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
                 <div className="relative grid md:grid-cols-2 gap-4 rounded-xl overflow-hidden shadow-2xl">
                   <div className="aspect-[4/3] relative">
-                    <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" loading="eager" decoding="async" fetchPriority="high" />
+                    <img alt="Garage floor before transformation - plain concrete with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/f08fd9e5-8f07-4243-9e04-7c3d607a0547.png" loading="eager" decoding="async" fetchpriority="high" />
                     {/* Before Banner */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-gray-800/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
@@ -54,7 +54,7 @@ const LandingVisual = () => {
                     </div>
                   </div>
                   <div className="aspect-[4/3] relative">
-                    <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png"  loading="lazy" decoding="async" />
+                    <img alt="Garage floor after transformation - beautiful epoxy coating with luxury cars" className="w-full h-full object-cover" src="/lovable-uploads/d9a4c532-7ba2-490e-8fc3-35dc938289e0.png"  loading="eager" decoding="async" />
                     {/* After Banner */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-blue-600/90 text-white px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
@@ -120,7 +120,7 @@ const LandingVisual = () => {
                   <div className="flex">
                     {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-yellow-400 fill-current" />)}
                   </div>
-                  <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900">170+ Five Star Reviews</span>
+                  <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900">200+ Five Star Reviews</span>
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -113,6 +114,8 @@ const FAQ = () => {
         <link rel="canonical" href="https://legacyindustrialcoatings.com/faq" />
         <meta property="og:url" content="https://legacyindustrialcoatings.com/faq" />
       </Helmet>
+
+      <StructuredData faqs={[...residentialFAQs, ...commercialFAQs]} />
 
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }, { name: "FAQ", url: "/faq" }]} />
 

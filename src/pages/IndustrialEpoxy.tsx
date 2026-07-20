@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -82,6 +83,10 @@ const IndustrialEpoxy = () => {
         <meta property="og:url" content="https://legacyindustrialcoatings.com/industrial-epoxy" />
       </Helmet>
 
+      <StructuredData
+        services={[{ name: "Industrial Epoxy Flooring", description: "High-performance industrial epoxy and urethane floor systems for warehouses, manufacturing plants, distribution centers, food processing, and aviation hangars across Dallas-Fort Worth.", url: "/industrial-epoxy" }]}
+      />
+
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Industrial Epoxy", url: "/industrial-epoxy" }]} />
 
       <div className="min-h-screen bg-white">
@@ -123,7 +128,7 @@ const IndustrialEpoxy = () => {
                   src="/lovable-uploads/7a412198-403e-4444-bc3d-56e2e28ac9fd.png" 
                   alt="Industrial epoxy flooring in commercial facility" 
                   className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
-                loading="eager" decoding="async" fetchPriority="high" />
+                loading="eager" decoding="async" fetchpriority="high" />
               </div>
             </div>
           </div>
@@ -197,7 +202,7 @@ const IndustrialEpoxy = () => {
                     src="/lovable-uploads/c7682b64-17bd-49b5-ac6c-96416093f159.png" 
                     alt="Helicopter hangar with industrial epoxy flooring" 
                     className="w-3/4 h-64 object-cover rounded-xl shadow-lg"
-                   loading="lazy" decoding="async" />
+                   loading="eager" decoding="async" />
                 </div>
               </div>
             </div>

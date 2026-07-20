@@ -95,7 +95,7 @@ const CaseStudiesHub = () => {
                         <img
                           src={card.image}
                           alt={card.title}
-                          loading="lazy"
+                          loading="eager"
                           className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                         />
                       )}

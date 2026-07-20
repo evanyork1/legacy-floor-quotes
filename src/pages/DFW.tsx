@@ -44,7 +44,7 @@ const DFW = () => {
     <>
       <Helmet>
         <title>Legacy Industrial Coatings | Epoxy & Polished Concrete DFW</title>
-        <meta name="description" content="Premium epoxy flooring, polyurea garage coatings & mechanical polished concrete across Dallas-Fort Worth. Lifetime warranty. Licensed & insured. 190+ reviews." />
+        <meta name="description" content="Premium epoxy flooring, polyurea garage coatings & mechanical polished concrete across Dallas-Fort Worth. Lifetime warranty. Licensed & insured. 200+ reviews." />
         <meta name="author" content="Legacy Industrial Coatings" />
         <meta name="keywords" content="epoxy flooring Dallas, polished concrete Fort Worth, garage floor coating DFW, garage floor epoxy, epoxy garage floors, industrial floor coatings, high-traffic epoxy, mechanical concrete polishing, polyurea garage floors, DFW commercial flooring, Plano, Frisco, McKinney, Prosper, Celina" />
 

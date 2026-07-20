@@ -19,7 +19,7 @@ export const BlogPostCard = React.memo(({ post }: BlogPostCardProps) => {
             src={post.featuredImage || post.image}
             alt={post.title}
             className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
+            loading="eager"
           />
           <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
             <Badge variant="outline" className="bg-white/90 text-xs sm:text-sm">{post.category}</Badge>

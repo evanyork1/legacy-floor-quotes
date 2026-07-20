@@ -2,6 +2,16 @@
   command = "npm run build"
   publish = "dist"
 
+# Serve prerendered directory-index pages at their canonical, NO-trailing-slash
+# URL (e.g. /garagefloors, not /garagefloors/). Without this, Netlify 301s
+# /garagefloors -> /garagefloors/, which mismatches the sitemap + canonical
+# tags (both no-slash) and confuses Google's canonicalization. pretty_urls
+# makes the no-slash URL serve 200 and redirects the slash form to it.
+[build.processing]
+  skip_processing = false
+[build.processing.html]
+  pretty_urls = true
+
 [build.environment]
   NODE_VERSION = "20"
   PUPPETEER_SKIP_DOWNLOAD = "false"

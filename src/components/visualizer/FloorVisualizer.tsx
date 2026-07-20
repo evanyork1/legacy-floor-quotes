@@ -535,7 +535,7 @@ export const FloorVisualizer = () => {
                 }} className={`cursor-pointer p-3 rounded-lg border-2 transition-all hover:scale-105 ${selectedColor === color.id ? 'border-navy-600 shadow-lg bg-navy-50' : 'border-navy-200 hover:border-navy-400'}`}>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20 rounded-lg overflow-hidden mb-2">
-                            <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" loading="lazy" />
+                            <img src={color.thumbnail} alt={color.name} className="w-full h-full object-cover" loading="eager" />
                           </div>
                           <p className="text-sm font-medium text-navy-900 text-center">
                             {color.name}

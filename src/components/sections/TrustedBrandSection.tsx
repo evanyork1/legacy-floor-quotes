@@ -10,7 +10,7 @@ const TrustedBrandSection = () => {
     description: "From small restaurants to massive warehouses — we deliver industrial-grade solutions that meet commercial demands and timelines."
   }, {
     icon: <Star className="h-8 w-8 text-blue-600" />,
-    title: "170+ Five Star Reviews",
+    title: "200+ Five Star Reviews",
     description: "Our reputation is important to us. See why we are a top-rated coatings company by hearing what our clients have to say."
   }, {
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
@@ -61,9 +61,9 @@ const TrustedBrandSection = () => {
               alt={imageAlt} 
               className="relative w-full h-auto rounded-xl shadow-2xl" 
               src={imageSource} 
-              loading="lazy"
+              loading="eager"
               decoding="async"
-              fetchPriority="low"
+              fetchpriority="low"
             />
           </div>
           

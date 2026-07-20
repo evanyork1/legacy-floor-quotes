@@ -122,7 +122,7 @@ export const FloorVisualizer = () => {
                   src={uploadedImage}
                   alt="Uploaded garage"
                   className="max-w-full h-64 object-contain mx-auto rounded-lg"
-                 loading="lazy" decoding="async" />
+                 loading="eager" decoding="async" />
                 <Button
                   variant="outline"
                   onClick={() => fileInputRef.current?.click()}
@@ -154,7 +154,7 @@ export const FloorVisualizer = () => {
                       src={color.thumbnail}
                       alt={color.name}
                       className="w-full h-full object-cover"
-                     loading="lazy" decoding="async" />
+                     loading="eager" decoding="async" />
                   </div>
                   <p className="font-medium text-sm">{color.name}</p>
                 </button>
@@ -195,7 +195,7 @@ export const FloorVisualizer = () => {
                   src={uploadedImage}
                   alt="Original garage"
                   className="w-full h-64 object-cover rounded-lg"
-                 loading="lazy" decoding="async" />
+                 loading="eager" decoding="async" />
               </div>
               <div>
                 <h4 className="font-medium mb-2 text-center">After</h4>
@@ -203,7 +203,7 @@ export const FloorVisualizer = () => {
                   src={visualizedImage}
                   alt="Visualized garage"
                   className="w-full h-64 object-cover rounded-lg"
-                 loading="lazy" decoding="async" />
+                 loading="eager" decoding="async" />
               </div>
             </div>
           </CardContent>

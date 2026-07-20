@@ -71,7 +71,7 @@ export const Step5ColorChoice = ({ formData, updateFormData, colorOptions }: Ste
                     isPreviewLoading ? "opacity-0" : "opacity-100"
                 )}
                 onLoad={() => setIsPreviewLoading(false)}
-                loading="lazy"
+                loading="eager"
               />
             )}
           </div>

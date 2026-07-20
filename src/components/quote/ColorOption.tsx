@@ -37,7 +37,7 @@ export const ColorOption = ({ color, isSelected, onSelect, onPreview }: ColorOpt
               isThumbnailLoading ? 'opacity-0' : 'opacity-100'
             )}
             onLoad={() => setIsThumbnailLoading(false)}
-            loading="lazy"
+            loading="eager"
           />
         </div>
         <p className="font-medium text-gray-900 text-sm sm:text-base">{color.name}</p>

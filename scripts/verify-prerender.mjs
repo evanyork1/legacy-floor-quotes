@@ -51,6 +51,18 @@ const REQUIRED_FILES = [
   "floor-visualizer/index.html",
 ];
 
+// Individual case-study detail pages are static data and must prerender too.
+// Derived from src/data/caseStudies.ts so this list can't drift.
+const caseFileSrc = readFileSync(
+  resolve(process.cwd(), "src/data/caseStudies.ts"),
+  "utf8",
+);
+for (const [, slug, category] of caseFileSrc.matchAll(
+  /slug:\s*"([a-z0-9-]+)",\s*[\r\n]+\s*category:\s*"(commercial|residential)"/g,
+)) {
+  REQUIRED_FILES.push(`${category}-case-studies/${slug}/index.html`);
+}
+
 // Min body bytes (post-</head>). An empty React shell is ~1 KB; real
 // marketing pages are 20-80 KB. 5 KB cleanly catches blank snapshots.
 const MIN_BODY_BYTES = 5 * 1024;

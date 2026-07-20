@@ -49,7 +49,37 @@ const STATIC_ROUTES = [
 
 const CITY_ROUTES = CITY_SLUGS.map((slug) => `/epoxy-flooring/${slug}`);
 
-const ROUTES = [...STATIC_ROUTES, ...CITY_ROUTES];
+// Case studies live in static data. Each canonicalizes to
+// /{category}-case-studies/{slug} (see CaseStudyDetail.tsx).
+const caseFileSrc = readFileSync(
+  resolve(process.cwd(), "src/data/caseStudies.ts"),
+  "utf8",
+);
+const CASE_STUDY_ROUTES = Array.from(
+  caseFileSrc.matchAll(
+    /slug:\s*"([a-z0-9-]+)",\s*[\r\n]+\s*category:\s*"(commercial|residential)"/g,
+  ),
+).map(([, slug, category]) => `/${category}-case-studies/${slug}`);
+
+// Blog posts are database-driven, so their canonical URLs are maintained in
+// the sitemap. Prerender whatever the sitemap advertises so crawlers never
+// receive the homepage fallback for a /blog/* URL. Treated as best-effort:
+// a failed blog render warns but does not abort the build (see main()).
+const sitemapSrc = readFileSync(
+  resolve(process.cwd(), "public/sitemap.xml"),
+  "utf8",
+);
+const BLOG_ROUTES = Array.from(
+  sitemapSrc.matchAll(
+    /<loc>https:\/\/legacyindustrialcoatings\.com(\/blog\/[a-z0-9-]+)<\/loc>/g,
+  ),
+).map((m) => m[1]);
+
+// Routes that MUST render (build aborts on failure).
+const REQUIRED_ROUTES = [...STATIC_ROUTES, ...CITY_ROUTES, ...CASE_STUDY_ROUTES];
+// Best-effort routes (warn on failure, keep going).
+const OPTIONAL_ROUTES = [...BLOG_ROUTES];
+const ROUTES = [...REQUIRED_ROUTES, ...OPTIONAL_ROUTES];
 
 const DIST = resolve(process.cwd(), "dist");
 const PORT = 4321;
@@ -103,18 +133,26 @@ async function renderRoute(browser, route) {
   try {
     const url = BASE + route;
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-    // Wait until React has hydrated and Helmet has injected meta tags.
+    // Wait until React has hydrated, real content is present, and Helmet has
+    // injected a canonical link WITH a populated href. Requiring a non-empty
+    // href (not just the element) prevents capturing an empty
+    // `<link rel="canonical">` before Helmet finishes — the bug that shipped
+    // hrefless canonicals to crawlers. Requiring an <h1> with text ensures
+    // async (database-driven) content has actually rendered.
     await page.waitForFunction(
       () => {
         const root = document.getElementById("root");
         const hasContent = !!root && root.children.length > 0;
         const canonical = document.querySelector('link[rel="canonical"]');
-        return hasContent && !!canonical;
+        const hasCanonical = !!canonical && !!canonical.getAttribute("href");
+        const h1 = document.querySelector("h1");
+        const hasHeading = !!h1 && h1.textContent.trim().length > 0;
+        return hasContent && hasCanonical && hasHeading;
       },
       { timeout: 30000 }
     );
     // Small settle for any final async paints.
-    await new Promise((r) => setTimeout(r, 300));
+    await new Promise((r) => setTimeout(r, 500));
     return await page.evaluate(() => "<!DOCTYPE html>" + document.documentElement.outerHTML);
   } finally {
     await page.close().catch(() => {});
@@ -141,17 +179,27 @@ async function main() {
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
     });
-    console.log(`[prerender] rendering ${ROUTES.length} routes`);
+    console.log(
+      `[prerender] rendering ${ROUTES.length} routes ` +
+        `(${REQUIRED_ROUTES.length} required, ${OPTIONAL_ROUTES.length} best-effort)`,
+    );
+    const optional = new Set(OPTIONAL_ROUTES);
+    let written = 0;
     for (const route of ROUTES) {
       try {
         const html = await renderRoute(browser, route);
         writeRouteHtml(route, html);
+        written++;
       } catch (err) {
+        if (optional.has(route)) {
+          console.warn(`[prerender] SKIPPED (best-effort) ${route}: ${err.message}`);
+          continue;
+        }
         console.error(`[prerender] FAILED ${route}:`, err.message);
         throw err;
       }
     }
-    console.log(`[prerender] done — ${ROUTES.length} routes written`);
+    console.log(`[prerender] done — ${written}/${ROUTES.length} routes written`);
   } finally {
     if (browser) await browser.close().catch(() => {});
     await closePreview(preview).catch((err) => {

@@ -228,7 +228,7 @@ const EpoxyFlooringCity = () => {
                 key={p.src}
                 src={p.src}
                 alt={`${p.alt} — ${city.name}, TX`}
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
               />
@@ -312,7 +312,7 @@ const EpoxyFlooringCity = () => {
                 key={p.src}
                 src={p.src}
                 alt={`${p.alt} — ${city.name}, TX`}
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="w-full h-40 sm:h-48 object-cover rounded-lg shadow-md"
               />

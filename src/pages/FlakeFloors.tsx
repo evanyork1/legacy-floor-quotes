@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import HeaderGeneric from "@/components/HeaderGeneric";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,10 @@ const FlakeFloors = () => {
         <meta property="og:url" content="https://legacyindustrialcoatings.com/flake-floors" />
       </Helmet>
 
+      <StructuredData
+        services={[{ name: "Flake Floor Coatings", description: "Decorative polyurea and epoxy flake floor systems for garages, showrooms, retail, and commercial spaces — durable, slip-resistant, and available in a wide range of colors across Dallas-Fort Worth.", url: "/flake-floors" }]}
+      />
+
       <PageBreadcrumbs items={[{ name: "Home", url: "/" }, { name: "Commercial", url: "/commercial" }, { name: "Flake Floors", url: "/flake-floors" }]} />
 
       <div className="min-h-screen bg-white">
@@ -104,7 +109,7 @@ const FlakeFloors = () => {
                   src="/lovable-uploads/8865d0d1-af13-4849-b194-a2611de34a0b.png" 
                   alt="Beautiful polyurea flake floor installation" 
                   className="relative w-full h-96 object-cover rounded-2xl shadow-2xl"
-                loading="eager" decoding="async" fetchPriority="high" />
+                loading="eager" decoding="async" fetchpriority="high" />
               </div>
             </div>
           </div>
@@ -140,7 +145,7 @@ const FlakeFloors = () => {
                   src="/lovable-uploads/e6d46c38-cab4-4c0e-b5f7-a13f414dc01b.png" 
                   alt="Close-up of polyurea flake floor texture" 
                   className="w-full h-80 object-cover rounded-xl shadow-lg"
-                 loading="lazy" decoding="async" />
+                 loading="eager" decoding="async" />
               </div>
             </div>
           </div>

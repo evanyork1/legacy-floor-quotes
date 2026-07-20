@@ -115,7 +115,7 @@ const HeroSection = () => {
                       </div>
                       <div className="flex items-center ml-2">
                         <span className="text-yellow-400 text-sm">★★★★★</span>
-                        <span className="ml-1 text-white font-medium text-sm">190+</span>
+                        <span className="ml-1 text-white font-medium text-sm">200+</span>
                         <span className="ml-1 text-white text-sm">reviews</span>
                       </div>
                     </div>
@@ -126,7 +126,7 @@ const HeroSection = () => {
                     {showExpertsSuffix && (
                       <>
                         {" "}
-                        <span className="text-blue-900">
+                        <span className="text-blue-400">
                           Experts
                         </span>
                       </>
@@ -189,7 +189,7 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-center ml-2">
                   <span className="text-yellow-400 text-sm">★★★★★</span>
-                  <span className="ml-1 text-white font-medium">190+ reviews</span>
+                  <span className="ml-1 text-white font-medium">200+ reviews</span>
                   <span className="ml-1 text-gray-400">›</span>
                 </div>
                 </div>
@@ -200,7 +200,7 @@ const HeroSection = () => {
                 {showExpertsSuffix && (
                   <>
                     {" "}
-                    <span className="text-blue-900">
+                    <span className="text-blue-400">
                       Experts
                     </span>
                   </>

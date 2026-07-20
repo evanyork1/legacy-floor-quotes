@@ -111,7 +111,7 @@ const CaseStudyDetail = () => {
         {/* Hero */}
         <section className="relative">
           <div className="relative h-[55vh] min-h-[420px] w-full overflow-hidden">
-            <img src={cs.heroImage} alt={cs.heroAlt} className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+            <img src={cs.heroImage} alt={cs.heroAlt} className="w-full h-full object-cover"  loading="eager" decoding="async" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
             <div className="absolute inset-0 flex items-end">
               <div className="container mx-auto px-4 max-w-6xl pb-12">
@@ -257,7 +257,7 @@ const CaseStudyDetail = () => {
             src={lightbox.src}
             alt={lightbox.alt}
             className="max-w-full max-h-full object-contain rounded-md"
-           loading="lazy" decoding="async" />
+           loading="eager" decoding="async" />
         </div>
       )}
     </div>

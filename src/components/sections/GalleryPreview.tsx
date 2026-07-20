@@ -57,7 +57,7 @@ export const GalleryPreview = () => {
           {previewImages.map(image => <Card key={image.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => openImage(image.src)}>
               <CardContent className="p-0">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"  loading="lazy" decoding="async" />
+                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"  loading="eager" decoding="async" />
                 </div>
               </CardContent>
             </Card>)}

@@ -36,7 +36,7 @@ const Footer = () => {
           {/* Company Info & Logo */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-6">
             <div className="space-y-4">
-              <img src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" alt="Legacy Industrial Coatings Logo" className="h-12 sm:h-16 w-auto"  loading="lazy" decoding="async" />
+              <img src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" alt="Legacy Industrial Coatings Logo" className="h-12 sm:h-16 w-auto"  loading="eager" decoding="async" />
               <div className="space-y-2 text-sm text-gray-300">
                 <p>Licensed & Insured</p>
                 <p>Family Owned & Operated</p>

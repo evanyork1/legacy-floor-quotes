@@ -34,14 +34,55 @@ export const StructuredData = ({
     schemas.push({
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
       name: "Legacy Industrial Coatings",
+      alternateName: "Legacy Industrial Coatings DFW",
       url: SITE_URL,
       logo: `${SITE_URL}/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png`,
+      image: `${SITE_URL}/lovable-uploads/e90dc902-382c-49a1-92b3-46b9b06b6a4b.png`,
+      description:
+        "Legacy Industrial Coatings is a licensed and insured flooring contractor specializing in epoxy flooring, polyurea garage floor coatings, mechanical polished concrete, and industrial floor coatings across the Dallas-Fort Worth metroplex.",
+      telephone: "+1-214-305-6516",
+      email: "support@legacyindustrialcoatings.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "6010 W Spring Creek Parkway",
+        addressLocality: "Plano",
+        addressRegion: "TX",
+        postalCode: "75024",
+        addressCountry: "US",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+1-214-305-6516",
+        email: "support@legacyindustrialcoatings.com",
+        contactType: "customer service",
+        areaServed: "US-TX",
+        availableLanguage: "English",
+      },
+      knowsAbout: [
+        "Epoxy flooring",
+        "Polyurea garage floor coatings",
+        "Mechanical polished concrete",
+        "Industrial floor coatings",
+        "Concrete sealing",
+        "Commercial flooring",
+      ],
       sameAs: [
         "https://www.instagram.com/legacyindustrialcoatings/",
         "https://www.facebook.com/legacyindustrialcoatings",
         "https://maps.app.goo.gl/2idbg4BFnZVKvLNK9",
       ],
+    });
+
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      url: SITE_URL,
+      name: "Legacy Industrial Coatings",
+      publisher: { "@id": `${SITE_URL}#organization` },
+      inLanguage: "en-US",
     });
   }
 
@@ -108,7 +149,7 @@ export const StructuredData = ({
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: "5.0",
-        reviewCount: "190",
+        reviewCount: "200",
       },
     });
   }

@@ -30,7 +30,7 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16 lg:items-center">
           {/* Image */}
@@ -39,9 +39,8 @@ const WhyChooseSection = () => {
               <img
                 src="/lovable-uploads/8d8cf4a3-4ed7-4f9b-8909-0cf80a149ecc.png"
                 alt="Beautiful garage floor with concrete coating"
-                className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] object-cover rounded-2xl shadow-2xl"
-               loading="lazy" decoding="async" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] object-cover rounded-lg border border-gray-200"
+               loading="eager" decoding="async" />
             </div>
           </div>
 
@@ -60,7 +59,7 @@ const WhyChooseSection = () => {
                 return (
                   <div key={index} className="flex items-start space-x-3 sm:space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-md flex items-center justify-center">
                         <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                     </div>

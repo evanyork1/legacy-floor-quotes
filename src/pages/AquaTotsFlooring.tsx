@@ -101,7 +101,7 @@ const AquaTotsFlooring = () => {
               </div>
 
               <div className="flex items-center justify-center mb-10">
-                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-16 sm:h-24 w-auto" loading="eager" decoding="async" fetchPriority="high" />
+                <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-16 sm:h-24 w-auto" loading="eager" decoding="async" fetchpriority="high" />
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 tracking-tight leading-tight max-w-4xl mx-auto">
@@ -135,7 +135,7 @@ const AquaTotsFlooring = () => {
                 { src: completed4, caption: "Pool Deck Lobby" },
               ].map((p, i) => (
                 <div key={i} className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition">
-                  <img src={p.src} alt={p.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"  loading="lazy" decoding="async" />
+                  <img src={p.src} alt={p.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"  loading="eager" decoding="async" />
                 </div>
               ))}
             </div>
@@ -166,7 +166,7 @@ const AquaTotsFlooring = () => {
                   alt="Standard VCT flooring inside an Aqua-Tots location"
                   className="w-full h-48 sm:h-56 object-cover"
                   style={{ objectPosition: "center 70%" }}
-                 loading="lazy" decoding="async" />
+                 loading="eager" decoding="async" />
                 <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-900 shadow-sm">
                   Standard VCT
                 </div>
@@ -181,7 +181,7 @@ const AquaTotsFlooring = () => {
             <div className="grid md:grid-cols-3 gap-5 mb-10">
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
-                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="max-h-64 w-auto object-contain"  loading="lazy" decoding="async" />
+                  <img src={moldSpores} alt="Mold spores discovered beneath existing flooring" className="max-h-64 w-auto object-contain"  loading="eager" decoding="async" />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
@@ -193,7 +193,7 @@ const AquaTotsFlooring = () => {
               </div>
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
-                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="max-h-64 w-auto object-contain"  loading="lazy" decoding="async" />
+                  <img src={wetDebris} alt="Wet debris trapped under flooring" className="max-h-64 w-auto object-contain"  loading="eager" decoding="async" />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
@@ -205,7 +205,7 @@ const AquaTotsFlooring = () => {
               </div>
               <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <div className="bg-gray-100 flex items-center justify-center p-4">
-                  <img src={moldCornerBlue} alt="Mold spores spreading at wall corner" className="max-h-64 w-auto object-contain"  loading="lazy" decoding="async" />
+                  <img src={moldCornerBlue} alt="Mold spores spreading at wall corner" className="max-h-64 w-auto object-contain"  loading="eager" decoding="async" />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
@@ -245,7 +245,7 @@ const AquaTotsFlooring = () => {
               ].map((s, i) => (
                 <div key={i} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-                    <img src={s.img} alt={s.title} className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                    <img src={s.img} alt={s.title} className="w-full h-full object-cover"  loading="eager" decoding="async" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-base font-bold text-gray-900 mb-2 leading-snug">{s.title}</h3>
@@ -271,7 +271,7 @@ const AquaTotsFlooring = () => {
             <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
               <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
                 <div className="aspect-[5/4] overflow-hidden bg-gray-100">
-                  <img src={integratedCove} alt="Cove base baseboards" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src={integratedCove} alt="Cove base baseboards" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                 </div>
                 <div className="p-5">
                   <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Option 1</div>
@@ -282,7 +282,7 @@ const AquaTotsFlooring = () => {
 
               <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
                 <div className="aspect-[5/4] overflow-hidden bg-gray-100">
-                  <img src={baseboardFlake} alt="Integrated cove base — seamless flake-coated baseboard" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src={baseboardFlake} alt="Integrated cove base — seamless flake-coated baseboard" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                 </div>
                 <div className="p-5">
                   <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Option 2</div>
@@ -309,7 +309,7 @@ const AquaTotsFlooring = () => {
                 src={floorLayers}
                 alt="Polyurea floor system layers: topcoat, flakes, basecoat, concrete"
                 className="w-2/3 max-w-xs sm:max-w-sm lg:max-w-sm h-auto"
-               loading="lazy" decoding="async" />
+               loading="eager" decoding="async" />
               <div className="flex-1">
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 tracking-tight">Three bonded layers. Zero seams.</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -403,7 +403,7 @@ const AquaTotsFlooring = () => {
         <section id="contact" className="py-16 lg:py-20 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="flex items-center justify-center mb-6">
-              <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-12 w-auto"  loading="lazy" decoding="async" />
+              <img src={aquatotsLogo} alt="Aqua-Tots Swim Schools" className="h-12 w-auto"  loading="eager" decoding="async" />
             </div>
 
             <div className="text-center mb-12">
@@ -416,7 +416,7 @@ const AquaTotsFlooring = () => {
               <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 lg:p-8 text-center">
                 <div className="text-xs uppercase tracking-widest text-blue-700 font-semibold mb-5">Your Point of Contact</div>
                 <div className="w-40 h-40 mx-auto mb-5 rounded-full overflow-hidden border-4 border-blue-50 shadow-sm">
-                  <img src={evanYork} alt="Evan York" className="w-full h-full object-cover"  loading="lazy" decoding="async" />
+                  <img src={evanYork} alt="Evan York" className="w-full h-full object-cover"  loading="eager" decoding="async" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Evan York</h3>
                 <p className="text-sm text-gray-600 mt-1">Legacy Industrial Coatings</p>

@@ -87,7 +87,7 @@ const FeaturesSection = () => {
                         src={feature.image} 
                         alt={feature.title}
                         className="w-full h-48 object-cover rounded-lg"
-                       loading="lazy" decoding="async" />
+                       loading="eager" decoding="async" />
                       <div className="mt-4 text-center w-full">
                         <button 
                           onClick={() => {

@@ -46,7 +46,7 @@ export const Step4DamagePhotos = ({ formData, handleFileUpload, removePhoto }: S
         <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Uploaded Damage Photos ({formData.damagePhotos.length})</h3>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {formData.damagePhotos.map((photo, index) => <div key={index} className="relative group">
-            <img src={URL.createObjectURL(photo)} alt={`Damage ${index + 1}`} className="w-full h-20 sm:h-24 object-cover rounded-lg"  loading="lazy" decoding="async" />
+            <img src={URL.createObjectURL(photo)} alt={`Damage ${index + 1}`} className="w-full h-20 sm:h-24 object-cover rounded-lg"  loading="eager" decoding="async" />
             <button onClick={() => removePhoto(index, 'damage')} className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-red-500 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-opacity">
               ×
             </button>

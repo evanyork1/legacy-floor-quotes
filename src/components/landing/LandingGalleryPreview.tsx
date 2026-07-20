@@ -75,7 +75,7 @@ export const LandingGalleryPreview = () => {
                     src={image.src}
                     alt={image.alt}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                   loading="lazy" decoding="async" />
+                   loading="eager" decoding="async" />
                 </div>
               </CardContent>
             </Card>
