@@ -1,64 +1,82 @@
-import { useState, useEffect } from 'react';
-import { CheckCircle, AlertCircle, Loader2, ExternalLink } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { CheckCircle, AlertCircle, Loader2, ExternalLink, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 const JOBBER_CLIENT_ID = 'a525f5fa-bc9f-43d4-8465-badf2721a1e6';
 const REDIRECT_URI = 'https://byvazfrvoanojfayvsaz.supabase.co/functions/v1/jobber-oauth-callback';
+const POLL_INTERVAL_MS = 60_000;
 
 export function JobberStatus() {
   const [status, setStatus] = useState<'loading' | 'connected' | 'disconnected'>('loading');
   const [expiresAt, setExpiresAt] = useState<Date | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const mountedRef = useRef(true);
 
   useEffect(() => {
+    mountedRef.current = true;
     checkConnection();
-    
-    // Check URL params for OAuth callback results
+
     const params = new URLSearchParams(window.location.search);
     const connected = params.get('connected');
     const error = params.get('error');
-    
     if (connected === 'true') {
       toast.success('Successfully connected to Jobber!');
-      // Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
       checkConnection();
     } else if (error) {
       toast.error(`Jobber connection failed: ${error}`);
       window.history.replaceState({}, '', window.location.pathname);
     }
+
+    const interval = setInterval(checkConnection, POLL_INTERVAL_MS);
+    return () => {
+      mountedRef.current = false;
+      clearInterval(interval);
+    };
   }, []);
 
   const checkConnection = async () => {
     try {
-      // Use the edge function to check status (it will also refresh if needed)
       const { data, error } = await supabase.functions.invoke('jobber-api', {
         body: { action: 'checkStatus' },
       });
+      if (!mountedRef.current) return;
 
-      if (error || data?.error) {
+      if (error || data?.error || !data?.connected) {
         setStatus('disconnected');
+        setExpiresAt(null);
         return;
       }
-
-      if (data?.connected) {
-        setStatus('connected');
-        if (data.expiresAt) {
-          setExpiresAt(new Date(data.expiresAt));
-        }
-      } else {
-        setStatus('disconnected');
-      }
+      setStatus('connected');
+      setExpiresAt(data.expiresAt ? new Date(data.expiresAt) : null);
     } catch (err) {
       console.error('Error checking Jobber connection:', err);
-      setStatus('disconnected');
+      if (mountedRef.current) setStatus('disconnected');
     }
   };
 
   const handleConnect = () => {
     const authUrl = `https://api.getjobber.com/api/oauth/authorize?client_id=${JOBBER_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code`;
     window.location.href = authUrl;
+  };
+
+  const handleForceRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('jobber-token-refresh', {
+        body: { source: 'manual' },
+      });
+      if (error || !data?.ok) {
+        toast.error('Refresh failed — try reconnecting.');
+      } else {
+        toast.success('Jobber token refreshed.');
+        await checkConnection();
+      }
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   if (status === 'loading') {
@@ -71,28 +89,40 @@ export function JobberStatus() {
   }
 
   if (status === 'connected') {
+    const expired = expiresAt && expiresAt.getTime() < Date.now();
     return (
       <div className="flex items-center gap-2">
-        <CheckCircle className="h-4 w-4 text-green-500" />
-        <span className="text-sm text-green-500">Jobber Connected</span>
-        {expiresAt && (
-          <span className="text-xs text-slate-500">
-            (expires {expiresAt.toLocaleDateString()})
-          </span>
-        )}
+        <CheckCircle className={`h-4 w-4 ${expired ? 'text-amber-500' : 'text-green-500'}`} />
+        <span className={`text-sm ${expired ? 'text-amber-500' : 'text-green-500'}`}>
+          Jobber {expired ? 'expiring' : 'Connected'}
+        </span>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleForceRefresh}
+          disabled={refreshing}
+          className="h-7 px-2"
+          title="Refresh Jobber token now"
+        >
+          <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+        </Button>
       </div>
     );
   }
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={handleConnect}
-      className="border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f]/10"
-    >
-      <ExternalLink className="h-4 w-4 mr-2" />
-      Connect to Jobber
-    </Button>
+    <div className="flex items-center gap-2">
+      <AlertCircle className="h-4 w-4 text-red-500" />
+      <span className="text-sm text-red-500 font-medium">Jobber Disconnected</span>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={handleConnect}
+        className="border-red-500 text-red-600 hover:bg-red-50"
+      >
+        <ExternalLink className="h-4 w-4 mr-2" />
+        Reconnect
+      </Button>
+    </div>
   );
 }
