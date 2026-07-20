@@ -874,6 +874,11 @@ Deno.serve(async (req) => {
     return json({ error: "Unknown action" }, 400);
   } catch (e) {
     console.error("jobber-quote-from-packet error", e);
+    try {
+      const supabase = getSupabase();
+      await logSyncFailure(supabase, null, `Server error: ${(e as Error).message}`);
+    } catch (_) { /* ignore */ }
     return json({ error: "Server error", details: (e as Error).message }, 500);
   }
 });
+
