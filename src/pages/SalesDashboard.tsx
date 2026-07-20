@@ -16,6 +16,8 @@ import { LeaderboardSection } from '@/components/sales/LeaderboardSection';
 import AnalyticsTab from '@/components/admin/AnalyticsTab';
 import { Seo } from '@/components/seo/Seo';
 import { JobberStatus } from '@/components/presentation/JobberStatus';
+import { JobberSyncFailuresBanner } from '@/components/presentation/JobberSyncFailuresBanner';
+
 
 export default function SalesDashboard() {
   const { user, loading, signOut, hasRole } = useAuth();
