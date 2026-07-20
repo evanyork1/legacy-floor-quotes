@@ -554,6 +554,63 @@ export type Database = {
           },
         ]
       }
+      jobber_sync_failures: {
+        Row: {
+          context: Json | null
+          created_at: string
+          error: string
+          id: string
+          packet_id: string | null
+          resolved: boolean
+          updated_at: string
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string
+          error: string
+          id?: string
+          packet_id?: string | null
+          resolved?: boolean
+          updated_at?: string
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string
+          error?: string
+          id?: string
+          packet_id?: string | null
+          resolved?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      jobber_token_recovery: {
+        Row: {
+          access_token: string
+          created_at: string
+          expires_at: string
+          id: string
+          reason: string | null
+          refresh_token: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          reason?: string | null
+          refresh_token: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          reason?: string | null
+          refresh_token?: string
+        }
+        Relationships: []
+      }
       jobber_tokens: {
         Row: {
           access_token: string
