@@ -25,7 +25,7 @@ export const CTAButton = React.forwardRef<HTMLButtonElement, CTAButtonProps>(
     ...props 
   }, ref) => {
     
-    const baseClasses = "rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1";
+    const baseClasses = "rounded-md shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1";
     
     const sizeClasses = {
       sm: "text-sm px-4 py-2",

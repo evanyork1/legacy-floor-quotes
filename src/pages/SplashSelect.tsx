@@ -19,7 +19,7 @@ const SplashSelect = () => {
           src={legacyLogo}
           alt="Legacy Industrial Coatings"
           className="w-64 sm:w-80 md:w-96 mb-6"
-        loading="eager" decoding="async" fetchpriority="high" />
+        loading="eager" decoding="async" fetchPriority="high" />
 
         {/* Divider */}
         <div className="w-16 h-[1px] bg-blue-600/40 mb-6" />

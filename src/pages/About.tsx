@@ -66,7 +66,7 @@ const About = () => {
                 </div>
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png" alt="Legacy Industrial Coatings professional truck and equipment ready for service" className="rounded-2xl shadow-2xl w-full h-auto" loading="eager" decoding="async" fetchpriority="high" />
+                <img src="/lovable-uploads/4a736b12-2872-4f73-9c03-1fe5a79358d9.png" alt="Legacy Industrial Coatings professional truck and equipment ready for service" className="rounded-2xl shadow-2xl w-full h-auto" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>

@@ -118,7 +118,7 @@ const ResidentialGarageFloors = () => {
                   <div className="grid grid-cols-2 h-full gap-1">
                     {/* Before Image */}
                     <div className="relative overflow-hidden">
-                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
+                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
                       <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                         <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold">
                           BEFORE
@@ -141,7 +141,44 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
         
-        <QuickFeaturesSection />
+        {/* Video Showcase Section */}
+        <section className="py-12 md:py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+                  See Our Work <span className="text-blue-900">In Action</span>
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600">
+                  Watch how we transform garage floors from start to finish.
+                </p>
+              </div>
+
+              <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg bg-black aspect-video">
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  poster="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png"
+                >
+                  <source src="/videos/garage-floor-showcase.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <div className="flex justify-center mt-8">
+                <Button
+                  onClick={() => setShowBookingModal(true)}
+                  className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-6 rounded-md text-base sm:text-lg font-semibold shadow-lg"
+                >
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Book A Free Estimate
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
         
         {/* Legacy Service Experience Section */}
         <section className="py-12 md:py-20 bg-slate-50">

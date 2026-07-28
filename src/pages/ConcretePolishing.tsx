@@ -138,7 +138,7 @@ const ConcretePolishing = () => {
               </div>
               <div className="relative">
                 <div className="absolute -inset-4 bg-blue-900 rounded-2xl blur opacity-20"></div>
-                <img src="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" alt="Beautiful polished concrete floor" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchpriority="high" />
+                <img src="/lovable-uploads/14a68967-8843-4c6d-b339-dd48a8e278ae.png" alt="Beautiful polished concrete floor" className="relative w-full h-96 object-cover rounded-2xl shadow-2xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>

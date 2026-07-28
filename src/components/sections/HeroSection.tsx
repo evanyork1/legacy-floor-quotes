@@ -154,16 +154,18 @@ const HeroSection = () => {
                       </CTAButton>
                       
                       {(isDFW || isPHX) && (
-                        <Button 
+                        <CTAButton
                           asChild
                           onClick={handlePhoneClick}
-                          className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-6"
+                          variant="primary"
+                          size="md"
+                          icon={<Phone />}
+                          iconPosition="left"
+                          fullWidthMobile={false}
+                          className="w-auto bg-white text-blue-900 hover:bg-gray-100"
                         >
-                          <a href={`tel:${phoneNumber}`} className="flex items-center gap-2">
-                            <Phone size={18} />
-                            {phoneNumber}
-                          </a>
-                        </Button>
+                          <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+                        </CTAButton>
                       )}
                     </div>
                   </div>
@@ -227,17 +229,18 @@ const HeroSection = () => {
                   </CTAButton>
                   
                   {(isDFW || isPHX) && (
-                    <Button 
+                    <CTAButton
                       asChild
                       onClick={handlePhoneClick}
+                      variant="primary"
                       size="lg"
-                      className="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 text-lg"
+                      icon={<Phone />}
+                      iconPosition="left"
+                      fullWidthMobile={false}
+                      className="bg-white text-blue-900 hover:bg-gray-100"
                     >
-                      <a href={`tel:${phoneNumber}`} className="flex items-center gap-2">
-                        <Phone size={20} />
-                        {phoneNumber}
-                      </a>
-                    </Button>
+                      <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+                    </CTAButton>
                   )}
                 </div>
               </div>
@@ -246,16 +249,8 @@ const HeroSection = () => {
         </div>
         </div>
 
-        {/* Floating Quote Button - Right Side - Only visible when scrolled past hero */}
-        {scrolledPastHero && (
-          <Button
-            onClick={() => navigate(quotePath)}
-            className="fixed right-[-90px] sm:right-[-120px] top-1/2 transform -translate-y-1/2 -rotate-90 origin-center font-bold px-3 py-4 sm:px-5 sm:py-6 text-sm sm:text-lg shadow-2xl z-50 rounded-l-xl rounded-r-none border-[3px] transition-all duration-300 bg-blue-600 text-white border-blue-600"
-            style={{ transformOrigin: 'center center' }}
-          >
-            INSTANT GARAGE QUOTE
-          </Button>
-        )}
+
+
 
         <BookingModal 
           isOpen={showBookingModal} 
