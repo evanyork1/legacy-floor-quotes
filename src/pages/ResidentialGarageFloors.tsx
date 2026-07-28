@@ -178,8 +178,8 @@ const ResidentialGarageFloors = () => {
                   <div className="text-xl sm:text-2xl font-bold mr-2 sm:mr-3">80%</div>
                   <div className="text-xs sm:text-sm">Reviews mention our service</div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
-                  The <span className="text-blue-900">Legacy Service</span> Experience
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 leading-tight tracking-tight">
+                  The Legacy service experience
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
