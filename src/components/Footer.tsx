@@ -64,10 +64,7 @@ const Footer = () => {
             <div className="space-y-6">
               {/* DFW Office */}
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <h4 className="text-white font-semibold">DFW Office</h4>
-                  
-                </div>
+                <h4 className="text-white font-semibold mb-2">DFW Office</h4>
                 <div className="text-gray-300 text-sm space-y-1">
                   <p>6010 W Spring Creek Parkway</p>
                   <p>Plano, TX 75024</p>
@@ -76,7 +73,18 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-              
+
+              {/* Fort Worth Office */}
+              <div>
+                <h4 className="text-white font-semibold mb-2">Fort Worth Office</h4>
+                <div className="text-gray-300 text-sm space-y-1">
+                  <p>1300 Summit Ave, #520</p>
+                  <p>Fort Worth, TX 76102</p>
+                  <a href="tel:214-305-6516" onClick={handlePhoneClick} className="text-gray-300 hover:text-blue-400 transition-colors block">
+                    (214) 305-6516
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
