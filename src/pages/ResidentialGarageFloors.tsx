@@ -93,23 +93,22 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
-                  Premium<br />
-                  <span className="text-blue-900">Garage Floors</span> <span className="text-gray-900">in One Day</span>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 md:mb-5 leading-[1.15] tracking-tight">
+                  Premium garage floors, installed in one day.
                 </h1>
-                <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
-                  Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
+                <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 px-4 lg:px-0">
+                  Polyurea flake coatings backed by a lifetime warranty. Careful prep, clean install, and a finish built for daily use.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-4 lg:px-0">
+                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-md text-sm sm:text-base font-medium">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Book a free estimate
+                  </Button>
+                  <Button asChild variant="outline" className="border border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white bg-transparent px-6 py-3 rounded-md text-sm sm:text-base font-medium">
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      <Phone className="mr-2 h-4 w-4" />
                       214-305-6516
                     </a>
-                  </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
-                    <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Book My Free Estimate
                   </Button>
                 </div>
               </div>
@@ -145,7 +144,7 @@ const ResidentialGarageFloors = () => {
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg bg-black aspect-video">
+              <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-black aspect-video">
                 <iframe
                   className="w-full h-full"
                   src="https://www.youtube.com/embed/LIHMnK4rbyc?si=uNfk1Jr8mpHX-RUS"
@@ -157,13 +156,13 @@ const ResidentialGarageFloors = () => {
                 ></iframe>
               </div>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-6">
                 <Button
                   onClick={() => setShowBookingModal(true)}
-                  className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-6 rounded-md text-base sm:text-lg font-semibold shadow-lg"
+                  className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-md text-sm sm:text-base font-medium"
                 >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Book A Free Estimate
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Book a free estimate
                 </Button>
               </div>
             </div>
@@ -179,8 +178,8 @@ const ResidentialGarageFloors = () => {
                   <div className="text-xl sm:text-2xl font-bold mr-2 sm:mr-3">80%</div>
                   <div className="text-xs sm:text-sm">Reviews mention our service</div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
-                  The <span className="text-blue-900">Legacy Service</span> Experience
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 leading-tight tracking-tight">
+                  The Legacy service experience
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
@@ -207,11 +206,11 @@ const ResidentialGarageFloors = () => {
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="text-blue-900">Transformations</span>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
+                Real garage transformations
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
+              <p className="text-base text-gray-600 max-w-2xl mx-auto px-4">
+                Ordinary concrete, turned into finishes homeowners are proud of.
               </p>
             </div>
             
@@ -337,11 +336,11 @@ const ResidentialGarageFloors = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Homeowner Questions About Garage Floors
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
+                  Homeowner questions
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Common questions from homeowners about our garage floor coating services
+                <p className="text-base text-gray-600">
+                  Straight answers on cost, timing, and what to expect.
                 </p>
               </div>
               
@@ -414,24 +413,24 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-blue-900 text-white">
+        <section className="py-16 md:py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Ready to Transform Your Garage?
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 tracking-tight">
+              Ready to transform your garage?
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Get a free estimate for your residential garage floor coating. Our home improvement experts will help you design the perfect floor for your garage.
+            <p className="text-base sm:text-lg mb-8 opacity-80 max-w-2xl mx-auto">
+              Get a free estimate. We'll help you pick the right system for your space.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-white hover:bg-gray-50 text-blue-600 hover:text-blue-700 px-8 py-3 rounded-md transition-colors duration-200">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 px-6 py-3 rounded-md text-sm sm:text-base font-medium">
+                <Calendar className="mr-2 h-4 w-4" />
+                Book a free estimate
+              </Button>
+              <Button asChild variant="outline" className="border border-white text-white hover:bg-white hover:text-blue-900 bg-transparent px-6 py-3 rounded-md text-sm sm:text-base font-medium">
                 <a href="tel:214-305-6516">
-                  <Phone className="mr-2 h-5 w-5" />
+                  <Phone className="mr-2 h-4 w-4" />
                   214-305-6516
                 </a>
-              </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-md transition-colors duration-200 bg-white/10">
-                <Calendar className="mr-2 h-5 w-5" />
-                Book My Free Estimate
               </Button>
             </div>
           </div>
