@@ -10,7 +10,7 @@ import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import EpoxyVsPolyureaSection from "@/components/sections/EpoxyVsPolyureaSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ProcessSection from "@/components/sections/ProcessSection";
-import { LeadForm } from "@/components/landing/LeadForm";
+
 import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -437,16 +437,6 @@ const ResidentialGarageFloors = () => {
           </div>
         </section>
 
-        {/* Contact Form Section */}
-        <section className="py-8 bg-slate-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <LeadForm />
-              </div>
-            </div>
-          </div>
-        </section>
 
         <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
 
