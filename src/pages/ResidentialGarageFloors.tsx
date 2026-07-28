@@ -93,23 +93,22 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
-                  Premium<br />
-                  <span className="text-blue-900">Garage Floors</span> <span className="text-gray-900">in One Day</span>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 md:mb-5 leading-[1.15] tracking-tight">
+                  Premium garage floors, installed in one day.
                 </h1>
-                <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
-                  Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
+                <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 px-4 lg:px-0">
+                  Polyurea flake coatings backed by a lifetime warranty. Careful prep, clean install, and a finish built for daily use.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-4 lg:px-0">
+                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-md text-sm sm:text-base font-medium">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Book a free estimate
+                  </Button>
+                  <Button asChild variant="outline" className="border border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white bg-transparent px-6 py-3 rounded-md text-sm sm:text-base font-medium">
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      <Phone className="mr-2 h-4 w-4" />
                       214-305-6516
                     </a>
-                  </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
-                    <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Book My Free Estimate
                   </Button>
                 </div>
               </div>
