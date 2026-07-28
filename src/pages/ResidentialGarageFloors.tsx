@@ -15,6 +15,7 @@ import { Shield, Clock, Palette, Wrench, CheckCircle, Calendar, Phone, ArrowRigh
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingModal } from "@/components/landing/BookingModal";
+import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 const garageFaqs = [
   { question: "How long does the garage floor installation take at my home?", answer: "Most residential garage floors are completed in just one day. You can park your cars back in the garage within 24–48 hours." },
   { question: "What does a residential garage floor coating cost?", answer: "For a typical 2-3 car residential garage using our premium polyurea flake system, pricing ranges from $2,800–$4,500. This investment adds significant value to your home while providing a lifetime of beauty and durability." },
@@ -439,6 +440,7 @@ const ResidentialGarageFloors = () => {
 
 
         <BookingModal isOpen={showBookingModal} onClose={() => setShowBookingModal(false)} />
+        <StickyMobileCTA />
 
         <Footer />
       </div>
