@@ -42,7 +42,7 @@ const EpoxyVsPolyureaSection = () => {
             <div className="relative">
               <img src="/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png" alt="Beautiful polyurea floor with decorative flakes" className="w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"  loading="eager" decoding="async" />
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg ring-4 ring-green-200">OUR PRODUCT</span>
+                <span className="whitespace-nowrap bg-gradient-to-r from-green-600 to-green-700 text-white px-4 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-lg font-bold shadow-lg ring-4 ring-green-200">OUR PRODUCT</span>
               </div>
             </div>
             <div className="bg-white rounded-2xl p-8 border-4 border-green-600 shadow-xl hover:shadow-2xl transition-all duration-500 relative">
