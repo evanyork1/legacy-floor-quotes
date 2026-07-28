@@ -94,7 +94,7 @@ const ResidentialGarageFloors = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
                   Premium<br />
                   <span className="text-blue-900">Garage Floors</span> <span className="text-gray-900">in One Day</span>
                 </h1>
