@@ -144,7 +144,7 @@ const ResidentialGarageFloors = () => {
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg bg-black aspect-video">
+              <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-black aspect-video">
                 <iframe
                   className="w-full h-full"
                   src="https://www.youtube.com/embed/LIHMnK4rbyc?si=uNfk1Jr8mpHX-RUS"
@@ -156,13 +156,13 @@ const ResidentialGarageFloors = () => {
                 ></iframe>
               </div>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-6">
                 <Button
                   onClick={() => setShowBookingModal(true)}
-                  className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-6 rounded-md text-base sm:text-lg font-semibold shadow-lg"
+                  className="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-md text-sm sm:text-base font-medium"
                 >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Book A Free Estimate
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Book a free estimate
                 </Button>
               </div>
             </div>
