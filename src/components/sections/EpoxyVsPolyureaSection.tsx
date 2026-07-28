@@ -1,102 +1,87 @@
 import { X, Check } from "lucide-react";
-
 const EpoxyVsPolyureaSection = () => {
-  const rows = [
-    { epoxy: "Minimal prep — weak bond", polyurea: "Full mechanical prep for lifetime adhesion" },
-    { epoxy: "Chips, peels, and fades within 6–12 months", polyurea: "Won't chip, peel, or discolor" },
-    { epoxy: "Yellows in sunlight", polyurea: "100% UV stable — stays vibrant for years" },
-    { epoxy: "Brittle in extreme temps", polyurea: "Flexible in heat and cold" },
-    { epoxy: "Long cure time (2–5 days)", polyurea: "Installed and ready in one day" },
-  ];
-
-  return (
-    <section className="py-20 md:py-28 bg-white border-y border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+  const epoxyFeatures = ["Minimal prep — weak bond", "Chips, peels, and fades within 6–12 months", "Yellows in sunlight", "Brittle in extreme temps", "Long cure time (2–5 days)"];
+  const polyureFeatures = ["Full mechanical prep for lifetime adhesion", {
+    text: "Won't chip, peel, or discolor",
+    highlighted: true
+  }, "100% UV stable — stays vibrant for years", "Flexible in heat or cold", "Installed and ready in 1 day"];
+  return <section className="py-16 sm:py-20 lg:py-24 bg-gray-100">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="max-w-2xl mb-14">
-          <div className="text-xs font-medium tracking-[0.18em] uppercase text-gray-500 mb-4">
-            Materials
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 tracking-tight leading-[1.15]">
-            Epoxy vs. polyurea.
-            <span className="block text-gray-500 font-normal">Why our floors outlast the rest.</span>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Epoxy vs. <span className="text-blue-900">Polyurea</span>: Why Legacy Floors Last
           </h2>
+          
         </div>
 
-        {/* Comparison */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {/* Epoxy column — AVOID */}
-          <div className="rounded-lg border border-gray-200 overflow-hidden bg-white flex flex-col">
-            <div className="relative h-48 overflow-hidden bg-gray-100">
-              <img
-                src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png"
-                alt="Failing epoxy garage floor peeling"
-                className="w-full h-full object-cover grayscale opacity-90"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute top-3 left-3">
-                <span className="inline-flex items-center gap-1.5 bg-white text-red-700 border border-red-200 px-2.5 py-1 rounded text-[11px] font-semibold tracking-wide uppercase">
-                  <X className="w-3 h-3" /> Avoid
-                </span>
+        {/* Comparison Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+          {/* Epoxy Column */}
+          <div className="space-y-6">
+            <div>
+              <img src="/lovable-uploads/614ed682-963b-4559-b96b-07c42be58d0f.png" alt="Failed epoxy floor showing chips and peeling" className="w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"  loading="eager" decoding="async" />
+            </div>
+            <div className="bg-white rounded-2xl p-8 border border-red-200 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <h3 className="text-2xl font-bold text-red-600 mb-6 text-center">
+                Cheap Epoxy Coatings
+              </h3>
+              <div className="space-y-4">
+                {epoxyFeatures.map((feature, index) => <div key={index} className="flex items-start space-x-4 p-3 rounded-lg bg-red-50/50">
+                    <div className="flex-shrink-0 mt-1 bg-red-100 p-1 rounded-full">
+                      <X className="w-4 h-4 text-red-500" />
+                    </div>
+                    <p className="text-gray-700 font-medium leading-relaxed">{feature}</p>
+                  </div>)}
               </div>
             </div>
-            <div className="px-6 py-5 border-b border-gray-100">
-              <h3 className="text-base font-semibold text-gray-900">Cheap epoxy coatings</h3>
-              <p className="text-xs text-gray-500 mt-0.5">Industry standard — short lifespan</p>
-            </div>
-            <ul className="divide-y divide-gray-100 flex-1">
-              {rows.map((r, i) => (
-                <li key={i} className="flex items-start gap-3 px-6 py-4">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-red-50 border border-red-100 flex items-center justify-center flex-shrink-0">
-                    <X className="w-3 h-3 text-red-600" strokeWidth={3} />
-                  </span>
-                  <span className="text-sm text-gray-600 leading-relaxed">{r.epoxy}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* Polyurea column — RECOMMENDED */}
-          <div className="rounded-lg border-2 border-blue-900 overflow-hidden bg-white flex flex-col shadow-sm">
-            <div className="relative h-48 overflow-hidden bg-gray-100">
-              <img
-                src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png"
-                alt="Finished polyurea flake garage floor"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute top-3 left-3">
-                <span className="inline-flex items-center gap-1.5 bg-blue-900 text-white px-2.5 py-1 rounded text-[11px] font-semibold tracking-wide uppercase">
-                  <Check className="w-3 h-3" /> Recommended
-                </span>
+          {/* Polyurea Column */}
+          <div className="space-y-6">
+            <div className="relative">
+              <img src="/lovable-uploads/57f768f2-8d88-45f9-9d4e-a4c13cf1ed0b.png" alt="Beautiful polyurea floor with decorative flakes" className="w-4/5 h-64 object-cover rounded-2xl shadow-xl mx-auto"  loading="eager" decoding="async" />
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg ring-4 ring-green-200">OUR PRODUCT</span>
               </div>
             </div>
-            <div className="px-6 py-5 border-b border-gray-100 bg-blue-50/40">
-              <h3 className="text-base font-semibold text-blue-900">Our polyurea flake system</h3>
-              <p className="text-xs text-blue-900/70 mt-0.5">Legacy Industrial Coatings — lifetime finish</p>
+            <div className="bg-white rounded-2xl p-8 border-4 border-green-600 shadow-xl hover:shadow-2xl transition-all duration-500 relative">
+              <h3 className="text-2xl font-bold text-green-600 mb-6 text-center">
+                Our Polyurea Flake Floors
+              </h3>
+              <div className="space-y-4">
+                {polyureFeatures.map((feature, index) => <div key={index} className="flex items-start space-x-4 p-3 rounded-lg bg-green-50/50">
+                    <div className="flex-shrink-0 mt-1 bg-green-100 p-1 rounded-full">
+                      <Check className="w-4 h-4 text-green-500" />
+                    </div>
+                    <p className="text-gray-700 font-medium leading-relaxed">
+                      {typeof feature === 'string' ? feature : <span className={feature.highlighted ? "font-bold underline decoration-2 decoration-green-600" : ""}>
+                          {feature.text}
+                        </span>}
+                    </p>
+                  </div>)}
+              </div>
             </div>
-            <ul className="divide-y divide-gray-100 flex-1">
-              {rows.map((r, i) => (
-                <li key={i} className="flex items-start gap-3 px-6 py-4">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                  </span>
-                  <span className="text-sm text-gray-900 leading-relaxed">{r.polyurea}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
-        {/* Footnote */}
-        <p className="mt-10 max-w-2xl text-sm text-gray-500 leading-relaxed">
-          <span className="text-gray-900 font-medium">Over half</span> of our projects begin by removing a failed epoxy floor. We recommend starting with polyurea.
-        </p>
+        {/* Fun Fact */}
+        <div className="bg-white rounded-2xl border border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-500 max-w-2xl mx-auto">
+          <div className="p-8">
+            <div className="flex items-start space-x-4">
+              <div className="bg-blue-900 rounded-full p-3 flex-shrink-0">
+                <span className="text-white text-lg">💡</span>
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 mb-3">Fun Fact</h4>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  Over 50% of our projects start by removing a failed epoxy floor. Don't make the same mistake — choose polyurea from the start.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default EpoxyVsPolyureaSection;
