@@ -154,16 +154,18 @@ const HeroSection = () => {
                       </CTAButton>
                       
                       {(isDFW || isPHX) && (
-                        <Button 
+                        <CTAButton
                           asChild
                           onClick={handlePhoneClick}
-                          className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-6"
+                          variant="primary"
+                          size="md"
+                          icon={<Phone />}
+                          iconPosition="left"
+                          fullWidthMobile={false}
+                          className="w-auto bg-white text-blue-900 hover:bg-gray-100"
                         >
-                          <a href={`tel:${phoneNumber}`} className="flex items-center gap-2">
-                            <Phone size={18} />
-                            {phoneNumber}
-                          </a>
-                        </Button>
+                          <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+                        </CTAButton>
                       )}
                     </div>
                   </div>
