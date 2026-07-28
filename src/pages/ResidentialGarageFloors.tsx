@@ -145,26 +145,16 @@ const ResidentialGarageFloors = () => {
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-                  See Our Work <span className="text-blue-900">In Action</span>
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600">
-                  Watch how we transform garage floors from start to finish.
-                </p>
-              </div>
-
               <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg bg-black aspect-video">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  preload="metadata"
-                  playsInline
-                  poster="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png"
-                >
-                  <source src="/videos/garage-floor-showcase.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/LIHMnK4rbyc?si=uNfk1Jr8mpHX-RUS"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
               </div>
 
               <div className="flex justify-center mt-8">
