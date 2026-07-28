@@ -206,11 +206,11 @@ const ResidentialGarageFloors = () => {
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Real Garage <span className="text-blue-900">Transformations</span>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
+                Real garage transformations
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                See how we transform ordinary concrete floors into stunning, durable surfaces that homeowners love
+              <p className="text-base text-gray-600 max-w-2xl mx-auto px-4">
+                Ordinary concrete, turned into finishes homeowners are proud of.
               </p>
             </div>
             
