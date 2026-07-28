@@ -413,24 +413,24 @@ const ResidentialGarageFloors = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-blue-900 text-white">
+        <section className="py-16 md:py-20 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Ready to Transform Your Garage?
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 tracking-tight">
+              Ready to transform your garage?
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Get a free estimate for your residential garage floor coating. Our home improvement experts will help you design the perfect floor for your garage.
+            <p className="text-base sm:text-lg mb-8 opacity-80 max-w-2xl mx-auto">
+              Get a free estimate. We'll help you pick the right system for your space.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-white hover:bg-gray-50 text-blue-600 hover:text-blue-700 px-8 py-3 rounded-md transition-colors duration-200">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 px-6 py-3 rounded-md text-sm sm:text-base font-medium">
+                <Calendar className="mr-2 h-4 w-4" />
+                Book a free estimate
+              </Button>
+              <Button asChild variant="outline" className="border border-white text-white hover:bg-white hover:text-blue-900 bg-transparent px-6 py-3 rounded-md text-sm sm:text-base font-medium">
                 <a href="tel:214-305-6516">
-                  <Phone className="mr-2 h-5 w-5" />
+                  <Phone className="mr-2 h-4 w-4" />
                   214-305-6516
                 </a>
-              </Button>
-              <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-md transition-colors duration-200 bg-white/10">
-                <Calendar className="mr-2 h-5 w-5" />
-                Book My Free Estimate
               </Button>
             </div>
           </div>
