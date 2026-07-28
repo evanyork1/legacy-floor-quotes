@@ -183,7 +183,7 @@ const Commercial = () => {
 
               </div>
               <div className="relative">
-                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchpriority="high" />
+                <img src="/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png" alt="Professional commercial flooring installation" className="relative w-full h-96 object-cover rounded-xl shadow-xl" loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>

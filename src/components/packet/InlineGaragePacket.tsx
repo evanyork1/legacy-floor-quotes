@@ -196,7 +196,7 @@ export const InlineGaragePacket = () => {
                     className="w-full aspect-square object-cover"
                     loading="eager"
                     decoding="async"
-                    fetchpriority="high"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-black/60 px-1 py-0.5">
                     <p className="text-white text-[10px] font-medium truncate text-center">{color.name}</p>
