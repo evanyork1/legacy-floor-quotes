@@ -336,11 +336,11 @@ const ResidentialGarageFloors = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Homeowner Questions About Garage Floors
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
+                  Homeowner questions
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Common questions from homeowners about our garage floor coating services
+                <p className="text-base text-gray-600">
+                  Straight answers on cost, timing, and what to expect.
                 </p>
               </div>
               
