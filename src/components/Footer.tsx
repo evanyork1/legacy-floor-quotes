@@ -98,17 +98,13 @@ const Footer = () => {
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">SERVICE AREAS</h3>
             <div className="text-gray-300 text-sm leading-relaxed">
-              <p className="font-semibold mb-2">Dallas-Fort Worth Metroplex</p>
-              <ul className="space-y-1 mb-3">
-                {cities.map((c) => (
-                  <li key={c.slug}>
-                    <a href={`/epoxy-flooring/${c.slug}`} className="hover:text-blue-400 transition-colors">
-                      {c.name}, TX
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              
+              <p className="font-semibold mb-3">Dallas-Fort Worth Metroplex</p>
+              <a
+                href="/service-areas"
+                className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors font-medium"
+              >
+                View all service areas →
+              </a>
             </div>
           </div>
 
