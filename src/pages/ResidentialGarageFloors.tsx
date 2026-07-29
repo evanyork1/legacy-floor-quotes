@@ -155,32 +155,28 @@ const ResidentialGarageFloors = () => {
         </section>
 
         
-        {/* Legacy Service Experience Section */}
         <section className="py-12 md:py-20 bg-slate-50">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-5">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center bg-blue-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg mb-6">
-                  <div className="text-xl sm:text-2xl font-bold mr-2 sm:mr-3">80%</div>
-                  <div className="text-xs sm:text-sm">Reviews mention our service</div>
+                <div className="inline-flex items-center gap-3 bg-white border border-gray-200 shadow-sm px-4 py-2 rounded-full mb-5">
+                  <span className="text-xl font-bold text-blue-900">80%</span>
+                  <span className="text-xs sm:text-sm text-gray-700">of reviews mention our service</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
                   The <span className="text-blue-900">Legacy Service</span> Experience
                 </h2>
-                <div className="space-y-4 md:space-y-6">
-                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
-                    Over 80% of our Google reviews don't just talk about the floors, they talk about the experience. That's because what truly sets Legacy apart is how we take care of you from start to finish.
-                  </p>
-                </div>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                  Over 80% of our Google reviews don't just talk about the floors — they talk about the experience. What truly sets Legacy apart is how we take care of you from start to finish.
+                </p>
               </div>
               <div className="order-1 lg:order-2 relative">
-                <div className="relative">
-                  <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing garage floor with hand grinder" className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg border border-gray-200"  loading="eager" decoding="async" />
-                </div>
+                <img src="/lovable-uploads/72eecda8-16d0-46b7-910a-0f72bee32409.png" alt="Legacy Industrial Coatings team member preparing garage floor" className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-lg" loading="eager" decoding="async" />
               </div>
             </div>
           </div>
         </section>
+
         
         <EpoxyVsPolyureaSection />
         
