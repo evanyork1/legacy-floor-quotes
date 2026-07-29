@@ -89,14 +89,14 @@ const ResidentialGarageFloors = () => {
                 <p className="text-base sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0 lg:max-w-none">
                   Transform your garage with premium polyurea flake coatings — beautiful, durable, and backed by a lifetime warranty.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm">
-                    <Calendar className="mr-2 h-4 w-4" />
+                <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center lg:justify-start">
+                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white min-h-0 h-9 sm:h-12 px-3.5 sm:px-6 rounded-md text-sm sm:text-base font-semibold shadow-sm">
+                    <Calendar className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     Book My Free Estimate
                   </Button>
-                  <Button asChild variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 h-12 px-6 rounded-md text-base font-semibold">
+                  <Button asChild variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 min-h-0 h-9 sm:h-12 px-3.5 sm:px-6 rounded-md text-sm sm:text-base font-semibold">
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-4 w-4" />
+                      <Phone className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       214-305-6516
                     </a>
                   </Button>
@@ -144,9 +144,9 @@ const ResidentialGarageFloors = () => {
               <div className="flex justify-center mt-6 md:mt-8">
                 <Button
                   onClick={() => setShowBookingModal(true)}
-                  className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm"
+                  className="bg-blue-900 hover:bg-blue-950 text-white min-h-0 h-9 sm:h-12 px-3.5 sm:px-6 rounded-md text-sm sm:text-base font-semibold shadow-sm"
                 >
-                  <Calendar className="mr-2 h-4 w-4" />
+                  <Calendar className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   Book A Free Estimate
                 </Button>
               </div>
@@ -351,14 +351,14 @@ const ResidentialGarageFloors = () => {
             <p className="text-base sm:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto">
               Get a free estimate on your residential garage floor coating.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto sm:max-w-none">
-              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 h-12 px-6 rounded-md text-base font-semibold">
-                <Calendar className="mr-2 h-4 w-4" />
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center max-w-md mx-auto sm:max-w-none">
+              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 min-h-0 h-9 sm:h-12 px-3.5 sm:px-6 rounded-md text-sm sm:text-base font-semibold">
+                <Calendar className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 Book My Free Estimate
               </Button>
-              <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white hover:text-blue-900 h-12 px-6 rounded-md text-base font-semibold bg-transparent">
+              <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white hover:text-blue-900 min-h-0 h-9 sm:h-12 px-3.5 sm:px-6 rounded-md text-sm sm:text-base font-semibold bg-transparent">
                 <a href="tel:214-305-6516">
-                  <Phone className="mr-2 h-4 w-4" />
+                  <Phone className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   214-305-6516
                 </a>
               </Button>

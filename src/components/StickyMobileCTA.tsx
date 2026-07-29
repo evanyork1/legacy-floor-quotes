@@ -35,9 +35,9 @@ export const StickyMobileCTA = ({
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-full bg-blue-900 hover:bg-blue-950 active:bg-blue-950 text-white font-semibold py-3.5 rounded-md text-base"
+          className="flex items-center justify-center w-full bg-blue-900 hover:bg-blue-950 active:bg-blue-950 text-white font-semibold py-2 rounded-md text-sm min-h-0"
         >
-          <Calendar className="mr-2 h-5 w-5" />
+          <Calendar className="mr-2 h-4 w-4" />
           {label}
         </a>
       </div>
