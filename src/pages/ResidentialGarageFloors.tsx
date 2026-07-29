@@ -352,11 +352,11 @@ const ResidentialGarageFloors = () => {
               Get a free estimate on your residential garage floor coating.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto sm:max-w-none">
-              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 h-12 px-6 rounded-md text-base font-semibold">
+              <Button onClick={() => setShowBookingModal(true)} className="bg-white hover:bg-gray-100 text-blue-900 h-10 sm:h-12 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold">
                 <Calendar className="mr-2 h-4 w-4" />
                 Book My Free Estimate
               </Button>
-              <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white hover:text-blue-900 h-12 px-6 rounded-md text-base font-semibold bg-transparent">
+              <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white hover:text-blue-900 h-10 sm:h-12 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold bg-transparent">
                 <a href="tel:214-305-6516">
                   <Phone className="mr-2 h-4 w-4" />
                   214-305-6516
