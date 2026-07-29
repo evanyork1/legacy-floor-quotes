@@ -90,11 +90,11 @@ const ResidentialGarageFloors = () => {
                   Transform your garage with premium polyurea flake coatings — beautiful, durable, and backed by a lifetime warranty.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm">
+                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white h-10 sm:h-12 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold shadow-sm">
                     <Calendar className="mr-2 h-4 w-4" />
                     Book My Free Estimate
                   </Button>
-                  <Button asChild variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 h-12 px-6 rounded-md text-base font-semibold">
+                  <Button asChild variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 h-10 sm:h-12 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold">
                     <a href="tel:214-305-6516">
                       <Phone className="mr-2 h-4 w-4" />
                       214-305-6516
