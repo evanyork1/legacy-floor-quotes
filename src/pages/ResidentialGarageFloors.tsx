@@ -72,67 +72,49 @@ const ResidentialGarageFloors = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="pt-28 md:pt-32 pb-12 md:pb-20 bg-slate-50">
-          <div className="container mx-auto px-4 w-full">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <section className="pt-24 md:pt-32 pb-10 md:pb-20 bg-slate-50">
+          <div className="container mx-auto px-5 w-full">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
               <div className="text-center lg:text-left">
-                {/* Google Reviews Badge - positioned above title */}
-                <div className="flex justify-center lg:justify-start mb-6">
-                  <div className="flex items-center">
-                    <div className="flex items-center">
-                      <span className="font-bold text-blue-500">G</span>
-                      <span className="font-bold text-red-500">o</span>
-                      <span className="font-bold text-yellow-500">o</span>
-                      <span className="font-bold text-blue-500">g</span>
-                      <span className="font-bold text-green-500">l</span>
-                      <span className="font-bold text-red-500">e</span>
-                    </div>
-                    <div className="flex items-center ml-2">
-                      <span className="text-yellow-400 text-sm">★★★★★</span>
-                      <span className="ml-1 text-gray-900 font-medium text-sm">200+</span>
-                      <span className="ml-1 text-gray-600 text-sm">reviews</span>
-                    </div>
+                {/* Reviews Badge */}
+                <div className="flex justify-center lg:justify-start mb-5">
+                  <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+                    <span className="text-yellow-400 text-sm tracking-tight">★★★★★</span>
+                    <span className="text-xs sm:text-sm font-medium text-gray-700">200+ Google reviews</span>
                   </div>
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight">
-                  Premium<br />
-                  <span className="text-blue-900">Garage Floors</span> <span className="text-gray-900">in One Day</span>
+                <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">
+                  Premium <span className="text-blue-900">Garage Floors</span> in One Day
                 </h1>
-                <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4 lg:px-0">
-                  Transform your garage with premium polyurea flake floor coatings. Our excellent service from start to finish ensures a beautiful, durable floor with lifetime warranty protection.
+                <p className="text-base sm:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0 lg:max-w-none">
+                  Transform your garage with premium polyurea flake coatings — beautiful, durable, and backed by a lifetime warranty.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
-                  <Button asChild className="bg-blue-900 hover:bg-blue-950 text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <Button onClick={() => setShowBookingModal(true)} className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Book My Free Estimate
+                  </Button>
+                  <Button asChild variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 h-12 px-6 rounded-md text-base font-semibold">
                     <a href="tel:214-305-6516">
-                      <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      <Phone className="mr-2 h-4 w-4" />
                       214-305-6516
                     </a>
                   </Button>
-                  <Button variant="outline" onClick={() => setShowBookingModal(true)} className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base">
-                    <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Book My Free Estimate
-                  </Button>
                 </div>
               </div>
-              <div className="relative mt-8 lg:mt-0">
-                <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-lg border border-gray-200">
+              <div className="relative mt-6 lg:mt-0">
+                <div className="relative h-[260px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl shadow-lg">
                   <div className="grid grid-cols-2 h-full gap-1">
-                    {/* Before Image */}
                     <div className="relative overflow-hidden">
-                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: Concrete garage floor before coating installation" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
-                      <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
-                        <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold">
-                          BEFORE
-                        </span>
+                      <img src="/lovable-uploads/69253a31-4762-4988-897d-8bc135fd43bd.png" alt="Before: concrete garage floor" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-black/70 backdrop-blur text-white px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide">BEFORE</span>
                       </div>
                     </div>
-                    {/* After Image */}
                     <div className="relative overflow-hidden">
-                      <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: Beautiful residential garage floor with polyurea flake coating" className="w-full h-full object-cover"  loading="eager" decoding="async" />
-                      <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
-                        <span className="bg-white text-blue-600 px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold border border-blue-600">
-                          AFTER
-                        </span>
+                      <img src="/lovable-uploads/b4732a11-b0eb-48f7-9950-d9c8e186ab97.png" alt="After: polyurea flake garage floor" className="w-full h-full object-cover" loading="eager" decoding="async" />
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-white text-blue-900 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide shadow-sm">AFTER</span>
                       </div>
                     </div>
                   </div>
@@ -141,6 +123,7 @@ const ResidentialGarageFloors = () => {
             </div>
           </div>
         </section>
+
         
         {/* Video Showcase Section */}
         <section className="py-12 md:py-20 bg-white">
