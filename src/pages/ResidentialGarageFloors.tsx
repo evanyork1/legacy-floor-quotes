@@ -126,10 +126,10 @@ const ResidentialGarageFloors = () => {
 
         
         {/* Video Showcase Section */}
-        <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-10 md:py-20 bg-white">
+          <div className="container mx-auto px-5">
             <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg bg-black aspect-video">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black aspect-video">
                 <iframe
                   className="w-full h-full"
                   src="https://www.youtube.com/embed/LIHMnK4rbyc?si=uNfk1Jr8mpHX-RUS"
@@ -141,18 +141,19 @@ const ResidentialGarageFloors = () => {
                 ></iframe>
               </div>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-6 md:mt-8">
                 <Button
                   onClick={() => setShowBookingModal(true)}
-                  className="bg-blue-900 hover:bg-blue-950 text-white px-8 py-6 rounded-md text-base sm:text-lg font-semibold shadow-lg"
+                  className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm"
                 >
-                  <Calendar className="mr-2 h-5 w-5" />
+                  <Calendar className="mr-2 h-4 w-4" />
                   Book A Free Estimate
                 </Button>
               </div>
             </div>
           </div>
         </section>
+
         
         {/* Legacy Service Experience Section */}
         <section className="py-12 md:py-20 bg-slate-50">
