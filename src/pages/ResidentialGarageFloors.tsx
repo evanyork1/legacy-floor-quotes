@@ -144,7 +144,7 @@ const ResidentialGarageFloors = () => {
               <div className="flex justify-center mt-6 md:mt-8">
                 <Button
                   onClick={() => setShowBookingModal(true)}
-                  className="bg-blue-900 hover:bg-blue-950 text-white h-12 px-6 rounded-md text-base font-semibold shadow-sm"
+                  className="bg-blue-900 hover:bg-blue-950 text-white h-10 sm:h-12 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold shadow-sm"
                 >
                   <Calendar className="mr-2 h-4 w-4" />
                   Book A Free Estimate
