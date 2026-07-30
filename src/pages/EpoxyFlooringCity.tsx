@@ -18,13 +18,12 @@ import {
   Home,
 } from "lucide-react";
 import { getCityBySlug, SERVICE_AREA_CITIES } from "@/data/serviceAreaCities";
+import { buildBookingUrl } from "@/contexts/BookingUrlContext";
 
 const PHONE_DISPLAY = "214-305-6516";
 const PHONE_HREF = "tel:+12143056516";
-const BOOK_URL =
-  "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/4986053/new?utm_source=website";
 
-const openBooking = () => window.open(BOOK_URL, "_blank", "noopener,noreferrer");
+const openBooking = () => window.open(buildBookingUrl(), "_blank", "noopener,noreferrer");
 
 const COMMERCIAL_PHOTOS = [
   { src: "/lovable-uploads/171b7f71-4aa3-4b54-8c96-5f7143dddebf.png", alt: "Commercial epoxy floor installation in DFW warehouse" },

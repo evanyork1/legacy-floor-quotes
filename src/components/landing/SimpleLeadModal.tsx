@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Phone } from "lucide-react";
+import { buildBookingUrl } from "@/contexts/BookingUrlContext";
 
 interface SimpleLeadModalProps {
   isOpen: boolean;
@@ -21,8 +22,6 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const BOOKING_URL =
-    "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/4986053/new?utm_source=website";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,7 +109,7 @@ export const SimpleLeadModal = ({ isOpen, onClose }: SimpleLeadModalProps) => {
               
               <Button
                 onClick={() => {
-                  window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+                  window.open(buildBookingUrl(), "_blank", "noopener,noreferrer");
                   handleClose();
                 }}
                 variant="outline"
