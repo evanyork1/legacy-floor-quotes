@@ -124,6 +124,31 @@ export const captureUtmsFromLocation = () => {
       captured.utm_medium = captured.utm_medium || "cpc";
     }
 
+    // Some ad tracking templates send an ID (e.g. {campaignid}) as utm_source,
+    // which surfaces in Jobber as "24046259518 - cpc". Normalize to a readable
+    // source and keep the ID as the campaign.
+    const isIdLike = (v?: string) => Boolean(v && /^\d{5,}$/.test(v));
+    const paidMedium = ["cpc", "ppc", "paid", "paidsearch", "paid_search"].includes(
+      (captured.utm_medium || "").toLowerCase()
+    );
+
+    if (isIdLike(captured.utm_source)) {
+      const id = captured.utm_source as string;
+      let normalized: string | null = null;
+      if (hasGoogleClickId || (paidMedium && !captured.msclkid && !captured.fbclid)) {
+        normalized = "google-ads";
+      } else if (captured.msclkid) {
+        normalized = "bing-ads";
+      } else if (captured.fbclid) {
+        normalized = "facebook-ads";
+      }
+      if (normalized) {
+        if (!captured.utm_campaign) captured.utm_campaign = id;
+        captured.utm_source = normalized;
+        captured.utm_medium = captured.utm_medium || "cpc";
+      }
+    }
+
     if (Object.keys(captured).length > 0) {
       // New tagged visit: merge over any previous values (last paid touch wins
       // for the keys present, older keys persist).
@@ -158,7 +183,18 @@ if (typeof window !== "undefined") {
 export const buildBookingUrl = (baseUrl: string = DEFAULT_BOOKING_URL): string => {
   try {
     const url = new URL(baseUrl);
-    const stored = readStoredUtms();
+    const stored = { ...readStoredUtms() };
+
+    // Safety net for attribution captured before normalization existed.
+    if (stored.utm_source && /^\d{5,}$/.test(stored.utm_source)) {
+      if (!stored.utm_campaign) stored.utm_campaign = stored.utm_source;
+      stored.utm_source = stored.msclkid
+        ? "bing-ads"
+        : stored.fbclid
+          ? "facebook-ads"
+          : "google-ads";
+      stored.utm_medium = stored.utm_medium || "cpc";
+    }
 
     for (const key of [...UTM_KEYS, ...CLICK_ID_KEYS] as AttributionKey[]) {
       const value = stored[key];
