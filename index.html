@@ -109,10 +109,23 @@
             var raw = readStored();
             var stored = {};
             for (var k0 in raw) { if (Object.prototype.hasOwnProperty.call(raw, k0)) stored[k0] = raw[k0]; }
-            // Ad tracking templates can send an ID as utm_source; normalize it.
-            if (stored.utm_source && /^\d{5,}$/.test(stored.utm_source)) {
+            // Keep Jobber's lead source human-readable while preserving campaign IDs.
+            var source = (stored.utm_source || '').trim();
+            var medium = (stored.utm_medium || '').trim().toLowerCase();
+            var isNumericSource = /^\d{5,}$/.test(source);
+            var isPaidMedium = ['cpc','ppc','paid','paidsearch','paid_search'].indexOf(medium) !== -1;
+            var hasGoogleClickId = !!(stored.gclid || stored.gbraid || stored.wbraid);
+            if (isNumericSource) {
               if (!stored.utm_campaign) stored.utm_campaign = stored.utm_source;
-              stored.utm_source = stored.msclkid ? 'bing-ads' : (stored.fbclid ? 'facebook-ads' : 'google-ads');
+            }
+            if (stored.msclkid && isNumericSource) {
+              stored.utm_source = 'Bing Ads';
+              stored.utm_medium = stored.utm_medium || 'cpc';
+            } else if (stored.fbclid && isNumericSource) {
+              stored.utm_source = 'Facebook Ads';
+              stored.utm_medium = stored.utm_medium || 'paid_social';
+            } else if (hasGoogleClickId || (isNumericSource && isPaidMedium) || (source.toLowerCase() === 'google' && isPaidMedium) || source.toLowerCase() === 'google-ads') {
+              stored.utm_source = 'Google Ads';
               stored.utm_medium = stored.utm_medium || 'cpc';
             }
             var hasSource = false;
