@@ -79,13 +79,47 @@
     <!-- Jivosite "Book an Estimate" button hijack -> Jobber booking page -->
     <script>
       (function() {
-        var websiteBookingUrl = "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/4986053/new?utm_source=website";
-        var chatGptBookingUrl = "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/4986053/new?utm_source=chatgpt";
+        var BASE_BOOKING_URL = "https://clienthub.getjobber.com/hubs/e7849464-5cd3-44cf-8cf8-c1fd5e2eb2fb/public/requests/4986053/new";
+        var ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','fbclid','msclkid'];
         var TARGET = 'book an estimate';
 
-        function getBookingUrl() {
-          return window.location.pathname === '/gpt' ? chatGptBookingUrl : websiteBookingUrl;
+        // Reads the same attribution payload the React app stores (see BookingUrlContext).
+        function readStored() {
+          var stores = [];
+          try { stores.push(window.localStorage); } catch (e) {}
+          try { stores.push(window.sessionStorage); } catch (e) {}
+          for (var i = 0; i < stores.length; i++) {
+            try {
+              var raw = stores[i].getItem('lic_utms');
+              if (!raw) continue;
+              var parsed = JSON.parse(raw);
+              if (parsed && parsed.data) return parsed.data;
+              if (parsed) return parsed;
+            } catch (e) {}
+          }
+          return {};
         }
+
+        function getBookingUrl() {
+          var url = BASE_BOOKING_URL;
+          var params = [];
+          if (window.location.pathname === '/gpt') {
+            params.push('utm_source=chatgpt');
+          } else {
+            var stored = readStored();
+            var hasSource = false;
+            for (var i = 0; i < ATTR_KEYS.length; i++) {
+              var k = ATTR_KEYS[i];
+              if (stored[k]) {
+                params.push(k + '=' + encodeURIComponent(stored[k]));
+                if (k === 'utm_source') hasSource = true;
+              }
+            }
+            if (!hasSource) params.push('utm_source=website');
+          }
+          return url + '?' + params.join('&');
+        }
+
 
         function matches(el) {
           if (!el || el.nodeType !== 1) return false;
