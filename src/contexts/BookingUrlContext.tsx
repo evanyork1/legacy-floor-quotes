@@ -27,6 +27,38 @@ type StoredAttribution = {
   ts: number;
 };
 
+/** Normalize paid-ad attribution into the human-readable values Jobber displays. */
+const normalizeAttribution = (data: UtmMap): UtmMap => {
+  const normalized = { ...data };
+  const source = (normalized.utm_source || "").trim();
+  const medium = (normalized.utm_medium || "").trim().toLowerCase();
+  const isNumericSource = /^\d{5,}$/.test(source);
+  const isPaidMedium = ["cpc", "ppc", "paid", "paidsearch", "paid_search"].includes(medium);
+  const hasGoogleClickId = Boolean(normalized.gclid || normalized.gbraid || normalized.wbraid);
+
+  if (isNumericSource && !normalized.utm_campaign) {
+    normalized.utm_campaign = source;
+  }
+
+  if (normalized.msclkid && isNumericSource) {
+    normalized.utm_source = "Bing Ads";
+    normalized.utm_medium = normalized.utm_medium || "cpc";
+  } else if (normalized.fbclid && isNumericSource) {
+    normalized.utm_source = "Facebook Ads";
+    normalized.utm_medium = normalized.utm_medium || "paid_social";
+  } else if (
+    hasGoogleClickId ||
+    (isNumericSource && isPaidMedium) ||
+    (source.toLowerCase() === "google" && isPaidMedium) ||
+    source.toLowerCase() === "google-ads"
+  ) {
+    normalized.utm_source = "Google Ads";
+    normalized.utm_medium = normalized.utm_medium || "cpc";
+  }
+
+  return normalized;
+};
+
 const readRaw = (): StoredAttribution | null => {
   if (typeof window === "undefined") return null;
   for (const store of [window.localStorage, window.sessionStorage]) {
@@ -48,7 +80,7 @@ const readRaw = (): StoredAttribution | null => {
   return null;
 };
 
-export const readStoredUtms = (): UtmMap => readRaw()?.data ?? {};
+export const readStoredUtms = (): UtmMap => normalizeAttribution(readRaw()?.data ?? {});
 
 const writeStoredUtms = (data: UtmMap) => {
   if (typeof window === "undefined") return;
@@ -112,7 +144,7 @@ export const captureUtmsFromLocation = () => {
 
     // Google Ads auto-tagging only appends gclid/gbraid/wbraid — no UTMs.
     if (hasGoogleClickId && !captured.utm_source) {
-      captured.utm_source = "google";
+      captured.utm_source = "Google Ads";
       captured.utm_medium = captured.utm_medium || "cpc";
     }
     if (captured.fbclid && !captured.utm_source) {
@@ -124,35 +156,12 @@ export const captureUtmsFromLocation = () => {
       captured.utm_medium = captured.utm_medium || "cpc";
     }
 
-    // Some ad tracking templates send an ID (e.g. {campaignid}) as utm_source,
-    // which surfaces in Jobber as "24046259518 - cpc". Normalize to a readable
-    // source and keep the ID as the campaign.
-    const isIdLike = (v?: string) => Boolean(v && /^\d{5,}$/.test(v));
-    const paidMedium = ["cpc", "ppc", "paid", "paidsearch", "paid_search"].includes(
-      (captured.utm_medium || "").toLowerCase()
-    );
+    const normalizedCaptured = normalizeAttribution(captured);
 
-    if (isIdLike(captured.utm_source)) {
-      const id = captured.utm_source as string;
-      let normalized: string | null = null;
-      if (hasGoogleClickId || (paidMedium && !captured.msclkid && !captured.fbclid)) {
-        normalized = "google-ads";
-      } else if (captured.msclkid) {
-        normalized = "bing-ads";
-      } else if (captured.fbclid) {
-        normalized = "facebook-ads";
-      }
-      if (normalized) {
-        if (!captured.utm_campaign) captured.utm_campaign = id;
-        captured.utm_source = normalized;
-        captured.utm_medium = captured.utm_medium || "cpc";
-      }
-    }
-
-    if (Object.keys(captured).length > 0) {
+    if (Object.keys(normalizedCaptured).length > 0) {
       // New tagged visit: merge over any previous values (last paid touch wins
       // for the keys present, older keys persist).
-      writeStoredUtms({ ...readStoredUtms(), ...captured });
+      writeStoredUtms(normalizeAttribution({ ...readStoredUtms(), ...normalizedCaptured }));
       return;
     }
 
@@ -183,18 +192,7 @@ if (typeof window !== "undefined") {
 export const buildBookingUrl = (baseUrl: string = DEFAULT_BOOKING_URL): string => {
   try {
     const url = new URL(baseUrl);
-    const stored = { ...readStoredUtms() };
-
-    // Safety net for attribution captured before normalization existed.
-    if (stored.utm_source && /^\d{5,}$/.test(stored.utm_source)) {
-      if (!stored.utm_campaign) stored.utm_campaign = stored.utm_source;
-      stored.utm_source = stored.msclkid
-        ? "bing-ads"
-        : stored.fbclid
-          ? "facebook-ads"
-          : "google-ads";
-      stored.utm_medium = stored.utm_medium || "cpc";
-    }
+    const stored = readStoredUtms();
 
     for (const key of [...UTM_KEYS, ...CLICK_ID_KEYS] as AttributionKey[]) {
       const value = stored[key];
