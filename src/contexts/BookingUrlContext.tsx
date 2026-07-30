@@ -183,7 +183,18 @@ if (typeof window !== "undefined") {
 export const buildBookingUrl = (baseUrl: string = DEFAULT_BOOKING_URL): string => {
   try {
     const url = new URL(baseUrl);
-    const stored = readStoredUtms();
+    const stored = { ...readStoredUtms() };
+
+    // Safety net for attribution captured before normalization existed.
+    if (stored.utm_source && /^\d{5,}$/.test(stored.utm_source)) {
+      if (!stored.utm_campaign) stored.utm_campaign = stored.utm_source;
+      stored.utm_source = stored.msclkid
+        ? "bing-ads"
+        : stored.fbclid
+          ? "facebook-ads"
+          : "google-ads";
+      stored.utm_medium = stored.utm_medium || "cpc";
+    }
 
     for (const key of [...UTM_KEYS, ...CLICK_ID_KEYS] as AttributionKey[]) {
       const value = stored[key];
