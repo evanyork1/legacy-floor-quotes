@@ -12,7 +12,6 @@ import {
   Droplets,
   Wrench,
   Layers,
-  ClipboardCheck,
   CheckCircle,
   GraduationCap,
 } from "lucide-react";
@@ -24,85 +23,47 @@ import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 
 import maintenanceHero from "@/assets/commercial-polishing-work.jpg";
 import maintenanceDetail from "@/assets/concrete-sealing-floor-detail.jpg";
-import maintenanceWarehouse from "@/assets/polishing-warehouse.jpg";
 
 const FAQS = [
   {
-    question: "Do you clean and maintain floors you didn't install?",
-    answer:
-      "Yes. We maintain any commercial floor in the Dallas-Fort Worth area regardless of who installed it. A large share of our maintenance customers came to us with existing epoxy, polished concrete, VCT, LVT, or carpet tile that was installed by another contractor.",
-  },
-  {
     question: "How are your cleaning crews trained?",
     answer:
-      "Our cleaning crews are trained by the material and product manufacturers on the correct procedures for each floor system — approved chemistry, dilution ratios, pad and brush selection, dwell times, and rinse and recovery. That training is the reason nothing that could damage the floor is used during our cleaning process.",
+      "Our crews are trained by the material and product manufacturers on the correct chemistry, dilution, pads, and dwell times for each floor system. Nothing that could damage the floor is used.",
   },
   {
-    question: "Can the wrong cleaner damage an epoxy or polished concrete floor?",
+    question: "What floor types do you maintain?",
     answer:
-      "It can. High-pH strippers, acidic descalers, citrus and solvent-based degreasers, and aggressive pads can dull a coating's gloss, soften a resin surface, etch a densified slab, or leave a residue that turns slippery. Repeated use of the wrong product shortens the life of the floor and can void a manufacturer warranty. Manufacturer-approved chemistry avoids all of it.",
+      "Epoxy, polyaspartic, polyurea, urethane cement, polished and sealed concrete, VCT, LVT, tile, carpet, and carpet tile.",
   },
   {
     question: "How often should a commercial floor be professionally cleaned?",
     answer:
-      "Most facilities are on a monthly or quarterly deep-cleaning cycle in addition to their own daily housekeeping. Restaurants, commercial kitchens, breweries, and food-processing areas usually need quarterly deep cleaning and degreasing at minimum. High-traffic warehouses, schools, and medical facilities are often monthly.",
+      "Most facilities are on a monthly or quarterly deep-clean cycle. Kitchens, breweries, and food-processing areas typically need quarterly service at minimum.",
   },
   {
-    question: "How often does a sealed or coated floor need resealing?",
+    question: "Do you do repairs as part of maintenance?",
     answer:
-      "Most commercial floors need resealing every 2 to 5 years depending on traffic, wash-down frequency, and the chemistry originally applied. Light-traffic offices and showrooms can stretch to 4 or 5 years; kitchens, warehouses, and forklift-traffic areas are typically 2 to 3 years.",
+      "Yes. We handle crack and joint repair, spall patching, worn traffic-lane recoating, cove base repair, and resealing during scheduled visits.",
   },
   {
     question: "How often does VCT need to be stripped and waxed?",
     answer:
-      "VCT typically needs a full strip and re-wax every 12 to 24 months, with scrub-and-recoat and burnishing in between. High-traffic entries, corridors, and retail sales floors are on the shorter end of that window. We build the cadence around your traffic instead of a generic schedule.",
+      "VCT usually needs a full strip and re-wax every 12 to 24 months, with scrub-and-recoat and burnishing in between.",
   },
   {
-    question: "What floor types do you clean and maintain?",
+    question: "Can you work after hours or weekends?",
     answer:
-      "Epoxy, polyaspartic and polyurea coatings, urethane cement, polished concrete, sealed concrete, VCT, LVT, ceramic and porcelain tile, carpet, and carpet tile. Most facilities have several of these under one roof, and we maintain all of them on one program.",
+      "Yes. Most of our maintenance work is scheduled nights, early mornings, or weekends so your facility stays open.",
   },
   {
-    question: "Do you do repairs as part of a maintenance program?",
+    question: "How is maintenance priced?",
     answer:
-      "Yes. Maintenance includes joint and crack repair, patching spalls and divots, re-coating worn traffic lanes, cove base repair, and re-sealing. Catching a small failure during a scheduled visit is far cheaper than a full tear-out later.",
+      "Pricing is based on square footage, floor type, soil load, and frequency. We walk the facility and provide a fixed per-visit price.",
   },
   {
-    question: "Can you work after hours or on weekends?",
+    question: "Do you maintain floors you didn't install?",
     answer:
-      "Yes. Most of our commercial maintenance work is scheduled nights, early mornings, or weekends so your facility keeps operating. We coordinate access, equipment staging, and area sequencing with your facility manager before the first visit.",
-  },
-  {
-    question: "How is a maintenance program priced?",
-    answer:
-      "Pricing is based on square footage, floor type, soil load, frequency, and access windows. We walk the facility, document the current condition of each floor type, and build a written program with a fixed per-visit price so there are no surprises.",
-  },
-];
-
-const floorTypes = [
-  {
-    icon: Layers,
-    title: "Epoxy, Polyaspartic & Urethane Cement",
-    body:
-      "Manufacturer-approved neutral cleaners and correct pad selection keep resinous floors glossy without hazing, scratching, or stripping the topcoat.",
-  },
-  {
-    icon: Sparkles,
-    title: "Polished & Sealed Concrete",
-    body:
-      "Auto-scrubbing with pH-neutral chemistry plus burnishing to bring clarity and sheen back, and re-densifying or re-sealing when the surface starts absorbing again.",
-  },
-  {
-    icon: Droplets,
-    title: "VCT, LVT & Tile",
-    body:
-      "Scrub-and-recoat, full strip and wax, burnishing for VCT, and manufacturer-safe cleaning for LVT and grouted tile that won't break down the wear layer.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Carpet & Carpet Tile",
-    body:
-      "Hot-water extraction, encapsulation, spot treatment, and entry-area programs to keep soil from tracking onto the hard surfaces next door.",
+      "Yes. We clean and maintain commercial floors across Dallas-Fort Worth regardless of who installed them.",
   },
 ];
 
@@ -110,32 +71,32 @@ const services = [
   {
     icon: Sparkles,
     title: "Deep Cleaning",
-    body: "Auto-scrubbing, edge and corner detail, and extraction that pulls out what nightly mopping leaves behind.",
+    body: "Auto-scrubbing, edge detail, and extraction that removes what nightly mopping leaves behind.",
   },
   {
     icon: Droplets,
     title: "Degreasing",
-    body: "Kitchen, bar, and production-floor degreasing with approved chemistry that restores slip resistance instead of destroying the finish.",
+    body: "Kitchen, bar, and production-floor degreasing with approved chemistry that restores slip resistance.",
   },
   {
     icon: Wrench,
     title: "Repairs",
-    body: "Crack and joint repair, spall patching, cove base fixes, and worn traffic-lane recoating handled during scheduled visits.",
+    body: "Crack and joint repair, spall patching, cove base fixes, and worn traffic-lane recoating.",
   },
   {
     icon: ShieldCheck,
     title: "Resealing",
-    body: "Re-application of sealers and topcoats on a 2 to 5 year cycle before the slab starts absorbing stains again.",
+    body: "Re-application of sealers and topcoats before the slab starts absorbing stains again.",
   },
   {
     icon: Layers,
     title: "VCT Strip & Wax",
-    body: "Full strip, re-wax, scrub-and-recoat, and burnishing programs that keep VCT looking new between full cycles.",
+    body: "Full strip, re-wax, scrub-and-recoat, and burnishing programs that keep VCT looking new.",
   },
   {
-    icon: ClipboardCheck,
+    icon: Calendar,
     title: "Scheduled Programs",
-    body: "Nightly, monthly, or quarterly service with documented scope, fixed per-visit pricing, and after-hours scheduling.",
+    body: "Nightly, monthly, or quarterly service with documented scope and fixed per-visit pricing.",
   },
 ];
 
@@ -158,7 +119,7 @@ const CommercialMaintenance = () => {
           {
             name: "Commercial Floor Cleaning & Maintenance",
             description:
-              "Scheduled commercial floor cleaning and maintenance in Dallas-Fort Worth: deep cleaning, degreasing, repairs, resealing, and VCT strip and wax, performed by crews trained by the material and product manufacturers.",
+              "Scheduled commercial floor cleaning and maintenance in Dallas-Fort Worth by manufacturer-trained crews.",
             url: "/commercial-floor-maintenance",
           },
         ]}
@@ -188,9 +149,9 @@ const CommercialMaintenance = () => {
                   Commercial Floor Cleaning &amp; Maintenance in Dallas–Fort Worth
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
-                  Scheduled cleaning, degreasing, repairs, resealing, and VCT wax programs — performed by
-                  crews trained by the material and product manufacturers, so nothing that could harm your
-                  floor is ever used on it.
+                  Scheduled cleaning, repairs, resealing, and VCT wax programs performed by
+                  manufacturer-trained crews. Maintenance protects the investment and keeps your floor
+                  performing for years.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
@@ -239,22 +200,16 @@ const CommercialMaintenance = () => {
                   Trained by the people who make the floor
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  Every crew that touches your floor is trained by the material and product manufacturers on
-                  the correct cleaning technique for that specific system. That means approved chemistry,
-                  correct dilution, the right pad or brush, proper dwell time, and full rinse and recovery —
-                  not whatever cleaner happened to be on the truck.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                  The wrong product will dull a coating, etch a densified slab, break down a wear layer, or
-                  leave a slick residue behind. We don't use anything that could harm the floor during the
-                  cleaning process. That discipline is the difference between a floor that still looks
-                  installed in year eight and one that has to be ground off and redone.
+                  Every crew is trained by the material and product manufacturers on the correct cleaning
+                  technique for that specific system — approved chemistry, dilution, pads, and dwell times.
+                  The wrong product can dull a coating, etch polished concrete, or break down a wear layer.
+                  We don't use anything that could harm the floor.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Manufacturer-approved chemistry for every floor type on site",
+                    "Manufacturer-approved chemistry for every floor type",
                     "Correct pad, brush, and equipment selection per surface",
-                    "No harsh strippers or acids on coated or polished surfaces",
+                    "No harsh strippers or acids on coated or polished floors",
                     "Documented procedures that protect your warranty",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-gray-700">
@@ -277,56 +232,15 @@ const CommercialMaintenance = () => {
           </div>
         </section>
 
-        {/* Why maintenance matters */}
-        <section className="py-16 lg:py-20 bg-slate-50 border-y border-slate-200">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Maintenance is how a floor lasts
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                A new floor is an investment in your facility. Maintenance is what protects it. Scheduled
-                professional cleaning is the single best way to keep a floor performing for years — it is an
-                essential part of every floor we install, and it's the reason our installations still look
-                right long after the install crew has left.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {[
-                {
-                  title: "Protects the surface",
-                  body: "Grit, grease, and food acids grind down and eat into a finish. Removing them on a schedule keeps the wear surface intact instead of sacrificial.",
-                },
-                {
-                  title: "Catches problems early",
-                  body: "Our crews document cracks, joint failures, and worn traffic lanes on every visit — small repairs now instead of a tear-out later.",
-                },
-                {
-                  title: "Keeps it safe and presentable",
-                  body: "Correct cleaning restores slip resistance and appearance, which matters for inspections, customers, and your team.",
-                },
-              ].map((item) => (
-                <Card key={item.title} className="bg-white border border-slate-200 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                    <p className="text-gray-700 leading-relaxed">{item.body}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* What's included */}
-        <section className="py-16 lg:py-20 bg-white">
+        <section className="py-16 lg:py-20 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                What our maintenance service includes
+                What maintenance includes
               </h2>
               <p className="text-lg text-gray-700">
-                One program that covers cleaning and the repair work most facilities have to chase down
-                separately.
+                One program that covers cleaning and the repairs most facilities chase down separately.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -343,70 +257,53 @@ const CommercialMaintenance = () => {
           </div>
         </section>
 
-        {/* Floor types */}
-        <section className="py-16 lg:py-20 bg-slate-50 border-y border-slate-200">
+        {/* Floor types + process */}
+        <section className="py-16 lg:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-12">
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  Floor types we clean and maintain
+                  Floor types we maintain
                 </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                  Most commercial buildings have four or five different floor surfaces under one roof. We
-                  maintain all of them on a single program instead of making you coordinate separate vendors.
+                <p className="text-lg text-gray-700 mb-8">
+                  Most buildings have several surfaces under one roof. We maintain all of them on one
+                  program.
                 </p>
-                <div className="space-y-5">
-                  {floorTypes.map((f) => (
-                    <div key={f.title} className="flex items-start gap-4">
-                      <f.icon className="h-6 w-6 text-blue-900 mt-1 flex-shrink-0" />
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-1">{f.title}</h3>
-                        <p className="text-gray-700 leading-relaxed">{f.body}</p>
-                      </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    "Epoxy, polyaspartic & polyurea",
+                    "Polished & sealed concrete",
+                    "VCT, LVT & tile",
+                    "Carpet & carpet tile",
+                  ].map((type) => (
+                    <div key={type} className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-blue-900 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{type}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <img
-                  src={maintenanceWarehouse}
-                  alt="Large commercial warehouse floor maintained on a scheduled cleaning program"
-                  className="w-full h-80 lg:h-[30rem] object-cover rounded-xl shadow-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                  How it works
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { title: "Walkthrough", body: "We map every surface, note damage, and identify wear patterns." },
+                    { title: "Written scope", body: "You get a documented scope with a fixed per-visit price." },
+                    { title: "Scheduled service", body: "Nights, early mornings, or weekends — your facility stays open." },
+                    { title: "Condition reporting", body: "Repairs and resealing get scheduled before they become emergencies." },
+                  ].map((step, i) => (
+                    <div key={step.title} className="flex gap-4">
+                      <div className="text-2xl font-bold text-blue-900 w-8">{String(i + 1).padStart(2, "0")}</div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
+                        <p className="text-gray-700">{step.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Program cadence */}
-        <section className="py-16 lg:py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Building your maintenance program
-              </h2>
-              <p className="text-lg text-gray-700">
-                We start with a walkthrough, document the condition of every floor type in the building, and
-                write a program around your traffic and your access windows.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-4 gap-6">
-              {[
-                { step: "01", title: "Walkthrough", body: "We map every floor surface, note existing damage, and identify what's causing wear." },
-                { step: "02", title: "Written scope", body: "You get a documented scope per area with a fixed per-visit price — nightly, monthly, or quarterly." },
-                { step: "03", title: "Scheduled service", body: "Crews work nights, early mornings, or weekends so your facility keeps running." },
-                { step: "04", title: "Condition reporting", body: "Each visit is documented so repairs and resealing get scheduled before they become emergencies." },
-              ].map((s) => (
-                <Card key={s.step} className="bg-white border border-slate-200 shadow-sm">
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-blue-900 mb-3">{s.step}</div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{s.title}</h3>
-                    <p className="text-gray-700 leading-relaxed">{s.body}</p>
-                  </CardContent>
-                </Card>
-              ))}
             </div>
           </div>
         </section>
@@ -415,7 +312,7 @@ const CommercialMaintenance = () => {
         <section className="py-16 lg:py-20 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-10 text-center">
-              Commercial floor maintenance questions
+              Common questions
             </h2>
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
               {FAQS.map((f) => (
@@ -453,23 +350,6 @@ const CommercialMaintenance = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Anyone can use it */}
-        <section className="py-16 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                We maintain floors we didn't install
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                You don't have to be an existing customer. We clean and maintain commercial floors across
-                Dallas-Fort Worth regardless of who installed them — epoxy, polished concrete, VCT, LVT,
-                tile, and carpet. If someone else put the floor in and nobody has taken care of it since,
-                that's exactly the kind of building we're set up for.
-              </p>
             </div>
           </div>
         </section>
