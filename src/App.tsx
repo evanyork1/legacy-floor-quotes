@@ -89,6 +89,7 @@ function App() {
               <Route path="/commercial" element={<Commercial />} />
               <Route path="/commercialfloors" element={<CommercialFloors />} />
               <Route path="/about-commercial" element={<AboutCommercial />} />
+              <Route path="/commercial-floor-maintenance" element={<CommercialMaintenance />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/concrete-sealing" element={<ConcreteSealing />} />
               <Route path="/faq" element={<FAQ />} />
