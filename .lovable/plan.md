@@ -1,32 +1,33 @@
-## Confirmed diagnosis
+# Commercial Floor Cleaning & Maintenance Page
 
-The screenshot is showing a booking created with the old raw value: `utm_source=24046259518`.
+Add a new SEO-focused page at `/commercial-floor-maintenance`, listed in the Commercial dropdown as "Maintenance".
 
-I reproduced both deployed versions:
+## What the page says
 
-- `legacyindustrialcoatings.com` currently opens Jobber with `utm_source=google-ads&utm_medium=cpc` — the normalization fix is active there.
-- `legacy-floor-quotes.lovable.app` still opens Jobber with `utm_source=24046259518&utm_medium=cpc` — that published version is stale and does not contain the fix.
+1. **Hero** — "Commercial Floor Cleaning & Maintenance Programs in DFW" with a short subhead about factory-trained cleaning crews, plus Book Estimate / Call CTAs.
+2. **Manufacturer-trained crews** — the core differentiator: our cleaning crews are trained by the material and product manufacturers on correct cleaning techniques, chemistry, pads, and dilution, so nothing that could damage the floor or void a coating is ever used.
+3. **Why maintenance matters** — a maintenance program is an essential part of having a floor installed by us; scheduled cleaning is the single best way to protect the investment and keep the floor performing for years.
+4. **Floor types we clean** — epoxy, polyaspartic/polyurea, urethane cement, polished and sealed concrete, plus carpet, carpet tile, LVT, VCT and tile.
+5. **What maintenance includes** — deep cleaning and degreasing, repairs, resealing, scrubbing/burnishing, and VCT strip, wax, and buff programs.
+6. **Program cadence** — quarterly/monthly/nightly options and what a walkthrough covers.
+7. **FAQ** — 8–10 questions targeting real search phrasing (how often to reseal, can you clean a floor you didn't install, what chemicals damage epoxy, VCT waxing frequency, deep cleaning cost drivers, etc.).
+8. **Closing section** — stated at the bottom: we service any commercial floor, including floors installed by someone else.
+9. **CTA band** — book an estimate + phone.
 
-Existing Jobber records will not be renamed retroactively, so the screenshot alone does not confirm which deployed version created that request.
+## SEO
 
-## Implementation plan
+- `Seo` component: title/description/canonical targeting "commercial floor cleaning and maintenance DFW", plus OG/Twitter tags.
+- Single H1, semantic H2/H3 section headings, descriptive alt text on all images.
+- `StructuredData`: Service schema (Commercial Floor Cleaning & Maintenance), FAQPage schema from the FAQ list, LocalBusiness/Organization as on sibling pages.
+- `PageBreadcrumbs`: Home → Commercial → Maintenance.
+- Internal links to `/commercial`, `/concrete-sealing`, `/concrete-polishing`, `/flake-floors`, `/commercial-case-studies`; add a link back from `/commercial`.
+- Add the route to the dynamic sitemap edge function so it gets indexed.
+- Keyword validation via Semrush before finalizing headings and FAQ wording.
 
-1. **Use the exact requested Jobber label**
-   - Normalize Google paid traffic to `utm_source=Google Ads` and `utm_medium=cpc` so Jobber receives and displays `Google Ads - cpc`, rather than `google-ads - cpc` or the campaign number.
-   - Preserve the numeric ID under `utm_campaign` and preserve `gclid`, `gbraid`, or `wbraid` for attribution.
+## Technical notes
 
-2. **Normalize attribution at the shared storage boundary**
-   - Apply normalization whenever stored attribution is read, not only while constructing selected booking URLs.
-   - This also repairs old numeric attribution already saved in a visitor’s browser before any Jobber link is opened.
-
-3. **Keep every Jobber entry path consistent**
-   - Update both the React booking-link builder and the Jivosite “Book an Estimate” interception path to produce the same exact parameters.
-   - Confirm homepage, Garage Floors sticky CTA, modals, and other direct Jobber booking buttons cannot bypass normalization.
-
-4. **Verify before release**
-   - Test a simulated Google Ads visit using `utm_source=24046259518&utm_medium=cpc&gclid=...`.
-   - Confirm the actual popup URL contains `utm_source=Google+Ads`, `utm_medium=cpc`, `utm_campaign=24046259518`, and the click ID.
-   - Also verify organic traffic remains `google - organic` and non-Google sources are unchanged.
-
-5. **Deployment check**
-   - After the code change, verify the production/custom-domain click URL again. The Lovable published URL is currently stale, so it must not be used as proof until its deployed version is updated.
+- New `src/pages/CommercialMaintenance.tsx`, modeled on `ConcreteSealing.tsx` (HeaderGeneric + Footer + BookingModal + Card sections), using the flattened non-gradient navy/slate styling used site-wide.
+- Route registered in `src/App.tsx`.
+- "Maintenance" added to `commercialItems` in `src/components/Header.tsx` (desktop dropdown and mobile section both read from that array).
+- New entry in `supabase/functions/sitemap/index.ts` static URL list.
+- Imagery: reuse existing commercial/cleaning assets in `src/assets`; generate one or two supporting images only if no suitable photo exists. No invented stats, certifications, or testimonials.
