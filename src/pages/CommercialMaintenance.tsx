@@ -219,7 +219,7 @@ const CommercialMaintenance = () => {
                   className="w-full h-80 lg:h-96 object-cover rounded-xl shadow-xl"
                   loading="eager"
                   decoding="async"
-                  fetchPriority="high"
+                  fetchpriority="high"
                 />
               </div>
             </div>
