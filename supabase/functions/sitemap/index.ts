@@ -39,6 +39,7 @@ const staticUrls: UrlEntry[] = [
   { loc: "/concrete-sealing", changefreq: "monthly", priority: "0.8", lastmod: today },
   { loc: "/commercial-case-studies", changefreq: "monthly", priority: "0.7", lastmod: today },
   { loc: "/about-commercial", changefreq: "monthly", priority: "0.7", lastmod: today },
+  { loc: "/commercial-floor-maintenance", changefreq: "monthly", priority: "0.8", lastmod: today },
 
   // About dropdown
   { loc: "/about", changefreq: "monthly", priority: "0.7", lastmod: today },

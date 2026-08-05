@@ -50,6 +50,7 @@ import SalesPresentation from "./pages/SalesPresentation";
 import CustomerPresentationPage from "./pages/CustomerPresentationPage";
 import SplashSelect from "./pages/SplashSelect";
 import CommercialFloors from "./pages/CommercialFloors";
+import CommercialMaintenance from "./pages/CommercialMaintenance";
 import AboutCommercial from "./pages/AboutCommercial";
 import AquaTotsFlooring from "./pages/AquaTotsFlooring";
 import CaseStudies from "./pages/CaseStudies";
@@ -89,6 +90,7 @@ function App() {
               <Route path="/commercial" element={<Commercial />} />
               <Route path="/commercialfloors" element={<CommercialFloors />} />
               <Route path="/about-commercial" element={<AboutCommercial />} />
+              <Route path="/commercial-floor-maintenance" element={<CommercialMaintenance />} />
               <Route path="/concrete-polishing" element={<ConcretePolishing />} />
               <Route path="/concrete-sealing" element={<ConcreteSealing />} />
               <Route path="/faq" element={<FAQ />} />

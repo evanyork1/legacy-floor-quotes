@@ -45,6 +45,7 @@ const residentialItems = [
     { name: "Industrial Epoxy", path: "/industrial-epoxy" },
     { name: "Concrete Polishing", path: "/concrete-polishing" },
     { name: "Concrete Sealing", path: "/concrete-sealing" },
+    { name: "Maintenance", path: "/commercial-floor-maintenance" },
     { name: "Case Studies", path: "/commercial-case-studies" }
   ];
 

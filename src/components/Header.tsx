@@ -65,6 +65,9 @@ const Header = () => {
     name: "Flake Floors",
     path: "/flake-floors"
   }, {
+    name: "Maintenance",
+    path: "/commercial-floor-maintenance"
+  }, {
     name: "Case Studies",
     path: "/commercial-case-studies"
   }];
