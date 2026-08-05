@@ -23,6 +23,7 @@ const Footer = () => {
     { href: "/industrial-epoxy", label: "Industrial Epoxy Flooring" },
     { href: "/concrete-polishing", label: "Polished Concrete Floors" },
     { href: "/concrete-sealing", label: "Concrete Sealing" },
+    { href: "/commercial-floor-maintenance", label: "Floor Cleaning & Maintenance" },
     { href: "/garagefloors", label: "Epoxy Garage Floor Coatings" },
     { href: "/flake-floors", label: "Polyurea Flake Floor Systems" },
     { href: "/residential-patio", label: "Residential Patio Coatings" },
