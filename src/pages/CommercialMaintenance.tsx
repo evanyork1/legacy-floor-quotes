@@ -21,7 +21,7 @@ import Seo from "@/components/seo/Seo";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { PageBreadcrumbs } from "@/components/seo/PageBreadcrumbs";
 
-import maintenanceHero from "@/assets/commercial-polishing-work.jpg";
+import warehouseHero from "@/assets/Warehouse.avif.asset.json";
 import maintenanceDetail from "@/assets/concrete-sealing-floor-detail.jpg";
 
 const FAQS = [
@@ -175,8 +175,8 @@ const CommercialMaintenance = () => {
               </div>
               <div>
                 <img
-                  src={maintenanceHero}
-                  alt="Commercial floor cleaning crew maintaining a polished concrete floor in a Dallas-Fort Worth facility"
+                  src={warehouseHero.url}
+                  alt="Warehouse floor cleaning and maintenance in a Dallas-Fort Worth commercial facility"
                   className="w-full h-80 lg:h-96 object-cover rounded-xl shadow-xl"
                   loading="eager"
                   decoding="async"
