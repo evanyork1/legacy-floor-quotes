@@ -41,16 +41,17 @@ const CommercialSystemPage = ({ slug }: Props) => {
       />
       <HeaderGeneric />
 
-      <section className="relative bg-blue-900 text-white">
+      <section className="relative bg-[#0f2440] text-white">
         <img
           src={product.heroImage}
           alt={`${product.shortTitle} flooring system installed in Dallas-Fort Worth`}
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
           loading="eager"
           decoding="async"
           fetchPriority="high"
         />
-        <div className="relative container mx-auto px-4 py-20 md:py-28 max-w-5xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f2440] via-[#0f2440]/85 to-[#0f2440]/40" />
+        <div className="relative container mx-auto px-4 py-24 md:py-32 max-w-5xl">
           <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-200 mb-4">
             Flooring Solutions
           </p>
@@ -79,7 +80,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+            <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-5">
               About {product.shortTitle.toLowerCase()} systems
             </h2>
             {product.overview.map((p) => (
@@ -89,7 +90,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
             ))}
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">Why specify it</h2>
+            <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-5">Why specify it</h2>
             <ul className="space-y-3">
               {product.benefits.map((b) => (
                 <li key={b} className="flex gap-3 text-gray-600">
@@ -104,7 +105,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
 
       <section className="py-16 md:py-20 bg-slate-50 border-y border-gray-200">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">System build-ups</h2>
+          <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-8">System build-ups</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {product.systems.map((s) => (
               <Card key={s.name} className="border-gray-200 rounded-none">
@@ -132,7 +133,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-700 mb-3">
               {sec.eyebrow}
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">{sec.heading}</h2>
+            <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-5">{sec.heading}</h2>
             {sec.paragraphs.map((p) => (
               <p key={p} className="text-gray-600 leading-relaxed mb-4">
                 {p}
@@ -142,27 +143,28 @@ const CommercialSystemPage = ({ slug }: Props) => {
         </section>
       ))}
 
-      <section className="py-16 md:py-20 bg-slate-50 border-y border-gray-200">
+      <section className="py-14 md:py-16 bg-slate-50 border-y border-gray-200">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Recent work</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-3 gap-3">
             {product.gallery.map((img, i) => (
-              <img
-                key={img + i}
-                src={img}
-                alt={`${product.shortTitle} flooring project ${i + 1}`}
-                className="w-full h-56 object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+              <div key={img + i} className="overflow-hidden bg-gray-100">
+                <img
+                  src={img}
+                  alt={`${product.shortTitle} flooring project ${i + 1}`}
+                  className="w-full h-60 object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
+
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+          <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-8">
             {product.shortTitle} FAQ
           </h2>
           <div className="space-y-6">
@@ -205,7 +207,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
         </div>
       </section>
 
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-20 bg-[#0f2440] text-white">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">Talk through your specification</h2>
           <p className="text-blue-100 mb-7">
