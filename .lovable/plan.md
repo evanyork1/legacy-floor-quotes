@@ -53,9 +53,48 @@ Import approach:
 
 Net result: 11 new industry pages + 5 new system pages + 4 upgraded existing pages.
 
+## 5. The 404'ing URLs from search
+
+None of these exist in the app today, so they all 404. Each gets wired up — no existing page is touched.
+
+Residential (both point at the existing garage floors page via a 301-style redirect):
+
+| URL | Behavior |
+| --- | --- |
+| `/garage-floor-coating` | redirects to `/garagefloors` |
+| `/polyaspartic-garage-floor` | redirects to `/garagefloors` |
+
+Commercial (redirect where an equivalent page already exists, real page where it doesn't):
+
+| URL | Behavior |
+| --- | --- |
+| `/polished-concrete` | redirects to existing `/concrete-polishing` |
+| `/warehouse-epoxy-flooring` | redirects to existing `/industrial-epoxy` |
+| `/commercial-flooring` | redirects to existing `/commercial` |
+| `/resinous-flooring` | new page (imported Epoxy/resinous systems content) |
+| `/healthcare-flooring` | new page — the Healthcare industry page lives at this URL |
+| `/manufacturing-floor-coating` | new page — the Manufacturing industry page lives at this URL |
+
+## 6. URLs for every new Applications / Solutions page
+
+Each imported page gets its own clean, keyword-shaped URL rather than a generic nested slug — the three above are simply part of this same map.
+
+Applications (industries):
+
+`/warehouse-flooring`, `/manufacturing-floor-coating`, `/data-center-flooring`, `/healthcare-flooring`, `/school-flooring`, `/hotel-flooring`, `/aerospace-hangar-flooring`, `/multifamily-flooring`, `/office-flooring`, `/retail-flooring`, `/agriculture-facility-flooring`
+
+Solutions (systems):
+
+`/resinous-flooring`, `/urethane-cement-flooring`, `/quartz-flooring`, `/specialty-floor-systems`, `/esd-static-control-flooring`, `/deck-coatings` — plus the four already-existing pages the menu links to (`/industrial-epoxy`, `/concrete-polishing`, `/concrete-sealing`, `/commercial-floor-maintenance`).
+
+All of these go into the sitemap, the mega menu, and the footer.
+
+
 ## Technical notes
 
 - New files: `src/data/industries.ts`, `src/data/commercialSystems.ts`, `src/pages/IndustryDetail.tsx`, `src/pages/CommercialSystemDetail.tsx`, `src/components/CommercialMegaMenu.tsx`.
+- Routing: each page is registered at its own top-level path (no `:slug` params), so the URL table above is exact. Redirect URLs use `<Navigate replace>`.
+
 - Edited: `src/App.tsx` (routes), `Header.tsx`, `HeaderGeneric.tsx`, `HeroSection.tsx`, `Footer.tsx`, `supabase/functions/sitemap/index.ts`, plus the four existing system pages.
 - Every detail page ships `Seo` meta, breadcrumb + Service + FAQPage JSON-LD, one H1, and lazy-loaded gallery images.
 - Assets migrated via `lovable-assets create`; no cross-project pointer files referenced.
