@@ -44,16 +44,17 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       <HeaderGeneric />
 
       {/* Hero */}
-      <section className="relative bg-blue-900 text-white">
+      <section className="relative bg-[#0f2440] text-white">
         <img
           src={industry.heroImage}
           alt={`${industry.shortTitle} flooring project in Dallas-Fort Worth`}
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
           loading="eager"
           decoding="async"
           fetchPriority="high"
         />
-        <div className="relative container mx-auto px-4 py-20 md:py-28 max-w-5xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f2440] via-[#0f2440]/85 to-[#0f2440]/40" />
+        <div className="relative container mx-auto px-4 py-24 md:py-32 max-w-5xl">
           <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-200 mb-4">
             Commercial Applications
           </p>
@@ -83,7 +84,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+            <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-5">
               Our approach to {industry.shortTitle.toLowerCase()} floors
             </h2>
             {industry.overview.map((p) => (
@@ -93,7 +94,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
             ))}
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">What we solve</h2>
+            <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-5">What we solve</h2>
             <ul className="space-y-3">
               {industry.challenges.map((c) => (
                 <li key={c} className="flex gap-3 text-gray-600">
@@ -109,7 +110,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       {/* Systems */}
       <section className="py-16 md:py-20 bg-slate-50 border-y border-gray-200">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Systems we install</h2>
+          <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-8">Systems we install</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {industry.systems.map((s) => (
               <Card key={s.name} className="border-gray-200 rounded-none">
@@ -151,7 +152,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       {/* FAQ */}
       <section className="py-16 md:py-20 bg-slate-50 border-y border-gray-200">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+          <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 tracking-tight mb-8">
             {industry.shortTitle} flooring FAQ
           </h2>
           <div className="space-y-6">
@@ -196,7 +197,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-20 bg-[#0f2440] text-white">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
             Get a bid for your {industry.shortTitle.toLowerCase()} floor
