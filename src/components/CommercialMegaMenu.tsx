@@ -27,14 +27,6 @@ export const CommercialMegaMenu = () => (
       <Column title="Applications" items={APPLICATIONS} />
       <Column title="Solutions" items={SOLUTIONS} />
     </div>
-    <div className="mt-5 pt-4 border-t border-gray-200 flex items-center justify-between">
-      <a href="/commercial" className="text-sm font-semibold text-blue-900 hover:text-blue-600">
-        Commercial overview
-      </a>
-      <a href="/commercial-case-studies" className="text-sm text-gray-600 hover:text-blue-600">
-        Case studies
-      </a>
-    </div>
   </div>
 );
 
