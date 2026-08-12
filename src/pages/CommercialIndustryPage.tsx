@@ -129,23 +129,24 @@ const CommercialIndustryPage = ({ slug }: Props) => {
       </section>
 
       {/* Gallery */}
-      <section className="py-16 md:py-20">
+      <section className="py-14 md:py-16">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Recent work</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-3 gap-3">
             {industry.gallery.map((img, i) => (
-              <img
-                key={img + i}
-                src={img}
-                alt={`${industry.shortTitle} floor coating project ${i + 1}`}
-                className="w-full h-56 object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+              <div key={img + i} className="overflow-hidden bg-gray-100">
+                <img
+                  src={img}
+                  alt={`${industry.shortTitle} floor coating project ${i + 1}`}
+                  className="w-full h-60 object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* FAQ */}
       <section className="py-16 md:py-20 bg-slate-50 border-y border-gray-200">
