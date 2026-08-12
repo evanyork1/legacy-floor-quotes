@@ -6,28 +6,19 @@ import industryHealthcare from "@/assets/industry-healthcare.webp";
 import industryDatacenter from "@/assets/industry-datacenter.webp";
 import industryAerospace from "@/assets/industry-aerospace.webp";
 
-import urethaneRed from "@/assets/urethane-cement-red.jpeg.asset.json";
-import urethaneGray from "@/assets/urethane-cement-gray.jpg.asset.json";
-import epoxyAutoShop from "@/assets/epoxy-auto-shop.png.asset.json";
-import epoxyWhiteCorridor from "@/assets/epoxy-white-corridor.jpg.asset.json";
-import polishedGrinding from "@/assets/polished-grinding.jpg.asset.json";
-import polishedTastingDetail from "@/assets/polished-tasting-detail.jpg.asset.json";
-import polishedTastingRoom from "@/assets/polished-tasting-room.jpg.asset.json";
-import polishedWarehouse from "@/assets/polished-warehouse.jpg.asset.json";
-import polishedCidery from "@/assets/polished-cidery.webp.asset.json";
-import polishedShowroom from "@/assets/polished-showroom.jpg.asset.json";
-import sealedTasting from "@/assets/sealed-concrete-tasting.jpg.asset.json";
-import sealedCidery from "@/assets/sealed-concrete-cidery.webp.asset.json";
+import commercialWarehouse from "@/assets/commercial-warehouse.jpg";
+import commercialPolishing from "@/assets/commercial-polishing-work.jpg";
+import polishedShowroomImg from "@/assets/polished-concrete-showroom.jpg";
+import polishingWarehouse from "@/assets/polishing-warehouse.jpg";
+import concreteSealingWarehouse from "@/assets/concrete-sealing-warehouse.jpg";
+import flakeCloseup from "@/assets/flake-closeup.jpg";
 
-const epoxyGallery = [epoxyAutoShop.url, epoxyWhiteCorridor.url, heroEpoxy];
-const urethaneGallery = [urethaneRed.url, urethaneGray.url, industryManufacturing];
+const epoxyGallery = [heroEpoxy, commercialWarehouse, industryIndustrial];
+const urethaneGallery = [industryManufacturing, commercialWarehouse, heroEpoxy];
 const polishedGallery = [
-  polishedShowroom.url,
-  polishedTastingRoom.url,
-  polishedWarehouse.url,
-  polishedCidery.url,
-  polishedTastingDetail.url,
-  polishedGrinding.url,
+  polishedShowroomImg,
+  polishingWarehouse,
+  commercialPolishing,
 ];
 
 export type Product = {
@@ -58,7 +49,7 @@ export const products: Product[] = [
     cardDesc: "Seamless high-build epoxy and self-leveling systems for tough commercial spaces.",
     metaTitle: "Commercial Epoxy Flooring DFW | Legacy Industrial Coatings",
     metaDescription: "Seamless high-build epoxy, self-leveling epoxy, and decorative flake and quartz broadcast systems installed across Dallas-Fort Worth. Built for warehouses, plants, and clean spaces.",
-    heroImage: epoxyAutoShop.url,
+    heroImage: heroEpoxy,
     gallery: epoxyGallery,
     intro: "Epoxy is the workhorse of commercial resin flooring. Legacy Industrial Coatings installs seamless, high-build epoxy systems that hold up to forklifts, chemicals, and years of hard use across the DFW Metroplex.",
     overview: [
@@ -112,7 +103,7 @@ export const products: Product[] = [
     cardDesc: "Cementitious urethane systems built for heat, chemicals, and wet processing.",
     metaTitle: "Urethane Cement Flooring DFW | Legacy Industrial Coatings",
     metaDescription: "Cementitious urethane flooring for food and beverage plants, cold storage, and wet processing across Dallas-Fort Worth. USDA and FDA-friendly, thermal-shock resistant.",
-    heroImage: urethaneRed.url,
+    heroImage: industryManufacturing,
     gallery: urethaneGallery,
     intro: "Urethane cement is the gold standard for food plants, breweries, and any space that sees hot wash-downs, thermal shock, or heavy chemical exposure. Legacy Industrial Coatings installs USDA and FDA-friendly urethane systems across DFW.",
     overview: [
@@ -192,7 +183,7 @@ export const products: Product[] = [
     cardDesc: "Diamond-ground and densified polished concrete for a low-maintenance, high-gloss finish.",
     metaTitle: "Polished Concrete Flooring DFW | Legacy Industrial Coatings",
     metaDescription: "Diamond-ground and densified polished concrete for showrooms, warehouses, and retail across Dallas-Fort Worth. Low maintenance, high-gloss, long service life.",
-    heroImage: polishedShowroom.url,
+    heroImage: polishedShowroomImg,
     gallery: polishedGallery,
     intro: "Polished concrete turns your existing slab into a hard, dust-free, high-gloss floor with minimal ongoing maintenance. Legacy Industrial Coatings polishes concrete for showrooms, warehouses, retail, and open commercial spaces across DFW.",
     overview: [
@@ -353,8 +344,8 @@ export const products: Product[] = [
     cardDesc: "Densified and sealed concrete for a clean, low-cost, low-maintenance commercial floor.",
     metaTitle: "Sealed Concrete Flooring DFW | Legacy Industrial Coatings",
     metaDescription: "Concrete sealing and densifying for tasting rooms, breweries, retail, and warehouses across Dallas-Fort Worth. A clean, low-cost, low-maintenance sealed concrete floor.",
-    heroImage: sealedTasting.url,
-    gallery: [sealedTasting.url, sealedCidery.url, polishedTastingRoom.url],
+    heroImage: concreteSealingWarehouse,
+    gallery: [concreteSealingWarehouse, polishingWarehouse, commercialPolishing],
     intro: "Sealed concrete is the simple, low-cost way to lock down a slab. Legacy Industrial Coatings cleans, densifies, and seals concrete for tasting rooms, breweries, retail, and warehouses across the DFW Metroplex — a clean floor that stops dust and holds up to daily use.",
     overview: [
       "We start by cleaning and lightly prepping the slab. Then we densify it with a lithium hardener so the top layer of concrete gets harder and tighter. Last, we roll or spray a penetrating sealer to lock out water, oil, and stains.",
@@ -393,8 +384,8 @@ export const products: Product[] = [
     cardDesc: "Manufacturer-trained cleaning, resealing, repairs, degreasing, and VCT wax programs.",
     metaTitle: "Commercial Floor Cleaning & Maintenance DFW | Legacy",
     metaDescription: "Manufacturer-trained commercial floor cleaning and maintenance in Dallas-Fort Worth. Epoxy, polished concrete, carpet tile, LVT, and VCT — resealing, repairs, degreasing, and wax programs.",
-    heroImage: polishedShowroom.url,
-    gallery: [polishedShowroom.url, epoxyWhiteCorridor.url, polishedWarehouse.url],
+    heroImage: polishedShowroomImg,
+    gallery: [polishedShowroomImg, flakeCloseup, commercialPolishing],
     intro: "A floor lasts as long as the care behind it. Legacy Industrial Coatings runs commercial floor cleaning and maintenance programs across the DFW Metroplex — manufacturer-trained crews, approved cleaners only, and scheduled service that keeps resin, concrete, carpet tile, LVT, and VCT looking new for years.",
     overview: [
       "Our cleaning crews are trained by the material and product manufacturers themselves. That training covers the right pads, the right pH, the right dwell time, and the right machine speed for each floor type. Nothing that could harm your floor — no harsh solvents, no wrong-pH strippers, no aggressive pads on a coated surface — is ever used during our cleaning process.",
