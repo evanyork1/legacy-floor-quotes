@@ -62,7 +62,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
               onClick={() => setShowBooking(true)}
               className="bg-white text-blue-900 hover:bg-blue-50 rounded-none px-7"
             >
-              Request a Bid <ArrowRight className="ml-2 h-4 w-4" />
+              Book an Estimate <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               asChild
@@ -152,7 +152,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
                   src={img}
                   alt={`${product.shortTitle} flooring project ${i + 1}`}
                   className="w-full h-60 object-cover transition-transform duration-500 hover:scale-105"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </div>
@@ -218,7 +218,7 @@ const CommercialSystemPage = ({ slug }: Props) => {
               onClick={() => setShowBooking(true)}
               className="bg-white text-blue-900 hover:bg-blue-50 rounded-none px-7"
             >
-              Request a Bid <ArrowRight className="ml-2 h-4 w-4" />
+              Book an Estimate <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               asChild

@@ -5,7 +5,7 @@ import { Seo } from "@/components/seo/Seo";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, CheckCircle, Phone, AlertTriangle } from "lucide-react";
+import { ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { getIndustry } from "@/data/commercialIndustries";
 import { APPLICATIONS, SOLUTIONS } from "@/data/commercialNav";
@@ -65,7 +65,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
               onClick={() => setShowBooking(true)}
               className="bg-white text-blue-900 hover:bg-blue-50 rounded-none px-7"
             >
-              Request a Bid <ArrowRight className="ml-2 h-4 w-4" />
+              Book an Estimate <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               asChild
@@ -98,7 +98,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
             <ul className="space-y-3">
               {industry.challenges.map((c) => (
                 <li key={c} className="flex gap-3 text-gray-600">
-                  <AlertTriangle className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
                   <span>{c}</span>
                 </li>
               ))}
@@ -139,7 +139,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
                   src={img}
                   alt={`${industry.shortTitle} floor coating project ${i + 1}`}
                   className="w-full h-60 object-cover transition-transform duration-500 hover:scale-105"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </div>
@@ -210,7 +210,7 @@ const CommercialIndustryPage = ({ slug }: Props) => {
               onClick={() => setShowBooking(true)}
               className="bg-white text-blue-900 hover:bg-blue-50 rounded-none px-7"
             >
-              Request a Bid <ArrowRight className="ml-2 h-4 w-4" />
+              Book an Estimate <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               asChild
