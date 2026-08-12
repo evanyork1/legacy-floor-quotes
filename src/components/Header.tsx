@@ -92,11 +92,7 @@ const Header = () => {
                 Commercial
                 <ChevronDown className="ml-1 h-3 w-3" />
               </button>
-              {isCommercialOpen && <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                  {commercialItems.map(item => <a key={item.name} href={item.path} className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors">
-                      {item.name}
-                    </a>)}
-                </div>}
+              {isCommercialOpen && <CommercialMegaMenu />}
             </div>
 
             {/* Residential Dropdown */}
