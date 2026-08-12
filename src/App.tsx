@@ -56,6 +56,9 @@ import AquaTotsFlooring from "./pages/AquaTotsFlooring";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import CaseStudiesHub from "./pages/CaseStudiesHub";
+import CommercialIndustryPage from "./pages/CommercialIndustryPage";
+import CommercialSystemPage from "./pages/CommercialSystemPage";
+import { APPLICATIONS, SOLUTIONS } from "./data/commercialNav";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -106,6 +109,33 @@ function App() {
               <Route path="/residential-case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/packagepresentation" element={<PackagePresentation />} />
               <Route path="/flakefloortemplate" element={<FlakeFloorTemplate />} />
+
+              {/* Commercial applications */}
+              {APPLICATIONS.map((a) => (
+                <Route
+                  key={a.path}
+                  path={a.path}
+                  element={<CommercialIndustryPage slug={a.slug!} />}
+                />
+              ))}
+
+              {/* Commercial solutions */}
+              {SOLUTIONS.filter((s) => !s.existing).map((s) => (
+                <Route
+                  key={s.path}
+                  path={s.path}
+                  element={<CommercialSystemPage slug={s.slug!} />}
+                />
+              ))}
+
+              {/* Keyword URL redirects to existing pages */}
+              <Route path="/garage-floor-coating" element={<Navigate to="/garagefloors" replace />} />
+              <Route path="/polyaspartic-garage-floor" element={<Navigate to="/garagefloors" replace />} />
+              <Route path="/polished-concrete" element={<Navigate to="/concrete-polishing" replace />} />
+              <Route path="/warehouse-epoxy-flooring" element={<Navigate to="/warehouse-flooring" replace />} />
+              <Route path="/commercial-flooring" element={<Navigate to="/commercial" replace />} />
+              <Route path="/epoxy-flooring-dallas" element={<Navigate to="/industrial-epoxy" replace />} />
+
               
           <Route path="/garagelandingform" element={<GarageLandingForm />} />
           <Route path="/garagelandinginstant" element={<GarageLandingInstant />} />

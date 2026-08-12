@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CommercialMegaMenu, CommercialMegaMenuMobile } from "@/components/CommercialMegaMenu";
 
 const HeaderGeneric = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,6 +66,18 @@ const residentialItems = [
               {navItems[0].name}
             </a>
             
+            {/* Commercial Dropdown */}
+            <div className="relative" onMouseEnter={() => setIsCommercialOpen(true)} onMouseLeave={() => setIsCommercialOpen(false)}>
+              <button 
+                onClick={() => navigate('/commercial')}
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
+              >
+                Commercial
+                <ChevronDown className="ml-1 h-3 w-3" />
+              </button>
+              {isCommercialOpen && <CommercialMegaMenu />}
+            </div>
+
             {/* Residential Dropdown */}
             <div className="relative" onMouseEnter={() => setIsResidentialOpen(true)} onMouseLeave={() => setIsResidentialOpen(false)}>
               <button 
@@ -76,30 +89,6 @@ const residentialItems = [
               {isResidentialOpen && (
                 <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                   {residentialItems.map(item => (
-                    <a 
-                      key={item.name} 
-                      href={item.path}
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Commercial Dropdown */}
-            <div className="relative" onMouseEnter={() => setIsCommercialOpen(true)} onMouseLeave={() => setIsCommercialOpen(false)}>
-              <button 
-                onClick={() => navigate('/commercial')}
-                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
-              >
-                Commercial
-                <ChevronDown className="ml-1 h-3 w-3" />
-              </button>
-              {isCommercialOpen && (
-                <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                  {commercialItems.map(item => (
                     <a 
                       key={item.name} 
                       href={item.path}
@@ -158,25 +147,16 @@ const residentialItems = [
                 </a>
               ))}
               
+              {/* Mobile Commercial Section */}
+              <div className="px-4">
+                <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
+                <CommercialMegaMenuMobile onNavigate={() => setIsMenuOpen(false)} />
+              </div>
+
               {/* Mobile Residential Section */}
               <div className="px-4">
                 <div className="text-gray-800 font-semibold text-base mb-2">Residential</div>
                 {residentialItems.map(item => (
-                  <a 
-                    key={item.name} 
-                    href={item.path}
-                    className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium py-2 text-sm pl-4 rounded-lg hover:bg-gray-50"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-
-              {/* Mobile Commercial Section */}
-              <div className="px-4">
-                <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
-                {commercialItems.map(item => (
                   <a 
                     key={item.name} 
                     href={item.path}

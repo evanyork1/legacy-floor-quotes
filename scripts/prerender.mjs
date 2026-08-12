@@ -45,7 +45,19 @@ const STATIC_ROUTES = [
   "/commercial-case-studies",
   "/residential-case-studies",
   "/floor-visualizer",
+  "/commercial-floor-maintenance",
 ];
+
+// Commercial application/solution pages come from src/data/commercialNav.ts.
+// Only routes this app actually renders (not the `existing: true` links).
+const navFileSrc = readFileSync(
+  resolve(process.cwd(), "src/data/commercialNav.ts"),
+  "utf8",
+);
+const COMMERCIAL_ROUTES = Array.from(
+  navFileSrc.matchAll(/path:\s*"(\/[a-z0-9-]+)",\s*slug:/g),
+).map((m) => m[1]);
+STATIC_ROUTES.push(...COMMERCIAL_ROUTES);
 
 const CITY_ROUTES = CITY_SLUGS.map((slug) => `/epoxy-flooring/${slug}`);
 

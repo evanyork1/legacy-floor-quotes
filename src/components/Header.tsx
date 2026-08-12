@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CommercialMegaMenu, CommercialMegaMenuMobile } from "@/components/CommercialMegaMenu";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResidentialOpen, setIsResidentialOpen] = useState(false);
@@ -92,11 +93,7 @@ const Header = () => {
                 Commercial
                 <ChevronDown className="ml-1 h-3 w-3" />
               </button>
-              {isCommercialOpen && <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                  {commercialItems.map(item => <a key={item.name} href={item.path} className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors">
-                      {item.name}
-                    </a>)}
-                </div>}
+              {isCommercialOpen && <CommercialMegaMenu />}
             </div>
 
             {/* Residential Dropdown */}
@@ -150,9 +147,7 @@ const Header = () => {
               {/* Mobile Commercial Section */}
               <div className="px-4">
                 <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
-                {commercialItems.map(item => <a key={item.name} href={item.path} className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium py-2 text-sm pl-4 rounded-lg hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
-                    {item.name}
-                  </a>)}
+                <CommercialMegaMenuMobile onNavigate={() => setIsMenuOpen(false)} />
               </div>
 
               {/* Mobile Residential Section */}
