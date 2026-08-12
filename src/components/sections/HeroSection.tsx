@@ -21,7 +21,7 @@ const HeroSection = () => {
   const title = isCommercial ? "DFW's Commercial Flooring" : (isPHX ? "Phoenix's Epoxy Flooring" : (isDFW ? "DFW's Epoxy Flooring" : (isProsper ? "Prosper's Trusted Epoxy Flooring Experts" : (isFrisco ? "Frisco's Trusted Epoxy Flooring Experts" : "Get Your Dream Garage Floor in One Day"))));
   const showExpertsSuffix = true;
   const locationText = isPHX ? "Phoenix, AZ" : "Dallas - Fort Worth, TX";
-  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Commercial &amp; Residential Floors That Last" : (isDFW ? "Commercial &amp; Residential Floors That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
+  const subtext = isCommercial ? "Industrial Concrete Polishing & Epoxy Solutions" : (isPHX ? "Commercial & Residential Floors That Last" : (isDFW ? "Commercial & Residential Floors That Last" : (isProsper ? "Fast, durable, and stunning garage floors for Prosper homeowners." : (isFrisco ? "Beautiful garage floors installed fast — proudly serving Frisco homeowners." : "Elite Installers. Unmatched Quality. A Reputation Built on Results"))));
   
   const phoneNumber = isPHX ? "602-560-0974" : "214-305-6516";
   const quotePath = isPHX ? "/quotephx" : "/quotedfw";
@@ -211,7 +211,7 @@ const HeroSection = () => {
               
               <div className="text-center">
                 <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-white leading-snug">
-                  {isProsper || isFrisco ? subtext : "Commercial &amp; Residential Floors That Last"}
+                  {isProsper || isFrisco ? subtext : "Commercial & Residential Floors That Last"}
                 </div>
               </div>
               
