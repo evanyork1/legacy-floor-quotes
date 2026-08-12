@@ -93,6 +93,8 @@ All of these go into the sitemap, the mega menu, and the footer.
 ## Technical notes
 
 - New files: `src/data/industries.ts`, `src/data/commercialSystems.ts`, `src/pages/IndustryDetail.tsx`, `src/pages/CommercialSystemDetail.tsx`, `src/components/CommercialMegaMenu.tsx`.
+- Routing: each page is registered at its own top-level path (no `:slug` params), so the URL table above is exact. Redirect URLs use `<Navigate replace>`.
+
 - Edited: `src/App.tsx` (routes), `Header.tsx`, `HeaderGeneric.tsx`, `HeroSection.tsx`, `Footer.tsx`, `supabase/functions/sitemap/index.ts`, plus the four existing system pages.
 - Every detail page ships `Seo` meta, breadcrumb + Service + FAQPage JSON-LD, one H1, and lazy-loaded gallery images.
 - Assets migrated via `lovable-assets create`; no cross-project pointer files referenced.
