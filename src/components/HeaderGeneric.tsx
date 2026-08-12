@@ -66,6 +66,18 @@ const residentialItems = [
               {navItems[0].name}
             </a>
             
+            {/* Commercial Dropdown */}
+            <div className="relative" onMouseEnter={() => setIsCommercialOpen(true)} onMouseLeave={() => setIsCommercialOpen(false)}>
+              <button 
+                onClick={() => navigate('/commercial')}
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
+              >
+                Commercial
+                <ChevronDown className="ml-1 h-3 w-3" />
+              </button>
+              {isCommercialOpen && <CommercialMegaMenu />}
+            </div>
+
             {/* Residential Dropdown */}
             <div className="relative" onMouseEnter={() => setIsResidentialOpen(true)} onMouseLeave={() => setIsResidentialOpen(false)}>
               <button 
@@ -87,18 +99,6 @@ const residentialItems = [
                   ))}
                 </div>
               )}
-            </div>
-
-            {/* Commercial Dropdown */}
-            <div className="relative" onMouseEnter={() => setIsCommercialOpen(true)} onMouseLeave={() => setIsCommercialOpen(false)}>
-              <button 
-                onClick={() => navigate('/commercial')}
-                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium text-xs lg:text-sm flex items-center"
-              >
-                Commercial
-                <ChevronDown className="ml-1 h-3 w-3" />
-              </button>
-              {isCommercialOpen && <CommercialMegaMenu />}
             </div>
 
             {/* About Dropdown */}
@@ -147,6 +147,12 @@ const residentialItems = [
                 </a>
               ))}
               
+              {/* Mobile Commercial Section */}
+              <div className="px-4">
+                <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
+                <CommercialMegaMenuMobile onNavigate={() => setIsMenuOpen(false)} />
+              </div>
+
               {/* Mobile Residential Section */}
               <div className="px-4">
                 <div className="text-gray-800 font-semibold text-base mb-2">Residential</div>
@@ -160,12 +166,6 @@ const residentialItems = [
                     {item.name}
                   </a>
                 ))}
-              </div>
-
-              {/* Mobile Commercial Section */}
-              <div className="px-4">
-                <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
-                <CommercialMegaMenuMobile onNavigate={() => setIsMenuOpen(false)} />
               </div>
 
               {/* Mobile About Section */}
