@@ -165,16 +165,7 @@ const residentialItems = [
               {/* Mobile Commercial Section */}
               <div className="px-4">
                 <div className="text-gray-800 font-semibold text-base mb-2">Commercial</div>
-                {commercialItems.map(item => (
-                  <a 
-                    key={item.name} 
-                    href={item.path}
-                    className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium py-2 text-sm pl-4 rounded-lg hover:bg-gray-50"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                <CommercialMegaMenuMobile onNavigate={() => setIsMenuOpen(false)} />
               </div>
 
               {/* Mobile About Section */}
