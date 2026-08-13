@@ -11,6 +11,8 @@ declare global {
   }
 }
 
+const SITE_URL = "https://legacyindustrialcoatings.com";
+
 const STEPS = [
   {
     title: "We review your project",
