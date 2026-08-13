@@ -152,6 +152,8 @@ function App() {
               <Route path="/sales-presentation" element={<SalesPresentation />} />
               <Route path="/presentation/:id" element={<CustomerPresentationPage />} />
               <Route path="/aquatotsflooring" element={<AquaTotsFlooring />} />
+              <Route path="/estimate-request-received" element={<EstimateRequestReceived />} />
+              <Route path="/booking-confirmed" element={<EstimateRequestReceived />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
