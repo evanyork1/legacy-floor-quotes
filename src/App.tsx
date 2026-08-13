@@ -60,6 +60,7 @@ import CommercialIndustryPage from "./pages/CommercialIndustryPage";
 import CommercialSystemPage from "./pages/CommercialSystemPage";
 import { APPLICATIONS, SOLUTIONS } from "./data/commercialNav";
 import ScrollToTop from "./components/ScrollToTop";
+import EstimateRequestReceived from "./pages/EstimateRequestReceived";
 
 
 const queryClient = new QueryClient();
