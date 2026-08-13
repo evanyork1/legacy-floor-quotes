@@ -47,15 +47,43 @@ export default function EstimateRequestReceived() {
   useEffect(() => {
     document.title = heading;
 
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
+    // Remove every existing robots meta tag and remember them so we can restore
+    // them when the visitor leaves this no-index confirmation page.
+    const existingRobots = Array.from(
+      document.querySelectorAll('meta[name="robots"]')
+    );
+    const previousRobots = existingRobots.map(
+      (el) => el.cloneNode(true) as HTMLMetaElement
+    );
+    existingRobots.forEach((el) => document.head.removeChild(el));
+
+    const robotsMeta = document.createElement("meta");
+    robotsMeta.name = "robots";
+    robotsMeta.content = "noindex, nofollow";
+    document.head.appendChild(robotsMeta);
+
+    // Replace any existing canonical link with one that self-references this route.
+    const existingCanonical = Array.from(
+      document.querySelectorAll('link[rel="canonical"]')
+    );
+    const previousCanonical = existingCanonical.map(
+      (el) => el.cloneNode(true) as HTMLLinkElement
+    );
+    existingCanonical.forEach((el) => document.head.removeChild(el));
+
+    const canonicalLink = document.createElement("link");
+    canonicalLink.rel = "canonical";
+    canonicalLink.href = `${SITE_URL}${pathname}`;
+    document.head.appendChild(canonicalLink);
 
     return () => {
-      document.head.removeChild(meta);
+      document.head.removeChild(robotsMeta);
+      previousRobots.forEach((el) => document.head.appendChild(el));
+
+      document.head.removeChild(canonicalLink);
+      previousCanonical.forEach((el) => document.head.appendChild(el));
     };
-  }, [heading]);
+  }, [heading, pathname]);
 
   useEffect(() => {
     const storageKey = `legacy_conversion_${formType}`;
