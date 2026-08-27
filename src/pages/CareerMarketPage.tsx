@@ -110,22 +110,17 @@ const CareerMarketPage = () => {
           </div>
         </section>
 
-        {/* 2. The money */}
+        {/* 2. Compensation */}
         <section className="py-14 bg-white">
           <div className="container mx-auto px-4 max-w-4xl">
-            <div className="border-2 border-blue-900 p-8">
-              <h2 className="text-sm uppercase tracking-widest font-semibold text-blue-900">
-                The money
-              </h2>
-              <p className="text-3xl md:text-4xl font-bold text-slate-900 mt-3">
-                $2,000 to $50,000 per deal
-              </p>
-              <p className="mt-4 text-slate-700 leading-relaxed">
-                Contracts run $20,000 to $500,000. Commission only. No base, no
-                cap, no split territories. Two mid-size jobs a month is a
-                six-figure year.
-              </p>
-            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              Compensation
+            </h2>
+            <p className="mt-4 text-slate-700 leading-relaxed">
+              This is a commission-only role. Contracts typically range from
+              $20,000 to $500,000, with commission of $2,000 to $50,000 per
+              deal. There is no cap and no split territories.
+            </p>
           </div>
         </section>
 

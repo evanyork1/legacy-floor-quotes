@@ -48,25 +48,25 @@ const Careers = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-2xl font-bold text-slate-900 mb-8">
-              Open markets
+              Open roles
             </h2>
             <ul className="divide-y divide-slate-200 border-y border-slate-200">
               {CAREER_MARKETS.map((m) => (
                 <li key={m.slug}>
                   <Link
                     to={`/careers/${m.slug}`}
-                    className="group flex flex-col md:flex-row md:items-center md:justify-between gap-2 py-6 hover:bg-slate-50 transition-colors px-2 -mx-2"
+                    className="group flex items-center justify-between gap-4 py-5 hover:bg-slate-50 transition-colors px-2 -mx-2"
                   >
-                    <div>
-                      <div className="flex items-baseline gap-3 flex-wrap">
-                        <span className="text-xl font-bold text-slate-900">
-                          {m.city}, {m.state}
-                        </span>
-                        <span className="text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-100 px-2 py-0.5">
-                          {m.seats} {m.seats === 1 ? "seat" : "seats"}
-                        </span>
-                      </div>
-                      <p className="text-slate-600 mt-1">{m.headline}</p>
+                    <div className="flex items-baseline gap-3 flex-wrap">
+                      <span className="text-lg font-semibold text-slate-900">
+                        Outside Sales Representative
+                      </span>
+                      <span className="text-slate-600">
+                        {m.city}, {m.stateAbbr}
+                      </span>
+                      <span className="text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-100 px-2 py-0.5">
+                        {m.seats} {m.seats === 1 ? "seat" : "seats"}
+                      </span>
                     </div>
                     <ArrowRight className="w-5 h-5 text-blue-900 shrink-0 group-hover:translate-x-1 transition-transform" />
                   </Link>
