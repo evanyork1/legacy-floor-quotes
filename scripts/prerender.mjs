@@ -46,6 +46,7 @@ const STATIC_ROUTES = [
   "/residential-case-studies",
   "/floor-visualizer",
   "/commercial-floor-maintenance",
+  "/careers",
 ];
 
 // Commercial application/solution pages come from src/data/commercialNav.ts.
@@ -58,6 +59,16 @@ const COMMERCIAL_ROUTES = Array.from(
   navFileSrc.matchAll(/path:\s*"(\/[a-z0-9-]+)",\s*slug:/g),
 ).map((m) => m[1]);
 STATIC_ROUTES.push(...COMMERCIAL_ROUTES);
+
+// Careers market pages come from src/data/careersMarkets.ts.
+const careersFileSrc = readFileSync(
+  resolve(process.cwd(), "src/data/careersMarkets.ts"),
+  "utf8",
+);
+const CAREER_ROUTES = Array.from(
+  careersFileSrc.matchAll(/^\s*slug:\s*"([a-z0-9-]+)"/gm),
+).map((m) => `/careers/${m[1]}`);
+STATIC_ROUTES.push(...CAREER_ROUTES);
 
 const CITY_ROUTES = CITY_SLUGS.map((slug) => `/epoxy-flooring/${slug}`);
 

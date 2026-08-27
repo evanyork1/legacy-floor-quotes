@@ -61,6 +61,8 @@ import CommercialSystemPage from "./pages/CommercialSystemPage";
 import { APPLICATIONS, SOLUTIONS } from "./data/commercialNav";
 import ScrollToTop from "./components/ScrollToTop";
 import EstimateRequestReceived from "./pages/EstimateRequestReceived";
+import Careers from "./pages/Careers";
+import CareerMarketPage from "./pages/CareerMarketPage";
 
 
 const queryClient = new QueryClient();
@@ -154,6 +156,8 @@ function App() {
               <Route path="/aquatotsflooring" element={<AquaTotsFlooring />} />
               <Route path="/estimate-request-received" element={<EstimateRequestReceived />} />
               <Route path="/booking-confirmed" element={<EstimateRequestReceived />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/careers/:city" element={<CareerMarketPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
