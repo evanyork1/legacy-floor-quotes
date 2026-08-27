@@ -38,10 +38,6 @@ const Footer = () => {
           <div className="sm:col-span-2 lg:col-span-1 space-y-6">
             <div className="space-y-4">
               <img src="/lovable-uploads/31a07739-2d1a-4e04-afcf-284435670519.png" alt="Legacy Industrial Coatings Logo" className="h-12 sm:h-16 w-auto"  loading="eager" decoding="async" />
-              <div className="space-y-2 text-sm text-gray-300">
-                <p>Licensed & Insured</p>
-                <p>Family Owned & Operated</p>
-              </div>
             </div>
           </div>
 
@@ -50,12 +46,13 @@ const Footer = () => {
             <h3 className="text-lg sm:text-xl font-bold text-white tracking-wider">MENU</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li><a href="/" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">HOME</a></li>
+              <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">ABOUT</a></li>
+              <li><a href="/careers" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">CAREERS</a></li>
               <li><a href="/faq" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">FAQ</a></li>
               <li><a href="/blog" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">BLOG</a></li>
               <li><a href="/warranty" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">WARRANTY</a></li>
               <li><a href="/terms" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">TERMS</a></li>
               <li><a href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">PRIVACY</a></li>
-              
             </ul>
           </div>
 
