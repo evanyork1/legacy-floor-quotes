@@ -1060,7 +1060,7 @@ function parseRows(rows){
       continue;
     }
     if(/^(client message|notes?|terms|thank you|payment|deposit|disclaimer|signature)/i.test(t)) break;
-    if(/(optional|alternate|not included|add[- ]?on)/i.test(t) && t.length<70 && !/\$/.test(t)){ optional=true; continue; }
+    if(/(optional|alternate|not included|add[- ]?on)/i.test(t) && t.length<70 && !/\$/.test(t) && !/\d[\d,]*\.\d{2}/.test(t)){ optional=true; continue; }
 
     const parts=['','','',''];
     r.cells.forEach(c=>{ const b=colStarts?bucket(c.x):0; parts[b]=(parts[b]?parts[b]+' ':'')+c.t; });
