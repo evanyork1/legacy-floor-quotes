@@ -843,8 +843,13 @@ function wrapRuns(runs, size, maxW){
 function lineOps(lines, x, startBaseline, size, ops){
   let b=startBaseline;
   lines.forEach(l=>{
-    let cx=x;
-    l.forEach(tk=>{ if(!tk.sp) ops.push({k:'t', x:cx, y:b, s:size, f:tk.f, c:tk.c, t:tk.t}); cx+=tk.w; });
+    let cx=x, run=null;
+    l.forEach(tk=>{
+      if(run && run.f===tk.f && run.c===tk.c){ run.t+=tk.t; }
+      else { run={k:'t', x:cx, y:b, s:size, f:tk.f, c:tk.c, t:tk.t}; ops.push(run); }
+      cx+=tk.w;
+    });
+    ops.forEach(o=>{ if(o.k==='t') o.t=o.t.replace(/\s+$/,''); });
     b-=size*1.17;
   });
   return b;
