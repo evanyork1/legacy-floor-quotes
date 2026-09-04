@@ -63,6 +63,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import EstimateRequestReceived from "./pages/EstimateRequestReceived";
 import Careers from "./pages/Careers";
 import CareerMarketPage from "./pages/CareerMarketPage";
+import PacketsFormat from "./pages/PacketsFormat";
 
 
 const queryClient = new QueryClient();
@@ -158,6 +159,7 @@ function App() {
               <Route path="/booking-confirmed" element={<EstimateRequestReceived />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/careers/:city" element={<CareerMarketPage />} />
+              <Route path="/packetsformat" element={<PacketsFormat />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
